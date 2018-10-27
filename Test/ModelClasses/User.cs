@@ -8,19 +8,19 @@ namespace ModelClasses
 {
     public class User
     {
-        String PhoneNumber { get; set; }
-        String FirstName { get; set; }
-        String LastName { get; set; }
-        String Email { get; set; }
-        String UserName { get; set; }
-        String Password { get; set; }
-        String AddressLine { get; set; }
-        String CityName { get; set; }
-        String Postcode { get; set; }
-        String Region { get; set; }
-        Gender Gender { get; set;}
+        public String PhoneNumber { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public String Email { get; set; }
+        public String UserName { get; set; }
+        public String Password { get; set; }
+        public String AddressLine { get; set; }
+        public String CityName { get; set; }
+        public String Postcode { get; set; }
+        public String Region { get; set; }
+        public Gender Gender { get; set;}
         
     }
 
-    enum Gender { Male, Female };
+    public enum Gender { Male, Female };
 }

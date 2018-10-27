@@ -12,5 +12,8 @@ namespace ServiceLibrary
     public interface IUserService
     {
         User CreateUser(User u);
+        User FindUser(String PhoneNumber);
+        bool DeleteUser(String PhoneNumber);
+        bool EditUser(User u);
     }  
 }

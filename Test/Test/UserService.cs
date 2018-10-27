@@ -15,5 +15,20 @@ namespace ServiceLibrary
         {
             throw new NotImplementedException();
         }
+
+        public bool DeleteUser(String PhoneNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EditUser(User u)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User FindUser(String PhoneNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
