@@ -11,9 +11,17 @@ namespace ServiceLibrary
     [ServiceContract]
     public interface IUserService
     {
+        [OperationContract]
         User CreateUser(User u);
+
+        [OperationContract]
         User FindUser(String PhoneNumber);
+
+        [OperationContract]
         bool DeleteUser(String PhoneNumber);
+
+        [OperationContract]
         bool EditUser(User u);
+        
     }  
 }

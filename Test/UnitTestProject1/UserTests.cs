@@ -4,7 +4,7 @@ using ModelClasses;
 using ServiceLibrary;
 using System.Collections.Generic;
 using ServiceLibrary.DbConnection;
-using System.Data.Linq;
+using System.Linq;
 namespace Tests
 {
     [TestClass]
@@ -27,10 +27,11 @@ namespace Tests
         [TestMethod]
         public void Test_Service_Creation_Of_User()
         {
+            var us = new UserService();
             var userMock = new Mock<User>();
             var databaseMock = new Mock<DatabaseDataContext>();
-            databaseMock.Setup(t=> t.Users).
-            var subject = new UserService();
+           // var table = databaseMock.Setup(t => t.ExecuteQuery("Insert into Users "));
+            us.CreateUser(userMock.Object);
             
         }
 

@@ -5,20 +5,35 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ModelClasses;
+using ServiceLibrary.DbConnection;
 
 namespace ServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class UserService : IUserService
     {
-        public User CreateUser(User u)
+        public virtual User CreateUser(User u)
         {
-            throw new NotImplementedException();
+            if (u != null)
+            {
+               
+
+                
+
+
+          
+            }
+            return null;
         }
 
-        public bool DeleteUser(String PhoneNumber)
+        public virtual bool DeleteUser(String phoneNumber)
         {
-            throw new NotImplementedException();
+            if (phoneNumber.Length > 0)
+            {
+
+             
+            }
+            return false;
         }
 
         public bool EditUser(User u)
