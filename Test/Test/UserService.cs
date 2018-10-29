@@ -4,17 +4,18 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using ModelClasses;
+using Repositories;
 using ServiceLibrary.DbConnection;
-using ServiceLibrary.Repository;
+using ServiceLibrary.Models;
 
 namespace ServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class UserService : IUserService
     {
-        private readonly IUserRepository _database;
-        public UserService(IUserRepository database)
+        private readonly IRepository<User> _database;
+
+        public UserService(IRepository<User> database)
         {
             _database = database;
         }

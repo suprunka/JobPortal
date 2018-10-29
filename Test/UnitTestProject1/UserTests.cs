@@ -1,11 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using ModelClasses;
 using ServiceLibrary;
 using System.Collections.Generic;
 using ServiceLibrary.DbConnection;
 using System.Linq;
-using ServiceLibrary.Repository;
+using ServiceLibrary.Models;
+using Repositories;
 
 namespace Tests
 {
@@ -34,13 +34,14 @@ namespace Tests
             userMock.SetupAllProperties();
 
 
-            var databaseMock = new Mock<IUserRepository>();
+            var databaseMock = new Mock<IRepository<User>>();
 
             UserService service = new UserService(databaseMock.Object);
-            
-        
+
+           
+
             service.CreateUser(userMock.Object);
-            databaseMock.Verify(t => t.CreateUser(It.IsAny<User>()), Times.AtLeastOnce);
+            databaseMock.Verify(t => t.Create(It.IsAny<User>()), Times.AtLeastOnce);
 
 
 
