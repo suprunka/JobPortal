@@ -6,13 +6,20 @@ using System.ServiceModel;
 using System.Text;
 using ModelClasses;
 using ServiceLibrary.DbConnection;
+using ServiceLibrary.Repository;
 
 namespace ServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class UserService : IUserService
     {
-        public virtual User CreateUser(User u)
+        private readonly IUserRepository _database;
+        public UserService(IUserRepository database)
+        {
+            _database = database;
+        }
+
+        public User CreateUser(User u)
         {
             if (u != null)
             {
@@ -26,7 +33,7 @@ namespace ServiceLibrary
             return null;
         }
 
-        public virtual bool DeleteUser(String phoneNumber)
+        public bool DeleteUser(String phoneNumber)
         {
             if (phoneNumber.Length > 0)
             {

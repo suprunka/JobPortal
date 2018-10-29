@@ -17,6 +17,7 @@ namespace ModelClasses
         public String Password { get; set; }
         public String AddressLine { get; set; }
         public String CityName { get; set; }
+
         public String Postcode { get; set; }
         public String Region { get; set; }
         public Gender Gender { get; set;}
