@@ -5,6 +5,8 @@ using ServiceLibrary;
 using System.Collections.Generic;
 using ServiceLibrary.DbConnection;
 using System.Linq;
+using ServiceLibrary.Repository;
+
 namespace Tests
 {
     [TestClass]
@@ -18,24 +20,34 @@ namespace Tests
                 new Users {PhoneNumber= "12121212", FirstName= "Wojtek", LastName="Pieczara", Email="wp@wp.pl"}
             };
 
-            
 
-           
+
+
 
         }
 
         [TestMethod]
         public void Test_Service_Creation_Of_User()
         {
-            var us = new UserService();
-            var userMock = new Mock<User>();
-            var databaseMock = new Mock<DatabaseDataContext>();
-           // var table = databaseMock.Setup(t => t.ExecuteQuery("Insert into Users "));
-            us.CreateUser(userMock.Object);
             
+            var userMock = new Mock<User>();
+            userMock.SetupAllProperties();
+
+
+            var databaseMock = new Mock<IUserRepository>();
+
+            UserService service = new UserService(databaseMock.Object);
+            
+        
+            service.CreateUser(userMock.Object);
+            databaseMock.Verify(t => t.CreateUser(It.IsAny<User>()), Times.AtLeastOnce);
+
+
+
         }
 
-        [TestMethod]
+
+        /*[TestMethod]
         public void Test_Service_Delete_Of_User()
         {
             var userMock = new Mock<User>();
@@ -61,7 +73,7 @@ namespace Tests
         {
             var userMock = new Mock<User>();
             userMock.Setup(x => x.LastName).Returns("Adam");
-            
-        }
+
+        }*/
     }
 }
