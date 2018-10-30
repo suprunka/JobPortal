@@ -10,27 +10,27 @@ namespace ServiceLibrary.Models
     [DataContract]
     public class User
     {
-        [DataMember]
-        public virtual String PhoneNumber { get; set; }
-        [DataMember]
+        [DataMember] // should have 8 digit
+        public virtual String PhoneNumber { get; set; } 
+        [DataMember] //include english alphabet and danish signs
         public String FirstName { get; set; }
-        [DataMember]
+        [DataMember] //same as first name
         public String LastName { get; set; }
-        [DataMember]
+        [DataMember] //have '@' sign
         public String Email { get; set; }
-        [DataMember]
+        [DataMember] //
         public String UserName { get; set; }
-        [DataMember]
+        [DataMember] //have capital, small letters and number
         public String Password { get; set; }
-        [DataMember]
+        [DataMember] 
         public String AddressLine { get; set; }
         [DataMember]
         public String CityName { get; set; }
-        [DataMember]
+        [DataMember] //should be 4 digit
         public String Postcode { get; set; }
+        [DataMember] //enum
+        public Region Region { get; set; }
         [DataMember]
-        public String Region { get; set; }
-        
-
+        public Gender Gender { get; set; }
     }
 }
