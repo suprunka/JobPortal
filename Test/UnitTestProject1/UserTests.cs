@@ -71,10 +71,7 @@ namespace Tests
         [TestMethod]
         public void Test_Service_Read_Of_User()
         {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.PhoneNumber).Returns("68457854");
-            var subject = new UserService();
-            Assert.IsNotNull(subject.FindUser(userMock.Object.PhoneNumber));
+           
         }
 
         [TestMethod]
@@ -83,6 +80,6 @@ namespace Tests
             var userMock = new Mock<User>();
             userMock.Setup(x => x.LastName).Returns("Adam");
 
-        }*/
+        }
     }
 }
