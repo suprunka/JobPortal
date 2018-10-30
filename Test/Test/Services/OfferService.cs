@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Repositories;
 using ServiceLibrary.Models;
 
@@ -28,7 +29,7 @@ namespace ServiceLibrary
             throw new NotImplementedException();
         }
 
-        public bool GetAllOffers(Offer serviceOffer)
+        public IQueryable<Offer> GetAllOffers()
         {
             throw new NotImplementedException();
         }

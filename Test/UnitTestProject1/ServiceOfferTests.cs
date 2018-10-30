@@ -85,7 +85,7 @@ namespace UnitTestProject1
             int OfferId = -1;
 
             dbMock.Setup(x => x.Get(It.IsAny<int>()))
-                .Callback<int>(x => x = OfferId);
+                .Callback<int>(x => OfferId = x);
 
             var sut = new OfferService(dbMock.Object);
             sut.FindServiceOffer(offerMock.Object.Id);
@@ -95,16 +95,44 @@ namespace UnitTestProject1
         [TestMethod]
         public void GetAll_OfferService_Verify_If_Returns_Queryable()
         {
-            var offerMock = new Mock<Offer>();
-            offerMock.Setup(x => x.Id).Returns(1);
             var dbMock = new Mock<IRepository<Offer>>();
             IQueryable<Offer> list = null;
-            dbMock.Setup(x => x.GetAll()).Returns(new Offer[] {new Offer() }.AsQueryable<Offer>())
-                .Callback<IQueryable<Offer>>(x=> list = x );
+            dbMock.Setup(x => x.GetAll()).Returns(new Offer[] { new Offer() }.AsQueryable<Offer>())
+                .Callback<IQueryable<Offer>>(x => list = x);
             var sut = new OfferService(dbMock.Object);
+            sut.GetAllOffers();
             dbMock.Verify(x => x.GetAll(), Times.Once());
 
             Assert.AreEqual(1, list.Count());
+        }
+
+        [TestMethod]
+        public void Update_OfferService_Verify_If_Connect_To_Db()
+        {
+            var offerMock = new Mock<Offer>();
+            var dbMock = new Mock<IRepository<Offer>>();
+            var sut = new OfferService(dbMock.Object);
+            sut.UpdateServiceOffer(offerMock.Object);
+            dbMock.Verify(x => x.Update(It.IsAny<Offer>()), Times.Once());
+
+        }
+
+        [TestMethod]
+        public void Update_OfferService_Verify_If_Returns_Valid_Object()
+        {
+            var offerMock = new Mock<Offer>();
+            offerMock.Setup(x => x.Id).Returns(1);
+            offerMock.Setup(x => x.RatePerHour).Returns(100);
+            var dbMock = new Mock<IRepository<Offer>>();
+            Offer returnedOffer = null;
+            dbMock.Setup(x => x.Update(It.IsAny<Offer>()))
+                .Callback<Offer>(x => returnedOffer = x);
+            var sut = new OfferService(dbMock.Object);
+            sut.UpdateServiceOffer(offerMock.Object);
+            Assert.IsTrue(
+                1 == offerMock.Object.Id &&
+                100 == offerMock.Object.RatePerHour
+                 );
         }
 
     }

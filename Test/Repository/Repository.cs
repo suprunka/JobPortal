@@ -1,13 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
+        protected Table<T> DataTable;
+
+        public Repository(DataContext dataContext)
+        {
+            DataTable = dataContext.GetTable<T>();
+        }
         public T Create(T obj)
         {
             throw new NotImplementedException();
