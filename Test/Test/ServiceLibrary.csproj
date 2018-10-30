@@ -42,6 +42,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -83,8 +84,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\locac\Source\Repos\JobPortal\Repositories\Repositories.csproj">
-      <Project>{a136edb4-5c3a-4ec5-985d-f112780a133a}</Project>
+    <ProjectReference Include="..\Repository\Repositories.csproj">
+      <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
       <Name>Repositories</Name>
     </ProjectReference>
   </ItemGroup>

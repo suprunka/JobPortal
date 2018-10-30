@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Repository\Repositories.csproj">
+      <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceHost\ServiceHost.csproj">
       <Project>{d6747a31-10f4-46ed-8e7d-78481f93e3d1}</Project>
       <Name>ServiceHost</Name>
@@ -78,10 +82,6 @@
     <ProjectReference Include="..\Test\ServiceLibrary.csproj">
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\locac\Source\Repos\JobPortal\Repositories\Repositories.csproj">
-      <Project>{a136edb4-5c3a-4ec5-985d-f112780a133a}</Project>
-      <Name>Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
