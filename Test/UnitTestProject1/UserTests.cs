@@ -12,52 +12,60 @@ namespace Tests
     [TestClass]
     public class UserTests
     {
-        public UserTests()
+
+
+        
+        [TestMethod]
+        public void Test_Service_Creation_Of_User_With_Different_Data()
         {
-            IList<Users> users = new List<Users>
-            {
-                new Users {PhoneNumber= "85858585", FirstName= "Adam", LastName="Pato³a", Email="ap@wp.pl"},
-                new Users {PhoneNumber= "12121212", FirstName= "Wojtek", LastName="Pieczara", Email="wp@wp.pl"}
-            };
+
+        }
 
 
+        [TestMethod]
+        public void Test_Service_Creation_Of_User_Hit_Database_Once()
+        {
+            var userMock = new Mock<User>();
+            userMock.SetupAllProperties();
+            var databaseMock = new Mock<IRepository<User>>();
+            UserService service = new UserService(databaseMock.Object);
+            service.CreateUser(userMock.Object);
+            databaseMock.Verify(t => t.Create(It.IsAny<User>()), Times.AtLeastOnce);
+        }
 
 
-
+        [TestMethod]
+        public void Test_Service_Creation_Of_User_Is_Not_Null()
+        {
+            var userMock = new Mock<User>();
+            userMock.SetupAllProperties();
+            var databaseMock = new Mock<IRepository<User>>();
+            UserService service = new UserService(databaseMock.Object);
+            User u = service.CreateUser(userMock.Object);
+            Assert.IsNotNull(u);
         }
 
         [TestMethod]
-        public void Test_Service_Creation_Of_User()
+        public void Test_Service_Delete_Of_User_Hit_Database_Once()
         {
-            
             var userMock = new Mock<User>();
             userMock.SetupAllProperties();
-
-
             var databaseMock = new Mock<IRepository<User>>();
-
             UserService service = new UserService(databaseMock.Object);
-
-           
-
-            service.CreateUser(userMock.Object);
-            databaseMock.Verify(t => t.Create(It.IsAny<User>()), Times.AtLeastOnce);
-
-
-
+            bool result = service.DeleteUser(userMock.Object.PhoneNumber);
+            Assert.IsTrue(result);
         }
 
 
-        /*[TestMethod]
+        [TestMethod]
         public void Test_Service_Delete_Of_User()
         {
             var userMock = new Mock<User>();
-            userMock.Setup(x => x.PhoneNumber).Returns("1");
-            var servicemoc = new Mock<IUserService>();
-            servicemoc.Setup(x => x.CreateUser(new User { PhoneNumber = "1" })).Returns(new User { PhoneNumber = "1" });
-
-            var subject = new UserService();
-            Assert.IsTrue(servicemoc.Object.DeleteUser(userMock.Object.PhoneNumber));
+            userMock.SetupAllProperties();
+            var databaseMock = new Mock<IRepository<User>>();
+            UserService service = new UserService(databaseMock.Object);
+            bool result = service.DeleteUser("45205657");
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
