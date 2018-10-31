@@ -15,6 +15,7 @@ namespace UnitTestProject1
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
             var offerMock = new Mock<Offer>();
+       
             offerMock.SetupAllProperties();
             var dbMock = new Mock<IRepository<Offer>>();
 

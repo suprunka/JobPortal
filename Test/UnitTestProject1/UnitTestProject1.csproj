@@ -72,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
+      <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
+      <Name>AppJobPortal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Repository\Repositories.csproj">
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
       <Name>Repositories</Name>
@@ -84,10 +88,17 @@
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebJobPortal\WebJobPortal.csproj">
+      <Project>{b8d60186-1d51-4b2c-9a3d-a83176d8b6e8}</Project>
+      <Name>WebJobPortal</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App test\" />
     <Folder Include="MVC tests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
