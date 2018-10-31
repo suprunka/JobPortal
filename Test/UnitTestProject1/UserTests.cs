@@ -69,10 +69,38 @@ namespace Tests
         }
 
         [TestMethod]
-        public void Test_Service_Read_Of_User()
+        public void Read_User_Return_Valid_User()
         {
-           
+
+            var userMock = new Mock<User>();
+            userMock.Setup(x => x.Id).Returns(1);
+            var dbMock = new Mock<IRepository<User>>();
+            int userId = -1;
+
+            dbMock.Setup(x => x.Get(It.IsAny<int>()))
+                .Callback<int>(x => userId = x);
+
+            var sut = new UserService(dbMock.Object);
+            sut.FindUser(userMock.Object.Id);
+            // var aa = sut.FindUser(1);
+            // Assert.AreEqual(1, aa.Id);
+
+            Assert.AreEqual(1, userId);
         }
+        [TestMethod]
+        public void Read_User_Hits_Db_Once()
+        {
+
+            var userMock = new Mock<User>();
+            userMock.Setup(x => x.Id).Returns(1);
+            var dbMock = new Mock<IRepository<User>>();
+           
+            var sut = new UserService(dbMock.Object);
+            sut.FindUser(userMock.Object.Id);
+          
+            dbMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once());
+        }
+
 
         [TestMethod]
         public void Test_Service_Update_Of_User()
