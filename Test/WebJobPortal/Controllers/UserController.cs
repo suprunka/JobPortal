@@ -8,14 +8,27 @@ namespace WebJobPortal.Controllers
 {
     public class UserController : Controller
     {
-        public UserController()
-        {
+        private readonly IUserService _proxy;
 
+        public UserController(IUserService proxy)
+        {
+            _proxy = proxy;
         }
         // GET: User
         public ActionResult Index()
         {
             return View();
+        }
+
+
+        public ActionResult Create()
+        {
+            
+        }
+
+        public ActionResult Create(UserModel user)
+        {
+
         }
     }
 }
