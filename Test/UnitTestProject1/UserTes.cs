@@ -1,37 +1,37 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+ï»¿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using ServiceLibrary;
 using ServiceLibrary.Models;
 using Repositories;
-using WebJobPortal;
 
 namespace UnitTestProject1
 {
     [TestClass]
-    public class UserTests
+    public class UserTest
     {
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (too many characters)
-        [DataRow("12345œæ", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (not allowed characters)
-        [DataRow("12345678", "Adaœ", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid firstname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam¿œæ", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid lastname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adaœ@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email
-        [DataRow("12345678", "Adam", "Adam", "Adaœgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '@'
-        [DataRow("12345678", "Adam", "Adam", "Adaœ@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '.'
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana¿", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid userName (not allowed characters)
+        [DataRow("12345Å›Ä‡", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (not allowed characters)
+        [DataRow("12345678", "AdaÅ›", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid firstname (not allowed characters)
+        [DataRow("12345678", "Adam", "AdamÅ¼Å›Ä‡", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid lastname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "AdaÅ›@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email
+        [DataRow("12345678", "Adam", "Adam", "AdaÅ›gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '@'
+        [DataRow("12345678", "Adam", "Adam", "AdaÅ›@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '.'
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamManaÅ¼", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid userName (not allowed characters)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "he", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //too short userName
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password no capital letter
-        [DataRow("12345678", "Adam", "Adam", "Adaœ@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password without number
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline¿æ", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid addressline (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamê", "2154", Region.Hovedstaden, Gender.Male)] //invalid city name (not allwed characters)
+        [DataRow("12345678", "Adam", "Adam", "AdaÅ›@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password without number
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "StreetlineÅ¼Ä‡", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid addressline (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "CitynamÄ™", "2154", Region.Hovedstaden, Gender.Male)] //invalid city name (not allwed characters)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male)] //invalid postcode (too long)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "œæê¿", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "Å›Ä‡Ä™Å¼", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //valid all data
         [TestMethod]
         public void Test_UserWebModel_validation(string phoneNumber, string firstName,
             string lastName, string email, string userName, string password, string addressLine,
             string cityName, string postCode, Region region, Gender gender)
         {
-            var userServiceStub = new UserWebModel{ 
+            var userServiceStub = new UserWebModel
+            {
                 PhoneNumber = phoneNumber,
                 FirstName = firstName,
                 LastName = lastName,
@@ -43,11 +43,13 @@ namespace UnitTestProject1
                 Postcode = postCode,
                 Region = region,
                 Gender = gender
-            };
-            
+            }));
+
             var sub = new UserController(userServiceStub.Object);
 
         }
+
+
 
 
         [TestMethod]
@@ -63,7 +65,7 @@ namespace UnitTestProject1
 
 
         [TestMethod]
-        public void Test_Service_Creation_Of_User_Is_Not_Null()
+        public void Test_Service_Created_NotNullUser()
         {
             var userMock = new Mock<User>();
             userMock.SetupAllProperties();
@@ -72,6 +74,64 @@ namespace UnitTestProject1
             User u = service.CreateUser(userMock.Object);
             Assert.IsNotNull(u);
         }
+
+        [TestMethod]
+        public void Test_MVCController_Created_NotNullUser()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_MVCController_Created_User_Only_Once()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_ApplicationController_Created_NotNullUser()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_ApplicationController_Created_User_Only_Once()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_Trying_To_Delete_Not_Existing_User()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_MVCController_Deleted_Existing_User()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_MVCController_Hits_Service_Once()
+        {
+
+        }
+
+        [TestMethod]
+        public void Test_ApplicationController_Deleted_Existing_User()
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
 
         [TestMethod]
         public void Test_Service_Delete_Of_User_Hit_Database_Once()
