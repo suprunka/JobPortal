@@ -19,10 +19,6 @@ namespace ServiceLibrary
         {
             _database = database;
         }
-        public UserService()
-        {
-           
-        }
 
         public User CreateUser(User u)
         {
