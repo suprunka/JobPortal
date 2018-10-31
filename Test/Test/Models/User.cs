@@ -37,7 +37,7 @@ namespace ServiceLibrary.Models
         public String UserName { get; set; }
 
         [DataMember]
-        [Required]
+        [Required] 
         [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$")]
         public String Password { get; set; }
 
