@@ -64,9 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceOfferTests.cs" />
+    <Compile Include="Services tests\ServiceOfferTests.cs" />
     <Compile Include="RepositoryTest.cs" />
-    <Compile Include="UserTests.cs" />
+    <Compile Include="Services tests\UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
