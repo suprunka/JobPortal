@@ -18,7 +18,7 @@ namespace ServiceLibrary.Models
 
         [DataMember]
         [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")] //allows danish characters
         public String FirstName { get; set; }
 
         [DataMember]

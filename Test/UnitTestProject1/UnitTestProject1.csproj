@@ -72,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App test\" />
+    <Folder Include="MVC tests\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
       <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
       <Name>AppJobPortal</Name>
@@ -92,10 +96,6 @@
       <Project>{b8d60186-1d51-4b2c-9a3d-a83176d8b6e8}</Project>
       <Name>WebJobPortal</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App test\" />
-    <Folder Include="MVC tests\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
