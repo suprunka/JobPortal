@@ -40,7 +40,23 @@ namespace UnitTestProject1.MVC_tests
                 var userServiceStub = new Mock<IUserService>();
                 userServiceStub.Setup(x => x.GetAll()).Returns(() =>
                 {
-                    return new List<User> { new User() , new User(), new User()};
+                    return new List<User> { new User(), new User(), new User() };
+                });
+                var sut = new UserController(userServiceStub.Object);
+
+                var resPage = sut.Index(null) as ViewResult;
+
+                var model = resPage.ViewData.Model as IEnumerable<User>;
+
+                Assert.IsTrue(model.Count() == 3);
+            }
+            [TestMethod]
+            public void Edit_Will_Show_View_Of_Updated_User()
+            {
+                var userServiceStub = new Mock<IUserService>();
+                userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+                {
+                    return new List<User> { new User(), new User(), new User() };
                 });
                 var sut = new UserController(userServiceStub.Object);
 

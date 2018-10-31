@@ -48,11 +48,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbConnection\Database.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="ServiceInterfaces\IOfferService.cs" />
@@ -70,14 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DbConnection\Database.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Database.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DbConnection\Database.dbml.layout">
-      <DependentUpon>Database.dbml</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
