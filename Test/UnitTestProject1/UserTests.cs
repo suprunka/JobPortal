@@ -35,7 +35,7 @@ namespace Tests
             string lastName, string email, string userName, string password, string addressLine,
             string cityName, string postCode, Region region, Gender gender)
         {
-         /*   var userServiceStub = new UserWebModel{ 
+           /* var userServiceStub = new UserWebModel{ 
                 PhoneNumber = phoneNumber,
                 FirstName = firstName,
                 LastName = lastName,
@@ -48,7 +48,7 @@ namespace Tests
                 Region = region,
                 Gender = gender
             }));
-
+            
             var sub = new UserController(userServiceStub.Object);*/
 
         }
