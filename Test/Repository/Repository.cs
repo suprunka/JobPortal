@@ -1,6 +1,7 @@
 ﻿// ABOUT REPOSITORY PATTERN: https://deviq.com/repository-pattern/
 
 
+using Repository.DbConnection;
 using ServiceLibrary.DbConnection;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,13 @@ namespace Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DatabaseDataContext _dbContext;
+        private  Table<T> _Table;
       
 
         public Repository(DatabaseDataContext dataContext )
         {
-            _dbContext = dataContext;
+            _Table = dataContext.GetTable<T>();
+                //http://web.archive.org/web/20150404154203/https://www.remondo.net/repository-pattern-example-csharp/
         }
         public T Create(T obj)
         {
@@ -39,12 +41,12 @@ namespace Repositories
             return _dbContext.Set<T>().Find(id);
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
             return _dbContext.Set<T>().AsEnumerable();
         }
 
-        public virtual IEnumerable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
+        public virtual IQueryable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
             return _dbContext.Set<T>()
                    .Where(predicate)
