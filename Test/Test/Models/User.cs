@@ -10,10 +10,13 @@ namespace ServiceLibrary.Models
 {
     [DataContract]
     public class User
-    {
+    {//can we have ID for Db instead of phonenumber/cpr? you can always change phone number and you don't want to share your cpr with everyone
         [DataMember]
         [Required]
-        [RegularExpression ("^[0-9]{8}$")]
+        public virtual int Id { get; set; }
+        [DataMember]
+        [Required]
+        [RegularExpression("^[0-9]{8}$")]
         public virtual String PhoneNumber { get; set; }
 
         [DataMember]
