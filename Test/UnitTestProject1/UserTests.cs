@@ -6,8 +6,9 @@ using ServiceLibrary.DbConnection;
 using System.Linq;
 using ServiceLibrary.Models;
 using Repositories;
-
-
+using WebJobPortal;
+using WebJobPortal.Controllers;
+using WebJobPortal.Models;
 
 namespace Tests
 {
@@ -35,7 +36,7 @@ namespace Tests
             string lastName, string email, string userName, string password, string addressLine,
             string cityName, string postCode, Region region, Gender gender)
         {
-           /* var userServiceStub = new UserWebModel{ 
+            var userServiceStub = new UserWebModel{ 
                 PhoneNumber = phoneNumber,
                 FirstName = firstName,
                 LastName = lastName,
@@ -49,7 +50,7 @@ namespace Tests
                 Gender = gender
             }));
             
-            var sub = new UserController(userServiceStub.Object);*/
+            var sub = new UserController(userServiceStub.Object);
 
         }
 
