@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using ServiceLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebJobPortal.Models;
 
 
-namespace ServiceLibrary.Mapping
+namespace WebJobPortal.Mapping
 {
     public static class MappingConfig
     {
