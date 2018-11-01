@@ -28,5 +28,5 @@ namespace ServiceLibrary
         IEnumerable<User> GetAll();
 
 
-    }  
+    }
 }
