@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App test\UserControllerTests.cs" />
     <Compile Include="MVC tests\UserControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceOfferTests.cs" />
@@ -100,9 +101,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App test\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
       <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
