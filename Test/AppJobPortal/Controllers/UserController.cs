@@ -28,6 +28,7 @@ namespace AppJobPortal.Controllers
         }
         public IList<UserModel> GetAll()
         {
+            _proxy.get
             return null;
         }
     }

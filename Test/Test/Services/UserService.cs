@@ -4,14 +4,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using DevTrends.WCFDataAnnotations;
 using Repositories;
-using ServiceLibrary.DbConnection;
 using ServiceLibrary.Models;
 
 namespace ServiceLibrary
 {
-    [ValidateDataAnnotationsBehavior]
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
