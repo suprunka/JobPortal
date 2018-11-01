@@ -7,8 +7,8 @@ using ServiceLibrary.Models;
 
 namespace WebJobPortal.Models
 {
-    public class UserWebModel
-    {
+  public class UserWebModel
+    {  
         private readonly string _phoneNumber;
         private readonly string _firstName;
         private readonly string _lastName;

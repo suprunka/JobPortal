@@ -31,6 +31,10 @@ namespace WebJobPortal.Controllers
         public ActionResult Create()
         {
             return View("Create");
+        } //Edit: Movie/Edit/id
+        public ActionResult Edit( UserWebModel user)
+        {
+            return View();
         }
 
         //POST: Movie/Create

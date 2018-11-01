@@ -135,6 +135,28 @@ namespace UnitTestProject1
                 100 == offerMock.Object.RatePerHour
                  );
         }
+        [TestMethod]
+        public void Edit_With_Valid_Inputs()
+        {
+            var userMock = new Mock<UserWebModel>();
+            userMock.Setup(x => x.LastName).Returns("Dreuk");
+            userMock.Setup(x => x.PhoneNumber).Returns("12334455");
+            var userServiceStub = new Mock<IUserService>();
+            User userSenftoService = null;
+
+            userServiceStub.Setup(x => x.EditUser(It.IsAny<User>()))
+                .Callback<User>(x => userSenftoService = x);
+
+            var sut = new UserController(userServiceStub.Object);
+            sut.Edit(userMock.Object);
+            userServiceStub.Verify(x =>
+           x.EditUser(It.IsAny<User>()), Times.Once());
+
+            Assert.IsTrue(
+                userSenftoService.LastName == "Dreuk" &&
+                userSenftoService.PhoneNumber == "12334455"
+                );
+        }
 
     }
 }
