@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using ServiceLibrary.Models;
+//using ServiceLibrary.Models;
 
 namespace WebJobPortal.Models
 {
-    public class UserWebModel
+    public class UserModel
     {
         private readonly string _phoneNumber;
         private readonly string _firstName;
@@ -18,11 +18,11 @@ namespace WebJobPortal.Models
         private readonly string _addressLine;
         private readonly string _cityName;
         private readonly string _postCode;
-        private readonly Region _region;
-        private readonly Gender _gender;
+        // private readonly Region _region;
+        //private readonly Gender _gender;
 
-        public UserWebModel(string phoneNumber, string firstName, string lastName, string email, string userName, string password,
-            string addressLine, string cityName, string postCode, Region region, Gender gender)
+        public UserModel(string phoneNumber, string firstName, string lastName, string email, string userName, string password,
+            string addressLine, string cityName, string postCode/*, Region region, Gender gender*/)
         {
             _phoneNumber = phoneNumber;
             _firstName = firstName;
@@ -33,11 +33,11 @@ namespace WebJobPortal.Models
             _addressLine = addressLine;
             _cityName = cityName;
             _postCode = postCode;
-            _region = region;
-            _gender = gender;
+            //  _region = region;
+            //  _gender = gender;
         }
 
-        public UserWebModel()
+        public UserModel()
         {
 
         }
@@ -46,17 +46,17 @@ namespace WebJobPortal.Models
         [RegularExpression("^[0-9]{8}$")]
         public virtual String PhoneNumber { get; set; }
 
-      
+
         [Required]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String FirstName { get; set; }
 
-    
+
         [Required]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String LastName { get; set; }
 
-  
+
         [Required]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]
         public virtual String Email { get; set; }
@@ -69,12 +69,12 @@ namespace WebJobPortal.Models
         [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$")]
         public virtual String Password { get; set; }
 
-      
+
         [Required]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String AddressLine { get; set; }
 
-     
+
         [Required]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String CityName { get; set; }
@@ -82,9 +82,9 @@ namespace WebJobPortal.Models
         [Required]
         [RegularExpression("^[0-9]{4}$")]
         public virtual String Postcode { get; set; }
-
-        public virtual Region Region { get; set; }
-
-        public virtual Gender Gender { get; set; }
     }
 }
+
+        //public virtual Region Region { get; set; }
+
+       // public virtual Gender Gender { get; set; }
