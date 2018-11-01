@@ -1,10 +1,13 @@
-﻿using ServiceLibrary;
+﻿using AutoMapper;
+using ServiceLibrary;
+using ServiceLibrary.Models;
 using System;
-using WebJobPortal.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebJobPortal.Models;
 
 namespace WebJobPortal.Controllers
 {
@@ -12,40 +15,45 @@ namespace WebJobPortal.Controllers
     {
         private readonly IUserService _proxy;
 
-        public UserController(IUserService proxy)
+        public UserController(IUserService proxy)//, IMapper mapper)
         {
             _proxy = proxy;
+
+        
         }
         // GET: User
-        public ActionResult Index(string SearchString)
+        public ActionResult Index()
         {
-            throw new NotImplementedException();
+            return View();
         }
 
-
+        //Get: Movie/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
-        public ActionResult Create(UserModel user)
-        {
-            return View();
-        }
-        // GET: User/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        // POST: User/Edit/5
+        //POST: Movie/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, User user)
+        public ActionResult Create(UserWebModel user)
         {
-            throw new NotImplementedException();
-
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                   
+                    _proxy.CreateUser(AutoMapper.Mapper.Map(user, new User()));
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Create");
+                }
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
-
     }
 }

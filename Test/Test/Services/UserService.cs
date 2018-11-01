@@ -4,13 +4,15 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using DevTrends.WCFDataAnnotations;
 using Repositories;
 using ServiceLibrary.DbConnection;
 using ServiceLibrary.Models;
 
 namespace ServiceLibrary
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+    [ValidateDataAnnotationsBehavior]
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
         private readonly IRepository<User> _database;
@@ -28,12 +30,14 @@ namespace ServiceLibrary
         {
             if (u != null)
             {
-               
-
-                
-
-
-          
+                try
+                {
+                    _database.Create(u);
+                    return u;
+                }catch(ArgumentNullException)
+                {
+                   
+                }
             }
             return null;
         }

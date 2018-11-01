@@ -24,7 +24,8 @@ namespace Repositories
         }
         public T Create(T obj)
         {
-            throw new NotImplementedException();
+            DataTable.InsertOnSubmit(obj);
+            return obj;
         }
 
         public bool Delete(int id)

@@ -9,8 +9,10 @@ using System.Text;
 namespace ServiceLibrary
 {
     [ServiceContract]
+
     public interface IUserService
     {
+        [FaultContract(typeof(User))]
         [OperationContract]
         User CreateUser(User u);
 

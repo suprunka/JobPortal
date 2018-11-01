@@ -32,5 +32,15 @@ namespace ServiceLibrary.Properties {
                 return ((string)(this["TestConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True")]
+        public string JobPortalConnectionString {
+            get {
+                return ((string)(this["JobPortalConnectionString"]));
+            }
+        }
     }
 }
