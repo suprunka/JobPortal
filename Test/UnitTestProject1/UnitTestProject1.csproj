@@ -103,10 +103,6 @@
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebJobPortal\WebJobPortal.csproj">
-      <Project>{b8d60186-1d51-4b2c-9a3d-a83176d8b6e8}</Project>
-      <Name>WebJobPortal</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

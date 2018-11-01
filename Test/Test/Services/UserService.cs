@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using Repositories;
 using ServiceLibrary.Models;
 
 namespace ServiceLibrary
 {
+
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
@@ -39,12 +37,12 @@ namespace ServiceLibrary
             return null;
         }
 
-        public bool DeleteUser(String phoneNumber)
+        public bool DeleteUser(int id)
         {
-            if (phoneNumber.Length > 0)
+            if (id> 0)
             {
-
-             
+                _database.Delete(id);
+                return true;
             }
             return false;
         }
@@ -54,9 +52,10 @@ namespace ServiceLibrary
             throw new NotImplementedException();
         }
 
-        public User FindUser(String PhoneNumber)
+        public User FindUser(int id)
         {
-            throw new NotImplementedException();
+            User u = _database.Get(id);
+            return u;
         }
         public IEnumerable<User> GetAll()
         {

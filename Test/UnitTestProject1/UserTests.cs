@@ -23,6 +23,9 @@ namespace UnitTestProject1
             MappingConfig.RegisterMaps();
         }
 
+        //Test for creation in service
+        #region
+
         [TestMethod]
         public void Test_Create_View()
         {
@@ -36,15 +39,25 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
         {
+            var serviceMock = new Mock<IUserService>();
+            var controller = new UserController(serviceMock.Object);
+            var result = controller.Create(new UserWebModel
+            {
+                PhoneNumber = "12345678",
+                FirstName = "Adam",
+                LastName = "Adam",
+                Email = "Adam@gmail.com",
+                UserName = "AdamMana",
+                Password = "Qwerty1",
+                AddressLine = "Streetline",
+                CityName = "Cityname",
+                Postcode = "2154",
+                Region = Region.Nordjylland,
+                Gender = Gender.Male,
+            }) as RedirectToRouteResult;
 
+            Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void Test_Create_View_Passing_Invalid_Object()
-        {
-
-        }
-
 
         [TestMethod]
         public void Test_Create_View_Exception_Expected()
@@ -192,6 +205,33 @@ namespace UnitTestProject1
             Assert.IsNotNull(u);
         }
 
+        #endregion//Create Service Tests
+
+
+        [TestMethod]
+        public void Test_Delete_View_Negative_Integer()
+        {
+            var serviceMock = new Mock<IUserService>();
+            var controller = new UserController(serviceMock.Object);
+            var result = controller.Delete(1) as ActionResult;
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void Test_Delete_View_With_Existing_Integer()
+        {
+            var userServiceStub = new Mock<IUserService>();
+            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+            {
+                return new List<User> { new User { Id = 1}, new User { Id = 2 }, new User { Id = 3 } };
+            });
+            var controller = new UserController(userServiceStub.Object);
+            var result = controller.Delete(1) as ActionResult;
+            Assert.IsInstanceOfType(result, typeof(ViewContext));
+        }
+        
+
+
         [TestMethod]
         public void Test_Service_Delete_Of_User_Hit_Database_Once()
         {
@@ -199,7 +239,7 @@ namespace UnitTestProject1
             userMock.SetupAllProperties();
             var databaseMock = new Mock<IRepository<User>>();
             UserService service = new UserService(databaseMock.Object);
-            bool result = service.DeleteUser(userMock.Object.PhoneNumber);
+            bool result = service.DeleteUser(userMock.Object.Id);
             Assert.IsTrue(result);
         }
 
@@ -211,7 +251,7 @@ namespace UnitTestProject1
             userMock.SetupAllProperties();
             var databaseMock = new Mock<IRepository<User>>();
             UserService service = new UserService(databaseMock.Object);
-            bool result = service.DeleteUser("45205657");
+            bool result = service.DeleteUser(2);
             Assert.IsTrue(result);
         }
 
@@ -222,7 +262,7 @@ namespace UnitTestProject1
             var dbMock = new Mock<IRepository<User>>();
 
             var sut = new UserService(dbMock.Object);
-            var foundUser = sut.FindUser("1");
+            var foundUser = sut.FindUser(1);
             dbMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once());
             Assert.AreEqual(1, foundUser.Id);
         }
