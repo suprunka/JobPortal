@@ -5,14 +5,14 @@ using ServiceLibrary;
 using ServiceLibrary.Models;
 using System.Collections.Generic;
 using System.Linq;
-using WebJobPortal.Controllers;
-using WebJobPortal.Models;
+//using WebJobPortal.Controllers;
+//using WebJobPortal.Models;
 
 namespace UnitTestProject1
 {
     [TestClass]
     public class ServiceOfferTests
-    {
+    {/*
         [TestMethod]
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
@@ -159,6 +159,6 @@ namespace UnitTestProject1
                 userSenftoService.PhoneNumber == "12334455"
                 );
         }
-
+        */
     }
 }

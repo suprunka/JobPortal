@@ -10,7 +10,7 @@ namespace AppJobPortal.Mapping
     {
         public static void RegisterMaps()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<UserModel, User>());
+            Mapper.Initialize(cfg => cfg.CreateMap<UserAppModel, User>());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using Repositories;
 using ServiceLibrary.Models;
@@ -56,7 +57,19 @@ namespace ServiceLibrary
 
         public bool EditUser(User u)
         {
-            throw new NotImplementedException();
+            //if (FindUser(u.ID) != null)
+            try
+            {
+                bool result = _database.Update(u);
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+            
+             
         }
 
         public User FindUser(int id)
@@ -73,9 +86,11 @@ namespace ServiceLibrary
             }
 
         }
-        public IEnumerable<User> GetAll()
+        public IQueryable<User> GetAll()
         {
-            throw new NotImplementedException();
+
+            IQueryable<User> users =  _database.GetAll();
+            return users;
 
         }
     }

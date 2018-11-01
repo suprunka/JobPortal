@@ -37,21 +37,21 @@ namespace Repositories
 
         public bool Update(T obj)
         {
-            throw new NotImplementedException();
+            return true;
         }
         public virtual T Get(int id)
         {
-            return _Table.First(t => t.PhoneNumber.Equals(id.ToString()));
+            return _Table.FirstOrDefault();
         }
 
         public virtual IQueryable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return new T[] { }.AsQueryable();
         }
 
         public virtual IQueryable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _Table.Where(predicate);
         }
 
     }
