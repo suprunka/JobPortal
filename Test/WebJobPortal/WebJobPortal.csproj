@@ -171,6 +171,7 @@
     <Compile Include="Mapping\MappingConfig.cs" />
     <Compile Include="Models\UserWebModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validator\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UserServiceReference\configuration91.svcinfo" />

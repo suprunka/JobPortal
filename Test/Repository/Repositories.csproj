@@ -52,10 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbConnection\Database.designer.cs">
-      <DependentUpon>Database.dbml</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="DbConnection\JobPortalDatabase.designer.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobPortalDatabase.dbml</DependentUpon>
     </Compile>
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,13 +68,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DbConnection\Database.dbml">
+    <None Include="DbConnection\JobPortalDatabase.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Database.designer.cs</LastGenOutput>
+      <LastGenOutput>JobPortalDatabase.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="DbConnection\Database.dbml.layout">
-      <DependentUpon>Database.dbml</DependentUpon>
+    <None Include="DbConnection\JobPortalDatabase.dbml.layout">
+      <DependentUpon>JobPortalDatabase.dbml</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

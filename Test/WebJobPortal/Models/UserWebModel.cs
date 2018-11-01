@@ -86,5 +86,6 @@ namespace WebJobPortal.Models
         public virtual Region Region { get; set; }
 
         public virtual Gender Gender { get; set; }
+
     }
 }

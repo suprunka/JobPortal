@@ -17,10 +17,10 @@ namespace ServiceLibrary
         User CreateUser(User u);
 
         [OperationContract]
-        User FindUser(String PhoneNumber);
+        User FindUser(int id);
 
         [OperationContract]
-        bool DeleteUser(String PhoneNumber);
+        bool DeleteUser(int id);
 
         [OperationContract]
         bool EditUser(User u);

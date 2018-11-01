@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebJobPortal.Models;
+using WebJobPortal.Validator;
 
 namespace WebJobPortal.Controllers
 {
@@ -39,6 +40,7 @@ namespace WebJobPortal.Controllers
         {
             try
             {
+               
                 if (ModelState.IsValid)
                 {
                    
@@ -54,6 +56,43 @@ namespace WebJobPortal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
+        }
+        
+
+        public ActionResult Delete(int? id)
+        {
+            if(id == null|| !id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var foundUser = _proxy.FindUser((int)id);
+            if(foundUser == null)
+            {
+                return HttpNotFound();
+            }
+
+            User u = Mapper.Map(foundUser, new User());
+            return View(u);
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteConfirm(User u)
+        {
+            try
+            {
+                if(u==null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                _proxy.DeleteUser(u.PhoneNumber);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+            
         }
     }
 }
