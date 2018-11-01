@@ -24,6 +24,9 @@ namespace ServiceLibrary
 
         [OperationContract]
         bool EditUser(User u);
-        
+        [OperationContract]
+        IEnumerable<User> GetAll();
+
+
     }  
 }

@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevTrends.WCFDataAnnotations, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WCFDataAnnotations.1.1.0\lib\net40\DevTrends.WCFDataAnnotations.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,11 +48,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbConnection\JobPortalDatabase.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JobPortalDatabase.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="ServiceInterfaces\IOfferService.cs" />
@@ -73,15 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DbConnection\JobPortalDatabase.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>JobPortalDatabase.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DbConnection\JobPortalDatabase.dbml.layout">
-      <DependentUpon>JobPortalDatabase.dbml</DependentUpon>
-    </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

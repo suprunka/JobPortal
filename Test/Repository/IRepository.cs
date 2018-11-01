@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Repositories
 {
@@ -9,6 +10,7 @@ namespace Repositories
         bool Update(T obj);
         bool Delete(int id);
         IQueryable<T> GetAll();
+        IQueryable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate);
 
     }
 }

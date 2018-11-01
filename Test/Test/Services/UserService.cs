@@ -61,5 +61,10 @@ namespace ServiceLibrary
         {
             throw new NotImplementedException();
         }
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
+
+        }
     }
 }
