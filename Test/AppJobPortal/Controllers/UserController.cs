@@ -1,5 +1,5 @@
 ﻿using AppJobPortal.Models;
-using AppJobPortal.ServiceReference;
+using AppJobPortal.UserServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ namespace AppJobPortal.Controllers
         }
         public IList<UserModel> GetAll()
         {
-            _proxy.get
+            _proxy.GetAll();
             return null;
         }
     }

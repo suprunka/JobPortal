@@ -51,7 +51,6 @@ namespace UnitTestProject1.Service_tests
         [TestMethod]
         [DataRow("1", 1, DisplayName = "Valid ID ")]
         [DataRow("", 3, DisplayName = "Empty id ")]
-
         public void Index_Will_return_the_correct_no_of_users_on_search(string Id, int expectedNoOfResults)
         {
             var userServiceStub = new Mock<IUserService>();
@@ -144,8 +143,5 @@ namespace UnitTestProject1.Service_tests
             ViewResult resultPage = subject.Edit(userStub.Object) as ViewResult;
             Assert.IsTrue("Edit" == resultPage.ViewName);
         }
-        
-
-
     }
 }

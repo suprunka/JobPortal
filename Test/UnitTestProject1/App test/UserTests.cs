@@ -1,10 +1,11 @@
 ﻿using System;
-using AppJobPortal.ServiceReference;
+using AppJobPortal.UserServiceReference;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using AppJobPortal.Controllers;
 using AppJobPortal.Models;
 using System.Collections.Generic;
+using ServiceLibrary.Models;
 
 namespace UnitTestProject1.App_test
 {
@@ -14,9 +15,9 @@ namespace UnitTestProject1.App_test
         [TestMethod]
         public void Get_Will_Return_Valid_Object()
         {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.Id == 6);
-            var userServiceStub = new Mock<AppJobPortal.ServiceReference.IUserService>();
+            var userMock = new Mock<ServiceLibrary.Models.User>();
+            userMock.Setup(x => x.ID == 6);
+            var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.FindUser(It.IsAny<int>())).Returns(userMock.Object);
 
             var sut = new UserController(userServiceStub.Object);

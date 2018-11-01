@@ -14,6 +14,8 @@ namespace ServiceLibrary.Mapping
         public static void RegisterMaps()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<UserWebModel, User>());
+
+            Mapper.Initialize(cfg => cfg.CreateMap<User, User>());
         }
     }
 }
