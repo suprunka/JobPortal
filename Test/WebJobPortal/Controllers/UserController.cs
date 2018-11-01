@@ -40,10 +40,8 @@ namespace WebJobPortal.Controllers
         {
             try
             {
-               
                 if (ModelState.IsValid)
-                {
-                   
+                {      
                     _proxy.CreateUser(AutoMapper.Mapper.Map(user, new User()));
                     return RedirectToAction("Index");
                 }
@@ -61,18 +59,23 @@ namespace WebJobPortal.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if(id == null|| !id.HasValue)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            try {
+                if (id == null || !id.HasValue)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var foundUser = _proxy.FindUser((int)id);
+                if (foundUser == null)
+                {
+                    return HttpNotFound();
+                }
+                User u = Mapper.Map(foundUser, new User());
+                return View(u);
             }
-            var foundUser = _proxy.FindUser((int)id);
-            if(foundUser == null)
+            catch
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
-
-            User u = Mapper.Map(foundUser, new User());
-            return View(u);
 
         }
 
@@ -85,7 +88,7 @@ namespace WebJobPortal.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                _proxy.DeleteUser(u.PhoneNumber);
+                _proxy.DeleteUser(u.Id);
                 return RedirectToAction("Index");
             }
             catch

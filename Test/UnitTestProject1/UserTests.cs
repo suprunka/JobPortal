@@ -11,6 +11,7 @@ using WebJobPortal.Mapping;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System;
 
 namespace UnitTestProject1
 {
@@ -23,7 +24,7 @@ namespace UnitTestProject1
             MappingConfig.RegisterMaps();
         }
 
-        //Test for creation in service
+        //Test of MVC controller for creation
         #region
 
         [TestMethod]
@@ -207,12 +208,26 @@ namespace UnitTestProject1
 
         #endregion//Create Service Tests
 
-
+        //Test of MVC controller for deleting
+        #region
         [TestMethod]
-        public void Test_Delete_View_Negative_Integer()
+        public void Test_Delete_Result_Passing_Negative_Integer()
         {
             var serviceMock = new Mock<IUserService>();
             var controller = new UserController(serviceMock.Object);
+            var result = controller.Delete(-1) as ActionResult;
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void Test_Delete_Null_Found()
+        {
+            var userServiceStub = new Mock<IUserService>();
+            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
+            {
+                return null;
+            });
+            var controller = new UserController(userServiceStub.Object);
             var result = controller.Delete(1) as ActionResult;
             Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
         }
@@ -221,16 +236,57 @@ namespace UnitTestProject1
         public void Test_Delete_View_With_Existing_Integer()
         {
             var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
             {
-                return new List<User> { new User { Id = 1}, new User { Id = 2 }, new User { Id = 3 } };
+                return new User { Id = 1 };
             });
             var controller = new UserController(userServiceStub.Object);
             var result = controller.Delete(1) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(ViewContext));
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void Test_Delete_Invokes_Exception()
+        {
+            var userServiceStub = new Mock<IUserService>();
+            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
+            {
+                throw new Exception();
+            });
+            var controller = new UserController(userServiceStub.Object);
+            var result = controller.Delete(1) as ActionResult;
+            Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
         }
         
+        [TestMethod]
+        public void Test_DeleteConfirm_While_User_Is_Null_Should_Return_Bad_Request()
+        {
+            var userServiceStub = new Mock<IUserService>();
+            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
+            {
+                return null;
+            });
+            var controller = new UserController(userServiceStub.Object);
+            var result = controller.DeleteConfirm(null) as ActionResult;
+            Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
 
+        }
+        [TestMethod]
+        public void Test_DeleteConfirm_While_User_Is_Valid_Returns_Redirection()
+        {
+            var userServiceStub = new Mock<IUserService>();
+            User userMock = null;
+            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
+            {
+               
+                userMock = new User{ Id = 1 };
+                return userMock;
+            });
+            var controller = new UserController(userServiceStub.Object);
+            var result = controller.DeleteConfirm(userMock) as ActionResult;
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+        
 
         [TestMethod]
         public void Test_Service_Delete_Of_User_Hit_Database_Once()
@@ -254,6 +310,7 @@ namespace UnitTestProject1
             bool result = service.DeleteUser(2);
             Assert.IsTrue(result);
         }
+        #endregion
 
         [TestMethod]
         public void Get_UserService_Verify_If_It_Calls_Db()

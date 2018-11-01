@@ -22,26 +22,40 @@ namespace AppJobPortal.ServiceReference {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string AddressLineField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CityNameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private AppJobPortal.ServiceReference.Gender GenderField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LastNameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PostcodeField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private AppJobPortal.ServiceReference.Region RegionField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -54,7 +68,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string AddressLine {
             get {
                 return this.AddressLineField;
@@ -67,7 +81,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string CityName {
             get {
                 return this.CityNameField;
@@ -80,7 +94,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Email {
             get {
                 return this.EmailField;
@@ -93,7 +107,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string FirstName {
             get {
                 return this.FirstNameField;
@@ -106,7 +120,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public AppJobPortal.ServiceReference.Gender Gender {
             get {
                 return this.GenderField;
@@ -119,7 +133,20 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string LastName {
             get {
                 return this.LastNameField;
@@ -132,7 +159,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Password {
             get {
                 return this.PasswordField;
@@ -145,7 +172,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string PhoneNumber {
             get {
                 return this.PhoneNumberField;
@@ -158,7 +185,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Postcode {
             get {
                 return this.PostcodeField;
@@ -171,7 +198,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public AppJobPortal.ServiceReference.Region Region {
             get {
                 return this.RegionField;
@@ -184,7 +211,7 @@ namespace AppJobPortal.ServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string UserName {
             get {
                 return this.UserNameField;
@@ -250,22 +277,28 @@ namespace AppJobPortal.ServiceReference {
         System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User> CreateUserAsync(AppJobPortal.ServiceReference.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        AppJobPortal.ServiceReference.User FindUser(string PhoneNumber);
+        AppJobPortal.ServiceReference.User FindUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User> FindUserAsync(string PhoneNumber);
+        System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User> FindUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
-        bool DeleteUser(string PhoneNumber);
+        bool DeleteUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
-        System.Threading.Tasks.Task<bool> DeleteUserAsync(string PhoneNumber);
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
         bool EditUser(AppJobPortal.ServiceReference.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
         System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.ServiceReference.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
+        AppJobPortal.ServiceReference.User[] GetAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
+        System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User[]> GetAllAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -303,20 +336,20 @@ namespace AppJobPortal.ServiceReference {
             return base.Channel.CreateUserAsync(u);
         }
         
-        public AppJobPortal.ServiceReference.User FindUser(string PhoneNumber) {
-            return base.Channel.FindUser(PhoneNumber);
+        public AppJobPortal.ServiceReference.User FindUser(int id) {
+            return base.Channel.FindUser(id);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User> FindUserAsync(string PhoneNumber) {
-            return base.Channel.FindUserAsync(PhoneNumber);
+        public System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User> FindUserAsync(int id) {
+            return base.Channel.FindUserAsync(id);
         }
         
-        public bool DeleteUser(string PhoneNumber) {
-            return base.Channel.DeleteUser(PhoneNumber);
+        public bool DeleteUser(int id) {
+            return base.Channel.DeleteUser(id);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteUserAsync(string PhoneNumber) {
-            return base.Channel.DeleteUserAsync(PhoneNumber);
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(int id) {
+            return base.Channel.DeleteUserAsync(id);
         }
         
         public bool EditUser(AppJobPortal.ServiceReference.User u) {
@@ -325,6 +358,14 @@ namespace AppJobPortal.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.ServiceReference.User u) {
             return base.Channel.EditUserAsync(u);
+        }
+        
+        public AppJobPortal.ServiceReference.User[] GetAll() {
+            return base.Channel.GetAll();
+        }
+        
+        public System.Threading.Tasks.Task<AppJobPortal.ServiceReference.User[]> GetAllAsync() {
+            return base.Channel.GetAllAsync();
         }
     }
 }

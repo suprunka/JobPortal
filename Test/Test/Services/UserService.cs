@@ -18,33 +18,40 @@ namespace ServiceLibrary
         }
         public UserService()
         {
-           
+
         }
 
         public User CreateUser(User u)
         {
-            if (u != null)
+            try
             {
-                try
-                {
-                    _database.Create(u);
-                    return u;
-                }catch(ArgumentNullException)
-                {
-                   
-                }
+                _database.Create(u);
+                return u;
             }
-            return null;
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+
         }
+
+
 
         public bool DeleteUser(int id)
         {
-            if (id> 0)
+            try
             {
-                _database.Delete(id);
-                return true;
+                if (id > 0)
+                {
+                    _database.Delete(id);
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
 
         public bool EditUser(User u)
@@ -54,8 +61,17 @@ namespace ServiceLibrary
 
         public User FindUser(int id)
         {
-            User u = _database.Get(id);
-            return u;
+            try
+            {
+                User u = _database.Get(id);
+                return u;
+            }
+            catch
+            {
+                return null;
+
+            }
+
         }
         public IEnumerable<User> GetAll()
         {
