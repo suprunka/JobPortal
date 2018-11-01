@@ -13,7 +13,7 @@ namespace ServiceLibrary.Models
     {//can we have ID for Db instead of phonenumber/cpr? you can always change phone number and you don't want to share your cpr with everyone
         [DataMember]
         [Required]
-        public virtual int Id { get; set; }
+        public virtual int ID { get; set; }
         [DataMember]
         [Required]
         [RegularExpression("^[0-9]{8}$")]

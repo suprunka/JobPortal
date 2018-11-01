@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using AppJobPortal.Controllers;
 using AppJobPortal.Models;
+using System.Collections.Generic;
 
 namespace UnitTestProject1.App_test
 {
@@ -16,12 +17,12 @@ namespace UnitTestProject1.App_test
             var userMock = new Mock<User>();
             userMock.Setup(x => x.Id == 6);
             var userServiceStub = new Mock<AppJobPortal.ServiceReference.IUserService>();
-            userServiceStub.Setup(x => x.FindUser(It.IsAny<string>())).Returns(userMock.Object);
+            userServiceStub.Setup(x => x.FindUser(It.IsAny<int>())).Returns(userMock.Object);
 
             var sut = new UserController(userServiceStub.Object);
             UserModel user = sut.Get(6);
             Assert.IsTrue(
-                userMock.Object.Id == user.Id
+                userMock.Object.Id == user.ID
             );
         }
 
@@ -73,7 +74,7 @@ namespace UnitTestProject1.App_test
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-                return new List<User> { new User() { Id = 1 }, new User() { Id = 71 }, new User() { Id = 10 } };
+                return new User[] { new User() { Id=  1 }, new User() { Id = 71 }, new User() { Id = 10 } };
             });
 
             var sut = new UserController(userServiceStub.Object);

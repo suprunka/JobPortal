@@ -42,7 +42,7 @@ namespace AppJobPortal.Models
 
     }
 
-    
+    public virtual int ID { get; set; }
     public virtual String PhoneNumber { get; set; }
 
 

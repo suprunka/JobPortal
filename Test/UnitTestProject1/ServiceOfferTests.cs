@@ -5,6 +5,8 @@ using ServiceLibrary;
 using ServiceLibrary.Models;
 using System.Collections.Generic;
 using System.Linq;
+using WebJobPortal.Controllers;
+using WebJobPortal.Models;
 
 namespace UnitTestProject1
 {

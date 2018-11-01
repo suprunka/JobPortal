@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System;
+using AutoMapper;
 
 namespace UnitTestProject1
 {
@@ -103,7 +104,7 @@ namespace UnitTestProject1
                 Gender = gender
             };
 
-            var context = new ValidationContext(userServiceStub, null, null);
+            var context = new System.ComponentModel.DataAnnotations.ValidationContext(userServiceStub, null, null);
             var result = new List<ValidationResult>();
 
 
@@ -238,7 +239,7 @@ namespace UnitTestProject1
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
             {
-                return new User { Id = 1 };
+                return new User { ID = 1 };
             });
             var controller = new UserController(userServiceStub.Object);
             var result = controller.Delete(1) as ActionResult;
@@ -257,7 +258,7 @@ namespace UnitTestProject1
             var result = controller.Delete(1) as ActionResult;
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
         }
-        
+
         [TestMethod]
         public void Test_DeleteConfirm_While_User_Is_Null_Should_Return_Bad_Request()
         {
@@ -278,15 +279,15 @@ namespace UnitTestProject1
             User userMock = null;
             userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
             {
-               
-                userMock = new User{ Id = 1 };
+
+                userMock = new User { ID = 1 };
                 return userMock;
             });
             var controller = new UserController(userServiceStub.Object);
-            var result = controller.DeleteConfirm(userMock) as ActionResult;
+            var result = controller.DeleteConfirm(AutoMapper.Mapper.Map(userMock, new UserWebModel())) as ActionResult;
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
-        
+
 
         [TestMethod]
         public void Test_Service_Delete_Of_User_Hit_Database_Once()
@@ -295,7 +296,7 @@ namespace UnitTestProject1
             userMock.SetupAllProperties();
             var databaseMock = new Mock<IRepository<User>>();
             UserService service = new UserService(databaseMock.Object);
-            bool result = service.DeleteUser(userMock.Object.Id);
+            bool result = service.DeleteUser(userMock.Object.ID);
             Assert.IsTrue(result);
         }
 
@@ -321,7 +322,7 @@ namespace UnitTestProject1
             var sut = new UserService(dbMock.Object);
             var foundUser = sut.FindUser(1);
             dbMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once());
-            Assert.AreEqual(1, foundUser.Id);
+            Assert.AreEqual(1, foundUser.ID);
         }
         [TestMethod]
         public void GetAll_OfferService_Verify_If_Returns_Queryable()
@@ -348,8 +349,8 @@ namespace UnitTestProject1
             dbMock.Verify(x => x.Update(It.IsAny<User>()), Times.Once());
 
         }
-       
-    }
+
     }
 }
+
 

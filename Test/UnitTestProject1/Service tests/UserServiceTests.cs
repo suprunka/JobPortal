@@ -57,7 +57,7 @@ namespace UnitTestProject1.Service_tests
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-                return new List<User> { new User() { Id = 1 }, new User() { Id = 71 }, new User() { Id = 10 } };
+                return new List<User> { new User() { ID = 1 }, new User() { ID = 71 }, new User() { ID = 10 } };
             });
 
             var sut = new UserController(userServiceStub.Object);

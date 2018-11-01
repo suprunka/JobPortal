@@ -43,6 +43,9 @@ namespace WebJobPortal.Models
         }
 
         [Required]
+        public virtual int ID { get; set; }
+
+        [Required]
         [RegularExpression("^[0-9]{8}$")]
         public virtual String PhoneNumber { get; set; }
 
