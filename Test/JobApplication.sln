@@ -14,6 +14,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebJobPortal", "WebJobPortal\WebJobPortal.csproj", "{B8D60186-1D51-4B2C-9A3D-A83176D8B6E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppJobPortal", "AppJobPortal\AppJobPortal.csproj", "{E63F4324-3FAB-4F0D-8126-6B4B123A2742}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33304A02-E154-4C1B-9F09-D2A024C77434} = {33304A02-E154-4C1B-9F09-D2A024C77434}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

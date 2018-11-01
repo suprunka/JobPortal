@@ -22,7 +22,7 @@ namespace WebJobPortal.Controllers
         
         }
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             return View();
         }
