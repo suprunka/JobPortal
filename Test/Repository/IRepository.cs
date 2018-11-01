@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Repositories
 {
-     public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         T Create(T obj);
-        T Get(int id);
+        T Get(Expression<Func<T, bool>> predicate);
         bool Update(T obj);
-        bool Delete(int id);
+        bool Delete(Expression<Func<T, bool>> predicate);
         IQueryable<T> GetAll();
-        IQueryable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate);
+        IQueryable<T> List(Expression<Func<T, bool>> predicate);
 
     }
 }

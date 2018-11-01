@@ -1,23 +1,27 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repositories;
 using ServiceLibrary;
 using ServiceLibrary.Models;
-using System.Collections.Generic;
-using System.Linq;
 using WebJobPortal.Controllers;
 using WebJobPortal.Models;
 
-namespace UnitTestProject1
+namespace UnitTestProject1.Service_tests
 {
     [TestClass]
-    public class ServiceOfferTests
+    public class ServiceOfferServiceTests
     {
+        //Create
+        #region
+
         [TestMethod]
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
             var offerMock = new Mock<Offer>();
-       
+
             offerMock.SetupAllProperties();
             var dbMock = new Mock<IRepository<Offer>>();
 
@@ -35,12 +39,12 @@ namespace UnitTestProject1
             Offer OfferSentToDb = null;
 
             dbMock.Setup(x => x.Create(It.IsAny<Offer>()))
-                .Callback<Offer>(x => x= OfferSentToDb);
+                .Callback<Offer>(x => x = OfferSentToDb);
 
             var sut = new OfferService(dbMock.Object);
             sut.CreateServiceOffer(offerMock.Object);
             dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.Once());
-            Assert.AreEqual(1, OfferSentToDb.Id );
+            Assert.AreEqual(1, OfferSentToDb.Id);
         }
 
         [TestMethod]
@@ -65,8 +69,10 @@ namespace UnitTestProject1
             sut.CreateServiceOffer(offerMock.Object);
             dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.AtLeastOnce);
         }
+        #endregion
 
-
+        //Delete
+        #region
         [TestMethod]
         public void Delete_OfferService_Verify_If_It_Calls_Db()
         {
@@ -76,9 +82,13 @@ namespace UnitTestProject1
 
             var sut = new OfferService(dbMock.Object);
             sut.DeleteServiceOffer(offerMock.Object.Id);
-            dbMock.Verify(x => x.Delete(It.IsAny<int>()), Times.AtLeastOnce);
+            dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<Offer, bool>>>()), Times.AtLeastOnce);
         }
+        #endregion
 
+
+        //Read
+        #region
         [TestMethod]
         public void Get_OfferService_Verify_If_It_Calls_Db()
         {
@@ -87,12 +97,12 @@ namespace UnitTestProject1
             var dbMock = new Mock<IRepository<Offer>>();
             int OfferId = -1;
 
-            dbMock.Setup(x => x.Get(It.IsAny<int>()))
+            dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<Offer, bool>>>()))
                 .Callback<int>(x => OfferId = x);
 
             var sut = new OfferService(dbMock.Object);
             sut.FindServiceOffer(offerMock.Object.Id);
-            dbMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once());
+            dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<Offer, bool>>>()), Times.Once());
             Assert.AreEqual(1, OfferId);
         }
         [TestMethod]
@@ -109,6 +119,10 @@ namespace UnitTestProject1
             Assert.AreEqual(1, list.Count());
         }
 
+        #endregion
+
+        //Update
+        #region
         [TestMethod]
         public void Update_OfferService_Verify_If_Connect_To_Db()
         {
@@ -159,6 +173,7 @@ namespace UnitTestProject1
                 userSenftoService.PhoneNumber == "12334455"
                 );
         }
-
+        #endregion
     }
 }
+

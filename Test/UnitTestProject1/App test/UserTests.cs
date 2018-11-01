@@ -4,8 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using AppJobPortal.Controllers;
 using AppJobPortal.Models;
-using System.Collections.Generic;
-using ServiceLibrary.Models;
+
+using User = AppJobPortal.UserServiceReference.User;
+using Region = AppJobPortal.UserServiceReference.Region;
+using Gender = AppJobPortal.UserServiceReference.Gender;
 
 namespace UnitTestProject1.App_test
 {
@@ -15,7 +17,7 @@ namespace UnitTestProject1.App_test
         [TestMethod]
         public void Get_Will_Return_Valid_Object()
         {
-            var userMock = new Mock<ServiceLibrary.Models.User>();
+            var userMock = new Mock<User>();
             userMock.Setup(x => x.ID == 6);
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.FindUser(It.IsAny<int>())).Returns(userMock.Object);
@@ -23,7 +25,7 @@ namespace UnitTestProject1.App_test
             var sut = new UserController(userServiceStub.Object);
             UserModel user = sut.Get(6);
             Assert.IsTrue(
-                userMock.Object.Id == user.ID
+                userMock.Object.ID == user.ID
             );
         }
 
@@ -75,7 +77,7 @@ namespace UnitTestProject1.App_test
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-                return new User[] { new User() { Id=  1 }, new User() { Id = 71 }, new User() { Id = 10 } };
+                return new User[] { new User() { ID=  1 }, new User() { ID = 71 }, new User() { ID = 10 } };
             });
 
             var sut = new UserController(userServiceStub.Object);
