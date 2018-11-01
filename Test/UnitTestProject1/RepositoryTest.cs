@@ -6,7 +6,6 @@ using ServiceLibrary.Models;
 using ServiceLibrary.DbConnection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
 namespace UnitTestProject1
 {
     [TestClass]
@@ -15,9 +14,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            var offer = new gsggs();
-            var context = new Mock<DatabaseDataContext>();
-            var dbTable = new Mock<dupa<Offer>>();
+            
         }
     }
 }

@@ -11,55 +11,72 @@ namespace ServiceLibrary.Models
     [DataContract]
     public class User
     {
-        [DataMember]
-        [Required]
-        [RegularExpression ("^[0-9]{8}$")]
+        private readonly string _phoneNumber;
+        private readonly string _firstName;
+        private readonly string _lastName;
+        private readonly string _email;
+        private readonly string _userName;
+        private readonly string _password;
+        private readonly string _addressLine;
+        private readonly string _cityName;
+        private readonly string _postCode;
+        private readonly Region _region;
+        private readonly Gender _gender;
+
+        public User(string phoneNumber, string firstName, string lastName, string email, string userName, string password,
+            string addressLine, string cityName, string postCode, Region region, Gender gender)
+        {
+        
+            _phoneNumber = PhoneNumber;
+            _firstName = firstName;
+            _lastName = lastName;
+            _email = email;
+            _userName = userName;
+            _password = password;
+            _addressLine = addressLine;
+            _cityName = cityName;
+            _postCode = postCode;
+            _region = region;
+            _gender = gender;
+
+        }
+        public User()
+        {
+
+        }
+
+        [DataMember(IsRequired = true)]
+        
         public virtual String PhoneNumber { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")] //allows danish characters
+        [DataMember(IsRequired = true)]
         public String FirstName { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [DataMember(IsRequired = true)]
         public String LastName { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]
+        [DataMember(IsRequired = true)]
         public String Email { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{4,}$")]
+        [DataMember(IsRequired = true)]
         public String UserName { get; set; }
 
-        [DataMember]
-        [Required] 
-        [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$")]
+        [DataMember(IsRequired = true)]
         public String Password { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [DataMember(IsRequired = true)]
         public String AddressLine { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [DataMember(IsRequired = true)]
         public String CityName { get; set; }
 
-        [DataMember]
-        [Required]
-        [RegularExpression("^[0-9]{4}$")]
+        [DataMember(IsRequired = true)]
         public String Postcode { get; set; }
 
-        [DataMember] //enum
+        [DataMember(IsRequired = true)]
         public Region Region { get; set; }
 
-        [DataMember]
+        [DataMember(IsRequired = true)]
         public Gender Gender { get; set; }
     }
 }
