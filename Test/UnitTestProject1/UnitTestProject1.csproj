@@ -74,6 +74,7 @@
     <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App test\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service tests\UserServiceTests.cs" />
     <Compile Include="ServiceOfferTests.cs" />
@@ -84,9 +85,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App test\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
       <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
@@ -103,10 +102,6 @@
     <ProjectReference Include="..\Test\ServiceLibrary.csproj">
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebJobPortal\WebJobPortal.csproj">
-      <Project>{b8d60186-1d51-4b2c-9a3d-a83176d8b6e8}</Project>
-      <Name>WebJobPortal</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -348,24 +348,8 @@ namespace UnitTestProject1
             dbMock.Verify(x => x.Update(It.IsAny<User>()), Times.Once());
 
         }
-
-        [TestMethod]
-        public void Update_OfferService_Verify_If_Returns_Valid_Object()
-        {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.LastName).Returns("Poulsen");
-            userMock.Setup(x => x.PhoneNumber).Returns("80901099");
-            var dbMock = new Mock<IRepository<User>>();
-            User returnedUser = null;
-            dbMock.Setup(x => x.Update(It.IsAny<User>()))
-                .Callback<User>(x => returnedUser = x);
-            var sut = new UserService(dbMock.Object);
-            sut.EditUser(userMock.Object);
-            Assert.IsTrue(
-                returnedUser.LastName.Equals("Poulsen") &&
-                returnedUser.PhoneNumber.Equals("80901099")
-                 );
-        }
+       
+    }
     }
 }
 
