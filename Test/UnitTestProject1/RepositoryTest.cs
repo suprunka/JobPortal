@@ -15,9 +15,9 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            var offer = new gsggs();
+            //var offer = new gsggs();
             var context = new Mock<DatabaseDataContext>();
-            var dbTable = new Mock<dupa<Offer>>();
+            //var dbTable = new Mock<dupa<Offer>>();
         }
     }
 }

@@ -3,7 +3,8 @@ using Moq;
 using ServiceLibrary;
 using ServiceLibrary.Models;
 using Repositories;
-using WebJobPortal;
+using WebJobPortal.Controllers;
+using WebJobPortal.Models;
 
 namespace UnitTestProject1
 {
@@ -31,7 +32,7 @@ namespace UnitTestProject1
             string lastName, string email, string userName, string password, string addressLine,
             string cityName, string postCode, Region region, Gender gender)
         {
-            var userServiceStub = new UserWebModel{ 
+            var userServiceStub = new UserModel{ 
                 PhoneNumber = phoneNumber,
                 FirstName = firstName,
                 LastName = lastName,
@@ -41,8 +42,8 @@ namespace UnitTestProject1
                 AddressLine = addressLine,
                 CityName = cityName,
                 Postcode = postCode,
-                Region = region,
-                Gender = gender
+                //Region = region,
+                //Gender = gender
             };
             
             var sub = new UserController(userServiceStub.Object);

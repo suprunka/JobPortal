@@ -120,10 +120,13 @@
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebJobPortal\WebJobPortal.csproj">
-      <Project>{b8d60186-1d51-4b2c-9a3d-a83176d8b6e8}</Project>
+    <ProjectReference Include="..\WebJobPortal2\WebJobPortal\WebJobPortal.csproj">
+      <Project>{a1b8868b-0c7b-4d50-b528-9b701ddac59d}</Project>
       <Name>WebJobPortal</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

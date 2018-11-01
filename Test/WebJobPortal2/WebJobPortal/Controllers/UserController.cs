@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiceLibrary.Models;
+//using WebJobPortal.ServiceReference1;
 
 namespace WebJobPortal.Controllers
 {
@@ -19,10 +21,12 @@ namespace WebJobPortal.Controllers
         // GET: User
         public ActionResult Index(string SearchString)
         {
-            throw new NotImplementedException();
+            return View();
         }
-
-
+        public ActionResult UserList()
+        {
+            return View();
+        }
         public ActionResult Create()
         {
             return View();
@@ -30,6 +34,7 @@ namespace WebJobPortal.Controllers
 
         public ActionResult Create(UserModel user)
         {
+
             return View();
         }
         // GET: User/Edit/5
