@@ -24,6 +24,7 @@ namespace ServiceLibrary
         {
             try
             {
+
                 _database.Create(u);
                 return u;
             }

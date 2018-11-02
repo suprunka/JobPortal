@@ -59,10 +59,8 @@ namespace UnitTestProject1
             context.Setup(x => x.GetTable<TestClassUser>()).Returns(dbSetMock.Object as Table<TestClassUser>);
             dbSetMock.Setup(x => x.InsertOnSubmit(It.IsAny<TestClassUser>()));
 
-            
             var repository = new Repository<TestClassUser>(context.Object);
             repository.Create(testObject);
-
 
             context.Verify(x => x.GetTable<TestClassUser>());
 
