@@ -29,7 +29,7 @@
         <Label Name="Gender" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,320,0,0" RenderTransformOrigin="0.526,0.385"/>
 
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = UserName }" VerticalAlignment="Top" Width="120" Margin="80,24,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="80,50,0,0" Grid.ColumnSpan="3"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="**************" VerticalAlignment="Top" Width="120" Margin="80,50,0,0" Grid.ColumnSpan="3"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = Mail }" VerticalAlignment="Top" Width="120" Margin="80,80,0,0" Grid.ColumnSpan="3"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = Phone}" VerticalAlignment="Top" Width="120" Margin="80,110,0,0" Grid.ColumnSpan="3"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = FirstName}" VerticalAlignment="Top" Width="120" Margin="80,140,0,0" Grid.ColumnSpan="3"/>
