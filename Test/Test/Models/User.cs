@@ -56,7 +56,7 @@ namespace ServiceLibrary.Models
 
         [DataMember]
         [Required]
-        [RegularExpression("^[0-9]{4}$")]
+        [RegularExpression("^[0-9]{4}$", ErrorMessage = "Characters are not allowed.")]
         public String Postcode { get; set; }
 
         [DataMember] //enum
