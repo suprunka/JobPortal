@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using Repositories;
 using ServiceLibrary.Models;
+
 
 namespace ServiceLibrary
 {
@@ -13,14 +13,12 @@ namespace ServiceLibrary
     {
         private readonly IRepository<User> _database;
 
+
         public UserService(IRepository<User> database)
         {
             _database = database;
         }
-        public UserService()
-        {
 
-        }
 
         public User CreateUser(User u)
         {
@@ -36,15 +34,13 @@ namespace ServiceLibrary
 
         }
 
-
-
         public bool DeleteUser(int id)
         {
             try
             {
                 if (id > 0)
                 {
-                    _database.Delete(id);
+                    _database.Delete(t => t.ID == id);
                     return true;
                 }
                 return false;
@@ -57,26 +53,15 @@ namespace ServiceLibrary
 
         public bool EditUser(User u)
         {
-            //if (FindUser(u.ID) != null)
-            try
-            {
-                bool result = _database.Update(u);
-                return true;
-
-            }
-            catch
-            {
-                return false;
-            }
-            
-             
+            _database.Update(u);
+            return true;
         }
 
         public User FindUser(int id)
         {
             try
             {
-                User u = _database.Get(id);
+                User u = _database.Get(t=> t.ID == id);
                 return u;
             }
             catch
@@ -86,11 +71,9 @@ namespace ServiceLibrary
             }
 
         }
-        public IQueryable<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
-
-            IQueryable<User> users =  _database.GetAll();
-            return users;
+            return _database.GetAll();
 
         }
     }

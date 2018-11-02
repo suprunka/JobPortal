@@ -4,55 +4,66 @@
 using Repository.DbConnection;
 using System;
 using System.Data.Linq;
-using System.Linq; 
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Repositories
 {
-    public class Repository<T> : IRepository<T> where T : UserTable
+    public class Repository<T> : IRepository<T> where T : class
     {
-        private  Table<T> _Table;
-      
+        protected readonly Table<T> _Table;
+        protected readonly JobPortalDatabaseDataContext db = null;
 
         public Repository(JobPortalDatabaseDataContext dataContext)
         {
-            _Table = dataContext.GetTable<T>();
-                //http://web.archive.org/web/20150404154203/https://www.remondo.net/repository-pattern-example-csharp/
+            db = dataContext;
+            _Table = db.GetTable<T>();
+
+            //http://web.archive.org/web/20150404154203/https://www.remondo.net/repository-pattern-example-csharp/
+            //https://www.codeproject.com/Articles/1239785/Implementing-and-Testing-Repository-Pattern-using
         }
-        public T Create(T obj)
+        public virtual T Create(T obj)
         {
             _Table.InsertOnSubmit(obj);
             return obj;
         }
 
-        public bool Delete(int id)
+        public virtual bool Delete(Expression<Func<T, bool>> predicate)
         {
-            if(id > 0)
+            try
             {
-                _Table.DeleteOnSubmit(Get(id));
+                _Table.DeleteOnSubmit(Get(predicate));
                 return true;
             }
-            return false;
-          
+            catch
+            {
+                return false;
+            }
         }
 
-        public bool Update(T obj)
+        public virtual bool Update(T obj)
         {
+            _Table.InsertOnSubmit(obj);
             return true;
         }
-        public virtual T Get(int id)
+        public virtual T Get(Expression<Func<T, bool>> predicate)
         {
-            return _Table.FirstOrDefault();
+            T o = _Table.FirstOrDefault(predicate);
+            return o;
         }
 
         public virtual IQueryable<T> GetAll()
         {
-            return new T[] { }.AsQueryable();
+            IQueryable<T> listOfAll = _Table;
+            return listOfAll;
         }
 
-        public virtual IQueryable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
+        public virtual IQueryable<T> List(Expression<Func<T, bool>> predicate)
         {
-            return _Table.Where(predicate);
+            IQueryable<T> filteredList = _Table.Where(predicate);
+            return filteredList;
         }
-
     }
+
+
 }
