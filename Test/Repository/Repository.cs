@@ -12,9 +12,9 @@ namespace Repositories
     public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly Table<T> _Table;
-        protected readonly JobPortalDatabaseDataContext db = null;
+        protected readonly DataContext db = null;
 
-        public Repository(JobPortalDatabaseDataContext dataContext)
+        public Repository(DataContext dataContext)
         {
             db = dataContext;
             _Table = db.GetTable<T>();
@@ -48,8 +48,7 @@ namespace Repositories
         }
         public virtual T Get(Expression<Func<T, bool>> predicate)
         {
-            T o = _Table.FirstOrDefault(predicate);
-            return o;
+           return _Table.FirstOrDefault(predicate);
         }
 
         public virtual IQueryable<T> GetAll()

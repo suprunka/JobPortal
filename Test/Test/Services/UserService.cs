@@ -24,11 +24,11 @@ namespace ServiceLibrary
         {
             try
             {
-
+                RegexMatch.DoesUserMatch(u);
                 _database.Create(u);
                 return u;
             }
-            catch (ArgumentNullException)
+            catch (ArgumentException)
             {
                 return null;
             }
@@ -77,5 +77,7 @@ namespace ServiceLibrary
             return _database.GetAll();
 
         }
+
+        
     }
 }

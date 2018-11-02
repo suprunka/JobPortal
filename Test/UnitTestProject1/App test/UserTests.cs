@@ -12,6 +12,8 @@ namespace UnitTestProject1.App_test
     [TestClass]
     public class UserTests
     {
+        //read
+        #region
         [TestMethod]
         public void Get_Will_Return_Valid_Object()
         {
@@ -27,6 +29,30 @@ namespace UnitTestProject1.App_test
             );
         }
 
+
+
+        [TestMethod]
+        public void Get_Will_Return_Proper_Amount_Of_Users()
+        {
+            User[] u = { new User(), new User() };
+            IQueryable<User> listOfUsers = u.AsQueryable<User>();
+
+            var userServiceStub = new Mock<IUserService>();
+            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+            {
+                return u;
+            });
+
+            var sut = new UserController(userServiceStub.Object);
+            var result = sut.GetAll();
+            Assert.AreEqual(result.Length, 2);
+        }
+
+        #endregion
+
+
+        //update
+        #region
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid phonenumber (too many characters)")] //invalid phonenumber (too many characters)
         [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid phonenumber (not allowed characters)")] //
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid firstname (not allowed characters)")] //
@@ -69,21 +95,6 @@ namespace UnitTestProject1.App_test
             Assert.IsTrue(result== shouldValidate);
         }
 
-        [TestMethod]
-        public void Get_Will_Return_Proper_Amount_Of_Users()
-        {
-            User[] u = { new User(), new User() };
-            IQueryable<User> listOfUsers = u.AsQueryable<User>();
-
-            var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
-            {
-                return u;
-            });
-
-            var sut = new UserController(userServiceStub.Object);
-            var result = sut.GetAll();
-            Assert.AreEqual( result.Length, 2);
-        }
     }
+    #endregion
 }

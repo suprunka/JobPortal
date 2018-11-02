@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 
 namespace ServiceLibrary
 {
@@ -25,7 +27,7 @@ namespace ServiceLibrary
         [OperationContract]
         bool EditUser(User u);
         [OperationContract]
-        IQueryable<User> GetAll();
+        IEnumerable<User> GetAll();
 
 
     }
