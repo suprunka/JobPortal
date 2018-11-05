@@ -21,7 +21,7 @@ namespace AppJobPortal.Models
 {
     class ClientViewModel :  ObservableCollection<UserAppModel>, INotifyPropertyChanged
     {
-        private int selectedIndex;
+        private int selectedIndex = -2;
 
         private int id;
         private string firstname;
@@ -45,12 +45,7 @@ namespace AppJobPortal.Models
         public ClientViewModel()
         {
             _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
-            var config = new MapperConfiguration(cfg => {
-
-                cfg.CreateMap<UserAppModel, User>();
-
-            });
-            _mapper = config.CreateMapper();
+           
             /*updateClientCommand = new CommandBase(param => this.UpdateClient());
             AddClientCommand = new CommandBase(param => this.AddClient());
             NewClientCommand = new CommandBase(new Action<Object>(NewClient));
@@ -353,7 +348,7 @@ namespace AppJobPortal.Models
 
             foreach (User u in _proxy.GetAll())
             {
-                UserAppModel userAppModel= _mapper.Map(u, new UserAppModel());
+                UserAppModel userAppModel= Mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);
             }
 

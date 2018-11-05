@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace ServiceLibrary.Models
 {
-    [Serializable]
+
     public static class RegexMatch
     {
         public static void DoesUserMatch(User user)

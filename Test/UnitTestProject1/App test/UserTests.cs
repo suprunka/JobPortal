@@ -1,9 +1,13 @@
-﻿using AppJobPortal.UserServiceReference;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using AppJobPortal.Controllers;
-using AppJobPortal.Models;
 using System.Linq;
+using AppJobPortal.UserServiceReferenceTcp;
+using User = AppJobPortal.UserServiceReferenceTcp.User;
+using Region = AppJobPortal.UserServiceReferenceTcp.Region;
+using Gender = AppJobPortal.UserServiceReferenceTcp.Gender;
+using AppJobPortal.Models;
+
 
 namespace UnitTestProject1.App_test
 {
@@ -15,13 +19,13 @@ namespace UnitTestProject1.App_test
         [TestMethod]
         public void Get_Will_Return_Valid_Object()
         {
-            var userMock = new Mock<User>();
+            var userMock = new Mock<AppJobPortal.UserServiceReferenceTcp.User>();
             userMock.Object.ID = 6;
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.FindUser(It.IsAny<int>())).Returns(userMock.Object);
 
             var sut = new UserController(userServiceStub.Object);
-            UserAppModel  user = sut.Get(6);
+            UserAppModel user = sut.Get(6);
             Assert.IsTrue(
                 userMock.Object.ID == user.ID
             );
@@ -47,7 +51,6 @@ namespace UnitTestProject1.App_test
         }
 
         #endregion
-
 
         //update
         #region

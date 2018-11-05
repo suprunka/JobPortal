@@ -1,13 +1,7 @@
-﻿using ServiceLibrary.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Text;
-using Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF;
-using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
+using JobPortal.Model;
 
 namespace ServiceLibrary
 {
@@ -15,19 +9,19 @@ namespace ServiceLibrary
     public interface IUserService
     {
         [OperationContract]
-        Users CreateUser(Users u);
+        User CreateUser(User u);
 
         [OperationContract]
-        Users FindUser(int id);
+        User FindUser(int id);
 
         [OperationContract]
         bool DeleteUser(int id);
 
         [OperationContract]
-        bool EditUser(Users u);
+        bool EditUser(User u);
 
         [OperationContract]
-        IQueryable<Users> GetAll();
+        IList<User> GetAll();
 
 
     }

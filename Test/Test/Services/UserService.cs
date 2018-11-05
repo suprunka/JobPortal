@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using Repositories;
+using JobPortal.Model;
+using Repository;
 using Repository.DbConnection;
-using ServiceLibrary.Models;
-using User = ServiceLibrary.Models.Users;
+using Gender = JobPortal.Model.Gender;
+using Region = JobPortal.Model.Region;
 
 namespace ServiceLibrary
 {
@@ -13,16 +14,16 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _database;
+        private readonly IUserRepository _database;
 
 
-        public UserService(IRepository<User> database)
+        public UserService(IUserRepository database)
         {
             _database = database;
         }
         public UserService()
         {
-            _database = new Repository<User>(new JobPortalDatabaseDataContext());
+            _database = new UsersRepository(new JobPortalDatabaseDataContext());
         }
 
 
@@ -31,7 +32,7 @@ namespace ServiceLibrary
             try
             {
                 _database.Create(u);
-                return u;
+                return AutoMapper.Mapper.Map(u, new User());     
             }
             catch (ArgumentNullException)
             {
@@ -59,7 +60,7 @@ namespace ServiceLibrary
 
         public bool EditUser(User u)
         {
-            _database.Update(u);
+            //_database.Update(u);
             return true;
         }
 
@@ -67,8 +68,9 @@ namespace ServiceLibrary
         {
             try
             {
-                User u = _database.Get(t=> t.ID == id);
-                return u;
+                // User u = _database.Get(t=> t.ID == id);
+                // return u;
+                return null;
             }
             catch
             {
@@ -79,9 +81,32 @@ namespace ServiceLibrary
         }
 
 
-        public IQueryable<User> GetAll()
+        public IList<User> GetAll()
         {
-            return _database.GetAll();
+            IList<User> modelListToReturn = new List<User>();
+            IQueryable<Users> listToTransfer = _database.GetAll();
+            foreach (var u in listToTransfer)
+            {
+                modelListToReturn.Add(new User
+                {
+                    ID = u.ID,
+                    PhoneNumber = u.PhoneNumber,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    AddressLine = u.AddressLine,
+                    Postcode = u.Postcode,
+                    Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
+                    CityName = u.AddressTable.City,
+                    Password = u.Logging.Password,
+                    UserName = u.Logging.UserName,
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                });
+            }
+            return modelListToReturn;
+            //return null;
         }
+
+       
     }
 }

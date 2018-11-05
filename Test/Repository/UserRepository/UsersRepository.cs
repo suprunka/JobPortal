@@ -1,4 +1,5 @@
-﻿using Repositories;
+﻿using JobPortal.Model;
+using Repositories;
 using Repository.DbConnection;
 using System;
 using System.Configuration;
@@ -20,7 +21,8 @@ namespace Repository
         {
             _context = context;
         }
-        public bool Create(RepositoryUser model)
+
+        public bool Create(User model)
         {
             bool result = false;
             using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS; Initial Catalog=JobPortalTestDB;Integrated Security=True"))
@@ -102,11 +104,11 @@ namespace Repository
 
                     Logging foundLogging = _context.GetTable<Logging>().FirstOrDefault(t => t.ID.ToString() == found.PhoneNumber);
                     _context.GetTable<Logging>().DeleteOnSubmit(foundLogging);
-                    
+
 
                     //delete however check if there is more people with the same city if not leave the city
-                    int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.Postcode== found.Postcode).Count();
-                    if(numberOfAddressRecords < 2)
+                    int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.Postcode == found.Postcode).Count();
+                    if (numberOfAddressRecords < 2)
                     {
 
                         var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == found.Postcode);
@@ -122,7 +124,7 @@ namespace Repository
                 {
                     sql.Rollback();
                     result = false;
-                    throw new InvalidOperationException();   
+                    throw new InvalidOperationException();
                 }
                 finally
                 {
@@ -133,48 +135,12 @@ namespace Repository
         }
 
 
-
-        public enum Region
+        public override IQueryable<Users> GetAll()
         {
-            Hovedstaden,
-            Midtjylland,
-            Nordjylland,
-            Sjælland,
-            Syddanmark
-        }
-        public enum Gender
-        {
-            Male,
-            Female,
-        }
-        public class RepositoryUser
-        {
-
-            public virtual int ID { get; set; }
-
-            public virtual String PhoneNumber { get; set; }
-
-            public virtual String FirstName { get; set; }
-
-            public virtual String LastName { get; set; }
-
-            public virtual String Email { get; set; }
-
-            public virtual String UserName { get; set; }
-
-
-            public virtual String Password { get; set; }
-
-
-            public virtual String AddressLine { get; set; }
-
-            public virtual String CityName { get; set; }
-
-            public virtual String Postcode { get; set; }
-
-            public virtual Region Region { get; set; }
-
-            public virtual Gender Gender { get; set; }
+        
+            IQueryable<Users> allUsers =  _context.GetTable<Users>();
+            return allUsers;
+             
         }
     }
 }
