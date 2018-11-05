@@ -8,6 +8,7 @@ using System.ServiceModel.Description;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF;
 using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
+using static Repository.UsersRepository;
 
 namespace ServiceLibrary
 {
@@ -15,7 +16,7 @@ namespace ServiceLibrary
     public interface IUserService
     {
         [OperationContract]
-        Users CreateUser(Users u);
+        Users CreateUser(RepositoryUser u);
 
         [OperationContract]
         Users FindUser(int id);
@@ -27,7 +28,7 @@ namespace ServiceLibrary
         bool EditUser(Users u);
 
         [OperationContract]
-        IEnumerable<Users> GetAll();
+        IQueryable<Users> GetAll();
 
 
     }

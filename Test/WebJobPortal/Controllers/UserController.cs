@@ -27,9 +27,5 @@ namespace WebJobPortal.Controllers
         {
             return View();
         }
-        public ActionResult UserPartialView()
-        {
-            return PartialView();
-        }
     }
 }
