@@ -147,10 +147,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.Users.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\Repository.xsd">
+    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UserServiceReferenceTcp\service.wsdl" />
@@ -158,9 +155,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UserServiceReferenceTcp\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\ServiceLibrary.Models.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -191,9 +185,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test\ServiceLibrary.csproj">
-      <Project>{33304A02-E154-4C1B-9F09-D2A024C77434}</Project>
-      <Name>ServiceLibrary</Name>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Name>JobPortal.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,6 +9,9 @@ namespace WebJobPortal.Controllers
 {
     public class UserController : Controller
     {
+        public //   
+
+
         // GET: User
         public ActionResult Index()
         {

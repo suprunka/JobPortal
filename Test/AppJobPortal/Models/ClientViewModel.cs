@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Input;
 using AppJobPortal.UserServiceReferenceTcp;
 using AutoMapper;
+using JobPortal.Model;
 
 namespace AppJobPortal.Models
 {
