@@ -451,8 +451,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Repository" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary.Models" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_CreateUser_InputMessage">

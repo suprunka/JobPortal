@@ -147,10 +147,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.Users.datasource">
+    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\Repository.xsd">
+    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UserServiceReferenceTcp\service.wsdl" />
@@ -158,9 +164,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UserServiceReferenceTcp\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\ServiceLibrary.Models.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -188,12 +191,13 @@
     <None Include="Connected Services\UserServiceReferenceTcp\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test\ServiceLibrary.csproj">
-      <Project>{33304A02-E154-4C1B-9F09-D2A024C77434}</Project>
-      <Name>ServiceLibrary</Name>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54C02908-1940-4080-9B75-A3879245C02B}</Project>
+      <Name>JobPortal.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
