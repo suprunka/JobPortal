@@ -11,6 +11,7 @@ using WebJobPortal.Mapping;
 using WebJobPortal.Models;
 using System.Linq;
 using System.Web.Mvc;
+using JobPortal.Model;
 
 namespace UnitTestProject1.MVC__tests
 {
