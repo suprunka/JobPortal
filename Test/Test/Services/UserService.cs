@@ -5,7 +5,7 @@ using System.ServiceModel;
 using Repositories;
 using Repository.DbConnection;
 using ServiceLibrary.Models;
-using User = ServiceLibrary.Models.User;
+
 
 namespace ServiceLibrary
 {
@@ -57,17 +57,17 @@ namespace ServiceLibrary
             }
         }
 
-        public bool EditUser(User u)
+        public bool EditUser(Users u)
         {
             _database.Update(u);
             return true;
         }
 
-        public User FindUser(int id)
+        public Users FindUser(int id)
         {
             try
             {
-                User u = _database.Get(t=> t.ID == id);
+                Users u = _database.Get(t=> t.ID == id);
                 return u;
             }
             catch
@@ -82,6 +82,26 @@ namespace ServiceLibrary
         public IQueryable<User> GetAll()
         {
             return _database.GetAll();
+        }
+
+        public Models.Users CreateUser(Models.Users u)
+        {
+            throw new NotImplementedException();
+        }
+
+        Models.Users IUserService.FindUser(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EditUser(Models.Users u)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Models.Users> IUserService.GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }
