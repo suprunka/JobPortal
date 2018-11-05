@@ -1,11 +1,11 @@
-﻿using System;
-using AppJobPortal.UserServiceReference;
+﻿using AppJobPortal.UserServiceReference;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using AppJobPortal.Controllers;
 using AppJobPortal.Models;
-using System.Collections.Generic;
 using System.Linq;
+
+
 
 namespace UnitTestProject1.App_test
 {
@@ -53,6 +53,7 @@ namespace UnitTestProject1.App_test
 
         //update
         #region
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true, DisplayName = "valid all data")] //valid all data
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid phonenumber (too many characters)")] //invalid phonenumber (too many characters)
         [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid phonenumber (not allowed characters)")] //
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid firstname (not allowed characters)")] //
@@ -68,7 +69,7 @@ namespace UnitTestProject1.App_test
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid city name (not allwed characters)")] //invalid city name (not allwed characters)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid postcode (too long)")] //invalid postcode (too long)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid postcode (not allowed characters)")] //invalid postcode (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true, DisplayName = "valid all data")] //valid all data
+        
         [TestMethod]
         public void Update_OfferService_Verify_If_Returns_Valid_Object(string phoneNumber, string firstName,
          string lastName, string email, string userName, string password, string addressLine,

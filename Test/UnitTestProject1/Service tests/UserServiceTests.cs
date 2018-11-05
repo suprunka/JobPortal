@@ -18,7 +18,7 @@ namespace UnitTestProject1.Service_tests
         string lastName, string email, string userName, string password, string addressLine,
         string cityName, string postCode, Region region, Gender gender)
         {
-            var userStub = new Mock<User>();
+            var userStub = new Mock<Users>();
             #region
             userStub.Setup(x => x.FirstName).Returns(firstName);
             userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
@@ -32,10 +32,10 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Region).Returns(region);
             userStub.Setup(x => x.Gender).Returns(gender);
             #endregion
-            var databaseMock = new Mock<IRepository<User>>();
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
             service.CreateUser(userStub.Object);
-            databaseMock.Verify(t => t.Create(It.IsAny<User>()), Times.AtLeastOnce);
+            databaseMock.Verify(t => t.Create(It.IsAny<Users>()), Times.AtLeastOnce);
         }
 
         [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
@@ -44,7 +44,7 @@ namespace UnitTestProject1.Service_tests
         string lastName, string email, string userName, string password, string addressLine,
         string cityName, string postCode, Region region, Gender gender)
         {
-            var userStub = new Mock<User>().SetupAllProperties();
+            var userStub = new Mock<Users>().SetupAllProperties();
             #region
             userStub.Setup(x => x.FirstName).Returns(firstName);
             userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
@@ -58,9 +58,9 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Region).Returns(region);
             userStub.Setup(x => x.Gender).Returns(gender);
             #endregion
-            var databaseMock = new Mock<IRepository<User>>();
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
-            User u = service.CreateUser(userStub.Object);
+            Users u = service.CreateUser(userStub.Object);
             Assert.IsNotNull(u);
         }
         [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
@@ -69,7 +69,7 @@ namespace UnitTestProject1.Service_tests
         string lastName, string email, string userName, string password, string addressLine,
         string cityName, string postCode, Region region, Gender gender)
         {
-            var userStub = new Mock<User>();
+            var userStub = new Mock<Users>();
             #region
             userStub.Setup(x => x.FirstName).Returns(firstName);
             userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
@@ -83,9 +83,9 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Region).Returns(region);
             userStub.Setup(x => x.Gender).Returns(gender);
             #endregion
-            var databaseMock = new Mock<IRepository<User>>();
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
-            User createdUser = service.CreateUser(userStub.Object);
+            Users createdUser = service.CreateUser(userStub.Object);
             Assert.AreEqual(userStub.Object.AddressLine, createdUser.AddressLine);
         }
 
@@ -95,7 +95,7 @@ namespace UnitTestProject1.Service_tests
         string lastName, string email, string userName, string password, string addressLine,
         string cityName, string postCode, Region region, Gender gender)
         {
-            var userStub = new Mock<User>().SetupAllProperties();
+            var userStub = new Mock<Users>().SetupAllProperties();
             #region
             userStub.Setup(x => x.FirstName).Returns(firstName);
             userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
@@ -109,7 +109,7 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Region).Returns(region);
             userStub.Setup(x => x.Gender).Returns(gender);
             #endregion
-            var databaseMock = new Mock<IRepository<User>>();
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
             Assert.IsNotNull(service.CreateUser(userStub.Object));
         }
@@ -136,7 +136,7 @@ namespace UnitTestProject1.Service_tests
         string lastName, string email, string userName, string password, string addressLine,
         string cityName, string postCode, Region region, Gender gender)
         {
-            var userStub = new Mock<User>().SetupAllProperties();
+            var userStub = new Mock<Users>().SetupAllProperties();
             userStub.Setup(x => x.FirstName).Returns(firstName);
             userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
             userStub.Setup(x => x.LastName).Returns(lastName);
@@ -148,7 +148,7 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Postcode).Returns(postCode);
             userStub.Setup(x => x.Region).Returns(region);
             userStub.Setup(x => x.Gender).Returns(gender);
-            var databaseMock = new Mock<IRepository<User>>();
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
             Assert.IsNull(service.CreateUser(userStub.Object));
         }
@@ -156,25 +156,25 @@ namespace UnitTestProject1.Service_tests
         [TestMethod]
         public void Get_UserService_Verify_If_It_Calls_Db()
         {
-            var userMock = new Mock<User>();
+            var userMock = new Mock<Users>();
             userMock.Setup(x => x.ID).Returns(1);
 
-            var dbMock = new Mock<IRepository<User>>();
+            var dbMock = new Mock<IRepository<Users>>();
             dbMock.Setup(x => x.Create(userMock.Object));
-            dbMock.Setup(x => x.Get(t => t.ID == It.IsAny<int>())).Returns(() => new User { ID = 1, PhoneNumber = "12345678" });
+            dbMock.Setup(x => x.Get(t => t.ID == It.IsAny<int>())).Returns(() => new Users { ID = 1, PhoneNumber = "12345678" });
             var sut = new UserService(dbMock.Object);
             var foundUser = sut.FindUser(1);
-            dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<User,bool>>>()), Times.Once());
+            dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<Users,bool>>>()), Times.Once());
             Assert.AreEqual(1, foundUser.ID);
         }
 
         [TestMethod]
         public void GetAll_OfferService_Verify_If_Returns_Queryable()
         {
-            var dbMock = new Mock<IRepository<User>>();
-            IQueryable<User> list = null;
-            dbMock.Setup(x => x.GetAll()).Returns(new User[] { new User() }.AsQueryable<User>())
-                .Callback<IQueryable<User>>(x => list = x);
+            var dbMock = new Mock<IRepository<Users>>();
+            IQueryable<Users> list = null;
+            dbMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users() }.AsQueryable<Users>())
+                .Callback<IQueryable<Users>>(x => list = x);
             var sut = new UserService(dbMock.Object);
             sut.GetAll();
             dbMock.Verify(x => x.GetAll(), Times.Once());
@@ -185,12 +185,12 @@ namespace UnitTestProject1.Service_tests
         [TestMethod]
         public void Update_UserService_Verify_If_Connect_To_Db()
         {
-            var userMock = new Mock<User>();
+            var userMock = new Mock<Users>();
             userMock.SetupAllProperties();
-            var dbMock = new Mock<IRepository<User>>();
+            var dbMock = new Mock<IRepository<Users>>();
             var sut = new UserService(dbMock.Object);
             sut.EditUser(userMock.Object);
-            dbMock.Verify(x => x.Update(It.IsAny<User>()), Times.Once());
+            dbMock.Verify(x => x.Update(It.IsAny<Users>()), Times.Once());
 
         }
 

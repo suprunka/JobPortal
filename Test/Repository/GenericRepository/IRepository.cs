@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -6,7 +6,7 @@ namespace Repositories
 {
     public interface IRepository<T> where T : class
     {
-        T Create(T obj);
+        bool Create(T obj);
         T Get(Expression<Func<T, bool>> predicate);
         bool Update(T obj);
         bool Delete(Expression<Func<T, bool>> predicate);

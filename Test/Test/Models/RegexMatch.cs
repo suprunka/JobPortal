@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace ServiceLibrary.Models
 {
+    [Serializable]
     public static class RegexMatch
     {
-        public static void DoesUserMatch(User user)
+        public static void DoesUserMatch(Users user)
         {
 
             if(Regex.IsMatch(user.UserName, "^[a-zA-Z0-9ÆæØøÅå]{4,}$") && 

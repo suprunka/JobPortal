@@ -130,10 +130,10 @@ namespace UnitTestProject1.MVC__tests
             userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
             userStub.Setup(x => x.Gender).Returns(Gender.Male);
 
-            User u = null;
+            Users u = null;
             var serviceMock = new Mock<IUserService>();
 
-            serviceMock.Setup(x => x.CreateUser(It.IsAny<User>())).Callback<User>(x => u = x);
+            serviceMock.Setup(x => x.CreateUser(It.IsAny<Users>())).Callback<Users>(x => u = x);
 
             var subject = new UserController(serviceMock.Object);
 
@@ -191,23 +191,44 @@ namespace UnitTestProject1.MVC__tests
         [TestMethod]
         public void Test_Service_Creation_Of_User_Hit_Database_Once()
         {
-            var userMock = new Mock<User>();
-            userMock.SetupAllProperties();
-            var databaseMock = new Mock<IRepository<User>>();
+            var userStub = new Mock<Users>();
+            userStub.Setup(x => x.FirstName).Returns("Adam");
+            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
+            userStub.Setup(x => x.LastName).Returns("Adam");
+            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
+            userStub.Setup(x => x.UserName).Returns("Adammana");
+            userStub.Setup(x => x.Password).Returns("Adama1");
+            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
+            userStub.Setup(x => x.CityName).Returns("Ålborg");
+            userStub.Setup(x => x.Postcode).Returns("9000");
+            userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
+            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
-            service.CreateUser(userMock.Object);
-            databaseMock.Verify(t => t.Create(It.IsAny<User>()), Times.AtLeastOnce);
+            service.CreateUser(userStub.Object);
+            databaseMock.Verify(t => t.Create(It.IsAny<Users>()), Times.AtLeastOnce);
         }
 
 
         [TestMethod]
         public void Test_Service_Creation_Of_User_Is_Not_Null()
         {
-            var userMock = new Mock<User>();
-            userMock.SetupAllProperties();
-            var databaseMock = new Mock<IRepository<User>>();
+            var userStub = new Mock<Users>();
+            userStub.Setup(x => x.FirstName).Returns("Adam");
+            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
+            userStub.Setup(x => x.LastName).Returns("Adam");
+            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
+            userStub.Setup(x => x.UserName).Returns("Adammana");
+            userStub.Setup(x => x.Password).Returns("Adama1");
+            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
+            userStub.Setup(x => x.CityName).Returns("Ålborg");
+            userStub.Setup(x => x.Postcode).Returns("9000");
+            userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
+            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
-            User u = service.CreateUser(userMock.Object);
+            Users u = service.CreateUser(userStub.Object);
             Assert.IsNotNull(u);
         }
         #endregion
@@ -222,13 +243,13 @@ namespace UnitTestProject1.MVC__tests
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-             //   return new IEnumerable<User> { new User() { ID = 1 }, new User() { ID = 71 }, new User() { ID = 10 } };
+             //   return new IEnumerable<Users> { new Users() { ID = 1 }, new Users() { ID = 71 }, new Users() { ID = 10 } };
             });
 
             var sut = new UserController(userServiceStub.Object);
             ViewResult resultPage = sut.Index(Id) as ViewResult;
 
-            var model = resultPage.ViewData.Model as IEnumerable<User>;
+            var model = resultPage.ViewData.Model as IEnumerable<Users>;
             Assert.IsTrue(model.Count() == expectedNoOfResults);
         }
 
@@ -239,13 +260,13 @@ namespace UnitTestProject1.MVC__tests
           
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-            //    return new IEnumerable<User> { new User(), new User(), new User() };
+            //    return new IEnumerable<Users> { new Users(), new Users(), new Users() };
             });
             var sut = new UserController(userServiceStub.Object);
 
             var resPage = sut.Index(null) as ViewResult;
 
-            var model = resPage.ViewData.Model as IEnumerable<User>;
+            var model = resPage.ViewData.Model as IEnumerable<Users>;
 
             Assert.IsTrue(model.Count() == 3);
         }*/
@@ -260,15 +281,15 @@ namespace UnitTestProject1.MVC__tests
             userMock.Setup(x => x.LastName).Returns("Dreuk");
             userMock.Setup(x => x.PhoneNumber).Returns("12334455");
             var userServiceStub = new Mock<IUserService>();
-            User userSenftoService = null;
+            Users userSenftoService = null;
 
-            userServiceStub.Setup(x => x.EditUser(It.IsAny<User>()))
-                .Callback<User>(x => userSenftoService = x);
+            userServiceStub.Setup(x => x.EditUser(It.IsAny<Users>()))
+                .Callback<Users>(x => userSenftoService = x);
 
             var sut = new UserController(userServiceStub.Object);
             sut.Edit(userMock.Object);
             userServiceStub.Verify(x =>
-           x.EditUser(It.IsAny<User>()), Times.Once());
+           x.EditUser(It.IsAny<Users>()), Times.Once());
 
             Assert.IsTrue(
                 userSenftoService.LastName == "Dreuk" &&
@@ -348,7 +369,7 @@ namespace UnitTestProject1.MVC__tests
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
             {
-                return new User { ID = 1 };
+                return new Users { ID = 1 };
             });
             var controller = new UserController(userServiceStub.Object);
             var result = controller.Delete(1) as ActionResult;
@@ -385,11 +406,10 @@ namespace UnitTestProject1.MVC__tests
         public void Test_DeleteConfirm_While_User_Is_Valid_Returns_Redirection()
         {
             var userServiceStub = new Mock<IUserService>();
-            User userMock = null;
+            Users userMock = null;
             userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
             {
-
-                userMock = new User { ID = 1 };
+                userMock = new Users { ID = 1 };
                 return userMock;
             });
             var controller = new UserController(userServiceStub.Object);
@@ -401,11 +421,20 @@ namespace UnitTestProject1.MVC__tests
         [TestMethod]
         public void Test_Service_Delete_Of_User_Hit_Database_Once()
         {
-            var userMock = new Mock<User>();
-            userMock.SetupAllProperties();
-            var databaseMock = new Mock<IRepository<User>>();
+            var userStub = new Mock<Users>();
+            userStub.Setup(x => x.FirstName).Returns("Adam");
+            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
+            userStub.Setup(x => x.LastName).Returns("Adam");
+            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
+            userStub.Setup(x => x.UserName).Returns("Adammana");
+            userStub.Setup(x => x.Password).Returns("Adama1");
+            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
+            userStub.Setup(x => x.CityName).Returns("Ålborg");
+            userStub.Setup(x => x.Postcode).Returns("9000");
+            userStub.Setup(x => x.ID).Returns(256548);
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
-            bool result = service.DeleteUser(userMock.Object.ID);
+            bool result = service.DeleteUser(userStub.Object.ID);
             Assert.IsTrue(result);
         }
 
@@ -413,18 +442,18 @@ namespace UnitTestProject1.MVC__tests
         [TestMethod]
         public void Test_Service_Delete_Of_User()
         {
-            var userMock = new Mock<User>();
+            var userMock = new Mock<Users>();
             userMock.SetupAllProperties();
-            var databaseMock = new Mock<IRepository<User>>();
+            var databaseMock = new Mock<IRepository<Users>>();
             UserService service = new UserService(databaseMock.Object);
             bool result = service.DeleteUser(2);
             Assert.IsTrue(result);
         }
         #endregion
-        
-        
 
-      
+
+
+
     }
 
 }

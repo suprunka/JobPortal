@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using Repositories;
+using System.ServiceModel.Description;
 using ServiceLibrary.Models;
 
 
@@ -11,16 +12,21 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _database;
+        private readonly IRepository<Users> _database;
 
 
-        public UserService(IRepository<User> database)
+        public UserService(IRepository<Users> database)
         {
             _database = database;
         }
 
+        public UserService()
+        {
 
-        public User CreateUser(User u)
+        }
+
+
+        public Users CreateUser(Users u)
         {
             try
             {
@@ -52,17 +58,25 @@ namespace ServiceLibrary
             }
         }
 
-        public bool EditUser(User u)
-        {
-            _database.Update(u);
-            return true;
-        }
-
-        public User FindUser(int id)
+        public bool EditUser(Users u)
         {
             try
             {
-                User u = _database.Get(t=> t.ID == id);
+                RegexMatch.DoesUserMatch(u);
+                _database.Update(u);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
+
+        public Users FindUser(int id)
+        {
+            try
+            {
+                Users u = _database.Get(t=> t.ID == id);
                 return u;
             }
             catch
@@ -72,7 +86,7 @@ namespace ServiceLibrary
             }
 
         }
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Users> GetAll()
         {
             return _database.GetAll();
 

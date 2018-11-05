@@ -35,7 +35,7 @@ namespace AppJobPortal.UserServiceReference {
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AppJobPortal.UserServiceReference.Gender GenderField;
+        private string GenderField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
@@ -53,7 +53,7 @@ namespace AppJobPortal.UserServiceReference {
         private string PostcodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AppJobPortal.UserServiceReference.Region RegionField;
+        private string RegionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
@@ -120,13 +120,13 @@ namespace AppJobPortal.UserServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public AppJobPortal.UserServiceReference.Gender Gender {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Gender {
             get {
                 return this.GenderField;
             }
             set {
-                if ((this.GenderField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.GenderField, value) != true)) {
                     this.GenderField = value;
                     this.RaisePropertyChanged("Gender");
                 }
@@ -198,13 +198,13 @@ namespace AppJobPortal.UserServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public AppJobPortal.UserServiceReference.Region Region {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Region {
             get {
                 return this.RegionField;
             }
             set {
-                if ((this.RegionField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.RegionField, value) != true)) {
                     this.RegionField = value;
                     this.RaisePropertyChanged("Region");
                 }
@@ -234,43 +234,11 @@ namespace AppJobPortal.UserServiceReference {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Gender", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary.Models")]
-    public enum Gender : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Male = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Female = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Region", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary.Models")]
-    public enum Region : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Hovedstaden = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Midtjylland = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Nordjylland = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Sjælland = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Syddanmark = 4,
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceReference.IUserService")]
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(AppJobPortal.UserServiceReference.User), Action="http://tempuri.org/IUserService/CreateUserUserFault", Name="User", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary.Models")]
         AppJobPortal.UserServiceReference.User CreateUser(AppJobPortal.UserServiceReference.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]

@@ -9,7 +9,12 @@ namespace WebJobPortal.Mapping
     {
         public static void RegisterMaps()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<UserWebModel, User>());
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<UserWebModel, Users>();
+                cfg.CreateMap<Users, UserWebModel>();
+            });
+
         }
     }
 }

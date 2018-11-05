@@ -22,7 +22,7 @@ namespace WebJobPortal.Controllers
 
 
         }
-        // GET: User
+        // GET: Users
         public ActionResult Index(string id)
         {
             return View();
@@ -42,7 +42,7 @@ namespace WebJobPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _proxy.CreateUser(AutoMapper.Mapper.Map(user, new User()));
+                    _proxy.CreateUser(AutoMapper.Mapper.Map(user, new Users()));
                     return RedirectToAction("Index");
                 }
                 else
@@ -70,7 +70,7 @@ namespace WebJobPortal.Controllers
                 {
                     return HttpNotFound();
                 }
-                User u = Mapper.Map(foundUser, new User());
+                UserWebModel u = Mapper.Map(foundUser, new UserWebModel());
                 return View(u);
             }
             catch
@@ -102,7 +102,19 @@ namespace WebJobPortal.Controllers
 
         public ActionResult Edit(UserWebModel u)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            try
+            {
+                if(!ModelState.IsValid)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                _proxy.EditUser(Mapper.Map(u, new Users()));
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
     }
 }

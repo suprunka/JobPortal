@@ -171,7 +171,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\UserServiceReference\" />
   </ItemGroup>

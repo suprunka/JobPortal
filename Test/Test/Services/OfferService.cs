@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Repositories;
+using System.ServiceModel.Description;
 using ServiceLibrary.Models;
 
 namespace ServiceLibrary
@@ -11,6 +12,11 @@ namespace ServiceLibrary
         public OfferService(IRepository<Offer> database)
         {
             _database = database;
+        }
+
+        public OfferService()
+        {
+
         }
 
         public Offer CreateServiceOffer(Offer serviceOffer)

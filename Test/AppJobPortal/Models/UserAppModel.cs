@@ -1,10 +1,5 @@
 ﻿
-using AppJobPortal.UserServiceReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppJobPortal.Models
 {
@@ -56,5 +51,20 @@ namespace AppJobPortal.Models
         public virtual Region Region { get; set; }
 
         public virtual Gender Gender { get; set; }
+    }
+
+    public enum Region
+    {
+        Hovedstaden,
+        Midtjylland,
+        Nordjylland,
+        Sjælland,
+        Syddanmark
+    }
+
+    public enum Gender
+    {
+        Male,
+        Female,
     }
 }
