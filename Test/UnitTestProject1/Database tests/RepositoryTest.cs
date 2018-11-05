@@ -4,9 +4,7 @@ using System.Data.Linq;
 using System.Linq;
 using UnitTestProject1.Database_tests;
 using Repository;
-using static Repository.UsersRepository;
-
-using Gender = Repository.UsersRepository.Gender;
+using JobPortal.Model;
 
 namespace UnitTestProject1
 {
@@ -20,7 +18,7 @@ namespace UnitTestProject1
         {
             var context = new JobPortalTestDBDataContext();
 
-            var userStub = new Mock<RepositoryUser>();
+            var userStub = new Mock<User>();
            
             userStub.Setup(x => x.PhoneNumber).Returns("12345678");
             userStub.Setup(x => x.FirstName).Returns("Adam");
@@ -31,7 +29,7 @@ namespace UnitTestProject1
             userStub.Setup(x => x.Password).Returns("Adama1");
             userStub.Setup(x => x.CityName).Returns("Ålborg");
             userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            userStub.Setup(x => x.Gender).Returns(JobPortal.Model.Gender.Male);
             userStub.Setup(x => x.Region).Returns(Region.Midtjylland);
            
             using (var unitOfWork = new UnitOfWork(context))
@@ -52,7 +50,7 @@ namespace UnitTestProject1
         {
             var context = new JobPortalTestDBDataContext();
 
-            var userStub = new Mock<RepositoryUser>();
+            var userStub = new Mock<User>();
 
             userStub.Setup(x => x.PhoneNumber).Returns("12345678");
             userStub.Setup(x => x.FirstName).Returns("Adam");
@@ -63,7 +61,7 @@ namespace UnitTestProject1
             userStub.Setup(x => x.Password).Returns("Adama1");
             userStub.Setup(x => x.CityName).Returns("Ålborg");
             userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            userStub.Setup(x => x.Gender).Returns(JobPortal.Model.Gender.Male);
             userStub.Setup(x => x.Region).Returns(Region.Midtjylland);
             using (var unitOfWork = new UnitOfWork(context))
             {
@@ -92,7 +90,7 @@ namespace UnitTestProject1
         public void Deleting_Object_From_Database()
         {
             var context = new JobPortalTestDBDataContext();
-            var userStub = new Mock<RepositoryUser>();
+            var userStub = new Mock<User>();
 
             userStub.Setup(x => x.PhoneNumber).Returns("12345678");
             userStub.Setup(x => x.FirstName).Returns("Adam");
@@ -103,7 +101,7 @@ namespace UnitTestProject1
             userStub.Setup(x => x.Password).Returns("Adama1");
             userStub.Setup(x => x.CityName).Returns("Ålborg");
             userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            userStub.Setup(x => x.Gender).Returns(JobPortal.Model.Gender.Male);
             userStub.Setup(x => x.Region).Returns(Region.Midtjylland);
 
             using(var unitOfWork = new UnitOfWork(context))
@@ -135,7 +133,7 @@ namespace UnitTestProject1
         public void Deleting_Object_But_Dont_Delete_Address_Records_If_There_Is_One_More_Person_Using_It()
         {
             var context = new JobPortalTestDBDataContext();
-            var userStub = new Mock<RepositoryUser>();
+            var userStub = new Mock<User>();
 
             userStub.Setup(x => x.PhoneNumber).Returns("12345678");
             userStub.Setup(x => x.FirstName).Returns("Adam");
@@ -146,22 +144,22 @@ namespace UnitTestProject1
             userStub.Setup(x => x.Password).Returns("Adama1");
             userStub.Setup(x => x.CityName).Returns("Ålborg");
             userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            userStub.Setup(x => x.Gender).Returns(JobPortal.Model.Gender.Male);
             userStub.Setup(x => x.Region).Returns(Region.Midtjylland);
 
-               var userStub2 = new Mock<RepositoryUser>();
+            var userStub2 = new Mock<User>();
 
-               userStub2.Setup(x => x.PhoneNumber).Returns("87654321");
-               userStub2.Setup(x => x.FirstName).Returns("Adam");
-               userStub2.Setup(x => x.LastName).Returns("Adam");
-               userStub2.Setup(x => x.Email).Returns("adam@gmail.com");
-               userStub2.Setup(x => x.UserName).Returns("Adammana");
-               userStub2.Setup(x => x.AddressLine).Returns("gogowaska");
-               userStub2.Setup(x => x.Password).Returns("Adama1");
-               userStub2.Setup(x => x.CityName).Returns("Ålborg");
-               userStub2.Setup(x => x.Postcode).Returns("9000");
-               userStub2.Setup(x => x.Gender).Returns(Gender.Male);
-               userStub2.Setup(x => x.Region).Returns(Region.Midtjylland);
+            userStub2.Setup(x => x.PhoneNumber).Returns("87654321");
+            userStub2.Setup(x => x.FirstName).Returns("Adam");
+            userStub2.Setup(x => x.LastName).Returns("Adam");
+            userStub2.Setup(x => x.Email).Returns("adam@gmail.com");
+            userStub2.Setup(x => x.UserName).Returns("Adammana");
+            userStub2.Setup(x => x.AddressLine).Returns("gogowaska");
+            userStub2.Setup(x => x.Password).Returns("Adama1");
+            userStub2.Setup(x => x.CityName).Returns("Ålborg");
+            userStub2.Setup(x => x.Postcode).Returns("9000");
+            userStub2.Setup(x => x.Gender).Returns(JobPortal.Model.Gender.Male);
+            userStub2.Setup(x => x.Region).Returns(Region.Midtjylland);
 
             using (var unitOfWork = new UnitOfWork(context))
             {
@@ -178,6 +176,7 @@ namespace UnitTestProject1
 
                 }
             }
+
             var secondContext = new JobPortalTestDBDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {

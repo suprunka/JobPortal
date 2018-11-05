@@ -1,4 +1,9 @@
-﻿namespace ServiceLibrary.Models
+﻿using JobPortal.Model;
+using System;
+using System.Text.RegularExpressions;
+
+
+namespace ServiceLibrary.Models
 {
 
     public class Offer

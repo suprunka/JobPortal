@@ -5,7 +5,6 @@ using System.ServiceModel;
 using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
-using ServiceLibrary.Models;
 using Gender = JobPortal.Model.Gender;
 using Region = JobPortal.Model.Region;
 
@@ -33,8 +32,7 @@ namespace ServiceLibrary
             try
             {
                 _database.Create(u);
-                return AutoMapper.Mapper.Map(u, new User());
-                   
+                return AutoMapper.Mapper.Map(u, new User());     
             }
             catch (ArgumentNullException)
             {

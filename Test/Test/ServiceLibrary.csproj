@@ -93,11 +93,6 @@
   <ItemGroup>
     <Compile Include="Mapping\ClassMapper.cs" />
     <Compile Include="Mapping\MappingConfig.cs" />
-    <Compile Include="Models\Gender.cs" />
-    <Compile Include="Models\RegexMatch.cs" />
-    <Compile Include="Models\Region.cs" />
-    <Compile Include="Models\Offer.cs" />
-    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

@@ -175,6 +175,10 @@
       <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
       <Name>AppJobPortal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Name>JobPortal.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Repository\Repositories.csproj">
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
       <Name>Repositories</Name>
