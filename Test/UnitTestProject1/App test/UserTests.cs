@@ -5,8 +5,6 @@ using AppJobPortal.Controllers;
 using AppJobPortal.Models;
 using System.Linq;
 
-
-
 namespace UnitTestProject1.App_test
 {
     [TestClass]

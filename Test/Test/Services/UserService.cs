@@ -5,7 +5,7 @@ using System.ServiceModel;
 using Repositories;
 using Repository.DbConnection;
 using ServiceLibrary.Models;
-using User = ServiceLibrary.Models.User;
+using User = ServiceLibrary.Models.Users;
 
 namespace ServiceLibrary
 {
