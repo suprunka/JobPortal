@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Linq;
 using Repositories;
+using System.ServiceModel.Description;
 using ServiceLibrary.Models;
 
 namespace ServiceLibrary
-{
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+{ 
     public class OfferService : IOfferService
     {
         private readonly IRepository<Offer> _database;
         public OfferService(IRepository<Offer> database)
         {
             _database = database;
+        }
+
+        public OfferService()
+        {
+
         }
 
         public Offer CreateServiceOffer(Offer serviceOffer)

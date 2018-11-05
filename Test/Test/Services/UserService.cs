@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using Repositories;
+using System.ServiceModel.Description;
 using ServiceLibrary.Models;
+
 
 namespace ServiceLibrary
 {
@@ -10,57 +12,86 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _database;
+        private readonly IRepository<Users> _database;
 
-        public UserService(IRepository<User> database)
+
+        public UserService(IRepository<Users> database)
         {
             _database = database;
         }
+
         public UserService()
         {
-           
+
         }
 
-        public User CreateUser(User u)
+
+        public Users CreateUser(Users u)
         {
-            if (u != null)
+            try
             {
-                try
-                {
-                    _database.Create(u);
-                    return u;
-                }catch(ArgumentNullException)
-                {
-                   
-                }
+                RegexMatch.DoesUserMatch(u);
+                _database.Create(u);
+                return u;
             }
-            return null;
+            catch (ArgumentException)
+            {
+                return null;
+            }
+
         }
 
         public bool DeleteUser(int id)
         {
-            if (id> 0)
+            try
             {
-                _database.Delete(id);
+                if (id > 0)
+                {
+                    _database.Delete(t => t.ID == id);
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool EditUser(Users u)
+        {
+            try
+            {
+                RegexMatch.DoesUserMatch(u);
+                _database.Update(u);
                 return true;
             }
-            return false;
+            catch (ArgumentException)
+            {
+                return false;
+            }
         }
 
-        public bool EditUser(User u)
+        public Users FindUser(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Users u = _database.Get(t=> t.ID == id);
+                return u;
+            }
+            catch
+            {
+                return null;
+
+            }
+
+        }
+        public IEnumerable<Users> GetAll()
+        {
+            return _database.GetAll();
+
         }
 
-        public User FindUser(int id)
-        {
-            User u = _database.Get(id);
-            return u;
-        }
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-
-        }
+        
     }
 }

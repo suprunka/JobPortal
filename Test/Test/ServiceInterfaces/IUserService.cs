@@ -4,29 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 
 namespace ServiceLibrary
 {
     [ServiceContract]
-
     public interface IUserService
     {
-        [FaultContract(typeof(User))]
         [OperationContract]
-        User CreateUser(User u);
+        Users CreateUser(Users u);
 
         [OperationContract]
-        User FindUser(int id);
+        Users FindUser(int id);
 
         [OperationContract]
         bool DeleteUser(int id);
 
         [OperationContract]
-        bool EditUser(User u);
+        bool EditUser(Users u);
+
         [OperationContract]
-        IEnumerable<User> GetAll();
+        IEnumerable<Users> GetAll();
 
 
-    }  
+    }
 }
