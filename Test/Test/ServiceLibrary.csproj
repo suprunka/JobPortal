@@ -125,6 +125,10 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Name>JobPortal.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Repository\Repositories.csproj">
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
       <Name>Repositories</Name>

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using AppJobPortal.Mapping;
-using Repositories;
+using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
 using ServiceLibrary.Models;
-using static Repository.UsersRepository;
-using User = ServiceLibrary.Models.Users;
+using Gender = JobPortal.Model.Gender;
+using Region = JobPortal.Model.Region;
 
 namespace ServiceLibrary
 {
@@ -29,7 +28,7 @@ namespace ServiceLibrary
         }
 
 
-        public User CreateUser( RepositoryUser u)
+        public User CreateUser(User u)
         {
             try
             {
@@ -84,9 +83,29 @@ namespace ServiceLibrary
         }
 
 
-        public IQueryable<User> GetAll()
+        public IList<User> GetAll()
         {
-             return _database.GetAll().Cast<User>();
+            IList<User> modelListToReturn = new List<User>();
+            IQueryable<Users> listToTransfer = _database.GetAll();
+            foreach (var u in listToTransfer)
+            {
+                modelListToReturn.Add(new User
+                {
+                    ID = u.ID,
+                    PhoneNumber = u.PhoneNumber,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    AddressLine = u.AddressLine,
+                    Postcode = u.Postcode,
+                    Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
+                    CityName = u.AddressTable.City,
+                    Password = u.Logging.Password,
+                    UserName = u.Logging.UserName,
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                });
+            }
+            return modelListToReturn;
             //return null;
         }
 

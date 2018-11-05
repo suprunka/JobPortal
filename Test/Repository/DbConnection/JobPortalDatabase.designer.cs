@@ -22,7 +22,7 @@ namespace Repository.DbConnection
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JobPortal")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JobPortalTestDB")]
 	public partial class JobPortalDatabaseDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -84,7 +84,7 @@ namespace Repository.DbConnection
     #endregion
 		
 		public JobPortalDatabaseDataContext() : 
-				base(global::Repository.Properties.Settings.Default.JobPortalConnectionString, mappingSource)
+				base(global::Repository.Properties.Settings.Default.JobPortalTestDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

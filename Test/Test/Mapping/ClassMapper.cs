@@ -8,7 +8,7 @@ namespace AppJobPortal.Mapping
         public ClassMapper()
         {
 
-            CreateMap<Users, RepositoryUser>().ReverseMap();
+            
         }
     }
 }
