@@ -3,40 +3,73 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Layout</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
+                    <li><a href="~/Home/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:20px;border:0;"></a></li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "UserProfile", "User")</li>
+                    <!--Register/login-->
+                    <li class="dropdown">
+                        <!--menu-->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" width="100" height="100">More</a>
+                        <ul class="dropdown-menu">
+                            <!--menu items-->
+                            <li><button class="open-button" onclick="openForm()">Login</button></li>
+                            <div class="form-popup" id="myForm">
+                                <form action="/action_page.php" class="form-container">
+                                    <h1>Login</h1>
+
+                                    <label for="email"><b>Email</b></label>
+                                    <input type="text" placeholder="Enter Email" name="email" required>
+
+                                    <label for="psw"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                                    <button type="submit" class="btn">Login</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                </form>
+                            </div>
+                            <li>@Html.ActionLink("Sign up", "Create", "User")</li>
+                        </ul>
+                    </li>
+                    <li class="search">
+                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                        {
+                            <input type="text" placeholder="Search" id="search-text-field">
+                            <input type="submit" value="Search">
+                        }
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Job Portal</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
 </body>
 </html>

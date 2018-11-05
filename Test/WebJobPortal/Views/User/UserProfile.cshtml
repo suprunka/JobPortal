@@ -1,0 +1,333 @@
+﻿@model WebJobPortal.Models.UserModel
+@using ServiceLibrary.Models
+@{
+    ViewBag.Title = "UserProfile";
+
+}
+
+<!--meant only for user's view-->
+<div class="row">
+    <div class="col-md-4">
+        @{
+
+            if (Enum.GetValues(typeof(Gender)).Equals("Female"))
+            {
+            <img src="~/Pictures/female.png" alt="User photo" />
+            }
+            else
+            {
+            <img src="~/Pictures/male.png" alt="User photo" />
+            }
+        }
+    </div>
+    <!--description from DB-->
+    <div class="col-md-4">
+        <p>Hello, I am Anna and I live in a house with 7 bedrooms, 3 bathrooms and a large garden with swimming pool. My family and I travel a lot and at that time we rent our house. I am looking for somebody responsible who would clean after our guests.</p>
+    </div>
+</div>
+<div>
+    <!--menu: Personal info, settings, sell and buy-->
+</div>
+<!--Side menu-->
+<div class="column">
+    <!--different tabs in menu-->
+    <div class="tabColumn">
+        <!--Personal info set like default frame-->
+        <button class="frameLinks" onclick="openFrame(event, 'Personal Information')" id="defaultOpen">Personal Information</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Sell')">Sell</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Buy')">Buy</button>
+        <!--Settings button, when clickes, reveals other options-->
+        <button class="dropdown-btn">Settings<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <!--Button privacy settings, reveals frame with other options/buttons. Code lower with other frames-->
+            <button class="framelinks" onclick="openFrame(event, 'PrivacySettings')">Privacy Settings</button>
+            <!--Second options is delete account btn, it directly shows popup window where user can delete it's account-->
+            <!-- Trigger/Open The Modal/popup window -->
+            <button id="delete-account-btn">Delete Account</button>
+            <!-- The Modal -->
+            <div id="delete-account-modal" class="deleteAccountModal">
+                <!-- Modal content -->
+                <div class="modalContent">
+                    <!--X button for closing-->
+                    <span class="close">&times;</span>
+                    <header id="modal-header">
+                        <h2>Delete Account</h2>
+                    </header>
+                    <div class="modalText">
+                        <p id="question">Are you sure you want to delete your account?</p>
+                        <p id="note">*NOTE: This cannot be undone.</p>
+                    </div>
+                    <button id="confirmBtn" class="buttons">Delete</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Read user-->
+    <div id="Personal Information" class="frameContentColumn">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <!--Date of birth here-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AddressLine, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.AddressLine, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <!--button to open hidden Edit page-->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Edit" class="buttons" onclick="openFrame(event,'Edit')" />
+            </div>
+        </div>
+
+    </div>
+
+    <!--Update user-->
+    <div id="Edit" class="frameContentColumn">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First name" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+<div class="form-group">
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last name" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!--Date of birth here-->
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Gender", new SelectList(Enum.GetValues(typeof(Gender))), "Select gender", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone number" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AddressLine, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AddressLine, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+            @Html.ValidationMessageFor(model => model.AddressLine, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control", placeholder = "Postcode" } })
+            @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+            @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Region", new SelectList(Enum.GetValues(typeof(Region))), "Select region", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!--submit button for Edit page-->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="buttons" />
+            </div>
+        </div>
+    </div>
+
+    <!--Frames for Column menu-->
+    <!--Sell page - calendar-->
+    <div id="Sell" class="frameContentColumn">
+        user's services for sell, calendar form
+    </div>
+
+    <!--Buy page with table-->
+    <div id="Buy" class="frameContentColumn">
+        user's bought services, table form form
+    </div>
+
+    <!--Privacy setting page-->
+    <div id='PrivacySettings' class="frameContentColumn">
+        <!-- Trigger/Open The Modal  - buttons for opening window -->
+        <button id="change-email-btn" class="buttons">Change Email</button>
+        <button id="change-password-btn" class="buttons">Change Password</button>
+
+        <!-- The Modal for changing password -->
+        <div id="change-password-modal" class="changePasswordModal">
+            <!-- Modal content -->
+            <div class="modalContent">
+                <span class="close">&times;</span>
+                <header id="modal-header">
+                    <h2>Change password</h2>
+                </header>
+                <div class="modalText">
+                    <p id="forgotten"><a href="#">Forgotten password?</a></p>
+                </div>
+                <button id="confirmBtn" class="buttons">Submit</button>
+            </div>
+        </div>
+
+        <!-- The Modal for CHANGing EMAIL -->
+        <div id="change-email-modal" class="changeEmailModal">
+            <!-- Modal content -->
+            <div class="modalContent">
+                <span class="close">&times;</span>
+                <header id="modal-header">
+                    <h2>Change email</h2>
+                </header>
+                <div class="modalText">
+                    <p id="forgotten"><a href="#">Forgotten email?</a></p>
+                </div>
+                <button id="confirmBtn" class="buttons">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!--delete account option, code in the beginning - button delete account-->
+    <div id='DeleteAccount' class="frameContentColumn">
+    </div>
+</div>
+
+<script>
+    /*function for opening frames (Personal info, sell,...)*/
+    function openFrame(evt, frameName) {
+        var i, frameContentColumn, tablinks;
+        frameContentColumn = document.getElementsByClassName("frameContentColumn");
+        for (i = 0; i < frameContentColumn.length; i++) {
+            frameContentColumn[i].style.display = "none";
+        }
+        frameLinks = document.getElementsByClassName("frameLinks");
+        for (i = 0; i < frameLinks.length; i++) {
+            frameLinks[i].className = frameLinks[i].className.replace(" active", "");
+        }
+        document.getElementById(frameName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - 
+     * This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+ 
+    /* modals - popup windows*/
+    // Get the modalS
+    var deleteAccountModal = document.getElementById('delete-account-modal');
+    var changeEmailModal = document.getElementById('change-email-modal');
+    var changePasswordModal = document.getElementById('change-password-modal');
+
+    // Get the button that opens the modal
+    var openDeleteAccountBtn = document.getElementById("delete-account-btn");
+    var openChangeEmailBtn = document.getElementById("change-email-btn");
+    var openChangePasswordBtn = document.getElementById("change-password-btn");
+
+    // Get the <span> element that closes the modal
+    var span0 = document.getElementsByClassName("close")[0];
+    var span1 = document.getElementsByClassName("close")[1];
+    var span2 = document.getElementsByClassName("close")[2];
+
+    // When the user clicks the button, open the modal 
+    openChangeEmailBtn.onclick = function () {
+        changeEmailModal.style.display = "block";
+    }
+    openChangePasswordBtn.onclick = function () {
+        changePasswordModal.style.display = "block";
+    }
+    openDeleteAccountBtn.onclick = function () {
+        deleteAccountModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span2.onclick = function () {
+        changeEmailModal.style.display = "none";
+    }
+    span1.onclick = function () {
+        changePasswordModal.style.display = "none";
+    }
+    span0.onclick = function () {
+        deleteAccountModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == changeEmailModal) {
+            changeEmailModal.style.display = "none";
+        }
+        else if (event.target == changePasswordModal) {
+            changePasswordModal.style.display = "none";
+        }
+        else if (event.target == deleteAccountModal) {
+            deleteAccountModal.style.display = "none";
+        }
+    }
+</script>
+

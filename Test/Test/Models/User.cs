@@ -64,5 +64,8 @@ namespace ServiceLibrary.Models
 
         [DataMember]
         public Gender Gender { get; set; }
+
+        [DataMember]
+        public String Description { get; set; }
     }
 }

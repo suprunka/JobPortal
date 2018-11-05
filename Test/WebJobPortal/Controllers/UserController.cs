@@ -18,5 +18,18 @@ namespace WebJobPortal.Controllers
         {
             return View();
         }
+        
+        public ActionResult Login(UserModel user)
+        {
+            return View();
+        }
+        public ActionResult UserProfile(UserModel user)
+        {
+            return View();
+        }
+        public ActionResult UserPartialView()
+        {
+            return PartialView();
+        }
     }
 }
