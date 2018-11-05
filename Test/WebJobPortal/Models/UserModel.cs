@@ -41,47 +41,57 @@ namespace WebJobPortal.Models
         {
 
         }
-
+        [Display(Name = "Phone Number:")]
         [Required(ErrorMessage = "Phone number required")]
         [RegularExpression("^[0-9]{8}$")]
         public virtual String PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "First Name:")]
+        [Required(ErrorMessage = "First name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String FirstName { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "Last Name:")]
+        [Required(ErrorMessage = ":Last name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String LastName { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "Email:")]
+        [Required(ErrorMessage = "Email required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]
         public virtual String Email { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "User Name:")]
+        [Required(ErrorMessage = "User name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{3,}$")]
         public virtual String UserName { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "Password:")]
+        [Required(ErrorMessage = "Password required")]
         [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$")]
         public virtual String Password { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "Address:")]
+        [Required(ErrorMessage = "Address (street and number) required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String AddressLine { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "City:")]
+        [Required(ErrorMessage = "City required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String CityName { get; set; }
 
-        [Required(ErrorMessage = "Phone number required")]
+        [Display(Name = "Postcode:")]
+        [Required(ErrorMessage = "Postcode required")]
         [RegularExpression("^[0-9]{4}$")]
         public virtual String Postcode { get; set; }
 
-        [EnumDataType(typeof(Region), ErrorMessage = "Phone number required")]
+        [Display(Name = "Region:")]
+        [EnumDataType(typeof(Region), ErrorMessage = "Choose region")]
         public virtual Region Region { get; set; }
 
-        [EnumDataType(typeof(Gender), ErrorMessage = "Phone number required")]
+        [Display(Name = "Gender:")]
+        [EnumDataType(typeof(Gender), ErrorMessage = "Choose gender")]
         public virtual Gender Gender { get; set; }
     }
 }
