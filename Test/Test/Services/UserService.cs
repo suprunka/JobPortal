@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using Repositories;
-using System.ServiceModel.Description;
+using Repository.DbConnection;
 using ServiceLibrary.Models;
-
+using User = ServiceLibrary.Models.User;
 
 namespace ServiceLibrary
 {
@@ -12,29 +13,27 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        private readonly IRepository<Users> _database;
+        private readonly IRepository<User> _database;
 
 
-        public UserService(IRepository<Users> database)
+        public UserService(IRepository<User> database)
         {
             _database = database;
         }
-
         public UserService()
         {
-
+            _database = new Repository<User>(new JobPortalDatabaseDataContext());
         }
 
 
-        public Users CreateUser(Users u)
+        public User CreateUser(User u)
         {
             try
             {
-                RegexMatch.DoesUserMatch(u);
                 _database.Create(u);
                 return u;
             }
-            catch (ArgumentException)
+            catch (ArgumentNullException)
             {
                 return null;
             }
@@ -58,25 +57,17 @@ namespace ServiceLibrary
             }
         }
 
-        public bool EditUser(Users u)
+        public bool EditUser(User u)
         {
-            try
-            {
-                RegexMatch.DoesUserMatch(u);
-                _database.Update(u);
-                return true;
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
+            _database.Update(u);
+            return true;
         }
 
-        public Users FindUser(int id)
+        public User FindUser(int id)
         {
             try
             {
-                Users u = _database.Get(t=> t.ID == id);
+                User u = _database.Get(t=> t.ID == id);
                 return u;
             }
             catch
@@ -86,12 +77,11 @@ namespace ServiceLibrary
             }
 
         }
-        public IEnumerable<Users> GetAll()
+
+
+        public IQueryable<User> GetAll()
         {
             return _database.GetAll();
-
         }
-
-        
     }
 }

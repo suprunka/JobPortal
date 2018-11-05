@@ -1,6 +1,6 @@
 ﻿using AppJobPortal.Mapping;
 using AppJobPortal.Models;
-using AppJobPortal.UserServiceReference;
+using AppJobPortal.UserServiceReferenceTcp;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -24,12 +24,22 @@ namespace AppJobPortal.Controllers
 
             });
             _mapper = config.CreateMapper();
+        }
+
+        public UserAppModel Create(UserAppModel user)
+        {
+             
+            User u = _proxy.CreateUser(_mapper.Map(user, new User()));
+            return _mapper.Map(u, new UserAppModel());
 
         }
-        public UserAppModel Get(int Id)
+
+            public UserAppModel Get(int Id)
         {
-           return _mapper.Map(_proxy.FindUser(Id), new UserAppModel());
+            return _mapper.Map(_proxy.FindUser(Id), new UserAppModel());
         }
+
+
         public bool Edit(UserAppModel user)
         {
 
