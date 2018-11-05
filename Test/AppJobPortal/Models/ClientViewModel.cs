@@ -21,7 +21,7 @@ namespace AppJobPortal.Models
 {
     class ClientViewModel :  ObservableCollection<UserAppModel>, INotifyPropertyChanged
     {
-        private int selectedIndex;
+        private int selectedIndex ;
 
         private int id;
         private string firstname;
@@ -45,16 +45,7 @@ namespace AppJobPortal.Models
         public ClientViewModel()
         {
             _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
-            var config = new MapperConfiguration(cfg => {
-
-                cfg.CreateMap<UserAppModel, User>();
-
-            });
-            _mapper = config.CreateMapper();
-            /*updateClientCommand = new CommandBase(param => this.UpdateClient());
-            AddClientCommand = new CommandBase(param => this.AddClient());
-            NewClientCommand = new CommandBase(new Action<Object>(NewClient));
-            DelClientCommand = new CommandBase(param => this.DelClient());*/
+           
             ViewClient();
 
         }
@@ -299,60 +290,12 @@ namespace AppJobPortal.Models
 
 
 
-        public ICommand NewClientCommand
-        {
-            get
-            {
-                return newClientCommand;
-            }
-            set
-            {
-                newClientCommand = value;
-            }
-        }
-
-        public ICommand AddClientCommand
-        {
-            get
-            {
-                return addClientCommand;
-            }
-            set
-            {
-                addClientCommand = value;
-            }
-        }
-        public ICommand DelClientCommand
-        {
-            get
-            {
-                return delClientCommand;
-            }
-            set
-            {
-                delClientCommand = value;
-            }
-        }
-
-        public ICommand UpdateClientCommand
-        {
-            get
-            {
-                return updateClientCommand;
-            }
-            set
-            {
-                updateClientCommand = value;
-            }
-        }
-
-        
-
         private void ViewClient()
         {
 
-            foreach (User u in _proxy.GetAll())
+            foreach (Users u in _proxy.GetAll())
             {
+                
                 UserAppModel userAppModel= _mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);
             }
