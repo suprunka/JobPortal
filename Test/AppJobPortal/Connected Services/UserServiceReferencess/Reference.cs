@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppJobPortal.UserServiceReferenceTcp {
+namespace AppJobPortal.UserServiceReferencess {
     using System.Runtime.Serialization;
     using System;
     
@@ -35,7 +35,7 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AppJobPortal.UserServiceReferenceTcp.UsersRepositoryGender GenderField;
+        private AppJobPortal.UserServiceReferencess.UsersRepositoryGender GenderField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
@@ -53,7 +53,7 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         private string PostcodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRegion RegionField;
+        private AppJobPortal.UserServiceReferencess.UsersRepositoryRegion RegionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
@@ -121,7 +121,7 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public AppJobPortal.UserServiceReferenceTcp.UsersRepositoryGender Gender {
+        public AppJobPortal.UserServiceReferencess.UsersRepositoryGender Gender {
             get {
                 return this.GenderField;
             }
@@ -199,7 +199,7 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRegion Region {
+        public AppJobPortal.UserServiceReferencess.UsersRepositoryRegion Region {
             get {
                 return this.RegionField;
             }
@@ -487,20 +487,20 @@ namespace AppJobPortal.UserServiceReferenceTcp {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceReferenceTcp.IUserService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceReferencess.IUserService")]
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        AppJobPortal.UserServiceReferenceTcp.Users CreateUser(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u);
+        AppJobPortal.UserServiceReferencess.Users CreateUser(AppJobPortal.UserServiceReferencess.UsersRepositoryRepositoryUser u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u);
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferencess.Users> CreateUserAsync(AppJobPortal.UserServiceReferencess.UsersRepositoryRepositoryUser u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        AppJobPortal.UserServiceReferenceTcp.Users FindUser(int id);
+        AppJobPortal.UserServiceReferencess.Users FindUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> FindUserAsync(int id);
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferencess.Users> FindUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         bool DeleteUser(int id);
@@ -509,25 +509,25 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         System.Threading.Tasks.Task<bool> DeleteUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
-        bool EditUser(AppJobPortal.UserServiceReferenceTcp.Users u);
+        bool EditUser(AppJobPortal.UserServiceReferencess.Users u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
-        System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferenceTcp.Users u);
+        System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferencess.Users u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
-        AppJobPortal.UserServiceReferenceTcp.Users[] GetAll();
+        AppJobPortal.UserServiceReferencess.Users[] GetAll();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users[]> GetAllAsync();
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferencess.Users[]> GetAllAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : AppJobPortal.UserServiceReferenceTcp.IUserService, System.ServiceModel.IClientChannel {
+    public interface IUserServiceChannel : AppJobPortal.UserServiceReferencess.IUserService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<AppJobPortal.UserServiceReferenceTcp.IUserService>, AppJobPortal.UserServiceReferenceTcp.IUserService {
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<AppJobPortal.UserServiceReferencess.IUserService>, AppJobPortal.UserServiceReferencess.IUserService {
         
         public UserServiceClient() {
         }
@@ -548,19 +548,19 @@ namespace AppJobPortal.UserServiceReferenceTcp {
                 base(binding, remoteAddress) {
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.Users CreateUser(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u) {
+        public AppJobPortal.UserServiceReferencess.Users CreateUser(AppJobPortal.UserServiceReferencess.UsersRepositoryRepositoryUser u) {
             return base.Channel.CreateUser(u);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u) {
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferencess.Users> CreateUserAsync(AppJobPortal.UserServiceReferencess.UsersRepositoryRepositoryUser u) {
             return base.Channel.CreateUserAsync(u);
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.Users FindUser(int id) {
+        public AppJobPortal.UserServiceReferencess.Users FindUser(int id) {
             return base.Channel.FindUser(id);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> FindUserAsync(int id) {
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferencess.Users> FindUserAsync(int id) {
             return base.Channel.FindUserAsync(id);
         }
         
@@ -572,19 +572,19 @@ namespace AppJobPortal.UserServiceReferenceTcp {
             return base.Channel.DeleteUserAsync(id);
         }
         
-        public bool EditUser(AppJobPortal.UserServiceReferenceTcp.Users u) {
+        public bool EditUser(AppJobPortal.UserServiceReferencess.Users u) {
             return base.Channel.EditUser(u);
         }
         
-        public System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferenceTcp.Users u) {
+        public System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferencess.Users u) {
             return base.Channel.EditUserAsync(u);
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.Users[] GetAll() {
+        public AppJobPortal.UserServiceReferencess.Users[] GetAll() {
             return base.Channel.GetAll();
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users[]> GetAllAsync() {
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferencess.Users[]> GetAllAsync() {
             return base.Channel.GetAllAsync();
         }
     }

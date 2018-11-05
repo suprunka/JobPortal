@@ -1,5 +1,6 @@
 ﻿
 using AppJobPortal.UserServiceReferenceTcp;
+using ServiceLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
