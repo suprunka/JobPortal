@@ -131,6 +131,11 @@ namespace Repository
             }
             return result;
         }
+        public override IQueryable<Users> GetAll()
+        {
+            return _context.GetTable<Users>();
+        }
+
 
 
 

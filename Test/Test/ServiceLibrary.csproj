@@ -91,6 +91,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\ClassMapper.cs" />
+    <Compile Include="Mapping\MappingConfig.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\RegexMatch.cs" />
     <Compile Include="Models\Region.cs" />

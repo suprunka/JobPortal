@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using AppJobPortal.Mapping;
 using Repositories;
+using Repository;
 using Repository.DbConnection;
 using ServiceLibrary.Models;
-using User = ServiceLibrary.Models.User;
+using static Repository.UsersRepository;
+using User = ServiceLibrary.Models.Users;
 
 namespace ServiceLibrary
 {
@@ -13,25 +16,26 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _database;
+        private readonly IUserRepository _database;
 
 
-        public UserService(IRepository<User> database)
+        public UserService(IUserRepository database)
         {
             _database = database;
         }
         public UserService()
         {
-            _database = new Repository<User>(new JobPortalDatabaseDataContext());
+            _database = new UsersRepository(new JobPortalDatabaseDataContext());
         }
 
 
-        public User CreateUser(User u)
+        public User CreateUser( RepositoryUser u)
         {
             try
             {
                 _database.Create(u);
-                return u;
+                return AutoMapper.Mapper.Map(u, new User());
+                   
             }
             catch (ArgumentNullException)
             {
@@ -59,7 +63,7 @@ namespace ServiceLibrary
 
         public bool EditUser(User u)
         {
-            _database.Update(u);
+            //_database.Update(u);
             return true;
         }
 
@@ -67,8 +71,9 @@ namespace ServiceLibrary
         {
             try
             {
-                User u = _database.Get(t=> t.ID == id);
-                return u;
+                // User u = _database.Get(t=> t.ID == id);
+                // return u;
+                return null;
             }
             catch
             {
@@ -81,7 +86,10 @@ namespace ServiceLibrary
 
         public IQueryable<User> GetAll()
         {
-            return _database.GetAll();
+             return _database.GetAll().Cast<User>();
+            //return null;
         }
+
+       
     }
 }
