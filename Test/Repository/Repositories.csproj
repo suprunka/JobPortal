@@ -110,7 +110,9 @@
     <Compile Include="UserRepository\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DbConnection\JobPortalDatabase.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>JobPortalDatabase.designer.cs</LastGenOutput>
@@ -131,5 +133,12 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Name>JobPortal.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

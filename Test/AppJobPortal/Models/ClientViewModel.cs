@@ -21,7 +21,7 @@ namespace AppJobPortal.Models
 {
     class ClientViewModel :  ObservableCollection<UserAppModel>, INotifyPropertyChanged
     {
-        private int selectedIndex ;
+        private int selectedIndex = -2;
 
         private int id;
         private string firstname;
@@ -46,6 +46,10 @@ namespace AppJobPortal.Models
         {
             _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
            
+            /*updateClientCommand = new CommandBase(param => this.UpdateClient());
+            AddClientCommand = new CommandBase(param => this.AddClient());
+            NewClientCommand = new CommandBase(new Action<Object>(NewClient));
+            DelClientCommand = new CommandBase(param => this.DelClient());*/
             ViewClient();
 
         }
@@ -290,13 +294,61 @@ namespace AppJobPortal.Models
 
 
 
+        public ICommand NewClientCommand
+        {
+            get
+            {
+                return newClientCommand;
+            }
+            set
+            {
+                newClientCommand = value;
+            }
+        }
+
+        public ICommand AddClientCommand
+        {
+            get
+            {
+                return addClientCommand;
+            }
+            set
+            {
+                addClientCommand = value;
+            }
+        }
+        public ICommand DelClientCommand
+        {
+            get
+            {
+                return delClientCommand;
+            }
+            set
+            {
+                delClientCommand = value;
+            }
+        }
+
+        public ICommand UpdateClientCommand
+        {
+            get
+            {
+                return updateClientCommand;
+            }
+            set
+            {
+                updateClientCommand = value;
+            }
+        }
+
+        
+
         private void ViewClient()
         {
 
-            foreach (Users u in _proxy.GetAll())
+            foreach (User u in _proxy.GetAll())
             {
-                
-                UserAppModel userAppModel= _mapper.Map(u, new UserAppModel());
+                UserAppModel userAppModel= Mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);
             }
 
