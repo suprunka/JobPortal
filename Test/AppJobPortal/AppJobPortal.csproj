@@ -147,7 +147,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UserServiceReferenceTcp\service.wsdl" />
@@ -182,11 +191,12 @@
     <None Include="Connected Services\UserServiceReferenceTcp\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
-      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Project>{54C02908-1940-4080-9B75-A3879245C02B}</Project>
       <Name>JobPortal.Model</Name>
     </ProjectReference>
   </ItemGroup>

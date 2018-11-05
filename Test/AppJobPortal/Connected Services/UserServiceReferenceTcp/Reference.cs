@@ -15,261 +15,9 @@ namespace AppJobPortal.UserServiceReferenceTcp {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UsersRepository.RepositoryUser", Namespace="http://schemas.datacontract.org/2004/07/Repository")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model")]
     [System.SerializableAttribute()]
-    public partial class UsersRepositoryRepositoryUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AddressLineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CityNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FirstNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AppJobPortal.UserServiceReferenceTcp.UsersRepositoryGender GenderField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LastNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PhoneNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PostcodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRegion RegionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AddressLine {
-            get {
-                return this.AddressLineField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AddressLineField, value) != true)) {
-                    this.AddressLineField = value;
-                    this.RaisePropertyChanged("AddressLine");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityName {
-            get {
-                return this.CityNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CityNameField, value) != true)) {
-                    this.CityNameField = value;
-                    this.RaisePropertyChanged("CityName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FirstName {
-            get {
-                return this.FirstNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
-                    this.FirstNameField = value;
-                    this.RaisePropertyChanged("FirstName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public AppJobPortal.UserServiceReferenceTcp.UsersRepositoryGender Gender {
-            get {
-                return this.GenderField;
-            }
-            set {
-                if ((this.GenderField.Equals(value) != true)) {
-                    this.GenderField = value;
-                    this.RaisePropertyChanged("Gender");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LastName {
-            get {
-                return this.LastNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
-                    this.LastNameField = value;
-                    this.RaisePropertyChanged("LastName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhoneNumber {
-            get {
-                return this.PhoneNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
-                    this.PhoneNumberField = value;
-                    this.RaisePropertyChanged("PhoneNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Postcode {
-            get {
-                return this.PostcodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PostcodeField, value) != true)) {
-                    this.PostcodeField = value;
-                    this.RaisePropertyChanged("Postcode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRegion Region {
-            get {
-                return this.RegionField;
-            }
-            set {
-                if ((this.RegionField.Equals(value) != true)) {
-                    this.RegionField = value;
-                    this.RaisePropertyChanged("Region");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName {
-            get {
-                return this.UserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
-                    this.UserNameField = value;
-                    this.RaisePropertyChanged("UserName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UsersRepository.Gender", Namespace="http://schemas.datacontract.org/2004/07/Repository")]
-    public enum UsersRepositoryGender : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Male = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Female = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UsersRepository.Region", Namespace="http://schemas.datacontract.org/2004/07/Repository")]
-    public enum UsersRepositoryRegion : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Hovedstaden = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Midtjylland = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Nordjylland = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Sjælland = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Syddanmark = 4,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Users", Namespace="http://schemas.datacontract.org/2004/07/ServiceLibrary.Models")]
-    [System.SerializableAttribute()]
-    public partial class Users : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -491,16 +239,16 @@ namespace AppJobPortal.UserServiceReferenceTcp {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        AppJobPortal.UserServiceReferenceTcp.Users CreateUser(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u);
+        AppJobPortal.UserServiceReferenceTcp.User CreateUser(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u);
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        AppJobPortal.UserServiceReferenceTcp.Users FindUser(int id);
+        AppJobPortal.UserServiceReferenceTcp.User FindUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> FindUserAsync(int id);
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         bool DeleteUser(int id);
@@ -509,16 +257,16 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         System.Threading.Tasks.Task<bool> DeleteUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
-        bool EditUser(AppJobPortal.UserServiceReferenceTcp.Users u);
+        bool EditUser(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
-        System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferenceTcp.Users u);
+        System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
-        AppJobPortal.UserServiceReferenceTcp.Users[] GetAll();
+        AppJobPortal.UserServiceReferenceTcp.User[] GetAll();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users[]> GetAllAsync();
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> GetAllAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -548,19 +296,19 @@ namespace AppJobPortal.UserServiceReferenceTcp {
                 base(binding, remoteAddress) {
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.Users CreateUser(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u) {
+        public AppJobPortal.UserServiceReferenceTcp.User CreateUser(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.CreateUser(u);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.UsersRepositoryRepositoryUser u) {
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.CreateUserAsync(u);
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.Users FindUser(int id) {
+        public AppJobPortal.UserServiceReferenceTcp.User FindUser(int id) {
             return base.Channel.FindUser(id);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users> FindUserAsync(int id) {
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(int id) {
             return base.Channel.FindUserAsync(id);
         }
         
@@ -572,19 +320,19 @@ namespace AppJobPortal.UserServiceReferenceTcp {
             return base.Channel.DeleteUserAsync(id);
         }
         
-        public bool EditUser(AppJobPortal.UserServiceReferenceTcp.Users u) {
+        public bool EditUser(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.EditUser(u);
         }
         
-        public System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferenceTcp.Users u) {
+        public System.Threading.Tasks.Task<bool> EditUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.EditUserAsync(u);
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.Users[] GetAll() {
+        public AppJobPortal.UserServiceReferenceTcp.User[] GetAll() {
             return base.Channel.GetAll();
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.Users[]> GetAllAsync() {
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> GetAllAsync() {
             return base.Channel.GetAllAsync();
         }
     }

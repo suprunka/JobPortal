@@ -6,14 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Data.OleDb;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Input;
 using AppJobPortal.UserServiceReferenceTcp;
 using AutoMapper;
 using JobPortal.Model;
@@ -35,10 +27,7 @@ namespace AppJobPortal.Models
         private string region;
         private string gender;
         //private DateTime? birthdate;
-        private ICommand newClientCommand;
-        private ICommand addClientCommand;
-        private ICommand delClientCommand;
-        private ICommand updateClientCommand;
+
         private readonly IUserService _proxy;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -295,59 +284,10 @@ namespace AppJobPortal.Models
 
 
 
-        public ICommand NewClientCommand
-        {
-            get
-            {
-                return newClientCommand;
-            }
-            set
-            {
-                newClientCommand = value;
-            }
-        }
-
-        public ICommand AddClientCommand
-        {
-            get
-            {
-                return addClientCommand;
-            }
-            set
-            {
-                addClientCommand = value;
-            }
-        }
-        public ICommand DelClientCommand
-        {
-            get
-            {
-                return delClientCommand;
-            }
-            set
-            {
-                delClientCommand = value;
-            }
-        }
-
-        public ICommand UpdateClientCommand
-        {
-            get
-            {
-                return updateClientCommand;
-            }
-            set
-            {
-                updateClientCommand = value;
-            }
-        }
-
-        
-
         private void ViewClient()
         {
 
-            foreach (User u in _proxy.GetAll())
+            foreach (var u in _proxy.GetAll())
             {
                 UserAppModel userAppModel= Mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);

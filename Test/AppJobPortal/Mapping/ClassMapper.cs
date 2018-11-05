@@ -1,5 +1,6 @@
 ﻿using AppJobPortal.Models;
 using AppJobPortal.UserServiceReferenceTcp;
+using JobPortal.Model;
 
 namespace AppJobPortal.Mapping
 {
@@ -8,7 +9,7 @@ namespace AppJobPortal.Mapping
         public ClassMapper()
         {
 
-            CreateMap<UserAppModel, User>().ReverseMap();
+            CreateMap<UserAppModel, JobPortal.Model.User>().ReverseMap();
         }
     }
 }
