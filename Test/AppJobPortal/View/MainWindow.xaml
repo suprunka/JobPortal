@@ -1,10 +1,94 @@
-﻿<NavigationWindow x:Class="AppJobPortal.View.MainWindow"
+﻿<Window x:Class="AppJobPortal.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                  mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Source="Home.xaml" >
-    
-    
-</NavigationWindow>
+        xmlns:viewmodel="clr-namespace:AppJobPortal.Models"
+        mc:Ignorable="d"
+       
+    Title="Registro de Clientes" Height="800" Width="700" FontFamily="Letter Gothic Std" Background="#FFA7B4B8">
+
+    <Window.Resources>
+        <viewmodel:ClientViewModel x:Key="clientViewModel" />
+    </Window.Resources>
+
+    <Grid  DataContext="{StaticResource clientViewModel}" Margin="0,0,0,3" HorizontalAlignment="Right" Width="692">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33*" />
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="43*"/>
+
+
+            <RowDefinition MinHeight="100" Height="145*"/>
+            <RowDefinition Height="101*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="txbIdLabel" VerticalAlignment="Center" Margin="20,10,20,3" Grid.Column="0" Grid.Row="0" Text="Id" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+        <TextBox x:Name="txtId" Text="{Binding Id}" Grid.Column="1" Grid.Row="0" Height="20" Margin="20,10,20,3" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <TextBlock x:Name="txbNameLabel" VerticalAlignment="Center" Margin="20,8,0,3.628" Grid.Column="0" Grid.Row="1" Text="First name" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+        <TextBox x:Name="txtFname" Text="{Binding Name}" Grid.Column="1" Grid.Row="1" Height="20" Margin="20,4,20,7.628" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <TextBlock x:Name="txbLastNameLabel" VerticalAlignment="Center" Margin="20,4.372,0,6.628" Grid.Column="0" Grid.Row="2" Text="Last name" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+        <TextBox x:Name="txtLname" Text="{Binding LastName}" Grid.Column="1" Grid.Row="2" Height="20" Margin="20,4.372,20,6.628" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <TextBlock x:Name="txtAddressLabel" VerticalAlignment="Center" Margin="20,3.372,0,7.628" Grid.Column="0" Grid.Row="3" Text="Address" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+        <TextBox x:Name="txtAddress" Text="{Binding Document}" Grid.Column="1" Grid.Row="3" Height="20" Margin="20,3.372,20,7.628" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <TextBlock x:Name="txbCityLabel" VerticalAlignment="Center" Margin="20,4.372,0,7.257" Grid.Column="0" Grid.Row="4" Text="City" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+        <TextBox x:Name="txtCity" Text="{Binding Address}" Grid.Column="1" Grid.Row="4" Height="20" Margin="20,3.372,20,8.257" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <TextBlock x:Name="txtPostcodeLbl" VerticalAlignment="Center" Margin="20,2.743,0,8.257" Grid.Column="0" Grid.Row="5" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Postcode"/></TextBlock>
+        <TextBox x:Name="txtPostcode" Text="{Binding Address}" Grid.Column="1" Grid.Row="5" Height="20" Margin="20,3.743,20,7.257" VerticalAlignment="Center" IsEnabled="False"/>
+        <TextBlock x:Name="Region" VerticalAlignment="Center" Margin="20,3.743,0,9.257" Grid.Column="0" Grid.Row="6" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Region"/></TextBlock>
+        <TextBlock x:Name="txtPhonenumberLbl" VerticalAlignment="Center" Margin="20,1.743,0,9.257" Grid.Column="0" Grid.Row="7" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Phone number"/></TextBlock>
+        <TextBox x:Name="txtPhonenumber" Text="{Binding Address}" Grid.Column="1" Grid.Row="7" Height="20" Margin="20,2.743,20,8.257" VerticalAlignment="Center" IsEnabled="False"/>
+        <TextBlock x:Name="txtEmailLbl" VerticalAlignment="Center" Margin="20,2.743,0,8.885" Grid.Column="0" Grid.Row="8" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Email"/></TextBlock>
+        <TextBox x:Name="txtEmail" Text="{Binding Address}" Grid.Column="1" Grid.Row="8" Height="20" Margin="20,2.743,20,8.885" VerticalAlignment="Center" IsEnabled="False"/>
+        <TextBlock x:Name="txtGenderLbl" VerticalAlignment="Center" Margin="20,4.115,0,9.885" Grid.Column="0" Grid.Row="10" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Gender"/></TextBlock>
+
+        <TextBlock x:Name="txtUsernameLbl" VerticalAlignment="Center" Margin="20,2.115,0,8.885" Grid.Column="0" Grid.Row="11" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Username"/></TextBlock>
+        <TextBox x:Name="txtUsername" Text="{Binding Address}" Grid.Column="1" Grid.Row="11" Height="20" Margin="20,3.115,20,7.885" VerticalAlignment="Center" IsEnabled="False"/>
+        <TextBlock x:Name="txtPasswordLbl" VerticalAlignment="Center" Margin="20,3.115,0,8.514" Grid.Column="0" Grid.Row="12" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Password"/></TextBlock>
+        <TextBox x:Name="txtPassword" Text="{Binding Address}" Grid.Column="1" Grid.Row="12" Height="20" Margin="20,6.115,20,5.514" VerticalAlignment="Center" IsEnabled="False"/>
+        <TextBlock x:Name="txbBirthDateLbl" Text="Birth date" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold" Margin="19,2.115,1,8.885" Grid.Row="9"/>
+        <DatePicker Grid.Row="8" Margin="20,30.743,20,5.885" Name="BirthdateLbl" VerticalAlignment="Center" SelectedDateFormat="Short" SelectedDate="{Binding Path=Birthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Height="26" Grid.Column="1" Background="#FFF0F0F0" BorderBrush="#FFF0F0F0" Foreground="#FF854F51" FirstDayOfWeek="Sunday" IsEnabled="False" Text="{Binding Path=Birthdate}" Grid.RowSpan="2">
+        </DatePicker>
+        <StackPanel x:Name="btnPanelone" HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="9" Margin="12,1.115,102,19.885" Visibility="Visible" Width="478" Grid.Column="1">
+            <Button x:Name="btnNuevo" Content="Nuevo" Height="40" Width="140" Margin="10,11,0,10" Command="{Binding NewClientCommand}" Click="btnNuevo_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="btnPaneltwo" HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="13" Margin="19,0,10,10" Width="663" RenderTransformOrigin="0.789,0.578" Grid.ColumnSpan="2" Grid.RowSpan="3" Height="73" VerticalAlignment="Bottom">
+            <Button x:Name="btnRegister" Content="Register" Height="40" Width="140" Margin="10 0 0 0" Command="{Binding AddClientCommand}" Click="btnGuardar_Click"/>
+            <Button x:Name="btnCancelar" Content="Reset" Height="40" Width="140" Margin="10 0 0 0" Command="{Binding ClearCommand}" Click="btnCancelar_Click"/>
+            <Button x:Name="btnModificar" Content="Modify" Height="40" Width="140" Margin="10 0 0 0" Command="{Binding UpdateClientCommand}" Click="btnModificar_Click" />
+            <Button x:Name="btnEliminar" Content="Delete" Height="40" Width="140" Margin="20 0 0 0" Command="{Binding DelClientCommand}" Click="btnEliminar_Click"/>
+
+        </StackPanel>
+
+
+        <DataGrid x:Name="lvClients" SelectedIndex="{Binding SelectedIndexOfCollection, Mode=TwoWay}" MinHeight="50" ItemsSource="{StaticResource ResourceKey=clientViewModel}" 
+                  SelectedItem="{Binding Path=Selected}" DisplayMemberPath="DisplayName"  Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2" Margin="20,0,20,9.514" RenderTransformOrigin="0.494,0.918" Height="140" VerticalAlignment="Bottom" HorizontalGridLinesBrush="#FF333337" VerticalGridLinesBrush="#FF2D2D30" CanUserAddRows="False" CanUserResizeRows="False" IsEnabled="True" Grid.RowSpan="2"/>
+        <RadioButton Content="Male" Grid.Column="1" HorizontalAlignment="Left" Margin="38,13.115,0,0" Grid.Row="10" VerticalAlignment="Top"/>
+        <RadioButton Content="Female" Grid.Column="1" HorizontalAlignment="Left" Margin="115,13.115,0,6.885" Grid.Row="10"/>
+
+    </Grid>
+</Window>

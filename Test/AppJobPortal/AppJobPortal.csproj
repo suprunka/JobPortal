@@ -91,11 +91,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\UserServiceReference\Reference.cs">
+    <Compile Include="Connected Services\UserServiceReferenceTcp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientViewModel.cs" />
+    <Compile Include="Models\NotifyBase.cs" />
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -137,17 +139,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\UserServiceReference\AppJobPortal.UserServiceReference.User.datasource">
+    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\UserServiceReference\service.wsdl" />
-    <None Include="Connected Services\UserServiceReference\service.xsd">
+    <None Include="Connected Services\UserServiceReferenceTcp\service.wsdl" />
+    <None Include="Connected Services\UserServiceReferenceTcp\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReference\service1.xsd">
+    <None Include="Connected Services\UserServiceReferenceTcp\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReference\ServiceLibrary.Models.xsd">
+    <None Include="Connected Services\UserServiceReferenceTcp\ServiceLibrary.Models.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -162,18 +164,17 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\UserServiceReference\" />
+    <None Include="Connected Services\UserServiceReferenceTcp\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserServiceReference\configuration91.svcinfo" />
+    <WCFMetadataStorage Include="Connected Services\UserServiceReferenceTcp\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\UserServiceReferenceTcp\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserServiceReference\Reference.svcmap">
+    <None Include="Connected Services\UserServiceReferenceTcp\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

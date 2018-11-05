@@ -1,5 +1,5 @@
 ﻿using AppJobPortal.Models;
-using AppJobPortal.UserServiceReference;
+using AppJobPortal.UserServiceReferenceTcp;
 
 namespace AppJobPortal.Mapping
 {

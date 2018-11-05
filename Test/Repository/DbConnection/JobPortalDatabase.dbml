@@ -8,7 +8,7 @@
       <Column Name="LatestActivity" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="Account_OrderTable" Member="OrderTable" ThisKey="ID" OtherKey="Account_ID" Type="OrderTable" />
       <Association Name="AccountState_Account" Member="AccountState" ThisKey="AccountState_ID" OtherKey="ID" Type="AccountState" IsForeignKey="true" />
-      <Association Name="UserTable_Account" Member="UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+      <Association Name="UserTable_Account" Member="User" Storage="_UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.WorkingArea" Member="WorkingArea">
@@ -16,7 +16,7 @@
       <Column Name="Employee_Phone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="AddressTable_WorkingArea" Member="AddressTable" ThisKey="City" OtherKey="City" Type="AddressTable" IsForeignKey="true" />
-      <Association Name="UserTable_WorkingArea" Member="UserTable" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+      <Association Name="UserTable_WorkingArea" Member="User" Storage="_UserTable" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AccountState" Member="AccountState">
@@ -32,7 +32,7 @@
       <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="Region" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Association Name="AddressTable_WorkingArea" Member="WorkingArea" ThisKey="City" OtherKey="City" Type="WorkingArea" />
-      <Association Name="AddressTable_UserTable" Member="UserTable" ThisKey="City" OtherKey="City" Type="UserTable" />
+      <Association Name="AddressTable_UserTable" Member="UserTable" ThisKey="City" OtherKey="City" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.Advertisement" Member="Advertisement">
@@ -48,7 +48,7 @@
       <Association Name="Advertisement_Saleline" Member="Saleline" ThisKey="ID" OtherKey="Advertisement_ID" Type="Saleline" />
       <Association Name="Review_Advertisement" Member="Review" ThisKey="Review_ID" OtherKey="ID" Type="Review" IsForeignKey="true" />
       <Association Name="ServiceTable_Advertisement" Member="ServiceTable" ThisKey="Service_ID" OtherKey="ID" Type="ServiceTable" IsForeignKey="true" />
-      <Association Name="UserTable_Advertisement" Member="UserTable" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+      <Association Name="UserTable_Advertisement" Member="User" Storage="_UserTable" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AvailableDates" Member="AvailableDates">
@@ -71,7 +71,7 @@
   <Table Name="dbo.Customer" Member="Customer">
     <Type Name="Customer">
       <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="UserTable_Customer" Member="UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+      <Association Name="UserTable_Customer" Member="User" Storage="_UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Dates" Member="Dates">
@@ -85,14 +85,14 @@
   <Table Name="dbo.Employee" Member="Employee">
     <Type Name="Employee">
       <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="UserTable_Employee" Member="UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+      <Association Name="UserTable_Employee" Member="User" Storage="_UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Gender" Member="Gender">
     <Type Name="Gender">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Gender" Member="Gender1" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Association Name="Gender_UserTable" Member="UserTable" ThisKey="ID" OtherKey="Gender_ID" Type="UserTable" />
+      <Association Name="Gender_UserTable" Member="UserTable" ThisKey="ID" OtherKey="Gender_ID" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.Logging" Member="Logging">
@@ -100,7 +100,7 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Logging_UserTable" Member="UserTable" ThisKey="ID" OtherKey="Logging_ID" Type="UserTable" />
+      <Association Name="Logging_UserTable" Member="UserTable" ThisKey="ID" OtherKey="Logging_ID" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.OrderStatus" Member="OrderStatus">
@@ -154,7 +154,7 @@
       <Column Name="Rate_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Review_Advertisement" Member="Advertisement" ThisKey="ID" OtherKey="Review_ID" Type="Advertisement" />
       <Association Name="Rate_Review" Member="Rate" ThisKey="Rate_ID" OtherKey="RateValue" Type="Rate" IsForeignKey="true" />
-      <Association Name="UserTable_Review" Member="UserTable" ThisKey="Customer_ID" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+      <Association Name="UserTable_Review" Member="User" Storage="_UserTable" ThisKey="Customer_ID" OtherKey="PhoneNumber" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Saleline" Member="Saleline">
@@ -177,8 +177,8 @@
       <Association Name="Category_ServiceTable" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UserTable" Member="UserTable">
-    <Type Name="UserTable">
+  <Table Name="dbo.UserTable" Member="Users">
+    <Type Name="User">
       <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />

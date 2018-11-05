@@ -218,7 +218,7 @@ namespace UnitTestProject1.MVC__tests
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-                return new List<User> { new User() { ID = 1 }, new User() { ID = 71 }, new User() { ID = 10 } };
+                return null; //new List<User> { new User() { ID = 1 }, new User() { ID = 71 }, new User() { ID = 10 } };
             });
 
             var sut = new UserController(userServiceStub.Object);
@@ -234,7 +234,7 @@ namespace UnitTestProject1.MVC__tests
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.GetAll()).Returns(() =>
             {
-                return new List<User> { new User(), new User(), new User() };
+                return null;//new List<User> { new User(), new User(), new User() };
             });
             var sut = new UserController(userServiceStub.Object);
 

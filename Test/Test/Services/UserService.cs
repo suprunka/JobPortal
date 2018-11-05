@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using Repositories;
+using Repository.DbConnection;
 using ServiceLibrary.Models;
-
+using User = ServiceLibrary.Models.User;
 
 namespace ServiceLibrary
 {
@@ -17,6 +19,10 @@ namespace ServiceLibrary
         public UserService(IRepository<User> database)
         {
             _database = database;
+        }
+        public UserService()
+        {
+            _database = new Repository<User>(new JobPortalDatabaseDataContext());
         }
 
 
@@ -71,10 +77,11 @@ namespace ServiceLibrary
             }
 
         }
-        public IEnumerable<User> GetAll()
+
+
+        public IQueryable<User> GetAll()
         {
             return _database.GetAll();
-
         }
     }
 }

@@ -5,41 +5,67 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AppJobPortal"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="900"
       Title="Home">
 
-    <Grid>
+    <!-- 
+    <Grid Margin="5,0,-100,-50">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="135*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="760*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Name="MyTable" HorizontalAlignment="Left" Height="440" Margin="150,0,0,0" VerticalAlignment="Top" Width="515" Grid.Column="2"/>
-        <Label Name="Username" Content="Label" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <Label Name="Password" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"/>
-        <Label Name="PasswordConfirm" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,80,0,0"/>
-        <Label Name="Mail" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"/>
-        <Label Name="Phone" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"/>
-        <Label Name="Firstname" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,140,0,0"/>
-        <Label Name="Lastname" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,170,0,0"/>
-        <Label Name="Address" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,200,0,0"/>
-        <Label Name="City" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,230,0,0"/>
-        <Label Name="Postcode" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,260,0,0"/>
-        <Label Name="Region" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,290,0,0"/>
-        <Label Name="Gender" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,320,0,0" RenderTransformOrigin="0.526,0.385"/>
+        <DataGrid Name="MyTable" HorizontalAlignment="Left" Height="440" Margin="130,70,0,0" VerticalAlignment="Top" Width="515" Grid.Column="4"/>
+        <Label  Name="Username" Content="Username" HorizontalAlignment="Left" Margin="16,66,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Name="Password" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,96,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="PasswordConfirm" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,126,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Mail" Content="Mail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,158,0,0" RenderTransformOrigin="1.03,0.923" Grid.Column="1"/>
+        <Label Name="Phone" Content="Phone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,198,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Firstname" Content="First name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,228,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Lastname" Content="Last name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,257,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Address" Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,287,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="City" Content="City" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,317,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Postcode" Content="Postcode" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,347,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Region" Content="Region" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,377,0,0" Grid.ColumnSpan="2"/>
+        <Label Name="Gender" Content="Gender" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,408,0,0" RenderTransformOrigin="0.526,0.385" Grid.ColumnSpan="2"/>
 
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = UserName }" VerticalAlignment="Top" Width="120" Margin="80,24,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="**************" VerticalAlignment="Top" Width="120" Margin="80,50,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = Mail }" VerticalAlignment="Top" Width="120" Margin="80,80,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = Phone}" VerticalAlignment="Top" Width="120" Margin="80,110,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = FirstName}" VerticalAlignment="Top" Width="120" Margin="80,140,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = LastName}" VerticalAlignment="Top" Width="120" Margin="80,170,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = Address}" VerticalAlignment="Top" Width="120" Margin="80,200,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path = City}" VerticalAlignment="Top" Width="120" Margin="80,230,0,0" Grid.ColumnSpan="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path =PostCode }" VerticalAlignment="Top" Width="120" Margin="80,260,0,0" Grid.ColumnSpan="3"/>
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="80,290,0,0" Grid.ColumnSpan="3"/>
-        <RadioButton Content="Male" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="80,326,0,0"/>
-        <RadioButton Content="Female" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,326,0,0" Grid.Column="2"/>
+        <TextBox Name="UsernameBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="12,65,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <PasswordBox Name= "PasswordBox1" HorizontalAlignment="Left" Height="23"  VerticalAlignment="Top" Width="120" Margin="13,96,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <PasswordBox Name= "PasswordBox2" HorizontalAlignment="Left" Height="23"  VerticalAlignment="Top" Width="120" Margin="12,126,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "MailBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="12,158,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "PhoneBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="13,193,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "FirstNameBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="13,223,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "LastnameBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="12,252,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "AddressBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="12,282,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "CityBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="12,312,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Name= "PostcodeBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="12,342,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <ComboBox Name="Regioncombobox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="12,372,0,0" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <ComboBoxItem>//dbadd</ComboBoxItem>
+        <ComboBoxItem>//dbadd</ComboBoxItem>
+        <ComboBoxItem>//dbadd</ComboBoxItem>
+        <RadioButton Content="Male" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,408,0,0" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <RadioButton Content="Female" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,408,0,0" Grid.Column="4"/>
+        <Rectangle Grid.ColumnSpan="4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="69" Margin="0,456,0,0" Stroke="Black" VerticalAlignment="Top" Width="228" Grid.Column="1"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="10,480,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Button_Click"/>
+        <Button Content="Update" Grid.Column="3" HorizontalAlignment="Left" Margin="0,480,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="ID" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="4" Margin="10,44,593,0"/>
+        <TextBox Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="185,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="35"/>
+        <TextBox Name="textBox1" Width="50" FontSize="15"  
+         Validation.ErrorTemplate="{StaticResource validationTemplate}"
+         Style="{StaticResource textBoxInError}"
+         Grid.Row="1" Grid.Column="1" Margin="2">
+            <TextBox.Text>
+                <Binding Path="Age" Source="{StaticResource ods}"
+             UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <c:AgeRangeRule Min="21" Max="130"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button Content="Search" Grid.Column="4" HorizontalAlignment="Left" Margin="235,45,0,0" VerticalAlignment="Top" Width="65" Height="22"/>
 
-    </Grid>
+    </Grid>-->
 </Page>
