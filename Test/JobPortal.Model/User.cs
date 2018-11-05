@@ -3,24 +3,33 @@ using System.Runtime.Serialization;
 
 namespace JobPortal.Model
 {
-    [DataContract]
+    [DataContract(Name = "Region")]
     public enum Region
     {
+        [EnumMember]
         Hovedstaden,
+        [EnumMember]
         Midtjylland,
+        [EnumMember]
         Nordjylland,
+        [EnumMember]
         Sjælland,
+        [EnumMember]
         Syddanmark
     }
 
-    [DataContract]
+    [DataContract(Name ="Gender")]
     public enum Gender
     {
+        [EnumMember]
         Male,
+        [EnumMember]
         Female,
     }
-
+   
     [DataContract]
+    [KnownType(typeof(Gender))]
+    [KnownType(typeof(Region))]
     public class User
     {
 

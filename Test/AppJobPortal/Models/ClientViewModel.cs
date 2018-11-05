@@ -41,8 +41,11 @@ namespace AppJobPortal.Models
             NewClientCommand = new CommandBase(new Action<Object>(NewClient));
             DelClientCommand = new CommandBase(param => this.DelClient());*/
             ViewClient();
+            //_proxy.say();
 
         }
+
+      
 
         public int SelectedIndexOfCollection
         {
@@ -286,8 +289,8 @@ namespace AppJobPortal.Models
 
         private void ViewClient()
         {
-
-            foreach (var u in _proxy.GetAll())
+            var g = _proxy.GetAll();
+            foreach (UserServiceReferenceTcp.User2 u in g)
             {
                 UserAppModel userAppModel= Mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);

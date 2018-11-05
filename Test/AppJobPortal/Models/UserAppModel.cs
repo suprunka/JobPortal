@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gender = JobPortal.Model.Gender;
+using Region = JobPortal.Model.Region;
 
 namespace AppJobPortal.Models
 {

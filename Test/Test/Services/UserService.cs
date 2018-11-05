@@ -81,11 +81,11 @@ namespace ServiceLibrary
         }
 
 
-        public IList<User> GetAll()
+        public User2[] GetAll()
         {
-            IList<User> modelListToReturn = new List<User>();
+            IList<User2> modelListToReturn = new List<User2>();
             IQueryable<Users> listToTransfer = _database.GetAll();
-            foreach (var u in listToTransfer)
+            /*foreach (var u in listToTransfer)
             {
                 modelListToReturn.Add(new User
                 {
@@ -102,11 +102,20 @@ namespace ServiceLibrary
                     UserName = u.Logging.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
-            }
-            return modelListToReturn;
+            }*/
+
+            modelListToReturn.Add(new User2
+            {
+                ID = 1,
+
+            });
+            return modelListToReturn.ToArray();
             //return null;
         }
 
-       
+        public string say()
+        {
+            return "say";
+        }
     }
 }

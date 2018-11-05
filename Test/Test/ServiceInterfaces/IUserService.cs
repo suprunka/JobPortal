@@ -21,7 +21,10 @@ namespace ServiceLibrary
         bool EditUser(User u);
 
         [OperationContract]
-        IList<User> GetAll();
+        User2[] GetAll();
+
+        [OperationContract]
+        string say();
 
 
     }
