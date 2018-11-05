@@ -17,30 +17,14 @@
                     <li><a href="~/Home/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:20px;border:0;"></a></li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Profile", "UserProfile", "User")</li>
-                    <!--Register/login-->
-                    <li class="dropdown">
-                        <!--menu-->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" width="100" height="100">More</a>
-                        <ul class="dropdown-menu">
-                            <!--menu items-->
-                            <li><button class="open-button" onclick="openForm()">Login</button></li>
-                            <div class="form-popup" id="myForm">
-                                <form action="/action_page.php" class="form-container">
-                                    <h1>Login</h1>
 
-                                    <label for="email"><b>Email</b></label>
-                                    <input type="text" placeholder="Enter Email" name="email" required>
+                    <!--menu items-->
+                    <li><button id="login-btn" class="loginBtn">Login</button></li>
+                    <!-- The Modal -->
+                    
+                    <li>@Html.ActionLink("Sign up", "Create", "User")</li>
 
-                                    <label for="psw"><b>Password</b></label>
-                                    <input type="password" placeholder="Enter Password" name="psw" required>
 
-                                    <button type="submit" class="btn">Login</button>
-                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                                </form>
-                            </div>
-                            <li>@Html.ActionLink("Sign up", "Create", "User")</li>
-                        </ul>
-                    </li>
                     <li class="search">
                         @using (Html.BeginForm("Index", "Search", FormMethod.Get))
                         {
@@ -52,24 +36,58 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
+    <div id="login-modal" class="loginModal">
+        <!-- Modal content -->
+        <div class="modalContent">
+            <!--X button for closing-->
+            <span class="close">&times;</span>
+            <header id="modal-header">
+                <h2>Delete Account</h2>
+            </header>
+            <div class="modalText">
+                <p id="question">Are you sure you want to delete your account?</p>
+                <p id="note">*NOTE: This cannot be undone.</p>
+            </div>
+            <button id="confirmBtn" class="buttons">Delete</button>
+        </div>
     </div>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Job Portal</p>
-    </footer>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Job Portal</p>
+        </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    <script>
-        function openForm() {
-            document.getElementById("myForm").style.display = "block";
-        }
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script>
+            /* modals - popup windows*/
+            // Get the modalS
+            var loginModal = document.getElementById('login-modal');
 
-        function closeForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
-    </script>
+            // Get the button that opens the modal
+            var openLoginBtn = document.getElementById("login-btn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal
+            openLoginBtn.onclick = function () {
+                loginModal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                loginModal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == loginModal) {
+                    loginModal.style.display = "none";
+                }
+            }
+        </script>
 </body>
 </html>

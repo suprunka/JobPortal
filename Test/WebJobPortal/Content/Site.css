@@ -109,7 +109,7 @@ a.link-icon {
 .search {
     margin-top: 12px;
     margin-right:auto;
-    margin-left:600px;
+    margin-left:300px;
 }
 #search-text-field{
     border-radius: 4px;
@@ -137,7 +137,7 @@ button {
 /*------------------------------------------------*/
 /*Modals - popup windows*/
 /* background */
-.changePasswordModal, .changeEmailModal, .deleteAccountModal {
+.changePasswordModal, .changeEmailModal, .deleteAccountModal, .loginModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -194,15 +194,27 @@ button {
 
 
 /* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    top: 23px;
-    right: 28px;
-    width: 280px;
+.loginBtn {
+    background-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    color: rgb(157, 157, 157);
+    display: block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    outline-offset: 0px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    position: relative;
+    text-decoration: none;
+    text-decoration-color: rgb(157, 157, 157);
+    text-decoration-line: none;
+    text-decoration-style: solid;
 }
 
 /* The popup form - hidden by default */

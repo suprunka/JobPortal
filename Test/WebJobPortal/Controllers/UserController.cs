@@ -14,11 +14,29 @@ namespace WebJobPortal.Controllers
         {
             return View();
         }
+        //POST: Movie/Create
+        [HttpPost]
         public ActionResult Create(UserModel user)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    _proxy.CreateUser(AutoMapper.Mapper.Map(user, new User()));
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Create");
+                }
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
-        
+
         public ActionResult Login(UserModel user)
         {
             return View();
