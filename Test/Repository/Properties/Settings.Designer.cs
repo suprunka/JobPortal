@@ -42,5 +42,16 @@ namespace Repository.Properties {
                 return ((string)(this["JobPortalConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=" +
+            "True")]
+        public string JobPortalTestDBConnectionString {
+            get {
+                return ((string)(this["JobPortalTestDBConnectionString"]));
+            }
+        }
     }
 }

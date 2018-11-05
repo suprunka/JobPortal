@@ -158,15 +158,15 @@ namespace UnitTestProject1.Service_tests
             userMock.Setup(x => x.LastName).Returns("Dreuk");
             userMock.Setup(x => x.PhoneNumber).Returns("12334455");
             var userServiceStub = new Mock<IUserService>();
-            User userSenftoService = null;
+            Users userSenftoService = null;
 
-            userServiceStub.Setup(x => x.EditUser(It.IsAny<User>()))
-                .Callback<User>(x => userSenftoService = x);
+            userServiceStub.Setup(x => x.EditUser(It.IsAny<Users>()))
+                .Callback<Users>(x => userSenftoService = x);
 
             var sut = new UserController(userServiceStub.Object);
             sut.Edit(userMock.Object);
             userServiceStub.Verify(x =>
-           x.EditUser(It.IsAny<User>()), Times.Once());
+           x.EditUser(It.IsAny<Users>()), Times.Once());
 
             Assert.IsTrue(
                 userSenftoService.LastName == "Dreuk" &&

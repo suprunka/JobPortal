@@ -8,7 +8,9 @@ namespace WebJobPortal.Mapping
         public ClassMapper()
         {
 
-            CreateMap<UserWebModel, User>().ReverseMap();
+            CreateMap<UserWebModel, Users>().ReverseMap();
+
+            CreateMap<Users, UserWebModel>().ReverseMap();
         }
     }
 }

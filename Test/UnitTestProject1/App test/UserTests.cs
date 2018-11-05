@@ -1,17 +1,19 @@
-﻿using System;
-using AppJobPortal.UserServiceReference;
+﻿using AppJobPortal.UserServiceReference;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using AppJobPortal.Controllers;
 using AppJobPortal.Models;
-using System.Collections.Generic;
 using System.Linq;
+
+
 
 namespace UnitTestProject1.App_test
 {
     [TestClass]
     public class UserTests
     {
+        //read
+        #region
         [TestMethod]
         public void Get_Will_Return_Valid_Object()
         {
@@ -27,6 +29,31 @@ namespace UnitTestProject1.App_test
             );
         }
 
+
+
+        [TestMethod]
+        public void Get_Will_Return_Proper_Amount_Of_Users()
+        {
+            User[] u = { new User(), new User() };
+            IQueryable<User> listOfUsers = u.AsQueryable<User>();
+
+            var userServiceStub = new Mock<IUserService>();
+            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+            {
+                return u;
+            });
+
+            var sut = new UserController(userServiceStub.Object);
+            var result = sut.GetAll();
+            Assert.AreEqual(result.Length, 2);
+        }
+
+        #endregion
+
+
+        //update
+        #region
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true, DisplayName = "valid all data")] //valid all data
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid phonenumber (too many characters)")] //invalid phonenumber (too many characters)
         [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid phonenumber (not allowed characters)")] //
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid firstname (not allowed characters)")] //
@@ -42,7 +69,7 @@ namespace UnitTestProject1.App_test
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid city name (not allwed characters)")] //invalid city name (not allwed characters)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid postcode (too long)")] //invalid postcode (too long)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, false, DisplayName = "invalid postcode (not allowed characters)")] //invalid postcode (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true, DisplayName = "valid all data")] //valid all data
+        
         [TestMethod]
         public void Update_OfferService_Verify_If_Returns_Valid_Object(string phoneNumber, string firstName,
          string lastName, string email, string userName, string password, string addressLine,
@@ -69,21 +96,6 @@ namespace UnitTestProject1.App_test
             Assert.IsTrue(result== shouldValidate);
         }
 
-        [TestMethod]
-        public void Get_Will_Return_Proper_Amount_Of_Users()
-        {
-            User[] u = { new User(), new User() };
-            IQueryable<User> listOfUsers = u.AsQueryable<User>();
-
-            var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
-            {
-                return u;
-            });
-
-            var sut = new UserController(userServiceStub.Object);
-            var result = sut.GetAll();
-            Assert.AreEqual( result.Length, 2);
-        }
     }
+    #endregion
 }
