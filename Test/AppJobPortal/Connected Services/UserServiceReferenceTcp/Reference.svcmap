@@ -13,7 +13,7 @@
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
-    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
     <ReferencedAssemblies />
     <ReferencedDataContractTypes />
     <ServiceContractMappings />
@@ -25,8 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f924a02c-40f2-42dc-9b3e-fe408e671c43" SourceId="1" SourceUrl="net.tcp://localhost:8090/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e1b84a12-323a-48a9-b3b8-b1a42612691c" SourceId="1" SourceUrl="net.tcp://localhost:8090/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f11dd347-8283-47b2-b9ff-8d03efc970b5" SourceId="1" SourceUrl="net.tcp://localhost:8090/mex" />
-    <MetadataFile FileName="Repository.xsd" MetadataType="Schema" ID="7133f534-fe62-4d6f-964c-bbc0bed44d97" SourceId="1" SourceUrl="net.tcp://localhost:8090/mex" />
-    <MetadataFile FileName="ServiceLibrary.Models.xsd" MetadataType="Schema" ID="07292790-d6e8-4302-a1e9-015721f49dda" SourceId="1" SourceUrl="net.tcp://localhost:8090/mex" />
+    <MetadataFile FileName="JobPortal.Model2.xsd" MetadataType="Schema" ID="381cc227-1086-4120-9f77-3bff5cf77401" SourceId="1" SourceUrl="net.tcp://localhost:8090/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
