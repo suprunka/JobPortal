@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using ServiceLibrary.Models;
+
+using JobPortal.Model;
 
 namespace WebJobPortal.Models
 {

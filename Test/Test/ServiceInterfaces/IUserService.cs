@@ -31,5 +31,6 @@ namespace ServiceLibrary
         [OperationContract]
         User[] List(Region region);
 
-        
+
+    }
 }
