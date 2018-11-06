@@ -25,7 +25,7 @@ namespace Repository
         public override bool Create(Users obj)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();

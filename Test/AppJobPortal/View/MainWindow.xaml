@@ -46,7 +46,7 @@
         <TextBox x:Name="txtLname" Text="{Binding LastName}" Grid.Column="1" Grid.Row="2" Height="20" Margin="20,4.372,20,6.628" VerticalAlignment="Center"  />
 
         <TextBlock x:Name="txtAddressLabel" VerticalAlignment="Center" Margin="20,3.372,0,7.628" Grid.Column="0" Grid.Row="3" Text="Address" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
-        <TextBox x:Name="txtAddress" Text="{Binding Address}" Grid.Column="1" Grid.Row="3" Height="20" Margin="20,3.372,20,7.628" VerticalAlignment="Center"  />
+        <TextBox x:Name="txtAddress" Text="{Binding AddressLine}" Grid.Column="1" Grid.Row="3" Height="20" Margin="20,3.372,20,7.628" VerticalAlignment="Center"  />
 
         <TextBlock x:Name="txbCityLabel" VerticalAlignment="Center" Margin="20,4.372,0,7.257" Grid.Column="0" Grid.Row="4" Text="City" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
         <TextBox x:Name="txtCity" Text="{Binding City}" Grid.Column="1" Grid.Row="4" Height="20" Margin="20,3.372,20,8.257" VerticalAlignment="Center"  />
@@ -84,7 +84,9 @@
             <RadioButton IsChecked="{Binding Path=Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Male}">Male</RadioButton>
             <RadioButton IsChecked="{Binding Path=Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Female}">Female</RadioButton>
         </StackPanel>
-        <ComboBox  Name="regionBox" Grid.Column="1" HorizontalAlignment="Left" Margin="20,7,0,0" Grid.Row="6" VerticalAlignment="Top" Width="424"/>
+        <ComboBox  ItemsSource="{Binding Values}" SelectedItem="{Binding SelectedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Path=Region}"
+             
+ Grid.Column="1" HorizontalAlignment="Left" Margin="20,7,0,0" Grid.Row="6" VerticalAlignment="Top" Width="424"/>
 
     </Grid>
 </Window>

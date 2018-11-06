@@ -10,6 +10,7 @@ using System.Windows.Input;
 using AppJobPortal.UserServiceReferenceTcp;
 using AutoMapper;
 using JobPortal.Model;
+using Region = AppJobPortal.UserServiceReferenceTcp.Region;
 
 namespace AppJobPortal.Models
 {
@@ -54,7 +55,8 @@ namespace AppJobPortal.Models
             addUserCommand = new CommandHandler(new Action(AddUser),()=> true);
             delUserCommand = new CommandHandler(new Action(DeleteUser), () => true);
 
-            ViewUser();
+            //ViewUser();
+            //if (_proxy.GetAll() != null || _proxy.GetAll.)
         }
 
       
@@ -68,27 +70,23 @@ namespace AppJobPortal.Models
             set
             {
                 selectedIndex = value;
-                this.OnPropertyChanged("Selected Index");
-                OnPropertyChanged("Phone number");
-                OnPropertyChanged("First name");
-                OnPropertyChanged("Last name");
+                this.OnPropertyChanged("SelectedIndex");
+                OnPropertyChanged("Phonenumber");
+                OnPropertyChanged("Firstname");
+                OnPropertyChanged("Lastname");
                 OnPropertyChanged("Email");
-                OnPropertyChanged("User name");
+                OnPropertyChanged("Username");
                 OnPropertyChanged("Password");
-                OnPropertyChanged("Address line");
+                OnPropertyChanged("Addressline");
                 OnPropertyChanged("City");
-                OnPropertyChanged("Post code");
+                OnPropertyChanged("Postcode");
                 OnPropertyChanged("Gender");
                 OnPropertyChanged("Region");
             }
         }
-
-
-        private ObservableCollection<string> values = new ObservableCollection<string>()//Combobox region
-        {
-            "ffff","dhg"
-        };
-        public ObservableCollection<string> Values
+       
+        private ObservableCollection<Region> values = new ObservableCollection<Region>(Enum.GetValues(typeof(Region)).Cast<Region>());
+        public ObservableCollection<Region> Values
         {
             get { return values; }
             set
@@ -112,7 +110,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     
                     return this.Items[this.SelectedIndexOfCollection].ID;
@@ -124,7 +122,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].ID = value;
                 }
@@ -139,7 +137,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
 
                     return this.Items[this.SelectedIndexOfCollection].PhoneNumber;
@@ -151,7 +149,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].PhoneNumber = value;
                 }
@@ -166,7 +164,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].Email;
                 }
@@ -177,7 +175,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].Email = value;
                 }
@@ -192,7 +190,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].FirstName;
                 }
@@ -203,7 +201,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].FirstName = value;
                 }
@@ -219,7 +217,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].LastName;
                 }
@@ -230,7 +228,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].LastName = value;
                 }
@@ -245,7 +243,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].UserName;
                 }
@@ -256,7 +254,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].UserName = value;
                 }
@@ -264,14 +262,14 @@ namespace AppJobPortal.Models
                 {
                     username = value;
                 }
-                OnPropertyChanged("User name");
+                OnPropertyChanged("Username");
             }
         }
         public string Address
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].AddressLine;
                 }
@@ -282,7 +280,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].AddressLine = value;
                 }
@@ -290,14 +288,14 @@ namespace AppJobPortal.Models
                 {
                     address = value;
                 }
-                OnPropertyChanged("Address");
+                OnPropertyChanged("Addressline");
             }
         }
         public string City
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].CityName;
                 }
@@ -308,7 +306,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].CityName = value;
                 }
@@ -323,7 +321,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].Postcode;
                 }
@@ -334,7 +332,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].Postcode = value;
                 }
@@ -349,7 +347,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].Region;
                 }
@@ -360,7 +358,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].Region = value;
 
@@ -375,7 +373,7 @@ namespace AppJobPortal.Models
         {
             get
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     return this.Items[this.SelectedIndexOfCollection].Gender;
                 }
@@ -386,7 +384,7 @@ namespace AppJobPortal.Models
             }
             set
             {
-                if (this.SelectedIndexOfCollection > -1)
+                if (this.SelectedIndexOfCollection >= 0)
                 {
                     this.Items[this.SelectedIndexOfCollection].Gender = value;
 
@@ -403,11 +401,13 @@ namespace AppJobPortal.Models
 
         private void ViewUser()
         {
+            this.Clear();
             foreach (UserServiceReferenceTcp.User u in _proxy.GetAll())
             {
                 UserAppModel userAppModel = _mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);
             }
+            
 
         }
 
@@ -421,27 +421,30 @@ namespace AppJobPortal.Models
   
         private void AddUser()
         {
-            UserAppModel userAppModel = new UserAppModel();
-            userAppModel.FirstName = firstname;
-            userAppModel.LastName = lastName;
-            userAppModel.Password = password;
-            userAppModel.PhoneNumber = phonenumber;
-            userAppModel.Postcode = postcode;
-            userAppModel.Region = region;
-            userAppModel.UserName = username;
-            userAppModel.Password = password;
-            userAppModel.CityName = city;
-            userAppModel.AddressLine = address;
-            userAppModel.Gender = gender;
-            userAppModel.Email = email;
-            _proxy.CreateUser(_mapper.Map(userAppModel, new UserServiceReferenceTcp.User()));
-
-            ViewUser();
+            if (SelectedIndexOfCollection >= 0)
+            {
+                UserAppModel userAppModel = new UserAppModel();
+                userAppModel.FirstName = firstname;
+                userAppModel.LastName = lastName;
+                userAppModel.Password = password;
+                userAppModel.PhoneNumber = phonenumber;
+                userAppModel.Postcode = postcode;
+                userAppModel.Region = region;
+                userAppModel.UserName = username;
+                userAppModel.CityName = city;
+                userAppModel.AddressLine = address;
+                userAppModel.Gender = gender;
+                userAppModel.Email = email;
+                if (_proxy.CreateUser(_mapper.Map(userAppModel, new UserServiceReferenceTcp.User())))
+                {
+                    ViewUser();
+                }
+            }
         }
 
         private void UpdateUser()
         {
-            if (SelectedIndexOfCollection > -1)
+            if (SelectedIndexOfCollection >= 0)
             {
                 UserAppModel userAppModel = new UserAppModel();
                 userAppModel.FirstName = firstname;
@@ -470,7 +473,7 @@ namespace AppJobPortal.Models
         private void DeleteUser()
         {
             
-            if (Id < 0)
+            if (selectedIndex < 0)
             {
                 MessageBox.Show("Select the user", "User isn't selected");
             }
@@ -485,6 +488,45 @@ namespace AppJobPortal.Models
             }
             ViewUser();
         }
+        #region ICommand
+        public ICommand AddUserCommand
+        {
+            get
+            {
+                return addUserCommand;
+            }
+            set
+            {
+                addUserCommand = value;
+            }
+        }
+
+      
+        public ICommand DelUserCommand
+        {
+            get
+            {
+                return delUserCommand;
+            }
+            set
+            {
+                delUserCommand = value;
+            }
+        }
+
+        public ICommand UpdateUserCommand
+        {
+            get
+            {
+                return updateUserCommand;
+            }
+            set
+            {
+                updateUserCommand = value;
+            }
+        }
+        #endregion
+
 
 
 
