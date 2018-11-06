@@ -540,7 +540,7 @@ namespace Repository.DbConnection
 		
 		private string _Employee_Phone;
 		
-		private string _Postcode;
+		private int _City_ID;
 		
 		public WorkingArea()
 		{
@@ -562,18 +562,18 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="VarChar(4)")]
-		public string Postcode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
+		public int City_ID
 		{
 			get
 			{
-				return this._Postcode;
+				return this._City_ID;
 			}
 			set
 			{
-				if ((this._Postcode != value))
+				if ((this._City_ID != value))
 				{
-					this._Postcode = value;
+					this._City_ID = value;
 				}
 			}
 		}
@@ -699,6 +699,8 @@ namespace Repository.DbConnection
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
+		private int _ID;
+		
 		private string _Postcode;
 		
 		private string _City;
@@ -711,6 +713,8 @@ namespace Repository.DbConnection
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
     partial void OnPostcodeChanging(string value);
     partial void OnPostcodeChanged();
     partial void OnCityChanging(string value);
@@ -725,7 +729,27 @@ namespace Repository.DbConnection
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="VarChar(4) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="VarChar(4) NOT NULL", CanBeNull=false)]
 		public string Postcode
 		{
 			get
@@ -785,7 +809,7 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_User", Storage="_Users", ThisKey="Postcode", OtherKey="Postcode")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_User", Storage="_Users", ThisKey="ID", OtherKey="City_ID")]
 		public EntitySet<Users> Users
 		{
 			get
@@ -1669,7 +1693,7 @@ namespace Repository.DbConnection
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -3264,7 +3288,7 @@ namespace Repository.DbConnection
 		
 		private string _AddressLine;
 		
-		private string _Postcode;
+		private int _City_ID;
 		
 		private int _Gender_ID;
 		
@@ -3298,8 +3322,8 @@ namespace Repository.DbConnection
     partial void OnLogging_IDChanged();
     partial void OnAddressLineChanging(string value);
     partial void OnAddressLineChanged();
-    partial void OnPostcodeChanging(string value);
-    partial void OnPostcodeChanged();
+    partial void OnCity_IDChanging(int value);
+    partial void OnCity_IDChanged();
     partial void OnGender_IDChanging(int value);
     partial void OnGender_IDChanged();
     #endregion
@@ -3459,26 +3483,26 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="VarChar(4) NOT NULL", CanBeNull=false)]
-		public string Postcode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
+		public int City_ID
 		{
 			get
 			{
-				return this._Postcode;
+				return this._City_ID;
 			}
 			set
 			{
-				if ((this._Postcode != value))
+				if ((this._City_ID != value))
 				{
 					if (this._AddressTable.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnPostcodeChanging(value);
+					this.OnCity_IDChanging(value);
 					this.SendPropertyChanging();
-					this._Postcode = value;
-					this.SendPropertyChanged("Postcode");
-					this.OnPostcodeChanged();
+					this._City_ID = value;
+					this.SendPropertyChanged("City_ID");
+					this.OnCity_IDChanged();
 				}
 			}
 		}
@@ -3614,7 +3638,7 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_User", Storage="_AddressTable", ThisKey="Postcode", OtherKey="Postcode", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_User", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public AddressTable AddressTable
 		{
 			get
@@ -3637,11 +3661,11 @@ namespace Repository.DbConnection
 					if ((value != null))
 					{
 						value.Users.Add(this);
-						this._Postcode = value.Postcode;
+						this._City_ID = value.ID;
 					}
 					else
 					{
-						this._Postcode = default(string);
+						this._City_ID = default(int);
 					}
 					this.SendPropertyChanged("AddressTable");
 				}

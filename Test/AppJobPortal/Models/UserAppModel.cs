@@ -49,7 +49,7 @@ namespace AppJobPortal.Models
             get { return phoneNumber; }
             set
             {
-                OnPropertyChanged("Phone number");
+                OnPropertyChanged("Phonenumber");
                 phoneNumber = value;
             }
         }
@@ -71,7 +71,7 @@ namespace AppJobPortal.Models
             get { return lastName; }
             set
             {
-                OnPropertyChanged("Last name");
+                OnPropertyChanged("Lastname");
                 lastName = value;
             }
         }
@@ -91,7 +91,7 @@ namespace AppJobPortal.Models
             get { return userName; }
             set
             {
-                OnPropertyChanged("User name");
+                OnPropertyChanged("Username");
                 userName = value;
             }
         }
@@ -111,7 +111,7 @@ namespace AppJobPortal.Models
             get { return addressLine; }
             set
             {
-                OnPropertyChanged("Address line");
+                OnPropertyChanged("Addressline");
                 addressLine = value;
             }
         }
@@ -131,7 +131,7 @@ namespace AppJobPortal.Models
             get { return postCode; }
             set
             {
-                OnPropertyChanged("Post code");
+                OnPropertyChanged("Postcode");
                 postCode = value;
             }
         }

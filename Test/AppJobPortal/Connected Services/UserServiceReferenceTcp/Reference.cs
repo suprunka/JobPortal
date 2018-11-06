@@ -270,10 +270,10 @@ namespace AppJobPortal.UserServiceReferenceTcp {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        AppJobPortal.UserServiceReferenceTcp.User CreateUser(AppJobPortal.UserServiceReferenceTcp.User u);
+        bool CreateUser(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
+        System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
         AppJobPortal.UserServiceReferenceTcp.User FindUser(int id);
@@ -298,6 +298,18 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
         System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> GetAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByGender", ReplyAction="http://tempuri.org/IUserService/ListByGenderResponse")]
+        AppJobPortal.UserServiceReferenceTcp.User[] ListByGender(AppJobPortal.UserServiceReferenceTcp.Gender gender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByGender", ReplyAction="http://tempuri.org/IUserService/ListByGenderResponse")]
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> ListByGenderAsync(AppJobPortal.UserServiceReferenceTcp.Gender gender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
+        AppJobPortal.UserServiceReferenceTcp.User[] ListByRegion(AppJobPortal.UserServiceReferenceTcp.Region region);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> ListByRegionAsync(AppJobPortal.UserServiceReferenceTcp.Region region);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -327,11 +339,11 @@ namespace AppJobPortal.UserServiceReferenceTcp {
                 base(binding, remoteAddress) {
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.User CreateUser(AppJobPortal.UserServiceReferenceTcp.User u) {
+        public bool CreateUser(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.CreateUser(u);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
+        public System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.CreateUserAsync(u);
         }
         
@@ -365,6 +377,22 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         
         public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> GetAllAsync() {
             return base.Channel.GetAllAsync();
+        }
+        
+        public AppJobPortal.UserServiceReferenceTcp.User[] ListByGender(AppJobPortal.UserServiceReferenceTcp.Gender gender) {
+            return base.Channel.ListByGender(gender);
+        }
+        
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> ListByGenderAsync(AppJobPortal.UserServiceReferenceTcp.Gender gender) {
+            return base.Channel.ListByGenderAsync(gender);
+        }
+        
+        public AppJobPortal.UserServiceReferenceTcp.User[] ListByRegion(AppJobPortal.UserServiceReferenceTcp.Region region) {
+            return base.Channel.ListByRegion(region);
+        }
+        
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> ListByRegionAsync(AppJobPortal.UserServiceReferenceTcp.Region region) {
+            return base.Channel.ListByRegionAsync(region);
         }
     }
 }

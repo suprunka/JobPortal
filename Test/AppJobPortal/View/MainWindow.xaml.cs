@@ -20,13 +20,12 @@ namespace AppJobPortal.View
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-        public partial class MainWindow : Window
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
         {
-            public MainWindow()
-            {
             InitializeComponent();
-            ActiveTextBoxes();
-            regionBox.ItemsSource = Enum.GetValues(typeof(Region)).Cast<Region>();
+            //regionBox.ItemsSource = Enum.GetValues(typeof(Region)).Cast<Region>();
 
 
         }
@@ -49,39 +48,6 @@ namespace AppJobPortal.View
         {
 
         }
-        private void Activarbtns()
-            {
-                btnPaneltwo.Visibility = Visibility.Visible;
-            }
-            private void Desactivarbtns()
-            {
-                btnPaneltwo.Visibility = Visibility.Hidden;
-            }
-            private void ActiveTextBoxes()
-            {
-           
-                txtAddress.IsEnabled = true;
-                txtCity.IsEnabled = true;
-                txtPostcode.IsEnabled = true;
-                txtEmail.IsEnabled = true;
-                txtFname.IsEnabled = true;
-                txtLname.IsEnabled = true;
-                txtPhonenumber.IsEnabled = true;
-                txbBirthDateLbl.IsEnabled = true;
-            
-            //txtFind.IsEnabled = false;
-                usersTable.IsEnabled = true; ;
-            }
-            private void DesactivarText()
-            {
-            txtAddress.IsEnabled = false;
-            txtCity.IsEnabled = false;
-            txtEmail.IsEnabled = false;
-            txtFname.IsEnabled = false;
-            txtLname.IsEnabled = false;
-            txtPhonenumber.IsEnabled = false;
-            //txtFind.IsEnabled = true;
-            usersTable.IsEnabled = true;
-            }
-        }
+
+    }
     }

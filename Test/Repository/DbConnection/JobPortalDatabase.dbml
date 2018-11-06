@@ -15,8 +15,8 @@
   <Table Name="dbo.WorkingArea" Member="WorkingAreas">
     <Type Name="WorkingArea">
       <Column Name="Employee_Phone" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
-      <Column Name="Postcode" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
-      <Association Name="AddressTable_WorkingArea" Member="AddressTable" ThisKey="Postcode" OtherKey="Postcode" Type="AddressTable" IsForeignKey="true" />
+      <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AddressTable_WorkingArea" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />
       <Association Name="User_WorkingArea" Member="Users" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="Users" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -29,11 +29,12 @@
   </Table>
   <Table Name="dbo.AddressTable" Member="AddressTables">
     <Type Name="AddressTable">
-      <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Region" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Association Name="AddressTable_WorkingArea" Member="WorkingAreas" ThisKey="Postcode" OtherKey="Postcode" Type="WorkingArea" />
-      <Association Name="AddressTable_User" Member="Users" ThisKey="Postcode" OtherKey="Postcode" Type="Users" />
+      <Association Name="AddressTable_WorkingArea" Member="WorkingAreas" ThisKey="ID" OtherKey="City_ID" Type="WorkingArea" />
+      <Association Name="AddressTable_User" Member="Users" ThisKey="ID" OtherKey="City_ID" Type="Users" />
     </Type>
   </Table>
   <Table Name="dbo.Advertisement" Member="Advertisements">
@@ -86,7 +87,7 @@
   </Table>
   <Table Name="dbo.Logging" Member="Loggings">
     <Type Name="Logging">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="Logging_User" Member="Users" ThisKey="ID" OtherKey="Logging_ID" Type="Users" />
@@ -175,7 +176,7 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Logging_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="AddressLine" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="User_Account" Member="Accounts" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Account" />
       <Association Name="User_WorkingArea" Member="WorkingAreas" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="WorkingArea" />
@@ -183,7 +184,7 @@
       <Association Name="User_Review" Member="Reviews" ThisKey="PhoneNumber" OtherKey="Customer_PhoneNumber" Type="Review" />
       <Association Name="Gender_User" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Logging_User" Member="Logging" ThisKey="Logging_ID" OtherKey="ID" Type="Logging" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AddressTable_User" Member="AddressTable" ThisKey="Postcode" OtherKey="Postcode" Type="AddressTable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AddressTable_User" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

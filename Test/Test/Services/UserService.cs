@@ -56,7 +56,7 @@ namespace ServiceLibrary
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     Email = u.Email,
-                    AddressLine = u.AddressLine,
+                    AddressLine = u.AddressLine
 
                 });
                 return true;
