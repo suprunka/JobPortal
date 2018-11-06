@@ -26,10 +26,10 @@ namespace ServiceLibrary
         User[] GetAll();
 
         [OperationContract]
-        User[] List(Gender gender);
+        User[] ListByGender(Gender gender);
 
         [OperationContract]
-        User[] List(Region region);
+        User[] ListByRegion(Region region);
 
 
     }

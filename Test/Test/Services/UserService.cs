@@ -175,7 +175,7 @@ namespace ServiceLibrary
             return resultToReturn.ToArray();
         }
 
-        public User[] List(Gender gender)
+        public User[] ListByGender(Gender gender)
         {
             IList<User> resultToReturn = new List<User>();
             foreach (var u in _database.List(Users => Users.Gender.Gender1 == gender.ToString()))
@@ -199,7 +199,7 @@ namespace ServiceLibrary
             return resultToReturn.ToArray();
         }
 
-        public User[] List(Region region)
+        public User[] ListByRegion(Region region)
         {
             IList<User> resultToReturn = new List<User>();
             foreach (var u in _database.List(Users => Users.AddressTable.Region == region.ToString()))
