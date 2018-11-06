@@ -5,27 +5,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repositories;
 using ServiceLibrary;
-using ServiceLibrary.Models;
 using WebJobPortal.Controllers;
-using WebJobPortal.Mapping;
-using WebJobPortal.Models;
-using System.Linq;
 using System.Web.Mvc;
 using JobPortal.Model;
 
 namespace UnitTestProject1.MVC__tests
 {
-    [TestClass]
+    /*[TestClass]
     public class UserTests
     {
 
-        [ClassInitialize]
-        public static void Init(TestContext context)
-        {
-            MappingConfig.RegisterMaps();
-        }
-
-
+    
         //Create
         #region
 
@@ -270,7 +260,7 @@ namespace UnitTestProject1.MVC__tests
             var model = resPage.ViewData.Model as IEnumerable<Users>;
 
             Assert.IsTrue(model.Count() == 3);
-        }*/
+        }
         #endregion
 
         //Update
@@ -456,5 +446,5 @@ namespace UnitTestProject1.MVC__tests
 
 
     }
-
+*/
 }

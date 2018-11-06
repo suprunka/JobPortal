@@ -11,8 +11,8 @@ using System.Linq.Expressions;
 
 namespace Repositories
 {
-    
-   public class Repository<T> : IRepository<T> where T : class
+
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly Table<T> _Table;
         private readonly DataContext db;
@@ -62,7 +62,7 @@ namespace Repositories
 
         public virtual T Get(Expression<Func<T, bool>> predicate)
         {
-           return _Table.FirstOrDefault(predicate);
+            return _Table.FirstOrDefault(predicate);
         }
 
 
@@ -77,6 +77,6 @@ namespace Repositories
         {
             IQueryable<T> filteredList = _Table.Where(predicate);
             return filteredList;
-        }  
+        }
     }
 }

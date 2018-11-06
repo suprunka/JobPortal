@@ -7,6 +7,7 @@ using System.ServiceModel;
 using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
+using ServiceLibrary.Models;
 using Gender = JobPortal.Model.Gender;
 using Region = JobPortal.Model.Region;
 
@@ -34,32 +35,37 @@ namespace ServiceLibrary
         {
             try
             {
-                _database.Create(new Users
+                if (RegexMatch.DoesUserMatch(u))
                 {
-                    AddressTable = new AddressTable
+                    _database.Create(new Users
                     {
-                        Postcode = u.Postcode,
-                        City = u.CityName,
-                        Region = u.Region.ToString(),
-                    },
-                    Logging = new Logging
-                    {
-                        Password = u.Password,
-                        UserName = u.UserName,
-                    },
-                    Gender = new Repository.DbConnection.Gender
-                    {
-                        Gender1 = u.Gender.ToString(),
-                    },
+                        AddressTable = new AddressTable
+                        {
+                            Postcode = u.Postcode,
+                            City = u.CityName,
+                            Region = u.Region.ToString(),
+                        },
+                        Logging = new Logging
+                        {
+                            Password = u.Password,
+                            UserName = u.UserName,
+                        },
+                        Gender = new Repository.DbConnection.Gender
+                        {
+                            Gender1 = u.Gender.ToString(),
+                        },
 
-                    PhoneNumber = u.PhoneNumber,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    AddressLine = u.AddressLine,
+                        PhoneNumber = u.PhoneNumber,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        Email = u.Email,
+                        AddressLine = u.AddressLine,
 
-                });
-                return true;
+                    });
+                    return true;
+                }
+                return false;
+                
             }
             catch (DuplicateKeyException)
             {
@@ -123,11 +129,11 @@ namespace ServiceLibrary
 
         }
 
-        public User FindUser(int id)
+        public User FindUser(string phoneNumber)
         {
             try
             {
-                var result = _database.Get(t => t.ID == id);
+                var result = _database.Get(t => t.PhoneNumber == phoneNumber);
                 return new User {
                     ID = result.ID,
                     PhoneNumber = result.PhoneNumber,

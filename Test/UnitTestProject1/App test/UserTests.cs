@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using AppJobPortal.Controllers;
 using System.Linq;
 using AppJobPortal.UserServiceReferenceTcp;
 using User = AppJobPortal.UserServiceReferenceTcp.User;
@@ -13,7 +12,7 @@ namespace UnitTestProject1.App_test
 {
     [TestClass]
     public class UserTests
-    {
+    {/*
         //read
         #region
         [TestMethod]
@@ -96,7 +95,7 @@ namespace UnitTestProject1.App_test
             
             Assert.IsTrue(result== shouldValidate);
         }
-
+        */
     }
-    #endregion
+  
 }

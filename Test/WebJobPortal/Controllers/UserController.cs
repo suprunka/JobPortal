@@ -15,14 +15,14 @@ namespace WebJobPortal.Controllers
     {
 
         private readonly IUserService _proxy;
-        public UserController()//, IMapper mapper)
+        public UserController()
         {
-            //_proxy = proxy;
+           
         }
-        public UserController(IUserService proxy)//, IMapper mapper)
-    {
-        _proxy = proxy;
-    }
+        public UserController(IUserService proxy)
+        {
+            _proxy = proxy;
+        }
 
         public ActionResult Index()
         {
@@ -51,12 +51,12 @@ namespace WebJobPortal.Controllers
             }
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string phoneNumber)
         {
-            if (id == null || !id.HasValue)
+            if (phoneNumber == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var userDetails = this._proxy.FindUser((int)id);
+            var userDetails = this._proxy.FindUser(phoneNumber);
 
             if (userDetails == null)
                 return HttpNotFound();
@@ -66,12 +66,12 @@ namespace WebJobPortal.Controllers
             return View("Index");
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string phoneNumber)
         {
-            if (id == null || !id.HasValue)
+            if (phoneNumber == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var userDetails = this._proxy.FindUser((int)id);
+            var userDetails = this._proxy.FindUser(phoneNumber);
 
             if (userDetails == null)
                 return HttpNotFound();

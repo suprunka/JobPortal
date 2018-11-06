@@ -7,7 +7,7 @@ namespace ServiceLibrary.Models
 
     public static class RegexMatch
     {
-        public static void DoesUserMatch(User user)
+        public static bool DoesUserMatch(User user)
         {
 
             if(Regex.IsMatch(user.UserName, "^[a-zA-Z0-9ÆæØøÅå]{4,}$") && 
@@ -20,11 +20,11 @@ namespace ServiceLibrary.Models
                 Regex.IsMatch(user.CityName, "^[a-zA-Z0-9ÆæØøÅå]{1,}$")&&
                 Regex.IsMatch(user.Postcode, "^[0-9]{4}$"))
             {
-
+                return true;
             }
             else
             {
-                throw new ArgumentException();
+                return false;
             }
             
            
