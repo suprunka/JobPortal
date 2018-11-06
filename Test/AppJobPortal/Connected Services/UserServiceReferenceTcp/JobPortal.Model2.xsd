@@ -34,27 +34,10 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Region" nillable="true" type="tns:Region" />
-  <xs:complexType name="ArrayOfUser2">
+  <xs:complexType name="ArrayOfUser">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="User2" nillable="true" type="tns:User2" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfUser2" nillable="true" type="tns:ArrayOfUser2" />
-  <xs:complexType name="User2">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AddressLine" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Gender" type="tns:Gender" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Region" type="tns:Region" />
-      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="User2" nillable="true" type="tns:User2" />
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
 </xs:schema>

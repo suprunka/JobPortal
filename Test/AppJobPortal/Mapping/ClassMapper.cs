@@ -9,7 +9,7 @@ namespace AppJobPortal.Mapping
         public ClassMapper()
         {
 
-            CreateMap<UserAppModel, JobPortal.Model.User>().ReverseMap();
+            CreateMap<UserAppModel, UserServiceReferenceTcp.User>().ReverseMap();
         }
     }
 }

@@ -105,6 +105,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommandHandler.cs" />
+    <Compile Include="Models\EnumMatchToBooleanConverter.cs" />
     <Compile Include="Models\ClientViewModel.cs" />
     <Compile Include="Models\NotifyBase.cs" />
     <Compile Include="View\Home.xaml.cs">
@@ -148,9 +150,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User2.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model.xsd">

@@ -6,7 +6,6 @@ namespace Repository
 {
     public interface IUserRepository : IRepository<Users>
     {
-        bool Create(User t);
-        //void Create(User u);
+        Users Update(Users obj, string phoneNumber);
     }
 }

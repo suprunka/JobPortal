@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.ServiceModel;
 using JobPortal.Model;
 
@@ -9,7 +11,7 @@ namespace ServiceLibrary
     public interface IUserService
     {
         [OperationContract]
-        User CreateUser(User u);
+        bool CreateUser(User u);
 
         [OperationContract]
         User FindUser(int id);
@@ -21,11 +23,13 @@ namespace ServiceLibrary
         bool EditUser(User u);
 
         [OperationContract]
-        User2[] GetAll();
+        User[] GetAll();
 
         [OperationContract]
-        string say();
+        User[] List(Gender gender);
 
+        [OperationContract]
+        User[] List(Region region);
 
-    }
+        
 }

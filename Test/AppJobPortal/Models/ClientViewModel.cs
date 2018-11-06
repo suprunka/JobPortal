@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using AppJobPortal.UserServiceReferenceTcp;
 using AutoMapper;
@@ -12,11 +13,13 @@ using JobPortal.Model;
 
 namespace AppJobPortal.Models
 {
-    class ClientViewModel :  ObservableCollection<UserAppModel>, INotifyPropertyChanged
+    class UserViewModel :  ObservableCollection<UserAppModel>, INotifyPropertyChanged
     {
-        private int selectedIndex = -2;
-
+        private int selectedIndex ;
+        private string selectedValue;
         private int id;
+        private string phonenumber;
+        private string email;
         private string firstname;
         private string lastName;
         private string username;
@@ -24,25 +27,34 @@ namespace AppJobPortal.Models
         private string address;
         private string city;
         private string postcode;
-        private string region;
-        private string gender;
+        private UserServiceReferenceTcp.Region region;
+        private UserServiceReferenceTcp.Gender gender;
+        private IMapper _mapper;
+        private ICommand addUserCommand;
+        private ICommand delUserCommand;
+        private ICommand updateUserCommand;
+
         //private DateTime? birthdate;
 
         private readonly IUserService _proxy;
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public ClientViewModel()
+        public UserViewModel()
         {
             _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
-           
-            /*updateClientCommand = new CommandBase(param => this.UpdateClient());
-            AddClientCommand = new CommandBase(param => this.AddClient());
-            NewClientCommand = new CommandBase(new Action<Object>(NewClient));
-            DelClientCommand = new CommandBase(param => this.DelClient());*/
-            ViewClient();
-            //_proxy.say();
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UserAppModel, UserServiceReferenceTcp.User>();
 
+        });
+
+        _mapper = config.CreateMapper();
+
+            updateUserCommand = new CommandHandler(new Action(UpdateUser),()=> true);
+            addUserCommand = new CommandHandler(new Action(AddUser),()=> true);
+            delUserCommand = new CommandHandler(new Action(DeleteUser), () => true);
+
+            ViewUser();
         }
 
       
@@ -58,7 +70,6 @@ namespace AppJobPortal.Models
                 selectedIndex = value;
                 this.OnPropertyChanged("Selected Index");
                 OnPropertyChanged("Phone number");
-
                 OnPropertyChanged("First name");
                 OnPropertyChanged("Last name");
                 OnPropertyChanged("Email");
@@ -86,8 +97,6 @@ namespace AppJobPortal.Models
                 OnPropertyChanged("Region");
             }
         }
-        private string selectedValue;
-        private IMapper _mapper;
 
         public string SelectedValue
         {
@@ -126,7 +135,59 @@ namespace AppJobPortal.Models
                 OnPropertyChanged("Id");
             }
         }
+        public string Phonenumber
+        {
+            get
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
 
+                    return this.Items[this.SelectedIndexOfCollection].PhoneNumber;
+                }
+                else
+                {
+                    return phonenumber;
+                }
+            }
+            set
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    this.Items[this.SelectedIndexOfCollection].PhoneNumber = value;
+                }
+                else
+                {
+                    phonenumber = value;
+                }
+                OnPropertyChanged("Phonenumber");
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    return this.Items[this.SelectedIndexOfCollection].Email;
+                }
+                else
+                {
+                    return email;
+                }
+            }
+            set
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    this.Items[this.SelectedIndexOfCollection].Email = value;
+                }
+                else
+                {
+                    email = value;
+                }
+                OnPropertyChanged("Email");
+            }
+        }
         public string FirstName
         {
             get
@@ -284,15 +345,67 @@ namespace AppJobPortal.Models
                 OnPropertyChanged("Postcode");
             }
         }
-
-
-
-        private void ViewClient()
+        public UserServiceReferenceTcp.Region Region
         {
-            var g = _proxy.GetAll();
-            foreach (UserServiceReferenceTcp.User2 u in g)
+            get
             {
-                UserAppModel userAppModel= Mapper.Map(u, new UserAppModel());
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    return this.Items[this.SelectedIndexOfCollection].Region;
+                }
+                else
+                {
+                    return region;
+                }
+            }
+            set
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    this.Items[this.SelectedIndexOfCollection].Region = value;
+
+                }
+                else
+                {
+                    region = value;
+                }
+                OnPropertyChanged("Region");
+            }
+        } public UserServiceReferenceTcp.Gender Gender
+        {
+            get
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    return this.Items[this.SelectedIndexOfCollection].Gender;
+                }
+                else
+                {
+                    return gender;
+                }
+            }
+            set
+            {
+                if (this.SelectedIndexOfCollection > -1)
+                {
+                    this.Items[this.SelectedIndexOfCollection].Gender = value;
+
+                }
+                else
+                {
+                    gender = value;
+                }
+                OnPropertyChanged("Gender");
+            }
+        }
+
+
+
+        private void ViewUser()
+        {
+            foreach (UserServiceReferenceTcp.User u in _proxy.GetAll())
+            {
+                UserAppModel userAppModel = _mapper.Map(u, new UserAppModel());
                 this.Add(userAppModel);
             }
 
@@ -305,8 +418,76 @@ namespace AppJobPortal.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
-        
+  
+        private void AddUser()
+        {
+            UserAppModel userAppModel = new UserAppModel();
+            userAppModel.FirstName = firstname;
+            userAppModel.LastName = lastName;
+            userAppModel.Password = password;
+            userAppModel.PhoneNumber = phonenumber;
+            userAppModel.Postcode = postcode;
+            userAppModel.Region = region;
+            userAppModel.UserName = username;
+            userAppModel.Password = password;
+            userAppModel.CityName = city;
+            userAppModel.AddressLine = address;
+            userAppModel.Gender = gender;
+            userAppModel.Email = email;
+            _proxy.CreateUser(_mapper.Map(userAppModel, new UserServiceReferenceTcp.User()));
+
+            ViewUser();
+        }
+
+        private void UpdateUser()
+        {
+            if (SelectedIndexOfCollection > -1)
+            {
+                UserAppModel userAppModel = new UserAppModel();
+                userAppModel.FirstName = firstname;
+                userAppModel.LastName = lastName;
+                userAppModel.Password = password;
+                userAppModel.PhoneNumber = phonenumber;
+                userAppModel.Postcode = postcode;
+                userAppModel.Region = region;
+                userAppModel.UserName = username;
+                userAppModel.Password = password;
+                userAppModel.CityName = city;
+                userAppModel.AddressLine = address;
+                userAppModel.Gender = gender;
+                userAppModel.Email = email;
+                userAppModel.ID = Id;
+                _proxy.EditUser(_mapper.Map(userAppModel, new UserServiceReferenceTcp.User()));
+            }
+            else
+            {
+                MessageBox.Show("Select the user", "User isn't selected");
+
+            }
+
+        }
+
+        private void DeleteUser()
+        {
+            
+            if (Id < 0)
+            {
+                MessageBox.Show("Select the user", "User isn't selected");
+            }
+            else
+            {
+                if (MessageBox.Show("Are you sure that you want to delete the user?",
+                        "Confirmation", MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    _proxy.DeleteUser(Id);
+                }
+            }
+            ViewUser();
+        }
+
+
+
     }
 }
 

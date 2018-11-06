@@ -1,5 +1,4 @@
-﻿using AppJobPortal.Models;
-using AppJobPortal.UserServiceReferenceTcp;
+﻿using AppJobPortal.UserServiceReferenceTcp;
 using AutoMapper;
 
 namespace AppJobPortal.Mapping
@@ -8,7 +7,7 @@ namespace AppJobPortal.Mapping
     {
         public static void RegisterMaps()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<UserAppModel, JobPortal.Model.User>());
+            Mapper.Initialize(cfg => cfg.CreateMap<Models.UserAppModel, User>());
         }
     }
 }

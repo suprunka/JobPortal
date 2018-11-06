@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
+using System.Linq.Expressions;
 using System.ServiceModel;
 using JobPortal.Model;
 using Repository;
@@ -21,22 +23,47 @@ namespace ServiceLibrary
         {
             _database = database;
         }
+
         public UserService()
         {
             _database = new UsersRepository(new JobPortalDatabaseDataContext());
         }
 
 
-        public User CreateUser(User u)
+        public bool CreateUser(User u)
         {
             try
             {
-                _database.Create(u);
-                return AutoMapper.Mapper.Map(u, new User());     
+                _database.Create(new Users
+                {
+                    AddressTable = new AddressTable
+                    {
+                        Postcode = u.Postcode,
+                        City = u.CityName,
+                        Region = u.Region.ToString(),
+                    },
+                    Logging = new Logging
+                    {
+                        Password = u.Password,
+                        UserName = u.UserName,
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
+                        Gender1 = u.Gender.ToString(),
+                    },
+
+                    PhoneNumber = u.PhoneNumber,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    AddressLine = u.AddressLine,
+
+                });
+                return true;
             }
-            catch (ArgumentNullException)
+            catch (DuplicateKeyException)
             {
-                return null;
+                return false;
             }
 
         }
@@ -52,7 +79,7 @@ namespace ServiceLibrary
                 }
                 return false;
             }
-            catch
+            catch (InvalidOperationException)
             {
                 return false;
             }
@@ -60,17 +87,61 @@ namespace ServiceLibrary
 
         public bool EditUser(User u)
         {
-            //_database.Update(u);
-            return true;
+            try
+            {
+                _database.Update(new Users
+                {
+                    AddressTable = new AddressTable
+                    {
+                        Postcode = u.Postcode,
+                        City = u.CityName,
+                        Region = u.Region.ToString(),
+                    },
+                    Logging = new Logging
+                    {
+                        Password = u.Password,
+                        UserName = u.UserName,
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
+                        Gender1 = u.Gender.ToString(),
+                    },
+
+                    PhoneNumber = u.PhoneNumber,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    AddressLine = u.AddressLine,
+
+                });
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
 
         public User FindUser(int id)
         {
             try
             {
-                // User u = _database.Get(t=> t.ID == id);
-                // return u;
-                return null;
+                var result = _database.Get(t => t.ID == id);
+                return new User {
+                    ID = result.ID,
+                    PhoneNumber = result.PhoneNumber,
+                    FirstName = result.FirstName,
+                    LastName = result.LastName,
+                    Email = result.Email,
+                    UserName = result.Logging.UserName,
+                    Password = result.Logging.Password,
+                    AddressLine = result.AddressLine,
+                    CityName = result.AddressTable.City,
+                    Postcode = result.AddressTable.Postcode,
+                    Region = (Region) Enum.Parse(typeof(Region), result.AddressTable.Region),
+                    Gender = (Gender) Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                };
             }
             catch
             {
@@ -80,14 +151,12 @@ namespace ServiceLibrary
 
         }
 
-
-        public User2[] GetAll()
+        public User[] GetAll()
         {
-            IList<User2> modelListToReturn = new List<User2>();
-            IQueryable<Users> listToTransfer = _database.GetAll();
-            /*foreach (var u in listToTransfer)
+            IList<User> resultToReturn = new List<User>();
+            foreach (var u in _database.GetAll())
             {
-                modelListToReturn.Add(new User
+                resultToReturn.Add(new User
                 {
                     ID = u.ID,
                     PhoneNumber = u.PhoneNumber,
@@ -95,27 +164,63 @@ namespace ServiceLibrary
                     LastName = u.LastName,
                     Email = u.Email,
                     AddressLine = u.AddressLine,
-                    Postcode = u.Postcode,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
+                    Postcode = u.AddressTable.Postcode,
                     Password = u.Logging.Password,
                     UserName = u.Logging.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
-            }*/
-
-            modelListToReturn.Add(new User2
-            {
-                ID = 1,
-
-            });
-            return modelListToReturn.ToArray();
-            //return null;
+            }
+            return resultToReturn.ToArray();
         }
 
-        public string say()
+        public User[] List(Gender gender)
         {
-            return "say";
+            IList<User> resultToReturn = new List<User>();
+            foreach (var u in _database.List(Users => Users.Gender.Gender1 == gender.ToString()))
+            {
+                resultToReturn.Add(new User
+                {
+                    ID = u.ID,
+                    PhoneNumber = u.PhoneNumber,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    AddressLine = u.AddressLine,
+                    Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
+                    CityName = u.AddressTable.City,
+                    Postcode = u.AddressTable.Postcode,
+                    Password = u.Logging.Password,
+                    UserName = u.Logging.UserName,
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                });
+            }
+            return resultToReturn.ToArray();
+        }
+
+        public User[] List(Region region)
+        {
+            IList<User> resultToReturn = new List<User>();
+            foreach (var u in _database.List(Users => Users.AddressTable.Region == region.ToString()))
+            {
+                resultToReturn.Add(new User
+                {
+                    ID = u.ID,
+                    PhoneNumber = u.PhoneNumber,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    AddressLine = u.AddressLine,
+                    Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
+                    CityName = u.AddressTable.City,
+                    Postcode = u.AddressTable.Postcode,
+                    Password = u.Logging.Password,
+                    UserName = u.Logging.UserName,
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                });
+            }
+            return resultToReturn.ToArray();
         }
     }
 }
