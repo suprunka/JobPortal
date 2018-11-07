@@ -6,21 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using AppJobPortal.Model;
 using Repositories;
+using Repository.DbConnection;
 
 namespace Repository.OfferRepository
 {
    public interface IOfferRepository : IRepository<Offer>
     {
-        bool Create(Offer obj);
+        bool Create(ServiceOffer obj);
 
-        Offer Get(Expression<Func<Offer, bool>> predicate);
+        ServiceOffer Get(Expression<Func<ServiceOffer, bool>> predicate);
 
-        bool Update(Offer obj);
+        bool Update(ServiceOffer obj);
 
-        bool Delete(Expression<Func<Offer, bool>> predicate);
+        bool Delete(Expression<Func<ServiceOffer, bool>> predicate);
 
-        IQueryable<Offer> GetAll();
+        IQueryable<ServiceOffer> GetAll();
 
-        IQueryable<Offer> List(Expression<Func<Offer, bool>> predicate);
+        IQueryable<ServiceOffer> List(Expression<Func<ServiceOffer, bool>> predicate);
     }
 }

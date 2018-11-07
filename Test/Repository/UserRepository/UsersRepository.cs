@@ -118,6 +118,7 @@ namespace Repository
                         var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == found.AddressTable.Postcode);
                         _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
                     }
+
                     _context.SubmitChanges();
 
                     sql.Commit();

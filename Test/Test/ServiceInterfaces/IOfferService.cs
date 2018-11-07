@@ -16,7 +16,7 @@ namespace ServiceLibrary
     {
 
         [OperationContract]
-        Offer CreateServiceOffer(Offer serviceOffer);
+        bool CreateServiceOffer(Offer offer);
 
         [OperationContract]
         Offer FindServiceOffer(int ID);

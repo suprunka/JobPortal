@@ -25,15 +25,23 @@ namespace ServiceLibrary
 
         }
 
-        public Offer CreateServiceOffer(Offer serviceOffer)
+        public bool CreateServiceOffer(Offer offer)
         {
 
+            _database.Create(new Repository.DbConnection.ServiceOffer
+            {
+                SubCategory = new Repository.DbConnection.SubCategory
+                {
+                    Name = offer.Subcategory.ToString(),
+                   
+                },
+                Title = offer.Title,
+                Description = offer.Description,
+                RatePerHour = offer.RatePerHour,
+                Employee_Phone = offer.Author.ID.ToString()
 
-           _database.Create(new ServiceOffer
-           {
-
-
-           })
+            });
+            return true;
         }
 
         public Offer FindServiceOffer(int ID)
@@ -55,5 +63,7 @@ namespace ServiceLibrary
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

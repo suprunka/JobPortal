@@ -6,7 +6,7 @@ using System.Configuration;
 using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Linq;
-
+using System.Linq.Expressions;
 
 namespace Repository.OfferRepository
 {
@@ -24,7 +24,7 @@ namespace Repository.OfferRepository
 
       
 
-        public bool Create(Advertisement offer)
+        public bool Create(ServiceOffer offer)
         {
             bool result = false;
             using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
@@ -33,14 +33,14 @@ namespace Repository.OfferRepository
                 sql = objConn.BeginTransaction();
                 try
                 {
-                    _context.GetTable<Advertisement>().InsertOnSubmit(new Advertisement
+                    _context.GetTable<ServiceOffer>().InsertOnSubmit(new ServiceOffer
                     {
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_Phone = offer.Employee_Phone,
-                        Service_ID = _context.GetTable<ServiceTable>().FirstOrDefault(x => x.Name.Equals(offer.Service_ID)).ID
-               
+                        Subcategory_ID= _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory)).ID
+              
                     });
                     result = true;
                 }
@@ -58,27 +58,27 @@ namespace Repository.OfferRepository
             return result;
         }
 
-        public bool Delete(System.Linq.Expressions.Expression<Func<Offer, bool>> predicate)
+        public bool Delete(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Offer Get(System.Linq.Expressions.Expression<Func<Offer, bool>> predicate)
+        public ServiceOffer Get(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Offer> GetAll()
+        public bool Update(ServiceOffer obj)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Offer> List(System.Linq.Expressions.Expression<Func<Offer, bool>> predicate)
+        IQueryable<ServiceOffer> IOfferRepository.GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Offer obj)
+        IQueryable<ServiceOffer> IOfferRepository.List(Expression<Func<ServiceOffer, bool>> predicate)
         {
             throw new NotImplementedException();
         }

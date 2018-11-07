@@ -105,10 +105,7 @@ namespace AppJobPortal.Model
         Audio,
         [EnumMember]
         [SubcategoryOf(Category.Media)]
-        MArketing,
-
-
-
+        Marketing,
 
     }
 }
