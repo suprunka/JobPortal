@@ -17,6 +17,9 @@ namespace ServiceLibrary
         User FindUser(string phoneNumber);
 
         [OperationContract]
+        bool EditWebUser(User u);
+
+        [OperationContract]
         bool DeleteUser(int id);
 
         [OperationContract]

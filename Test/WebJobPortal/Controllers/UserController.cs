@@ -1,116 +1,139 @@
-﻿using AutoMapper;
-using ServiceLibrary;
-using ServiceLibrary.Models;
+﻿using JobPortal.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WebJobPortal.Models;
+using WebJobPortal.UserServiceReference;
 
 namespace WebJobPortal.Controllers
 {
     public class UserController : Controller
     {
-
+        private const int lenght = 8;
+        private const int n = 100000000;
         private readonly IUserService _proxy;
-        public UserController()
-        {
-           
-        }
+
         public UserController(IUserService proxy)
         {
-            _proxy = proxy;
+            this._proxy = proxy;
         }
 
-        public ActionResult Index()
+        /*[HttpGet]
+        public ActionResult Index(int? phoneNumber)
         {
-            return View();
+            if (phoneNumber.HasValue && lenght == (int)(Math.Log10(n)))
+            {
+                string pn = phoneNumber.ToString();
+                var found = _proxy.FindUser(pn);
+                UserModel um = new UserModel
+                {
+                    ID = found.ID,
+                    PhoneNumber = found.PhoneNumber,
+                    FirstName = found.FirstName,
+                    LastName = found.LastName,
+                    Email = found.Email,
+                    UserName = found.UserName,
+                    Password = found.Password,
+                    AddressLine = found.AddressLine,
+                    CityName = found.CityName,
+                    Postcode = found.Postcode,
+                    Region = found.Region,
+                    Gender = found.Gender
+                };
+                return View("UserProfile", um);
+            }
+            return View("Index");
+        }*/
+
+        [HttpGet]
+        public ActionResult UserProfile(UserModel um)
+        {
+                return View(um);
         }
+
+        //GET: User/Create
+        public ActionResult Create()
+        {
+            return View("Create");
+        }
+
         //POST: Movie/Create
         [HttpPost]
         public ActionResult Create(UserModel user)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                User u = new User
                 {
-
-                  //  _proxy.CreateUser(AutoMapper.Mapper.Map(user, new JobPortal.Model.User()));
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View("Create",user);
-                }
+                    ID = user.ID,
+                    PhoneNumber = user.PhoneNumber,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    Password = user.Password,
+                    AddressLine = user.AddressLine,
+                    CityName = user.CityName,
+                    Postcode = user.Postcode,
+                    Region = user.Region,
+                    Gender = user.Gender
+                };
+                _proxy.CreateUser(u);
+                ModelState.Clear();
+                ViewBag.SuccessMessage = "Creation done.";
+                return View("Create", new UserModel());
             }
-            catch
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return View("Create", user);
             }
         }
 
-        public ActionResult Delete(string phoneNumber)
+
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            if (phoneNumber == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            var userDetails = this._proxy.FindUser(phoneNumber);
-
-            if (userDetails == null)
+            var userDetails = this._proxy.DeleteUser(id);
+            if (userDetails == false)
+            {
                 return HttpNotFound();
-
-            UserModel userToDelete = new UserModel {UserName=userDetails.UserName, Email=userDetails.Email};
-
-            return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
-        public ActionResult Edit(string phoneNumber)
-        {
-            if (phoneNumber == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var userDetails = this._proxy.FindUser(phoneNumber);
-
-            if (userDetails == null)
-                return HttpNotFound();
-
-            var userToEdit = new UserModel { UserName = userDetails.UserName, Email = userDetails.Email};
-
-            ViewBag.Title = "Edit: " + userToEdit.UserName;
-
-            return View(userToEdit);
-
-        }
-
-        // POST: Movie/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, UserModel user)
+        public ActionResult Edit(int id)
         {
-            try
+            User u = new User
             {
-                if (!ModelState.IsValid)
-                    return View(user);
+                ID = id,
+                FirstName = Request.Form["firstName"],
+                LastName = Request.Form["lastName"],
+                Gender = (Gender)Enum.Parse(typeof(Gender), Request.Form["gender"]),
+                PhoneNumber = Request.Form["phoneNumber"],
+                AddressLine = Request.Form["addressLine"],
+                Postcode = Request.Form["postcode"],
+                CityName = Request.Form["cityName"],
+                Region = (Region)Enum.Parse(typeof(Region), Request.Form["region"]),
+            };
 
-                //this._proxy.EditUser(new MovieResource { Id = movie.Id, Title = movie.Title, Description = movie.Description });
-
-                return RedirectToAction("Index");
-            }
-            catch
+            bool result = this._proxy.EditWebUser(u);
+            if (result)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+            }
+            else
+            {
+                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
             }
         }
-        public ActionResult Login(UserModel user)
-        {
-            return View();
-        }
 
-        public ActionResult UserProfile(UserModel user)
-        {
-            return View();
-        }
+  
     }
 }

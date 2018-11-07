@@ -4,32 +4,32 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repositories;
-using ServiceLibrary;
+
 using WebJobPortal.Controllers;
 using System.Web.Mvc;
-using JobPortal.Model;
+using WebJobPortal.UserServiceReference;
 
 namespace UnitTestProject1.MVC__tests
 {
-    /*[TestClass]
+    [TestClass]
     public class UserTests
     {
-
-    
         //Create
         #region
-
+        #endregion
         [TestMethod]
         public void Test_Create_View()
         {
             var serviceMock = new Mock<IUserService>();
+            serviceMock.Setup(s=> s.CreateUser)
             var controller = new UserController(serviceMock.Object);
             var result = controller.Create() as ViewResult;
             Assert.AreEqual("Create", result.ViewName);
 
         }
+    }
 
-        [TestMethod]
+        /*[TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
         {
             var serviceMock = new Mock<IUserService>();

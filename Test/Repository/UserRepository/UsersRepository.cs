@@ -25,7 +25,7 @@ namespace Repository
         public override bool Create(Users obj)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
@@ -233,6 +233,83 @@ namespace Repository
                     _context.SubmitChanges();
                     sql.Commit();
                     result =  found;
+                }
+                catch
+                {
+                    sql.Rollback();
+                    result = null;
+                    throw new InvalidOperationException();
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
+        }
+
+
+        public Users UpdateWeb(Users newInformation)
+        {
+            Users result = null;
+            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True"))
+            {
+
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == newInformation.ID);
+                    /*int oldCity_ID = found.City_ID;
+                    var oldPostCode = found.AddressTable.Postcode;*/
+
+                    found.PhoneNumber = newInformation.PhoneNumber;
+                    found.FirstName = newInformation.FirstName;
+                    found.LastName = newInformation.LastName;
+                    found.AddressLine = newInformation.AddressLine;
+                    found.Gender.Gender1 = newInformation.Gender.Gender1;
+
+                    var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == newInformation.AddressTable.Postcode);
+                    /*if (addressExists == null)
+                    {
+                        // nie działa
+                        _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
+                        {
+                            Postcode = newInformation.AddressTable.Postcode,
+                            City = newInformation.AddressTable.City,
+                            Region = newInformation.AddressTable.Region,
+
+
+                        });
+                        string newPhoneNumber = newInformation.PhoneNumber;
+                        _context.SubmitChanges();
+
+
+                        /*Users found2 = _context.GetTable<Users>().FirstOrDefault(u => u.PhoneNumber == found.PhoneNumber);
+                        var incoming_ID = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == newInformation.AddressTable.Postcode).ID;
+                        found2.City_ID = incoming_ID; tutaj STOP
+
+
+                        int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
+                        if (numberOfAddressRecords < 2)
+                        {
+                            var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
+                            _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
+                        }
+                    }
+                    else
+                    {*/
+                        found.AddressTable.Postcode = newInformation.AddressTable.Postcode;
+                        found.AddressTable.City = newInformation.AddressTable.City;
+                        found.AddressTable.Region = newInformation.AddressTable.Region;
+                    //}
+
+                    //delete old address reference, however check if there is more people with the same city if yes leave it
+
+
+                    _context.SubmitChanges();
+                    sql.Commit();
+                    result = found;
                 }
                 catch
                 {

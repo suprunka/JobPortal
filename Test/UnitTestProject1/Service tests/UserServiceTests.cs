@@ -80,13 +80,10 @@ namespace UnitTestProject1.Service_tests
         {
            
             var databaseMock = new Mock<IUserRepository>();
-            
 
-            databaseMock.Setup(t => t.Get(z => z.PhoneNumber == phoneNumber)).Returns(new Users
-            {
-                FirstName = "Ådam",
-                Email = "Pamparampam",
-            });
+
+
+            databaseMock.Setup(t => t.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users{  FirstName = "Ådam"});
             UserService service = new UserService(databaseMock.Object);
             var u = service.FindUser(phoneNumber);
             Assert.AreEqual("Ådam", u.FirstName);

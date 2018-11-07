@@ -2,16 +2,18 @@
 
 @using JobPortal.Model
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registration</h2>
+<h2>@ViewBag.Title</h2>
 <hr />
 <!--SIGN UP-->
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+ 
     
 <div class="form-horizontal">
 
@@ -107,6 +109,8 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="buttons" />
+           
+            
         </div>
     </div>
 </div>
