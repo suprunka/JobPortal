@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.ServiceModel.Description;
+using AppJobPortal.Model;
 
 namespace ServiceLibrary
 {

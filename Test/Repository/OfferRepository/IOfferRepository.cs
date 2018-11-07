@@ -9,7 +9,7 @@ using Repositories;
 
 namespace Repository.OfferRepository
 {
-    interface IOfferRepository : IRepository<Offer>
+   public interface IOfferRepository : IRepository<Offer>
     {
         bool Create(Offer obj);
 
