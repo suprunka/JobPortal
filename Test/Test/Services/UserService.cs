@@ -137,7 +137,7 @@ namespace ServiceLibrary
         {
             try
             {
-                if (RegexMatch.DoesUserMatch(u))
+                if (RegexMatch.DoesWebUserMatch(u))
                 {
                     _database.UpdateWeb(new Users
                     {

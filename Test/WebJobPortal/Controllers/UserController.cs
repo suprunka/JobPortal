@@ -48,7 +48,7 @@ namespace WebJobPortal.Controllers
         [HttpGet]
         public ActionResult UserProfile(UserModel um)
         {
-                return View(um);
+            return View(um);
         }
 
         //GET: User/Create
@@ -91,25 +91,25 @@ namespace WebJobPortal.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             var userDetails = this._proxy.DeleteUser(id);
             if (userDetails == false)
             {
-                return HttpNotFound();
+                return null;
             }
             else
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id)
         {
+
             User u = new User
             {
                 ID = id,
@@ -126,7 +126,18 @@ namespace WebJobPortal.Controllers
             bool result = this._proxy.EditWebUser(u);
             if (result)
             {
-                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+                return RedirectToAction("UserProfile", "User", new UserModel
+                {
+                    ID = u.ID,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Gender = u.Gender,
+                    PhoneNumber = u.PhoneNumber,
+                    AddressLine = u.AddressLine,
+                    Postcode = u.Postcode,
+                    CityName = u.CityName,
+                    Region = u.Region
+                });
             }
             else
             {

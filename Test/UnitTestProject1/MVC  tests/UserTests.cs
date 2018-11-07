@@ -21,7 +21,7 @@ namespace UnitTestProject1.MVC__tests
         public void Test_Create_View()
         {
             var serviceMock = new Mock<IUserService>();
-            serviceMock.Setup(s=> s.CreateUser)
+            serviceMock.Setup(s => s.CreateUser(null));
             var controller = new UserController(serviceMock.Object);
             var result = controller.Create() as ViewResult;
             Assert.AreEqual("Create", result.ViewName);

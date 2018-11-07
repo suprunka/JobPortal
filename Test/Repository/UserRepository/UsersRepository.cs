@@ -92,7 +92,7 @@ namespace Repository
         public override bool Delete(Expression<Func<Users, bool>> predicate)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
@@ -173,7 +173,7 @@ namespace Repository
         public Users Update(Users newInformation, string phoneNumber)
         {
             Users result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
             {
                 
                 objConn.Open();
