@@ -1,6 +1,5 @@
-﻿@model WebJobPortal.Models.UserModel
+﻿<!DOCTYPE html>
 
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,9 +29,7 @@
                     <li class="search">
                         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
                         {
-
-                            @Html.TextBoxFor(m=> m.PhoneNumber, new { @class = "phone" });
-                           
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "phone" });
                             <input type="submit" value="Search">
                         }
                     </li>
@@ -42,7 +39,7 @@
     </div>
     <div id="login-modal" class="loginModal">
         <!-- Modal content -->
-        <div class="modalContent">
+        <div class="modalContent" id="loginModalContent">
             <!--X button for closing-->
             <span class="close">&times;</span>
             <h1>Login</h1>
@@ -51,11 +48,9 @@
             <input id="mail" type="text" placeholder="Enter Email" name="email" required>
 
             <label for="psw"><b>Password</b></label>
-            <input id="pass" type="password" placeholder="Enter Password" name="psw" required>
+            <input id="mail" type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit" class="buttons" id="loginBtn">Login</button>
-
-
+            @Html.ActionLink("Login", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "buttons", @id = "loginBtn", @role = "button" })
         </div>
     </div>
     <div class="container body-content">

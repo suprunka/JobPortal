@@ -37,7 +37,7 @@ body {
     }
 /*all confirm buttons, like delete, submit...*/
 #confirmBtn {
-    width: 20%;
+    width: 30%;
     display: block;
     margin-top: 30px;
     margin-right: auto;
@@ -53,6 +53,9 @@ textarea {
 
 /*For USerProfile*/
 /* buttons in menu Column*/
+#edit-user{
+    padding-bottom: 35px;
+}
 .tabColumn {
     float: left;
     background-color: #f1f1f1;
@@ -116,6 +119,7 @@ a.link-icon {
 
 footer{
     text-align:center;
+    bottom:0;
 }
 
 /* Style the buttons  */
@@ -205,10 +209,7 @@ button {
     list-style-position: outside;
     list-style-type: none;
     outline-offset: 0px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
+    padding:15px;
     position: relative;
     text-decoration: none;
     text-decoration-color: rgb(157, 157, 157);
@@ -231,14 +232,14 @@ button {
 }
 
 /* Add styles to the form container */
-.modalContent {
+#loginModalContent {
     max-width: 300px;
     padding: 20px;
     background-color: white;
 }
 
     /* Full-width input fields */
-    .modalContent input[type=text], .modalContent input[type=password] {
+    #loginModalContent input[type=text], #loginModalContent input[type=password] {
         width: 100%;
         padding: 15px;
         margin: 5px 0 22px 0;
@@ -247,7 +248,7 @@ button {
     }
 
         /* When the inputs get focus, do something */
-        .modalContent input[type=text]:focus, .modalContent input[type=password]:focus {
+        #loginModalContent input[type=text]:focus, #loginModalContent input[type=password]:focus {
             background-color: #ddd;
             outline: none;
         }
@@ -264,3 +265,68 @@ button {
         opacity: 0.8;
     }
 
+
+
+
+
+
+
+.serviceOffer {
+    position: relative;
+    width: 30%;
+    height: 60%
+}
+
+.serviceOfferPic {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: 99;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    min-height: 100%;
+    width: 100%;
+}
+
+.loading {
+    font-family: Arial;
+    font-size: 10pt;
+    border: 5px solid #67CFF5;
+    width: 200px;
+    height: 100px;
+    display: none;
+    position: fixed;
+    background-color: White;
+    z-index: 999;
+}
