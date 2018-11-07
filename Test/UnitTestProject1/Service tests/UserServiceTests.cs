@@ -75,14 +75,14 @@ namespace UnitTestProject1.Service_tests
 
     
         [TestMethod]
-        public void Test_Finding_A_User_In_Database(string phoneNumber)
+        public void Test_Finding_A_User_In_Database()
         {
 
             var databaseMock = new Mock<IUserRepository>();
             databaseMock.Setup(t => t.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users { ID = 1, PhoneNumber = "12345678", FirstName = "Ådam",
                 LastName = "Adam", Email = "Adam@wp.pl", AddressLine = "polkowicka", Gender_ID = 1, City_ID = 1, Logging_ID = 1});
             UserService service = new UserService(databaseMock.Object);
-            var u = service.FindUser(phoneNumber);
+            var u = service.FindUser("12345678");
             Assert.AreEqual("Ådam", u.FirstName);
         }
 

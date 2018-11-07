@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.ServiceModel.Description;
+using AppJobPortal.Model;
 
 namespace ServiceLibrary
 {
@@ -15,7 +16,7 @@ namespace ServiceLibrary
     {
 
         [OperationContract]
-        Offer CreateServiceOffer(Offer serviceOffer);
+        bool CreateServiceOffer(Offer offer);
 
         [OperationContract]
         Offer FindServiceOffer(int ID);
