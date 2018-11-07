@@ -47,6 +47,7 @@ namespace AppJobPortal.New
         public void Init()
         {
             regBox.ItemsSource = Enum.GetValues(typeof(Region)).Cast<Region>();
+            
         }
         private void GetAll() {
             _source = _proxy.GetAll();
@@ -121,7 +122,7 @@ namespace AppJobPortal.New
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            User user = (User)usersTable.SelectedItem;
+            UserAppModel user =(UserAppModel) usersTable.SelectedItem;
             if (MessageBox.Show("Are you sure that you want to delete the user?",
                         "Confirmation", MessageBoxButton.YesNo,
                         MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -143,6 +144,10 @@ namespace AppJobPortal.New
             if (_proxy.CreateUser(_mapper.Map(_user, new User())))
             {
                 GetAll();
+            }
+            else {
+                MessageBox.Show("Wrong input", "Input failure");
+
             }
 
         }

@@ -26,9 +26,17 @@ namespace ServiceLibrary.Models
             {
                 return false;
             }
-            
-           
-            
+ 
         }
-    }
+        public static bool DoesOfferMatch(Offer offer)
+        {
+            if (Regex.IsMatch(offer.Description, "^[a-zA-Z0-9ÆæØøÅå ]{10,}$") &&
+                Regex.IsMatch(offer.Description, "^[a-zA-Z0-9ÆæØøÅå ]{5,}$") 
+                )
+                //checking if the rate per hour isn't good to do in regex (as I read)
+                return true;
+            return false;
+        }
+
+        }
 }

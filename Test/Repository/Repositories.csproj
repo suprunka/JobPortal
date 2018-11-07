@@ -97,6 +97,8 @@
       <DependentUpon>JobPortalDatabase.dbml</DependentUpon>
     </Compile>
     <Compile Include="GenericRepository\IRepository.cs" />
+    <Compile Include="OfferRepository\IOfferRepository.cs" />
+    <Compile Include="OfferRepository\OfferRepository.cs" />
     <Compile Include="UoW\IUnitOfWork.cs" />
     <Compile Include="UserRepository\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

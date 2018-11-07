@@ -1,19 +1,30 @@
 ﻿using JobPortal.Model;
 using System;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 
-namespace ServiceLibrary.Models
+namespace AppJobPortal.Model
 {
-
+    [DataContract]
     public class Offer
     {
-        public int Id { get; set; }
+    [DataMember]
+        public virtual int Id { get; set; }
+        [DataMember]
+        public virtual int RatePerHour { get; set; }
+        [DataMember]
+        public virtual string Title { get; set; }
+        [DataMember]
+        public virtual string Description { get; set; }
+        [DataMember]
+        public virtual User Author { get; set; }
+        [DataMember]
+        public virtual string CategoryName { get; set; }
+        [DataMember]
+        public virtual string CategoryDescription { get; set; }
+        [DataMember]
+        public virtual string ServiceName { get; set; }
 
-        public int RatePerHour { get; set; }
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
     }
 }
