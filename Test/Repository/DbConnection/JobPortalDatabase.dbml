@@ -37,29 +37,13 @@
       <Association Name="AddressTable_User" Member="Users" ThisKey="ID" OtherKey="City_ID" Type="Users" />
     </Type>
   </Table>
-  <Table Name="dbo.Advertisement" Member="Advertisements">
-    <Type Name="Advertisement">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Review_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Service_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Employee_Phone" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Association Name="Advertisement_AvailableDate" Member="AvailableDates" ThisKey="ID" OtherKey="Advertisement_ID" Type="AvailableDate" />
-      <Association Name="Advertisement_Saleline" Member="Salelines" ThisKey="ID" OtherKey="Advertisement_ID" Type="Saleline" />
-      <Association Name="Review_Advertisement" Member="Review" ThisKey="Review_ID" OtherKey="ID" Type="Review" IsForeignKey="true" />
-      <Association Name="ServiceTable_Advertisement" Member="ServiceTable" ThisKey="Service_ID" OtherKey="ID" Type="ServiceTable" IsForeignKey="true" />
-      <Association Name="User_Advertisement" Member="Users" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="Users" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.AvailableDates" Member="AvailableDates">
     <Type Name="AvailableDate">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Saleline_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Advertisement_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Advertisement_AvailableDate" Member="Advertisement" ThisKey="Advertisement_ID" OtherKey="ID" Type="Advertisement" IsForeignKey="true" />
+      <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Saleline_AvailableDate" Member="Saleline" ThisKey="Saleline_ID" OtherKey="ID" Type="Saleline" IsForeignKey="true" />
+      <Association Name="ServiceOffer_AvailableDate" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Category" Member="Categories">
@@ -67,7 +51,7 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Association Name="Category_ServiceTable" Member="ServiceTables" ThisKey="ID" OtherKey="Category_ID" Type="ServiceTable" />
+      <Association Name="Category_SubCategory" Member="SubCategories" ThisKey="ID" OtherKey="Category_ID" Type="SubCategory" />
     </Type>
   </Table>
   <Table Name="dbo.Dates" Member="Dates">
@@ -142,8 +126,9 @@
       <Column Name="Customer_PhoneNumber" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Rate_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Review_Advertisement" Member="Advertisements" ThisKey="ID" OtherKey="Review_ID" Type="Advertisement" />
+      <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Rate_Review" Member="Rate" ThisKey="Rate_ID" OtherKey="RateValue" Type="Rate" IsForeignKey="true" />
+      <Association Name="ServiceOffer_Review" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
       <Association Name="User_Review" Member="Users" ThisKey="Customer_PhoneNumber" OtherKey="PhoneNumber" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>
@@ -151,20 +136,35 @@
     <Type Name="Saleline">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Advertisement_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Order_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Saleline_AvailableDate" Member="AvailableDates" ThisKey="ID" OtherKey="Saleline_ID" Type="AvailableDate" />
-      <Association Name="Advertisement_Saleline" Member="Advertisement" ThisKey="Advertisement_ID" OtherKey="ID" Type="Advertisement" IsForeignKey="true" />
       <Association Name="OrderTable_Saleline" Member="OrderTable" ThisKey="Order_ID" OtherKey="ID" Type="OrderTable" IsForeignKey="true" />
+      <Association Name="ServiceOffer_Saleline" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ServiceTable" Member="ServiceTables">
-    <Type Name="ServiceTable">
+  <Table Name="dbo.ServiceOffer" Member="ServiceOffers">
+    <Type Name="ServiceOffer">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Subcategory_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Employee_Phone" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="ServiceOffer_AvailableDate" Member="AvailableDates" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="AvailableDate" />
+      <Association Name="ServiceOffer_Review" Member="Reviews" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Review" />
+      <Association Name="ServiceOffer_Saleline" Member="Salelines" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Saleline" />
+      <Association Name="SubCategory_ServiceOffer" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
+      <Association Name="User_ServiceOffer" Member="Users" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubCategory" Member="SubCategories">
+    <Type Name="SubCategory">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Category_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ServiceTable_Advertisement" Member="Advertisements" ThisKey="ID" OtherKey="Service_ID" Type="Advertisement" />
-      <Association Name="Category_ServiceTable" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
+      <Association Name="SubCategory_ServiceOffer" Member="ServiceOffers" ThisKey="ID" OtherKey="Subcategory_ID" Type="ServiceOffer" />
+      <Association Name="Category_SubCategory" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Users" Member="Users">
@@ -180,8 +180,8 @@
       <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="User_Account" Member="Accounts" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Account" />
       <Association Name="User_WorkingArea" Member="WorkingAreas" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="WorkingArea" />
-      <Association Name="User_Advertisement" Member="Advertisements" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="Advertisement" />
       <Association Name="User_Review" Member="Reviews" ThisKey="PhoneNumber" OtherKey="Customer_PhoneNumber" Type="Review" />
+      <Association Name="User_ServiceOffer" Member="ServiceOffers" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="ServiceOffer" />
       <Association Name="Gender_User" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Logging_User" Member="Logging" ThisKey="Logging_ID" OtherKey="ID" Type="Logging" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="AddressTable_User" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />

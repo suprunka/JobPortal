@@ -29,7 +29,11 @@ namespace ServiceLibrary
         {
 
 
-            } );
+           _database.Create(new ServiceOffer
+           {
+
+
+           })
         }
 
         public Offer FindServiceOffer(int ID)

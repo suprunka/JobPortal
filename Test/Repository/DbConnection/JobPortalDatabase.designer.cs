@@ -39,9 +39,6 @@ namespace Repository.DbConnection
     partial void InsertAddressTable(AddressTable instance);
     partial void UpdateAddressTable(AddressTable instance);
     partial void DeleteAddressTable(AddressTable instance);
-    partial void InsertAdvertisement(Advertisement instance);
-    partial void UpdateAdvertisement(Advertisement instance);
-    partial void DeleteAdvertisement(Advertisement instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
@@ -75,9 +72,12 @@ namespace Repository.DbConnection
     partial void InsertSaleline(Saleline instance);
     partial void UpdateSaleline(Saleline instance);
     partial void DeleteSaleline(Saleline instance);
-    partial void InsertServiceTable(ServiceTable instance);
-    partial void UpdateServiceTable(ServiceTable instance);
-    partial void DeleteServiceTable(ServiceTable instance);
+    partial void InsertServiceOffer(ServiceOffer instance);
+    partial void UpdateServiceOffer(ServiceOffer instance);
+    partial void DeleteServiceOffer(ServiceOffer instance);
+    partial void InsertSubCategory(SubCategory instance);
+    partial void UpdateSubCategory(SubCategory instance);
+    partial void DeleteSubCategory(SubCategory instance);
     partial void InsertUsers(Users instance);
     partial void UpdateUsers(Users instance);
     partial void DeleteUsers(Users instance);
@@ -142,14 +142,6 @@ namespace Repository.DbConnection
 			get
 			{
 				return this.GetTable<AddressTable>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Advertisement> Advertisements
-		{
-			get
-			{
-				return this.GetTable<Advertisement>();
 			}
 		}
 		
@@ -249,11 +241,19 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		public System.Data.Linq.Table<ServiceTable> ServiceTables
+		public System.Data.Linq.Table<ServiceOffer> ServiceOffers
 		{
 			get
 			{
-				return this.GetTable<ServiceTable>();
+				return this.GetTable<ServiceOffer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SubCategory> SubCategories
+		{
+			get
+			{
+				return this.GetTable<SubCategory>();
 			}
 		}
 		
@@ -855,363 +855,6 @@ namespace Repository.DbConnection
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Advertisement")]
-	public partial class Advertisement : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private decimal _RatePerHour;
-		
-		private string _Description;
-		
-		private System.Nullable<int> _Review_ID;
-		
-		private int _Service_ID;
-		
-		private string _Employee_Phone;
-		
-		private string _Title;
-		
-		private EntitySet<Saleline> _Salelines;
-		
-		private EntityRef<Review> _Review;
-		
-		private EntityRef<ServiceTable> _ServiceTable;
-		
-		private EntityRef<Users> _Users;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnRatePerHourChanging(decimal value);
-    partial void OnRatePerHourChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnReview_IDChanging(System.Nullable<int> value);
-    partial void OnReview_IDChanged();
-    partial void OnService_IDChanging(int value);
-    partial void OnService_IDChanged();
-    partial void OnEmployee_PhoneChanging(string value);
-    partial void OnEmployee_PhoneChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    #endregion
-		
-		public Advertisement()
-		{
-			this._Salelines = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Salelines), new Action<Saleline>(this.detach_Salelines));
-			this._Review = default(EntityRef<Review>);
-			this._ServiceTable = default(EntityRef<ServiceTable>);
-			this._Users = default(EntityRef<Users>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RatePerHour", DbType="Money NOT NULL")]
-		public decimal RatePerHour
-		{
-			get
-			{
-				return this._RatePerHour;
-			}
-			set
-			{
-				if ((this._RatePerHour != value))
-				{
-					this.OnRatePerHourChanging(value);
-					this.SendPropertyChanging();
-					this._RatePerHour = value;
-					this.SendPropertyChanged("RatePerHour");
-					this.OnRatePerHourChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Review_ID", DbType="Int")]
-		public System.Nullable<int> Review_ID
-		{
-			get
-			{
-				return this._Review_ID;
-			}
-			set
-			{
-				if ((this._Review_ID != value))
-				{
-					if (this._Review.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnReview_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Review_ID = value;
-					this.SendPropertyChanged("Review_ID");
-					this.OnReview_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Service_ID", DbType="Int NOT NULL")]
-		public int Service_ID
-		{
-			get
-			{
-				return this._Service_ID;
-			}
-			set
-			{
-				if ((this._Service_ID != value))
-				{
-					if (this._ServiceTable.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnService_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Service_ID = value;
-					this.SendPropertyChanged("Service_ID");
-					this.OnService_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_Phone", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-		public string Employee_Phone
-		{
-			get
-			{
-				return this._Employee_Phone;
-			}
-			set
-			{
-				if ((this._Employee_Phone != value))
-				{
-					if (this._Users.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployee_PhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Employee_Phone = value;
-					this.SendPropertyChanged("Employee_Phone");
-					this.OnEmployee_PhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this.OnTitleChanging(value);
-					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Advertisement_Saleline", Storage="_Salelines", ThisKey="ID", OtherKey="Advertisement_ID")]
-		public EntitySet<Saleline> Salelines
-		{
-			get
-			{
-				return this._Salelines;
-			}
-			set
-			{
-				this._Salelines.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Review_Advertisement", Storage="_Review", ThisKey="Review_ID", OtherKey="ID", IsForeignKey=true)]
-		public Review Review
-		{
-			get
-			{
-				return this._Review.Entity;
-			}
-			set
-			{
-				Review previousValue = this._Review.Entity;
-				if (((previousValue != value) 
-							|| (this._Review.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Review.Entity = null;
-						previousValue.Advertisements.Remove(this);
-					}
-					this._Review.Entity = value;
-					if ((value != null))
-					{
-						value.Advertisements.Add(this);
-						this._Review_ID = value.ID;
-					}
-					else
-					{
-						this._Review_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Review");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceTable_Advertisement", Storage="_ServiceTable", ThisKey="Service_ID", OtherKey="ID", IsForeignKey=true)]
-		public ServiceTable ServiceTable
-		{
-			get
-			{
-				return this._ServiceTable.Entity;
-			}
-			set
-			{
-				ServiceTable previousValue = this._ServiceTable.Entity;
-				if (((previousValue != value) 
-							|| (this._ServiceTable.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ServiceTable.Entity = null;
-						previousValue.Advertisements.Remove(this);
-					}
-					this._ServiceTable.Entity = value;
-					if ((value != null))
-					{
-						value.Advertisements.Add(this);
-						this._Service_ID = value.ID;
-					}
-					else
-					{
-						this._Service_ID = default(int);
-					}
-					this.SendPropertyChanged("ServiceTable");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Advertisement", Storage="_Users", ThisKey="Employee_Phone", OtherKey="PhoneNumber", IsForeignKey=true)]
-		public Users Users
-		{
-			get
-			{
-				return this._Users.Entity;
-			}
-			set
-			{
-				Users previousValue = this._Users.Entity;
-				if (((previousValue != value) 
-							|| (this._Users.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Users.Entity = null;
-						previousValue.Advertisements.Remove(this);
-					}
-					this._Users.Entity = value;
-					if ((value != null))
-					{
-						value.Advertisements.Add(this);
-						this._Employee_Phone = value.PhoneNumber;
-					}
-					else
-					{
-						this._Employee_Phone = default(string);
-					}
-					this.SendPropertyChanged("Users");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Salelines(Saleline entity)
-		{
-			this.SendPropertyChanging();
-			entity.Advertisement = this;
-		}
-		
-		private void detach_Salelines(Saleline entity)
-		{
-			this.SendPropertyChanging();
-			entity.Advertisement = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AvailableDates")]
 	public partial class AvailableDate
 	{
@@ -1220,7 +863,7 @@ namespace Repository.DbConnection
 		
 		private System.Nullable<int> _Saleline_ID;
 		
-		private int _Advertisement_ID;
+		private int _ServiceOffer_ID;
 		
 		public AvailableDate()
 		{
@@ -1258,18 +901,18 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Advertisement_ID", DbType="Int NOT NULL")]
-		public int Advertisement_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
+		public int ServiceOffer_ID
 		{
 			get
 			{
-				return this._Advertisement_ID;
+				return this._ServiceOffer_ID;
 			}
 			set
 			{
-				if ((this._Advertisement_ID != value))
+				if ((this._ServiceOffer_ID != value))
 				{
-					this._Advertisement_ID = value;
+					this._ServiceOffer_ID = value;
 				}
 			}
 		}
@@ -1287,7 +930,7 @@ namespace Repository.DbConnection
 		
 		private string _Description;
 		
-		private EntitySet<ServiceTable> _ServiceTables;
+		private EntitySet<SubCategory> _SubCategories;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1303,7 +946,7 @@ namespace Repository.DbConnection
 		
 		public Category()
 		{
-			this._ServiceTables = new EntitySet<ServiceTable>(new Action<ServiceTable>(this.attach_ServiceTables), new Action<ServiceTable>(this.detach_ServiceTables));
+			this._SubCategories = new EntitySet<SubCategory>(new Action<SubCategory>(this.attach_SubCategories), new Action<SubCategory>(this.detach_SubCategories));
 			OnCreated();
 		}
 		
@@ -1367,16 +1010,16 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_ServiceTable", Storage="_ServiceTables", ThisKey="ID", OtherKey="Category_ID")]
-		public EntitySet<ServiceTable> ServiceTables
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_SubCategory", Storage="_SubCategories", ThisKey="ID", OtherKey="Category_ID")]
+		public EntitySet<SubCategory> SubCategories
 		{
 			get
 			{
-				return this._ServiceTables;
+				return this._SubCategories;
 			}
 			set
 			{
-				this._ServiceTables.Assign(value);
+				this._SubCategories.Assign(value);
 			}
 		}
 		
@@ -1400,13 +1043,13 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		private void attach_ServiceTables(ServiceTable entity)
+		private void attach_SubCategories(SubCategory entity)
 		{
 			this.SendPropertyChanging();
 			entity.Category = this;
 		}
 		
-		private void detach_ServiceTables(ServiceTable entity)
+		private void detach_SubCategories(SubCategory entity)
 		{
 			this.SendPropertyChanging();
 			entity.Category = null;
@@ -2643,9 +2286,11 @@ namespace Repository.DbConnection
 		
 		private System.Nullable<int> _Rate_ID;
 		
-		private EntitySet<Advertisement> _Advertisements;
+		private System.Nullable<int> _ServiceOffer_ID;
 		
 		private EntityRef<Rate> _Rate;
+		
+		private EntityRef<ServiceOffer> _ServiceOffer;
 		
 		private EntityRef<Users> _Users;
 		
@@ -2661,12 +2306,14 @@ namespace Repository.DbConnection
     partial void OnCommentChanged();
     partial void OnRate_IDChanging(System.Nullable<int> value);
     partial void OnRate_IDChanged();
+    partial void OnServiceOffer_IDChanging(System.Nullable<int> value);
+    partial void OnServiceOffer_IDChanged();
     #endregion
 		
 		public Review()
 		{
-			this._Advertisements = new EntitySet<Advertisement>(new Action<Advertisement>(this.attach_Advertisements), new Action<Advertisement>(this.detach_Advertisements));
 			this._Rate = default(EntityRef<Rate>);
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
 			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
@@ -2759,16 +2406,27 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Review_Advertisement", Storage="_Advertisements", ThisKey="ID", OtherKey="Review_ID")]
-		public EntitySet<Advertisement> Advertisements
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int")]
+		public System.Nullable<int> ServiceOffer_ID
 		{
 			get
 			{
-				return this._Advertisements;
+				return this._ServiceOffer_ID;
 			}
 			set
 			{
-				this._Advertisements.Assign(value);
+				if ((this._ServiceOffer_ID != value))
+				{
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnServiceOffer_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ServiceOffer_ID = value;
+					this.SendPropertyChanged("ServiceOffer_ID");
+					this.OnServiceOffer_IDChanged();
+				}
 			}
 		}
 		
@@ -2802,6 +2460,40 @@ namespace Repository.DbConnection
 						this._Rate_ID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Rate");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Review", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true)]
+		public ServiceOffer ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer.Entity;
+			}
+			set
+			{
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceOffer.Entity = null;
+						previousValue.Reviews.Remove(this);
+					}
+					this._ServiceOffer.Entity = value;
+					if ((value != null))
+					{
+						value.Reviews.Add(this);
+						this._ServiceOffer_ID = value.ID;
+					}
+					else
+					{
+						this._ServiceOffer_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ServiceOffer");
 				}
 			}
 		}
@@ -2859,18 +2551,6 @@ namespace Repository.DbConnection
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_Advertisements(Advertisement entity)
-		{
-			this.SendPropertyChanging();
-			entity.Review = this;
-		}
-		
-		private void detach_Advertisements(Advertisement entity)
-		{
-			this.SendPropertyChanging();
-			entity.Review = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Saleline")]
@@ -2883,13 +2563,13 @@ namespace Repository.DbConnection
 		
 		private int _Quantity;
 		
-		private int _Advertisement_ID;
+		private int _ServiceOffer_ID;
 		
 		private int _Order_ID;
 		
-		private EntityRef<Advertisement> _Advertisement;
-		
 		private EntityRef<OrderTable> _OrderTable;
+		
+		private EntityRef<ServiceOffer> _ServiceOffer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2899,16 +2579,16 @@ namespace Repository.DbConnection
     partial void OnIDChanged();
     partial void OnQuantityChanging(int value);
     partial void OnQuantityChanged();
-    partial void OnAdvertisement_IDChanging(int value);
-    partial void OnAdvertisement_IDChanged();
+    partial void OnServiceOffer_IDChanging(int value);
+    partial void OnServiceOffer_IDChanged();
     partial void OnOrder_IDChanging(int value);
     partial void OnOrder_IDChanged();
     #endregion
 		
 		public Saleline()
 		{
-			this._Advertisement = default(EntityRef<Advertisement>);
 			this._OrderTable = default(EntityRef<OrderTable>);
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
 			OnCreated();
 		}
 		
@@ -2952,26 +2632,26 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Advertisement_ID", DbType="Int NOT NULL")]
-		public int Advertisement_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
+		public int ServiceOffer_ID
 		{
 			get
 			{
-				return this._Advertisement_ID;
+				return this._ServiceOffer_ID;
 			}
 			set
 			{
-				if ((this._Advertisement_ID != value))
+				if ((this._ServiceOffer_ID != value))
 				{
-					if (this._Advertisement.HasLoadedOrAssignedValue)
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnAdvertisement_IDChanging(value);
+					this.OnServiceOffer_IDChanging(value);
 					this.SendPropertyChanging();
-					this._Advertisement_ID = value;
-					this.SendPropertyChanged("Advertisement_ID");
-					this.OnAdvertisement_IDChanged();
+					this._ServiceOffer_ID = value;
+					this.SendPropertyChanged("ServiceOffer_ID");
+					this.OnServiceOffer_IDChanged();
 				}
 			}
 		}
@@ -2996,40 +2676,6 @@ namespace Repository.DbConnection
 					this._Order_ID = value;
 					this.SendPropertyChanged("Order_ID");
 					this.OnOrder_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Advertisement_Saleline", Storage="_Advertisement", ThisKey="Advertisement_ID", OtherKey="ID", IsForeignKey=true)]
-		public Advertisement Advertisement
-		{
-			get
-			{
-				return this._Advertisement.Entity;
-			}
-			set
-			{
-				Advertisement previousValue = this._Advertisement.Entity;
-				if (((previousValue != value) 
-							|| (this._Advertisement.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Advertisement.Entity = null;
-						previousValue.Salelines.Remove(this);
-					}
-					this._Advertisement.Entity = value;
-					if ((value != null))
-					{
-						value.Salelines.Add(this);
-						this._Advertisement_ID = value.ID;
-					}
-					else
-					{
-						this._Advertisement_ID = default(int);
-					}
-					this.SendPropertyChanged("Advertisement");
 				}
 			}
 		}
@@ -3068,6 +2714,40 @@ namespace Repository.DbConnection
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Saleline", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true)]
+		public ServiceOffer ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer.Entity;
+			}
+			set
+			{
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceOffer.Entity = null;
+						previousValue.Salelines.Remove(this);
+					}
+					this._ServiceOffer.Entity = value;
+					if ((value != null))
+					{
+						value.Salelines.Add(this);
+						this._ServiceOffer_ID = value.ID;
+					}
+					else
+					{
+						this._ServiceOffer_ID = default(int);
+					}
+					this.SendPropertyChanged("ServiceOffer");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3089,8 +2769,328 @@ namespace Repository.DbConnection
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceTable")]
-	public partial class ServiceTable : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceOffer")]
+	public partial class ServiceOffer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private decimal _RatePerHour;
+		
+		private string _Description;
+		
+		private int _Subcategory_ID;
+		
+		private string _Employee_Phone;
+		
+		private string _Title;
+		
+		private EntitySet<Review> _Reviews;
+		
+		private EntitySet<Saleline> _Salelines;
+		
+		private EntityRef<SubCategory> _SubCategory;
+		
+		private EntityRef<Users> _Users;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnRatePerHourChanging(decimal value);
+    partial void OnRatePerHourChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnSubcategory_IDChanging(int value);
+    partial void OnSubcategory_IDChanged();
+    partial void OnEmployee_PhoneChanging(string value);
+    partial void OnEmployee_PhoneChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    #endregion
+		
+		public ServiceOffer()
+		{
+			this._Reviews = new EntitySet<Review>(new Action<Review>(this.attach_Reviews), new Action<Review>(this.detach_Reviews));
+			this._Salelines = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Salelines), new Action<Saleline>(this.detach_Salelines));
+			this._SubCategory = default(EntityRef<SubCategory>);
+			this._Users = default(EntityRef<Users>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RatePerHour", DbType="Money NOT NULL")]
+		public decimal RatePerHour
+		{
+			get
+			{
+				return this._RatePerHour;
+			}
+			set
+			{
+				if ((this._RatePerHour != value))
+				{
+					this.OnRatePerHourChanging(value);
+					this.SendPropertyChanging();
+					this._RatePerHour = value;
+					this.SendPropertyChanged("RatePerHour");
+					this.OnRatePerHourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subcategory_ID", DbType="Int NOT NULL")]
+		public int Subcategory_ID
+		{
+			get
+			{
+				return this._Subcategory_ID;
+			}
+			set
+			{
+				if ((this._Subcategory_ID != value))
+				{
+					if (this._SubCategory.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSubcategory_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Subcategory_ID = value;
+					this.SendPropertyChanged("Subcategory_ID");
+					this.OnSubcategory_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_Phone", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Employee_Phone
+		{
+			get
+			{
+				return this._Employee_Phone;
+			}
+			set
+			{
+				if ((this._Employee_Phone != value))
+				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployee_PhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Employee_Phone = value;
+					this.SendPropertyChanged("Employee_Phone");
+					this.OnEmployee_PhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Review", Storage="_Reviews", ThisKey="ID", OtherKey="ServiceOffer_ID")]
+		public EntitySet<Review> Reviews
+		{
+			get
+			{
+				return this._Reviews;
+			}
+			set
+			{
+				this._Reviews.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Saleline", Storage="_Salelines", ThisKey="ID", OtherKey="ServiceOffer_ID")]
+		public EntitySet<Saleline> Salelines
+		{
+			get
+			{
+				return this._Salelines;
+			}
+			set
+			{
+				this._Salelines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubCategory_ServiceOffer", Storage="_SubCategory", ThisKey="Subcategory_ID", OtherKey="ID", IsForeignKey=true)]
+		public SubCategory SubCategory
+		{
+			get
+			{
+				return this._SubCategory.Entity;
+			}
+			set
+			{
+				SubCategory previousValue = this._SubCategory.Entity;
+				if (((previousValue != value) 
+							|| (this._SubCategory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SubCategory.Entity = null;
+						previousValue.ServiceOffers.Remove(this);
+					}
+					this._SubCategory.Entity = value;
+					if ((value != null))
+					{
+						value.ServiceOffers.Add(this);
+						this._Subcategory_ID = value.ID;
+					}
+					else
+					{
+						this._Subcategory_ID = default(int);
+					}
+					this.SendPropertyChanged("SubCategory");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ServiceOffer", Storage="_Users", ThisKey="Employee_Phone", OtherKey="PhoneNumber", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.ServiceOffers.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.ServiceOffers.Add(this);
+						this._Employee_Phone = value.PhoneNumber;
+					}
+					else
+					{
+						this._Employee_Phone = default(string);
+					}
+					this.SendPropertyChanged("Users");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Reviews(Review entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_Reviews(Review entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
+		}
+		
+		private void attach_Salelines(Saleline entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_Salelines(Saleline entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SubCategory")]
+	public partial class SubCategory : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3101,7 +3101,7 @@ namespace Repository.DbConnection
 		
 		private System.Nullable<int> _Category_ID;
 		
-		private EntitySet<Advertisement> _Advertisements;
+		private EntitySet<ServiceOffer> _ServiceOffers;
 		
 		private EntityRef<Category> _Category;
 		
@@ -3117,9 +3117,9 @@ namespace Repository.DbConnection
     partial void OnCategory_IDChanged();
     #endregion
 		
-		public ServiceTable()
+		public SubCategory()
 		{
-			this._Advertisements = new EntitySet<Advertisement>(new Action<Advertisement>(this.attach_Advertisements), new Action<Advertisement>(this.detach_Advertisements));
+			this._ServiceOffers = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffers), new Action<ServiceOffer>(this.detach_ServiceOffers));
 			this._Category = default(EntityRef<Category>);
 			OnCreated();
 		}
@@ -3188,20 +3188,20 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceTable_Advertisement", Storage="_Advertisements", ThisKey="ID", OtherKey="Service_ID")]
-		public EntitySet<Advertisement> Advertisements
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubCategory_ServiceOffer", Storage="_ServiceOffers", ThisKey="ID", OtherKey="Subcategory_ID")]
+		public EntitySet<ServiceOffer> ServiceOffers
 		{
 			get
 			{
-				return this._Advertisements;
+				return this._ServiceOffers;
 			}
 			set
 			{
-				this._Advertisements.Assign(value);
+				this._ServiceOffers.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_ServiceTable", Storage="_Category", ThisKey="Category_ID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_SubCategory", Storage="_Category", ThisKey="Category_ID", OtherKey="ID", IsForeignKey=true)]
 		public Category Category
 		{
 			get
@@ -3218,12 +3218,12 @@ namespace Repository.DbConnection
 					if ((previousValue != null))
 					{
 						this._Category.Entity = null;
-						previousValue.ServiceTables.Remove(this);
+						previousValue.SubCategories.Remove(this);
 					}
 					this._Category.Entity = value;
 					if ((value != null))
 					{
-						value.ServiceTables.Add(this);
+						value.SubCategories.Add(this);
 						this._Category_ID = value.ID;
 					}
 					else
@@ -3255,16 +3255,16 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		private void attach_Advertisements(Advertisement entity)
+		private void attach_ServiceOffers(ServiceOffer entity)
 		{
 			this.SendPropertyChanging();
-			entity.ServiceTable = this;
+			entity.SubCategory = this;
 		}
 		
-		private void detach_Advertisements(Advertisement entity)
+		private void detach_ServiceOffers(ServiceOffer entity)
 		{
 			this.SendPropertyChanging();
-			entity.ServiceTable = null;
+			entity.SubCategory = null;
 		}
 	}
 	
@@ -3294,9 +3294,9 @@ namespace Repository.DbConnection
 		
 		private EntitySet<Account> _Accounts;
 		
-		private EntitySet<Advertisement> _Advertisements;
-		
 		private EntitySet<Review> _Reviews;
+		
+		private EntitySet<ServiceOffer> _ServiceOffers;
 		
 		private EntityRef<Gender> _Gender;
 		
@@ -3331,8 +3331,8 @@ namespace Repository.DbConnection
 		public Users()
 		{
 			this._Accounts = new EntitySet<Account>(new Action<Account>(this.attach_Accounts), new Action<Account>(this.detach_Accounts));
-			this._Advertisements = new EntitySet<Advertisement>(new Action<Advertisement>(this.attach_Advertisements), new Action<Advertisement>(this.detach_Advertisements));
 			this._Reviews = new EntitySet<Review>(new Action<Review>(this.attach_Reviews), new Action<Review>(this.detach_Reviews));
+			this._ServiceOffers = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffers), new Action<ServiceOffer>(this.detach_ServiceOffers));
 			this._Gender = default(EntityRef<Gender>);
 			this._Logging = default(EntityRef<Logging>);
 			this._AddressTable = default(EntityRef<AddressTable>);
@@ -3544,19 +3544,6 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Advertisement", Storage="_Advertisements", ThisKey="PhoneNumber", OtherKey="Employee_Phone")]
-		public EntitySet<Advertisement> Advertisements
-		{
-			get
-			{
-				return this._Advertisements;
-			}
-			set
-			{
-				this._Advertisements.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Review", Storage="_Reviews", ThisKey="PhoneNumber", OtherKey="Customer_PhoneNumber")]
 		public EntitySet<Review> Reviews
 		{
@@ -3567,6 +3554,19 @@ namespace Repository.DbConnection
 			set
 			{
 				this._Reviews.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ServiceOffer", Storage="_ServiceOffers", ThisKey="PhoneNumber", OtherKey="Employee_Phone")]
+		public EntitySet<ServiceOffer> ServiceOffers
+		{
+			get
+			{
+				return this._ServiceOffers;
+			}
+			set
+			{
+				this._ServiceOffers.Assign(value);
 			}
 		}
 		
@@ -3704,18 +3704,6 @@ namespace Repository.DbConnection
 			entity.Users = null;
 		}
 		
-		private void attach_Advertisements(Advertisement entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_Advertisements(Advertisement entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-		
 		private void attach_Reviews(Review entity)
 		{
 			this.SendPropertyChanging();
@@ -3723,6 +3711,18 @@ namespace Repository.DbConnection
 		}
 		
 		private void detach_Reviews(Review entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_ServiceOffers(ServiceOffer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_ServiceOffers(ServiceOffer entity)
 		{
 			this.SendPropertyChanging();
 			entity.Users = null;
