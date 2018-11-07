@@ -105,17 +105,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Models\CommandHandler.cs" />
-    <Compile Include="Models\EnumMatchToBooleanConverter.cs" />
-    <Compile Include="Models\ClientViewModel.cs" />
-    <Compile Include="Models\NotifyBase.cs" />
-    <Compile Include="View\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="New\EnumMatchToBooleanConverter.cs" />
+    <Compile Include="New\NotifyBase.cs" />
+    <Compile Include="New\UserAppModel.cs" />
+    <Compile Include="New\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="View\Home.xaml">
+    <Page Include="New\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,15 +119,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\ClassMapper.cs" />
     <Compile Include="Mapping\MappingConfig.cs" />
-    <Compile Include="Models\UserAppModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

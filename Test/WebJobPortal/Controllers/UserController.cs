@@ -1,56 +1,139 @@
-﻿using AutoMapper;
-using ServiceLibrary;
-using ServiceLibrary.Models;
+﻿using JobPortal.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WebJobPortal.Models;
+using WebJobPortal.UserServiceReference;
 
 namespace WebJobPortal.Controllers
 {
     public class UserController : Controller
     {
-
+        private const int lenght = 8;
+        private const int n = 100000000;
         private readonly IUserService _proxy;
-        public UserController()//, IMapper mapper)
-        {
-            //_proxy = proxy;
-        }
-        public UserController(IUserService proxy)//, IMapper mapper)
-    {
-        _proxy = proxy;
-    }
 
-        public ActionResult Index()
+        public UserController(IUserService proxy)
         {
-            return View();
+            this._proxy = proxy;
         }
+
+        /*[HttpGet]
+        public ActionResult Index(int? phoneNumber)
+        {
+            if (phoneNumber.HasValue && lenght == (int)(Math.Log10(n)))
+            {
+                string pn = phoneNumber.ToString();
+                var found = _proxy.FindUser(pn);
+                UserModel um = new UserModel
+                {
+                    ID = found.ID,
+                    PhoneNumber = found.PhoneNumber,
+                    FirstName = found.FirstName,
+                    LastName = found.LastName,
+                    Email = found.Email,
+                    UserName = found.UserName,
+                    Password = found.Password,
+                    AddressLine = found.AddressLine,
+                    CityName = found.CityName,
+                    Postcode = found.Postcode,
+                    Region = found.Region,
+                    Gender = found.Gender
+                };
+                return View("UserProfile", um);
+            }
+            return View("Index");
+        }*/
+
+        [HttpGet]
+        public ActionResult UserProfile(UserModel um)
+        {
+                return View(um);
+        }
+
+        //GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
+
         //POST: Movie/Create
+        [HttpPost]
+        public ActionResult Create(UserModel user)
+        {
 
-        public ActionResult Delete()
-        {
-            return View("UserProfile");
+            if (ModelState.IsValid)
+            {
+                User u = new User
+                {
+                    ID = user.ID,
+                    PhoneNumber = user.PhoneNumber,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    Password = user.Password,
+                    AddressLine = user.AddressLine,
+                    CityName = user.CityName,
+                    Postcode = user.Postcode,
+                    Region = user.Region,
+                    Gender = user.Gender
+                };
+                _proxy.CreateUser(u);
+                ModelState.Clear();
+                ViewBag.SuccessMessage = "Creation done.";
+                return View("Create", new UserModel());
+            }
+            else
+            {
+                return View("Create", user);
+            }
         }
 
-        public ActionResult Edit()
+
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            return View("UserProfile");
-        }
-        public ActionResult Login()
-        {
-            return View();
+            var userDetails = this._proxy.DeleteUser(id);
+            if (userDetails == false)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View();
+            }
         }
 
-        public ActionResult UserProfile()
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id)
         {
-            return View();
+            User u = new User
+            {
+                ID = id,
+                FirstName = Request.Form["firstName"],
+                LastName = Request.Form["lastName"],
+                Gender = (Gender)Enum.Parse(typeof(Gender), Request.Form["gender"]),
+                PhoneNumber = Request.Form["phoneNumber"],
+                AddressLine = Request.Form["addressLine"],
+                Postcode = Request.Form["postcode"],
+                CityName = Request.Form["cityName"],
+                Region = (Region)Enum.Parse(typeof(Region), Request.Form["region"]),
+            };
+
+            bool result = this._proxy.EditWebUser(u);
+            if (result)
+            {
+                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+            }
+            else
+            {
+                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+            }
         }
+
+  
     }
 }

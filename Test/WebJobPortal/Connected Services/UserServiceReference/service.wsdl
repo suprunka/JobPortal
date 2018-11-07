@@ -9,31 +9,21 @@
               <wsp:Policy>
                 <sp:SecureConversationToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
                   <wsp:Policy>
-                    <sp:RequireDerivedKeys>
-                    </sp:RequireDerivedKeys>
+                    <sp:RequireDerivedKeys />
                     <sp:BootstrapPolicy>
                       <wsp:Policy>
                         <sp:SignedParts>
-                          <sp:Body>
-                          </sp:Body>
-                          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
-                          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
-                          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
-                          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
-                          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
-                          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
-                          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-                          </sp:Header>
+                          <sp:Body />
+                          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
                         </sp:SignedParts>
                         <sp:EncryptedParts>
-                          <sp:Body>
-                          </sp:Body>
+                          <sp:Body />
                         </sp:EncryptedParts>
                         <sp:SymmetricBinding>
                           <wsp:Policy>
@@ -41,96 +31,72 @@
                               <wsp:Policy>
                                 <sp:SpnegoContextToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
                                   <wsp:Policy>
-                                    <sp:RequireDerivedKeys>
-                                    </sp:RequireDerivedKeys>
-                                    <sp:MustNotSendCancel>
-                                    </sp:MustNotSendCancel>
-                                    <sp:MustNotSendAmend>
-                                    </sp:MustNotSendAmend>
-                                    <sp:MustNotSendRenew>
-                                    </sp:MustNotSendRenew>
+                                    <sp:RequireDerivedKeys />
+                                    <sp:MustNotSendCancel />
+                                    <sp:MustNotSendAmend />
+                                    <sp:MustNotSendRenew />
                                   </wsp:Policy>
                                 </sp:SpnegoContextToken>
                               </wsp:Policy>
                             </sp:ProtectionToken>
                             <sp:AlgorithmSuite>
                               <wsp:Policy>
-                                <sp:Basic256>
-                                </sp:Basic256>
+                                <sp:Basic256 />
                               </wsp:Policy>
                             </sp:AlgorithmSuite>
                             <sp:Layout>
                               <wsp:Policy>
-                                <sp:Strict>
-                                </sp:Strict>
+                                <sp:Strict />
                               </wsp:Policy>
                             </sp:Layout>
-                            <sp:IncludeTimestamp>
-                            </sp:IncludeTimestamp>
-                            <sp:EncryptSignature>
-                            </sp:EncryptSignature>
-                            <sp:OnlySignEntireHeadersAndBody>
-                            </sp:OnlySignEntireHeadersAndBody>
+                            <sp:IncludeTimestamp />
+                            <sp:EncryptSignature />
+                            <sp:OnlySignEntireHeadersAndBody />
                           </wsp:Policy>
                         </sp:SymmetricBinding>
                         <sp:Wss11>
-                          <wsp:Policy>
-                          </wsp:Policy>
+                          <wsp:Policy />
                         </sp:Wss11>
                         <sp:Trust13>
                           <wsp:Policy>
-                            <sp:MustSupportIssuedTokens>
-                            </sp:MustSupportIssuedTokens>
-                            <sp:RequireClientEntropy>
-                            </sp:RequireClientEntropy>
-                            <sp:RequireServerEntropy>
-                            </sp:RequireServerEntropy>
+                            <sp:MustSupportIssuedTokens />
+                            <sp:RequireClientEntropy />
+                            <sp:RequireServerEntropy />
                           </wsp:Policy>
                         </sp:Trust13>
                       </wsp:Policy>
                     </sp:BootstrapPolicy>
-                    <sp:MustNotSendAmend>
-                    </sp:MustNotSendAmend>
+                    <sp:MustNotSendAmend />
                   </wsp:Policy>
                 </sp:SecureConversationToken>
               </wsp:Policy>
             </sp:ProtectionToken>
             <sp:AlgorithmSuite>
               <wsp:Policy>
-                <sp:Basic256>
-                </sp:Basic256>
+                <sp:Basic256 />
               </wsp:Policy>
             </sp:AlgorithmSuite>
             <sp:Layout>
               <wsp:Policy>
-                <sp:Strict>
-                </sp:Strict>
+                <sp:Strict />
               </wsp:Policy>
             </sp:Layout>
-            <sp:IncludeTimestamp>
-            </sp:IncludeTimestamp>
-            <sp:EncryptSignature>
-            </sp:EncryptSignature>
-            <sp:OnlySignEntireHeadersAndBody>
-            </sp:OnlySignEntireHeadersAndBody>
+            <sp:IncludeTimestamp />
+            <sp:EncryptSignature />
+            <sp:OnlySignEntireHeadersAndBody />
           </wsp:Policy>
         </sp:SymmetricBinding>
         <sp:Wss11 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <wsp:Policy>
-          </wsp:Policy>
+          <wsp:Policy />
         </sp:Wss11>
         <sp:Trust13 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
           <wsp:Policy>
-            <sp:MustSupportIssuedTokens>
-            </sp:MustSupportIssuedTokens>
-            <sp:RequireClientEntropy>
-            </sp:RequireClientEntropy>
-            <sp:RequireServerEntropy>
-            </sp:RequireServerEntropy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
           </wsp:Policy>
         </sp:Trust13>
-        <wsaw:UsingAddressing>
-        </wsaw:UsingAddressing>
+        <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
@@ -138,26 +104,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -166,26 +123,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -194,26 +142,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -222,26 +161,55 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditWebUser_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditWebUser_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -250,26 +218,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -278,26 +237,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -306,26 +256,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -334,26 +275,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -362,26 +294,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -390,26 +313,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -418,26 +332,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -446,26 +351,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -474,26 +370,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -502,26 +389,17 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
+          <sp:Body />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
@@ -529,8 +407,7 @@
   <wsp:Policy wsu:Id="UserServiceTcpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
-        </msb:BinaryEncoding>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <wsp:Policy>
             <sp:TransportToken>
@@ -542,20 +419,17 @@
             </sp:TransportToken>
             <sp:AlgorithmSuite>
               <wsp:Policy>
-                <sp:Basic256>
-                </sp:Basic256>
+                <sp:Basic256 />
               </wsp:Policy>
             </sp:AlgorithmSuite>
             <sp:Layout>
               <wsp:Policy>
-                <sp:Strict>
-                </sp:Strict>
+                <sp:Strict />
               </wsp:Policy>
             </sp:Layout>
           </wsp:Policy>
         </sp:TransportBinding>
-        <wsaw:UsingAddressing>
-        </wsaw:UsingAddressing>
+        <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
@@ -577,6 +451,12 @@
   </wsdl:message>
   <wsdl:message name="IUserService_FindUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_EditWebUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditWebUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_EditWebUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditWebUserResponse" />
   </wsdl:message>
   <wsdl:message name="IUserService_DeleteUser_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUser" />
@@ -617,6 +497,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/FindUser" message="tns:IUserService_FindUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/FindUserResponse" message="tns:IUserService_FindUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="EditWebUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/EditWebUser" message="tns:IUserService_EditWebUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/EditWebUserResponse" message="tns:IUserService_EditWebUser_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/DeleteUser" message="tns:IUserService_DeleteUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/DeleteUserResponse" message="tns:IUserService_DeleteUser_OutputMessage" />
@@ -639,104 +523,99 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UserServiceHttpEndpoint" type="tns:IUserService">
-    <wsp:PolicyReference URI="#UserServiceHttpEndpoint_policy">
-    </wsp:PolicyReference>
+    <wsp:PolicyReference URI="#UserServiceHttpEndpoint_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/CreateUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateUser_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateUser_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="FindUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/FindUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUser_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUser_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUser_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditWebUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditWebUser" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditWebUser_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditWebUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/DeleteUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/EditUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUser_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUser_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAll">
       <soap12:operation soapAction="http://tempuri.org/IUserService/GetAll" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetAll_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetAll_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetAll_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetAll_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ListByGender">
       <soap12:operation soapAction="http://tempuri.org/IUserService/ListByGender" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByGender_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByGender_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByGender_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByGender_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ListByRegion">
       <soap12:operation soapAction="http://tempuri.org/IUserService/ListByRegion" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByRegion_Input_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByRegion_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByRegion_output_policy">
-        </wsp:PolicyReference>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByRegion_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="UserServiceTcpEndpoint" type="tns:IUserService">
-    <wsp:PolicyReference URI="#UserServiceTcpEndpoint_policy">
-    </wsp:PolicyReference>
+    <wsp:PolicyReference URI="#UserServiceTcpEndpoint_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="CreateUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/CreateUser" style="document" />
@@ -749,6 +628,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/FindUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditWebUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditWebUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -808,7 +696,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:8080/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-GQ6AKJT\locac</Upn>
+          <Upn>JAKUB\jakub</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

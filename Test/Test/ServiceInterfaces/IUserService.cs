@@ -14,7 +14,10 @@ namespace ServiceLibrary
         bool CreateUser(User u);
 
         [OperationContract]
-        User FindUser(int id);
+        User FindUser(string phoneNumber);
+
+        [OperationContract]
+        bool EditWebUser(User u);
 
         [OperationContract]
         bool DeleteUser(int id);
@@ -26,10 +29,10 @@ namespace ServiceLibrary
         User[] GetAll();
 
         [OperationContract]
-        User[] List(Gender gender);
+        User[] ListByGender(Gender gender);
 
         [OperationContract]
-        User[] List(Region region);
+        User[] ListByRegion(Region region);
 
 
     }

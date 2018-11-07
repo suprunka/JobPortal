@@ -6,15 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace AppJobPortal.Models
+namespace AppJobPortal.New
 {
     public class EnumMatchToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
                                       object parameter, CultureInfo culture)
-            {
-                if (value == null || parameter == null)
-                    return false;
+        {
+            if (value == null || parameter == null)
+                return false;
 
             string checkValue = value.ToString();
             string targetValue = parameter.ToString();
@@ -35,5 +35,4 @@ namespace AppJobPortal.Models
             return null;
         }
     }
-    }
-
+}

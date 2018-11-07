@@ -1,7 +1,9 @@
-﻿using AppJobPortal.UserServiceReferenceTcp;
+﻿using AppJobPortal.New;
+using AppJobPortal.UserServiceReferenceTcp;
 using JobPortal.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ using Region = AppJobPortal.UserServiceReferenceTcp.Region;
 
 namespace AppJobPortal.Models
 {
-    public class UserAppModel : NotifyBase
+    public class UserAppModel : NotifyBase//, IDataErrorInfo
     {
         string phoneNumber, firstName, lastName, email, userName, password,
              addressLine, cityName, postCode;
@@ -18,7 +20,7 @@ namespace AppJobPortal.Models
         Region region;
         Gender gender;
 
-        public UserAppModel(int Id,string phoneNumber, string firstName, string lastName, string email, string userName, string password,
+        public UserAppModel(int Id, string phoneNumber, string firstName, string lastName, string email, string userName, string password,
             string addressLine, string cityName, string postCode, Region region, Gender gender)
         {
             this.Id = Id;
@@ -34,10 +36,39 @@ namespace AppJobPortal.Models
             this.region = region;
             this.gender = gender;
         }
+        public UserAppModel( string phoneNumber, string firstName, string lastName, string email, string userName, string password,
+                   string addressLine, string cityName, string postCode, Region region, Gender gender)
+        {
+            this.phoneNumber = phoneNumber;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.userName = userName;
+            this.password = password;
+            this.addressLine = addressLine;
+            this.cityName = cityName;
+            this.postCode = postCode;
+            this.region = region;
+            this.gender = gender;
+        }
 
         public UserAppModel()
         {
+        }
 
+        public UserAppModel(int iD, string phoneNumber, string firstName, string lastName, string email,string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
+        {
+            ID = iD;
+            this.phoneNumber = phoneNumber;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.userName = username;
+            this.addressLine = addressLine;
+            this.cityName = cityName;
+            this.postCode = postcode;
+            this.region = region;
+            this.gender = gender;
         }
 
         public virtual int ID
@@ -49,7 +80,7 @@ namespace AppJobPortal.Models
             get { return phoneNumber; }
             set
             {
-                OnPropertyChanged("Phone number");
+                OnPropertyChanged("Phonenumber");
                 phoneNumber = value;
             }
         }
@@ -71,7 +102,7 @@ namespace AppJobPortal.Models
             get { return lastName; }
             set
             {
-                OnPropertyChanged("Last name");
+                OnPropertyChanged("Lastname");
                 lastName = value;
             }
         }
@@ -91,7 +122,7 @@ namespace AppJobPortal.Models
             get { return userName; }
             set
             {
-                OnPropertyChanged("User name");
+                OnPropertyChanged("Username");
                 userName = value;
             }
         }
@@ -111,7 +142,7 @@ namespace AppJobPortal.Models
             get { return addressLine; }
             set
             {
-                OnPropertyChanged("Address line");
+                OnPropertyChanged("Addressline");
                 addressLine = value;
             }
         }
@@ -131,7 +162,7 @@ namespace AppJobPortal.Models
             get { return postCode; }
             set
             {
-                OnPropertyChanged("Post code");
+                OnPropertyChanged("Postcode");
                 postCode = value;
             }
         }
@@ -155,5 +186,35 @@ namespace AppJobPortal.Models
                 gender = value;
             }
         }
+       /* #region implementing IDataErrorInfo
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = null;
+                if (columnName == "FirstName")
+                {
+                    if (string.IsNullOrEmpty(FirstName))
+                        result = "Please enter a First Name";
+                }
+                if (columnName == "LastName")
+                {
+                    if (string.IsNullOrEmpty(LastName))
+                        result = "Please enter a Last Name";
+                }
+                if (columnName == "Email")
+                {
+                    if (!Email.Contains("@"))
+                        result = "Please enter a valid email";
+                }
+                return result;
+            }
+        }
+        #endregion*/
     }
 }

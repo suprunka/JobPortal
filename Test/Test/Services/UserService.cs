@@ -7,6 +7,7 @@ using System.ServiceModel;
 using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
+using ServiceLibrary.Models;
 using Gender = JobPortal.Model.Gender;
 using Region = JobPortal.Model.Region;
 
@@ -34,32 +35,37 @@ namespace ServiceLibrary
         {
             try
             {
-                _database.Create(new Users
+                if (RegexMatch.DoesUserMatch(u))
                 {
-                    AddressTable = new AddressTable
+                    _database.Create(new Users
                     {
-                        Postcode = u.Postcode,
-                        City = u.CityName,
-                        Region = u.Region.ToString(),
-                    },
-                    Logging = new Logging
-                    {
-                        Password = u.Password,
-                        UserName = u.UserName,
-                    },
-                    Gender = new Repository.DbConnection.Gender
-                    {
-                        Gender1 = u.Gender.ToString(),
-                    },
+                        AddressTable = new AddressTable
+                        {
+                            Postcode = u.Postcode,
+                            City = u.CityName,
+                            Region = u.Region.ToString(),
+                        },
+                        Logging = new Logging
+                        {
+                            Password = u.Password,
+                            UserName = u.UserName,
+                        },
+                        Gender = new Repository.DbConnection.Gender
+                        {
+                            Gender1 = u.Gender.ToString(),
+                        },
 
-                    PhoneNumber = u.PhoneNumber,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    AddressLine = u.AddressLine,
+                        PhoneNumber = u.PhoneNumber,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        Email = u.Email,
+                        AddressLine = u.AddressLine,
 
-                });
-                return true;
+                    });
+                    return true;
+                }
+                return false;
+
             }
             catch (DuplicateKeyException)
             {
@@ -89,32 +95,36 @@ namespace ServiceLibrary
         {
             try
             {
-                _database.Update(new Users
+                if (RegexMatch.DoesUserMatch(u))
                 {
-                    AddressTable = new AddressTable
+                    _database.Update(new Users
                     {
-                        Postcode = u.Postcode,
-                        City = u.CityName,
-                        Region = u.Region.ToString(),
-                    },
-                    Logging = new Logging
-                    {
-                        Password = u.Password,
-                        UserName = u.UserName,
-                    },
-                    Gender = new Repository.DbConnection.Gender
-                    {
-                        Gender1 = u.Gender.ToString(),
-                    },
+                        AddressTable = new AddressTable
+                        {
+                            Postcode = u.Postcode,
+                            City = u.CityName,
+                            Region = u.Region.ToString(),
+                        },
+                        Logging = new Logging
+                        {
+                            Password = u.Password,
+                            UserName = u.UserName,
+                        },
+                        Gender = new Repository.DbConnection.Gender
+                        {
+                            Gender1 = u.Gender.ToString(),
+                        },
 
-                    PhoneNumber = u.PhoneNumber,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    AddressLine = u.AddressLine,
+                        PhoneNumber = u.PhoneNumber,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        Email = u.Email,
+                        AddressLine = u.AddressLine,
 
-                });
-                return true;
+                    });
+                    return true;
+                }
+                return false;
             }
             catch
             {
@@ -123,12 +133,52 @@ namespace ServiceLibrary
 
         }
 
-        public User FindUser(int id)
+        public bool EditWebUser(User u)
         {
             try
             {
-                var result = _database.Get(t => t.ID == id);
-                return new User {
+                if (RegexMatch.DoesUserMatch(u))
+                {
+                    _database.UpdateWeb(new Users
+                    {
+                        AddressTable = new AddressTable
+                        {
+                            Postcode = u.Postcode,
+                            City = u.CityName,
+                            Region = u.Region.ToString(),
+                        },
+
+                        Gender = new Repository.DbConnection.Gender
+                        {
+                            Gender1 = u.Gender.ToString(),
+                        },
+                        ID = u.ID,
+                        PhoneNumber = u.PhoneNumber,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+
+                        AddressLine = u.AddressLine,
+
+                    });
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+
+        public User FindUser(string phoneNumber)
+        {
+            try
+            {
+                var result = _database.Get(t => t.PhoneNumber == phoneNumber);
+                return new User
+                {
                     ID = result.ID,
                     PhoneNumber = result.PhoneNumber,
                     FirstName = result.FirstName,
@@ -139,17 +189,18 @@ namespace ServiceLibrary
                     AddressLine = result.AddressLine,
                     CityName = result.AddressTable.City,
                     Postcode = result.AddressTable.Postcode,
-                    Region = (Region) Enum.Parse(typeof(Region), result.AddressTable.Region),
-                    Gender = (Gender) Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                    Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                 };
             }
             catch
             {
                 return null;
-
             }
 
         }
+
+
 
         public User[] GetAll()
         {
@@ -175,7 +226,7 @@ namespace ServiceLibrary
             return resultToReturn.ToArray();
         }
 
-        public User[] List(Gender gender)
+        public User[] ListByGender(Gender gender)
         {
             IList<User> resultToReturn = new List<User>();
             foreach (var u in _database.List(Users => Users.Gender.Gender1 == gender.ToString()))
@@ -199,7 +250,7 @@ namespace ServiceLibrary
             return resultToReturn.ToArray();
         }
 
-        public User[] List(Region region)
+        public User[] ListByRegion(Region region)
         {
             IList<User> resultToReturn = new List<User>();
             foreach (var u in _database.List(Users => Users.AddressTable.Region == region.ToString()))
