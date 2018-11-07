@@ -38,10 +38,15 @@ namespace WebJobPortal.Models
             _gender = gender;
         }
 
+
+
         public UserModel()
         {
 
         }
+
+        public virtual int ID { get; set; }
+
         [Display(Name = "Phone Number:")]
         [Required(ErrorMessage = "Phone number required")]
         [RegularExpression("^[0-9]{8}$")]
@@ -49,12 +54,12 @@ namespace WebJobPortal.Models
 
         [Display(Name = "First Name:")]
         [Required(ErrorMessage = "First name required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
         public virtual String FirstName { get; set; }
 
         [Display(Name = "Last Name:")]
         [Required(ErrorMessage = ":Last name required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$", ErrorMessage = "Last name characters must be included in danish alphabeth.")]  
         public virtual String LastName { get; set; }
 
         [Display(Name = "Email:")]
@@ -64,7 +69,7 @@ namespace WebJobPortal.Models
 
         [Display(Name = "User Name:")]
         [Required(ErrorMessage = "User name required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{3,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{3,}$")]
         public virtual String UserName { get; set; }
 
         [Display(Name = "Password:")]
@@ -74,12 +79,12 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Address:")]
         [Required(ErrorMessage = "Address (street and number) required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
         public virtual String AddressLine { get; set; }
 
         [Display(Name = "City:")]
         [Required(ErrorMessage = "City required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
         public virtual String CityName { get; set; }
 
         [Display(Name = "Postcode:")]

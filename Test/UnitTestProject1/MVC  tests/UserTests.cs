@@ -4,42 +4,32 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repositories;
-using ServiceLibrary;
-using ServiceLibrary.Models;
+
 using WebJobPortal.Controllers;
-using WebJobPortal.Mapping;
-using WebJobPortal.Models;
-using System.Linq;
 using System.Web.Mvc;
-using JobPortal.Model;
+using WebJobPortal.UserServiceReference;
 
 namespace UnitTestProject1.MVC__tests
 {
     [TestClass]
     public class UserTests
     {
-
-        [ClassInitialize]
-        public static void Init(TestContext context)
-        {
-            MappingConfig.RegisterMaps();
-        }
-
-
         //Create
         #region
-
+        #endregion
         [TestMethod]
         public void Test_Create_View()
         {
             var serviceMock = new Mock<IUserService>();
+            serviceMock.Setup(s=> s.CreateUser)
             var controller = new UserController(serviceMock.Object);
             var result = controller.Create() as ViewResult;
             Assert.AreEqual("Create", result.ViewName);
 
         }
+    }
 
-        [TestMethod]
+        /*[TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
         {
             var serviceMock = new Mock<IUserService>();
@@ -270,7 +260,7 @@ namespace UnitTestProject1.MVC__tests
             var model = resPage.ViewData.Model as IEnumerable<Users>;
 
             Assert.IsTrue(model.Count() == 3);
-        }*/
+        }
         #endregion
 
         //Update
@@ -456,5 +446,5 @@ namespace UnitTestProject1.MVC__tests
 
 
     }
-
+*/
 }

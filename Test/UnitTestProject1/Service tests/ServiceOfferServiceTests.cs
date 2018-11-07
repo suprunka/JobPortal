@@ -151,7 +151,7 @@ namespace UnitTestProject1.Service_tests
                 100 == offerMock.Object.RatePerHour
                  );
         }
-        [TestMethod]
+        /*[TestMethod]
         public void Edit_With_Valid_Inputs()
         {
             var userMock = new Mock<UserWebModel>();
@@ -172,7 +172,7 @@ namespace UnitTestProject1.Service_tests
                 userSenftoService.LastName == "Dreuk" &&
                 userSenftoService.PhoneNumber == "12334455"
                 );
-        }
+        }*/
         #endregion
     }
 }
