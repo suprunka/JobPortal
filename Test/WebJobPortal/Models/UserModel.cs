@@ -43,17 +43,17 @@ namespace WebJobPortal.Models
 
         }
         [Display(Name = "Phone Number:")]
-        [Required(ErrorMessage = "Phone number required")]
-        [RegularExpression("^[0-9]{8}$")]
+        [Required]
+        [RegularExpression("^[0-9]{8}$",ErrorMessage = "Phone number required")]
         public virtual String PhoneNumber { get; set; }
 
         [Display(Name = "First Name:")]
-        [Required(ErrorMessage = "First name required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
+        [Required]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$", ErrorMessage = "First name required")]
         public virtual String FirstName { get; set; }
 
         [Display(Name = "Last Name:")]
-        [Required(ErrorMessage = ":Last name required")]
+        [Required(ErrorMessage = "Last name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå]{1,}$")]
         public virtual String LastName { get; set; }
 

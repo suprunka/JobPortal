@@ -28,87 +28,27 @@ namespace WebJobPortal.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
         //POST: Movie/Create
-        [HttpPost]
-        public ActionResult Create(UserModel user)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
 
-                  //  _proxy.CreateUser(AutoMapper.Mapper.Map(user, new JobPortal.Model.User()));
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View("Create",user);
-                }
-            }
-            catch
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-            }
+        public ActionResult Delete()
+        {
+            return View("UserProfile");
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult Edit()
         {
-            if (id == null || !id.HasValue)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            var userDetails = this._proxy.FindUser((int)id);
-
-            if (userDetails == null)
-                return HttpNotFound();
-
-            UserModel userToDelete = new UserModel {UserName=userDetails.UserName, Email=userDetails.Email};
-
-            return View("Index");
+            return View("UserProfile");
         }
-
-        public ActionResult Edit(int? id)
-        {
-            if (id == null || !id.HasValue)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            var userDetails = this._proxy.FindUser((int)id);
-
-            if (userDetails == null)
-                return HttpNotFound();
-
-            var userToEdit = new UserModel { UserName = userDetails.UserName, Email = userDetails.Email};
-
-            ViewBag.Title = "Edit: " + userToEdit.UserName;
-
-            return View(userToEdit);
-
-        }
-
-        // POST: Movie/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, UserModel user)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                    return View(user);
-
-                //this._proxy.EditUser(new MovieResource { Id = movie.Id, Title = movie.Title, Description = movie.Description });
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-            }
-        }
-        public ActionResult Login(UserModel user)
+        public ActionResult Login()
         {
             return View();
         }
 
-        public ActionResult UserProfile(UserModel user)
+        public ActionResult UserProfile()
         {
             return View();
         }
