@@ -126,7 +126,18 @@ namespace WebJobPortal.Controllers
             bool result = this._proxy.EditWebUser(u);
             if (result)
             {
-                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+                return RedirectToAction("UserProfile", "User", new UserModel
+                {
+                    ID = u.ID,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Gender = u.Gender,
+                    PhoneNumber = u.PhoneNumber,
+                    AddressLine = u.AddressLine,
+                    Postcode = u.Postcode,
+                    CityName = u.CityName,
+                    Region = u.Region
+                });
             }
             else
             {
