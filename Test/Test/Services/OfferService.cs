@@ -30,10 +30,14 @@ namespace ServiceLibrary
 
             _database.Create(new Repository.DbConnection.ServiceOffer
             {
+
                 SubCategory = new Repository.DbConnection.SubCategory
                 {
                     Name = offer.Subcategory.ToString(),
-                   
+                    Category = new Repository.DbConnection.Category
+                    {
+                        Name = offer.Category.ToString(),
+                   },
                 },
                 Title = offer.Title,
                 Description = offer.Description,

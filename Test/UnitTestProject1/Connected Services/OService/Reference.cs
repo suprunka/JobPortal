@@ -16,16 +16,16 @@ namespace UnitTestProject1.OService {
     public interface IOfferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
-        ServiceLibrary.Models.Offer CreateServiceOffer(ServiceLibrary.Models.Offer serviceOffer);
+        AppJobPortal.Model.Offer CreateServiceOffer(AppJobPortal.Model.Offer serviceOffer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
-        System.Threading.Tasks.Task<ServiceLibrary.Models.Offer> CreateServiceOfferAsync(ServiceLibrary.Models.Offer serviceOffer);
+        System.Threading.Tasks.Task<AppJobPortal.Model.Offer> CreateServiceOfferAsync(AppJobPortal.Model.Offer serviceOffer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/FindServiceOffer", ReplyAction="http://tempuri.org/IOfferService/FindServiceOfferResponse")]
-        ServiceLibrary.Models.Offer FindServiceOffer(int ID);
+        AppJobPortal.Model.Offer FindServiceOffer(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/FindServiceOffer", ReplyAction="http://tempuri.org/IOfferService/FindServiceOfferResponse")]
-        System.Threading.Tasks.Task<ServiceLibrary.Models.Offer> FindServiceOfferAsync(int ID);
+        System.Threading.Tasks.Task<AppJobPortal.Model.Offer> FindServiceOfferAsync(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/DeleteServiceOffer", ReplyAction="http://tempuri.org/IOfferService/DeleteServiceOfferResponse")]
         bool DeleteServiceOffer(int ID);
@@ -34,16 +34,16 @@ namespace UnitTestProject1.OService {
         System.Threading.Tasks.Task<bool> DeleteServiceOfferAsync(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/UpdateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/UpdateServiceOfferResponse")]
-        bool UpdateServiceOffer(ServiceLibrary.Models.Offer serviceOffer);
+        bool UpdateServiceOffer(AppJobPortal.Model.Offer serviceOffer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/UpdateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/UpdateServiceOfferResponse")]
-        System.Threading.Tasks.Task<bool> UpdateServiceOfferAsync(ServiceLibrary.Models.Offer serviceOffer);
+        System.Threading.Tasks.Task<bool> UpdateServiceOfferAsync(AppJobPortal.Model.Offer serviceOffer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
-        ServiceLibrary.Models.Offer[] GetAllOffers();
+        AppJobPortal.Model.Offer[] GetAllOffers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
-        System.Threading.Tasks.Task<ServiceLibrary.Models.Offer[]> GetAllOffersAsync();
+        System.Threading.Tasks.Task<AppJobPortal.Model.Offer[]> GetAllOffersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -73,19 +73,19 @@ namespace UnitTestProject1.OService {
                 base(binding, remoteAddress) {
         }
         
-        public ServiceLibrary.Models.Offer CreateServiceOffer(ServiceLibrary.Models.Offer serviceOffer) {
+        public AppJobPortal.Model.Offer CreateServiceOffer(AppJobPortal.Model.Offer serviceOffer) {
             return base.Channel.CreateServiceOffer(serviceOffer);
         }
         
-        public System.Threading.Tasks.Task<ServiceLibrary.Models.Offer> CreateServiceOfferAsync(ServiceLibrary.Models.Offer serviceOffer) {
+        public System.Threading.Tasks.Task<AppJobPortal.Model.Offer> CreateServiceOfferAsync(AppJobPortal.Model.Offer serviceOffer) {
             return base.Channel.CreateServiceOfferAsync(serviceOffer);
         }
         
-        public ServiceLibrary.Models.Offer FindServiceOffer(int ID) {
+        public AppJobPortal.Model.Offer FindServiceOffer(int ID) {
             return base.Channel.FindServiceOffer(ID);
         }
         
-        public System.Threading.Tasks.Task<ServiceLibrary.Models.Offer> FindServiceOfferAsync(int ID) {
+        public System.Threading.Tasks.Task<AppJobPortal.Model.Offer> FindServiceOfferAsync(int ID) {
             return base.Channel.FindServiceOfferAsync(ID);
         }
         
@@ -97,19 +97,19 @@ namespace UnitTestProject1.OService {
             return base.Channel.DeleteServiceOfferAsync(ID);
         }
         
-        public bool UpdateServiceOffer(ServiceLibrary.Models.Offer serviceOffer) {
+        public bool UpdateServiceOffer(AppJobPortal.Model.Offer serviceOffer) {
             return base.Channel.UpdateServiceOffer(serviceOffer);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateServiceOfferAsync(ServiceLibrary.Models.Offer serviceOffer) {
+        public System.Threading.Tasks.Task<bool> UpdateServiceOfferAsync(AppJobPortal.Model.Offer serviceOffer) {
             return base.Channel.UpdateServiceOfferAsync(serviceOffer);
         }
         
-        public ServiceLibrary.Models.Offer[] GetAllOffers() {
+        public AppJobPortal.Model.Offer[] GetAllOffers() {
             return base.Channel.GetAllOffers();
         }
         
-        public System.Threading.Tasks.Task<ServiceLibrary.Models.Offer[]> GetAllOffersAsync() {
+        public System.Threading.Tasks.Task<AppJobPortal.Model.Offer[]> GetAllOffersAsync() {
             return base.Channel.GetAllOffersAsync();
         }
     }
