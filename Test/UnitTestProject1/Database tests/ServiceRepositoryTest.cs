@@ -25,7 +25,7 @@ namespace UnitTestProject1
                 },
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_Phone = "123456780",
+                Employee_Phone = "12345678",
                 Title = "Sample",
             };
             return serviceOfferStub;
@@ -39,9 +39,17 @@ namespace UnitTestProject1
             var context = new JobPortalTestDBDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
-                var result = unitOfWork.Offers.Create(GetServiceOffer());
-                Assert.IsTrue(result);
-                context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                try
+                {
+                    var result = unitOfWork.Offers.Create(GetServiceOffer());
+                    Assert.IsNotNull(result);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                
             }
 
            

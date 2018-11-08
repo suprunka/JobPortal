@@ -24,17 +24,15 @@ namespace Repository
         }
 
 
-        public virtual bool Create(T obj)
+        public virtual T Create(T obj)
         {
             try
             {
-                _Table.InsertOnSubmit(obj);
-                db.SubmitChanges();
-                return true;
+                return null; 
             }
             catch
             {
-                return false;
+                return null;
             }
         }
 

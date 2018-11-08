@@ -23,16 +23,16 @@ namespace Repository
 
         }
 
-        public override bool Create(ServiceOffer offer)
+        public override ServiceOffer Create(ServiceOffer offer)
         {
-            bool result = false;
+            ServiceOffer result = null;
             using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
                 try
                 {
-                    _context.GetTable<ServiceOffer>().InsertOnSubmit(new ServiceOffer
+                    ServiceOffer s = new ServiceOffer
                     {
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
@@ -40,13 +40,17 @@ namespace Repository
                         Employee_Phone = offer.Employee_Phone,
                         Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory.Name)).ID
 
-                    });
-                    result = true;
+                    };
+
+                    _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
+                    _context.SubmitChanges();
+                    result = s;
+                    sql.Commit();
                 }
                 catch (Exception e)
                 {
                     sql.Rollback();
-                    result = false;
+                    result = null;
                     throw e;
                 }
                 finally
@@ -58,40 +62,7 @@ namespace Repository
         }
 
 
-        /*public override bool Create(ServiceOffer offer)
-        {
-            bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
-            {
-                objConn.Open();
-                sql = objConn.BeginTransaction();
-                try
-                {
-                    _context.GetTable<ServiceOffer>().InsertOnSubmit(new ServiceOffer
-                    {
-                        Description = offer.Description,
-                        RatePerHour = offer.RatePerHour,
-                        Title = offer.Title,
-                        Employee_Phone = offer.Employee_Phone,
-                        Subcategory_ID= _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory)).ID
-              
-                    });
-                    result = true;
-                }
-                catch (Exception e)
-                {
-                    sql.Rollback();
-                    result = false;
-                    throw e;
-                }
-                finally
-                {
-                    objConn.Close();
-                }
-            }
-            return result;
-        }*/
-
+        
         public override ServiceOffer Get(Expression<Func<ServiceOffer, bool>> predicate)
         {
             return base.Get(predicate);

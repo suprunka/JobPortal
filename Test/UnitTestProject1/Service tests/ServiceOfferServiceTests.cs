@@ -12,6 +12,7 @@ namespace UnitTestProject1.Service_tests
     [TestClass]
     public class ServiceOfferServiceTests
     {
+        /*
         //Create
         #region
 
@@ -172,8 +173,9 @@ namespace UnitTestProject1.Service_tests
                 userSenftoService.LastName == "Dreuk" &&
                 userSenftoService.PhoneNumber == "12334455"
                 );
-        }*/
+        }
         #endregion
+        */
     }
 }
 
