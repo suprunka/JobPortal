@@ -1,6 +1,4 @@
-﻿using JobPortal.Model;
-using Repositories;
-using Repository.DbConnection;
+﻿using Repository.DbConnection;
 
 namespace Repository
 {

@@ -124,9 +124,9 @@
       <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
       <Name>JobPortal.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repositories.csproj">
+    <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
-      <Name>Repositories</Name>
+      <Name>Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceHost\ServiceHost.csproj">
       <Project>{d6747a31-10f4-46ed-8e7d-78481f93e3d1}</Project>

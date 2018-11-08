@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System.Data.Linq;
 using System.Linq;
-
 using Repository;
-using JobPortal.Model;
-using Repository.DbConnection;
 using UnitTestProject1.Database_tests;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Users = Repository.DbConnection.Users;

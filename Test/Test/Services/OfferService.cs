@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Repositories;
-using System.ServiceModel.Description;
-using ServiceLibrary.Models;
 using AppJobPortal.Model;
 using System.ServiceModel;
-using Repository.OfferRepository;
 using Repository.DbConnection;
+using Repository;
 
 namespace ServiceLibrary
 {
@@ -28,7 +25,7 @@ namespace ServiceLibrary
         public bool CreateServiceOffer(Offer offer)
         {
 
-            _database.Create(new Repository.DbConnection.ServiceOffer
+            _database.Create(new ServiceOffer
             {
                 SubCategory = new Repository.DbConnection.SubCategory
                 {

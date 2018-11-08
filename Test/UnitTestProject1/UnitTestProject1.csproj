@@ -101,12 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App test\UserTests.cs" />
-    <Compile Include="Connected Services\OService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\UService\Reference.cs">
+    <Compile Include="Connected Services\UserService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -116,6 +111,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JobPortalTestDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Database tests\ServiceRepositoryTest.cs" />
     <Compile Include="MVC  tests\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -125,30 +121,20 @@
     </Compile>
     <Compile Include="Service tests\ServiceOfferServiceTests.cs" />
     <Compile Include="Service tests\UserServiceTests.cs" />
-    <Compile Include="Database tests\RepositoryTest.cs" />
+    <Compile Include="Database tests\UserRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OService\service.wsdl" />
-    <None Include="Connected Services\OService\service.xsd">
+    <None Include="Connected Services\UserService\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OService\service1.xsd">
+    <None Include="Connected Services\UserService\service.wsdl" />
+    <None Include="Connected Services\UserService\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OService\ServiceLibrary.Models.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UService\service.wsdl" />
-    <None Include="Connected Services\UService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UService\ServiceLibrary.Models.xsd">
+    <None Include="Connected Services\UserService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Database tests\JobPortalTestDB.dbml">
@@ -167,10 +153,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\OService\" />
-    <WCFMetadataStorage Include="Connected Services\UService\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
       <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
       <Name>AppJobPortal</Name>
@@ -179,9 +161,9 @@
       <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
       <Name>JobPortal.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repositories.csproj">
+    <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
-      <Name>Repositories</Name>
+      <Name>Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceHost\ServiceHost.csproj">
       <Project>{d6747a31-10f4-46ed-8e7d-78481f93e3d1}</Project>
@@ -200,31 +182,22 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\OService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\OService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\OService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\UserService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UserService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UserService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UserService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

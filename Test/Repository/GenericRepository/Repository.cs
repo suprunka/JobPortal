@@ -9,7 +9,7 @@ using System.Data.Linq;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Repositories
+namespace Repository
 {
 
     public class Repository<T> : IRepository<T> where T : class
@@ -62,21 +62,36 @@ namespace Repositories
 
         public virtual T Get(Expression<Func<T, bool>> predicate)
         {
-            return _Table.FirstOrDefault(predicate);
+            try
+            {
+                T found = db.GetTable<T>().FirstOrDefault(predicate);
+                return found;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 
         public virtual IQueryable<T> GetAll()
         {
-            IQueryable<T> listOfAll = _Table;
-            return listOfAll;
+            IQueryable<T> allOffers = db.GetTable<T>();
+            return allOffers;
         }
 
 
         public virtual IQueryable<T> List(Expression<Func<T, bool>> predicate)
         {
-            IQueryable<T> filteredList = _Table.Where(predicate);
-            return filteredList;
+            try
+            {
+                IQueryable<T> filteredResult = db.GetTable<T>().Where(predicate);
+                return filteredResult;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

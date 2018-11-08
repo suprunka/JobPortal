@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Linq;
 
 namespace Repository
 {
@@ -16,10 +11,14 @@ namespace Repository
         {
             _context = context;
             Users = new UsersRepository(_context);
+            Offers = new OfferRepository(_context);
         }
+
+
         public IUserRepository Users { get; private set; }
 
-  
+        public IOfferRepository Offers { get; private set; }
+
         public void Dispose()
         {
             _context.Dispose();

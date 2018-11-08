@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using AppJobPortal.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Repositories;
+using Repository;
 using ServiceLibrary;
-using ServiceLibrary.Models;
-using WebJobPortal.Controllers;
-using WebJobPortal.Models;
 
 namespace UnitTestProject1.Service_tests
 {
@@ -21,9 +19,11 @@ namespace UnitTestProject1.Service_tests
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
             var offerMock = new Mock<Offer>();
-
             offerMock.SetupAllProperties();
+
+
             var dbMock = new Mock<IRepository<Offer>>();
+            dbMock.Setup(x => x.Create(offerMock.Object)).Returns(true);
 
             OfferService service = new OfferService(dbMock.Object);
             service.CreateServiceOffer(offerMock.Object);

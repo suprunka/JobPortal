@@ -1,5 +1,4 @@
-﻿using AppJobPortal.Model;
-using Repositories;
+﻿
 using Repository.DbConnection;
 using System;
 using System.Configuration;
@@ -8,23 +7,58 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Repository.OfferRepository
+namespace Repository
 {
-    public class OfferRepository : Repository<Offer>, IOfferRepository
+    public class OfferRepository : Repository<ServiceOffer>, IOfferRepository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
         private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        private JobPortalDatabaseDataContext jobPortalDatabaseDataContext;
+
 
         public OfferRepository(DataContext context) : base(context)
         {
             _context = context;
+
+
         }
 
-      
+        public override bool Create(ServiceOffer offer)
+        {
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            {
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    _context.GetTable<ServiceOffer>().InsertOnSubmit(new ServiceOffer
+                    {
+                        Description = offer.Description,
+                        RatePerHour = offer.RatePerHour,
+                        Title = offer.Title,
+                        Employee_Phone = offer.Employee_Phone,
+                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory.Name)).ID
 
-        public bool Create(ServiceOffer offer)
+                    });
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    sql.Rollback();
+                    result = false;
+                    throw e;
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
+        }
+
+
+        /*public override bool Create(ServiceOffer offer)
         {
             bool result = false;
             using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
@@ -56,31 +90,33 @@ namespace Repository.OfferRepository
                 }
             }
             return result;
+        }*/
+
+        public override ServiceOffer Get(Expression<Func<ServiceOffer, bool>> predicate)
+        {
+            return base.Get(predicate);
         }
 
-        public bool Delete(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
+        public override IQueryable<ServiceOffer> GetAll()
         {
-            throw new NotImplementedException();
+            return base.GetAll();
         }
 
-        public ServiceOffer Get(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
+        public override IQueryable<ServiceOffer> List(Expression<Func<ServiceOffer, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return base.List(predicate);
         }
 
-        public bool Update(ServiceOffer obj)
+        //TO DO
+        public override bool Delete(Expression<Func<ServiceOffer, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return base.Delete(predicate);
         }
 
-        IQueryable<ServiceOffer> IOfferRepository.GetAll()
+        //TO DO
+        public override bool Update(ServiceOffer obj)
         {
-            throw new NotImplementedException();
-        }
-
-        IQueryable<ServiceOffer> IOfferRepository.List(Expression<Func<ServiceOffer, bool>> predicate)
-        {
-            throw new NotImplementedException();
+            return base.Update(obj);
         }
     }
 }
