@@ -106,10 +106,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Database tests\JobPortalTestDB.designer.cs">
+    <Compile Include="Database tests\DbTest.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>JobPortalTestDB.dbml</DependentUpon>
+      <DependentUpon>DbTest.dbml</DependentUpon>
     </Compile>
     <Compile Include="Database tests\ServiceRepositoryTest.cs" />
     <Compile Include="MVC  tests\UserTests.cs" />
@@ -137,13 +137,13 @@
     <None Include="Connected Services\UserService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Database tests\JobPortalTestDB.dbml">
+    <None Include="Database tests\DbTest.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>JobPortalTestDB.designer.cs</LastGenOutput>
+      <LastGenOutput>DbTest.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Database tests\JobPortalTestDB.dbml.layout">
-      <DependentUpon>JobPortalTestDB.dbml</DependentUpon>
+    <None Include="Database tests\DbTest.dbml.layout">
+      <DependentUpon>DbTest.dbml</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ServiceLibrary.Models.Offer.datasource" />
