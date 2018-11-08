@@ -13,7 +13,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabase"].ConnectionString;
 
 
         public OfferRepository(DataContext context) : base(context)
@@ -26,7 +26,7 @@ namespace Repository
         public override ServiceOffer Create(ServiceOffer offer)
         {
             ServiceOffer result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
@@ -82,7 +82,7 @@ namespace Repository
         public override bool Delete(Expression<Func<ServiceOffer, bool>> predicate)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 try
@@ -101,9 +101,37 @@ namespace Repository
             }
 
         //TO DO
-        public override bool Update(ServiceOffer obj)
+        public override bool Update(ServiceOffer modified)
         {
-            return base.Update(obj);
-        }
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    var foundService = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == modified.ID);
+                    if (foundService != null)
+                    {
+                        foundService.RatePerHour = modified.RatePerHour;
+                        foundService.Title = modified.Title;
+                        foundService.Description = modified.Title;
+                        foundService.Subcategory_ID = modified.ID;
+                        result = true;
+                        _context.SubmitChanges();
+                    }
+                }
+                catch
+                {
+                    result = false;
+
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+                return result;
+
+            }
+            
     }
 }
