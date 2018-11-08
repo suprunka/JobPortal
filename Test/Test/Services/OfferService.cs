@@ -15,13 +15,14 @@ namespace ServiceLibrary
     {
         private readonly IOfferRepository _database;
 
-        public OfferService(IRepository<Offer> database)
+        public OfferService(IOfferRepository database)
         {
-            _database = new OfferRepository(new JobPortalDatabaseDataContext());
+            _database = database;
         }
 
         public OfferService()
         {
+            _database = new OfferRepository(new JobPortalDatabaseDataContext());
 
         }
 
@@ -55,7 +56,20 @@ namespace ServiceLibrary
 
         public bool DeleteServiceOffer(int ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (ID > -1)
+                {
+                    _database.Delete(t => t.ID == ID);
+                    return true;
+                }
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+
         }
 
         public bool UpdateServiceOffer(Offer serviceOffer)

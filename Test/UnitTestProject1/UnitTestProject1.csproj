@@ -116,6 +116,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JobPortalTestDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Database tests\TestDb.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestDb.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Database tests\UnitTest1.cs" />
     <Compile Include="MVC  tests\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -123,6 +129,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service tests\UnitTest1.cs" />
     <Compile Include="Service tests\UserServiceTests.cs" />
     <Compile Include="Database tests\RepositoryTest.cs" />
   </ItemGroup>
@@ -157,6 +164,14 @@
     </None>
     <None Include="Database tests\JobPortalTestDB.dbml.layout">
       <DependentUpon>JobPortalTestDB.dbml</DependentUpon>
+    </None>
+    <None Include="Database tests\TestDb.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TestDb.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Database tests\TestDb.dbml.layout">
+      <DependentUpon>TestDb.dbml</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ServiceLibrary.Models.Offer.datasource" />

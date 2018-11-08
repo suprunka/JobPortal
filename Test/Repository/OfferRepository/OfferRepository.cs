@@ -60,7 +60,33 @@ namespace Repository.OfferRepository
 
         public bool Delete(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
         {
-            throw new NotImplementedException();
+            bool res = false;
+            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
+            {
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    var row = _context.GetTable<ServiceOffer>().FirstOrDefault(predicate);
+                    if (row != null)
+                    {
+                        _context.GetTable<ServiceOffer>().DeleteOnSubmit(row);
+                        _context.SubmitChanges();
+                        res= true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    sql.Rollback();
+                    res = false;
+                    throw e;
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+                return res;
+            }
         }
 
         public ServiceOffer Get(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
