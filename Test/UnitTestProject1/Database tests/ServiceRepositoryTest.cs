@@ -43,9 +43,8 @@ namespace UnitTestProject1
                 Assert.IsTrue(result);
                 context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
             }
-
-           
-
         }
+
+        //deleting service
     }
 }

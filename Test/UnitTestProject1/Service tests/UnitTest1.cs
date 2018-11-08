@@ -36,18 +36,7 @@ namespace UnitTestProject1.Service_tests
             bool result = sut.DeleteServiceOffer(offerMock.Object.ID);
             Assert.IsTrue(result == true);
         }
-        [TestMethod]
-        public void Delete_OfferService_Verify_If_It_Removes()
-        {
-            var offerMock = new Mock<ServiceOffer>();
-            offerMock.SetupAllProperties();
-            var dbMock = new Mock<IOfferRepository>();
-            dbMock.Setup(x => x.Create(offerMock.Object));
 
-            var sut = new OfferService(dbMock.Object);
-            bool result = sut.DeleteServiceOffer(offerMock.Object.ID);
-            Assert.IsTrue(result == true);
-        }
 
         /* [TestMethod]
          public void Get_OfferService_Verify_If_It_Calls_Db()

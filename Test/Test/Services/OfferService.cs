@@ -57,8 +57,8 @@ namespace ServiceLibrary
             {
                 if (ID > -1)
                 {
-                    _database.Delete(t => t.ID == ID);
-                    return true;
+                   return _database.Delete(t => t.ID == ID);
+                   
                 }
                 return false;
             }

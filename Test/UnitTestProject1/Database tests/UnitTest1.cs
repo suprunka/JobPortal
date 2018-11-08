@@ -38,7 +38,10 @@ namespace UnitTestProject1.Database_tests
                 SubCategory = new SubCategory
                 {
                     Name = "sub1",
-                    Category = new Category {
+                    Category = new Category
+                    {
+
+                    }
                     }
 
                 }
