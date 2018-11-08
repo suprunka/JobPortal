@@ -5,6 +5,7 @@ using AppJobPortal.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repository;
+using Repository.DbConnection;
 using ServiceLibrary;
 
 namespace UnitTestProject1.Service_tests
@@ -12,11 +13,10 @@ namespace UnitTestProject1.Service_tests
     [TestClass]
     public class ServiceOfferServiceTests
     {
-        /*
         //Create
-        #region
+        //#region
 
-        [TestMethod]
+        /*[TestMethod]
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
             var offerMock = new Mock<Offer>();
@@ -70,23 +70,41 @@ namespace UnitTestProject1.Service_tests
             sut.CreateServiceOffer(offerMock.Object);
             dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.AtLeastOnce);
         }
-        #endregion
+        #endregion*/
 
         //Delete
         #region
         [TestMethod]
         public void Delete_OfferService_Verify_If_It_Calls_Db()
         {
-            var offerMock = new Mock<Offer>();
+            var offerMock = new Mock<ServiceOffer>();
             offerMock.SetupAllProperties();
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
 
             var sut = new OfferService(dbMock.Object);
-            sut.DeleteServiceOffer(offerMock.Object.Id);
-            dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<Offer, bool>>>()), Times.AtLeastOnce);
+            sut.DeleteServiceOffer(offerMock.Object.ID);
+            dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.AtLeastOnce);
         }
-        #endregion
+        [TestMethod]
+        public void Delete_OfferService_Verify_If_Returns_true()
+        {
+            var offerMock = new Mock<Offer>();
+            offerMock.SetupAllProperties();
+            var dbMock = new Mock<IOfferRepository>();
+            bool result =false;
 
+            var sut = new OfferService(dbMock.Object);
+            try
+            {
+                sut.CreateServiceOffer(offerMock.Object);
+                 result = sut.DeleteServiceOffer(offerMock.Object.Id);
+            }
+            catch (Exception e) { }
+            Assert.IsTrue(result);
+        }
+        
+        #endregion
+        /*
 
         //Read
         #region
@@ -173,9 +191,9 @@ namespace UnitTestProject1.Service_tests
                 userSenftoService.LastName == "Dreuk" &&
                 userSenftoService.PhoneNumber == "12334455"
                 );
-        }
-        #endregion
-        */
+        }*/
+       // #endregion
+        
     }
 }
 

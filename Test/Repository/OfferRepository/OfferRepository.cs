@@ -81,8 +81,24 @@ namespace Repository
         //TO DO
         public override bool Delete(Expression<Func<ServiceOffer, bool>> predicate)
         {
-            return base.Delete(predicate);
-        }
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            {
+                objConn.Open();
+                try
+                {
+                    var toDelete = _context.GetTable<ServiceOffer>().SingleOrDefault(predicate);
+                    _context.GetTable<ServiceOffer>().DeleteOnSubmit(toDelete);
+                    result = true;
+                }
+                catch (Exception e )
+                {
+                    result = false;
+                    throw e;
+                }
+                return result;
+            }
+            }
 
         //TO DO
         public override bool Update(ServiceOffer obj)
