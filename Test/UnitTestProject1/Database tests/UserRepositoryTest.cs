@@ -13,7 +13,7 @@ namespace UnitTestProject1
     [TestClass]
     public class RepositoryTest
     {
-        //Creating users for test purpose
+        /*//Creating users for test purpose
         #region
         private static Users GetUser()
         {
@@ -244,7 +244,7 @@ namespace UnitTestProject1
                  secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                  secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
                  secondContext.SubmitChanges();
-             }*/
+             }
         }
 
         //While adding two same object only first of them is saved in database. [OK]
@@ -464,7 +464,7 @@ namespace UnitTestProject1
         }
 
         //Testing an edition of existing user in a database
-        /*[TestMethod]
+        [TestMethod]
         public void Edition_Of_User_Is_Saved()
         {
             var context = new JobPortalTestDBDataContext();

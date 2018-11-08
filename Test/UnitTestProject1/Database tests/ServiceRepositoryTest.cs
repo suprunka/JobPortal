@@ -29,22 +29,37 @@ namespace UnitTestProject1
                 Title = "Sample",
             };
             return serviceOfferStub;
-                
+
         }
-       
+
         //Testing adding service
         [TestMethod]
         public void TestCreationOfOffer()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 var result = unitOfWork.Offers.Create(GetServiceOffer());
                 Assert.IsTrue(result);
-                context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
             }
         }
 
         //deleting service
+        [TestMethod]
+        public void Test_Delete_Of_Service()
+        {
+            var context =  new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                unitOfWork.Offers.Create(GetServiceOffer());
+                var result = unitOfWork.Offers.Delete(x => x.ID == GetServiceOffer().ID);
+                Assert.IsTrue(result);
+                context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+
+            }
+        }
+
+      
     }
 }
