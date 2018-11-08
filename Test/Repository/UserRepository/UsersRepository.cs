@@ -15,8 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
+        private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabase"].ConnectionString;
         public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
@@ -26,7 +25,7 @@ namespace Repository
         public override Users Create(Users obj)
         {
             Users result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS; Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 using (var myTran = new TransactionScope())
@@ -94,7 +93,7 @@ namespace Repository
         public override bool Delete(Expression<Func<Users, bool>> predicate)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
@@ -180,7 +179,7 @@ namespace Repository
         {
             {
                 bool result = false;
-                using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+                using (SqlConnection objConn = new SqlConnection(connection))
                 {
 
                     objConn.Open();

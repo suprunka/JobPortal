@@ -180,9 +180,9 @@ namespace UnitTestProject1
             {
                 var result = unitOfWork.Users.Create(GetUser());
                 Assert.IsNotNull(context.Users.FirstOrDefault(t => t.PhoneNumber == "12345678"));
-                context.Users.DeleteAllOnSubmit(context.Users);
+                /*context.Users.DeleteAllOnSubmit(context.Users);
                 context.Logging.DeleteAllOnSubmit(context.Logging);
-                context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                context.AddressTable.DeleteAllOnSubmit(context.AddressTable);*/
                 context.SubmitChanges();
             }
 
