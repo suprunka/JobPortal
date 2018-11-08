@@ -6,7 +6,7 @@ namespace Repository
 {
     public interface IRepository<T> where T : class
     {
-        bool Create(T obj);
+        T Create(T obj);
 
         T Get(Expression<Func<T, bool>> predicate);
 

@@ -99,6 +99,7 @@ namespace ServiceLibrary
                 {
                     _database.Update(new Users
                     {
+
                         AddressTable = new AddressTable
                         {
                             Postcode = u.Postcode,
@@ -114,7 +115,7 @@ namespace ServiceLibrary
                         {
                             Gender1 = u.Gender.ToString(),
                         },
-
+                        ID = u.ID,
                         PhoneNumber = u.PhoneNumber,
                         FirstName = u.FirstName,
                         LastName = u.LastName,

@@ -25,41 +25,34 @@ namespace UnitTestProject1
                 },
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_Phone = "123456780",
+                Employee_Phone = "12345678",
                 Title = "Sample",
             };
             return serviceOfferStub;
-
+                
         }
-
+       
         //Testing adding service
         [TestMethod]
         public void TestCreationOfOffer()
         {
-            var context = new DbTestDataContext();
+            var context = new JobPortalTestDBDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
-                var result = unitOfWork.Offers.Create(GetServiceOffer());
-                Assert.IsTrue(result);
-                context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                try
+                {
+                    var result = unitOfWork.Offers.Create(GetServiceOffer());
+                    Assert.IsNotNull(result);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                
             }
         }
 
         //deleting service
-        [TestMethod]
-        public void Test_Delete_Of_Service()
-        {
-            var context =  new DbTestDataContext();
-            using (var unitOfWork = new UnitOfWork(context))
-            {
-                unitOfWork.Offers.Create(GetServiceOffer());
-                var result = unitOfWork.Offers.Delete(x => x.ID == GetServiceOffer().ID);
-                Assert.IsTrue(result);
-                context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
-
-            }
-        }
-
-      
     }
 }

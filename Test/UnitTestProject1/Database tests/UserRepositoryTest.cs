@@ -7,6 +7,7 @@ using AddressTable = Repository.DbConnection.AddressTable;
 using Users = Repository.DbConnection.Users;
 using Logging = Repository.DbConnection.Logging;
 using Gender = Repository.DbConnection.Gender;
+using System;
 
 namespace UnitTestProject1
 {
@@ -59,7 +60,7 @@ namespace UnitTestProject1
                 Logging = new Logging
                 {
                     Password = "Adama1",
-                    UserName = "Username1",
+                    UserName = "Username21",
                 },
                 Gender = new Gender
                 {
@@ -233,13 +234,19 @@ namespace UnitTestProject1
                 }
                 catch (DuplicateKeyException)
                 {
-                    Assert.IsTrue(true);
+                    int numberOfUsers = context.Users.Count();
+                    int numberOfAddresses = context.AddressTable.Count();
+                    int numberOfLoggings = context.Logging.Count();
+                    Assert.AreEqual(1, numberOfUsers);
+                    Assert.AreEqual(1, numberOfAddresses);
+                    Assert.AreEqual(1, numberOfLoggings);
                 }
             }
 
-            /*var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new JobPortalTestDBDataContext();
              using (var unitOfWork = new UnitOfWork(secondContext))
              {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
                  secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                  secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                  secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -270,6 +277,7 @@ namespace UnitTestProject1
             var secondContext = new JobPortalTestDBDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -472,9 +480,12 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    Users edited = unitOfWork.Users.Update(ToUpdate(), "12345678");
-                    Assert.AreEqual(edited.AddressTable.City, "Aarhus");
+                    Users u = unitOfWork.Users.Create(GetUser());
+                    Users toUpdate = ToUpdate();
+                    toUpdate.ID = u.ID;
+
+                    bool edited = unitOfWork.Users.Update(toUpdate);
+                    Assert.IsTrue(edited);
                 }
                 catch
                 {
@@ -490,7 +501,7 @@ namespace UnitTestProject1
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
                 secondContext.SubmitChanges();
             }
-        }*/
+        }
     }
 }
 
