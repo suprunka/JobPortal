@@ -4,6 +4,7 @@ using AppJobPortal.Model;
 using System.ServiceModel;
 using Repository.DbConnection;
 using Repository;
+using ServiceLibrary.Models;
 
 namespace ServiceLibrary
 {
@@ -71,7 +72,38 @@ namespace ServiceLibrary
 
         public bool UpdateServiceOffer(Offer serviceOffer)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if ((RegexMatch.DoesOfferMatch(serviceOffer)) && (serviceOffer.RatePerHour > 0))
+                {
+                    _database.Update(new ServiceOffer
+                    {
+                        ID = serviceOffer.Id,
+                        Description = serviceOffer.Description,
+                        Title = serviceOffer.Title,
+                        RatePerHour = serviceOffer.RatePerHour,
+                        SubCategory = new Repository.DbConnection.SubCategory
+                        {
+                            Name = serviceOffer.Subcategory.ToString(),
+                            Category = new Repository.DbConnection.Category
+                            {
+                                Name = serviceOffer.Category.ToString()
+                            }
+                        }
+                    });
+                    return true;
+                    }
+                return false;
+
+            }
+
+            catch
+            {
+                return false;
+
+            }
+
+
         }
 
         public IQueryable<Offer> GetAllOffers()

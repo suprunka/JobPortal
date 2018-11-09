@@ -13,15 +13,12 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
+        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabase"].ConnectionString;
 
 
         public OfferRepository(DataContext context) : base(context)
         {
             _context = context;
-            
-            
 
 
         }
@@ -34,7 +31,7 @@ namespace Repository
                 objConn.Open();
                 sql = objConn.BeginTransaction();
                 try
-                { 
+                {
                     ServiceOffer s = new ServiceOffer
                     {
                         Description = offer.Description,
@@ -42,6 +39,7 @@ namespace Repository
                         Title = offer.Title,
                         Employee_Phone = offer.Employee_Phone,
                         Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory.Name)).ID
+
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
@@ -103,9 +101,37 @@ namespace Repository
             }
 
         //TO DO
-        public override bool Update(ServiceOffer obj)
+        public override bool Update(ServiceOffer modified)
         {
-            return base.Update(obj);
-        }
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    var foundService = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == modified.ID);
+                    if (foundService != null)
+                    {
+                        foundService.RatePerHour = modified.RatePerHour;
+                        foundService.Title = modified.Title;
+                        foundService.Description = modified.Title;
+                        foundService.Subcategory_ID = modified.ID;
+                        result = true;
+                        _context.SubmitChanges();
+                    }
+                }
+                catch
+                {
+                    result = false;
+
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+                return result;
+
+            }
+            
     }
 }
