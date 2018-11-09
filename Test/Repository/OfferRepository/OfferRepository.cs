@@ -14,11 +14,14 @@ namespace Repository
         private DataContext _context;
         private SqlTransaction sql = null;
         private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
 
 
         public OfferRepository(DataContext context) : base(context)
         {
             _context = context;
+            
+            
 
 
         }
@@ -26,12 +29,12 @@ namespace Repository
         public override ServiceOffer Create(ServiceOffer offer)
         {
             ServiceOffer result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
                 try
-                {
+                { 
                     ServiceOffer s = new ServiceOffer
                     {
                         Description = offer.Description,
@@ -39,7 +42,6 @@ namespace Repository
                         Title = offer.Title,
                         Employee_Phone = offer.Employee_Phone,
                         Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory.Name)).ID
-
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
@@ -82,7 +84,7 @@ namespace Repository
         public override bool Delete(Expression<Func<ServiceOffer, bool>> predicate)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 try

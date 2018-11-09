@@ -3,9 +3,9 @@ using System.Data.Linq;
 using System.Linq;
 using Repository;
 using UnitTestProject1.Database_tests;
-using AddressTable = Repository.DbConnection.AddressTable;
+using AddressTables = Repository.DbConnection.AddressTable;
 using Users = Repository.DbConnection.Users;
-using Logging = Repository.DbConnection.Logging;
+using Loggings = Repository.DbConnection.Logging;
 using Gender = Repository.DbConnection.Gender;
 using System;
 
@@ -14,19 +14,19 @@ namespace UnitTestProject1
     [TestClass]
     public class RepositoryTest
     {
-        /*//Creating users for test purpose
+        //Creating users for test purpose
         #region
         private static Users GetUser()
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTable = new AddressTables
                 {
                     Postcode = "9000",
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                Logging = new Loggings
                 {
                     Password = "Adama1",
                     UserName = "Username1",
@@ -46,18 +46,18 @@ namespace UnitTestProject1
             return userStub;
 
         }
-        //same as GetUser() [same username and phonenumber]
+        //same as GetUser() [same  phonenumber]
         private static Users GetAnotherUser()
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTable = new AddressTables
                 {
                     Postcode = "8000",
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                Logging = new Loggings
                 {
                     Password = "Adama1",
                     UserName = "Username21",
@@ -81,13 +81,13 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTable = new AddressTables
                 {
                     Postcode = "8000",
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                Logging = new Loggings
                 {
                     Password = "Adama1",
                     UserName = "Username1",
@@ -112,13 +112,13 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTable = new AddressTables
                 {
                     Postcode = "8000",
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                Logging = new Loggings
                 {
                     Password = "Adama1",
                     UserName = "Username100",
@@ -142,13 +142,13 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTable = new AddressTables
                 {
                     Postcode = "9000",
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                Logging = new Loggings
                 {
                     Password = "Adama1",
                     UserName = "Username3",
@@ -175,14 +175,14 @@ namespace UnitTestProject1
         [TestMethod]
         public void Add_TestClassUserObjectPassed()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 var result = unitOfWork.Users.Create(GetUser());
                 Assert.IsNotNull(context.Users.FirstOrDefault(t => t.PhoneNumber == "12345678"));
-                /*context.Users.DeleteAllOnSubmit(context.Users);
+                context.Users.DeleteAllOnSubmit(context.Users);
                 context.Logging.DeleteAllOnSubmit(context.Logging);
-                context.AddressTable.DeleteAllOnSubmit(context.AddressTable);*/
+                context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                 context.SubmitChanges();
             }
 
@@ -192,7 +192,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Creates_One_Address_Record_If_Two_Users_Share_The_Same_Address()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -209,7 +209,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -223,7 +223,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Adding_Two_Same_Object_Throws_Exception()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
 
             using (var unitOfWork = new UnitOfWork(context))
             {
@@ -243,7 +243,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
              using (var unitOfWork = new UnitOfWork(secondContext))
              {
                 secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
@@ -258,7 +258,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Adding_Two_Same_Adds_First_Of_Them()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
 
             using (var unitOfWork = new UnitOfWork(context))
             {
@@ -274,7 +274,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
@@ -289,7 +289,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Deleting_Object_From_Database()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
 
 
             using (var unitOfWork = new UnitOfWork(context))
@@ -309,7 +309,7 @@ namespace UnitTestProject1
 
 
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -323,7 +323,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Deleting_Object_But_Dont_Delete_Address_Records_If_There_Is_One_More_Person_Using_It()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -339,7 +339,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -353,7 +353,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Deleting_User_And_Address_Table_If_No_One_Uses_It()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -368,7 +368,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -382,7 +382,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Get_All_Users_From_Database()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -398,7 +398,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -412,7 +412,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Get_Specific_User_With_All_Information()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -430,7 +430,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -444,7 +444,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Filtr_Database_Of_Users()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -461,7 +461,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
@@ -475,7 +475,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Edition_Of_User_Is_Saved()
         {
-            var context = new JobPortalTestDBDataContext();
+            var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
@@ -493,7 +493,7 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new JobPortalTestDBDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
