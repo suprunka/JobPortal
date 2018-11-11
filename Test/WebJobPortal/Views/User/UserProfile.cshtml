@@ -22,15 +22,17 @@
     </div>
     <!--description from DB-->
     <div class="col-md-4">
-        <p>
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-        </p>
-        <p>Hello, I am Anna and I live in a house with 7 bedrooms, 3 bathrooms and a large garden with swimming pool. My family and I travel a lot and at that time we rent our house. I am looking for somebody responsible who would clean after our guests.</p>
+        <!--<p>
+         <dd>
+             Html.DisplayFor(model => model.FirstName)
+         </dd>
+         <dd>
+             Html.DisplayFor(model => model.LastName)
+         </dd>
+     </p>-->
+        <h2>Jozko Mrkvicka</h2>
+        <p>Profesion</p>
+        <p>Hello, I am Jozko and I live in a house with 7 bedrooms, 3 bathrooms and a large garden with swimming pool. My family and I travel a lot and at that time we rent our house. I am looking for somebody responsible who would clean after our guests.</p>
     </div>
 </div>
 
@@ -41,8 +43,8 @@
     <div class="tabColumn">
         <!--Personal info set like default frame-->
         <button class="frameLinks" onclick="openFrame(event, 'Calendar')" id="defaultOpen">My calendar</button>
-        <button class="frameLinks" onclick="openFrame(event, 'Sell')">Sell</button>
-        <button class="frameLinks" onclick="openFrame(event, 'Buy')">Buy</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Sell')">My services</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Buy')">Bought services</button>
         <button class="frameLinks" onclick="openFrame(event, 'Personal Information')">Personal Information</button>
         <!--Settings button, when clickes, reveals other options-->
         <button class="dropdown-btn">Settings<i class="fa fa-caret-down"></i></button>
@@ -218,7 +220,27 @@
 
     <!--Buy page with table-->
     <div id="Buy" class="frameContentColumn">
-        user's bought services, table form form
+        <h2>Bought services</h2>
+        <table class="serviceTable" style="width: 100%;">
+            <tr>
+                <th>Service</th>
+                <th>User</th>
+                <th>Date??</th>
+                <th>Reorder?</th>
+            </tr>
+            <tr>
+                <td>Cleaning</td>
+                <td>John Smith</td>
+                <td>18.08.2018</td>
+                <td><button>Reorder</button></td>
+            </tr>
+            <tr>
+                <td>Babysitting</td>
+                <td>Ava Jackson</td>
+                <td>29.10.2018</td>
+                <td><button>Reorder</button></td>
+            </tr>
+        </table>
     </div>
 
     <!--Privacy setting page-->
