@@ -14,7 +14,7 @@ namespace UnitTestProject1
     [TestClass]
     public class RepositoryTest
     {
-        /*//Creating users for test purpose
+        //Creating users for test purpose
         #region
         private static Users GetUser()
         {

@@ -46,7 +46,6 @@ namespace AppJobPortal.New
         }
         public void Init()
         {
-            regBox.ItemsSource = Enum.GetValues(typeof(Region)).Cast<Region>();
             
         }
         private void GetAll() {
@@ -74,7 +73,7 @@ namespace AppJobPortal.New
             {
                 MessageBox.Show("Enter positive number", "Wrong input in search box");
             }
-           User u =  _proxy.FindUser(id);
+           User u =  _proxy.FindUser(id.ToString());
             if (u != null)
             {
                 _user = _mapper.Map(u, new UserAppModel());

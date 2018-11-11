@@ -62,7 +62,7 @@ namespace Repository
         }
 
 
-        
+
         public override ServiceOffer Get(Expression<Func<ServiceOffer, bool>> predicate)
         {
             return base.Get(predicate);
@@ -91,14 +91,14 @@ namespace Repository
                     _context.GetTable<ServiceOffer>().DeleteOnSubmit(toDelete);
                     result = true;
                 }
-                catch (Exception e )
+                catch (Exception e)
                 {
                     result = false;
                     throw e;
                 }
                 return result;
             }
-            }
+        }
 
         //TO DO
         public override bool Update(ServiceOffer modified)
@@ -132,6 +132,7 @@ namespace Repository
                 return result;
 
             }
-            
+
+        }
     }
 }

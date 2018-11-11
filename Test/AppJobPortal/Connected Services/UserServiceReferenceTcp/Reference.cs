@@ -276,10 +276,16 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        AppJobPortal.UserServiceReferenceTcp.User FindUser(int id);
+        AppJobPortal.UserServiceReferenceTcp.User FindUser(string phoneNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
-        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(int id);
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(string phoneNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUser", ReplyAction="http://tempuri.org/IUserService/EditWebUserResponse")]
+        bool EditWebUser(AppJobPortal.UserServiceReferenceTcp.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUser", ReplyAction="http://tempuri.org/IUserService/EditWebUserResponse")]
+        System.Threading.Tasks.Task<bool> EditWebUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         bool DeleteUser(int id);
@@ -347,12 +353,20 @@ namespace AppJobPortal.UserServiceReferenceTcp {
             return base.Channel.CreateUserAsync(u);
         }
         
-        public AppJobPortal.UserServiceReferenceTcp.User FindUser(int id) {
-            return base.Channel.FindUser(id);
+        public AppJobPortal.UserServiceReferenceTcp.User FindUser(string phoneNumber) {
+            return base.Channel.FindUser(phoneNumber);
         }
         
-        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(int id) {
-            return base.Channel.FindUserAsync(id);
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(string phoneNumber) {
+            return base.Channel.FindUserAsync(phoneNumber);
+        }
+        
+        public bool EditWebUser(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.EditWebUser(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditWebUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.EditWebUserAsync(u);
         }
         
         public bool DeleteUser(int id) {
