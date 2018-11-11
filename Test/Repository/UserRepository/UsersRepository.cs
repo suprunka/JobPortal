@@ -15,7 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabase"].ConnectionString;
+        private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
         public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
@@ -142,34 +142,17 @@ namespace Repository
 
         public override IQueryable<Users> GetAll()
         {
-            IQueryable<Users> allUsers = _context.GetTable<Users>();
-            return allUsers;
+            return base.GetAll();
         }
 
         public override Users Get(Expression<Func<Users, bool>> predicate)
         {
-            try
-            {
-                Users found = _context.GetTable<Users>().FirstOrDefault(predicate);
-                return found;
-            }
-            catch
-            {
-                return null;
-            }
+            return base.Get(predicate);
         }
 
         public override IQueryable<Users> List(Expression<Func<Users, bool>> predicate)
         {
-            try
-            {
-                IQueryable<Users> found = _context.GetTable<Users>().Where(predicate);
-                return found;
-            }
-            catch
-            {
-                return null;
-            }
+            return base.List(predicate);
         }
 
 
