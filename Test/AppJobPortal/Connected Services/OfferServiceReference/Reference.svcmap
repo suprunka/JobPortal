@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="50394a72-51cd-4978-ae9e-b9586649a352" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/Offer/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="45f8deab-f271-4b5e-acf6-bb860f17c59e" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a62c5035-5aa3-4416-9c53-19127ff3c282" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="1cf0efa6-32a0-46f6-80eb-a4085cabea4b" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="AppJobPortal.Model.xsd" MetadataType="Schema" ID="3e051bf7-becc-4e0a-91d9-04e76d9476a5" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="cab042f4-f86a-4ab2-b25b-b8529d21f141" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
