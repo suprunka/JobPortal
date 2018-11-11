@@ -65,13 +65,8 @@
                         <p id="question">Are you sure you want to delete your account?</p>
                         <p id="note">*NOTE: This cannot be undone.</p>
                     </div>
-
                     @Html.AntiForgeryToken()
-
                     @Html.ActionLink("Delete", "Delete", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-
-
-
                 </div>
             </div>
         </div>
@@ -128,9 +123,7 @@
 
 <!--Update user-->
 <div id="Edit" class="frameContentColumn">
-    <div>
         @{ using (Html.BeginForm("Edit", "User", FormMethod.Post))
-
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.ID, "ID")
@@ -139,7 +132,7 @@
 
                     @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div id="1" class="col-md-10">
-                        @Html.EditorFor(model => model.FirstName, "firstName", new { htmlAttributes = new { @class = "form -control", placeholder = "First name" } })
+                        @Html.EditorFor(model => model.FirstName, "firstName", new { htmlAttributes = new { @class = "form-control", placeholder = "First name" } })
                         @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -202,21 +195,15 @@
                     </div>
                 </div>
 
-
                 <!--submit button for Edit page-->
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Edit" class="buttons" />
                     </div>
                 </div>
-
             }
         }
-
-
-
     </div>
-
 
     <!--Frames for Column menu-->
     <!--User's services-->
@@ -278,6 +265,7 @@
     <div id="Calendar" class="frameContentColumn">
         calendar
     </div>
+
     <script>
         /*function for opening frames (Personal info, sell,...)*/
         function openFrame(evt, frameName) {
@@ -363,4 +351,3 @@
             }
         }
     </script>
-

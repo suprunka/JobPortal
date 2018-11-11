@@ -38,8 +38,6 @@ namespace WebJobPortal.Models
             _gender = gender;
         }
 
-
-
         public UserModel()
         {
 
@@ -58,7 +56,7 @@ namespace WebJobPortal.Models
         public virtual String FirstName { get; set; }
 
         [Display(Name = "Last Name:")]
-        [Required(ErrorMessage = ":Last name required")]
+        [Required(ErrorMessage = "Last name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$", ErrorMessage = "Last name characters must be included in danish alphabeth.")]  
         public virtual String LastName { get; set; }
 
