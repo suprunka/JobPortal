@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repository;
 using Repository.DbConnection;
@@ -47,50 +47,112 @@ namespace UnitTestProject1
             };
             return userStub;
         }
+        private static Users SecondUser()
+        {
+            var userStub = new Users
+            {
+                AddressTable = new AddressTable
+                {
+                    Postcode = "8000",
+                    City = "Aarhus",
+                    Region = "Midtjylland"
+                },
+                Logging = new Logging
+                {
+                    Password = "Adama1",
+                    UserName = "Username100",
+                },
+                Gender = new Gender
+                {
+                    Gender1 = "Male",
+                },
+
+                PhoneNumber = "35896452",
+                FirstName = "Adam",
+                LastName = "Adam",
+                Email = "adam@gmail.com",
+                AddressLine = "mickiewicza",
+
+            };
+            return userStub;
+
+        }
         private static ServiceOffer GetServiceOffer()
         {
             var serviceOfferStub = new ServiceOffer
             {
-                SubCategory = new SubCategory
-                {
-                    ID = 1,
-                    Name = "House",
-                    Category = new Category
-                    {
-                        ID = 1,
-                        Name = "Cleaning",
-                    }
-                },
+                Subcategory_ID = 1,
                 RatePerHour = 20,
                 Description = "Sample",
                 Employee_Phone = "12345678",
-                Title = "Sample",
+                Title = "First",
             };
             return serviceOfferStub;
         }
-        private static ServiceOffer GetInvalidServiceOffer()
+        private static ServiceOffer GetSecondServiceOffer()
         {
             var serviceOfferStub = new ServiceOffer
             {
-                SubCategory = new SubCategory
-                {
-                    ID = -1,
-                    Name = "House",
-                    Category = new Category
-                    {
-                        ID = -1,
-                        Name = "Cleaning",
-                    }
-                },
-                RatePerHour = 20,
+                Subcategory_ID = 1,
+                RatePerHour = 40,
                 Description = "Sample",
                 Employee_Phone = "12345678",
-                Title = "Sample",
+                Title = "Second",
+            };
+            return serviceOfferStub;
+        }
+        private static ServiceOffer GetThirdServiceOffer()
+        {
+            var serviceOfferStub = new ServiceOffer
+            {
+                Subcategory_ID = 1,
+                RatePerHour = 30,
+                Description = "Sample",
+                Employee_Phone = "12345678",
+                Title = "Third",
+            };
+            return serviceOfferStub;
+        }
+        private static ServiceOffer GetForthServiceOffer()
+        {
+            var serviceOfferStub = new ServiceOffer
+            {
+                Subcategory_ID = 1,
+                RatePerHour = 30,
+                Description = "Sample",
+                Employee_Phone = "35896452",
+                Title = "Third",
             };
             return serviceOfferStub;
         }
 
-        //Testing adding service
+        private static ServiceOffer ToUpdateServiceOffer()
+        {
+            var serviceOfferStub = new ServiceOffer
+            {
+                Subcategory_ID = 5,
+                RatePerHour = 100,
+                Description = "Updated",
+                Employee_Phone = "35896452",
+                Title = "Updated",
+            };
+            return serviceOfferStub;
+        }
+
+        private static ServiceOffer GetInvalidServiceOffer()
+        {
+            var serviceOfferStub = new ServiceOffer
+            {
+                Subcategory_ID = -5,
+                RatePerHour = 20,
+                Description = "Sample",
+                Employee_Phone = "12345678",
+                Title = "Invalid",
+            };
+            return serviceOfferStub;
+        }
+
+        //Testing adding service. [OK]
         [TestMethod]
         public void TestCreationOfOffer()
         {
@@ -99,40 +161,56 @@ namespace UnitTestProject1
             {
                 try
                 {
+                    unitOfWork.Users.Create(GetUser());
                     var result = unitOfWork.Offers.Create(GetServiceOffer());
                     Assert.IsNotNull(result);
-                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                 }
                 catch
                 {
                     Assert.Fail();
                 }
-                
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
+                }
             }
         }
 
-        //Testing adding service with not existing subcategory ID
+        //Testing adding service with not existing subcategory ID doesnt add. [OK]
         [TestMethod]
-        public void Test_Create_Offer_With_Not_Existing_ID()
+        public void Test_Create_Offer_With_Not_Existing_SubOffer_ID_Throws_Exception_And_Do_Not_Add()
         {
             var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
                 try
                 {
+                    unitOfWork.Users.Create(GetUser());
                     var result = unitOfWork.Offers.Create(GetInvalidServiceOffer());
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Assert.IsTrue(true);
+                    Assert.AreEqual(0, context.GetTable<ServiceOffer>().Count());
                 }
                 finally
                 {
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
                 }
             }
         }
 
+        //Testing reading specific service offer by its ID. [OK]
         [TestMethod]
         public void Test_Getting_Specific_Service_Offer()
         {
@@ -144,11 +222,183 @@ namespace UnitTestProject1
                     unitOfWork.Users.Create(GetUser());
                     ServiceOffer created = unitOfWork.Offers.Create(GetServiceOffer());
                     ServiceOffer result = unitOfWork.Offers.Get(t => t.ID == created.ID);
-                    Assert.AreEqual(created.Title, result.Title);
+                    Assert.AreEqual("Cleaning", created.SubCategory.Name.ToString());
+                    Assert.AreEqual(created.SubCategory, result.SubCategory);
                 }
-                catch 
+                catch
                 {
                     Assert.Fail();
+                }
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        //Testing getting all available service offers [OK]
+        [TestMethod]
+        public void Test_Getting_All_Service_Offers()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Offers.Create(GetServiceOffer());
+                    unitOfWork.Offers.Create(GetSecondServiceOffer());
+                    unitOfWork.Offers.Create(GetThirdServiceOffer());
+                    var list = unitOfWork.Offers.GetAll();
+                    Assert.AreEqual(3, list.Count());
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        //Testing filtering list of available services by user phoneNumber. [OK]
+        [TestMethod]
+        public void Test_Filtering_Using_Phone_Number()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(SecondUser());
+                    unitOfWork.Offers.Create(GetServiceOffer());
+                    unitOfWork.Offers.Create(GetSecondServiceOffer());
+                    unitOfWork.Offers.Create(GetThirdServiceOffer());
+                    unitOfWork.Offers.Create(GetForthServiceOffer());
+                    var list = unitOfWork.Offers.List(t => t.Employee_Phone == "35896452");
+                    Assert.AreEqual(1, list.Count());
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        //Testing filtering list of available services by rate by hour. [OK]
+        [TestMethod]
+        public void Test_Fitering_Using_Rate_By_Hour()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(SecondUser());
+                    unitOfWork.Offers.Create(GetServiceOffer());
+                    unitOfWork.Offers.Create(GetSecondServiceOffer());
+                    unitOfWork.Offers.Create(GetThirdServiceOffer());
+                    unitOfWork.Offers.Create(GetForthServiceOffer());
+                    var list = unitOfWork.Offers.List(t => t.RatePerHour < 40);
+                    Assert.AreEqual(3, list.Count());
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        //Testing editing a service offer
+        [TestMethod]
+        public void Test_Editing_A_Service_Offer()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    unitOfWork.Users.Create(GetUser());
+                    ServiceOffer service = unitOfWork.Offers.Create(GetServiceOffer());
+                    ServiceOffer toUpdate = ToUpdateServiceOffer();
+                    toUpdate.ID = service.ID;
+                    var result = unitOfWork.Offers.Update(toUpdate);
+                    Assert.IsTrue(result);
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        //Testing deleting a service offer [OK]
+        [TestMethod]
+        public void Test_Deleting_A_Service_Offer()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    unitOfWork.Users.Create(GetUser());
+                    ServiceOffer service = unitOfWork.Offers.Create(GetServiceOffer());
+                    var result = unitOfWork.Offers.Delete(t => t.ID == service.ID);
+                    Assert.IsTrue(result);
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+                finally
+                {
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                    context.SubmitChanges();
+                    context.Users.DeleteAllOnSubmit(context.Users);
+                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                    context.SubmitChanges();
                 }
             }
         }

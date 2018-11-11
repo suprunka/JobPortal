@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 
-namespace AppJobPortal.Model
+namespace JobPortal.Model
 {
     [DataContract]
     [KnownType(typeof(Category))]
@@ -14,7 +14,7 @@ namespace AppJobPortal.Model
         [DataMember]
         public virtual int Id { get; set; }
         [DataMember]
-        public virtual int RatePerHour { get; set; }
+        public virtual decimal RatePerHour { get; set; }
         [DataMember]
         public virtual string Title { get; set; }
         [DataMember]
@@ -38,8 +38,8 @@ namespace AppJobPortal.Model
         IT,
         [EnumMember]
         Repairs,
-        [EnumMember]
-        Art,
+        /*[EnumMember]
+        Art,*/
         [EnumMember]
         Architecture,
         [EnumMember]

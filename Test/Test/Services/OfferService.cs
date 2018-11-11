@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
-using AppJobPortal.Model;
 using System.ServiceModel;
 using Repository.DbConnection;
 using Repository;
 using ServiceLibrary.Models;
+using System.Collections.Generic;
+using JobPortal.Model;
+using SubCategory = JobPortal.Model.SubCategory;
+using Category = JobPortal.Model.Category;
 
 namespace ServiceLibrary
 {
@@ -49,7 +52,18 @@ namespace ServiceLibrary
 
         public Offer FindServiceOffer(int ID)
         {
-            throw new NotImplementedException();
+            UserService userService = new UserService();
+            var result =  _database.Get(t => t.ID == ID);
+            return new Offer
+            {
+                Id = result.ID,
+                RatePerHour = result.RatePerHour,
+                Title = result.Title,
+                Description = result.Description,
+                Author = userService.FindUser(result.Employee_Phone),
+                Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), result.SubCategory.Name),
+                Category = (Category)Enum.Parse(typeof(Category), result.SubCategory.Category.Name),
+            };
         }
 
         public bool DeleteServiceOffer(int ID)
@@ -74,7 +88,7 @@ namespace ServiceLibrary
         {
             try
             {
-                if ((RegexMatch.DoesOfferMatch(serviceOffer)) && (serviceOffer.RatePerHour > 0))
+                if (RegexMatch.DoesOfferMatch(serviceOffer) && (serviceOffer.RatePerHour > 0))
                 {
                     _database.Update(new ServiceOffer
                     {
@@ -106,9 +120,24 @@ namespace ServiceLibrary
 
         }
 
-        public IQueryable<Offer> GetAllOffers()
+        public Offer[] GetAllOffers()
         {
-            throw new NotImplementedException();
+            UserService userService = new UserService();
+            IList<Offer> resultToReturn = new List<Offer>();
+            foreach(var o in _database.GetAll())
+            {
+                resultToReturn.Add(new Offer
+                {
+                    Id = o.ID,
+                    RatePerHour = o.RatePerHour,
+                    Title = o.Title,
+                    Description = o.Description,
+                    Author = userService.FindUser(o.Employee_Phone),
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), o.SubCategory.Name),
+                    Category = (Category)Enum.Parse(typeof(Category), o.SubCategory.Category.Name),
+                });
+            }
+            return resultToReturn.ToArray();
         }
 
         

@@ -155,9 +155,6 @@ namespace Repository
             return base.List(predicate);
         }
 
-
-
-
         public override bool Update(Users obj)
         {
             {
@@ -215,9 +212,6 @@ namespace Repository
                             found.AddressTable.City = obj.AddressTable.City;
                             found.AddressTable.Region = obj.AddressTable.Region;
                         }
-
-                        //delete old address reference, however check if there is more people with the same city if yes leave it
-
 
                         _context.SubmitChanges();
                         sql.Commit();
