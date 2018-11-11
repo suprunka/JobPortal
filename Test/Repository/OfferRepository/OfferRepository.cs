@@ -1,5 +1,4 @@
-﻿using AppJobPortal.Model;
-using Repositories;
+﻿
 using Repository.DbConnection;
 using System;
 using System.Configuration;
@@ -8,46 +7,50 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Repository.OfferRepository
+namespace Repository
 {
-    public class OfferRepository : Repository<Offer>, IOfferRepository
+    public class OfferRepository : Repository<ServiceOffer>, IOfferRepository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        private JobPortalDatabaseDataContext jobPortalDatabaseDataContext;
+        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabase"].ConnectionString;
+
 
         public OfferRepository(DataContext context) : base(context)
         {
             _context = context;
+
+
         }
 
-      
-
-        public bool Create(ServiceOffer offer)
+        public override ServiceOffer Create(ServiceOffer offer)
         {
-            bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;Integrated Security=True"))
+            ServiceOffer result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
                 try
                 {
-                    _context.GetTable<ServiceOffer>().InsertOnSubmit(new ServiceOffer
+                    ServiceOffer s = new ServiceOffer
                     {
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_Phone = offer.Employee_Phone,
-                        Subcategory_ID= _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory)).ID
-              
-                    });
-                    result = true;
+                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory.Name)).ID
+
+                    };
+
+                    _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
+                    _context.SubmitChanges();
+                    result = s;
+                    sql.Commit();
                 }
                 catch (Exception e)
                 {
                     sql.Rollback();
-                    result = false;
+                    result = null;
                     throw e;
                 }
                 finally
@@ -58,29 +61,77 @@ namespace Repository.OfferRepository
             return result;
         }
 
-        public bool Delete(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
+
+        
+        public override ServiceOffer Get(Expression<Func<ServiceOffer, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return base.Get(predicate);
         }
 
-        public ServiceOffer Get(System.Linq.Expressions.Expression<Func<ServiceOffer, bool>> predicate)
+        public override IQueryable<ServiceOffer> GetAll()
         {
-            throw new NotImplementedException();
+            return base.GetAll();
         }
 
-        public bool Update(ServiceOffer obj)
+        public override IQueryable<ServiceOffer> List(Expression<Func<ServiceOffer, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return base.List(predicate);
         }
 
-        IQueryable<ServiceOffer> IOfferRepository.GetAll()
+        //TO DO
+        public override bool Delete(Expression<Func<ServiceOffer, bool>> predicate)
         {
-            throw new NotImplementedException();
-        }
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    var toDelete = _context.GetTable<ServiceOffer>().SingleOrDefault(predicate);
+                    _context.GetTable<ServiceOffer>().DeleteOnSubmit(toDelete);
+                    result = true;
+                }
+                catch (Exception e )
+                {
+                    result = false;
+                    throw e;
+                }
+                return result;
+            }
+            }
 
-        IQueryable<ServiceOffer> IOfferRepository.List(Expression<Func<ServiceOffer, bool>> predicate)
+        //TO DO
+        public override bool Update(ServiceOffer modified)
         {
-            throw new NotImplementedException();
-        }
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    var foundService = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == modified.ID);
+                    if (foundService != null)
+                    {
+                        foundService.RatePerHour = modified.RatePerHour;
+                        foundService.Title = modified.Title;
+                        foundService.Description = modified.Title;
+                        foundService.Subcategory_ID = modified.ID;
+                        result = true;
+                        _context.SubmitChanges();
+                    }
+                }
+                catch
+                {
+                    result = false;
+
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+                return result;
+
+            }
+            
     }
 }

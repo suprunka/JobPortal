@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Repositories;
+
 
 using WebJobPortal.Controllers;
 using System.Web.Mvc;
@@ -11,7 +11,7 @@ using WebJobPortal.UserServiceReference;
 
 namespace UnitTestProject1.MVC__tests
 {
-    [TestClass]
+    /*[TestClass]
     public class UserTests
     {
         //Create
@@ -29,7 +29,7 @@ namespace UnitTestProject1.MVC__tests
         }
     }
 
-        /*[TestMethod]
+        [TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
         {
             var serviceMock = new Mock<IUserService>();

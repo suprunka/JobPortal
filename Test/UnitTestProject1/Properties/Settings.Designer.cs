@@ -44,5 +44,27 @@ namespace UnitTestProject1.Properties {
                 return ((string)(this["JobPortalDBTestConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortalTest;User ID=sa;Password=" +
+            "root")]
+        public string JobPortalTestConnectionString {
+            get {
+                return ((string)(this["JobPortalTestConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Pass" +
+            "word=Password1!")]
+        public string DataSourceConnectionString {
+            get {
+                return ((string)(this["DataSourceConnectionString"]));
+            }
+        }
     }
 }

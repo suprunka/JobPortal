@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository.DbConnection
+namespace UnitTestProject1.Database_tests
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -22,8 +22,8 @@ namespace Repository.DbConnection
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DataSource")]
-	public partial class JobPortalDatabaseDataContext : System.Data.Linq.DataContext
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JobPortalTestDB")]
+	public partial class DbTestDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -83,31 +83,31 @@ namespace Repository.DbConnection
     partial void DeleteUsers(Users instance);
     #endregion
 		
-		public JobPortalDatabaseDataContext() : 
-				base(global::Repository.Properties.Settings.Default.DataSourceConnectionString, mappingSource)
+		public DbTestDataContext() : 
+				base(global::UnitTestProject1.Properties.Settings.Default.JobPortalTestDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public JobPortalDatabaseDataContext(string connection) : 
+		public DbTestDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public JobPortalDatabaseDataContext(System.Data.IDbConnection connection) : 
+		public DbTestDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public JobPortalDatabaseDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DbTestDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public JobPortalDatabaseDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DbTestDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();

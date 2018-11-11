@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Repositories;
-using System.ServiceModel.Description;
-using ServiceLibrary.Models;
 using AppJobPortal.Model;
 using System.ServiceModel;
-using Repository.OfferRepository;
 using Repository.DbConnection;
+using Repository;
+using ServiceLibrary.Models;
 
 namespace ServiceLibrary
 {
@@ -15,25 +13,30 @@ namespace ServiceLibrary
     {
         private readonly IOfferRepository _database;
 
-        public OfferService(IRepository<Offer> database)
+        public OfferService(IOfferRepository database)
         {
-            _database = new OfferRepository(new JobPortalDatabaseDataContext());
+            _database = database;
         }
 
         public OfferService()
         {
+            _database = new OfferRepository(new JobPortalDatabaseDataContext());
 
         }
 
         public bool CreateServiceOffer(Offer offer)
         {
 
-            _database.Create(new Repository.DbConnection.ServiceOffer
+            _database.Create(new ServiceOffer
             {
+
                 SubCategory = new Repository.DbConnection.SubCategory
                 {
                     Name = offer.Subcategory.ToString(),
-                   
+                    Category = new Repository.DbConnection.Category
+                    {
+                        Name = offer.Category.ToString(),
+                   },
                 },
                 Title = offer.Title,
                 Description = offer.Description,
@@ -51,12 +54,56 @@ namespace ServiceLibrary
 
         public bool DeleteServiceOffer(int ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (ID > -1)
+                {
+                   return _database.Delete(t => t.ID == ID);
+                   
+                }
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+
         }
 
         public bool UpdateServiceOffer(Offer serviceOffer)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if ((RegexMatch.DoesOfferMatch(serviceOffer)) && (serviceOffer.RatePerHour > 0))
+                {
+                    _database.Update(new ServiceOffer
+                    {
+                        ID = serviceOffer.Id,
+                        Description = serviceOffer.Description,
+                        Title = serviceOffer.Title,
+                        RatePerHour = serviceOffer.RatePerHour,
+                        SubCategory = new Repository.DbConnection.SubCategory
+                        {
+                            Name = serviceOffer.Subcategory.ToString(),
+                            Category = new Repository.DbConnection.Category
+                            {
+                                Name = serviceOffer.Category.ToString()
+                            }
+                        }
+                    });
+                    return true;
+                    }
+                return false;
+
+            }
+
+            catch
+            {
+                return false;
+
+            }
+
+
         }
 
         public IQueryable<Offer> GetAllOffers()
