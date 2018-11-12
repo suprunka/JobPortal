@@ -2836,9 +2836,8 @@ namespace Repository.DbConnection
 					this.OnRatePerHourChanged();
 				}
 			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
+        }
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
 		public string Description
 		{
 			get

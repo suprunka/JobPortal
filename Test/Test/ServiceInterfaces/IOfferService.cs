@@ -28,7 +28,7 @@ namespace ServiceLibrary
         bool UpdateServiceOffer(Offer serviceOffer);
 
         [OperationContract]
-        IQueryable<Offer> GetAllOffers();
+        Offer[] GetAllOffers();
 
     }
 }

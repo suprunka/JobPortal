@@ -73,8 +73,8 @@
 
         <DataGrid x:Name="usersTable" DisplayMemberPath="DisplayName"  Grid.Column="1" Margin="356,2,-751,3" RenderTransformOrigin="0.494,0.918" HorizontalGridLinesBrush="#FF333337" VerticalGridLinesBrush="#FF2D2D30" CanUserAddRows="True" CanUserResizeRows="False" IsEnabled="True" Grid.RowSpan="13" SelectionChanged="usersTable_SelectionChanged" Grid.Row="1" CurrentCellChanged="usersTable_CurrentCellChanged"/>
         <StackPanel x:Name="genderPanel" HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="9" Margin="20,0,-37,20" Width="336" RenderTransformOrigin="0.789,0.578" Height="38" VerticalAlignment="Bottom" Grid.Column="1" Grid.RowSpan="2">
-            <RadioButton  GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Male}" Width="85">Male</RadioButton>
-            <RadioButton  GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Female}" Height="38" VerticalAlignment="Bottom">Female</RadioButton>
+            <RadioButton Name="Male" GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Male}" Width="85">Male</RadioButton>
+            <RadioButton Name="Female" GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Female}" Height="38" VerticalAlignment="Bottom">Female</RadioButton>
         </StackPanel>
         <ComboBox  Name="regBox" Grid.Column="1" HorizontalAlignment="Left" Margin="20,7,0,0" Grid.Row="6" VerticalAlignment="Top" Width="279" />
         <TextBox  Name="searchMe" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="356,14,-152,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" UndoLimit="11" Grid.RowSpan="2"/>

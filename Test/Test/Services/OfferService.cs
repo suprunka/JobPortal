@@ -5,6 +5,11 @@ using System.ServiceModel;
 using Repository.DbConnection;
 using Repository;
 using ServiceLibrary.Models;
+using System.Collections.Generic;
+using JobPortal.Model;
+using SubCategory = AppJobPortal.Model.SubCategory;
+using Category = AppJobPortal.Model.Category;
+using System.Data.Linq;
 
 namespace ServiceLibrary
 {
@@ -49,7 +54,24 @@ namespace ServiceLibrary
 
         public Offer FindServiceOffer(int ID)
         {
-            throw new NotImplementedException();
+            Offer offer = null;
+            var dbResult = _database.Get(x => x.ID == ID);
+            if (dbResult != null)
+            {
+                var employeePhone = dbResult.Employee_Phone;
+                User user = new UserService().FindUser(employeePhone);
+                offer = new Offer {
+                    Id = ID,
+                    Author = user,
+                    Description = dbResult.Description,
+                    Title = dbResult.Title,
+                    RatePerHour = dbResult.RatePerHour,
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), dbResult.SubCategory.Name),
+                    Category = (Category)Enum.Parse(typeof(Category), dbResult.SubCategory.Category.Name)
+                };
+
+            }
+            return offer;
         }
 
         public bool DeleteServiceOffer(int ID)
@@ -92,23 +114,44 @@ namespace ServiceLibrary
                         }
                     });
                     return true;
-                    }
+                }
                 return false;
 
             }
 
+            catch (ChangeConflictException e)
+            {
+                //optimistic concurrency
+                throw e;
+
+            }
             catch
             {
                 return false;
-
             }
 
 
         }
 
-        public IQueryable<Offer> GetAllOffers()
+        public Offer[] GetAllOffers()
         {
-            throw new NotImplementedException();
+            IList<Offer> resultToReturn = new List<Offer>();
+            foreach (var item in _database.GetAll())
+            {
+                var employeePhone = item.Employee_Phone;
+                User user = new UserService().FindUser(employeePhone);
+                resultToReturn.Add(new Offer
+                {
+                    Id = item.ID,
+                    Author = user,
+                    Description = item.Description,
+                    Title = item.Title,
+                    RatePerHour = item.RatePerHour,
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), item.SubCategory.Name),
+                    Category = (Category)Enum.Parse(typeof(Category), item.SubCategory.Category.Name),
+                });
+            }
+            return resultToReturn.ToArray();
         }
 
         

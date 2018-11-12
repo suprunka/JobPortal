@@ -4,13 +4,39 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AppJobPortal.New"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Services">
+      mc:Ignorable="d"
+      Title="Services" WindowTitle="Services" Height="520" Width="1165" >
 
-    <Grid>
-        <Label Content="Title" HorizontalAlignment="Left" Margin="45,50,0,0" VerticalAlignment="Top"/>
-        <DataGrid Name="servicesTable" HorizontalAlignment="Left" Height="400" Margin="10,25,0,0" VerticalAlignment="Top" Width="765"/>
+    <Grid Margin="0,0,-140,-125">
+
+        <DataGrid Name="servicesTable" HorizontalAlignment="Stretch"   HorizontalContentAlignment="Stretch" 
+        ColumnWidth="*"  Height="495" Margin="65,100,120,0" VerticalAlignment="Top" CanUserSortColumns="True" CanUserDeleteRows="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="ServiceID"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Title}" Header="Title"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Category}" Header="Category"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Subcategory}" Header="Subcategory"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Author">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnEmployee" Content="{Binding Path=FullName}" Click="GoToEmployee" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDelete" Content="Delete" Click="Delete" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Search ID:" HorizontalAlignment="Left" Margin="65,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,1.154" Height="36" Width="75"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="280,59,0,0" VerticalAlignment="Top" Width="90" Height="36" Click="Button_Click"/>
+        <TextBox Name="txtId" HorizontalAlignment="Left" Height="36" Margin="145,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130"/>
+        <Button Name ="RefreshBtn" Content="Refresh" HorizontalAlignment="Left" Margin="1105,59,0,0" VerticalAlignment="Top" Width="80" Height="36" Click="RefreshBtn_Click"/>
 
     </Grid>
 </Page>

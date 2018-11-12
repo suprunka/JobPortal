@@ -35,18 +35,37 @@ namespace AppJobPortal.New
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<UserAppModel, UserServiceReferenceTcp.User>();
-                 });
+            });
 
             _mapper = config.CreateMapper();
 
             _user = new UserAppModel();
             Init();
             GetAll();
+           
 
         }
+        public Window1(UserAppModel user)
+        {
+            InitializeComponent();
+            _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UserAppModel, UserServiceReferenceTcp.User>();
+            });
+
+            _mapper = config.CreateMapper();
+
+            _user = new UserAppModel();
+            Init();
+            GetAll();
+            _user = user;
+            SetTextBoxes();
+        }
+
         public void Init()
         {
-            
+            regBox.ItemsSource = Enum.GetValues(typeof(UserServiceReferenceTcp.Region));
         }
         private void GetAll() {
             _source = _proxy.GetAll();
@@ -78,11 +97,13 @@ namespace AppJobPortal.New
             {
                 _user = _mapper.Map(u, new UserAppModel());
                 SetTextBoxes();
-                
+                usersTable.SelectedItem = _user;
+
+
             }
             else
             {
-                MessageBox.Show("I can't find user with id"+ id, "Cannot find user");
+                MessageBox.Show("I can't find user with phone"+ id, "Cannot find user");
             }
         }
 
@@ -171,12 +192,13 @@ namespace AppJobPortal.New
                 txtPostcode.Text = _user.Postcode;
                 txtUsername.Text = _user.UserName;
                 regBox.SelectedValue = _user.Region;
+
                 
             }
         }
         private void SetUserFromBoxes()
         {
-
+            _user.Region = (Region) regBox.SelectedItem;
             _user.AddressLine = txtAddress.Text;
             _user.CityName = txtCity.Text;
             _user.Email = txtEmail.Text;
@@ -186,6 +208,19 @@ namespace AppJobPortal.New
             _user.Postcode = txtPostcode.Text;
             _user.UserName = txtUsername.Text;
             _user.Password = txtPassword.Password;
+            if ((bool)Male.IsChecked)
+            {
+                _user.Gender = Gender.Male;
+            }
+            else if ((bool)Male.IsChecked)
+            {
+                _user.Gender = Gender.Female;
+
+            }
+            else
+            {
+            }
+
         }
 
         private void usersTable_CurrentCellChanged(object sender, EventArgs e)

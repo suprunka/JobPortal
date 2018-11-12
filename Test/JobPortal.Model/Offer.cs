@@ -14,7 +14,7 @@ namespace AppJobPortal.Model
         [DataMember]
         public virtual int Id { get; set; }
         [DataMember]
-        public virtual int RatePerHour { get; set; }
+        public virtual decimal RatePerHour { get; set; }
         [DataMember]
         public virtual string Title { get; set; }
         [DataMember]
@@ -57,7 +57,7 @@ namespace AppJobPortal.Model
         Gardening,
         [EnumMember]
         [SubcategoryOf(Category.Home)]
-        BabySitting,
+        Babysitting,
 
         [EnumMember]
         [SubcategoryOf(Category.Tutoring)]
@@ -84,7 +84,10 @@ namespace AppJobPortal.Model
         Bikes,
         [EnumMember]
         [SubcategoryOf(Category.Repairs)]
-        Household,
+        HouseholdGoods,
+        [EnumMember]
+        [SubcategoryOf(Category.Repairs)]
+        Electronics,
 
 
         [EnumMember]
