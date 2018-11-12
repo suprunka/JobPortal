@@ -57,7 +57,7 @@ namespace JobPortal.Model
         Gardening,
         [EnumMember]
         [SubcategoryOf(Category.Home)]
-        BabySitting,
+        Babysitting,
 
         [EnumMember]
         [SubcategoryOf(Category.Tutoring)]
@@ -84,7 +84,10 @@ namespace JobPortal.Model
         Bikes,
         [EnumMember]
         [SubcategoryOf(Category.Repairs)]
-        Household,
+        HouseholdGoods,
+        [EnumMember]
+        [SubcategoryOf(Category.Repairs)]
+        Electronics,
 
 
         [EnumMember]

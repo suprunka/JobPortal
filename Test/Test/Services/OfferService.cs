@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Linq;
+using AppJobPortal.Model;
 using System.ServiceModel;
 using Repository.DbConnection;
 using Repository;
 using ServiceLibrary.Models;
 using System.Collections.Generic;
 using JobPortal.Model;
-using SubCategory = JobPortal.Model.SubCategory;
-using Category = JobPortal.Model.Category;
+using SubCategory = AppJobPortal.Model.SubCategory;
+using Category = AppJobPortal.Model.Category;
+using System.Data.Linq;
 
 namespace ServiceLibrary
 {
@@ -52,18 +54,24 @@ namespace ServiceLibrary
 
         public Offer FindServiceOffer(int ID)
         {
-            UserService userService = new UserService();
-            var result =  _database.Get(t => t.ID == ID);
-            return new Offer
+            Offer offer = null;
+            var dbResult = _database.Get(x => x.ID == ID);
+            if (dbResult != null)
             {
-                Id = result.ID,
-                RatePerHour = result.RatePerHour,
-                Title = result.Title,
-                Description = result.Description,
-                Author = userService.FindUser(result.Employee_Phone),
-                Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), result.SubCategory.Name),
-                Category = (Category)Enum.Parse(typeof(Category), result.SubCategory.Category.Name),
-            };
+                var employeePhone = dbResult.Employee_Phone;
+                User user = new UserService().FindUser(employeePhone);
+                offer = new Offer {
+                    Id = ID,
+                    Author = user,
+                    Description = dbResult.Description,
+                    Title = dbResult.Title,
+                    RatePerHour = dbResult.RatePerHour,
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), dbResult.SubCategory.Name),
+                    Category = (Category)Enum.Parse(typeof(Category), dbResult.SubCategory.Category.Name)
+                };
+
+            }
+            return offer;
         }
 
         public bool DeleteServiceOffer(int ID)
@@ -88,7 +96,7 @@ namespace ServiceLibrary
         {
             try
             {
-                if (RegexMatch.DoesOfferMatch(serviceOffer) && (serviceOffer.RatePerHour > 0))
+                if ((RegexMatch.DoesOfferMatch(serviceOffer)) && (serviceOffer.RatePerHour > 0))
                 {
                     _database.Update(new ServiceOffer
                     {
@@ -106,15 +114,20 @@ namespace ServiceLibrary
                         }
                     });
                     return true;
-                    }
+                }
                 return false;
 
             }
 
+            catch (ChangeConflictException e)
+            {
+                //optimistic concurrency
+                throw e;
+
+            }
             catch
             {
                 return false;
-
             }
 
 
@@ -122,19 +135,20 @@ namespace ServiceLibrary
 
         public Offer[] GetAllOffers()
         {
-            UserService userService = new UserService();
             IList<Offer> resultToReturn = new List<Offer>();
-            foreach(var o in _database.GetAll())
+            foreach (var item in _database.GetAll())
             {
+                var employeePhone = item.Employee_Phone;
+                User user = new UserService().FindUser(employeePhone);
                 resultToReturn.Add(new Offer
                 {
-                    Id = o.ID,
-                    RatePerHour = o.RatePerHour,
-                    Title = o.Title,
-                    Description = o.Description,
-                    Author = userService.FindUser(o.Employee_Phone),
-                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), o.SubCategory.Name),
-                    Category = (Category)Enum.Parse(typeof(Category), o.SubCategory.Category.Name),
+                    Id = item.ID,
+                    Author = user,
+                    Description = item.Description,
+                    Title = item.Title,
+                    RatePerHour = item.RatePerHour,
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), item.SubCategory.Name),
+                    Category = (Category)Enum.Parse(typeof(Category), item.SubCategory.Category.Name),
                 });
             }
             return resultToReturn.ToArray();
