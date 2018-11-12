@@ -96,5 +96,11 @@ namespace Repository
                 return null;
             }
         }
+
+        public virtual Logging Login(Logging obj)
+        {
+            return db.GetTable<Logging>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
+           
+        }
     }
 }

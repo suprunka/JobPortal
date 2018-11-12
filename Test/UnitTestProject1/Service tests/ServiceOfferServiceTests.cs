@@ -138,7 +138,7 @@ namespace UnitTestProject1.Service_tests
             var dbMock = new Mock<IOfferRepository>();
             var serviceOfferMock = new Mock<ServiceOffer>();
 
-            dbMock.Setup(x=>x.D)
+        ///    dbMock.Setup(x=>x.D)
             dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer());
          //  {
          //      ID =1, Description="ddddddd", Employee_Phone="0000111",

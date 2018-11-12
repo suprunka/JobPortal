@@ -154,6 +154,10 @@ namespace Repository
         {
             return base.List(predicate);
         }
+        public  Logging Login(Logging account)
+        {
+            return base.Login(account);
+        }
 
         public override bool Update(Users obj)
         {

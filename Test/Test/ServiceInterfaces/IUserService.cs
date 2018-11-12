@@ -33,5 +33,8 @@ namespace ServiceLibrary
 
         [OperationContract]
         User[] ListByRegion(Region region);
+
+        [OperationContract]
+        bool Login(string username, string password);
     }
 }
