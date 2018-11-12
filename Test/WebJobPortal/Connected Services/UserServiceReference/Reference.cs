@@ -27,11 +27,11 @@ namespace WebJobPortal.UserServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User> FindUserAsync(string phoneNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUser", ReplyAction="http://tempuri.org/IUserService/EditWebUserResponse")]
-        bool EditWebUser(JobPortal.Model.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
+        JobPortal.Model.User FindUserByID(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUser", ReplyAction="http://tempuri.org/IUserService/EditWebUserResponse")]
-        System.Threading.Tasks.Task<bool> EditWebUserAsync(JobPortal.Model.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.User> FindUserByIDAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         bool DeleteUser(int id);
@@ -62,18 +62,6 @@ namespace WebJobPortal.UserServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByRegionAsync(JobPortal.Model.Region region);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserPassword", ReplyAction="http://tempuri.org/IUserService/EditWebUserPasswordResponse")]
-        bool EditWebUserPassword(JobPortal.Model.User u);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserPassword", ReplyAction="http://tempuri.org/IUserService/EditWebUserPasswordResponse")]
-        System.Threading.Tasks.Task<bool> EditWebUserPasswordAsync(JobPortal.Model.User u);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserEmail", ReplyAction="http://tempuri.org/IUserService/EditWebUserEmailResponse")]
-        bool EditWebUserEmail(JobPortal.Model.User u);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserEmail", ReplyAction="http://tempuri.org/IUserService/EditWebUserEmailResponse")]
-        System.Threading.Tasks.Task<bool> EditWebUserEmailAsync(JobPortal.Model.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -119,12 +107,12 @@ namespace WebJobPortal.UserServiceReference {
             return base.Channel.FindUserAsync(phoneNumber);
         }
         
-        public bool EditWebUser(JobPortal.Model.User u) {
-            return base.Channel.EditWebUser(u);
+        public JobPortal.Model.User FindUserByID(int id) {
+            return base.Channel.FindUserByID(id);
         }
         
-        public System.Threading.Tasks.Task<bool> EditWebUserAsync(JobPortal.Model.User u) {
-            return base.Channel.EditWebUserAsync(u);
+        public System.Threading.Tasks.Task<JobPortal.Model.User> FindUserByIDAsync(int id) {
+            return base.Channel.FindUserByIDAsync(id);
         }
         
         public bool DeleteUser(int id) {
@@ -165,22 +153,6 @@ namespace WebJobPortal.UserServiceReference {
         
         public System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByRegionAsync(JobPortal.Model.Region region) {
             return base.Channel.ListByRegionAsync(region);
-        }
-        
-        public bool EditWebUserPassword(JobPortal.Model.User u) {
-            return base.Channel.EditWebUserPassword(u);
-        }
-        
-        public System.Threading.Tasks.Task<bool> EditWebUserPasswordAsync(JobPortal.Model.User u) {
-            return base.Channel.EditWebUserPasswordAsync(u);
-        }
-        
-        public bool EditWebUserEmail(JobPortal.Model.User u) {
-            return base.Channel.EditWebUserEmail(u);
-        }
-        
-        public System.Threading.Tasks.Task<bool> EditWebUserEmailAsync(JobPortal.Model.User u) {
-            return base.Channel.EditWebUserEmailAsync(u);
         }
     }
 }
