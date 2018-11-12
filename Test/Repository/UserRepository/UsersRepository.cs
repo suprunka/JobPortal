@@ -15,7 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
+        //private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
         public UsersRepository(DataContext context) : base(context)
         {
             _context = context;

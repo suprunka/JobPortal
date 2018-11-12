@@ -129,6 +129,9 @@
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.ID, "ID")
+            @Html.HiddenFor(model => model.Email, "Email")
+            @Html.HiddenFor(model => model.Password, "Password")
+            @Html.HiddenFor(model => model.UserName, "Username")
 
             <div class="form-group">
 
@@ -229,11 +232,22 @@
 
     <!-- The Modal for changing password -->
     <div id="change-password-modal" class="changePasswordModal">
-        @{ using (Html.BeginForm("EditPassword", "User", FormMethod.Post))
+        @{ using (Html.BeginForm("Edit", "User", FormMethod.Post))
 
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.ID, "ID")
+                @Html.HiddenFor(model => model.AddressLine, "AddressLine")
+                @Html.HiddenFor(model => model.CityName, "CityName")
+                @Html.HiddenFor(model => model.Email, "Email")
+                @Html.HiddenFor(model => model.FirstName, "FirstName")
+                @Html.HiddenFor(model => model.Gender, "Gender")
+                @Html.HiddenFor(model => model.LastName, "LastName")
+                @Html.HiddenFor(model => model.PhoneNumber, "PhoneNumber")
+                @Html.HiddenFor(model => model.Postcode, "Postcode")
+                @Html.HiddenFor(model => model.Region, "Region")
+                @Html.HiddenFor(model => model.UserName, "UserName")
+
                 <!-- Modal content -->
                 <div class="modalContent">
                     <span class="close">&times;</span>
@@ -261,13 +275,23 @@
         }
     </div>
 
-    <!-- The Modal for CHANGing EMAIL -->
+    <!-- The Modal for changing email -->
     <div id="change-email-modal" class="changeEmailModal">
-        @{ using (Html.BeginForm("EditEmail", "User", FormMethod.Post))
+        @{ using (Html.BeginForm("Edit", "User", FormMethod.Post))
 
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.ID, "ID")
+                @Html.HiddenFor(model => model.Password, "Password")
+                @Html.HiddenFor(model => model.AddressLine, "AddressLine")
+                @Html.HiddenFor(model => model.CityName, "CityName")
+                @Html.HiddenFor(model => model.FirstName, "FirstName")
+                @Html.HiddenFor(model => model.Gender, "Gender")
+                @Html.HiddenFor(model => model.LastName, "LastName")
+                @Html.HiddenFor(model => model.PhoneNumber, "PhoneNumber")
+                @Html.HiddenFor(model => model.Postcode, "Postcode")
+                @Html.HiddenFor(model => model.Region, "Region")
+                @Html.HiddenFor(model => model.UserName, "UserName")
                 <!-- Modal content -->
                 <div class="modalContent">
                     <span class="close">&times;</span>
@@ -279,9 +303,6 @@
                         <div id="" class="col-md-10">
                             @Html.EditorFor(model => model.Email, "email", new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="modalText">
-                            <p id="forgotten"><a href="#">Forgotten email?</a></p>
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">

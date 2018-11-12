@@ -30,51 +30,6 @@ namespace ServiceLibrary
             _database = new UsersRepository(new JobPortalDatabaseDataContext());
         }
 
-        public bool EditWebUserPassword(User u)
-        {
-            try
-            {
-                if (RegexMatch.DoesWebUserMatch(u))
-                {
-                    _database.UpdateWeb(new Users
-                    {
-                        ID = u.ID,
-                        Email = u.Email,
-                    });
-                    return true;
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool EditWebUserEmail(User u)
-        {
-            try
-            {
-                if (RegexMatch.DoesWebUserMatch(u))
-                {
-                    _database.UpdateWeb(new Users
-                    {
-                        Logging = new Logging
-                        {
-                            Password = u.Password,
-                        },
-                        ID = u.ID,
-                    });
-                    return true;
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public bool CreateUser(User u)
         {
             try
@@ -178,45 +133,6 @@ namespace ServiceLibrary
 
         }
 
-        public bool EditWebUser(User u)
-        {
-            try
-            {
-                if (RegexMatch.DoesWebUserMatch(u))
-                {
-                    _database.UpdateWeb(new Users
-                    {
-                        AddressTable = new AddressTable
-                        {
-                            Postcode = u.Postcode,
-                            City = u.CityName,
-                            Region = u.Region.ToString(),
-                        },
-
-                        Gender = new Repository.DbConnection.Gender
-                        {
-                            Gender1 = u.Gender.ToString(),
-                        },
-                        ID = u.ID,
-                        PhoneNumber = u.PhoneNumber,
-                        FirstName = u.FirstName,
-                        LastName = u.LastName,
-
-                        AddressLine = u.AddressLine,
-
-                    });
-                    return true;
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-
-        }
-
-
         public User FindUser(string phoneNumber)
         {
             try
@@ -245,7 +161,33 @@ namespace ServiceLibrary
 
         }
 
+        public User FindUserByID(int id)
+        {
+            try
+            {
+                var result = _database.Get(t => t.ID == id);
+                return new User
+                {
+                    ID = result.ID,
+                    PhoneNumber = result.PhoneNumber,
+                    FirstName = result.FirstName,
+                    LastName = result.LastName,
+                    Email = result.Email,
+                    UserName = result.Logging.UserName,
+                    Password = result.Logging.Password,
+                    AddressLine = result.AddressLine,
+                    CityName = result.AddressTable.City,
+                    Postcode = result.AddressTable.Postcode,
+                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                    Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                };
+            }
+            catch
+            {
+                return null;
+            }
 
+        }
 
         public User[] GetAll()
         {

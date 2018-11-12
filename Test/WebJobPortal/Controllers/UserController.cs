@@ -109,6 +109,9 @@ namespace WebJobPortal.Controllers
             User u = new User
             {
                 ID = id,
+                Email = Request.Form["Email"],
+                Password= Request.Form["Password"],
+                UserName = Request.Form["Username"],
                 FirstName = Request.Form["firstName"],
                 LastName = Request.Form["lastName"],
                 Gender = (Gender)Enum.Parse(typeof(Gender), Request.Form["gender"]),
@@ -119,12 +122,15 @@ namespace WebJobPortal.Controllers
                 Region = (Region)Enum.Parse(typeof(Region), Request.Form["region"]),
             };
 
-            bool result = this._proxy.EditWebUser(u);
+            bool result = this._proxy.EditUser(u);
             if (result)
             {
                 return RedirectToAction("UserProfile", "User", new UserModel
                 {
                     ID = u.ID,
+                    Email = u.Email,
+                    UserName = u.UserName,
+                    Password = u.Password,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     Gender = u.Gender,
@@ -139,53 +145,6 @@ namespace WebJobPortal.Controllers
             {
                 return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
             }
-        }
-
-        [HttpPost]
-        public ActionResult EditPassword(int id)
-        {
-
-            User u = new User
-            {
-                ID = id,
-                Password = Request.Form["password"],
-            };
-            bool result = this._proxy.EditWebUser(u);
-            if (result)
-            {
-                return RedirectToAction("UserProfile", "User", new UserModel
-                {
-                    ID = u.ID,
-                    Password = u.Password
-                });
-            }
-            else
-            {
-                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
-            }
-        }
-        [HttpPost]
-        public ActionResult EditEmail(int id)
-        {
-
-            User u = new User
-            {
-                ID = id,
-                Email = Request.Form["email"],
-            };
-            bool result = this._proxy.EditWebUser(u);
-            if (result)
-            {
-                return RedirectToAction("UserProfile", "User", new UserModel
-                {
-                    ID = u.ID,
-                    Email = u.Email
-                });
-            }
-            else
-            {
-                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
-            }
-        }
+        }       
     }
 }

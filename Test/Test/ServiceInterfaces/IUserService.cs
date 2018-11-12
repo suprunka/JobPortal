@@ -17,7 +17,7 @@ namespace ServiceLibrary
         User FindUser(string phoneNumber);
 
         [OperationContract]
-        bool EditWebUser(User u);
+        User FindUserByID(int id);
 
         [OperationContract]
         bool DeleteUser(int id);
@@ -33,13 +33,5 @@ namespace ServiceLibrary
 
         [OperationContract]
         User[] ListByRegion(Region region);
-
-        [OperationContract]
-        bool EditWebUserPassword(User u);
-
-        [OperationContract]
-        bool EditWebUserEmail(User u);
-
-
     }
 }
