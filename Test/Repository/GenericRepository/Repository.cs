@@ -23,6 +23,11 @@ namespace Repository
             _Table = db.GetTable<T>();
         }
 
+        public Repository()
+        {
+
+        }
+
 
         public virtual T Create(T obj)
         {

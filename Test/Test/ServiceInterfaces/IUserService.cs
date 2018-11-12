@@ -34,6 +34,12 @@ namespace ServiceLibrary
         [OperationContract]
         User[] ListByRegion(Region region);
 
+        [OperationContract]
+        bool EditWebUserPassword(User u);
+
+        [OperationContract]
+        bool EditWebUserEmail(User u);
+
 
     }
 }

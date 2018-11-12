@@ -23,6 +23,11 @@ namespace Repository
 
         }
 
+        public OfferRepository()
+        {
+
+        }
+
         public override ServiceOffer Create(ServiceOffer offer)
         {
             ServiceOffer result = null;
