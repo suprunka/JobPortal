@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject1.UserService {
+namespace UnitTestProject1.UserServiceRef {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserService.IUserService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceRef.IUserService")]
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
@@ -62,15 +62,27 @@ namespace UnitTestProject1.UserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByRegionAsync(JobPortal.Model.Region region);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserPassword", ReplyAction="http://tempuri.org/IUserService/EditWebUserPasswordResponse")]
+        bool EditWebUserPassword(JobPortal.Model.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserPassword", ReplyAction="http://tempuri.org/IUserService/EditWebUserPasswordResponse")]
+        System.Threading.Tasks.Task<bool> EditWebUserPasswordAsync(JobPortal.Model.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserEmail", ReplyAction="http://tempuri.org/IUserService/EditWebUserEmailResponse")]
+        bool EditWebUserEmail(JobPortal.Model.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserEmail", ReplyAction="http://tempuri.org/IUserService/EditWebUserEmailResponse")]
+        System.Threading.Tasks.Task<bool> EditWebUserEmailAsync(JobPortal.Model.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : UnitTestProject1.UserService.IUserService, System.ServiceModel.IClientChannel {
+    public interface IUserServiceChannel : UnitTestProject1.UserServiceRef.IUserService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<UnitTestProject1.UserService.IUserService>, UnitTestProject1.UserService.IUserService {
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<UnitTestProject1.UserServiceRef.IUserService>, UnitTestProject1.UserServiceRef.IUserService {
         
         public UserServiceClient() {
         }
@@ -153,6 +165,22 @@ namespace UnitTestProject1.UserService {
         
         public System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByRegionAsync(JobPortal.Model.Region region) {
             return base.Channel.ListByRegionAsync(region);
+        }
+        
+        public bool EditWebUserPassword(JobPortal.Model.User u) {
+            return base.Channel.EditWebUserPassword(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditWebUserPasswordAsync(JobPortal.Model.User u) {
+            return base.Channel.EditWebUserPasswordAsync(u);
+        }
+        
+        public bool EditWebUserEmail(JobPortal.Model.User u) {
+            return base.Channel.EditWebUserEmail(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditWebUserEmailAsync(JobPortal.Model.User u) {
+            return base.Channel.EditWebUserEmailAsync(u);
         }
     }
 }

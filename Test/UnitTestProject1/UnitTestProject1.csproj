@@ -106,7 +106,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\UserService\Reference.cs">
+    <Compile Include="Connected Services\UserServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -142,14 +142,14 @@
     <None Include="Connected Services\OfferServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserService\JobPortal.Model.xsd">
+    <None Include="Connected Services\UserServiceRef\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserService\service.wsdl" />
-    <None Include="Connected Services\UserService\service.xsd">
+    <None Include="Connected Services\UserServiceRef\service.wsdl" />
+    <None Include="Connected Services\UserServiceRef\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserService\service1.xsd">
+    <None Include="Connected Services\UserServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Database tests\DbTest.dbml">
@@ -199,16 +199,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\OfferServiceRef\" />
-    <WCFMetadataStorage Include="Connected Services\UserService\" />
+    <WCFMetadataStorage Include="Connected Services\UserServiceRef\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserService\configuration91.svcinfo" />
+    <None Include="Connected Services\UserServiceRef\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserService\configuration.svcinfo" />
+    <None Include="Connected Services\UserServiceRef\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserService\Reference.svcmap">
+    <None Include="Connected Services\UserServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

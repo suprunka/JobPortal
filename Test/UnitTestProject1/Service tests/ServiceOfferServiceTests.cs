@@ -35,18 +35,23 @@ namespace UnitTestProject1.Service_tests
         [TestMethod]
         public void Create_OfferService_Check_The_Return_Object()
         {
-            var offerMock = new Mock<Offer>();
-            offerMock.Setup(x => x.Id).Returns(1);
+            var offerMock = new Mock<ServiceOffer>();
+            var offer2Mock = new Mock<Offer>();
+            offerMock.SetupAllProperties();
             var dbMock = new Mock<IOfferRepository>();
-            Offer OfferSentToDb = null;
-
-            dbMock.Setup(x => x.Create(It.IsAny<ServiceOffer>()))
-                .Callback<Offer>(x => x = OfferSentToDb);
 
             var sut = new OfferService(dbMock.Object);
-            sut.CreateServiceOffer(offerMock.Object);
+
+            ServiceOffer OfferSentToDb = null;
+            offer2Mock.Setup(x => x.Id).Returns(offerMock.Object.ID);
+            
+
+            dbMock.Setup(x => x.Create(It.IsAny<ServiceOffer>())).Returns(offerMock.Object)
+                .Callback<ServiceOffer>(x => x = OfferSentToDb);
+
+            sut.CreateServiceOffer(offer2Mock.Object);
             dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.Once());
-            Assert.AreEqual(1, OfferSentToDb.Id);
+            Assert.AreEqual(1, OfferSentToDb.ID);
         }
 
         [TestMethod]
