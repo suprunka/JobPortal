@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq;
-using AppJobPortal.Model;
 using System.ServiceModel;
 using Repository.DbConnection;
 using Repository;
 using ServiceLibrary.Models;
 using System.Collections.Generic;
 using JobPortal.Model;
-using SubCategory = AppJobPortal.Model.SubCategory;
-using Category = AppJobPortal.Model.Category;
 using System.Data.Linq;
+using SubCategory = JobPortal.Model.SubCategory;
+using Category = JobPortal.Model.Category;
 
 namespace ServiceLibrary
 {

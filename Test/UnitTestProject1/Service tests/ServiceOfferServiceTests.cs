@@ -20,16 +20,19 @@ namespace UnitTestProject1.Service_tests
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
             var offerMock = new Mock<Offer>();
+            
             var offerMockForDB = new Mock<ServiceOffer>();
             offerMock.SetupAllProperties();
 
 
-            var dbMock = new Mock<OfferRepository>();
+            var dbMock = new Mock<IOfferRepository>();
             dbMock.Setup(x => x.Create(offerMockForDB.Object)).Returns(new ServiceOffer
             {
-                ID = 1,
-                Title = "title",
-                Description = "description",
+                Subcategory_ID = 1,
+                RatePerHour = 20,
+                Description = "Sample",
+                Employee_Phone = "12345678",
+                Title = "First",
             });
 
             OfferService service = new OfferService(dbMock.Object);
@@ -97,20 +100,21 @@ namespace UnitTestProject1.Service_tests
             var offerMock = new Mock<Offer>();
             offerMock.SetupAllProperties();
             var dbMock = new Mock<IOfferRepository>();
-            bool result =false;
+            bool result = false;
 
             var sut = new OfferService(dbMock.Object);
             try
             {
                 sut.CreateServiceOffer(offerMock.Object);
-                 result = sut.DeleteServiceOffer(offerMock.Object.Id);
+                result = sut.DeleteServiceOffer(offerMock.Object.Id);
             }
-            catch {
+            catch
+            {
                 Assert.IsTrue(result);
             }
-           
+
         }
-        
+
         #endregion
         /*
 
@@ -200,8 +204,8 @@ namespace UnitTestProject1.Service_tests
                 userSenftoService.PhoneNumber == "12334455"
                 );
         }*/
-       // #endregion
-        
+        // #endregion
+
     }
 }
 

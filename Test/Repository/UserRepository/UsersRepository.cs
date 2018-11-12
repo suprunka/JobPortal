@@ -25,7 +25,7 @@ namespace Repository
         public override Users Create(Users obj)
         {
             Users result = null;
-            using (SqlConnection objConn = new SqlConnection(connection))
+            using (SqlConnection objConn = new SqlConnection("Data Source = JAKUB\\SQLEXPRESS; Initial Catalog = JobPortalTestDB; Integrated Security = True"))
             {
                 objConn.Open();
                 using (var myTran = new TransactionScope())
@@ -93,7 +93,7 @@ namespace Repository
         public override bool Delete(Expression<Func<Users, bool>> predicate)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection(connection))
+            using (SqlConnection objConn = new SqlConnection("Data Source = JAKUB\\SQLEXPRESS; Initial Catalog = JobPortalTestDB; Integrated Security = True"))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
@@ -159,7 +159,7 @@ namespace Repository
         {
             {
                 bool result = false;
-                using (SqlConnection objConn = new SqlConnection(connection))
+                using (SqlConnection objConn = new SqlConnection("Data Source = JAKUB\\SQLEXPRESS; Initial Catalog = JobPortalTestDB; Integrated Security = True"))
                 {
 
                     objConn.Open();
