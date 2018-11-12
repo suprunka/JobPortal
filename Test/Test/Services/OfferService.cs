@@ -45,7 +45,7 @@ namespace ServiceLibrary
                 Title = offer.Title,
                 Description = offer.Description,
                 RatePerHour = offer.RatePerHour,
-                Employee_Phone = offer.Author.ID.ToString()
+                Employee_Phone = offer.Author.PhoneNumber.ToString()
 
             });
             return true;

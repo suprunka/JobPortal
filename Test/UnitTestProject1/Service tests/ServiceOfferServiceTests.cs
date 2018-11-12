@@ -7,6 +7,9 @@ using Moq;
 using Repository;
 using Repository.DbConnection;
 using ServiceLibrary;
+using UnitTestProject1.Database_tests;
+using ServiceOffer = Repository.DbConnection.ServiceOffer;
+using Users = UnitTestProject1.Database_tests.Users;
 
 namespace UnitTestProject1.Service_tests
 {
@@ -21,11 +24,16 @@ namespace UnitTestProject1.Service_tests
         {
             var offerServiceMock = new Mock<ServiceOffer>();
             var offerMock = new Mock<Offer>();
-            offerMock.SetupAllProperties();
+            offerMock.Setup(x => x.Id).Returns(1);
+            offerMock.Setup(x => x.RatePerHour).Returns(220);
+            offerMock.Setup(x => x.Subcategory).Returns(JobPortal.Model.SubCategory.AppPrgramming);
+            offerMock.Setup(x => x.Title).Returns("Title123456789");
+            offerMock.Setup(x => x.Author).Returns(new Mock<User>().SetupAllProperties().Object);
+            offerMock.Setup(x => x.Category).Returns(JobPortal.Model.Category.IT);
+            offerMock.Setup(x => x.Description).Returns("verylongdescription verylongdescription verylongdescription");
 
 
             var dbMock = new Mock<IOfferRepository>();
-            dbMock.Setup(x => x.Create(offerServiceMock.Object)).Returns(offerServiceMock.Object);
 
             OfferService service = new OfferService(dbMock.Object);
             service.CreateServiceOffer(offerMock.Object);
@@ -37,6 +45,9 @@ namespace UnitTestProject1.Service_tests
         {
             var offerMock = new Mock<ServiceOffer>();
             var offer2Mock = new Mock<Offer>();
+            var userMock = new Mock<User>();
+            userMock.SetupAllProperties();
+            offer2Mock.Setup(x => x.Author).Returns(userMock.Object);
             offerMock.SetupAllProperties();
             var dbMock = new Mock<IOfferRepository>();
 
@@ -94,25 +105,28 @@ namespace UnitTestProject1.Service_tests
         [TestMethod]
         public void Delete_OfferService_Verify_If_Returns_true()
         {
-            var offerMock = new Mock<Offer>();
-            offerMock.SetupAllProperties();
+           
             var dbMock = new Mock<IOfferRepository>();
+
             bool result =false;
+            dbMock.Setup(x => x.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(true);
 
             var sut = new OfferService(dbMock.Object);
             try
             {
-                sut.CreateServiceOffer(offerMock.Object);
-                 result = sut.DeleteServiceOffer(offerMock.Object.Id);
+              //  sut.CreateServiceOffer(offerMock.Object);
+                 result = sut.DeleteServiceOffer(6);
+                
             }
             catch {
-                Assert.IsTrue(result);
+                result = false;
             }
-           
+            Assert.IsTrue(result);
+
         }
-        
+
         #endregion
-        
+
 
         //Read
         #region
@@ -122,15 +136,43 @@ namespace UnitTestProject1.Service_tests
             var offerMock = new Mock<Offer>();
             offerMock.Setup(x => x.Id).Returns(1);
             var dbMock = new Mock<IOfferRepository>();
-            int OfferId = -1;
+            var serviceOfferMock = new Mock<ServiceOffer>();
 
-            dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>()))
-                .Callback<int>(x => OfferId = x);
-
+            dbMock.Setup(x=>x.D)
+            dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer());
+         //  {
+         //      ID =1, Description="ddddddd", Employee_Phone="0000111",
+         //      RatePerHour =222, Subcategory_ID =1, Title="dddd", Users = new Repository.DbConnection.Users
+         //      {
+         //          AddressTable = new Repository.DbConnection.AddressTable
+         //          {
+         //              Postcode = "9000",
+         //              City = "Aalborg",
+         //              Region = "Nordjylland"
+         //          },
+         //          Logging = new Repository.DbConnection.Logging
+         //          {
+         //              Password = "Adama1",
+         //              UserName = "Username1",
+         //          },
+         //          Gender = new Repository.DbConnection.Gender
+         //          {
+         //              Gender1 = "Male",
+         //          },
+         //          ID = 1,
+         //          PhoneNumber = "0000111",
+         //          FirstName = "Adam",
+         //          LastName = "Adam",
+         //          Email = "adam@gmail.com",
+         //          AddressLine = "mickiewicza",
+         //
+         //      }
+         //     
+         //  });
             var sut = new OfferService(dbMock.Object);
-            sut.FindServiceOffer(offerMock.Object.Id);
+            var returnedOffer = sut.FindServiceOffer(1);
             dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.Once());
-            Assert.AreEqual(1, OfferId);
+            Assert.IsNotNull( returnedOffer);
         }
         [TestMethod]
         public void GetAll_OfferService_Verify_If_Returns_Queryable()
@@ -155,6 +197,13 @@ namespace UnitTestProject1.Service_tests
         {
             var offerMock = new Mock<Offer>();
             var dbMock = new Mock<IOfferRepository>();
+            offerMock.Setup(x => x.Id).Returns(1);
+            offerMock.Setup(x => x.RatePerHour).Returns(220);
+            offerMock.Setup(x => x.Subcategory).Returns(JobPortal.Model.SubCategory.AppPrgramming);
+            offerMock.Setup(x => x.Title).Returns("Title123456789");
+            offerMock.Setup(x => x.Author).Returns(new Mock<User>().SetupAllProperties().Object);
+            offerMock.Setup(x => x.Category).Returns(JobPortal.Model.Category.IT);
+            offerMock.Setup(x => x.Description).Returns("verylongdescription verylongdescription verylongdescription");
             var sut = new OfferService(dbMock.Object);
             sut.UpdateServiceOffer(offerMock.Object);
             dbMock.Verify(x => x.Update(It.IsAny<ServiceOffer>()), Times.Once());
@@ -166,17 +215,19 @@ namespace UnitTestProject1.Service_tests
         {
             var offerMock = new Mock<Offer>();
             offerMock.Setup(x => x.Id).Returns(1);
-            offerMock.Setup(x => x.RatePerHour).Returns(100);
+            offerMock.Setup(x => x.RatePerHour).Returns(220);
+            offerMock.Setup(x => x.Subcategory).Returns(JobPortal.Model.SubCategory.AppPrgramming);
+            offerMock.Setup(x => x.Title).Returns("Title123456789");
+            offerMock.Setup(x => x.Author).Returns(new Mock<User>().SetupAllProperties().Object);
+            offerMock.Setup(x => x.Category).Returns(JobPortal.Model.Category.IT);
+            offerMock.Setup(x => x.Description).Returns("verylongdescription verylongdescription verylongdescription");
+
             var dbMock = new Mock<IOfferRepository>();
-            Offer returnedOffer = null;
-            dbMock.Setup(x => x.Update(It.IsAny<ServiceOffer>()))
-                .Callback<Offer>(x => returnedOffer = x);
+            dbMock.Setup(x => x.Update(It.IsAny<ServiceOffer>()));
+
             var sut = new OfferService(dbMock.Object);
-            sut.UpdateServiceOffer(offerMock.Object);
-            Assert.IsTrue(
-                1 == offerMock.Object.Id &&
-                100 == offerMock.Object.RatePerHour
-                 );
+            bool res = sut.UpdateServiceOffer(offerMock.Object);
+            Assert.IsTrue(res);
         }
        /* [TestMethod]
         public void Edit_With_Valid_Inputs()

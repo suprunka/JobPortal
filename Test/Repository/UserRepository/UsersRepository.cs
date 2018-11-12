@@ -15,8 +15,8 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
-        public UsersRepository(DataContext context) : base(context)
+        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password=Password1!";
+      public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
 
