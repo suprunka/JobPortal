@@ -1,27 +1,21 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using Moq;
-//using System.Linq;
-//using AppJobPortal.UserServiceReferenceTcp;
-//using User = AppJobPortal.UserServiceReferenceTcp.User;
-//using Region = AppJobPortal.UserServiceReferenceTcp.Region;
-//using Gender = AppJobPortal.UserServiceReferenceTcp.Gender;
-//using AppJobPortal.Models;
-
+using Moq;
+using AppJobPortal.UserServiceReferenceTcp;
 
 namespace UnitTestProject1.App_test
 {
     [TestClass]
     public class UserTests
-    {/*
+    {
         //read
         #region
-        [TestMethod]
+       /*[TestMethod]
         public void Get_Will_Return_Valid_Object()
         {
             var userMock = new Mock<AppJobPortal.UserServiceReferenceTcp.User>();
             userMock.Object.ID = 6;
             var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.FindUser(It.IsAny<int>())).Returns(userMock.Object);
+            userServiceStub.Setup(x => x.FindUser(It.IsAny<string>())).Returns(userMock.Object);
 
             var sut = new UserController(userServiceStub.Object);
             UserAppModel user = sut.Get(6);
@@ -30,7 +24,7 @@ namespace UnitTestProject1.App_test
             );
         }
 
-
+/*
 
         [TestMethod]
         public void Get_Will_Return_Proper_Amount_Of_Users()

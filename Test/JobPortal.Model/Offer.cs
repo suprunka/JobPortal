@@ -20,7 +20,7 @@ namespace JobPortal.Model
         [DataMember]
         public virtual string Description { get; set; }
         [DataMember]
-        public virtual User Author { get; set; }
+        public virtual User Author{ get; set; }
         [DataMember]
         public virtual Category Category { get; set; }
         [DataMember]

@@ -165,22 +165,26 @@ namespace ServiceLibrary
         {
             try
             {
-                var result = _database.Get(t => t.ID == id);
-                return new User
+                if (id > 0)
                 {
-                    ID = result.ID,
-                    PhoneNumber = result.PhoneNumber,
-                    FirstName = result.FirstName,
-                    LastName = result.LastName,
-                    Email = result.Email,
-                    UserName = result.Logging.UserName,
-                    Password = result.Logging.Password,
-                    AddressLine = result.AddressLine,
-                    CityName = result.AddressTable.City,
-                    Postcode = result.AddressTable.Postcode,
-                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
-                    Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
-                };
+                    var result = _database.Get(t => t.ID == id);
+                    return new User
+                    {
+                        ID = result.ID,
+                        PhoneNumber = result.PhoneNumber,
+                        FirstName = result.FirstName,
+                        LastName = result.LastName,
+                        Email = result.Email,
+                        UserName = result.Logging.UserName,
+                        Password = result.Logging.Password,
+                        AddressLine = result.AddressLine,
+                        CityName = result.AddressTable.City,
+                        Postcode = result.AddressTable.Postcode,
+                        Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                        Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                    };
+                }
+                return null;
             }
             catch
             {

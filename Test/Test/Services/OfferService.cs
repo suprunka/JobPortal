@@ -30,25 +30,39 @@ namespace ServiceLibrary
 
         public bool CreateServiceOffer(Offer offer)
         {
-
-            _database.Create(new ServiceOffer
+            try
             {
-
-                SubCategory = new Repository.DbConnection.SubCategory
+                if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
                 {
-                    Name = offer.Subcategory.ToString(),
-                    Category = new Repository.DbConnection.Category
+                    _database.Create(new ServiceOffer
                     {
-                        Name = offer.Category.ToString(),
-                   },
-                },
-                Title = offer.Title,
-                Description = offer.Description,
-                RatePerHour = offer.RatePerHour,
-                Employee_Phone = offer.Author.ID.ToString()
 
-            });
-            return true;
+                        SubCategory = new Repository.DbConnection.SubCategory
+                        {
+                            Name = offer.Subcategory.ToString(),
+                            Category = new Repository.DbConnection.Category
+                            {
+                                Name = offer.Category.ToString(),
+                            },
+                        },
+                        Title = offer.Title,
+                        Description = offer.Description,
+                        RatePerHour = offer.RatePerHour,
+                        Employee_Phone = offer.Author.ID.ToString()
+
+                    });
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+           
         }
 
         public Offer FindServiceOffer(int ID)
