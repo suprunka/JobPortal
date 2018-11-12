@@ -139,6 +139,53 @@ namespace WebJobPortal.Controllers
             {
                 return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
             }
-        }  
+        }
+
+        [HttpPost]
+        public ActionResult EditPassword(int id)
+        {
+
+            User u = new User
+            {
+                ID = id,
+                Password = Request.Form["password"],
+            };
+            bool result = this._proxy.EditWebUser(u);
+            if (result)
+            {
+                return RedirectToAction("UserProfile", "User", new UserModel
+                {
+                    ID = u.ID,
+                    Password = u.Password
+                });
+            }
+            else
+            {
+                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+            }
+        }
+        [HttpPost]
+        public ActionResult EditEmail(int id)
+        {
+
+            User u = new User
+            {
+                ID = id,
+                Email = Request.Form["email"],
+            };
+            bool result = this._proxy.EditWebUser(u);
+            if (result)
+            {
+                return RedirectToAction("UserProfile", "User", new UserModel
+                {
+                    ID = u.ID,
+                    Email = u.Email
+                });
+            }
+            else
+            {
+                return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
+            }
+        }
     }
 }

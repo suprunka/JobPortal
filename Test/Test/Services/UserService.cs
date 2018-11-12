@@ -30,6 +30,50 @@ namespace ServiceLibrary
             _database = new UsersRepository(new JobPortalDatabaseDataContext());
         }
 
+        public bool EditWebUserPassword(User u)
+        {
+            try
+            {
+                if (RegexMatch.DoesWebUserMatch(u))
+                {
+                    _database.UpdateWeb(new Users
+                    {
+                        ID = u.ID,
+                        Email = u.Email,
+                    });
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool EditWebUserEmail(User u)
+        {
+            try
+            {
+                if (RegexMatch.DoesWebUserMatch(u))
+                {
+                    _database.UpdateWeb(new Users
+                    {
+                        Logging = new Logging
+                        {
+                            Password = u.Password,
+                        },
+                        ID = u.ID,
+                    });
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public bool CreateUser(User u)
         {

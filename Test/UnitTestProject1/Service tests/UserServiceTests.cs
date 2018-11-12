@@ -79,8 +79,31 @@ namespace UnitTestProject1.Service_tests
         {
 
             var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(t => t.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users { ID = 1, PhoneNumber = "12345678", FirstName = "Ådam",
-                LastName = "Adam", Email = "Adam@wp.pl", AddressLine = "polkowicka", Gender_ID = 1, City_ID = 1, Logging_ID = 1});
+            databaseMock.Setup(t => t.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+            {
+                AddressTable = new AddressTable
+                {
+                    Postcode = "9000",
+                    City = "Aalborg",
+                    Region = "Nordjylland"
+                },
+                Logging = new Logging
+                {
+                    Password = "Adama1",
+                    UserName = "Username1",
+                },
+                Gender = new Repository.DbConnection.Gender
+                {
+                    Gender1 = "Male",
+                },
+
+                PhoneNumber = "12345678",
+                FirstName = "Adam",
+                LastName = "Adam",
+                Email = "adam@gmail.com",
+                AddressLine = "mickiewicza",
+
+            });
             UserService service = new UserService(databaseMock.Object);
             var u = service.FindUser("12345678");
             Assert.AreEqual("Ådam", u.FirstName);

@@ -16,21 +16,27 @@ namespace UnitTestProject1.Service_tests
         //Create
         //#region
 
-        /*[TestMethod]
+        [TestMethod]
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
             var offerMock = new Mock<Offer>();
+            var offerMockForDB = new Mock<ServiceOffer>();
             offerMock.SetupAllProperties();
 
 
-            var dbMock = new Mock<IRepository<Offer>>();
-            dbMock.Setup(x => x.Create(offerMock.Object)).Returns(true);
+            var dbMock = new Mock<OfferRepository>();
+            dbMock.Setup(x => x.Create(offerMockForDB.Object)).Returns(new ServiceOffer
+            {
+                ID = 1,
+                Title = "title",
+                Description = "description",
+            });
 
             OfferService service = new OfferService(dbMock.Object);
             service.CreateServiceOffer(offerMock.Object);
-            dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.AtLeastOnce);
+            dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.AtLeastOnce);
         }
-
+        /*
         [TestMethod]
         public void Create_OfferService_Check_The_Return_Object()
         {
