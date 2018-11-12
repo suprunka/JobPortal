@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 
-namespace AppJobPortal.Model
+namespace JobPortal.Model
 {
     [DataContract]
     [KnownType(typeof(Category))]
@@ -38,8 +38,8 @@ namespace AppJobPortal.Model
         IT,
         [EnumMember]
         Repairs,
-        [EnumMember]
-        Art,
+        /*[EnumMember]
+        Art,*/
         [EnumMember]
         Architecture,
         [EnumMember]

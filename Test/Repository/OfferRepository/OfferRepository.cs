@@ -13,7 +13,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabase"].ConnectionString;
+        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
 
 
         public OfferRepository(DataContext context) : base(context)
@@ -38,8 +38,7 @@ namespace Repository
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_Phone = offer.Employee_Phone,
-                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name.Equals(offer.SubCategory.Name)).ID
-
+                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.ID == offer.Subcategory_ID).ID
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
@@ -78,7 +77,7 @@ namespace Repository
             return base.List(predicate);
         }
 
-        //TO DO
+
         public override bool Delete(Expression<Func<ServiceOffer, bool>> predicate)
         {
             bool result = false;
@@ -90,6 +89,7 @@ namespace Repository
                     var toDelete = _context.GetTable<ServiceOffer>().SingleOrDefault(predicate);
                     _context.GetTable<ServiceOffer>().DeleteOnSubmit(toDelete);
                     result = true;
+                    _context.SubmitChanges();
                 }
                 catch (Exception e)
                 {
@@ -100,7 +100,7 @@ namespace Repository
             }
         }
 
-        //TO DO
+
         public override bool Update(ServiceOffer modified)
         {
             bool result = false;
@@ -114,8 +114,8 @@ namespace Repository
                     {
                         foundService.RatePerHour = modified.RatePerHour;
                         foundService.Title = modified.Title;
-                        foundService.Description = modified.Title;
-                        foundService.Subcategory_ID = modified.ID;
+                        foundService.Description = modified.Description;
+                        foundService.Subcategory_ID = modified.Subcategory_ID;
                         result = true;
                         _context.SubmitChanges();
                     }

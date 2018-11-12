@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using AppJobPortal.Model;
+using JobPortal.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repository;
@@ -99,8 +99,10 @@ namespace UnitTestProject1.Service_tests
                 sut.CreateServiceOffer(offerMock.Object);
                  result = sut.DeleteServiceOffer(offerMock.Object.Id);
             }
-            catch (Exception e) { }
-            Assert.IsTrue(result);
+            catch {
+                Assert.IsTrue(result);
+            }
+           
         }
         
         #endregion

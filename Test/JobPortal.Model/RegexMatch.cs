@@ -1,6 +1,5 @@
-﻿using AppJobPortal.Model;
-using JobPortal.Model;
-using System;
+﻿using JobPortal.Model;
+
 using System.Text.RegularExpressions;
 
 namespace ServiceLibrary.Models

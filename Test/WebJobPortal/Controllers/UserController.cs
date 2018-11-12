@@ -61,7 +61,6 @@ namespace WebJobPortal.Controllers
         [HttpPost]
         public ActionResult Create(UserModel user)
         {
-
             if (ModelState.IsValid)
             {
                 User u = new User
@@ -90,7 +89,6 @@ namespace WebJobPortal.Controllers
             }
         }
 
-
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -105,11 +103,9 @@ namespace WebJobPortal.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult Edit(int id)
         {
-
             User u = new User
             {
                 ID = id,
@@ -143,8 +139,6 @@ namespace WebJobPortal.Controllers
             {
                 return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
             }
-        }
-
-  
+        }  
     }
 }

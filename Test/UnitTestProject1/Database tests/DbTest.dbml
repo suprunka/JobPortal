@@ -144,7 +144,7 @@
   </Table>
   <Table Name="dbo.ServiceOffer" Member="ServiceOffer">
     <Type Name="ServiceOffer">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Subcategory_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
