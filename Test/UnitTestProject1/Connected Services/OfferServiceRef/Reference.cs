@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JobPortal.OfferServiceReference {
+namespace UnitTestProject1.OfferServiceRef {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OfferServiceReference.IOfferService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OfferServiceRef.IOfferService")]
     public interface IOfferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
@@ -47,12 +47,12 @@ namespace JobPortal.OfferServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IOfferServiceChannel : JobPortal.OfferServiceReference.IOfferService, System.ServiceModel.IClientChannel {
+    public interface IOfferServiceChannel : UnitTestProject1.OfferServiceRef.IOfferService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class OfferServiceClient : System.ServiceModel.ClientBase<JobPortal.OfferServiceReference.IOfferService>, JobPortal.OfferServiceReference.IOfferService {
+    public partial class OfferServiceClient : System.ServiceModel.ClientBase<UnitTestProject1.OfferServiceRef.IOfferService>, UnitTestProject1.OfferServiceRef.IOfferService {
         
         public OfferServiceClient() {
         }

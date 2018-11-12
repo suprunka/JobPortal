@@ -14,21 +14,22 @@ namespace UnitTestProject1.Service_tests
     public class ServiceOfferServiceTests
     {
         //Create
-        //#region
+        #region
 
-        /*[TestMethod]
+        [TestMethod]
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
+            var offerServiceMock = new Mock<ServiceOffer>();
             var offerMock = new Mock<Offer>();
             offerMock.SetupAllProperties();
 
 
-            var dbMock = new Mock<IRepository<Offer>>();
-            dbMock.Setup(x => x.Create(offerMock.Object)).Returns(true);
+            var dbMock = new Mock<IOfferRepository>();
+            dbMock.Setup(x => x.Create(offerServiceMock.Object)).Returns(offerServiceMock.Object);
 
             OfferService service = new OfferService(dbMock.Object);
             service.CreateServiceOffer(offerMock.Object);
-            dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.AtLeastOnce);
+            dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.AtLeastOnce);
         }
 
         [TestMethod]
@@ -36,15 +37,15 @@ namespace UnitTestProject1.Service_tests
         {
             var offerMock = new Mock<Offer>();
             offerMock.Setup(x => x.Id).Returns(1);
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
             Offer OfferSentToDb = null;
 
-            dbMock.Setup(x => x.Create(It.IsAny<Offer>()))
+            dbMock.Setup(x => x.Create(It.IsAny<ServiceOffer>()))
                 .Callback<Offer>(x => x = OfferSentToDb);
 
             var sut = new OfferService(dbMock.Object);
             sut.CreateServiceOffer(offerMock.Object);
-            dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.Once());
+            dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.Once());
             Assert.AreEqual(1, OfferSentToDb.Id);
         }
 
@@ -64,13 +65,13 @@ namespace UnitTestProject1.Service_tests
             offerMock.Setup(x => x.RatePerHour).Returns(ratePerHour);
             offerMock.Setup(x => x.Title).Returns(title);
             offerMock.Setup(x => x.Description).Returns(description);
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
 
             var sut = new OfferService(dbMock.Object);
             sut.CreateServiceOffer(offerMock.Object);
-            dbMock.Verify(x => x.Create(It.IsAny<Offer>()), Times.AtLeastOnce);
+            dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.AtLeastOnce);
         }
-        #endregion*/
+        #endregion
 
         //Delete
         #region
@@ -106,7 +107,7 @@ namespace UnitTestProject1.Service_tests
         }
         
         #endregion
-        /*
+        
 
         //Read
         #region
@@ -115,23 +116,23 @@ namespace UnitTestProject1.Service_tests
         {
             var offerMock = new Mock<Offer>();
             offerMock.Setup(x => x.Id).Returns(1);
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
             int OfferId = -1;
 
-            dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<Offer, bool>>>()))
+            dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>()))
                 .Callback<int>(x => OfferId = x);
 
             var sut = new OfferService(dbMock.Object);
             sut.FindServiceOffer(offerMock.Object.Id);
-            dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<Offer, bool>>>()), Times.Once());
+            dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.Once());
             Assert.AreEqual(1, OfferId);
         }
         [TestMethod]
         public void GetAll_OfferService_Verify_If_Returns_Queryable()
         {
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
             IQueryable<Offer> list = null;
-            dbMock.Setup(x => x.GetAll()).Returns(new Offer[] { new Offer() }.AsQueryable<Offer>())
+            dbMock.Setup(x => x.GetAll()).Returns(new ServiceOffer[] { new ServiceOffer() }.AsQueryable<ServiceOffer>())
                 .Callback<IQueryable<Offer>>(x => list = x);
             var sut = new OfferService(dbMock.Object);
             sut.GetAllOffers();
@@ -148,10 +149,10 @@ namespace UnitTestProject1.Service_tests
         public void Update_OfferService_Verify_If_Connect_To_Db()
         {
             var offerMock = new Mock<Offer>();
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
             var sut = new OfferService(dbMock.Object);
             sut.UpdateServiceOffer(offerMock.Object);
-            dbMock.Verify(x => x.Update(It.IsAny<Offer>()), Times.Once());
+            dbMock.Verify(x => x.Update(It.IsAny<ServiceOffer>()), Times.Once());
 
         }
 
@@ -161,9 +162,9 @@ namespace UnitTestProject1.Service_tests
             var offerMock = new Mock<Offer>();
             offerMock.Setup(x => x.Id).Returns(1);
             offerMock.Setup(x => x.RatePerHour).Returns(100);
-            var dbMock = new Mock<IRepository<Offer>>();
+            var dbMock = new Mock<IOfferRepository>();
             Offer returnedOffer = null;
-            dbMock.Setup(x => x.Update(It.IsAny<Offer>()))
+            dbMock.Setup(x => x.Update(It.IsAny<ServiceOffer>()))
                 .Callback<Offer>(x => returnedOffer = x);
             var sut = new OfferService(dbMock.Object);
             sut.UpdateServiceOffer(offerMock.Object);
@@ -172,7 +173,7 @@ namespace UnitTestProject1.Service_tests
                 100 == offerMock.Object.RatePerHour
                  );
         }
-        /*[TestMethod]
+       /* [TestMethod]
         public void Edit_With_Valid_Inputs()
         {
             var userMock = new Mock<UserWebModel>();
@@ -194,7 +195,7 @@ namespace UnitTestProject1.Service_tests
                 userSenftoService.PhoneNumber == "12334455"
                 );
         }*/
-       // #endregion
+       #endregion
         
     }
 }

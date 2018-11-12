@@ -1,5 +1,4 @@
-﻿using AppJobPortal.Model;
-using JobPortal.Model;
+﻿using JobPortal.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.Linq;
-using AppJobPortal.UserServiceReferenceTcp;
-using User = AppJobPortal.UserServiceReferenceTcp.User;
-using Region = AppJobPortal.UserServiceReferenceTcp.Region;
-using Gender = AppJobPortal.UserServiceReferenceTcp.Gender;
-using AppJobPortal.Models;
+//using Moq;
+//using System.Linq;
+//using AppJobPortal.UserServiceReferenceTcp;
+//using User = AppJobPortal.UserServiceReferenceTcp.User;
+//using Region = AppJobPortal.UserServiceReferenceTcp.Region;
+//using Gender = AppJobPortal.UserServiceReferenceTcp.Gender;
+//using AppJobPortal.Models;
 
 
 namespace UnitTestProject1.App_test
