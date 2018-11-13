@@ -11,7 +11,7 @@ namespace WebJobPortal.Controllers
     {
         private const int lenght = 8;
         private const int n = 100000000;
-        private readonly IUserService _proxy;
+        private readonly IUserService _proxy =new  UserServiceClient("UserServiceHttpEndpoint");
 
         public UserController(IUserService proxy)
         {

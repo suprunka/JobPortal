@@ -13,7 +13,8 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
+        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password=Password1!";
+
 
 
         public OfferRepository(DataContext context) : base(context)
@@ -93,8 +94,9 @@ namespace Repository
                 {
                     var toDelete = _context.GetTable<ServiceOffer>().SingleOrDefault(predicate);
                     _context.GetTable<ServiceOffer>().DeleteOnSubmit(toDelete);
-                    result = true;
                     _context.SubmitChanges();
+                    result = true;
+
                 }
                 catch (Exception e)
                 {

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.ServiceModel;
+using System.Text;
 using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
@@ -44,11 +46,7 @@ namespace ServiceLibrary
                             City = u.CityName,
                             Region = u.Region.ToString(),
                         },
-                        Logging = new Logging
-                        {
-                            Password = u.Password,
-                            UserName = u.UserName,
-                        },
+                        Logging = Register(u.UserName, u.Password),
                         Gender = new Repository.DbConnection.Gender
                         {
                             Gender1 = u.Gender.ToString(),
@@ -263,6 +261,54 @@ namespace ServiceLibrary
                 });
             }
             return resultToReturn.ToArray();
+        }
+
+       
+
+        private Logging Register(String login, String password)
+        {
+            if (login.Length == 0 || password.Length == 0)
+            {
+                return null; 
+            }
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
+            byte[] result = md5.Hash;
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                str.Append(result[i].ToString("x2"));
+            }
+            Logging logging = new Logging
+            {
+                UserName = login,
+                Password = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result))
+            };
+            return logging;
+        
+        }
+
+        public bool Login(String login, String password)
+        {
+
+            var existing = _database.Login(new Logging { UserName = login, Password = password });
+            if (existing!=  null)
+            {
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
+                byte[] result = md5.Hash;
+                StringBuilder str = new StringBuilder();
+                for (int i = 0; i < result.Length; i++)
+                {
+                    str.Append(result[i].ToString("x2"));
+                }
+                String t = Encoding.UTF8.GetString(result);
+                if (t.Equals(Encrypt.DecryptString(existing.Password)))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

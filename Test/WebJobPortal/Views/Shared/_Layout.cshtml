@@ -44,14 +44,22 @@
             <span class="close">&times;</span>
             <h1>Login</h1>
 
-            <label for="email"><b>Email</b></label>
-            <input id="mail" type="text" placeholder="Enter Email" name="email" required>
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                <div class="form col">
 
-            <label for="psw"><b>Password</b></label>
-            <input id="mail" type="password" placeholder="Enter Password" name="psw" required>
-
-            @Html.ActionLink("Login", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "buttons", @id = "loginBtn", @role = "button" })
-        </div>
+                    <div>
+                        @Html.LabelFor(f => f.UserName)
+                        @Html.TextBoxFor(f => f.UserName, new { title = "Enter Username", @Value = @ViewBag.Username })
+                    </div>
+                    <div>
+                        @Html.LabelFor(f => f.Password)
+                        @Html.PasswordFor(f => f.Password, new { title = "Enter Password.", @Value = @ViewBag.Password })
+                    </div>
+                    <button type="submit" class="small fr">Login</button><br class="cl" />
+                </div>
+            }</div>
+            
     </div>
     <div class="container body-content">
         @RenderBody()

@@ -1,4 +1,5 @@
-﻿ using System;
+﻿using Repository.DbConnection;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -17,5 +18,8 @@ namespace Repository
         IQueryable<T> GetAll();
 
         IQueryable<T> List(Expression<Func<T, bool>> predicate);
+
+        Logging Login(Logging account);
+
     }
 }

@@ -15,8 +15,8 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        //private readonly string  connection = ConfigurationManager.ConnectionStrings["JobPortalDatabaseTesting"].ConnectionString;
-        public UsersRepository(DataContext context) : base(context)
+        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password=Password1!";
+      public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
 
@@ -25,7 +25,7 @@ namespace Repository
         public override Users Create(Users obj)
         {
             Users result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source = JAKUB\\SQLEXPRESS; Initial Catalog = JobPortalTestDB; Integrated Security = True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 using (var myTran = new TransactionScope())
@@ -93,7 +93,7 @@ namespace Repository
         public override bool Delete(Expression<Func<Users, bool>> predicate)
         {
             bool result = false;
-            using (SqlConnection objConn = new SqlConnection("Data Source = JAKUB\\SQLEXPRESS; Initial Catalog = JobPortalTestDB; Integrated Security = True"))
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
@@ -154,12 +154,16 @@ namespace Repository
         {
             return base.List(predicate);
         }
+        public  Logging Login(Logging account)
+        {
+            return base.Login(account);
+        }
 
         public override bool Update(Users obj)
         {
             {
                 bool result = false;
-                using (SqlConnection objConn = new SqlConnection("Data Source = JAKUB\\SQLEXPRESS; Initial Catalog = JobPortalTestDB; Integrated Security = True"))
+                using (SqlConnection objConn = new SqlConnection(connection))
                 {
 
                     objConn.Open();
