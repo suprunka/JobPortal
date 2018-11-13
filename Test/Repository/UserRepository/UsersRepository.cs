@@ -15,8 +15,8 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password=Password1!";
-      public UsersRepository(DataContext context) : base(context)
+        private readonly string connection = "Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True";
+        public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
 
@@ -70,16 +70,30 @@ namespace Repository
                             City_ID = addressExists.ID
                         };
 
+                        Account account = new Account
+                        {
+                            PhoneNumber = obj.PhoneNumber,
+                            AccountState_ID = 1,
+                            LatestActivity = DateTime.Now.ToShortDateString(),
+                            Description = "",
+                        };
+
                         _context.GetTable<Users>().InsertOnSubmit(u);
+                        _context.GetTable<Account>().InsertOnSubmit(account);
                         _context.SubmitChanges();
 
                         myTran.Complete();
                         result = u;
                     }
-                    catch
+                    catch (DuplicateKeyException)
                     {
                         result = null;
                         throw new DuplicateKeyException(this);
+                    }
+                    catch (Exception e)
+                    {
+                        result = null;
+
                     }
                     finally
                     {
@@ -108,7 +122,8 @@ namespace Repository
                     Logging foundLogging = _context.GetTable<Logging>().FirstOrDefault(t => t.ID.ToString() == found.Logging_ID.ToString());
                     _context.GetTable<Logging>().DeleteOnSubmit(foundLogging);
 
-
+                    Account foundAccount = _context.GetTable<Account>().FirstOrDefault(t => t.PhoneNumber == found.PhoneNumber);
+                    _context.GetTable<Account>().DeleteOnSubmit(foundAccount);
 
 
                     //delete however check if there is more people with the same city if not leave the city
@@ -154,127 +169,51 @@ namespace Repository
         {
             return base.List(predicate);
         }
-        public  Logging Login(Logging account)
+        public override Logging Login(Logging account)
         {
             return base.Login(account);
         }
 
         public override bool Update(Users obj)
         {
+
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
             {
-                bool result = false;
-                using (SqlConnection objConn = new SqlConnection(connection))
-                {
-
-                    objConn.Open();
-                    sql = objConn.BeginTransaction();
-                    try
-                    {
-                        Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
-                        int oldCity_ID = found.City_ID;
-                        var oldPostCode = found.AddressTable.Postcode;
-                        found.PhoneNumber = obj.PhoneNumber;
-                        found.FirstName = obj.FirstName;
-                        found.LastName = obj.LastName;
-                        found.Email = obj.Email;
-                        found.Logging.UserName = obj.Logging.UserName;
-                        found.Logging.Password = obj.Logging.Password;
-                        found.AddressLine = obj.AddressLine;
-                        found.Gender.Gender1 = obj.Gender.Gender1;
-
-                        var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
-                        if (addressExists == null)
-                        {
-
-                            _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
-                            {
-                                Postcode = obj.AddressTable.Postcode,
-                                City = obj.AddressTable.City,
-                                Region = obj.AddressTable.Region,
-
-
-                            });
-                            string newPhoneNumber = obj.PhoneNumber;
-                            _context.SubmitChanges();
-
-
-                            /*Users found2 = _context.GetTable<Users>().FirstOrDefault(u => u.PhoneNumber == found.PhoneNumber);
-                            var incoming_ID = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode).ID;
-                            found2.City_ID = incoming_ID;*/
-
-
-                            int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
-                            if (numberOfAddressRecords < 2)
-                            {
-                                var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
-                                _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
-                            }
-                        }
-                        else
-                        {
-                            found.AddressTable.Postcode = obj.AddressTable.Postcode;
-                            found.AddressTable.City = obj.AddressTable.City;
-                            found.AddressTable.Region = obj.AddressTable.Region;
-                        }
-
-                        _context.SubmitChanges();
-                        sql.Commit();
-                        result = true;
-                    }
-                    catch
-                    {
-                        sql.Rollback();
-                        result = false;
-                        throw new InvalidOperationException();
-                    }
-                    finally
-                    {
-                        objConn.Close();
-                    }
-                }
-                return result;
-            }
-        }
-
-        public Users UpdateWeb(Users newInformation)
-        {
-            Users result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True"))
-            {
-
+                int cityID = 0;
                 objConn.Open();
                 sql = objConn.BeginTransaction();
                 try
                 {
-                    Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == newInformation.ID);
-                    /*int oldCity_ID = found.City_ID;
-                    var oldPostCode = found.AddressTable.Postcode;*/
+                    Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
+                    int? oldCity_ID = found.City_ID;
+                    int? newCity_ID = null;
 
-                    found.PhoneNumber = newInformation.PhoneNumber;
-                    found.FirstName = newInformation.FirstName;
-                    found.LastName = newInformation.LastName;
-                    found.AddressLine = newInformation.AddressLine;
-                    found.Gender.Gender1 = newInformation.Gender.Gender1;
+                    var oldPostCode = found.AddressTable.Postcode;
+                    found.PhoneNumber = obj.PhoneNumber;
+                    found.FirstName = obj.FirstName;
+                    found.LastName = obj.LastName;
+                    found.Email = obj.Email;
+                    found.Logging.UserName = obj.Logging.UserName;
+                    found.Logging.Password = obj.Logging.Password;
+                    found.AddressLine = obj.AddressLine;
+                    found.Gender.Gender1 = obj.Gender.Gender1;
 
-                    var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == newInformation.AddressTable.Postcode);
-                    /*if (addressExists == null)
+
+                    var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                    if (addressExists == null)
                     {
-                        // nie działa
-                        _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
+                        AddressTable at = new AddressTable
                         {
-                            Postcode = newInformation.AddressTable.Postcode,
-                            City = newInformation.AddressTable.City,
-                            Region = newInformation.AddressTable.Region,
-
-
-                        });
-                        string newPhoneNumber = newInformation.PhoneNumber;
+                            Postcode = obj.AddressTable.Postcode,
+                            City = obj.AddressTable.City,
+                            Region = obj.AddressTable.Region,
+                        };
+                        _context.GetTable<AddressTable>().InsertOnSubmit(at);
+                        string newPhoneNumber = obj.PhoneNumber;
                         _context.SubmitChanges();
-
-
-                        /*Users found2 = _context.GetTable<Users>().FirstOrDefault(u => u.PhoneNumber == found.PhoneNumber);
-                        var incoming_ID = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == newInformation.AddressTable.Postcode).ID;
-                        found2.City_ID = incoming_ID; tutaj STOP
+                        newCity_ID = at.ID;
+                        cityID = at.ID;
 
 
                         int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
@@ -283,25 +222,56 @@ namespace Repository
                             var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
                             _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
                         }
+
                     }
                     else
-                    {*/
-                    found.AddressTable.Postcode = newInformation.AddressTable.Postcode;
-                    found.AddressTable.City = newInformation.AddressTable.City;
-                    found.AddressTable.Region = newInformation.AddressTable.Region;
-                    //}
-
-                    //delete old address reference, however check if there is more people with the same city if yes leave it
-
+                    {
+                        found.AddressTable.Postcode = obj.AddressTable.Postcode;
+                        found.AddressTable.City = obj.AddressTable.City;
+                        found.AddressTable.Region = obj.AddressTable.Region;
+                    }
 
                     _context.SubmitChanges();
+
+
                     sql.Commit();
-                    result = found;
+                    result = true;
                 }
                 catch
                 {
                     sql.Rollback();
-                    result = null;
+                    result = false;
+                    throw new InvalidOperationException();
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+                Update(obj.ID, cityID);
+            }
+
+            return result;
+        }
+
+        public bool Update(int id, int city_ID)
+        {
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == id);
+                    found.City_ID = city_ID;
+                    _context.SubmitChanges();
+                    sql.Commit();
+                    result = true;
+                }
+                catch
+                {
+                    sql.Rollback();
+                    result = false;
                     throw new InvalidOperationException();
                 }
                 finally

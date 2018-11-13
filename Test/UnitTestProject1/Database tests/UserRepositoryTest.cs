@@ -97,7 +97,7 @@ namespace UnitTestProject1
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "12345678",
+                PhoneNumber = "01100110",
                 FirstName = "Adam",
                 LastName = "Adam",
                 Email = "adamUpdated",
@@ -180,6 +180,8 @@ namespace UnitTestProject1
             {
                 var result = unitOfWork.Users.Create(GetUser());
                 Assert.IsNotNull(context.Users.FirstOrDefault(t => t.PhoneNumber == "12345678"));
+                context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
+                context.Account.DeleteAllOnSubmit(context.Account);
                 context.Users.DeleteAllOnSubmit(context.Users);
                 context.Logging.DeleteAllOnSubmit(context.Logging);
                 context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
@@ -212,6 +214,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -244,14 +248,15 @@ namespace UnitTestProject1
             }
 
             var secondContext = new DbTestDataContext();
-             using (var unitOfWork = new UnitOfWork(secondContext))
-             {
+            using (var unitOfWork = new UnitOfWork(secondContext))
+            {
                 secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
-                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
-                 secondContext.SubmitChanges();
-             }
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
+                secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
+                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
+                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.SubmitChanges();
+            }
         }
 
         //While adding two same object only first of them is saved in database. [OK]
@@ -278,6 +283,7 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -312,6 +318,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -342,6 +350,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -371,6 +381,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -401,6 +413,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -433,6 +447,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -464,6 +480,8 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
@@ -493,14 +511,16 @@ namespace UnitTestProject1
                 }
             }
 
-            var secondContext = new DbTestDataContext();
+            /*var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
+                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.Account.DeleteAllOnSubmit(secondContext.Account);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
                 secondContext.SubmitChanges();
-            }
+            }*/
         }
     }
 }

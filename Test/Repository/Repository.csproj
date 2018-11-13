@@ -130,6 +130,8 @@
     <Compile Include="GenericRepository\IRepository.cs" />
     <Compile Include="OfferRepository\IOfferRepository.cs" />
     <Compile Include="OfferRepository\OfferRepository.cs" />
+    <Compile Include="OrderRepository\IOrderRepository.cs" />
+    <Compile Include="OrderRepository\OrderRepository.cs" />
     <Compile Include="UoW\IUnitOfWork.cs" />
     <Compile Include="UserRepository\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

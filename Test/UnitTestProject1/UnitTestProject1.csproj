@@ -178,6 +178,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service tests\ServiceOfferServiceTests.cs" />
+    <Compile Include="Service tests\ServiceOrderTests.cs" />
     <Compile Include="Service tests\UserServiceTests.cs" />
     <Compile Include="Database tests\UserRepositoryTest.cs" />
   </ItemGroup>

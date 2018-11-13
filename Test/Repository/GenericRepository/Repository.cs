@@ -99,8 +99,17 @@ namespace Repository
 
         public virtual Logging Login(Logging obj)
         {
-            return db.GetTable<Logging>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
+            var logging= db.GetTable<Logging>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
+            //Updating latest activity of account
+            var user = db.GetTable<Users>().FirstOrDefault(x => x.Logging_ID == obj.ID);
+            var account = db.GetTable<Account>().FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber);
+            account.LatestActivity = DateTime.Now.ToShortTimeString();
+            //
+            db.SubmitChanges();
+            return logging;
            
         }
+
+        
     }
 }

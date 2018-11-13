@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JobPortalTestDB" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=JAKUB\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="JobPortalTestDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Account">
     <Type Name="Account">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
-      <Column Name="AccountState_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccountState_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LatestActivity" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Account_OrderTable" Member="OrderTable" ThisKey="ID" OtherKey="Account_ID" Type="OrderTable" />
-      <Association Name="AccountState_Account" Member="AccountState" ThisKey="AccountState_ID" OtherKey="ID" Type="AccountState" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="AccountState_Account" Member="AccountState" ThisKey="AccountState_ID" OtherKey="ID" Type="AccountState" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Users_Account" Member="Users" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Users" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -85,7 +85,7 @@
   </Table>
   <Table Name="dbo.OrderTable" Member="OrderTable">
     <Type Name="OrderTable">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Account_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="OrderStatus_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Payment_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -175,7 +175,7 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Logging_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="AddressLine" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="City_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Users_Account" Member="Account" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Account" />
       <Association Name="Users_WorkingArea" Member="WorkingArea" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="WorkingArea" />
@@ -183,7 +183,7 @@
       <Association Name="Users_ServiceOffer" Member="ServiceOffer" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="ServiceOffer" />
       <Association Name="Gender_Users" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Logging_Users" Member="Logging" ThisKey="Logging_ID" OtherKey="ID" Type="Logging" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
   </Table>
 </Database>

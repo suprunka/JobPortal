@@ -131,9 +131,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\IOfferService.cs" />
+    <Compile Include="ServiceInterfaces\IOrderService.cs" />
     <Compile Include="ServiceInterfaces\IUserService.cs" />
     <Compile Include="Services\Encrypt.cs" />
     <Compile Include="Services\OfferService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

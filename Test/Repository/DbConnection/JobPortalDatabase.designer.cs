@@ -22,7 +22,7 @@ namespace Repository.DbConnection
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DataSource")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JobPortalTestDB")]
 	public partial class JobPortalDatabaseDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -84,7 +84,7 @@ namespace Repository.DbConnection
     #endregion
 		
 		public JobPortalDatabaseDataContext() : 
-				base(global::Repository.Properties.Settings.Default.DataSourceConnectionString, mappingSource)
+				base(global::Repository.Properties.Settings.Default.JobPortalTestDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -276,7 +276,7 @@ namespace Repository.DbConnection
 		
 		private string _PhoneNumber;
 		
-		private System.Nullable<int> _AccountState_ID;
+		private int _AccountState_ID;
 		
 		private string _LatestActivity;
 		
@@ -296,7 +296,7 @@ namespace Repository.DbConnection
     partial void OnIDChanged();
     partial void OnPhoneNumberChanging(string value);
     partial void OnPhoneNumberChanged();
-    partial void OnAccountState_IDChanging(System.Nullable<int> value);
+    partial void OnAccountState_IDChanging(int value);
     partial void OnAccountState_IDChanged();
     partial void OnLatestActivityChanging(string value);
     partial void OnLatestActivityChanged();
@@ -312,7 +312,7 @@ namespace Repository.DbConnection
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -356,8 +356,8 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountState_ID", DbType="Int")]
-		public System.Nullable<int> AccountState_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountState_ID", DbType="Int NOT NULL")]
+		public int AccountState_ID
 		{
 			get
 			{
@@ -433,7 +433,7 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountState_Account", Storage="_AccountState", ThisKey="AccountState_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountState_Account", Storage="_AccountState", ThisKey="AccountState_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public AccountState AccountState
 		{
 			get
@@ -460,7 +460,7 @@ namespace Repository.DbConnection
 					}
 					else
 					{
-						this._AccountState_ID = default(Nullable<int>);
+						this._AccountState_ID = default(int);
 					}
 					this.SendPropertyChanged("AccountState");
 				}
@@ -1581,7 +1581,7 @@ namespace Repository.DbConnection
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -2836,8 +2836,9 @@ namespace Repository.DbConnection
 					this.OnRatePerHourChanged();
 				}
 			}
-        }
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
 		public string Description
 		{
 			get
@@ -3263,7 +3264,7 @@ namespace Repository.DbConnection
 		
 		private string _AddressLine;
 		
-		private int _City_ID;
+		private System.Nullable<int> _City_ID;
 		
 		private int _Gender_ID;
 		
@@ -3297,7 +3298,7 @@ namespace Repository.DbConnection
     partial void OnLogging_IDChanged();
     partial void OnAddressLineChanging(string value);
     partial void OnAddressLineChanged();
-    partial void OnCity_IDChanging(int value);
+    partial void OnCity_IDChanging(System.Nullable<int> value);
     partial void OnCity_IDChanged();
     partial void OnGender_IDChanging(int value);
     partial void OnGender_IDChanged();
@@ -3458,8 +3459,8 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
-		public int City_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int")]
+		public System.Nullable<int> City_ID
 		{
 			get
 			{
@@ -3613,7 +3614,7 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="SET NULL")]
 		public AddressTable AddressTable
 		{
 			get
@@ -3640,7 +3641,7 @@ namespace Repository.DbConnection
 					}
 					else
 					{
-						this._City_ID = default(int);
+						this._City_ID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("AddressTable");
 				}
