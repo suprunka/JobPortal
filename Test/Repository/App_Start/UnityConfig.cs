@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
 
-namespace WebJobPortal
+namespace Repository
 {
     public static class UnityConfig
     {

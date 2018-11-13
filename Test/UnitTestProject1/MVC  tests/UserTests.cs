@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-
-
 using WebJobPortal.Controllers;
 using System.Web.Mvc;
 using WebJobPortal.UserServiceReference;
+using JobPortal.Model;
+using WebJobPortal.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System;
+using System.Web;
+using TypeMock.ArrangeActAssert;
 
 namespace UnitTestProject1.MVC__tests
 {
@@ -16,25 +18,63 @@ namespace UnitTestProject1.MVC__tests
     {
         //Create
         #region
-        #endregion
+
         [TestMethod]
         public void Test_Create_View()
         {
-            var serviceMock = new Mock<IUserService>();
-            serviceMock.Setup(s => s.CreateUser(null));
-            var controller = new UserController(serviceMock.Object);
-            var result = controller.Create();
-            Assert.IsNotNull(result);
-
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                serviceMock.Setup(s => s.CreateUser(It.IsAny<User>())).Returns(true);
+                var controller = new UserController(serviceMock.Object);
+                var result = controller.Create() as ViewResult;
+                Assert.IsTrue("Create" == result.ViewName);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
-    }
 
-      /*  [TestMethod]
+
+        [TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
         {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var controller = new UserController(serviceMock.Object);
+                var result = controller.Create(new UserModel
+                {
+                    PhoneNumber = "12345678",
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    Email = "Adam@gmail.com",
+                    UserName = "AdamMana",
+                    Password = "Qwerty1",
+                    AddressLine = "Streetline",
+                    CityName = "Cityname",
+                    Postcode = "2154",
+                    Region = Region.Nordjylland,
+                    Gender = Gender.Male,
+                }) as ActionResult;
+
+                Assert.IsNotNull(result);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+
+
+        [TestMethod]
+        public void Test_Create_View_Exception_Expected()
+        {
             var serviceMock = new Mock<IUserService>();
-            var controller = new UserController(serviceMock.Object);
-            var result = controller.Create(new UserWebModel
+            serviceMock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception());            var controller = new UserController(serviceMock.Object);
+            var result = controller.Create(new UserModel
             {
                 PhoneNumber = "12345678",
                 FirstName = "Adam",
@@ -47,15 +87,8 @@ namespace UnitTestProject1.MVC__tests
                 Postcode = "2154",
                 Region = Region.Nordjylland,
                 Gender = Gender.Male,
-            }) as RedirectToRouteResult;
-
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void Test_Create_View_Exception_Expected()
-        {
-
+            }) as ViewResult;
+            Assert.IsTrue("Create" == result.ViewName);
         }
 
 
@@ -80,60 +113,76 @@ namespace UnitTestProject1.MVC__tests
           string lastName, string email, string userName, string password, string addressLine,
           string cityName, string postCode, Region region, Gender gender, bool shouldValidate)
         {
-            var userServiceStub = new UserWebModel
+            try
             {
-                PhoneNumber = phoneNumber,
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                UserName = userName,
-                Password = password,
-                AddressLine = addressLine,
-                CityName = cityName,
-                Postcode = postCode,
-                Region = region,
-                Gender = gender
-            };
+                var userServiceStub = new UserModel
+                {
+                    PhoneNumber = phoneNumber,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    UserName = userName,
+                    Password = password,
+                    AddressLine = addressLine,
+                    CityName = cityName,
+                    Postcode = postCode,
+                    Region = region,
+                    Gender = gender
+                };
 
-            var context = new System.ComponentModel.DataAnnotations.ValidationContext(userServiceStub, null, null);
-            var result = new List<ValidationResult>();
+                var context = new ValidationContext(userServiceStub, null, null);
+                var result = new List<ValidationResult>();
 
 
-            var isModelStateValid = Validator.TryValidateObject(userServiceStub, context, result, true);
+                var isModelStateValid = Validator.TryValidateObject(userServiceStub, context, result, true);
 
-            Assert.IsTrue(isModelStateValid == shouldValidate);
+                Assert.IsTrue(isModelStateValid == shouldValidate);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
 
         [TestMethod]
         public void Test_MVCController_Can_Create_User_With_Valid_Inputs()
         {
-            var userStub = new Mock<UserWebModel>().SetupAllProperties();
-            userStub.Setup(x => x.FirstName).Returns("Adam");
-            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
-            userStub.Setup(x => x.LastName).Returns("Adam");
-            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
-            userStub.Setup(x => x.UserName).Returns("Adammana");
-            userStub.Setup(x => x.Password).Returns("Adama1");
-            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
-            userStub.Setup(x => x.CityName).Returns("Ålborg");
-            userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            try
+            {
+                var userStub = new Mock<UserModel>().SetupAllProperties();
+                userStub.Setup(x => x.FirstName).Returns("Adam");
+                userStub.Setup(x => x.PhoneNumber).Returns("12345678");
+                userStub.Setup(x => x.LastName).Returns("Adam");
+                userStub.Setup(x => x.Email).Returns("adam@gmail.com");
+                userStub.Setup(x => x.UserName).Returns("Adammana");
+                userStub.Setup(x => x.Password).Returns("Adama1");
+                userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
+                userStub.Setup(x => x.CityName).Returns("Ålborg");
+                userStub.Setup(x => x.Postcode).Returns("9000");
+                userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
+                userStub.Setup(x => x.Gender).Returns(Gender.Male);
 
-            Users u = null;
-            var serviceMock = new Mock<IUserService>();
+                User u = null;
+                var serviceMock = new Mock<IUserService>();
 
-            serviceMock.Setup(x => x.CreateUser(It.IsAny<Users>())).Callback<Users>(x => u = x);
+                serviceMock.Setup(x => x.CreateUser(It.IsAny<User>())).Callback<User>(x => u = x);
 
-            var subject = new UserController(serviceMock.Object);
+                var subject = new UserController(serviceMock.Object);
 
-            subject.Create(userStub.Object);
+                subject.Create(userStub.Object);
 
-            Assert.IsTrue(u.FirstName == "Adam" &&
-                u.Gender == Gender.Male &&
-                u.PhoneNumber == "12345678");
+                Assert.IsTrue(u.FirstName == "Adam" &&
+                    u.Gender == Gender.Male &&
+                    u.PhoneNumber == "12345678");
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
+
+
         #region
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (too many characters)
         [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (not allowed characters)
@@ -156,141 +205,160 @@ namespace UnitTestProject1.MVC__tests
          string lastName, string email, string userName, string password, string addressLine,
          string cityName, string postCode, Region region, Gender gender)
         {
-            var serviceMock = new Mock<IUserService>();
-            var userStub = new Mock<UserWebModel>();
-            //Set up properties
-            #region
-            userStub.Setup(x => x.FirstName).Returns(firstName);
-            userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-            userStub.Setup(x => x.LastName).Returns(lastName);
-            userStub.Setup(x => x.Email).Returns(email);
-            userStub.Setup(x => x.UserName).Returns(userName);
-            userStub.Setup(x => x.Password).Returns(password);
-            userStub.Setup(x => x.AddressLine).Returns(addressLine);
-            userStub.Setup(x => x.CityName).Returns(cityName);
-            userStub.Setup(x => x.Postcode).Returns(postCode);
-            userStub.Setup(x => x.Region).Returns(region);
-            userStub.Setup(x => x.Gender).Returns(gender);
-            #endregion
-            var subject = new UserController(serviceMock.Object);
-            subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
-            ViewResult resultPage = subject.Create(userStub.Object) as ViewResult;
-            Assert.IsTrue("Create" == resultPage.ViewName);
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var userStub = new Mock<UserModel>();
+                //Set up properties
+                #region
+                userStub.Setup(x => x.FirstName).Returns(firstName);
+                userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
+                userStub.Setup(x => x.LastName).Returns(lastName);
+                userStub.Setup(x => x.Email).Returns(email);
+                userStub.Setup(x => x.UserName).Returns(userName);
+                userStub.Setup(x => x.Password).Returns(password);
+                userStub.Setup(x => x.AddressLine).Returns(addressLine);
+                userStub.Setup(x => x.CityName).Returns(cityName);
+                userStub.Setup(x => x.Postcode).Returns(postCode);
+                userStub.Setup(x => x.Region).Returns(region);
+                userStub.Setup(x => x.Gender).Returns(gender);
+                #endregion
+                var subject = new UserController(serviceMock.Object);
+                subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
+                ViewResult resultPage = subject.Create(userStub.Object) as ViewResult;
+                Assert.IsTrue("Create" == resultPage.ViewName);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
 
-        [TestMethod]
-        public void Test_Service_Creation_Of_User_Hit_Database_Once()
-        {
-            var userStub = new Mock<Users>();
-            userStub.Setup(x => x.FirstName).Returns("Adam");
-            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
-            userStub.Setup(x => x.LastName).Returns("Adam");
-            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
-            userStub.Setup(x => x.UserName).Returns("Adammana");
-            userStub.Setup(x => x.Password).Returns("Adama1");
-            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
-            userStub.Setup(x => x.CityName).Returns("Ålborg");
-            userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
-
-            var databaseMock = new Mock<IRepository<Users>>();
-            UserService service = new UserService(databaseMock.Object);
-            service.CreateUser(userStub.Object);
-            databaseMock.Verify(t => t.Create(It.IsAny<Users>()), Times.AtLeastOnce);
-        }
-
-
-        [TestMethod]
-        public void Test_Service_Creation_Of_User_Is_Not_Null()
-        {
-            var userStub = new Mock<Users>();
-            userStub.Setup(x => x.FirstName).Returns("Adam");
-            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
-            userStub.Setup(x => x.LastName).Returns("Adam");
-            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
-            userStub.Setup(x => x.UserName).Returns("Adammana");
-            userStub.Setup(x => x.Password).Returns("Adama1");
-            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
-            userStub.Setup(x => x.CityName).Returns("Ålborg");
-            userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.Region).Returns(Region.Nordjylland);
-            userStub.Setup(x => x.Gender).Returns(Gender.Male);
-            var databaseMock = new Mock<IRepository<Users>>();
-            UserService service = new UserService(databaseMock.Object);
-            Users u = service.CreateUser(userStub.Object);
-            Assert.IsNotNull(u);
-        }
         #endregion
-
         //Read
-        #region
-        /*[TestMethod]
-        [DataRow("1", 1, DisplayName = "Valid ID ")]
-        [DataRow("", 3, DisplayName = "Empty id ")]
-       /* public void Index_Will_return_the_correct_no_of_users_on_search(string Id, int expectedNoOfResults)
+
+        [TestMethod]
+        public void Search_Of_User_Returns_Redirect_To_Action()
         {
-            var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+            try
             {
-             //   return new IEnumerable<Users> { new Users() { ID = 1 }, new Users() { ID = 71 }, new Users() { ID = 10 } };
-            });
+                var serviceMock = new Mock<IUserService>();
+                serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Returns(new User
+                {
+                    PhoneNumber = "12345678",
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    Email = "Adam@gmail.com",
+                    UserName = "AdamMana",
+                    Password = "Qwerty1",
+                    AddressLine = "Streetline",
+                    CityName = "Cityname",
+                    Postcode = "2154",
+                    Region = Region.Nordjylland,
+                    Gender = Gender.Male,
+                });
 
-            var sut = new UserController(userServiceStub.Object);
-            ViewResult resultPage = sut.Index(Id) as ViewResult;
-
-            var model = resultPage.ViewData.Model as IEnumerable<Users>;
-            Assert.IsTrue(model.Count() == expectedNoOfResults);
+                var controller = new HomeController(serviceMock.Object);
+                var result = controller.Search(12345678);
+                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
-        public void Index_Will_show_all_movies_from_service()
+        public void Search_Of_User_Entering_Invalid_PhoneNumber_Returns_View_Index()
         {
-            var userServiceStub = new Mock<IUserService>();
-          
-            userServiceStub.Setup(x => x.GetAll()).Returns(() =>
+            try
             {
-            //    return new IEnumerable<Users> { new Users(), new Users(), new Users() };
-            });
-            var sut = new UserController(userServiceStub.Object);
+                var serviceMock = new Mock<IUserService>();
+                serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Returns(new User
+                {
+                    PhoneNumber = "12345678",
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    Email = "Adam@gmail.com",
+                    UserName = "AdamMana",
+                    Password = "Qwerty1",
+                    AddressLine = "Streetline",
+                    CityName = "Cityname",
+                    Postcode = "2154",
+                    Region = Region.Nordjylland,
+                    Gender = Gender.Male,
+                });
 
-            var resPage = sut.Index(null) as ViewResult;
-
-            var model = resPage.ViewData.Model as IEnumerable<Users>;
-
-            Assert.IsTrue(model.Count() == 3);
+                var controller = new HomeController(serviceMock.Object);
+                var result = controller.Search(1234567825) as ViewResult;
+                Assert.AreEqual("Index" , result.ViewName);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
-        #endregion
+
+        [TestMethod]
+        public void Search_Of_User__Returns_View_Index_While_Exeption_Occurs()
+        {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Throws(new Exception());
+                var controller = new HomeController(serviceMock.Object);
+                var result = controller.Search(null) as ViewResult;
+                Assert.AreEqual("Index", result.ViewName);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+
 
         //Update
+        /*
+
         #region
 
-
-
-    [TestMethod]
+        [TestMethod]//To do
         public void Edit_With_Valid_inputs()
         {
-            var userMock = new Mock<UserWebModel>();
-            userMock.Setup(x => x.LastName).Returns("Dreuk");
-            userMock.Setup(x => x.PhoneNumber).Returns("12334455");
+            var userMock = new Mock<UserModel>();
+            userMock.Setup(x => x.ID).Returns(1);
+            userMock.Setup(x => x.PhoneNumber).Returns("12345678");
+            userMock.Setup(x => x.FirstName).Returns("Adam");
+            userMock.Setup(x => x.LastName).Returns("Adam");
+            userMock.Setup(x => x.Email).Returns("Adam@gmail.com");
+            userMock.Setup(x => x.UserName).Returns("AdamMana");
+            userMock.Setup(x => x.Password).Returns("Qwerty1");
+            userMock.Setup(x => x.AddressLine).Returns("Streetline");
+            userMock.Setup(x => x.CityName).Returns("Cityname");
+            userMock.Setup(x => x.Postcode).Returns("2154");
+            userMock.Setup(x => x.Region).Returns(Region.Midtjylland);
+            userMock.Setup(x => x.Gender).Returns(Gender.Male);
             var userServiceStub = new Mock<IUserService>();
-            Users userSenftoService = null;
-
-            userServiceStub.Setup(x => x.EditUser(It.IsAny<Users>()))
-                .Callback<Users>(x => userSenftoService = x);
-
-            var sut = new UserController(userServiceStub.Object);
-            sut.Edit(userMock.Object);
-            userServiceStub.Verify(x =>
-           x.EditUser(It.IsAny<Users>()), Times.Once());
-
-            Assert.IsTrue(
-                userSenftoService.LastName == "Dreuk" &&
-                userSenftoService.PhoneNumber == "12334455"
-                );
+            userServiceStub.Setup(x => x.EditUser(It.IsAny<User>())).Returns(true);
+            var controller = new Mock<UserController>(userServiceStub.Object);
+            controller.Setup(t => t.Request.Form["Email"]).Returns("Adam@gmail.com");
+            controller.Setup(t => t.Request.Form["Password"]).Returns("Qwerty1");
+            controller.Setup(t => t.Request.Form["Username"]).Returns("AdamMana");
+            controller.Setup(t => t.Request.Form["firstName"]).Returns("Adam");
+            controller.Setup(t => t.Request.Form["lastName"]).Returns("Adam");
+            controller.Setup(t => t.Request.Form["gender"]).Returns("Male");
+            controller.Setup(t => t.Request.Form["phoneNumber"]).Returns("12345678");
+            controller.Setup(t => t.Request.Form["addressLine"]).Returns("Streetline");
+            controller.Setup(t => t.Request.Form["postcode"]).Returns("2154");
+            controller.Setup(t => t.Request.Form["cityName"]).Returns("Cityname");
+            controller.Setup(t => t.Request.Form["region"]).Returns("Midtjylland");
+            controller.Object.Edit(1);
+            userServiceStub.Verify(x => x.EditUser(It.IsAny<User>()), Times.Once());
         }
 
+        //To do
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (too many characters)
         [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (not allowed characters)
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid firstname (not allowed characters)
@@ -313,7 +381,7 @@ namespace UnitTestProject1.MVC__tests
         string cityName, string postCode, Region region, Gender gender, bool shouldValidate)
         {
             var serviceMock = new Mock<IUserService>();
-            var userStub = new Mock<UserWebModel>().SetupAllProperties();
+            var userStub = new Mock<UserModel>().SetupAllProperties();
             userStub.Setup(x => x.FirstName).Returns(firstName);
             userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
             userStub.Setup(x => x.LastName).Returns(lastName);
@@ -327,127 +395,49 @@ namespace UnitTestProject1.MVC__tests
             userStub.Setup(x => x.Gender).Returns(gender);
             var subject = new UserController(serviceMock.Object);
             subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
-            ViewResult resultPage = subject.Edit(userStub.Object) as ViewResult;
+            ViewResult resultPage = subject.Edit(userStub.Object.ID) as ViewResult;
             Assert.IsTrue("Edit" == resultPage.ViewName);
         }
 
         #endregion
-
+        */
         //Delete
         #region
         [TestMethod]
-        public void Test_Delete_Result_Passing_Negative_Integer()
+        public void Test_Delete_Result_Passing_Invalid_Integer()
         {
             var serviceMock = new Mock<IUserService>();
             var controller = new UserController(serviceMock.Object);
-            var result = controller.Delete(-1) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+            var result = controller.Delete(-1);
+            Assert.IsNull(result);
         }
+
 
         [TestMethod]
         public void Test_Delete_Null_Found()
         {
             var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
-            {
-                return null;
-            });
+            userServiceStub.Setup(x => x.DeleteUser(1)).Returns(false);
             var controller = new UserController(userServiceStub.Object);
-            var result = controller.Delete(1) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+            var result = controller.Delete(1);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
         public void Test_Delete_View_With_Existing_Integer()
         {
             var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
-            {
-                return new Users { ID = 1 };
-            });
+            userServiceStub.Setup(x => x.DeleteUser(It.IsAny<int>())).Returns(true);
             var controller = new UserController(userServiceStub.Object);
-            var result = controller.Delete(1) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var result = controller.Delete(1);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 
-        [TestMethod]
-        public void Test_Delete_Invokes_Exception()
-        {
-            var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
-            {
-                throw new Exception();
-            });
-            var controller = new UserController(userServiceStub.Object);
-            var result = controller.Delete(1) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
-        }
-
-        [TestMethod]
-        public void Test_DeleteConfirm_While_User_Is_Null_Should_Return_Bad_Request()
-        {
-            var userServiceStub = new Mock<IUserService>();
-            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
-            {
-                return null;
-            });
-            var controller = new UserController(userServiceStub.Object);
-            var result = controller.DeleteConfirm(null) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
-
-        }
-        [TestMethod]
-        public void Test_DeleteConfirm_While_User_Is_Valid_Returns_Redirection()
-        {
-            var userServiceStub = new Mock<IUserService>();
-            Users userMock = null;
-            userServiceStub.Setup(x => x.FindUser(1)).Returns(() =>
-            {
-                userMock = new Users { ID = 1 };
-                return userMock;
-            });
-            var controller = new UserController(userServiceStub.Object);
-            var result = controller.DeleteConfirm(AutoMapper.Mapper.Map(userMock, new UserWebModel())) as ActionResult;
-            Assert.IsInstanceOfType(result, typeof(ActionResult));
-        }
-
-
-        [TestMethod]
-        public void Test_Service_Delete_Of_User_Hit_Database_Once()
-        {
-            var userStub = new Mock<Users>();
-            userStub.Setup(x => x.FirstName).Returns("Adam");
-            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
-            userStub.Setup(x => x.LastName).Returns("Adam");
-            userStub.Setup(x => x.Email).Returns("adam@gmail.com");
-            userStub.Setup(x => x.UserName).Returns("Adammana");
-            userStub.Setup(x => x.Password).Returns("Adama1");
-            userStub.Setup(x => x.AddressLine).Returns("Adaminsæøa");
-            userStub.Setup(x => x.CityName).Returns("Ålborg");
-            userStub.Setup(x => x.Postcode).Returns("9000");
-            userStub.Setup(x => x.ID).Returns(256548);
-            var databaseMock = new Mock<IRepository<Users>>();
-            UserService service = new UserService(databaseMock.Object);
-            bool result = service.DeleteUser(userStub.Object.ID);
-            Assert.IsTrue(result);
-        }
-
-
-        [TestMethod]
-        public void Test_Service_Delete_Of_User()
-        {
-            var userMock = new Mock<Users>();
-            userMock.SetupAllProperties();
-            var databaseMock = new Mock<IRepository<Users>>();
-            UserService service = new UserService(databaseMock.Object);
-            bool result = service.DeleteUser(2);
-            Assert.IsTrue(result);
-        }
         #endregion
 
 
-
-
     }
-*/
 }
+
+
+

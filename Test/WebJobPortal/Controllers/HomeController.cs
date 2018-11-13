@@ -29,7 +29,7 @@ namespace WebJobPortal.Controllers
         {
             try
             {
-                if (phoneNumber.HasValue && lenght == (int)(Math.Log10(n)))
+                if (phoneNumber.HasValue && phoneNumber.ToString().Length == (int)(Math.Log10(n)))
                 {
                     string pn = phoneNumber.ToString();
                     var found = _proxy.FindUser(pn);

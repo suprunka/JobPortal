@@ -18,33 +18,6 @@ namespace WebJobPortal.Controllers
             this._proxy = proxy;
         }
 
-        /*[HttpGet]
-        public ActionResult Index(int? phoneNumber)
-        {
-            if (phoneNumber.HasValue && lenght == (int)(Math.Log10(n)))
-            {
-                string pn = phoneNumber.ToString();
-                var found = _proxy.FindUser(pn);
-                UserModel um = new UserModel
-                {
-                    ID = found.ID,
-                    PhoneNumber = found.PhoneNumber,
-                    FirstName = found.FirstName,
-                    LastName = found.LastName,
-                    Email = found.Email,
-                    UserName = found.UserName,
-                    Password = found.Password,
-                    AddressLine = found.AddressLine,
-                    CityName = found.CityName,
-                    Postcode = found.Postcode,
-                    Region = found.Region,
-                    Gender = found.Gender
-                };
-                return View("UserProfile", um);
-            }
-            return View("Index");
-        }*/
-
         [HttpGet]
         public ActionResult UserProfile(UserModel um)
         {
@@ -61,45 +34,59 @@ namespace WebJobPortal.Controllers
         [HttpPost]
         public ActionResult Create(UserModel user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                User u = new User
+                if (ModelState.IsValid)
                 {
-                    ID = user.ID,
-                    PhoneNumber = user.PhoneNumber,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    UserName = user.UserName,
-                    Password = user.Password,
-                    AddressLine = user.AddressLine,
-                    CityName = user.CityName,
-                    Postcode = user.Postcode,
-                    Region = user.Region,
-                    Gender = user.Gender
-                };
-                _proxy.CreateUser(u);
-                ModelState.Clear();
-                ViewBag.SuccessMessage = "Creation done.";
-                return View("Create", new UserModel());
+                    User u = new User
+                    {
+                        ID = user.ID,
+                        PhoneNumber = user.PhoneNumber,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        AddressLine = user.AddressLine,
+                        CityName = user.CityName,
+                        Postcode = user.Postcode,
+                        Region = user.Region,
+                        Gender = user.Gender
+                    };
+                    _proxy.CreateUser(u);
+                    ModelState.Clear();
+                    ViewBag.SuccessMessage = "Creation done.";
+                    return View("Create", new UserModel());
+                }
+                else
+                {
+                    return View("Create", user);
+                }
             }
-            else
+            catch
             {
-                return View("Create", user);
+                return View("Create");
             }
         }
 
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var userDetails = this._proxy.DeleteUser(id);
-            if (userDetails == false)
+            try
+            {
+                var userDetails = this._proxy.DeleteUser(id);
+                if (userDetails == false)
+                {
+                    return null;
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch
             {
                 return null;
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
             }
         }
 
