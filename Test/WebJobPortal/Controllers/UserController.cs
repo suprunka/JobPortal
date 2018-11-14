@@ -17,6 +17,10 @@ namespace WebJobPortal.Controllers
         {
             this._proxy = proxy;
         }
+        public UserController()
+        {
+        
+        }
 
         [HttpGet]
         public ActionResult UserProfile(UserModel um)

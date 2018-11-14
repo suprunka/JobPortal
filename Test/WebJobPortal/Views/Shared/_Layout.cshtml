@@ -26,39 +26,21 @@
                     <li>@Html.ActionLink("Sign up", "Create", "User")</li>
 
 
+                   @*
                     <li class="search">
                         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
                         {
                             @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "phone" });
                             <input type="submit" value="Search">
                         }
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </div>
     </div>
     <div id="login-modal" class="loginModal">
         <!-- Modal content -->
-        <div class="modalContent" id="loginModalContent">
-            <!--X button for closing-->
-            <span class="close">&times;</span>
-            <h1>Login</h1>
-
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-            {
-                <div class="form col">
-
-                    <div>
-                        @Html.LabelFor(f => f.UserName)
-                        @Html.TextBoxFor(f => f.UserName, new { title = "Enter Username", @Value = @ViewBag.Username })
-                    </div>
-                    <div>
-                        @Html.LabelFor(f => f.Password)
-                        @Html.PasswordFor(f => f.Password, new { title = "Enter Password.", @Value = @ViewBag.Password })
-                    </div>
-                    <button type="submit" class="small fr">Login</button><br class="cl" />
-                </div>
-            }</div>
+        @Html.Partial("Login")
             
     </div>
     <div class="container body-content">
