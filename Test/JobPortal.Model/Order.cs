@@ -29,12 +29,6 @@ namespace JobPortal.Model
             return _offers;
         }
 
-        
-
-
-
-
-
-
+        public User GetUser { get; set; }
     }
 }

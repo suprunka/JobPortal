@@ -1,4 +1,6 @@
 ﻿using JobPortal.Model;
+using Repository;
+using Repository.DbConnection;
 using ServiceLibrary.ServiceInterfaces;
 using System;
 using System.ServiceModel;
@@ -9,6 +11,15 @@ namespace ServiceLibrary.Services
                  ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class OrderService : IOrderService
     {
+        private readonly IOrderService _database;
+
+        public OrderService(IOrderService database)
+        {
+            _database = database;
+        }
+
+        
+
         public Order AddToExistingOrder(Offer o)
         {
             throw new NotImplementedException();
@@ -19,17 +30,15 @@ namespace ServiceLibrary.Services
             throw new NotImplementedException();
         }
 
-        public Order CreateOrder(User u, Offer o, int hours)
+        public Order CreateOrder(Users u)
         {
-            Order order = new Order(u);
             lock (typeof(OrderService))
             {
-                order.AddOffer(o, hours);
+                return _database.CreateOrder(u);
             }
-            return order;
+ 
         }
 
-        
         public Order DeleteFromExistingOrder(Offer o)
         {
             throw new NotImplementedException();

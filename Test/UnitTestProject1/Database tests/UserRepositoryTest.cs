@@ -94,7 +94,7 @@ namespace UnitTestProject1
                 },
                 Gender = new Gender
                 {
-                    Gender1 = "Male",
+                    Gender1 = "Female",
                 },
 
                 PhoneNumber = "01100110",
@@ -511,7 +511,7 @@ namespace UnitTestProject1
                 }
             }
 
-            /*var secondContext = new DbTestDataContext();
+            var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
@@ -520,7 +520,7 @@ namespace UnitTestProject1
                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
                 secondContext.SubmitChanges();
-            }*/
+            }
         }
     }
 }

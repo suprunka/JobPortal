@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Repository.OrderRepository
 {
-    public class OrderRepository: Repository<OrderTable>, IOrderRepository
+    public class OrderRepository : Repository<OrderTable>, IOrderRepository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
@@ -31,35 +31,124 @@ namespace Repository.OrderRepository
 
         }
 
-        public Order Create(Order obj)
+        public OrderTable CreateOrder(Users u)
         {
-            throw new NotImplementedException();
+            OrderTable result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    OrderTable newOrder = new OrderTable
+                    {
+                        Account_ID = _context.GetTable<Account>().FirstOrDefault(x => x.PhoneNumber == u.PhoneNumber).ID,
+                        OrderStatus_ID = 1,
+                        Payment = new Payment
+                        {
+                            TotalPrice = 0,
+                            PaymentType = 1,
+                        },
+                        Date = DateTime.Now,
+                    };
+                    _context.GetTable<OrderTable>().InsertOnSubmit(newOrder);
+                    _context.SubmitChanges();
+                    result = newOrder;
+                    sql.Commit();
+                }
+                catch (Exception e)
+                {
+                    sql.Rollback();
+                    result = null;
+                    throw e;
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
         }
 
-        public Order Get(Expression<Func<Order, bool>> predicate)
+        public OrderTable AddToExistingOrder(OrderTable o, ServiceOffer s, int quantity)
         {
-            throw new NotImplementedException();
+            OrderTable result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    Saleline saleline = new Saleline
+                    {
+                       Quantity = quantity,
+                       ServiceOffer_ID = _context.GetTable<ServiceOffer>().FirstOrDefault(x=>x.ID == s.ID).ID,
+                       Order_ID = o.ID,
+                    };
+                    _context.GetTable<Saleline>().InsertOnSubmit(saleline);
+                    _context.SubmitChanges();
+
+                    var order= _context.GetTable<OrderTable>().FirstOrDefault(x => x.ID == o.ID);
+                    order.Payment.TotalPrice += s.RatePerHour * quantity;
+                    _context.SubmitChanges();
+                    result = o;
+                    sql.Commit();
+                }
+                catch (Exception e)
+                {
+                    sql.Rollback();
+                    result = null;
+                    throw e;
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
         }
 
-        public bool Update(Order obj)
+        public OrderTable DeleteFromExistingOffer(OrderTable o, ServiceOffer s)
         {
-            throw new NotImplementedException();
+            OrderTable result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    var filterListDelete = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == s.ID);
+                    var toDelete = filterListDelete.FirstOrDefault(x => x.Order_ID == o.ID);
+                    int quantity = toDelete.Quantity;
+                    _context.GetTable<Saleline>().DeleteOnSubmit(toDelete);
+                    _context.SubmitChanges();
+                    result = o;
+
+                    var order = _context.GetTable<OrderTable>().FirstOrDefault(x => x.ID == o.ID);
+                    order.Payment.TotalPrice -= s.RatePerHour * quantity;
+                    _context.SubmitChanges();
+                    result = o;
+                    sql.Commit();
+                    sql.Commit();
+                }
+                catch (Exception e)
+                {
+                    sql.Rollback();
+                    result = null;
+                    throw e;
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
         }
 
-        public bool Delete(Expression<Func<Order, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
 
-        IQueryable<Order> IRepository<Order>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IQueryable<Order> List(Expression<Func<Order, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
+
+
     }
 }
 

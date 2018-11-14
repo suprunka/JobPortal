@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.OrderRepository;
+using System;
 
 
 namespace Repository
@@ -8,6 +9,8 @@ namespace Repository
         IUserRepository Users { get; }
 
         IOfferRepository Offers { get; }
+
+        IOrderRepository Orders { get; }
         
     }
 }

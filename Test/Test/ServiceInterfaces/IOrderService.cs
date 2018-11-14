@@ -1,11 +1,11 @@
 ﻿using JobPortal.Model;
-
+using Repository.DbConnection;
 
 namespace ServiceLibrary.ServiceInterfaces
 {
     public interface IOrderService
     {
-        Order CreateOrder(User u, Offer o, int hours);
+        Order CreateOrder(Users u);
 
         bool CancelOrder(Order o);
 

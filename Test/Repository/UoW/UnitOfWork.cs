@@ -1,4 +1,5 @@
 ﻿using System.Data.Linq;
+using Repository.OrderRepository;
 
 namespace Repository
 {
@@ -12,12 +13,18 @@ namespace Repository
             _context = context;
             Users = new UsersRepository(_context);
             Offers = new OfferRepository(_context);
+            Orders = new OrderRepository.OrderRepository(_context);
         }
 
 
         public IUserRepository Users { get; private set; }
 
         public IOfferRepository Offers { get; private set; }
+
+        public IOrderRepository Orders { get; private set; }
+
+
+    
 
         public void Dispose()
         {

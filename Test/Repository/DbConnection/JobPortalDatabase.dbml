@@ -98,7 +98,7 @@
   </Table>
   <Table Name="dbo.Payment" Member="Payment">
     <Type Name="Payment">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TotalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="PaymentType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Payment_OrderTable" Member="OrderTable" ThisKey="ID" OtherKey="Payment_ID" Type="OrderTable" />
@@ -133,7 +133,7 @@
   </Table>
   <Table Name="dbo.Saleline" Member="Saleline">
     <Type Name="Saleline">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Order_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

@@ -153,6 +153,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App test\OrderTests.cs" />
     <Compile Include="App test\UserTests.cs" />
     <Compile Include="Connected Services\OfferServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -170,6 +171,7 @@
       <DependentUpon>DbTest.dbml</DependentUpon>
     </Compile>
     <Compile Include="Database tests\ServiceRepositoryTest.cs" />
+    <Compile Include="Database tests\OrderRepositoryTests.cs" />
     <Compile Include="MVC  tests\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
