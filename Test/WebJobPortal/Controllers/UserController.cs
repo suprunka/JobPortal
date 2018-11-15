@@ -1,8 +1,11 @@
 ﻿using JobPortal.Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using WebJobPortal.Models;
+using WebJobPortal.OfferReference;
 using WebJobPortal.UserServiceReference;
 
 namespace WebJobPortal.Controllers
@@ -11,7 +14,9 @@ namespace WebJobPortal.Controllers
     {
         private const int lenght = 8;
         private const int n = 100000000;
-        private readonly IUserService _proxy =new  UserServiceClient("UserServiceHttpEndpoint");
+        private readonly IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint");
+        private readonly IOfferService _offerProxy = new OfferServiceClient("offerService");
+        private IEnumerable<ServiceOfferWebModel> _serviceOffers = null;
 
         public UserController(IUserService proxy)
         {
@@ -19,12 +24,31 @@ namespace WebJobPortal.Controllers
         }
         public UserController()
         {
-        
+            
         }
 
         [HttpGet]
-        public ActionResult UserProfile(UserModel um)
+        public ActionResult UserProfile(UserServicesViewModel um)
         {
+            // var tuple = new Tuple<UserModel, IEnumerable<ServiceOfferWebModel>>(um, _serviceOffers);
+            um.User = new UserModel();
+            um.Services = _offerProxy.GetAllOffers().
+            um.Services = new ServiceOfferWebModel[]{
+                new ServiceOfferWebModel {
+                     Title = "Cleaning at you house",
+                     Description = "I'm very nice person, who'd love to clean your dirty socks",
+                     RatePerHour = 150 },
+                new ServiceOfferWebModel {
+                    Title = "Gardening",
+                    Description = "I'm very nice person, who'd love to clean your garden",
+                    RatePerHour = 290 },
+                new ServiceOfferWebModel {
+                    Title = "Graphic star",
+                    Description = "I'm very nice person, who'd love to  prepare logo for you",
+                    RatePerHour = 350 }, new ServiceOfferWebModel {
+                        Title = "Babysitter",
+                        Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
+                        RatePerHour = 10 } };
             return View(um);
         }
 
@@ -85,7 +109,7 @@ namespace WebJobPortal.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "ServiceOffer");
                 }
             }
             catch

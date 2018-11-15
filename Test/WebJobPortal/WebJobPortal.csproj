@@ -203,6 +203,7 @@
     <Compile Include="Models\LoginWebModel.cs" />
     <Compile Include="Models\ServiceOfferWebModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserServicesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator\Validate.cs" />
   </ItemGroup>
@@ -256,6 +257,8 @@
     <Content Include="JobPortal.Model.User.datasource" />
     <Content Include="JobPortal.Model.Offer.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\e-search.js" />
+    <Content Include="Scripts\e-search.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -281,10 +284,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\UserProfile-old.cshtml" />
     <Content Include="Views\ServiceOffer\AllServices.cshtml" />
-    <Content Include="Views\ServiceOffer\View.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Views\Shared\Offers.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

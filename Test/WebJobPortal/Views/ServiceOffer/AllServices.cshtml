@@ -1,38 +1,45 @@
-﻿@model IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>
+﻿@using WebJobPortal.Models
+@model  IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>
+
 
 @{
-    ViewBag.Title = "Services offers";
-   /// Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    var itemCount = 0;
+    var counter = 0;
 }
-
-@{
-    foreach (var item in Model)
-    {
-        var insertRow = itemCount % 3 == 0;
-
-        if (insertRow)
-        {
-            @Html.Raw("<div class=\"row\">");
+<style>
+    #xx {
+        height: 60px;
+        width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin: 30px auto 60px auto;
     }
+</style>
+:<div class="row">
+     <div class="col-sm-12">
 
-<div class="col-sm-4 bg-success">
-    <div class="card">
-        <img class="card-img-top" src="~/Pictures/male.png" alt="Card image" style="width:100%">
-        <div class="card-body">
-            <h4 class="card-title">John Doe</h4>
-            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-            <a href="#" class="btn btn-primary">See Profile</a>
-        </div>
-
+         <form>
+             <center>
+                 @Html.TextBox("SearchingString")
+                 <input class="btn btn-light" type="submit" value="Search" />
+             </center>
+         </form>
+     </div>
     </div>
-</div>
 
-   if (insertRow) {
-   @Html.Raw("  </div>")}
 
-    itemCount++;
-    }
-}
+
+    <div class="containerItems">
+
+    
+
+
+            @Html.Partial("Offers", Model);
+
+
+
+        </div>

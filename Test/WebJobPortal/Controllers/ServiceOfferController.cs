@@ -31,18 +31,57 @@ namespace WebJobPortal.Controllers
             _proxy = new OfferReference.OfferServiceClient("offerService") ;
         }
         // GET: ServiceOffer
-        public ActionResult Index()
+        public ActionResult Index(string searchingString)
         {
-         // var list = _proxy.GetAllOffers();
-         // IList toSend = new List<ServiceOfferWebModel>();
-         // foreach (Offer offer in list)
-         // {
-         //     toSend.Add(_mapper.Map(offer, new ServiceOfferWebModel()));
-         // }
-         
-            
+            // var list = _proxy.GetAllOffers();
+            // IList toSend = new List<ServiceOfferWebModel>();
+            // foreach (Offer offer in list)
+            // {
+            // toSend.Add(_mapper.Map(offer, new ServiceOfferWebModel()));
+            // }
+            ServiceOfferWebModel[] list = new ServiceOfferWebModel[]{
+                new ServiceOfferWebModel {
+                     Title = "Cleaning at you house",
+                     Description = "I'm very nice person, who'd love to clean your dirty socks",
+                     RatePerHour = 150 },
+                new ServiceOfferWebModel {
+                    Title = "Gardening",
+                    Description = "I'm very nice person, who'd love to clean your garden",
+                    RatePerHour = 290 },
+                new ServiceOfferWebModel {
+                    Title = "Graphic star",
+                    Description = "I'm very nice person, who'd love to  prepare logo for you",
+                    RatePerHour = 350 }, new ServiceOfferWebModel {
+                        Title = "Babysitter",
+                        Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
+                        RatePerHour = 10 },
+            new ServiceOfferWebModel
+            {
+                Title = "Graphic star",
+                Description = "I'm very nice person, who'd love to  prepare logo for you",
+                RatePerHour = 350
+            }, new ServiceOfferWebModel {
+                Title = "Babysitter",
+                Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
+                RatePerHour = 10 },
+            new ServiceOfferWebModel
+            {
+                Title = "Boring programmer",
+                Description = "Hello Word! I'm so excited and ready for new programming challenges! ",
+                RatePerHour = 300
+            }, new ServiceOfferWebModel {
+                Title = "Bikeman",
+                Description = "Hi, I'm Marcin Marcin and I reapir bikes, I also buy them and sells for higher price :D",
+                RatePerHour = 10 } };
 
-            return View("View", new ServiceOfferWebModel[] { new ServiceOfferWebModel(), new ServiceOfferWebModel(), new ServiceOfferWebModel() });
+            if (searchingString == null)
+            {
+                return View("AllServices", list);
+            }
+            IEnumerable xx = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).ToArray();
+
+
+            return View("AllServices", xx);
         }
-    }
+}
 }

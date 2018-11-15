@@ -9,6 +9,8 @@ using JobPortal.Model;
 using System.Data.Linq;
 using SubCategory = JobPortal.Model.SubCategory;
 using Category = JobPortal.Model.Category;
+using System.Linq.Expressions;
+using System.Collections;
 
 namespace ServiceLibrary
 {
@@ -146,7 +148,7 @@ namespace ServiceLibrary
 
         }
 
-        public Offer[] GetAllOffers()
+        public IEnumerable<Offer> GetAllOffers()
         {
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _database.GetAll())
@@ -164,9 +166,10 @@ namespace ServiceLibrary
                     Category = (Category)Enum.Parse(typeof(Category), item.SubCategory.Category.Name),
                 });
             }
-            return resultToReturn.ToArray();
+            return resultToReturn.AsEnumerable<Offer>();
         }
+       
+  
 
-        
     }
 }
