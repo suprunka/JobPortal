@@ -8,14 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Linq;
-
-namespace WebJobPortal.OfferReference {
+namespace WebJobPortal.OfferReference2 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OfferReference.IOfferService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OfferReference2.IOfferService")]
     public interface IOfferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
@@ -43,19 +40,19 @@ namespace WebJobPortal.OfferReference {
         System.Threading.Tasks.Task<bool> UpdateServiceOfferAsync(JobPortal.Model.Offer serviceOffer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
-        IQueryable<JobPortal.Model.Offer> GetAllOffers();
+        JobPortal.Model.Offer[] GetAllOffers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
-        System.Threading.Tasks.Task<IQueryable<JobPortal.Model.Offer>> GetAllOffersAsync();
+        System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllOffersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IOfferServiceChannel : WebJobPortal.OfferReference.IOfferService, System.ServiceModel.IClientChannel {
+    public interface IOfferServiceChannel : WebJobPortal.OfferReference2.IOfferService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class OfferServiceClient : System.ServiceModel.ClientBase<WebJobPortal.OfferReference.IOfferService>, WebJobPortal.OfferReference.IOfferService {
+    public partial class OfferServiceClient : System.ServiceModel.ClientBase<WebJobPortal.OfferReference2.IOfferService>, WebJobPortal.OfferReference2.IOfferService {
         
         public OfferServiceClient() {
         }
@@ -108,11 +105,11 @@ namespace WebJobPortal.OfferReference {
             return base.Channel.UpdateServiceOfferAsync(serviceOffer);
         }
         
-        public IQueryable<JobPortal.Model.Offer> GetAllOffers() {
+        public JobPortal.Model.Offer[] GetAllOffers() {
             return base.Channel.GetAllOffers();
         }
         
-        public System.Threading.Tasks.Task<IQueryable<JobPortal.Model.Offer>> GetAllOffersAsync() {
+        public System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllOffersAsync() {
             return base.Channel.GetAllOffersAsync();
         }
     }

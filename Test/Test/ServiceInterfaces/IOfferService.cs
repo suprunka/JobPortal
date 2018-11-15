@@ -29,7 +29,7 @@ namespace ServiceLibrary
         bool UpdateServiceOffer(Offer serviceOffer);
 
         [OperationContract]
-        IEnumerable<Offer> GetAllOffers();
+        IQueryable<Offer> GetAllOffers();
 
 
     }

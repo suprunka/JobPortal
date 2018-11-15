@@ -39,49 +39,55 @@ namespace WebJobPortal.Controllers
             // {
             // toSend.Add(_mapper.Map(offer, new ServiceOfferWebModel()));
             // }
-            ServiceOfferWebModel[] list = new ServiceOfferWebModel[]{
-                new ServiceOfferWebModel {
-                     Title = "Cleaning at you house",
-                     Description = "I'm very nice person, who'd love to clean your dirty socks",
-                     RatePerHour = 150 },
-                new ServiceOfferWebModel {
-                    Title = "Gardening",
-                    Description = "I'm very nice person, who'd love to clean your garden",
-                    RatePerHour = 290 },
-                new ServiceOfferWebModel {
-                    Title = "Graphic star",
-                    Description = "I'm very nice person, who'd love to  prepare logo for you",
-                    RatePerHour = 350 }, new ServiceOfferWebModel {
-                        Title = "Babysitter",
-                        Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
-                        RatePerHour = 10 },
-            new ServiceOfferWebModel
-            {
-                Title = "Graphic star",
-                Description = "I'm very nice person, who'd love to  prepare logo for you",
-                RatePerHour = 350
-            }, new ServiceOfferWebModel {
-                Title = "Babysitter",
-                Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
-                RatePerHour = 10 },
-            new ServiceOfferWebModel
-            {
-                Title = "Boring programmer",
-                Description = "Hello Word! I'm so excited and ready for new programming challenges! ",
-                RatePerHour = 300
-            }, new ServiceOfferWebModel {
-                Title = "Bikeman",
-                Description = "Hi, I'm Marcin Marcin and I reapir bikes, I also buy them and sells for higher price :D",
-                RatePerHour = 10 } };
+            // ServiceOfferWebModel[] list = new ServiceOfferWebModel[]{
+            // new ServiceOfferWebModel {
+            // Title = "Cleaning at you house",
+            // Description = "I'm very nice person, who'd love to clean your dirty socks",
+            // RatePerHour = 150 },
+            // new ServiceOfferWebModel {
+            // Title = "Gardening",
+            // Description = "I'm very nice person, who'd love to clean your garden",
+            // RatePerHour = 290 },
+            // new ServiceOfferWebModel {
+            // Title = "Graphic star",
+            // Description = "I'm very nice person, who'd love to  prepare logo for you",
+            // RatePerHour = 350 }, new ServiceOfferWebModel {
+            // Title = "Babysitter",
+            // Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
+            // RatePerHour = 10 },
+            // new ServiceOfferWebModel
+            //   {
+            // Title = "Graphic star",
+            // Description = "I'm very nice person, who'd love to  prepare logo for you",
+            // RatePerHour = 350
+            //   }, new ServiceOfferWebModel {
+            // Title = "Babysitter",
+            // Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
+            // RatePerHour = 10 },
+            // new ServiceOfferWebModel
+            //   {
+            // Title = "Boring programmer",
+            // Description = "Hello Word! I'm so excited and ready for new programming challenges! ",
+            // RatePerHour = 300
+            //   }, new ServiceOfferWebModel {
+            // Title = "Bikeman",
+            // Description = "Hi, I'm Marcin Marcin and I reapir bikes, I also buy them and sells for higher price :D",
+            // RatePerHour = 10 } };
 
-            if (searchingString == null)
+            var received = _proxy.GetAllOffers();
+            IList list = new List<ServiceOfferWebModel>();
+            foreach (var item in received)
             {
-                return View("AllServices", list);
+                list.Add(_mapper.Map(item, new ServiceOfferWebModel()));
             }
-            IEnumerable xx = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).ToArray();
-
-
-            return View("AllServices", xx);
+            
+            if (searchingString == null)
+               {
+             return View("AllServices", list);
+               }
+            var condition = received.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ServiceOfferWebModel()));
+           
+            return View("AllServices", condition);
         }
 }
 }

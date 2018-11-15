@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0c76c1e3-64f1-43ab-b5d3-fc4767b144be" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="09da9373-1670-4a72-ac2e-17fbc925cbd4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8080/Offer/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="95ecbf6a-3eba-41a7-9f70-c05e76128ea7" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="50fe849b-d1a9-409c-8529-d76c9ae611d0" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4fe81c16-3c15-47eb-9fa4-e93879079859" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="a94b4715-f807-45fa-8a27-7224c0891c97" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4fc3338a-692d-4eb9-b790-e4d529bbfe31" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7dbf7f7c-e739-4565-9dc6-136f0c320cda" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="3fdfd968-17d3-4c0f-a147-0b3f864b4612" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="64e8f71e-a188-40b4-971e-85e8bd15de64" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

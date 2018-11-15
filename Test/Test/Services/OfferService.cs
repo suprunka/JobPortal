@@ -148,7 +148,7 @@ namespace ServiceLibrary
 
         }
 
-        public IEnumerable<Offer> GetAllOffers()
+        public IQueryable<Offer> GetAllOffers()
         {
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _database.GetAll())
@@ -166,7 +166,7 @@ namespace ServiceLibrary
                     Category = (Category)Enum.Parse(typeof(Category), item.SubCategory.Category.Name),
                 });
             }
-            return resultToReturn.AsEnumerable<Offer>();
+            return resultToReturn.AsQueryable<Offer>();
         }
        
   
