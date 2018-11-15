@@ -64,10 +64,14 @@ namespace JobPortal.Model
         public virtual String Postcode { get; set; }
 
         [DataMember]
+        public virtual String BankAccountNumber { get; set; }
+
+        [DataMember]
         public virtual Region Region { get; set; }
 
         [DataMember]
         public virtual Gender Gender { get; set; }
+        
         
     }
 }

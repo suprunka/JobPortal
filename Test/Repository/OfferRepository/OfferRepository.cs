@@ -1,4 +1,5 @@
 ﻿
+using JobPortal.Model;
 using Repository.DbConnection;
 using System;
 using System.Configuration;
@@ -44,7 +45,7 @@ namespace Repository
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_Phone = offer.Employee_Phone,
-                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.ID == offer.Subcategory_ID).ID
+                        Subcategory_ID = _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.ID == offer.Subcategory_ID).ID,
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
@@ -126,6 +127,40 @@ namespace Repository
                         result = true;
                         _context.SubmitChanges();
                     }
+                }
+                catch
+                {
+                    result = false;
+
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+                return result;
+
+            }
+
+        }
+
+        public bool AddWorkingDates(Days day, TimeSpan hourFrom, TimeSpan hourTo, ServiceOffer s)
+        {
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    WorkingDates workingDates = new WorkingDates
+                    {
+                        NameOfDay = day.ToString(),
+                        HourFrom = hourFrom,
+                        HourTo = hourTo,
+                        ServiceOffer_ID = s.ID,
+                    };
+                    _context.GetTable<WorkingDates>().InsertOnSubmit(workingDates);
+                    _context.SubmitChanges();
+                    result = true;
                 }
                 catch
                 {

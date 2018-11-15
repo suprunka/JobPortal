@@ -70,7 +70,8 @@ namespace Repository
                             Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
                                 t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
                             AddressLine = obj.AddressLine,
-                            City_ID = addressExists.ID
+                            City_ID = addressExists.ID,
+                            BankAccountNumber= obj.BankAccountNumber,
                         };
 
                         Account account = new Account
@@ -95,7 +96,7 @@ namespace Repository
                         throw new DuplicateKeyException(this);
                         
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         myTran.Dispose();
                         result = null;
@@ -224,6 +225,7 @@ namespace Repository
                         found.Logging.UserName = obj.Logging.UserName;
                         found.Logging.Password = obj.Logging.Password;
                         found.AddressLine = obj.AddressLine;
+                        found.BankAccountNumber = obj.BankAccountNumber;
                         
                         if (addressExists != null)
                         {

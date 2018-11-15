@@ -30,5 +30,7 @@ namespace JobPortal.Model
         }
 
         public User GetUser { get; set; }
+
+        public LinkedList<Offer> GetListOfOffers { get; set; }
     }
 }

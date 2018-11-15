@@ -33,18 +33,21 @@ namespace UnitTestProject1.Database_tests
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
+    partial void InsertWorkingDates(WorkingDates instance);
+    partial void UpdateWorkingDates(WorkingDates instance);
+    partial void DeleteWorkingDates(WorkingDates instance);
     partial void InsertAccountState(AccountState instance);
     partial void UpdateAccountState(AccountState instance);
     partial void DeleteAccountState(AccountState instance);
     partial void InsertAddressTable(AddressTable instance);
     partial void UpdateAddressTable(AddressTable instance);
     partial void DeleteAddressTable(AddressTable instance);
+    partial void InsertBookedDates(BookedDates instance);
+    partial void UpdateBookedDates(BookedDates instance);
+    partial void DeleteBookedDates(BookedDates instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
-    partial void InsertDates(Dates instance);
-    partial void UpdateDates(Dates instance);
-    partial void DeleteDates(Dates instance);
     partial void InsertGender(Gender instance);
     partial void UpdateGender(Gender instance);
     partial void DeleteGender(Gender instance);
@@ -57,12 +60,6 @@ namespace UnitTestProject1.Database_tests
     partial void InsertOrderTable(OrderTable instance);
     partial void UpdateOrderTable(OrderTable instance);
     partial void DeleteOrderTable(OrderTable instance);
-    partial void InsertPayment(Payment instance);
-    partial void UpdatePayment(Payment instance);
-    partial void DeletePayment(Payment instance);
-    partial void InsertPaymentType(PaymentType instance);
-    partial void UpdatePaymentType(PaymentType instance);
-    partial void DeletePaymentType(PaymentType instance);
     partial void InsertRate(Rate instance);
     partial void UpdateRate(Rate instance);
     partial void DeleteRate(Rate instance);
@@ -121,11 +118,11 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<WorkingArea> WorkingArea
+		public System.Data.Linq.Table<WorkingDates> WorkingDates
 		{
 			get
 			{
-				return this.GetTable<WorkingArea>();
+				return this.GetTable<WorkingDates>();
 			}
 		}
 		
@@ -145,11 +142,11 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<AvailableDates> AvailableDates
+		public System.Data.Linq.Table<BookedDates> BookedDates
 		{
 			get
 			{
-				return this.GetTable<AvailableDates>();
+				return this.GetTable<BookedDates>();
 			}
 		}
 		
@@ -158,14 +155,6 @@ namespace UnitTestProject1.Database_tests
 			get
 			{
 				return this.GetTable<Category>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Dates> Dates
-		{
-			get
-			{
-				return this.GetTable<Dates>();
 			}
 		}
 		
@@ -198,22 +187,6 @@ namespace UnitTestProject1.Database_tests
 			get
 			{
 				return this.GetTable<OrderTable>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Payment> Payment
-		{
-			get
-			{
-				return this.GetTable<Payment>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PaymentType> PaymentType
-		{
-			get
-			{
-				return this.GetTable<PaymentType>();
 			}
 		}
 		
@@ -534,47 +507,201 @@ namespace UnitTestProject1.Database_tests
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkingArea")]
-	public partial class WorkingArea
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkingDates")]
+	public partial class WorkingDates : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private string _Employee_Phone;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _City_ID;
+		private int _ID;
 		
-		public WorkingArea()
+		private string _NameOfDay;
+		
+		private System.TimeSpan _HourFrom;
+		
+		private System.TimeSpan _HourTo;
+		
+		private int _ServiceOffer_ID;
+		
+		private EntityRef<ServiceOffer> _ServiceOffer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameOfDayChanging(string value);
+    partial void OnNameOfDayChanged();
+    partial void OnHourFromChanging(System.TimeSpan value);
+    partial void OnHourFromChanged();
+    partial void OnHourToChanging(System.TimeSpan value);
+    partial void OnHourToChanged();
+    partial void OnServiceOffer_IDChanging(int value);
+    partial void OnServiceOffer_IDChanged();
+    #endregion
+		
+		public WorkingDates()
 		{
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_Phone", DbType="VarChar(8)")]
-		public string Employee_Phone
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this._Employee_Phone;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._Employee_Phone != value))
+				if ((this._ID != value))
 				{
-					this._Employee_Phone = value;
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
-		public int City_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameOfDay", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string NameOfDay
 		{
 			get
 			{
-				return this._City_ID;
+				return this._NameOfDay;
 			}
 			set
 			{
-				if ((this._City_ID != value))
+				if ((this._NameOfDay != value))
 				{
-					this._City_ID = value;
+					this.OnNameOfDayChanging(value);
+					this.SendPropertyChanging();
+					this._NameOfDay = value;
+					this.SendPropertyChanged("NameOfDay");
+					this.OnNameOfDayChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
+		public System.TimeSpan HourFrom
+		{
+			get
+			{
+				return this._HourFrom;
+			}
+			set
+			{
+				if ((this._HourFrom != value))
+				{
+					this.OnHourFromChanging(value);
+					this.SendPropertyChanging();
+					this._HourFrom = value;
+					this.SendPropertyChanged("HourFrom");
+					this.OnHourFromChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
+		public System.TimeSpan HourTo
+		{
+			get
+			{
+				return this._HourTo;
+			}
+			set
+			{
+				if ((this._HourTo != value))
+				{
+					this.OnHourToChanging(value);
+					this.SendPropertyChanging();
+					this._HourTo = value;
+					this.SendPropertyChanged("HourTo");
+					this.OnHourToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
+		public int ServiceOffer_ID
+		{
+			get
+			{
+				return this._ServiceOffer_ID;
+			}
+			set
+			{
+				if ((this._ServiceOffer_ID != value))
+				{
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnServiceOffer_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ServiceOffer_ID = value;
+					this.SendPropertyChanged("ServiceOffer_ID");
+					this.OnServiceOffer_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_WorkingDates", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public ServiceOffer ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer.Entity;
+			}
+			set
+			{
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceOffer.Entity = null;
+						previousValue.WorkingDates.Remove(this);
+					}
+					this._ServiceOffer.Entity = value;
+					if ((value != null))
+					{
+						value.WorkingDates.Add(this);
+						this._ServiceOffer_ID = value.ID;
+					}
+					else
+					{
+						this._ServiceOffer_ID = default(int);
+					}
+					this.SendPropertyChanged("ServiceOffer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -855,21 +982,47 @@ namespace UnitTestProject1.Database_tests
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AvailableDates")]
-	public partial class AvailableDates
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BookedDates")]
+	public partial class BookedDates : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private System.Nullable<int> _Saleline_ID;
+		private int _NumberOfHours;
 		
-		private int _ServiceOffer_ID;
+		private System.DateTime _BookedDate;
 		
-		public AvailableDates()
+		private System.TimeSpan _HourFrom;
+		
+		private System.TimeSpan _HourTo;
+		
+		private EntitySet<Saleline> _Saleline;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNumberOfHoursChanging(int value);
+    partial void OnNumberOfHoursChanged();
+    partial void OnBookedDateChanging(System.DateTime value);
+    partial void OnBookedDateChanged();
+    partial void OnHourFromChanging(System.TimeSpan value);
+    partial void OnHourFromChanged();
+    partial void OnHourToChanging(System.TimeSpan value);
+    partial void OnHourToChanged();
+    #endregion
+		
+		public BookedDates()
 		{
+			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -880,41 +1033,138 @@ namespace UnitTestProject1.Database_tests
 			{
 				if ((this._ID != value))
 				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
 					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Saleline_ID", DbType="Int")]
-		public System.Nullable<int> Saleline_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfHours", DbType="Int NOT NULL")]
+		public int NumberOfHours
 		{
 			get
 			{
-				return this._Saleline_ID;
+				return this._NumberOfHours;
 			}
 			set
 			{
-				if ((this._Saleline_ID != value))
+				if ((this._NumberOfHours != value))
 				{
-					this._Saleline_ID = value;
+					this.OnNumberOfHoursChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfHours = value;
+					this.SendPropertyChanged("NumberOfHours");
+					this.OnNumberOfHoursChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
-		public int ServiceOffer_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookedDate", DbType="Date NOT NULL")]
+		public System.DateTime BookedDate
 		{
 			get
 			{
-				return this._ServiceOffer_ID;
+				return this._BookedDate;
 			}
 			set
 			{
-				if ((this._ServiceOffer_ID != value))
+				if ((this._BookedDate != value))
 				{
-					this._ServiceOffer_ID = value;
+					this.OnBookedDateChanging(value);
+					this.SendPropertyChanging();
+					this._BookedDate = value;
+					this.SendPropertyChanged("BookedDate");
+					this.OnBookedDateChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
+		public System.TimeSpan HourFrom
+		{
+			get
+			{
+				return this._HourFrom;
+			}
+			set
+			{
+				if ((this._HourFrom != value))
+				{
+					this.OnHourFromChanging(value);
+					this.SendPropertyChanging();
+					this._HourFrom = value;
+					this.SendPropertyChanged("HourFrom");
+					this.OnHourFromChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
+		public System.TimeSpan HourTo
+		{
+			get
+			{
+				return this._HourTo;
+			}
+			set
+			{
+				if ((this._HourTo != value))
+				{
+					this.OnHourToChanging(value);
+					this.SendPropertyChanging();
+					this._HourTo = value;
+					this.SendPropertyChanged("HourTo");
+					this.OnHourToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookedDates_Saleline", Storage="_Saleline", ThisKey="ID", OtherKey="BookedDates_ID")]
+		public EntitySet<Saleline> Saleline
+		{
+			get
+			{
+				return this._Saleline;
+			}
+			set
+			{
+				this._Saleline.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Saleline(Saleline entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookedDates = this;
+		}
+		
+		private void detach_Saleline(Saleline entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookedDates = null;
 		}
 	}
 	
@@ -1029,140 +1279,6 @@ namespace UnitTestProject1.Database_tests
 		{
 			this.SendPropertyChanging();
 			entity.Category = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Dates")]
-	public partial class Dates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.DateTime _Date;
-		
-		private System.TimeSpan _HourFrom;
-		
-		private System.TimeSpan _HourTo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnHourFromChanging(System.TimeSpan value);
-    partial void OnHourFromChanged();
-    partial void OnHourToChanging(System.TimeSpan value);
-    partial void OnHourToChanged();
-    #endregion
-		
-		public Dates()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
-		public System.TimeSpan HourFrom
-		{
-			get
-			{
-				return this._HourFrom;
-			}
-			set
-			{
-				if ((this._HourFrom != value))
-				{
-					this.OnHourFromChanging(value);
-					this.SendPropertyChanging();
-					this._HourFrom = value;
-					this.SendPropertyChanged("HourFrom");
-					this.OnHourFromChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
-		public System.TimeSpan HourTo
-		{
-			get
-			{
-				return this._HourTo;
-			}
-			set
-			{
-				if ((this._HourTo != value))
-				{
-					this.OnHourToChanging(value);
-					this.SendPropertyChanging();
-					this._HourTo = value;
-					this.SendPropertyChanged("HourTo");
-					this.OnHourToChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1544,7 +1660,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _OrderStatus_ID;
 		
-		private int _Payment_ID;
+		private decimal _TotalPrice;
 		
 		private System.Nullable<System.DateTime> _Date;
 		
@@ -1553,8 +1669,6 @@ namespace UnitTestProject1.Database_tests
 		private EntityRef<Account> _Account;
 		
 		private EntityRef<OrderStatus> _OrderStatus;
-		
-		private EntityRef<Payment> _Payment;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1566,8 +1680,8 @@ namespace UnitTestProject1.Database_tests
     partial void OnAccount_IDChanged();
     partial void OnOrderStatus_IDChanging(int value);
     partial void OnOrderStatus_IDChanged();
-    partial void OnPayment_IDChanging(int value);
-    partial void OnPayment_IDChanged();
+    partial void OnTotalPriceChanging(decimal value);
+    partial void OnTotalPriceChanged();
     partial void OnDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDateChanged();
     #endregion
@@ -1577,7 +1691,6 @@ namespace UnitTestProject1.Database_tests
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
 			this._Account = default(EntityRef<Account>);
 			this._OrderStatus = default(EntityRef<OrderStatus>);
-			this._Payment = default(EntityRef<Payment>);
 			OnCreated();
 		}
 		
@@ -1649,31 +1762,27 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Payment_ID", DbType="Int NOT NULL")]
-		public int Payment_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
+		public decimal TotalPrice
 		{
 			get
 			{
-				return this._Payment_ID;
+				return this._TotalPrice;
 			}
 			set
 			{
-				if ((this._Payment_ID != value))
+				if ((this._TotalPrice != value))
 				{
-					if (this._Payment.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPayment_IDChanging(value);
+					this.OnTotalPriceChanging(value);
 					this.SendPropertyChanging();
-					this._Payment_ID = value;
-					this.SendPropertyChanged("Payment_ID");
-					this.OnPayment_IDChanged();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime2")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date")]
 		public System.Nullable<System.DateTime> Date
 		{
 			get
@@ -1774,40 +1883,6 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payment_OrderTable", Storage="_Payment", ThisKey="Payment_ID", OtherKey="ID", IsForeignKey=true)]
-		public Payment Payment
-		{
-			get
-			{
-				return this._Payment.Entity;
-			}
-			set
-			{
-				Payment previousValue = this._Payment.Entity;
-				if (((previousValue != value) 
-							|| (this._Payment.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Payment.Entity = null;
-						previousValue.OrderTable.Remove(this);
-					}
-					this._Payment.Entity = value;
-					if ((value != null))
-					{
-						value.OrderTable.Add(this);
-						this._Payment_ID = value.ID;
-					}
-					else
-					{
-						this._Payment_ID = default(int);
-					}
-					this.SendPropertyChanged("Payment");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1838,299 +1913,6 @@ namespace UnitTestProject1.Database_tests
 		{
 			this.SendPropertyChanging();
 			entity.OrderTable = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Payment")]
-	public partial class Payment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private decimal _TotalPrice;
-		
-		private System.Nullable<int> _PaymentType;
-		
-		private EntitySet<OrderTable> _OrderTable;
-		
-		private EntityRef<PaymentType> _PaymentType1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnTotalPriceChanging(decimal value);
-    partial void OnTotalPriceChanged();
-    partial void OnPaymentTypeChanging(System.Nullable<int> value);
-    partial void OnPaymentTypeChanged();
-    #endregion
-		
-		public Payment()
-		{
-			this._OrderTable = new EntitySet<OrderTable>(new Action<OrderTable>(this.attach_OrderTable), new Action<OrderTable>(this.detach_OrderTable));
-			this._PaymentType1 = default(EntityRef<PaymentType>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
-		public decimal TotalPrice
-		{
-			get
-			{
-				return this._TotalPrice;
-			}
-			set
-			{
-				if ((this._TotalPrice != value))
-				{
-					this.OnTotalPriceChanging(value);
-					this.SendPropertyChanging();
-					this._TotalPrice = value;
-					this.SendPropertyChanged("TotalPrice");
-					this.OnTotalPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentType", DbType="Int")]
-		public System.Nullable<int> PaymentType
-		{
-			get
-			{
-				return this._PaymentType;
-			}
-			set
-			{
-				if ((this._PaymentType != value))
-				{
-					if (this._PaymentType1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPaymentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentType = value;
-					this.SendPropertyChanged("PaymentType");
-					this.OnPaymentTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payment_OrderTable", Storage="_OrderTable", ThisKey="ID", OtherKey="Payment_ID")]
-		public EntitySet<OrderTable> OrderTable
-		{
-			get
-			{
-				return this._OrderTable;
-			}
-			set
-			{
-				this._OrderTable.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PaymentType_Payment", Storage="_PaymentType1", ThisKey="PaymentType", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public PaymentType PaymentType1
-		{
-			get
-			{
-				return this._PaymentType1.Entity;
-			}
-			set
-			{
-				PaymentType previousValue = this._PaymentType1.Entity;
-				if (((previousValue != value) 
-							|| (this._PaymentType1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PaymentType1.Entity = null;
-						previousValue.Payment.Remove(this);
-					}
-					this._PaymentType1.Entity = value;
-					if ((value != null))
-					{
-						value.Payment.Add(this);
-						this._PaymentType = value.ID;
-					}
-					else
-					{
-						this._PaymentType = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PaymentType1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_OrderTable(OrderTable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Payment = this;
-		}
-		
-		private void detach_OrderTable(OrderTable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Payment = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PaymentType")]
-	public partial class PaymentType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _PaymentType1;
-		
-		private EntitySet<Payment> _Payment;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnPaymentType1Changing(string value);
-    partial void OnPaymentType1Changed();
-    #endregion
-		
-		public PaymentType()
-		{
-			this._Payment = new EntitySet<Payment>(new Action<Payment>(this.attach_Payment), new Action<Payment>(this.detach_Payment));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="PaymentType", Storage="_PaymentType1", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string PaymentType1
-		{
-			get
-			{
-				return this._PaymentType1;
-			}
-			set
-			{
-				if ((this._PaymentType1 != value))
-				{
-					this.OnPaymentType1Changing(value);
-					this.SendPropertyChanging();
-					this._PaymentType1 = value;
-					this.SendPropertyChanged("PaymentType1");
-					this.OnPaymentType1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PaymentType_Payment", Storage="_Payment", ThisKey="ID", OtherKey="PaymentType")]
-		public EntitySet<Payment> Payment
-		{
-			get
-			{
-				return this._Payment;
-			}
-			set
-			{
-				this._Payment.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Payment(Payment entity)
-		{
-			this.SendPropertyChanging();
-			entity.PaymentType1 = this;
-		}
-		
-		private void detach_Payment(Payment entity)
-		{
-			this.SendPropertyChanging();
-			entity.PaymentType1 = null;
 		}
 	}
 	
@@ -2294,7 +2076,7 @@ namespace UnitTestProject1.Database_tests
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -2537,11 +2319,13 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _ID;
 		
-		private int _Quantity;
-		
 		private int _ServiceOffer_ID;
 		
 		private int _Order_ID;
+		
+		private int _BookedDates_ID;
+		
+		private EntityRef<BookedDates> _BookedDates;
 		
 		private EntityRef<OrderTable> _OrderTable;
 		
@@ -2553,16 +2337,17 @@ namespace UnitTestProject1.Database_tests
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnQuantityChanging(int value);
-    partial void OnQuantityChanged();
     partial void OnServiceOffer_IDChanging(int value);
     partial void OnServiceOffer_IDChanged();
     partial void OnOrder_IDChanging(int value);
     partial void OnOrder_IDChanged();
+    partial void OnBookedDates_IDChanging(int value);
+    partial void OnBookedDates_IDChanged();
     #endregion
 		
 		public Saleline()
 		{
+			this._BookedDates = default(EntityRef<BookedDates>);
 			this._OrderTable = default(EntityRef<OrderTable>);
 			this._ServiceOffer = default(EntityRef<ServiceOffer>);
 			OnCreated();
@@ -2584,26 +2369,6 @@ namespace UnitTestProject1.Database_tests
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
-		public int Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this.OnQuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
 				}
 			}
 		}
@@ -2652,6 +2417,64 @@ namespace UnitTestProject1.Database_tests
 					this._Order_ID = value;
 					this.SendPropertyChanged("Order_ID");
 					this.OnOrder_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookedDates_ID", DbType="Int NOT NULL")]
+		public int BookedDates_ID
+		{
+			get
+			{
+				return this._BookedDates_ID;
+			}
+			set
+			{
+				if ((this._BookedDates_ID != value))
+				{
+					if (this._BookedDates.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBookedDates_IDChanging(value);
+					this.SendPropertyChanging();
+					this._BookedDates_ID = value;
+					this.SendPropertyChanged("BookedDates_ID");
+					this.OnBookedDates_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookedDates_Saleline", Storage="_BookedDates", ThisKey="BookedDates_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public BookedDates BookedDates
+		{
+			get
+			{
+				return this._BookedDates.Entity;
+			}
+			set
+			{
+				BookedDates previousValue = this._BookedDates.Entity;
+				if (((previousValue != value) 
+							|| (this._BookedDates.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookedDates.Entity = null;
+						previousValue.Saleline.Remove(this);
+					}
+					this._BookedDates.Entity = value;
+					if ((value != null))
+					{
+						value.Saleline.Add(this);
+						this._BookedDates_ID = value.ID;
+					}
+					else
+					{
+						this._BookedDates_ID = default(int);
+					}
+					this.SendPropertyChanged("BookedDates");
 				}
 			}
 		}
@@ -2763,6 +2586,8 @@ namespace UnitTestProject1.Database_tests
 		
 		private string _Title;
 		
+		private EntitySet<WorkingDates> _WorkingDates;
+		
 		private EntitySet<Review> _Review;
 		
 		private EntitySet<Saleline> _Saleline;
@@ -2791,6 +2616,7 @@ namespace UnitTestProject1.Database_tests
 		
 		public ServiceOffer()
 		{
+			this._WorkingDates = new EntitySet<WorkingDates>(new Action<WorkingDates>(this.attach_WorkingDates), new Action<WorkingDates>(this.detach_WorkingDates));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
 			this._SubCategory = default(EntityRef<SubCategory>);
@@ -2926,6 +2752,19 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_WorkingDates", Storage="_WorkingDates", ThisKey="ID", OtherKey="ServiceOffer_ID")]
+		public EntitySet<WorkingDates> WorkingDates
+		{
+			get
+			{
+				return this._WorkingDates;
+			}
+			set
+			{
+				this._WorkingDates.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Review", Storage="_Review", ThisKey="ID", OtherKey="ServiceOffer_ID")]
 		public EntitySet<Review> Review
 		{
@@ -3038,6 +2877,18 @@ namespace UnitTestProject1.Database_tests
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_WorkingDates(WorkingDates entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_WorkingDates(WorkingDates entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
 		}
 		
 		private void attach_Review(Review entity)
@@ -3264,7 +3115,9 @@ namespace UnitTestProject1.Database_tests
 		
 		private string _AddressLine;
 		
-		private System.Nullable<int> _City_ID;
+		private string _BankAccountNumber;
+		
+		private int _City_ID;
 		
 		private int _Gender_ID;
 		
@@ -3298,7 +3151,9 @@ namespace UnitTestProject1.Database_tests
     partial void OnLogging_IDChanged();
     partial void OnAddressLineChanging(string value);
     partial void OnAddressLineChanged();
-    partial void OnCity_IDChanging(System.Nullable<int> value);
+    partial void OnBankAccountNumberChanging(string value);
+    partial void OnBankAccountNumberChanged();
+    partial void OnCity_IDChanging(int value);
     partial void OnCity_IDChanged();
     partial void OnGender_IDChanging(int value);
     partial void OnGender_IDChanged();
@@ -3459,8 +3314,28 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int")]
-		public System.Nullable<int> City_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BankAccountNumber", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string BankAccountNumber
+		{
+			get
+			{
+				return this._BankAccountNumber;
+			}
+			set
+			{
+				if ((this._BankAccountNumber != value))
+				{
+					this.OnBankAccountNumberChanging(value);
+					this.SendPropertyChanging();
+					this._BankAccountNumber = value;
+					this.SendPropertyChanged("BankAccountNumber");
+					this.OnBankAccountNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
+		public int City_ID
 		{
 			get
 			{
@@ -3614,7 +3489,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="SET NULL")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true)]
 		public AddressTable AddressTable
 		{
 			get
@@ -3641,7 +3516,7 @@ namespace UnitTestProject1.Database_tests
 					}
 					else
 					{
-						this._City_ID = default(Nullable<int>);
+						this._City_ID = default(int);
 					}
 					this.SendPropertyChanged("AddressTable");
 				}

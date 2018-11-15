@@ -41,6 +41,7 @@ namespace UnitTestProject1
                 LastName = "Adam",
                 Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
+                BankAccountNumber = "255"
 
             };
             return userStub;
@@ -72,6 +73,7 @@ namespace UnitTestProject1
                 LastName = "Adam",
                 Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
+                BankAccountNumber = "255"
 
             };
             return userStub;
@@ -102,6 +104,7 @@ namespace UnitTestProject1
                 LastName = "Adam",
                 Email = "adamUpdated",
                 AddressLine = "Updated",
+                BankAccountNumber = "255"
 
             };
             return userStub;
@@ -133,6 +136,7 @@ namespace UnitTestProject1
                 LastName = "Adam",
                 Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
+                BankAccountNumber = "255"
 
             };
             return userStub;
@@ -163,6 +167,7 @@ namespace UnitTestProject1
                 LastName = "Adam",
                 Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
+                BankAccountNumber = "255"
 
 
             };

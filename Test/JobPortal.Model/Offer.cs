@@ -38,8 +38,6 @@ namespace JobPortal.Model
         IT,
         [EnumMember]
         Repairs,
-        /*[EnumMember]
-        Art,*/
         [EnumMember]
         Architecture,
         [EnumMember]
@@ -110,5 +108,25 @@ namespace JobPortal.Model
         [SubcategoryOf(Category.Media)]
         Marketing,
 
+    }
+
+
+    [DataContract]
+    public enum Days
+    {
+        [EnumMember]
+        Monday,
+        [EnumMember]
+        Thursday,
+        [EnumMember]
+        Wednesday,
+        [EnumMember]
+        Tuesday,
+        [EnumMember]
+        Friday,
+        [EnumMember]
+        Saturday,
+        [EnumMember]
+        Sunday
     }
 }
