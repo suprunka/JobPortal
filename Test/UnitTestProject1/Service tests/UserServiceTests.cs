@@ -45,7 +45,7 @@ namespace UnitTestProject1.Service_tests
                 #endregion
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                service.CreateUser(userStub.Object);
+                service.CreateUser(userStub.Object, null);
                 databaseMock.Verify(t => t.Create(It.IsAny<Users>()), Times.AtLeastOnce);
             }
             catch
@@ -80,7 +80,7 @@ namespace UnitTestProject1.Service_tests
                 #endregion
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                bool result = service.CreateUser(userStub.Object);
+                bool result = service.CreateUser(userStub.Object, null);
                 Assert.IsTrue(result);
             }
             catch
@@ -115,7 +115,7 @@ namespace UnitTestProject1.Service_tests
                 #endregion
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                Assert.IsNotNull(service.CreateUser(userStub.Object));
+                Assert.IsNotNull(service.CreateUser(userStub.Object, null));
             }
             catch
             {
@@ -163,7 +163,7 @@ namespace UnitTestProject1.Service_tests
                 userStub.Setup(x => x.Gender).Returns(gender);
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                Assert.IsFalse(service.CreateUser(userStub.Object));
+                Assert.IsFalse(service.CreateUser(userStub.Object, null));
             }
             catch
             {
@@ -187,9 +187,11 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
                     UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
@@ -197,10 +199,8 @@ namespace UnitTestProject1.Service_tests
                     Gender1 = "Male",
                 },
                 ID = 1,
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             });
@@ -221,9 +221,11 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
                     UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
@@ -231,10 +233,8 @@ namespace UnitTestProject1.Service_tests
                     Gender1 = "Male",
                 },
                 ID = 1,
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             });
@@ -255,9 +255,11 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
                     UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
@@ -265,10 +267,8 @@ namespace UnitTestProject1.Service_tests
                     Gender1 = "Male",
                 },
                 ID = 1,
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             });
@@ -289,9 +289,11 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
                     UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
@@ -299,10 +301,8 @@ namespace UnitTestProject1.Service_tests
                     Gender1 = "Male",
                 },
                 ID = 1,
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             });
@@ -325,9 +325,11 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
                     UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
@@ -335,10 +337,8 @@ namespace UnitTestProject1.Service_tests
                     Gender1 = "Male",
                 },
                 ID = 1,
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             });
@@ -359,9 +359,11 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
                     UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
@@ -369,10 +371,8 @@ namespace UnitTestProject1.Service_tests
                     Gender1 = "Male",
                 },
                 ID = 1,
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             },new Users {
@@ -382,20 +382,20 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username2",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
+                    UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 2,
-                PhoneNumber = "76584321",
+                ID = 1,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             },new Users {
@@ -405,20 +405,20 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username3",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
+                    UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 3,
-                PhoneNumber = "76854321",
+                ID = 1,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             },new Users {
@@ -428,20 +428,20 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username4",
+                    PasswordHash = "Adama1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
+                    UserName = "Username1",
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 4,
-                PhoneNumber = "78654321",
+                ID = 1,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }, new Users {
@@ -451,20 +451,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "adamapA1",
+                    PasswordHash = "adamapA1",
                     UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
                 ID = 5,
-                PhoneNumber = "87654321",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }
@@ -484,20 +486,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username3",
+                    PasswordHash = "adamapA1",
+                    UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 3,
-                PhoneNumber = "76854321",
+                ID = 5,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             },new Users {
@@ -507,20 +511,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username4",
+                    PasswordHash = "adamapA1",
+                    UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 4,
-                PhoneNumber = "78654321",
+                ID = 5,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }, new Users {
@@ -530,20 +536,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "adamapA1",
+                    PasswordHash = "adamapA1",
                     UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
                 ID = 5,
-                PhoneNumber = "87654321",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }
@@ -563,20 +571,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username3",
+                    PasswordHash = "adamapA1",
+                    UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 3,
-                PhoneNumber = "76854321",
+                ID = 5,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             },new Users {
@@ -586,22 +596,23 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username4",
+                    PasswordHash = "adamapA1",
+                    UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 4,
-                PhoneNumber = "78654321",
+                ID = 5,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
-
             }, new Users {
                 AddressTable = new AddressTable
                 {
@@ -609,20 +620,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "adamapA1",
+                    PasswordHash = "adamapA1",
                     UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
                 ID = 5,
-                PhoneNumber = "87654321",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }
@@ -642,20 +655,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username1",
+                    PasswordHash = "adamapA1",
+                    UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 1,
-                PhoneNumber = "12345678",
+                ID = 5,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }, new Users {
@@ -665,20 +680,22 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                 AspNetUsers = new AspNetUsers
                 {
-                    Password = "adamapA1",
-                    UserName = "werok",
+                    PasswordHash = "adamapA1",
+                    UserName = "Username5",
+                   PhoneNumber = "87654321",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Repository.DbConnection.Gender
                 {
                     Gender1 = "Male",
                 },
-                ID = 1,
-                PhoneNumber = "87654321",
+                ID = 5,
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             }

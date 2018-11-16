@@ -43,7 +43,7 @@ namespace Repository
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
-                        Employee_Phone = offer.Employee_Phone,
+                        Employee_ID = offer.Employee_ID,
                         Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.ID == offer.Subcategory_ID).ID
                     };
 
