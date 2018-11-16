@@ -38,8 +38,6 @@ namespace JobPortal.Model
         IT,
         [EnumMember]
         Repairs,
-        /*[EnumMember]
-        Art,*/
         [EnumMember]
         Architecture,
         [EnumMember]

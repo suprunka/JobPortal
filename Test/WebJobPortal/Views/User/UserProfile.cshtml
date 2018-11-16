@@ -215,14 +215,20 @@
 <!--Frames for Column menu-->
 <!--User's services-->
 <div id="Sell" class="frameContentColumn">
+    <div>
+        @Html.Partial("Offers", Model.Services)
 
-    @Html.Partial("Offers", Model.Services)
 
-
-    <div class="col-sm-4">
-        <a href="~/ServiceOffer/Create><img style="width:70%;display: block;margin-left: auto; margin-right: auto; margin-top:60px;" src="~/Pictures/addBtn.png" /></a>
+        <div class="col-sm-4">
+            <a href="~/ServiceOffer/Create><img style="width:70%;display: block;margin-left: auto; margin-right: auto; margin-top:60px;" src="~/Pictures/addBtn.png" /></a>
+        </div>
     </div>
+  
+    <div>
+        @Html.ActionLink("Add service", "Add", "ServiceOffer", new { PhoneNumber = Model.User.PhoneNumber }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
+
+    </div>
 </div>
 
     <!--Buy page with table-->

@@ -31,6 +31,9 @@ namespace ServiceLibrary
         [OperationContract]
         IQueryable<Offer> GetAllOffers();
 
+ 
+
+
 
     }
 }

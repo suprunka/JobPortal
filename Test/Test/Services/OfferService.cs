@@ -44,7 +44,7 @@ namespace ServiceLibrary
                             Name = offer.Subcategory.ToString(),
                             Category = new Repository.DbConnection.Category
                             {
-                                Name = offer.Category.ToString(),
+                                Name = offer.Subcategory.ToString(),
                             },
                         },
                         Title = offer.Title,

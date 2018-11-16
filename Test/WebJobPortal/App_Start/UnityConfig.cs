@@ -16,6 +16,7 @@ namespace WebJobPortal
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
+            container.RegisterType<HomeController>(new InjectionConstructor());
             container.RegisterType<UserController>(new InjectionConstructor());
             container.RegisterType<LoginController>(new InjectionConstructor());
             container.RegisterType<ServiceOfferController>(new InjectionConstructor());

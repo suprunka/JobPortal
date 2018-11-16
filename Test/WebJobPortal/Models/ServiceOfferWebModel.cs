@@ -26,7 +26,7 @@ namespace WebJobPortal.Models
         [RegularExpression(" ^[a - zA - Z0 - 9ÆæØøÅå]{10,}$")]
         public string Description { get; set; }
 
-        public User Author { get; set; }
+        public string AuthorNumber { get; set; }
         public Category Category { get; set; }
         public SubCategory Subcategory { get; set; }
     }
