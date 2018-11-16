@@ -1,0 +1,459 @@
+﻿@model WebJobPortal.Models.UserIndexViewModel
+@using Microsoft.AspNet.Identity
+
+@using WebJobPortal.Models
+@using JobPortal.Model
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--meant only for user's view-->
+<div class="row">
+    <div class="col-md-4">
+        @{
+
+            if (Enum.GetValues(typeof(Gender)).Equals("Female"))
+            {
+                <img src="~/Pictures/female.png" alt="User photo" />
+            }
+            else
+            {
+                <img src="~/Pictures/male.png" alt="User photo" />
+            }
+        }
+    </div>
+    <!--description from DB-->
+    <div class="col-md-4">
+        <p>
+            <dd>
+                @Html.DisplayFor(model => model.User.FirstName)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.User.LastName)
+            </dd>
+        </p>
+        <p>Hello, I am Anna and I live in a house with 7 bedrooms, 3 bathrooms and a large garden with swimming pool. My family and I travel a lot and at that time we rent our house. I am looking for somebody responsible who would clean after our guests.</p>
+    </div>
+</div>
+
+<!--menu: Personal info, settings, sell and buy-->
+<!--Side menu-->
+<div class="column">
+    <!--different tabs in menu-->
+    <div class="tabColumn">
+        <!--Personal info set like default frame-->
+        <button class="frameLinks" onclick="openFrame(event, 'Calendar')" id="defaultOpen">My calendar</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Sell')">Sell</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Buy')">Buy</button>
+        <button class="frameLinks" onclick="openFrame(event, 'Personal Information')">Personal Information</button>
+        <!--Settings button, when clickes, reveals other options-->
+        <button class="dropdown-btn">Settings<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-container">
+            <!--Button privacy settings, reveals frame with other options/buttons. Code lower with other frames-->
+            <button class="framelinks" onclick="openFrame(event, 'PrivacySettings')">Privacy Settings</button>
+            <!--Second options is delete account btn, it directly shows popup window where user can delete it's account-->
+            <!-- Trigger/Open The Modal/popup window -->
+            <button id="delete-account-btn">Delete Account</button>
+            <!-- The Modal -->
+            <div id="delete-account-modal" class="deleteAccountModal">
+                <!-- Modal content -->
+                <div class="modalContent">
+                    <!--X button for closing-->
+                    <span class="close">&times;</span>
+                    <header id="modal-header">
+                        <h2>Delete Account</h2>
+                    </header>
+                    <div class="modalText">
+                        <p id="question">Are you sure you want to delete your account?</p>
+                        <p id="note">*NOTE: This cannot be undone.</p>
+                    </div>
+
+                    @Html.AntiForgeryToken()
+                    @Html.ActionLink("Delete", "Delete", "User", new { id= User.Identity.GetUserId() }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Read usenhr-->
+<div id="Personal Information" class="frameContentColumn">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.LastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <!--Date of birth here-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.Gender, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.AddressLine, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.AddressLine, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.Postcode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.CityName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.CityName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.User.Region, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <!--button to open hidden Edit page-->
+    <input type="submit" value="Edit" class="buttons" id="confirmBtn" onclick="openFrame(event,'Edit')" />
+</div>
+
+<!--Update user-->
+<div id="Edit" class="frameContentColumn">
+    @{ using (Html.BeginForm("Edit", "User", FormMethod.Post))
+
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div id="1" class="col-md-10">
+                    @Html.EditorFor(model => model.User.FirstName, "firstName", new { htmlAttributes = new { @class = "form -control", placeholder = "First name" } })
+                    @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div id="2" class="col-md-10">
+                    @Html.EditorFor(model => model.User.LastName, "lastName", new { htmlAttributes = new { @class = "form-control", placeholder = "Last name" } })
+                    @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!--Date of birth here-->
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("gender", new SelectList(Enum.GetValues(typeof(Gender))), "Select gender", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.User.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, "phoneNumber", new { htmlAttributes = new { @class = "form-control", placeholder = "Phone number" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.AddressLine, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User.AddressLine, "addressLine", new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+                    @Html.ValidationMessageFor(model => model.User.AddressLine, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User.Postcode, "postcode", new { htmlAttributes = new { @class = "form-control", placeholder = "Postcode" } })
+                    @Html.ValidationMessageFor(model => model.User.Postcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.CityName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div id="" class="col-md-10">
+                    @Html.EditorFor(model => model.User.CityName, "cityName", new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+                    @Html.ValidationMessageFor(model => model.User.CityName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("region", new SelectList(Enum.GetValues(typeof(Region))), "Select region", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.User.Region, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <!--submit button for Edit page-->
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Edit" class="buttons" />
+                </div>
+            </div>
+
+        }
+    }
+</div>
+
+
+<!--Frames for Column menu-->
+<!--User's services-->
+<div id="Sell" class="frameContentColumn">
+
+    @Html.Partial("Offers", Model.Services)
+
+
+    <div class="col-sm-4">
+        <a href="~/ServiceOffer/Create><img style="width:70%;display: block;margin-left: auto; margin-right: auto; margin-top:60px;" src="~/Pictures/addBtn.png" /></a>
+    </div>
+
+</div>
+
+<!--Buy page with table-->
+<div id="Buy" class="frameContentColumn">
+    user's bought services, table form form
+</div>
+
+<!--Privacy setting page-->
+<div id='PrivacySettings' class="frameContentColumn">
+    <!-- Trigger/Open The Modal  - buttons for opening window -->
+    <button id="change-email-btn" class="buttons">Change Email</button>
+    <button id="change-password-btn" class="buttons">Change Password</button>
+
+ 
+
+  
+
+    <!--delete account option, code in the beginning - button delete account-->
+    <div id='DeleteAccount' class="frameContentColumn">
+    </div>
+
+    <div id="Calendar" class="frameContentColumn">
+        calendar
+    </div>
+    <script>
+        /*function for opening frames (Personal info, sell,...)*/
+        function openFrame(evt, frameName) {
+            var i, frameContentColumn, tablinks;
+            frameContentColumn = document.getElementsByClassName("frameContentColumn");
+            for (i = 0; i < frameContentColumn.length; i++) {
+                frameContentColumn[i].style.display = "none";
+            }
+            frameLinks = document.getElementsByClassName("frameLinks");
+            for (i = 0; i < frameLinks.length; i++) {
+                frameLinks[i].className = frameLinks[i].className.replace(" active", "");
+            }
+            document.getElementById(frameName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content -
+         * This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+        /* modals - popup windows*/
+        // Get the modalS
+        var deleteAccountModal = document.getElementById('delete-account-modal');
+        var changeEmailModal = document.getElementById('change-email-modal');
+        var changePasswordModal = document.getElementById('change-password-modal');
+
+        // Get the button that opens the modal
+        var openDeleteAccountBtn = document.getElementById("delete-account-btn");
+        var openChangeEmailBtn = document.getElementById("change-email-btn");
+        var openChangePasswordBtn = document.getElementById("change-password-btn");
+
+        // Get the <span> element that closes the modal
+        var span3 = document.getElementsByClassName("close")[3];
+        var span1 = document.getElementsByClassName("close")[1];
+        var span2 = document.getElementsByClassName("close")[2];
+
+        // When the user clicks the button, open the modal
+        openChangeEmailBtn.onclick = function () {
+            changeEmailModal.style.display = "block";
+        }
+        openChangePasswordBtn.onclick = function () {
+            changePasswordModal.style.display = "block";
+        }
+        openDeleteAccountBtn.onclick = function () {
+            deleteAccountModal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span3.onclick = function () {
+            changeEmailModal.style.display = "none";
+        }
+        span2.onclick = function () {
+            changePasswordModal.style.display = "none";
+        }
+        span1.onclick = function () {
+            deleteAccountModal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == changeEmailModal) {
+                changeEmailModal.style.display = "none";
+            }
+            else if (event.target == changePasswordModal) {
+                changePasswordModal.style.display = "none";
+            }
+            else if (event.target == deleteAccountModal) {
+                deleteAccountModal.style.display = "none";
+            }
+        }
+    </script>
+
+    @*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div>
+            <h4>Change your account settings</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>Password:</dt>
+                <dd>
+                    [
+                    @if (Model.HasPassword)
+                    {
+                        @Html.ActionLink("Change your password", "ChangePassword")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Create", "SetPassword")
+                    }
+                    ]
+                </dd>
+                <dt>External Logins:</dt>
+                <dd>
+                    @Model.Logins.Count [
+                    @Html.ActionLink("Manage", "ManageLogins") ]
+                </dd>
+                @*
+                    Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                     See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                        for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                     Uncomment the following block after you have set up two-factor authentication
+    *@
+    @*
+                    <dt>Phone Number:</dt>
+                    <dd>
+                        @(Model.PhoneNumber ?? "None")
+                        @if (Model.PhoneNumber != null)
+                        {
+                            <br />
+                            <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                            using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                            }
+                        }
+                        else
+                        {
+                            <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                        }
+                    </dd>
+
+                <dt>Two-Factor Authentication:</dt>
+                <dd>
+                    <p>
+                        There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                        for details on setting up this ASP.NET application to support two-factor authentication.
+                    </p>
+                    @if (Model.TwoFactor)
+                        {
+                            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Enabled
+                                <input type="submit" value="Disable" class="btn btn-link" />
+                                </text>
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Disabled
+                                <input type="submit" value="Enable" class="btn btn-link" />
+                                </text>
+                            }
+                        }
+                </dd>
+            </dl>
+        </div>
+    *@

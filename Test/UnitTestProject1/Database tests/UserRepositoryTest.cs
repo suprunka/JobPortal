@@ -5,7 +5,7 @@ using Repository;
 using UnitTestProject1.Database_tests;
 using AddressTables = Repository.DbConnection.AddressTable;
 using Users = Repository.DbConnection.Users;
-using Loggings = Repository.DbConnection.Logging;
+using AspNetUsers = Repository.DbConnection.AspNetUsers;
 using Gender = Repository.DbConnection.Gender;
 using System;
 
@@ -26,20 +26,21 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Loggings
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username1",
+                    PasswordHash = "Adama1",
+                    UserName = "Username12",
+                    PhoneNumber = "12345670",
+                    Email = "adam2@gmail.com",
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             };
@@ -57,20 +58,21 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Loggings
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username21",
+                    PasswordHash = "Adama1",
+                    UserName = "Username13",
+                    PhoneNumber = "12345673",
+                    Email = "adam3@gmail.com",
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             };
@@ -87,21 +89,22 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Loggings
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username1",
+                    PasswordHash = "Adama1",
+                    UserName = "Username143",
+                    PhoneNumber = "12345643",
+                    Email = "adam33@gmail.com",
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adamUpdated",
-                AddressLine = "Updated",
+                AddressLine = "mickiewicza",
 
             };
             return userStub;
@@ -118,22 +121,22 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Loggings
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username100",
+                    PasswordHash = "Adama1",
+                    UserName = "Username14",
+                    PhoneNumber = "12345674",
+                    Email = "adam4@gmail.com",
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "35896452",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
-
             };
             return userStub;
 
@@ -148,20 +151,21 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Loggings
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username3",
+                    PasswordHash = "Adama1",
+                    UserName = "Username1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "15975384",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
 
@@ -297,7 +301,7 @@ namespace UnitTestProject1
                 try
                 {
                     unitOfWork.Users.Create(GetUser());
-                    bool result = unitOfWork.Users.Delete(t => t.PhoneNumber == GetUser().PhoneNumber);
+                    bool result = unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
                     Assert.IsTrue(result);
 
                 }
@@ -330,7 +334,7 @@ namespace UnitTestProject1
                 {
                     unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Create(ThirdUser());
-                    unitOfWork.Users.Delete(t => t.PhoneNumber == GetUser().PhoneNumber);
+                    unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
                     Assert.IsNotNull(context.AddressTable.First());
                 }
                 catch
@@ -359,7 +363,7 @@ namespace UnitTestProject1
                 try
                 {
                     unitOfWork.Users.Create(GetUser());
-                    unitOfWork.Users.Delete(t => t.PhoneNumber == GetUser().PhoneNumber);
+                    unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
                     Assert.AreEqual(0, context.AddressTable.Count());
                 }
                 catch
@@ -418,10 +422,10 @@ namespace UnitTestProject1
                 try
                 {
                     unitOfWork.Users.Create(GetUser());
-                    Users found = unitOfWork.Users.Get(t => t.PhoneNumber == "12345678");
-                    Assert.AreEqual("adam@gmail.com", found.Email);
-                    Assert.AreEqual("Male", found.Gender.Gender1);
-                    Assert.AreEqual("Username1", found.Logging.UserName);
+                    Users found = unitOfWork.Users.Get(t => t.AspNetUsers.PhoneNumber == "12345678");
+                    Assert.AreEqual("adam@gmail.com", found.AspNetUsers.Email);
+                        Assert.AreEqual("Male", found.Gender.Gender1);
+                    Assert.AreEqual("Username1", found.AspNetUsers.UserName);
                     Assert.AreEqual("Nordjylland", found.AddressTable.Region);
                 }
                 catch

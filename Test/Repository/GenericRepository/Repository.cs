@@ -97,9 +97,9 @@ namespace Repository
             }
         }
 
-        public virtual Logging Login(Logging obj)
+        public virtual AspNetUsers Login(AspNetUsers obj)
         {
-            return db.GetTable<Logging>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
+            return db.GetTable<AspNetUsers>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
            
         }
     }

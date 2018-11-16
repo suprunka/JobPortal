@@ -7,7 +7,7 @@ using UnitTestProject1.Database_tests;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Category = Repository.DbConnection.Category;
 using Gender = Repository.DbConnection.Gender;
-using Logging = Repository.DbConnection.Logging;
+using AspNetUsers = Repository.DbConnection.AspNetUsers;
 using ServiceOffer = Repository.DbConnection.ServiceOffer;
 using SubCategory = Repository.DbConnection.SubCategory;
 using Users = Repository.DbConnection.Users;
@@ -28,20 +28,22 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
+                    PasswordHash = "Adama1",
                     UserName = "Username1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "12345678",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             };
@@ -57,20 +59,22 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUsers
                 {
-                    Password = "Adama1",
-                    UserName = "Username100",
+                    PasswordHash = "Adama1",
+                    UserName = "Username1",
+                    PhoneNumber = "12345678",
+                    Email = "adam@gmail.com",
+
+
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
 
-                PhoneNumber = "35896452",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
 
             };
@@ -84,7 +88,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Title = "First",
             };
             return serviceOfferStub;
@@ -96,7 +100,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 40,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Title = "Second",
             };
             return serviceOfferStub;
@@ -108,7 +112,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Title = "Third",
             };
             return serviceOfferStub;
@@ -120,7 +124,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_Phone = "35896452",
+                Employee_ID = 12,
                 Title = "Third",
             };
             return serviceOfferStub;
@@ -133,7 +137,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 5,
                 RatePerHour = 100,
                 Description = "Updated",
-                Employee_Phone = "35896452",
+                Employee_ID = 12,
                 Title = "Updated",
             };
             return serviceOfferStub;
@@ -146,7 +150,7 @@ namespace UnitTestProject1
                 Subcategory_ID = -5,
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = 12,
                 Title = "Invalid",
             };
             return serviceOfferStub;
@@ -288,7 +292,7 @@ namespace UnitTestProject1
                     unitOfWork.Offers.Create(GetSecondServiceOffer());
                     unitOfWork.Offers.Create(GetThirdServiceOffer());
                     unitOfWork.Offers.Create(GetForthServiceOffer());
-                    var list = unitOfWork.Offers.List(t => t.Employee_Phone == "35896452");
+                    var list = unitOfWork.Offers.List(t => t.Users.AspNetUsers.PhoneNumber == "35896452");
                     Assert.AreEqual(1, list.Count());
                 }
                 catch
