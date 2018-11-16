@@ -50,7 +50,7 @@ namespace ServiceLibrary
                         Title = offer.Title,
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
-                        Employee_Phone = offer.Author.ID.ToString()
+                        Employee_ID = offer.Author.ID,
 
                     });
                     return true;
@@ -73,8 +73,8 @@ namespace ServiceLibrary
             var dbResult = _database.Get(x => x.ID == ID);
             if (dbResult != null)
             {
-                var employeePhone = dbResult.Employee_Phone;
-                User user = new UserService().FindUser(employeePhone);
+                var employeeID = dbResult.Employee_ID;
+                User user = new UserService().FindUserByID(employeeID);
                 offer = new Offer {
                     Id = ID,
                     Author = user,
@@ -153,8 +153,8 @@ namespace ServiceLibrary
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _database.GetAll())
             {
-                var employeePhone = item.Employee_Phone;
-                User user = new UserService().FindUser(employeePhone);
+                var employeePhone = item.Employee_ID;
+                User user = new UserService().FindUserByID(employeePhone);
                 resultToReturn.Add(new Offer
                 {
                     Id = item.ID,
