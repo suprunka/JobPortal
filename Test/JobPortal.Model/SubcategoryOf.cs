@@ -15,5 +15,6 @@ namespace JobPortal.Model
             Category = cat;
         }
         public Category Category { get; private set; }
+
     }
 }

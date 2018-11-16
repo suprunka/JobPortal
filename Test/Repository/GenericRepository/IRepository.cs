@@ -19,7 +19,7 @@ namespace Repository
 
         IQueryable<T> List(Expression<Func<T, bool>> predicate);
 
-        Logging Login(Logging account);
+        AspNetUsers Login(AspNetUsers account);
 
     }
 }

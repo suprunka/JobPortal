@@ -243,7 +243,7 @@
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebJobPortal\WebJobPortal.csproj">
+    <ProjectReference Include="..\WebJobPortal\WebJobPortal-old.csproj">
       <Project>{ab35267b-52c2-4aec-8766-a0f9e8e26aab}</Project>
       <Name>WebJobPortal</Name>
     </ProjectReference>

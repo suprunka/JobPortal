@@ -22,7 +22,7 @@ namespace Repository
 
         }
 
-        public override Users Create(Users obj)
+        public override Users Create(Users obj, string loggingId)
         {
             Users result = null;
             using (SqlConnection objConn = new SqlConnection(connection))
@@ -32,15 +32,18 @@ namespace Repository
                 {
                     try
                     {
-                        Logging logging = new Logging
+                        if (loggingId == null)
                         {
-                            UserName = obj.Logging.UserName,
-                            Password = obj.Logging.Password,
-                        };
+                            AspNetUsers logging = new AspNetUsers
+                            {
+                                UserName = obj.AspNetUsers.UserName,
+                                Password = obj.AspNetUsers.Password,
+                            };
 
-                        _context.GetTable<Logging>().InsertOnSubmit(logging);
-                        _context.SubmitChanges();
-
+                            _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
+                            _context.SubmitChanges();
+                            loggingId = logging.ID.ToString();
+                        }
 
                         var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                         if (addressExists == null)
@@ -59,11 +62,9 @@ namespace Repository
 
                         Users u = new Users
                         {
-                            PhoneNumber = obj.PhoneNumber,
                             FirstName = obj.FirstName,
                             LastName = obj.LastName,
-                            Email = obj.Email,
-                            Logging_ID = logging.ID,
+                            Logging_ID = loggingId,
                             Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
                                 t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
                             AddressLine = obj.AddressLine,
@@ -105,8 +106,8 @@ namespace Repository
 
 
 
-                    Logging foundLogging = _context.GetTable<Logging>().FirstOrDefault(t => t.ID.ToString() == found.Logging_ID.ToString());
-                    _context.GetTable<Logging>().DeleteOnSubmit(foundLogging);
+                    AspNetUsers foundLogging = _context.GetTable<AspNetUsers>().FirstOrDefault(t => t.ID.ToString() == found.Logging_ID.ToString());
+                    _context.GetTable<AspNetUsers>().DeleteOnSubmit(foundLogging);
 
 
 
@@ -154,7 +155,7 @@ namespace Repository
         {
             return base.List(predicate);
         }
-        public  Logging Login(Logging account)
+        public  AspNetUsers Login(AspNetUsers account)
         {
             return base.Login(account);
         }
@@ -177,8 +178,8 @@ namespace Repository
                         found.FirstName = obj.FirstName;
                         found.LastName = obj.LastName;
                         found.Email = obj.Email;
-                        found.Logging.UserName = obj.Logging.UserName;
-                        found.Logging.Password = obj.Logging.Password;
+                        found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
+                        found.AspNetUsers.Password = obj.AspNetUsers.Password;
                         found.AddressLine = obj.AddressLine;
                         found.Gender.Gender1 = obj.Gender.Gender1;
 

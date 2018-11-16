@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.ServiceModel;
 using JobPortal.Model;
+using Repository.DbConnection.Entity;
 
 namespace ServiceLibrary
 {
@@ -11,7 +12,7 @@ namespace ServiceLibrary
     public interface IUserService
     {
         [OperationContract]
-        bool CreateUser(User u);
+        bool CreateUser(User u, string loggingId);
 
         [OperationContract]
         User FindUser(string phoneNumber);
@@ -36,5 +37,8 @@ namespace ServiceLibrary
 
         [OperationContract]
         bool Login(string username, string password);
+
+        [OperationContract]
+        dmai0917_1067677Entities1 GetLoginEntity();
     }
 }
