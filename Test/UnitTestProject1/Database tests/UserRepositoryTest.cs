@@ -20,13 +20,13 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                City_ID  = new AddressTables
+                AddressTable = new AddressTables
                 {
                     Postcode = "9000",
                     City = "Aalborg",
                     Region = "Nordjylland"
-                }.ID,
-                Logging_ID = new AspNetUsers
+                },
+                AspNetUsers = new AspNetUsers
                 {
                     Id="1",
                     PasswordHash = "Adama1",
@@ -38,11 +38,11 @@ namespace UnitTestProject1
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
                     AccessFailedCount = 4,
-                }.Id,
-                Gender_ID = new Gender
+                },
+                Gender = new Gender
                 {
                     Gender1 = "Male",
-                }.ID,
+                },
                 PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
