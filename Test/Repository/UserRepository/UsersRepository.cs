@@ -36,6 +36,7 @@ namespace Repository
                         {
                             AspNetUsers logging = new AspNetUsers
                             {
+                                Id= obj.AspNetUsers.UserName,
                                 UserName = obj.AspNetUsers.UserName,
                                 PasswordHash = obj.AspNetUsers.PasswordHash,
                                 Email = obj.AspNetUsers.Email,

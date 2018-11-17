@@ -125,23 +125,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbConnection\Entity\LogContext.Context.cs">
+    <Compile Include="DbConnection\Entity\AspNetUser.cs">
+      <DependentUpon>Logging.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbConnection\Entity\Logging.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LogContext.Context.tt</DependentUpon>
+      <DependentUpon>Logging.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbConnection\Entity\LogContext.cs">
+    <Compile Include="DbConnection\Entity\Logging.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LogContext.tt</DependentUpon>
+      <DependentUpon>Logging.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbConnection\Entity\LogContext.Designer.cs">
+    <Compile Include="DbConnection\Entity\Logging.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LogContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DbConnection\Entity\LoggingTable.cs">
-      <DependentUpon>LogContext.tt</DependentUpon>
+      <DependentUpon>Logging.edmx</DependentUpon>
     </Compile>
     <Compile Include="DbConnection\JobPortalDatabase.designer.cs">
       <AutoGen>True</AutoGen>
@@ -167,12 +167,12 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="DbConnection\Entity\LogContext.edmx">
+    <EntityDeploy Include="DbConnection\Entity\Logging.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LogContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>Logging.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DbConnection\Entity\LogContext.edmx.diagram">
-      <DependentUpon>LogContext.edmx</DependentUpon>
+    <None Include="DbConnection\Entity\Logging.edmx.diagram">
+      <DependentUpon>Logging.edmx</DependentUpon>
     </None>
     <None Include="DbConnection\JobPortalDatabase.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -203,15 +203,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="DbConnection\Entity\LogContext.Context.tt">
+    <Content Include="DbConnection\Entity\Logging.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LogContext.edmx</DependentUpon>
-      <LastGenOutput>LogContext.Context.cs</LastGenOutput>
+      <DependentUpon>Logging.edmx</DependentUpon>
+      <LastGenOutput>Logging.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DbConnection\Entity\LogContext.tt">
+    <Content Include="DbConnection\Entity\Logging.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LogContext.edmx</DependentUpon>
-      <LastGenOutput>LogContext.cs</LastGenOutput>
+      <DependentUpon>Logging.edmx</DependentUpon>
+      <LastGenOutput>Logging.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

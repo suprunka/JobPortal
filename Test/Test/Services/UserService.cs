@@ -21,7 +21,7 @@ namespace ServiceLibrary
     public class UserService : IUserService
     {
         private readonly IUserRepository _database;
-        private readonly dmai0917_1067677Entities1 _logEntity;
+        private readonly JobPortalEntities _logEntity;
 
         public UserService(IUserRepository database)
         {
@@ -321,9 +321,9 @@ namespace ServiceLibrary
             }
             return false;
         }
-        public dmai0917_1067677Entities1 GetLoginEntity()
+        public JobPortalEntities GetLoginEntity()
         {
-            return dmai0917_1067677Entities1.Create();
+            return JobPortalEntities.Create();
         }
 
         public User FindUser(string phoneNumber)

@@ -20,25 +20,30 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTables
+                City_ID  = new AddressTables
                 {
                     Postcode = "9000",
                     City = "Aalborg",
                     Region = "Nordjylland"
-                },
-                AspNetUsers = new AspNetUsers
+                }.ID,
+                Logging_ID = new AspNetUsers
                 {
+                    Id="1",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
                     PhoneNumber = "12345670",
                     Email = "adam2@gmail.com",
-
-                },
-                Gender = new Gender
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
+                }.Id,
+                Gender_ID = new Gender
                 {
                     Gender1 = "Male",
-                },
-
+                }.ID,
+                PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
@@ -60,9 +65,10 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
+                    Id = "12",
                     PasswordHash = "Adama1",
                     UserName = "Username13",
-                    PhoneNumber = "12345673",
+                    PhoneNumber = "12345670",
                     Email = "adam3@gmail.com",
 
                 },
@@ -91,6 +97,7 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
+                    Id = "1",
                     PasswordHash = "Adama1",
                     UserName = "Username143",
                     PhoneNumber = "12345643",
@@ -101,7 +108,7 @@ namespace UnitTestProject1
                 {
                     Gender1 = "Male",
                 },
-
+                PayPalMail = "lal@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
@@ -123,6 +130,7 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
+                    Id = "1234",
                     PasswordHash = "Adama1",
                     UserName = "Username14",
                     PhoneNumber = "12345674",
@@ -153,6 +161,13 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
+
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled= false,
+                    AccessFailedCount = 4,
+
                     PasswordHash = "Adama1",
                     UserName = "Username1",
                     PhoneNumber = "12345678",
@@ -183,10 +198,10 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(context))
             {
                 var result = unitOfWork.Users.Create(GetUser());
-                Assert.IsNotNull(context.Users.FirstOrDefault(t => t.PhoneNumber == "12345678"));
+                Assert.IsNotNull(context.Users.FirstOrDefault(t => t.FirstName == "Adam"));
                 context.Users.DeleteAllOnSubmit(context.Users);
-                context.Logging.DeleteAllOnSubmit(context.Logging);
-                context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
+                context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
+                context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
                 context.SubmitChanges();
             }
 
@@ -203,7 +218,7 @@ namespace UnitTestProject1
                 {
                     unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Create(ThirdUser());
-                    int numberOfAddressRecords = context.AddressTable.Count();
+                    int numberOfAddressRecords = context.AddressTables.Count();
                     Assert.AreEqual(1, numberOfAddressRecords);
 
                 }
@@ -217,8 +232,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -239,21 +254,21 @@ namespace UnitTestProject1
                 catch (DuplicateKeyException)
                 {
                     int numberOfUsers = context.Users.Count();
-                    int numberOfAddresses = context.AddressTable.Count();
-                    int numberOfLoggings = context.Logging.Count();
+                    int numberOfAddresses = context.AddressTables.Count();
+                    int numberOfAspNetUserss = context.AspNetUsers.Count();
                     Assert.AreEqual(1, numberOfUsers);
                     Assert.AreEqual(1, numberOfAddresses);
-                    Assert.AreEqual(1, numberOfLoggings);
+                    Assert.AreEqual(1, numberOfAspNetUserss);
                 }
             }
 
             var secondContext = new DbTestDataContext();
              using (var unitOfWork = new UnitOfWork(secondContext))
              {
-                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.ServiceOffers.DeleteAllOnSubmit(secondContext.ServiceOffers);
                  secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                 secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                 secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                 secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                 secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                  secondContext.SubmitChanges();
              }
         }
@@ -281,10 +296,10 @@ namespace UnitTestProject1
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
-                secondContext.ServiceOffer.DeleteAllOnSubmit(secondContext.ServiceOffer);
+                secondContext.ServiceOffers.DeleteAllOnSubmit(secondContext.ServiceOffers);
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -317,8 +332,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -335,7 +350,7 @@ namespace UnitTestProject1
                     unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Create(ThirdUser());
                     unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
-                    Assert.IsNotNull(context.AddressTable.First());
+                    Assert.IsNotNull(context.AddressTables.First());
                 }
                 catch
                 {
@@ -347,8 +362,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -364,7 +379,7 @@ namespace UnitTestProject1
                 {
                     unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
-                    Assert.AreEqual(0, context.AddressTable.Count());
+                    Assert.AreEqual(0, context.AddressTables.Count());
                 }
                 catch
                 {
@@ -376,8 +391,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -406,8 +421,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -438,8 +453,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -469,8 +484,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -501,8 +516,8 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.Logging.DeleteAllOnSubmit(secondContext.Logging);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }

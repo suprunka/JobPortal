@@ -289,24 +289,26 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    Logging = new Logging
+                    AspNetUsers = new AspNetUsers
                     {
-                        Password = "Adama1",
+                        PasswordHash = "Adama1",
                         UserName = "Username1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+
+
                     },
                     Gender = new Gender
                     {
                         Gender1 = "Male",
                     },
 
-                    PhoneNumber = "12345678",
                     FirstName = "Adam",
                     LastName = "Adam",
-                    Email = "adam@gmail.com",
                     AddressLine = "mickiewicza",
 
                 },
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Description = "Descriptionlong",
                 Title = "Title",
                 RatePerHour = 20,
@@ -345,24 +347,26 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    Logging = new Logging
+                                       AspNetUsers = new AspNetUsers
                     {
-                        Password = "Adama1",
+                        PasswordHash = "Adama1",
                         UserName = "Username1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+
+
                     },
                     Gender = new Gender
                     {
                         Gender1 = "Male",
                     },
 
-                    PhoneNumber = "12345678",
                     FirstName = "Adam",
                     LastName = "Adam",
-                    Email = "adam@gmail.com",
                     AddressLine = "mickiewicza",
 
                 },
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Description = "Descriptionlong",
                 Title = "Title",
                 RatePerHour = 20,
@@ -388,24 +392,26 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    Logging = new Logging
+                                       AspNetUsers = new AspNetUsers
                     {
-                        Password = "Adama1",
+                        PasswordHash = "Adama1",
                         UserName = "Username1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+
+
                     },
                     Gender = new Gender
                     {
                         Gender1 = "Male",
                     },
 
-                    PhoneNumber = "12345678",
                     FirstName = "Adam",
                     LastName = "Adam",
-                    Email = "adam@gmail.com",
                     AddressLine = "mickiewicza",
 
                 },
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Description = "Descriptionlong",
                 Title = "Title",
                 RatePerHour = 20,
@@ -447,24 +453,26 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    Logging = new Logging
+                    AspNetUsers = new AspNetUsers
                     {
-                        Password = "Adama1",
+                        PasswordHash = "Adama1",
                         UserName = "Username1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+
+
                     },
                     Gender = new Gender
                     {
                         Gender1 = "Male",
                     },
 
-                    PhoneNumber = "12345678",
                     FirstName = "Adam",
                     LastName = "Adam",
-                    Email = "adam@gmail.com",
                     AddressLine = "mickiewicza",
 
                 },
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Description = "Descriptonlong",
                 Title = "Title",
                 RatePerHour = 20,
@@ -506,24 +514,26 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    Logging = new Logging
+                    AspNetUsers = new AspNetUsers
                     {
-                        Password = "Adama1",
+                        PasswordHash = "Adama1",
                         UserName = "Username1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+
+
                     },
                     Gender = new Gender
                     {
                         Gender1 = "Male",
                     },
 
-                    PhoneNumber = "12345678",
                     FirstName = "Adam",
                     LastName = "Adam",
-                    Email = "adam@gmail.com",
                     AddressLine = "mickiewicza",
 
                 },
-                Employee_Phone = "12345678",
+                Employee_ID = 1,
                 Description = "Descriptionlong",
                 Title = "Title",
                 RatePerHour = 20,
