@@ -33,36 +33,45 @@ namespace UnitTestProject1.Database_tests
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
+    partial void InsertWorkingDates(WorkingDates instance);
+    partial void UpdateWorkingDates(WorkingDates instance);
+    partial void DeleteWorkingDates(WorkingDates instance);
     partial void InsertAccountState(AccountState instance);
     partial void UpdateAccountState(AccountState instance);
     partial void DeleteAccountState(AccountState instance);
     partial void InsertAddressTable(AddressTable instance);
     partial void UpdateAddressTable(AddressTable instance);
     partial void DeleteAddressTable(AddressTable instance);
+    partial void InsertAspNetRoles(AspNetRoles instance);
+    partial void UpdateAspNetRoles(AspNetRoles instance);
+    partial void DeleteAspNetRoles(AspNetRoles instance);
+    partial void InsertAspNetUserClaims(AspNetUserClaims instance);
+    partial void UpdateAspNetUserClaims(AspNetUserClaims instance);
+    partial void DeleteAspNetUserClaims(AspNetUserClaims instance);
+    partial void InsertAspNetUserLogins(AspNetUserLogins instance);
+    partial void UpdateAspNetUserLogins(AspNetUserLogins instance);
+    partial void DeleteAspNetUserLogins(AspNetUserLogins instance);
+    partial void InsertAspNetUserRoles(AspNetUserRoles instance);
+    partial void UpdateAspNetUserRoles(AspNetUserRoles instance);
+    partial void DeleteAspNetUserRoles(AspNetUserRoles instance);
+    partial void InsertAspNetUsers(AspNetUsers instance);
+    partial void UpdateAspNetUsers(AspNetUsers instance);
+    partial void DeleteAspNetUsers(AspNetUsers instance);
+    partial void InsertBookedDates(BookedDates instance);
+    partial void UpdateBookedDates(BookedDates instance);
+    partial void DeleteBookedDates(BookedDates instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
-    partial void InsertDates(Dates instance);
-    partial void UpdateDates(Dates instance);
-    partial void DeleteDates(Dates instance);
     partial void InsertGender(Gender instance);
     partial void UpdateGender(Gender instance);
     partial void DeleteGender(Gender instance);
-    partial void InsertLogging(Logging instance);
-    partial void UpdateLogging(Logging instance);
-    partial void DeleteLogging(Logging instance);
     partial void InsertOrderStatus(OrderStatus instance);
     partial void UpdateOrderStatus(OrderStatus instance);
     partial void DeleteOrderStatus(OrderStatus instance);
     partial void InsertOrderTable(OrderTable instance);
     partial void UpdateOrderTable(OrderTable instance);
     partial void DeleteOrderTable(OrderTable instance);
-    partial void InsertPayment(Payment instance);
-    partial void UpdatePayment(Payment instance);
-    partial void DeletePayment(Payment instance);
-    partial void InsertPaymentType(PaymentType instance);
-    partial void UpdatePaymentType(PaymentType instance);
-    partial void DeletePaymentType(PaymentType instance);
     partial void InsertRate(Rate instance);
     partial void UpdateRate(Rate instance);
     partial void DeleteRate(Rate instance);
@@ -121,11 +130,11 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<WorkingArea> WorkingArea
+		public System.Data.Linq.Table<WorkingDates> WorkingDates
 		{
 			get
 			{
-				return this.GetTable<WorkingArea>();
+				return this.GetTable<WorkingDates>();
 			}
 		}
 		
@@ -145,11 +154,51 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<AvailableDates> AvailableDates
+		public System.Data.Linq.Table<AspNetRoles> AspNetRoles
 		{
 			get
 			{
-				return this.GetTable<AvailableDates>();
+				return this.GetTable<AspNetRoles>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AspNetUserClaims> AspNetUserClaims
+		{
+			get
+			{
+				return this.GetTable<AspNetUserClaims>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AspNetUserLogins> AspNetUserLogins
+		{
+			get
+			{
+				return this.GetTable<AspNetUserLogins>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AspNetUserRoles> AspNetUserRoles
+		{
+			get
+			{
+				return this.GetTable<AspNetUserRoles>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AspNetUsers> AspNetUsers
+		{
+			get
+			{
+				return this.GetTable<AspNetUsers>();
+			}
+		}
+		
+		public System.Data.Linq.Table<BookedDates> BookedDates
+		{
+			get
+			{
+				return this.GetTable<BookedDates>();
 			}
 		}
 		
@@ -161,27 +210,11 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<Dates> Dates
-		{
-			get
-			{
-				return this.GetTable<Dates>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Gender> Gender
 		{
 			get
 			{
 				return this.GetTable<Gender>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Logging> Logging
-		{
-			get
-			{
-				return this.GetTable<Logging>();
 			}
 		}
 		
@@ -198,22 +231,6 @@ namespace UnitTestProject1.Database_tests
 			get
 			{
 				return this.GetTable<OrderTable>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Payment> Payment
-		{
-			get
-			{
-				return this.GetTable<Payment>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PaymentType> PaymentType
-		{
-			get
-			{
-				return this.GetTable<PaymentType>();
 			}
 		}
 		
@@ -274,9 +291,9 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _ID;
 		
-		private string _PhoneNumber;
+		private int _UserID;
 		
-		private System.Nullable<int> _AccountState_ID;
+		private int _AccountState_ID;
 		
 		private string _LatestActivity;
 		
@@ -294,9 +311,9 @@ namespace UnitTestProject1.Database_tests
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnAccountState_IDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnAccountState_IDChanging(int value);
     partial void OnAccountState_IDChanged();
     partial void OnLatestActivityChanging(string value);
     partial void OnLatestActivityChanged();
@@ -312,7 +329,7 @@ namespace UnitTestProject1.Database_tests
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -332,32 +349,32 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-		public string PhoneNumber
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		public int UserID
 		{
 			get
 			{
-				return this._PhoneNumber;
+				return this._UserID;
 			}
 			set
 			{
-				if ((this._PhoneNumber != value))
+				if ((this._UserID != value))
 				{
 					if (this._Users.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnPhoneNumberChanging(value);
+					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountState_ID", DbType="Int")]
-		public System.Nullable<int> AccountState_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountState_ID", DbType="Int NOT NULL")]
+		public int AccountState_ID
 		{
 			get
 			{
@@ -433,7 +450,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountState_Account", Storage="_AccountState", ThisKey="AccountState_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountState_Account", Storage="_AccountState", ThisKey="AccountState_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public AccountState AccountState
 		{
 			get
@@ -460,14 +477,14 @@ namespace UnitTestProject1.Database_tests
 					}
 					else
 					{
-						this._AccountState_ID = default(Nullable<int>);
+						this._AccountState_ID = default(int);
 					}
 					this.SendPropertyChanged("AccountState");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Account", Storage="_Users", ThisKey="PhoneNumber", OtherKey="PhoneNumber", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Account", Storage="_Users", ThisKey="UserID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Users Users
 		{
 			get
@@ -490,11 +507,11 @@ namespace UnitTestProject1.Database_tests
 					if ((value != null))
 					{
 						value.Account.Add(this);
-						this._PhoneNumber = value.PhoneNumber;
+						this._UserID = value.ID;
 					}
 					else
 					{
-						this._PhoneNumber = default(string);
+						this._UserID = default(int);
 					}
 					this.SendPropertyChanged("Users");
 				}
@@ -534,47 +551,201 @@ namespace UnitTestProject1.Database_tests
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkingArea")]
-	public partial class WorkingArea
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkingDates")]
+	public partial class WorkingDates : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private string _Employee_Phone;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _City_ID;
+		private int _ID;
 		
-		public WorkingArea()
+		private string _NameOfDay;
+		
+		private System.TimeSpan _HourFrom;
+		
+		private System.TimeSpan _HourTo;
+		
+		private int _ServiceOffer_ID;
+		
+		private EntityRef<ServiceOffer> _ServiceOffer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameOfDayChanging(string value);
+    partial void OnNameOfDayChanged();
+    partial void OnHourFromChanging(System.TimeSpan value);
+    partial void OnHourFromChanged();
+    partial void OnHourToChanging(System.TimeSpan value);
+    partial void OnHourToChanged();
+    partial void OnServiceOffer_IDChanging(int value);
+    partial void OnServiceOffer_IDChanged();
+    #endregion
+		
+		public WorkingDates()
 		{
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_Phone", DbType="VarChar(8)")]
-		public string Employee_Phone
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this._Employee_Phone;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._Employee_Phone != value))
+				if ((this._ID != value))
 				{
-					this._Employee_Phone = value;
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
-		public int City_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameOfDay", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string NameOfDay
 		{
 			get
 			{
-				return this._City_ID;
+				return this._NameOfDay;
 			}
 			set
 			{
-				if ((this._City_ID != value))
+				if ((this._NameOfDay != value))
 				{
-					this._City_ID = value;
+					this.OnNameOfDayChanging(value);
+					this.SendPropertyChanging();
+					this._NameOfDay = value;
+					this.SendPropertyChanged("NameOfDay");
+					this.OnNameOfDayChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
+		public System.TimeSpan HourFrom
+		{
+			get
+			{
+				return this._HourFrom;
+			}
+			set
+			{
+				if ((this._HourFrom != value))
+				{
+					this.OnHourFromChanging(value);
+					this.SendPropertyChanging();
+					this._HourFrom = value;
+					this.SendPropertyChanged("HourFrom");
+					this.OnHourFromChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
+		public System.TimeSpan HourTo
+		{
+			get
+			{
+				return this._HourTo;
+			}
+			set
+			{
+				if ((this._HourTo != value))
+				{
+					this.OnHourToChanging(value);
+					this.SendPropertyChanging();
+					this._HourTo = value;
+					this.SendPropertyChanged("HourTo");
+					this.OnHourToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
+		public int ServiceOffer_ID
+		{
+			get
+			{
+				return this._ServiceOffer_ID;
+			}
+			set
+			{
+				if ((this._ServiceOffer_ID != value))
+				{
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnServiceOffer_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ServiceOffer_ID = value;
+					this.SendPropertyChanged("ServiceOffer_ID");
+					this.OnServiceOffer_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_WorkingDates", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public ServiceOffer ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer.Entity;
+			}
+			set
+			{
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceOffer.Entity = null;
+						previousValue.WorkingDates.Remove(this);
+					}
+					this._ServiceOffer.Entity = value;
+					if ((value != null))
+					{
+						value.WorkingDates.Add(this);
+						this._ServiceOffer_ID = value.ID;
+					}
+					else
+					{
+						this._ServiceOffer_ID = default(int);
+					}
+					this.SendPropertyChanged("ServiceOffer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -855,21 +1026,1093 @@ namespace UnitTestProject1.Database_tests
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AvailableDates")]
-	public partial class AvailableDates
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetRoles")]
+	public partial class AspNetRoles : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _Name;
+		
+		private EntitySet<AspNetUserRoles> _AspNetUserRoles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public AspNetRoles()
+		{
+			this._AspNetUserRoles = new EntitySet<AspNetUserRoles>(new Action<AspNetUserRoles>(this.attach_AspNetUserRoles), new Action<AspNetUserRoles>(this.detach_AspNetUserRoles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRoles_AspNetUserRoles", Storage="_AspNetUserRoles", ThisKey="Id", OtherKey="RoleId")]
+		public EntitySet<AspNetUserRoles> AspNetUserRoles
+		{
+			get
+			{
+				return this._AspNetUserRoles;
+			}
+			set
+			{
+				this._AspNetUserRoles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AspNetUserRoles(AspNetUserRoles entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetRoles = this;
+		}
+		
+		private void detach_AspNetUserRoles(AspNetUserRoles entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetRoles = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUserClaims")]
+	public partial class AspNetUserClaims : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _UserId;
+		
+		private string _ClaimType;
+		
+		private string _ClaimValue;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(string value);
+    partial void OnUserIdChanged();
+    partial void OnClaimTypeChanging(string value);
+    partial void OnClaimTypeChanged();
+    partial void OnClaimValueChanging(string value);
+    partial void OnClaimValueChanged();
+    #endregion
+		
+		public AspNetUserClaims()
+		{
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaimType", DbType="NVarChar(MAX)")]
+		public string ClaimType
+		{
+			get
+			{
+				return this._ClaimType;
+			}
+			set
+			{
+				if ((this._ClaimType != value))
+				{
+					this.OnClaimTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ClaimType = value;
+					this.SendPropertyChanged("ClaimType");
+					this.OnClaimTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaimValue", DbType="NVarChar(MAX)")]
+		public string ClaimValue
+		{
+			get
+			{
+				return this._ClaimValue;
+			}
+			set
+			{
+				if ((this._ClaimValue != value))
+				{
+					this.OnClaimValueChanging(value);
+					this.SendPropertyChanging();
+					this._ClaimValue = value;
+					this.SendPropertyChanged("ClaimValue");
+					this.OnClaimValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserClaims", Storage="_AspNetUsers", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.AspNetUserClaims.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.AspNetUserClaims.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUserLogins")]
+	public partial class AspNetUserLogins : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _LoginProvider;
+		
+		private string _ProviderKey;
+		
+		private string _UserId;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLoginProviderChanging(string value);
+    partial void OnLoginProviderChanged();
+    partial void OnProviderKeyChanging(string value);
+    partial void OnProviderKeyChanged();
+    partial void OnUserIdChanging(string value);
+    partial void OnUserIdChanged();
+    #endregion
+		
+		public AspNetUserLogins()
+		{
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginProvider", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string LoginProvider
+		{
+			get
+			{
+				return this._LoginProvider;
+			}
+			set
+			{
+				if ((this._LoginProvider != value))
+				{
+					this.OnLoginProviderChanging(value);
+					this.SendPropertyChanging();
+					this._LoginProvider = value;
+					this.SendPropertyChanged("LoginProvider");
+					this.OnLoginProviderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProviderKey", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ProviderKey
+		{
+			get
+			{
+				return this._ProviderKey;
+			}
+			set
+			{
+				if ((this._ProviderKey != value))
+				{
+					this.OnProviderKeyChanging(value);
+					this.SendPropertyChanging();
+					this._ProviderKey = value;
+					this.SendPropertyChanged("ProviderKey");
+					this.OnProviderKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserLogins", Storage="_AspNetUsers", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.AspNetUserLogins.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.AspNetUserLogins.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUserRoles")]
+	public partial class AspNetUserRoles : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _UserId;
+		
+		private string _RoleId;
+		
+		private EntityRef<AspNetRoles> _AspNetRoles;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIdChanging(string value);
+    partial void OnUserIdChanged();
+    partial void OnRoleIdChanging(string value);
+    partial void OnRoleIdChanged();
+    #endregion
+		
+		public AspNetUserRoles()
+		{
+			this._AspNetRoles = default(EntityRef<AspNetRoles>);
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string RoleId
+		{
+			get
+			{
+				return this._RoleId;
+			}
+			set
+			{
+				if ((this._RoleId != value))
+				{
+					if (this._AspNetRoles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoleId = value;
+					this.SendPropertyChanged("RoleId");
+					this.OnRoleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRoles_AspNetUserRoles", Storage="_AspNetRoles", ThisKey="RoleId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetRoles AspNetRoles
+		{
+			get
+			{
+				return this._AspNetRoles.Entity;
+			}
+			set
+			{
+				AspNetRoles previousValue = this._AspNetRoles.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetRoles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetRoles.Entity = null;
+						previousValue.AspNetUserRoles.Remove(this);
+					}
+					this._AspNetRoles.Entity = value;
+					if ((value != null))
+					{
+						value.AspNetUserRoles.Add(this);
+						this._RoleId = value.Id;
+					}
+					else
+					{
+						this._RoleId = default(string);
+					}
+					this.SendPropertyChanged("AspNetRoles");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserRoles", Storage="_AspNetUsers", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.AspNetUserRoles.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.AspNetUserRoles.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUsers")]
+	public partial class AspNetUsers : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _Email;
+		
+		private bool _EmailConfirmed;
+		
+		private string _PasswordHash;
+		
+		private string _SecurityStamp;
+		
+		private string _PhoneNumber;
+		
+		private bool _PhoneNumberConfirmed;
+		
+		private bool _TwoFactorEnabled;
+		
+		private System.Nullable<System.DateTime> _LockoutEndDateUtc;
+		
+		private bool _LockoutEnabled;
+		
+		private int _AccessFailedCount;
+		
+		private string _UserName;
+		
+		private EntitySet<AspNetUserClaims> _AspNetUserClaims;
+		
+		private EntitySet<AspNetUserLogins> _AspNetUserLogins;
+		
+		private EntitySet<AspNetUserRoles> _AspNetUserRoles;
+		
+		private EntitySet<Users> _Users;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnEmailConfirmedChanging(bool value);
+    partial void OnEmailConfirmedChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
+    partial void OnSecurityStampChanging(string value);
+    partial void OnSecurityStampChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnPhoneNumberConfirmedChanging(bool value);
+    partial void OnPhoneNumberConfirmedChanged();
+    partial void OnTwoFactorEnabledChanging(bool value);
+    partial void OnTwoFactorEnabledChanged();
+    partial void OnLockoutEndDateUtcChanging(System.Nullable<System.DateTime> value);
+    partial void OnLockoutEndDateUtcChanged();
+    partial void OnLockoutEnabledChanging(bool value);
+    partial void OnLockoutEnabledChanged();
+    partial void OnAccessFailedCountChanging(int value);
+    partial void OnAccessFailedCountChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    #endregion
+		
+		public AspNetUsers()
+		{
+			this._AspNetUserClaims = new EntitySet<AspNetUserClaims>(new Action<AspNetUserClaims>(this.attach_AspNetUserClaims), new Action<AspNetUserClaims>(this.detach_AspNetUserClaims));
+			this._AspNetUserLogins = new EntitySet<AspNetUserLogins>(new Action<AspNetUserLogins>(this.attach_AspNetUserLogins), new Action<AspNetUserLogins>(this.detach_AspNetUserLogins));
+			this._AspNetUserRoles = new EntitySet<AspNetUserRoles>(new Action<AspNetUserRoles>(this.attach_AspNetUserRoles), new Action<AspNetUserRoles>(this.detach_AspNetUserRoles));
+			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailConfirmed", DbType="Bit NOT NULL")]
+		public bool EmailConfirmed
+		{
+			get
+			{
+				return this._EmailConfirmed;
+			}
+			set
+			{
+				if ((this._EmailConfirmed != value))
+				{
+					this.OnEmailConfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._EmailConfirmed = value;
+					this.SendPropertyChanged("EmailConfirmed");
+					this.OnEmailConfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(MAX)")]
+		public string PasswordHash
+		{
+			get
+			{
+				return this._PasswordHash;
+			}
+			set
+			{
+				if ((this._PasswordHash != value))
+				{
+					this.OnPasswordHashChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecurityStamp", DbType="NVarChar(MAX)")]
+		public string SecurityStamp
+		{
+			get
+			{
+				return this._SecurityStamp;
+			}
+			set
+			{
+				if ((this._SecurityStamp != value))
+				{
+					this.OnSecurityStampChanging(value);
+					this.SendPropertyChanging();
+					this._SecurityStamp = value;
+					this.SendPropertyChanged("SecurityStamp");
+					this.OnSecurityStampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(MAX)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumberConfirmed", DbType="Bit NOT NULL")]
+		public bool PhoneNumberConfirmed
+		{
+			get
+			{
+				return this._PhoneNumberConfirmed;
+			}
+			set
+			{
+				if ((this._PhoneNumberConfirmed != value))
+				{
+					this.OnPhoneNumberConfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumberConfirmed = value;
+					this.SendPropertyChanged("PhoneNumberConfirmed");
+					this.OnPhoneNumberConfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwoFactorEnabled", DbType="Bit NOT NULL")]
+		public bool TwoFactorEnabled
+		{
+			get
+			{
+				return this._TwoFactorEnabled;
+			}
+			set
+			{
+				if ((this._TwoFactorEnabled != value))
+				{
+					this.OnTwoFactorEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._TwoFactorEnabled = value;
+					this.SendPropertyChanged("TwoFactorEnabled");
+					this.OnTwoFactorEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEndDateUtc", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LockoutEndDateUtc
+		{
+			get
+			{
+				return this._LockoutEndDateUtc;
+			}
+			set
+			{
+				if ((this._LockoutEndDateUtc != value))
+				{
+					this.OnLockoutEndDateUtcChanging(value);
+					this.SendPropertyChanging();
+					this._LockoutEndDateUtc = value;
+					this.SendPropertyChanged("LockoutEndDateUtc");
+					this.OnLockoutEndDateUtcChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEnabled", DbType="Bit NOT NULL")]
+		public bool LockoutEnabled
+		{
+			get
+			{
+				return this._LockoutEnabled;
+			}
+			set
+			{
+				if ((this._LockoutEnabled != value))
+				{
+					this.OnLockoutEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._LockoutEnabled = value;
+					this.SendPropertyChanged("LockoutEnabled");
+					this.OnLockoutEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessFailedCount", DbType="Int NOT NULL")]
+		public int AccessFailedCount
+		{
+			get
+			{
+				return this._AccessFailedCount;
+			}
+			set
+			{
+				if ((this._AccessFailedCount != value))
+				{
+					this.OnAccessFailedCountChanging(value);
+					this.SendPropertyChanging();
+					this._AccessFailedCount = value;
+					this.SendPropertyChanged("AccessFailedCount");
+					this.OnAccessFailedCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserClaims", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<AspNetUserClaims> AspNetUserClaims
+		{
+			get
+			{
+				return this._AspNetUserClaims;
+			}
+			set
+			{
+				this._AspNetUserClaims.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserLogins", Storage="_AspNetUserLogins", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<AspNetUserLogins> AspNetUserLogins
+		{
+			get
+			{
+				return this._AspNetUserLogins;
+			}
+			set
+			{
+				this._AspNetUserLogins.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserRoles", Storage="_AspNetUserRoles", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<AspNetUserRoles> AspNetUserRoles
+		{
+			get
+			{
+				return this._AspNetUserRoles;
+			}
+			set
+			{
+				this._AspNetUserRoles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_Users", Storage="_Users", ThisKey="Id", OtherKey="Logging_ID")]
+		public EntitySet<Users> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AspNetUserClaims(AspNetUserClaims entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_AspNetUserClaims(AspNetUserClaims entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+		
+		private void attach_AspNetUserLogins(AspNetUserLogins entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_AspNetUserLogins(AspNetUserLogins entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+		
+		private void attach_AspNetUserRoles(AspNetUserRoles entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_AspNetUserRoles(AspNetUserRoles entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+		
+		private void attach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BookedDates")]
+	public partial class BookedDates : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private System.Nullable<int> _Saleline_ID;
+		private int _NumberOfHours;
 		
-		private int _ServiceOffer_ID;
+		private System.DateTime _BookedDate;
 		
-		public AvailableDates()
+		private System.TimeSpan _HourFrom;
+		
+		private System.TimeSpan _HourTo;
+		
+		private EntitySet<Saleline> _Saleline;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNumberOfHoursChanging(int value);
+    partial void OnNumberOfHoursChanged();
+    partial void OnBookedDateChanging(System.DateTime value);
+    partial void OnBookedDateChanged();
+    partial void OnHourFromChanging(System.TimeSpan value);
+    partial void OnHourFromChanged();
+    partial void OnHourToChanging(System.TimeSpan value);
+    partial void OnHourToChanged();
+    #endregion
+		
+		public BookedDates()
 		{
+			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -880,41 +2123,138 @@ namespace UnitTestProject1.Database_tests
 			{
 				if ((this._ID != value))
 				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
 					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Saleline_ID", DbType="Int")]
-		public System.Nullable<int> Saleline_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfHours", DbType="Int NOT NULL")]
+		public int NumberOfHours
 		{
 			get
 			{
-				return this._Saleline_ID;
+				return this._NumberOfHours;
 			}
 			set
 			{
-				if ((this._Saleline_ID != value))
+				if ((this._NumberOfHours != value))
 				{
-					this._Saleline_ID = value;
+					this.OnNumberOfHoursChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfHours = value;
+					this.SendPropertyChanged("NumberOfHours");
+					this.OnNumberOfHoursChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
-		public int ServiceOffer_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookedDate", DbType="Date NOT NULL")]
+		public System.DateTime BookedDate
 		{
 			get
 			{
-				return this._ServiceOffer_ID;
+				return this._BookedDate;
 			}
 			set
 			{
-				if ((this._ServiceOffer_ID != value))
+				if ((this._BookedDate != value))
 				{
-					this._ServiceOffer_ID = value;
+					this.OnBookedDateChanging(value);
+					this.SendPropertyChanging();
+					this._BookedDate = value;
+					this.SendPropertyChanged("BookedDate");
+					this.OnBookedDateChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
+		public System.TimeSpan HourFrom
+		{
+			get
+			{
+				return this._HourFrom;
+			}
+			set
+			{
+				if ((this._HourFrom != value))
+				{
+					this.OnHourFromChanging(value);
+					this.SendPropertyChanging();
+					this._HourFrom = value;
+					this.SendPropertyChanged("HourFrom");
+					this.OnHourFromChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
+		public System.TimeSpan HourTo
+		{
+			get
+			{
+				return this._HourTo;
+			}
+			set
+			{
+				if ((this._HourTo != value))
+				{
+					this.OnHourToChanging(value);
+					this.SendPropertyChanging();
+					this._HourTo = value;
+					this.SendPropertyChanged("HourTo");
+					this.OnHourToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookedDates_Saleline", Storage="_Saleline", ThisKey="ID", OtherKey="BookedDates_ID")]
+		public EntitySet<Saleline> Saleline
+		{
+			get
+			{
+				return this._Saleline;
+			}
+			set
+			{
+				this._Saleline.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Saleline(Saleline entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookedDates = this;
+		}
+		
+		private void detach_Saleline(Saleline entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookedDates = null;
 		}
 	}
 	
@@ -1032,140 +2372,6 @@ namespace UnitTestProject1.Database_tests
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Dates")]
-	public partial class Dates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.DateTime _Date;
-		
-		private System.TimeSpan _HourFrom;
-		
-		private System.TimeSpan _HourTo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnHourFromChanging(System.TimeSpan value);
-    partial void OnHourFromChanged();
-    partial void OnHourToChanging(System.TimeSpan value);
-    partial void OnHourToChanged();
-    #endregion
-		
-		public Dates()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
-		public System.TimeSpan HourFrom
-		{
-			get
-			{
-				return this._HourFrom;
-			}
-			set
-			{
-				if ((this._HourFrom != value))
-				{
-					this.OnHourFromChanging(value);
-					this.SendPropertyChanging();
-					this._HourFrom = value;
-					this.SendPropertyChanged("HourFrom");
-					this.OnHourFromChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
-		public System.TimeSpan HourTo
-		{
-			get
-			{
-				return this._HourTo;
-			}
-			set
-			{
-				if ((this._HourTo != value))
-				{
-					this.OnHourToChanging(value);
-					this.SendPropertyChanging();
-					this._HourTo = value;
-					this.SendPropertyChanged("HourTo");
-					this.OnHourToChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gender")]
 	public partial class Gender : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1277,144 +2483,6 @@ namespace UnitTestProject1.Database_tests
 		{
 			this.SendPropertyChanging();
 			entity.Gender = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Logging")]
-	public partial class Logging : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _UserName;
-		
-		private string _Password;
-		
-		private EntitySet<Users> _Users;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    #endregion
-		
-		public Logging()
-		{
-			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Logging_Users", Storage="_Users", ThisKey="ID", OtherKey="Logging_ID")]
-		public EntitySet<Users> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Users(Users entity)
-		{
-			this.SendPropertyChanging();
-			entity.Logging = this;
-		}
-		
-		private void detach_Users(Users entity)
-		{
-			this.SendPropertyChanging();
-			entity.Logging = null;
 		}
 	}
 	
@@ -1544,7 +2612,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _OrderStatus_ID;
 		
-		private int _Payment_ID;
+		private decimal _TotalPrice;
 		
 		private System.Nullable<System.DateTime> _Date;
 		
@@ -1553,8 +2621,6 @@ namespace UnitTestProject1.Database_tests
 		private EntityRef<Account> _Account;
 		
 		private EntityRef<OrderStatus> _OrderStatus;
-		
-		private EntityRef<Payment> _Payment;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1566,8 +2632,8 @@ namespace UnitTestProject1.Database_tests
     partial void OnAccount_IDChanged();
     partial void OnOrderStatus_IDChanging(int value);
     partial void OnOrderStatus_IDChanged();
-    partial void OnPayment_IDChanging(int value);
-    partial void OnPayment_IDChanged();
+    partial void OnTotalPriceChanging(decimal value);
+    partial void OnTotalPriceChanged();
     partial void OnDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDateChanged();
     #endregion
@@ -1577,11 +2643,10 @@ namespace UnitTestProject1.Database_tests
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
 			this._Account = default(EntityRef<Account>);
 			this._OrderStatus = default(EntityRef<OrderStatus>);
-			this._Payment = default(EntityRef<Payment>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -1649,31 +2714,27 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Payment_ID", DbType="Int NOT NULL")]
-		public int Payment_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
+		public decimal TotalPrice
 		{
 			get
 			{
-				return this._Payment_ID;
+				return this._TotalPrice;
 			}
 			set
 			{
-				if ((this._Payment_ID != value))
+				if ((this._TotalPrice != value))
 				{
-					if (this._Payment.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPayment_IDChanging(value);
+					this.OnTotalPriceChanging(value);
 					this.SendPropertyChanging();
-					this._Payment_ID = value;
-					this.SendPropertyChanged("Payment_ID");
-					this.OnPayment_IDChanged();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime2")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date")]
 		public System.Nullable<System.DateTime> Date
 		{
 			get
@@ -1774,40 +2835,6 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payment_OrderTable", Storage="_Payment", ThisKey="Payment_ID", OtherKey="ID", IsForeignKey=true)]
-		public Payment Payment
-		{
-			get
-			{
-				return this._Payment.Entity;
-			}
-			set
-			{
-				Payment previousValue = this._Payment.Entity;
-				if (((previousValue != value) 
-							|| (this._Payment.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Payment.Entity = null;
-						previousValue.OrderTable.Remove(this);
-					}
-					this._Payment.Entity = value;
-					if ((value != null))
-					{
-						value.OrderTable.Add(this);
-						this._Payment_ID = value.ID;
-					}
-					else
-					{
-						this._Payment_ID = default(int);
-					}
-					this.SendPropertyChanged("Payment");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1838,299 +2865,6 @@ namespace UnitTestProject1.Database_tests
 		{
 			this.SendPropertyChanging();
 			entity.OrderTable = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Payment")]
-	public partial class Payment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private decimal _TotalPrice;
-		
-		private System.Nullable<int> _PaymentType;
-		
-		private EntitySet<OrderTable> _OrderTable;
-		
-		private EntityRef<PaymentType> _PaymentType1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnTotalPriceChanging(decimal value);
-    partial void OnTotalPriceChanged();
-    partial void OnPaymentTypeChanging(System.Nullable<int> value);
-    partial void OnPaymentTypeChanged();
-    #endregion
-		
-		public Payment()
-		{
-			this._OrderTable = new EntitySet<OrderTable>(new Action<OrderTable>(this.attach_OrderTable), new Action<OrderTable>(this.detach_OrderTable));
-			this._PaymentType1 = default(EntityRef<PaymentType>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
-		public decimal TotalPrice
-		{
-			get
-			{
-				return this._TotalPrice;
-			}
-			set
-			{
-				if ((this._TotalPrice != value))
-				{
-					this.OnTotalPriceChanging(value);
-					this.SendPropertyChanging();
-					this._TotalPrice = value;
-					this.SendPropertyChanged("TotalPrice");
-					this.OnTotalPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentType", DbType="Int")]
-		public System.Nullable<int> PaymentType
-		{
-			get
-			{
-				return this._PaymentType;
-			}
-			set
-			{
-				if ((this._PaymentType != value))
-				{
-					if (this._PaymentType1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPaymentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentType = value;
-					this.SendPropertyChanged("PaymentType");
-					this.OnPaymentTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payment_OrderTable", Storage="_OrderTable", ThisKey="ID", OtherKey="Payment_ID")]
-		public EntitySet<OrderTable> OrderTable
-		{
-			get
-			{
-				return this._OrderTable;
-			}
-			set
-			{
-				this._OrderTable.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PaymentType_Payment", Storage="_PaymentType1", ThisKey="PaymentType", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public PaymentType PaymentType1
-		{
-			get
-			{
-				return this._PaymentType1.Entity;
-			}
-			set
-			{
-				PaymentType previousValue = this._PaymentType1.Entity;
-				if (((previousValue != value) 
-							|| (this._PaymentType1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PaymentType1.Entity = null;
-						previousValue.Payment.Remove(this);
-					}
-					this._PaymentType1.Entity = value;
-					if ((value != null))
-					{
-						value.Payment.Add(this);
-						this._PaymentType = value.ID;
-					}
-					else
-					{
-						this._PaymentType = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PaymentType1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_OrderTable(OrderTable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Payment = this;
-		}
-		
-		private void detach_OrderTable(OrderTable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Payment = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PaymentType")]
-	public partial class PaymentType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _PaymentType1;
-		
-		private EntitySet<Payment> _Payment;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnPaymentType1Changing(string value);
-    partial void OnPaymentType1Changed();
-    #endregion
-		
-		public PaymentType()
-		{
-			this._Payment = new EntitySet<Payment>(new Action<Payment>(this.attach_Payment), new Action<Payment>(this.detach_Payment));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="PaymentType", Storage="_PaymentType1", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string PaymentType1
-		{
-			get
-			{
-				return this._PaymentType1;
-			}
-			set
-			{
-				if ((this._PaymentType1 != value))
-				{
-					this.OnPaymentType1Changing(value);
-					this.SendPropertyChanging();
-					this._PaymentType1 = value;
-					this.SendPropertyChanged("PaymentType1");
-					this.OnPaymentType1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PaymentType_Payment", Storage="_Payment", ThisKey="ID", OtherKey="PaymentType")]
-		public EntitySet<Payment> Payment
-		{
-			get
-			{
-				return this._Payment;
-			}
-			set
-			{
-				this._Payment.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Payment(Payment entity)
-		{
-			this.SendPropertyChanging();
-			entity.PaymentType1 = this;
-		}
-		
-		private void detach_Payment(Payment entity)
-		{
-			this.SendPropertyChanging();
-			entity.PaymentType1 = null;
 		}
 	}
 	
@@ -2256,7 +2990,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _ID;
 		
-		private string _Customer_PhoneNumber;
+		private int _Customer_ID;
 		
 		private string _Comment;
 		
@@ -2276,8 +3010,8 @@ namespace UnitTestProject1.Database_tests
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnCustomer_PhoneNumberChanging(string value);
-    partial void OnCustomer_PhoneNumberChanged();
+    partial void OnCustomer_IDChanging(int value);
+    partial void OnCustomer_IDChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     partial void OnRate_IDChanging(System.Nullable<int> value);
@@ -2294,7 +3028,7 @@ namespace UnitTestProject1.Database_tests
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -2314,26 +3048,26 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_PhoneNumber", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-		public string Customer_PhoneNumber
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_ID", DbType="Int NOT NULL")]
+		public int Customer_ID
 		{
 			get
 			{
-				return this._Customer_PhoneNumber;
+				return this._Customer_ID;
 			}
 			set
 			{
-				if ((this._Customer_PhoneNumber != value))
+				if ((this._Customer_ID != value))
 				{
 					if (this._Users.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCustomer_PhoneNumberChanging(value);
+					this.OnCustomer_IDChanging(value);
 					this.SendPropertyChanging();
-					this._Customer_PhoneNumber = value;
-					this.SendPropertyChanged("Customer_PhoneNumber");
-					this.OnCustomer_PhoneNumberChanged();
+					this._Customer_ID = value;
+					this.SendPropertyChanged("Customer_ID");
+					this.OnCustomer_IDChanged();
 				}
 			}
 		}
@@ -2474,7 +3208,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Review", Storage="_Users", ThisKey="Customer_PhoneNumber", OtherKey="PhoneNumber", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Review", Storage="_Users", ThisKey="Customer_ID", OtherKey="ID", IsForeignKey=true)]
 		public Users Users
 		{
 			get
@@ -2497,11 +3231,11 @@ namespace UnitTestProject1.Database_tests
 					if ((value != null))
 					{
 						value.Review.Add(this);
-						this._Customer_PhoneNumber = value.PhoneNumber;
+						this._Customer_ID = value.ID;
 					}
 					else
 					{
-						this._Customer_PhoneNumber = default(string);
+						this._Customer_ID = default(int);
 					}
 					this.SendPropertyChanged("Users");
 				}
@@ -2537,11 +3271,13 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _ID;
 		
-		private int _Quantity;
-		
 		private int _ServiceOffer_ID;
 		
 		private int _Order_ID;
+		
+		private int _BookedDates_ID;
+		
+		private EntityRef<BookedDates> _BookedDates;
 		
 		private EntityRef<OrderTable> _OrderTable;
 		
@@ -2553,22 +3289,23 @@ namespace UnitTestProject1.Database_tests
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnQuantityChanging(int value);
-    partial void OnQuantityChanged();
     partial void OnServiceOffer_IDChanging(int value);
     partial void OnServiceOffer_IDChanged();
     partial void OnOrder_IDChanging(int value);
     partial void OnOrder_IDChanged();
+    partial void OnBookedDates_IDChanging(int value);
+    partial void OnBookedDates_IDChanged();
     #endregion
 		
 		public Saleline()
 		{
+			this._BookedDates = default(EntityRef<BookedDates>);
 			this._OrderTable = default(EntityRef<OrderTable>);
 			this._ServiceOffer = default(EntityRef<ServiceOffer>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -2584,26 +3321,6 @@ namespace UnitTestProject1.Database_tests
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
-		public int Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this.OnQuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
 				}
 			}
 		}
@@ -2652,6 +3369,64 @@ namespace UnitTestProject1.Database_tests
 					this._Order_ID = value;
 					this.SendPropertyChanged("Order_ID");
 					this.OnOrder_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookedDates_ID", DbType="Int NOT NULL")]
+		public int BookedDates_ID
+		{
+			get
+			{
+				return this._BookedDates_ID;
+			}
+			set
+			{
+				if ((this._BookedDates_ID != value))
+				{
+					if (this._BookedDates.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBookedDates_IDChanging(value);
+					this.SendPropertyChanging();
+					this._BookedDates_ID = value;
+					this.SendPropertyChanged("BookedDates_ID");
+					this.OnBookedDates_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookedDates_Saleline", Storage="_BookedDates", ThisKey="BookedDates_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public BookedDates BookedDates
+		{
+			get
+			{
+				return this._BookedDates.Entity;
+			}
+			set
+			{
+				BookedDates previousValue = this._BookedDates.Entity;
+				if (((previousValue != value) 
+							|| (this._BookedDates.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookedDates.Entity = null;
+						previousValue.Saleline.Remove(this);
+					}
+					this._BookedDates.Entity = value;
+					if ((value != null))
+					{
+						value.Saleline.Add(this);
+						this._BookedDates_ID = value.ID;
+					}
+					else
+					{
+						this._BookedDates_ID = default(int);
+					}
+					this.SendPropertyChanged("BookedDates");
 				}
 			}
 		}
@@ -2759,17 +3534,17 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _Subcategory_ID;
 		
-		private string _Employee_Phone;
+		private int _Employee_ID;
 		
 		private string _Title;
+		
+		private EntitySet<WorkingDates> _WorkingDates;
 		
 		private EntitySet<Review> _Review;
 		
 		private EntitySet<Saleline> _Saleline;
 		
 		private EntityRef<SubCategory> _SubCategory;
-		
-		private EntityRef<Users> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2783,18 +3558,18 @@ namespace UnitTestProject1.Database_tests
     partial void OnDescriptionChanged();
     partial void OnSubcategory_IDChanging(int value);
     partial void OnSubcategory_IDChanged();
-    partial void OnEmployee_PhoneChanging(string value);
-    partial void OnEmployee_PhoneChanged();
+    partial void OnEmployee_IDChanging(int value);
+    partial void OnEmployee_IDChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
     #endregion
 		
 		public ServiceOffer()
 		{
+			this._WorkingDates = new EntitySet<WorkingDates>(new Action<WorkingDates>(this.attach_WorkingDates), new Action<WorkingDates>(this.detach_WorkingDates));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
 			this._SubCategory = default(EntityRef<SubCategory>);
-			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
 		
@@ -2882,26 +3657,22 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_Phone", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-		public string Employee_Phone
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_ID", DbType="Int NOT NULL")]
+		public int Employee_ID
 		{
 			get
 			{
-				return this._Employee_Phone;
+				return this._Employee_ID;
 			}
 			set
 			{
-				if ((this._Employee_Phone != value))
+				if ((this._Employee_ID != value))
 				{
-					if (this._Users.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployee_PhoneChanging(value);
+					this.OnEmployee_IDChanging(value);
 					this.SendPropertyChanging();
-					this._Employee_Phone = value;
-					this.SendPropertyChanged("Employee_Phone");
-					this.OnEmployee_PhoneChanged();
+					this._Employee_ID = value;
+					this.SendPropertyChanged("Employee_ID");
+					this.OnEmployee_IDChanged();
 				}
 			}
 		}
@@ -2923,6 +3694,19 @@ namespace UnitTestProject1.Database_tests
 					this.SendPropertyChanged("Title");
 					this.OnTitleChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_WorkingDates", Storage="_WorkingDates", ThisKey="ID", OtherKey="ServiceOffer_ID")]
+		public EntitySet<WorkingDates> WorkingDates
+		{
+			get
+			{
+				return this._WorkingDates;
+			}
+			set
+			{
+				this._WorkingDates.Assign(value);
 			}
 		}
 		
@@ -2986,40 +3770,6 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_ServiceOffer", Storage="_Users", ThisKey="Employee_Phone", OtherKey="PhoneNumber", IsForeignKey=true)]
-		public Users Users
-		{
-			get
-			{
-				return this._Users.Entity;
-			}
-			set
-			{
-				Users previousValue = this._Users.Entity;
-				if (((previousValue != value) 
-							|| (this._Users.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Users.Entity = null;
-						previousValue.ServiceOffer.Remove(this);
-					}
-					this._Users.Entity = value;
-					if ((value != null))
-					{
-						value.ServiceOffer.Add(this);
-						this._Employee_Phone = value.PhoneNumber;
-					}
-					else
-					{
-						this._Employee_Phone = default(string);
-					}
-					this.SendPropertyChanged("Users");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3038,6 +3788,18 @@ namespace UnitTestProject1.Database_tests
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_WorkingDates(WorkingDates entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_WorkingDates(WorkingDates entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
 		}
 		
 		private void attach_Review(Review entity)
@@ -3252,17 +4014,15 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _ID;
 		
-		private string _PhoneNumber;
-		
 		private string _FirstName;
 		
 		private string _LastName;
 		
-		private string _Email;
-		
-		private int _Logging_ID;
+		private string _Logging_ID;
 		
 		private string _AddressLine;
+		
+		private string _PayPalMail;
 		
 		private int _City_ID;
 		
@@ -3272,11 +4032,9 @@ namespace UnitTestProject1.Database_tests
 		
 		private EntitySet<Review> _Review;
 		
-		private EntitySet<ServiceOffer> _ServiceOffer;
-		
 		private EntityRef<Gender> _Gender;
 		
-		private EntityRef<Logging> _Logging;
+		private EntityRef<AspNetUsers> _AspNetUsers;
 		
 		private EntityRef<AddressTable> _AddressTable;
 		
@@ -3286,18 +4044,16 @@ namespace UnitTestProject1.Database_tests
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
     partial void OnLastNameChanging(string value);
     partial void OnLastNameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnLogging_IDChanging(int value);
+    partial void OnLogging_IDChanging(string value);
     partial void OnLogging_IDChanged();
     partial void OnAddressLineChanging(string value);
     partial void OnAddressLineChanged();
+    partial void OnPayPalMailChanging(string value);
+    partial void OnPayPalMailChanged();
     partial void OnCity_IDChanging(int value);
     partial void OnCity_IDChanged();
     partial void OnGender_IDChanging(int value);
@@ -3308,9 +4064,8 @@ namespace UnitTestProject1.Database_tests
 		{
 			this._Account = new EntitySet<Account>(new Action<Account>(this.attach_Account), new Action<Account>(this.detach_Account));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
-			this._ServiceOffer = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffer), new Action<ServiceOffer>(this.detach_ServiceOffer));
 			this._Gender = default(EntityRef<Gender>);
-			this._Logging = default(EntityRef<Logging>);
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
 			this._AddressTable = default(EntityRef<AddressTable>);
 			OnCreated();
 		}
@@ -3331,26 +4086,6 @@ namespace UnitTestProject1.Database_tests
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
 				}
 			}
 		}
@@ -3395,28 +4130,8 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logging_ID", DbType="Int NOT NULL")]
-		public int Logging_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logging_ID", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string Logging_ID
 		{
 			get
 			{
@@ -3426,7 +4141,7 @@ namespace UnitTestProject1.Database_tests
 			{
 				if ((this._Logging_ID != value))
 				{
-					if (this._Logging.HasLoadedOrAssignedValue)
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -3455,6 +4170,26 @@ namespace UnitTestProject1.Database_tests
 					this._AddressLine = value;
 					this.SendPropertyChanged("AddressLine");
 					this.OnAddressLineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayPalMail", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string PayPalMail
+		{
+			get
+			{
+				return this._PayPalMail;
+			}
+			set
+			{
+				if ((this._PayPalMail != value))
+				{
+					this.OnPayPalMailChanging(value);
+					this.SendPropertyChanging();
+					this._PayPalMail = value;
+					this.SendPropertyChanged("PayPalMail");
+					this.OnPayPalMailChanged();
 				}
 			}
 		}
@@ -3507,7 +4242,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Account", Storage="_Account", ThisKey="PhoneNumber", OtherKey="PhoneNumber")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Account", Storage="_Account", ThisKey="ID", OtherKey="UserID")]
 		public EntitySet<Account> Account
 		{
 			get
@@ -3520,7 +4255,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Review", Storage="_Review", ThisKey="PhoneNumber", OtherKey="Customer_PhoneNumber")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Review", Storage="_Review", ThisKey="ID", OtherKey="Customer_ID")]
 		public EntitySet<Review> Review
 		{
 			get
@@ -3530,19 +4265,6 @@ namespace UnitTestProject1.Database_tests
 			set
 			{
 				this._Review.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_ServiceOffer", Storage="_ServiceOffer", ThisKey="PhoneNumber", OtherKey="Employee_Phone")]
-		public EntitySet<ServiceOffer> ServiceOffer
-		{
-			get
-			{
-				return this._ServiceOffer;
-			}
-			set
-			{
-				this._ServiceOffer.Assign(value);
 			}
 		}
 		
@@ -3580,41 +4302,41 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Logging_Users", Storage="_Logging", ThisKey="Logging_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Logging Logging
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_Users", Storage="_AspNetUsers", ThisKey="Logging_ID", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUsers AspNetUsers
 		{
 			get
 			{
-				return this._Logging.Entity;
+				return this._AspNetUsers.Entity;
 			}
 			set
 			{
-				Logging previousValue = this._Logging.Entity;
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
 				if (((previousValue != value) 
-							|| (this._Logging.HasLoadedOrAssignedValue == false)))
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Logging.Entity = null;
+						this._AspNetUsers.Entity = null;
 						previousValue.Users.Remove(this);
 					}
-					this._Logging.Entity = value;
+					this._AspNetUsers.Entity = value;
 					if ((value != null))
 					{
 						value.Users.Add(this);
-						this._Logging_ID = value.ID;
+						this._Logging_ID = value.Id;
 					}
 					else
 					{
-						this._Logging_ID = default(int);
+						this._Logging_ID = default(string);
 					}
-					this.SendPropertyChanged("Logging");
+					this.SendPropertyChanged("AspNetUsers");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true)]
 		public AddressTable AddressTable
 		{
 			get
@@ -3687,18 +4409,6 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		private void detach_Review(Review entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-		
-		private void attach_ServiceOffer(ServiceOffer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_ServiceOffer(ServiceOffer entity)
 		{
 			this.SendPropertyChanging();
 			entity.Users = null;

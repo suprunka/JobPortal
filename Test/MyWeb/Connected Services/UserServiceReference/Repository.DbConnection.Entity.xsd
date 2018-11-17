@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Repository.DbConnection.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Repository.DbConnection.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" />
+  <xs:complexType name="dmai0917_1067677Entities1">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" base="q1:IdentityDbContextOfApplicationUsermgZUxk6B">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="dmai0917_1067677Entities1" nillable="true" type="tns:dmai0917_1067677Entities1" />
+</xs:schema>

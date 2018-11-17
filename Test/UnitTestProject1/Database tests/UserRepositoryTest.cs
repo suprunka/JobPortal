@@ -183,15 +183,15 @@ namespace UnitTestProject1
             using (var unitOfWork = new UnitOfWork(context))
             {
                 var result = unitOfWork.Users.Create(GetUser());
-                Assert.IsNotNull(context.Users.FirstOrDefault(t => t.PhoneNumber == "12345678"));
+                Assert.IsNotNull(context.Users.FirstOrDefault(t => t.AspNetUsers.PhoneNumber == "12345678"));
                 context.Users.DeleteAllOnSubmit(context.Users);
-                context.Logging.DeleteAllOnSubmit(context.Logging);
+                context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                 context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                 context.SubmitChanges();
             }
 
         }
-
+        
         //While creating two users with same address only one address row is created [OK]
         [TestMethod]
         public void Creates_One_Address_Record_If_Two_Users_Share_The_Same_Address()

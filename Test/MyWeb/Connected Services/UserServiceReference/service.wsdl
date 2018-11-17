@@ -442,6 +442,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_GetLoginEntity_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_GetLoginEntity_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="UserServiceTcpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -476,6 +514,9 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Repository.DbConnection.Entity" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data.Entity" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_CreateUser_InputMessage">
@@ -532,6 +573,12 @@
   <wsdl:message name="IUserService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetLoginEntity_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoginEntity" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetLoginEntity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoginEntityResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateUser" message="tns:IUserService_CreateUser_InputMessage" />
@@ -568,6 +615,10 @@
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginResponse" message="tns:IUserService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginEntity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetLoginEntity" message="tns:IUserService_GetLoginEntity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetLoginEntityResponse" message="tns:IUserService_GetLoginEntity_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UserServiceHttpEndpoint" type="tns:IUserService">
@@ -672,6 +723,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetLoginEntity">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetLoginEntity" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetLoginEntity_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetLoginEntity_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="UserServiceTcpEndpoint" type="tns:IUserService">
     <wsp:PolicyReference URI="#UserServiceTcpEndpoint_policy" />
@@ -757,6 +819,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetLoginEntity">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetLoginEntity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="UserService">
     <wsdl:port name="UserServiceHttpEndpoint" binding="tns:UserServiceHttpEndpoint">
@@ -764,7 +835,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:8080/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-GQ6AKJT\locac</Upn>
+          <Upn>JAKUB\jakub</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MyWeb.Mapping;
 using WebJobPortal.Models;
 
 namespace WebJobPortal.Controllers
@@ -289,10 +290,30 @@ namespace WebJobPortal.Controllers
                 OtherLogins = otherLogins
             });
         }
+
+        [HttpGet]
         public ActionResult SetUserProperties()
         {
-
           return  View("SetUserProperties", new SetPropertiesViewModel());
+        }
+
+
+        [HttpPost]
+        public ActionResult SetUserProperties(SetPropertiesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = _proxy.CreateUser(UserMapping.MapSetPropertiesViewModelToUser(model), User.Identity.GetUserId());
+            if (result)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         //
