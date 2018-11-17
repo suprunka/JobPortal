@@ -39,6 +39,6 @@ namespace ServiceLibrary
         bool Login(string username, string password);
 
         [OperationContract]
-        dmai0917_1067677Entities1 GetLoginEntity();
+        JobPortalEntities GetLoginEntity();
     }
 }

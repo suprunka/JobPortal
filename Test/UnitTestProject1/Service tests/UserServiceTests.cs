@@ -21,7 +21,7 @@ namespace UnitTestProject1.Service_tests
         #region
 
         //Test if during creation of user database is hit only once. 
-        [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
+        [DataRow("12345678", "Ådam", "Ådåm", "am@gmail.com", "AdamM", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
         [TestMethod]
         public void Create_UserService_Creation_Of_User_Hit_Database_Once(string phoneNumber, string firstName,
         string lastName, string email, string userName, string password, string addressLine,
