@@ -13,7 +13,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password=Password1!";
+        private readonly string connection = "Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortalTest;Integrated Security=True";
 
 
 

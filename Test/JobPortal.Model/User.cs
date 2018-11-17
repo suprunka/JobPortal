@@ -68,6 +68,7 @@ namespace JobPortal.Model
 
         [DataMember]
         public virtual Gender Gender { get; set; }
-        
+        [DataMember]
+        public virtual String PayPalMail { get; set; }
     }
 }

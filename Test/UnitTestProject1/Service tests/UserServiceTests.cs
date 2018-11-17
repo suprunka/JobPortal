@@ -307,7 +307,7 @@ namespace UnitTestProject1.Service_tests
 
             });
             var subject = new UserService(databaseMock.Object);
-            var foundUser = subject.FindUser("12345678");
+            var foundUser = subject.FindUserByID(1);
             databaseMock.Verify(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once());
 
         }
@@ -343,8 +343,8 @@ namespace UnitTestProject1.Service_tests
 
             });
             var subject = new UserService(databaseMock.Object);
-            var foundUser = subject.FindUser("12345678");
-            Assert.AreEqual(1, foundUser.ID);
+            var foundUser = subject.FindUserByID(1);
+            Assert.AreEqual("Username1", foundUser.UserName);
 
         }
 

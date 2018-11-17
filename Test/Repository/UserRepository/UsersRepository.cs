@@ -15,7 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password=Password1!";
+        private readonly string connection = "Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortalTest;Integrated Security=True";
       public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
@@ -41,6 +41,12 @@ namespace Repository
                                 PasswordHash = obj.AspNetUsers.PasswordHash,
                                 Email = obj.AspNetUsers.Email,
                                 PhoneNumber = obj.AspNetUsers.PhoneNumber,
+
+                                EmailConfirmed = false,
+                                PhoneNumberConfirmed = false,
+                                TwoFactorEnabled = false,
+                                LockoutEnabled = false,
+                                AccessFailedCount = 4,
                             };
 
                             _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
@@ -65,6 +71,7 @@ namespace Repository
 
                         Users u = new Users
                         {
+                            PayPalMail= obj.PayPalMail,
                             FirstName = obj.FirstName,
                             LastName = obj.LastName,
                             Logging_ID = loggingId,

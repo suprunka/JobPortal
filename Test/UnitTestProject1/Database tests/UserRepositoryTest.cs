@@ -28,7 +28,7 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
-                    Id="1",
+                    Id= "Username12",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
                     PhoneNumber = "12345670",
@@ -57,26 +57,31 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
+                
                 AddressTable = new AddressTables
                 {
                     Postcode = "8000",
                     City = "Aarhus",
-                    Region = "Midtjylland"
+                    Region = "Midjylland"
                 },
                 AspNetUsers = new AspNetUsers
                 {
-                    Id = "12",
+                    Id= "Username12",
                     PasswordHash = "Adama1",
-                    UserName = "Username13",
+                    UserName = "Username12",
                     PhoneNumber = "12345670",
-                    Email = "adam3@gmail.com",
-
+                    Email = "adam2@gmail.com",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
-
+                PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
@@ -97,19 +102,23 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
-                    Id = "1",
+                    Id = "Username12",
                     PasswordHash = "Adama1",
-                    UserName = "Username143",
-                    PhoneNumber = "12345643",
-                    Email = "adam33@gmail.com",
-
+                    UserName = "Username12",
+                    PhoneNumber = "12345670",
+                    Email = "adam2@gmail.com",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
                 PayPalMail = "lal@wp.pl",
-                FirstName = "Adam",
+                FirstName = "Updated",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
 
@@ -122,30 +131,36 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTables
-                {
-                    Postcode = "8000",
-                    City = "Aarhus",
-                    Region = "Midtjylland"
-                },
-                AspNetUsers = new AspNetUsers
-                {
-                    Id = "1234",
-                    PasswordHash = "Adama1",
-                    UserName = "Username14",
-                    PhoneNumber = "12345674",
-                    Email = "adam4@gmail.com",
 
-                },
-                Gender = new Gender
-                {
-                    Gender1 = "Male",
-                },
+                     AddressTable = new AddressTables
+                     {
+                         Postcode = "9000",
+                         City = "Aalborg",
+                         Region = "Nordjylland"
+                     },
+                     AspNetUsers = new AspNetUsers
+                     {
+                         Id = "Username123",
+                         PasswordHash = "Adama1",
+                         UserName = "Username12",
+                         PhoneNumber = "12345670",
+                         Email = "adam2@gmail.com",
+                         EmailConfirmed = false,
+                         PhoneNumberConfirmed = false,
+                         TwoFactorEnabled = false,
+                         LockoutEnabled = false,
+                         AccessFailedCount = 4,
+                     },
+                     Gender = new Gender
+                     {
+                         Gender1 = "Male",
+                     },
+                     PayPalMail = "mama@wp.pl",
+                     FirstName = "Adam",
+                     LastName = "Adam",
+                     AddressLine = "mickiewicza",
 
-                FirstName = "Adam",
-                LastName = "Adam",
-                AddressLine = "mickiewicza",
-            };
+                 };
             return userStub;
 
         }
@@ -161,28 +176,25 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUsers
                 {
-
+                    Id = "UsernameThird",
+                    PasswordHash = "Adama1",
+                    UserName = "UsernameThird",
+                    PhoneNumber = "09098999",
+                    Email = "UsernameThird@gmail.com",
                     EmailConfirmed = false,
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
-                    LockoutEnabled= false,
+                    LockoutEnabled = false,
                     AccessFailedCount = 4,
-
-                    PasswordHash = "Adama1",
-                    UserName = "Username1",
-                    PhoneNumber = "12345678",
-                    Email = "adam@gmail.com",
-
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
-
-                FirstName = "Adam",
-                LastName = "Adam",
+                PayPalMail = "mama@wp.pl",
+                FirstName = "Adam2",
+                LastName = "Adam2",
                 AddressLine = "mickiewicza",
-
 
             };
             return userStub;
@@ -197,8 +209,11 @@ namespace UnitTestProject1
             var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
-                var result = unitOfWork.Users.Create(GetUser());
-                Assert.IsNotNull(context.Users.FirstOrDefault(t => t.FirstName == "Adam"));
+                var result = unitOfWork.Users.Create(GetUser(),null);
+
+                Assert.IsNotNull(result);
+
+                Assert.IsNotNull(context.Users.FirstOrDefault());
                 context.Users.DeleteAllOnSubmit(context.Users);
                 context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                 context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
@@ -216,8 +231,8 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    unitOfWork.Users.Create(ThirdUser());
+                    unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(ThirdUser(), null);
                     int numberOfAddressRecords = context.AddressTables.Count();
                     Assert.AreEqual(1, numberOfAddressRecords);
 
@@ -248,7 +263,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(GetUser(), null);
                     unitOfWork.Users.Create(GetAnotherUser());
                 }
                 catch (DuplicateKeyException)
@@ -283,9 +298,9 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    var result = unitOfWork.Users.Create(GetUser());
+                    var result = unitOfWork.Users.Create(GetUser(), null);
                     Assert.IsNotNull(result);
-                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(GetUser(), null);
                 }
                 catch (DuplicateKeyException)
                 {
@@ -315,13 +330,14 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    bool result = unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
+                    var x = unitOfWork.Users.Create(GetUser(), null);
+                    bool result = unitOfWork.Users.Delete(t => t.ID == x.ID);
                     Assert.IsTrue(result);
 
                 }
                 catch
                 {
+                  
                     Assert.Fail();
                 }
             }
@@ -347,9 +363,9 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    unitOfWork.Users.Create(ThirdUser());
-                    unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
+                    var user = unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(ThirdUser(), null);
+                    unitOfWork.Users.Delete(t => t.ID == user.ID);
                     Assert.IsNotNull(context.AddressTables.First());
                 }
                 catch
@@ -377,8 +393,8 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    unitOfWork.Users.Delete(t => t.ID == GetUser().ID);
+                    var user = unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Delete(t => t.ID == user.ID);
                     Assert.AreEqual(0, context.AddressTables.Count());
                 }
                 catch
@@ -406,7 +422,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(GetUser(), null);
                     unitOfWork.Users.Create(ThirdUser());
                     IQueryable<Users> listOfAvailableUsers = unitOfWork.Users.GetAll();
                     Assert.AreEqual(2, listOfAvailableUsers.ToArray().Count());
@@ -436,19 +452,20 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    Users found = unitOfWork.Users.Get(t => t.AspNetUsers.PhoneNumber == "12345678");
-                    Assert.AreEqual("adam@gmail.com", found.AspNetUsers.Email);
-                        Assert.AreEqual("Male", found.Gender.Gender1);
-                    Assert.AreEqual("Username1", found.AspNetUsers.UserName);
+                    unitOfWork.Users.Create(GetUser(), null);
+                    Users found = unitOfWork.Users.Get(t => t.AspNetUsers.PhoneNumber == "12345670");
+                    Assert.AreEqual("adam2@gmail.com", found.AspNetUsers.Email);
+                    Assert.AreEqual("Male", found.Gender.Gender1);
+                    Assert.AreEqual("Username12", found.AspNetUsers.UserName);
                     Assert.AreEqual("Nordjylland", found.AddressTable.Region);
                 }
                 catch
                 {
                     Assert.Fail();
+
                 }
             }
-
+                    
             var secondContext = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(secondContext))
             {
@@ -468,11 +485,11 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser());
-                    unitOfWork.Users.Create(ForthUser());
-                    unitOfWork.Users.Create(ThirdUser());
+                    unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(ForthUser(), null);
+                    unitOfWork.Users.Create(ThirdUser(), null);
                     IQueryable<Users> filtredList = unitOfWork.Users.List(u => u.AddressTable.City == "Aalborg");
-                    Assert.AreEqual(2, filtredList.ToArray().Count());
+                    Assert.AreEqual(3, filtredList.ToArray().Count());
                 }
                 catch
                 {
@@ -499,7 +516,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    Users u = unitOfWork.Users.Create(GetUser());
+                    Users u = unitOfWork.Users.Create(GetUser(), null);
                     Users toUpdate = ToUpdate();
                     toUpdate.ID = u.ID;
 

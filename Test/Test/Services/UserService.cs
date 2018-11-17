@@ -61,7 +61,7 @@ namespace ServiceLibrary
                         {
                             Gender1 = u.Gender.ToString(),
                         },
-
+                        PayPalMail = u.PayPalMail,
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         AddressLine = u.AddressLine,
@@ -288,12 +288,19 @@ namespace ServiceLibrary
             {
                 str.Append(result[i].ToString("x2"));
             }
+            var pass = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result));
             AspNetUsers logging = new AspNetUsers
             {
+                Id= login+"."+phonenumber,
                 Email = mail,
                 PhoneNumber = phonenumber,
                 UserName = login,
-                PasswordHash = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result))
+                PasswordHash = pass,
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = false,
+                AccessFailedCount = 4,
             };
             return logging;
         
