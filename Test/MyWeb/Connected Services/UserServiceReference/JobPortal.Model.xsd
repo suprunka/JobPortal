@@ -10,6 +10,7 @@
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PayPalMail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Region" type="tns:Region" />
@@ -29,7 +30,7 @@
       <xs:enumeration value="Hovedstaden" />
       <xs:enumeration value="Midtjylland" />
       <xs:enumeration value="Nordjylland" />
-      <xs:enumeration value="Sjælland" />
+      <xs:enumeration value="Sjalland" />
       <xs:enumeration value="Syddanmark" />
     </xs:restriction>
   </xs:simpleType>

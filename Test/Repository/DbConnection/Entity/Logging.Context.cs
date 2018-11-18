@@ -9,15 +9,15 @@
 
 namespace Repository.DbConnection.Entity
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JobPortalEntities : Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext<JobPortal.Model.ApplicationUser>
+    public partial class dmai0917_1067677Entities1 : IdentityDbContext<JobPortal.Model.ApplicationUser>
     {
-    
-        public JobPortalEntities()
-            : base("data source = DESKTOP - GQ6AKJT\\SA; initial catalog = JobPortal; integrated security = True; MultipleActiveResultSets=True;App=EntityFramework")
+        public dmai0917_1067677Entities1()
+            : base("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework")
         {
         }
     
@@ -25,10 +25,11 @@ namespace Repository.DbConnection.Entity
         {
             base.OnModelCreating(modelBuilder);
         }
-        public static JobPortalEntities Create()
+
+        public static dmai0917_1067677Entities1 Create()
         {
-            return new JobPortalEntities();
+            return new dmai0917_1067677Entities1();
         }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+
     }
 }

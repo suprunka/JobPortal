@@ -39,15 +39,6 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesUserMatch(u))
                 {
-                    AspNetUsers aspNetUsers = null;
-                    if (loggingId != null)
-                    {
-                        aspNetUsers = _database.Get(x => x.AspNetUsers.Id == loggingId).AspNetUsers;
-                    }
-                    else
-                    {
-                        aspNetUsers = Register(u.UserName, u.Password, u.Email, u.PhoneNumber);
-                    }
                     _database.Create(new Users
                     {
                         AddressTable = new AddressTable
@@ -56,8 +47,8 @@ namespace ServiceLibrary
                             City = u.CityName,
                             Region = u.Region.ToString(),
                         },
-                        AspNetUsers = aspNetUsers,
-                    Gender = new Repository.DbConnection.Gender
+                        Logging_ID = loggingId,
+                        Gender = new Repository.DbConnection.Gender
                         {
                             Gender1 = u.Gender.ToString(),
                         },
@@ -65,9 +56,7 @@ namespace ServiceLibrary
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         AddressLine = u.AddressLine,
-
-                    }
-                    );
+                    });
                     return true;
                 }
                 return false;
@@ -140,34 +129,35 @@ namespace ServiceLibrary
 
         }
 
-      /*  public User FindUser(string phoneNumber)
-        {
-            try
-            {
-                var result = _database.Get(t => t.PhoneNumber == phoneNumber);
-                return new User
-                {
-                    ID = result.ID,
-                    PhoneNumber = result.PhoneNumber,
-                    FirstName = result.FirstName,
-                    LastName = result.LastName,
-                    Email = result.Email,
-                    UserName = result.AspNetUsers.UserName,
-                    Password = result.AspNetUsers.Password,
-                    AddressLine = result.AddressLine,
-                    CityName = result.AddressTable.City,
-                    Postcode = result.AddressTable.Postcode,
-                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
-                    Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
-                };
-            }
-            catch
-            {
-                return null;
-            }
+        public User FindUser(string phoneNumber)
+          {
+              try
+              {
+                  var result = _database.Get(t => t.Logging_ID == phoneNumber);
+                  return new User
+                  {
+                      ID = result.ID,
+                      PhoneNumber = result.AspNetUsers.PhoneNumber,
+                      FirstName = result.FirstName,
+                      LastName = result.LastName,
+                      Email = result.AspNetUsers.Email,
+                      UserName = result.AspNetUsers.UserName,
+                     // Password = result.AspNetUsers.PasswordHash,
+                      AddressLine = result.AddressLine,
+                      CityName = result.AddressTable.City,
+                      Postcode = result.AddressTable.Postcode,
+                      PayPalMail = result.PayPalMail,
+                      Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                      Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                  };
+              }
+              catch
+              {
+                  return null;
+              }
 
-        }
-        */
+          }
+          
         public User FindUserByID(int id)
         {
             try
@@ -187,6 +177,7 @@ namespace ServiceLibrary
                         AddressLine = result.AddressLine,
                         CityName = result.AddressTable.City,
                         Postcode = result.AddressTable.Postcode,
+                        PayPalMail = result.PayPalMail,
                         Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                         Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                     };
@@ -216,7 +207,7 @@ namespace ServiceLibrary
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
-                   // Password = u.AspNetUsers.Password,
+                    // Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
@@ -272,13 +263,13 @@ namespace ServiceLibrary
             return resultToReturn.ToArray();
         }
 
-       
+
 
         private AspNetUsers Register(String login, String password, string mail, string phonenumber)
         {
             if (login.Length == 0 || password.Length == 0)
             {
-                return null; 
+                return null;
             }
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
@@ -303,14 +294,14 @@ namespace ServiceLibrary
                 AccessFailedCount = 4,
             };
             return logging;
-        
+
         }
 
         public bool Login(String login, String password)
         {
 
             var existing = _database.Login(new AspNetUsers { UserName = login, PasswordHash = password });
-            if (existing!=  null)
+            if (existing != null)
             {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
@@ -333,9 +324,6 @@ namespace ServiceLibrary
             return JobPortalEntities.Create();
         }
 
-        public User FindUser(string phoneNumber)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

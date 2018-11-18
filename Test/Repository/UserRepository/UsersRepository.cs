@@ -15,14 +15,14 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortalTest;Integrated Security=True";
+        private readonly string connection = "Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework";
       public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
 
         }
 
-        public  Users Create(Users obj, string loggingId)
+        public override Users Create(Users obj)
         {
             Users result = null;
             using (SqlConnection objConn = new SqlConnection(connection))
@@ -32,27 +32,20 @@ namespace Repository
                 {
                     try
                     {
-                        if (loggingId == null)
-                        {
-                            AspNetUsers logging = new AspNetUsers
-                            {
-                                Id= obj.AspNetUsers.UserName,
-                                UserName = obj.AspNetUsers.UserName,
-                                PasswordHash = obj.AspNetUsers.PasswordHash,
-                                Email = obj.AspNetUsers.Email,
-                                PhoneNumber = obj.AspNetUsers.PhoneNumber,
-
-                                EmailConfirmed = false,
-                                PhoneNumberConfirmed = false,
-                                TwoFactorEnabled = false,
-                                LockoutEnabled = false,
-                                AccessFailedCount = 4,
-                            };
-
-                            _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
-                            _context.SubmitChanges();
-                            loggingId = logging.Id.ToString();
-                        }
+                       //if (loggingId == null)
+                       //{
+                       //    AspNetUsers logging = new AspNetUsers
+                       //    {
+                       //        UserName = obj.AspNetUsers.UserName,
+                       //        PasswordHash = obj.AspNetUsers.PasswordHash,
+                       //        Email = obj.AspNetUsers.Email,
+                       //        PhoneNumber = obj.AspNetUsers.PhoneNumber,
+                       //    };
+                       //
+                       //    _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
+                       //    _context.SubmitChanges();
+                       //    loggingId = logging.Id.ToString();
+                       //}
 
                         var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                         if (addressExists == null)
@@ -71,14 +64,14 @@ namespace Repository
 
                         Users u = new Users
                         {
-                            PayPalMail= obj.PayPalMail,
                             FirstName = obj.FirstName,
                             LastName = obj.LastName,
-                            Logging_ID = loggingId,
+                            Logging_ID = obj.Logging_ID,
                             Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
                                 t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
                             AddressLine = obj.AddressLine,
-                            City_ID = addressExists.ID
+                            City_ID = addressExists.ID,
+                            PayPalMail = obj.PayPalMail,
                         };
 
                         _context.GetTable<Users>().InsertOnSubmit(u);
@@ -191,7 +184,14 @@ namespace Repository
                         found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
                        // found.AspNetUsers.Password = obj.AspNetUsers.AspNetUsers.Password;
                         found.AddressLine = obj.AddressLine;
-                        found.Gender.Gender1 = obj.Gender.Gender1;
+                        if(obj.Gender.Gender1 == "Male")
+                        {
+                            found.Gender_ID = 1;
+                        }
+                        else
+                        {
+                            found.Gender_ID = 2;
+                        }
 
                         var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                         if (addressExists == null)
@@ -250,7 +250,7 @@ namespace Repository
         public Users UpdateWeb(Users newInformation)
         {
             Users result = null;
-            using (SqlConnection objConn = new SqlConnection("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True"))
+            using (SqlConnection objConn = new SqlConnection("connection"))
             {
 
                 objConn.Open();

@@ -210,9 +210,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\UserMapping.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageOffers.cs" />
@@ -239,14 +241,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\UserServiceReference\Microsoft.AspNet.Identity.EntityFramework.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UserServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -259,6 +263,9 @@
     <None Include="Connected Services\UserServiceReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UserServiceReference\Repository.DbConnection.Entity.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UserServiceReference\service.wsdl" />
     <None Include="Connected Services\UserServiceReference\service.xsd">
       <SubType>Designer</SubType>
@@ -268,6 +275,10 @@
     </None>
     <Content Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.User.datasource" />
+    <None Include="Connected Services\UserServiceReference\System.Data.Entity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Properties\DataSources\Repository.DbConnection.Entity.dmai0917_1067677Entities1.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -315,6 +326,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Offers.cshtml" />
     <Content Include="Views\Manage\SetUserProperties.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,8 +340,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />

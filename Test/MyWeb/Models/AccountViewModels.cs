@@ -64,6 +64,39 @@ namespace WebJobPortal.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+
+    public class UserProfileViewModel
+    {
+        //public IEnumerable<ManageOffers> Services { get; set; }
+
+        public String Email { get; set; }
+
+        //public String Password { get; set; }
+
+        public String UserName { get; set;}
+
+        public String PhoneNumber { get; set; }
+
+        public String ID { get; set; }
+
+        public String FirstName { get; set; }
+
+        public String LastName { get; set; }
+ 
+        public String AddressLine { get; set; }
+
+        public String CityName { get; set; }
+
+        public String PayPalMail { get; set; }
+
+        public String Postcode { get; set; }
+      
+        public Region Region { get; set; }
+
+        public Gender Gender { get; set; }
+    }
+
+
     public class SetPropertiesViewModel
     {
 
@@ -86,6 +119,10 @@ namespace WebJobPortal.Models
         [Required(ErrorMessage = "City required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
         public String CityName { get; set; }
+
+        [Display(Name = "PayPal mail:")]
+        [Required(ErrorMessage = "PayPal required")]
+        public String PayPalMail { get; set; }
 
         [Display(Name = "Postcode:")]
         [Required(ErrorMessage = "Postcode required")]
