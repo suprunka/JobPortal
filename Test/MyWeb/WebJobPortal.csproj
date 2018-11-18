@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -322,13 +325,13 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\ChangeEmail.cshtml" />
     <Content Include="Views\User\AddDescription.cshtml" />
-    <Content Include="Views\Offers\Index.cshtml" />
-    <Content Include="Views\Offers\Add.cshtml" />
+    <Content Include="Views\ServiceOffer\Index.cshtml" />
+    <Content Include="Views\ServiceOffer\Add.cshtml" />
+    <Content Include="Views\ServiceOffer\ViewDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Pictures\" />
-    <Folder Include="Views\ServiceOffer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

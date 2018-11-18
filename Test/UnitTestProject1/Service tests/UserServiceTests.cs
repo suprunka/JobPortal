@@ -680,7 +680,7 @@ namespace UnitTestProject1.Service_tests
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                 AspNetUser = new AspNetUser
+                 AspNetUsers = new AspNetUsers
                 {
                     PasswordHash = "adamapA1",
                     UserName = "Username5",

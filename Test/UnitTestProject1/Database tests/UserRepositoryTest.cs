@@ -5,7 +5,7 @@ using Repository;
 using UnitTestProject1.Database_tests;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Users = Repository.DbConnection.Users;
-using AspNetUser = Repository.DbConnection.AspNetUser;
+using AspNetUser = Repository.DbConnection.AspNetUsers;
 using Gender = Repository.DbConnection.Gender;
 using System;
 
@@ -26,7 +26,7 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                 {
                     Id= "Username12",
                     PasswordHash = "Adama1",
@@ -64,7 +64,7 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midjylland"
                 },
-                AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                 {
                     Id= "Username12",
                     PasswordHash = "Adama1",
@@ -100,7 +100,7 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                 {
                     Id = "Username12",
                     PasswordHash = "Adama1",
@@ -138,7 +138,7 @@ namespace UnitTestProject1
                          City = "Aalborg",
                          Region = "Nordjylland"
                      },
-                     AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                      {
                          Id = "Username123",
                          PasswordHash = "Adama1",
@@ -174,7 +174,7 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                 {
                     Id = "UsernameThird",
                     PasswordHash = "Adama1",

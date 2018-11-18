@@ -44,7 +44,7 @@ namespace WebJobPortal
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<dmai0917_1067677Entities1>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<dmai0917_1067677Entities2>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

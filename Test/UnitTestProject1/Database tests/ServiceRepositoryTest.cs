@@ -7,7 +7,7 @@ using UnitTestProject1.Database_tests;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Category = Repository.DbConnection.Category;
 using Gender = Repository.DbConnection.Gender;
-using AspNetUser = Repository.DbConnection.AspNetUser;
+using AspNetUser = Repository.DbConnection.AspNetUsers;
 using ServiceOffer = Repository.DbConnection.ServiceOffer;
 using SubCategory = Repository.DbConnection.SubCategory;
 using Users = Repository.DbConnection.Users;
@@ -28,7 +28,7 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                 {
                     PasswordHash = "Adama1",
                     UserName = "Username1",
@@ -59,7 +59,7 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                AspNetUser = new AspNetUser
+                AspNetUsers = new AspNetUser
                 {
                     PasswordHash = "Adama1",
                     UserName = "Username1",
@@ -292,7 +292,7 @@ namespace UnitTestProject1
                     unitOfWork.Offers.Create(GetSecondServiceOffer());
                     unitOfWork.Offers.Create(GetThirdServiceOffer());
                     unitOfWork.Offers.Create(GetForthServiceOffer());
-                    var list = unitOfWork.Offers.List(t => t.Users.AspNetUser.PhoneNumber == "35896452");
+                    var list = unitOfWork.Offers.List(t => t.Users.AspNetUsers.PhoneNumber == "35896452");
                     Assert.AreEqual(1, list.Count());
                 }
                 catch

@@ -13,7 +13,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;User ID=sa;Password=root";
+        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;Integrated Security=True";
 
 
 
@@ -27,6 +27,39 @@ namespace Repository
         public OfferRepository()
         {
 
+        }
+
+        public WorkingDate AddToService(ServiceOffer offer, WorkingDate date)
+        {
+            WorkingDate result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    WorkingDate datew = new WorkingDate
+                    {
+                        NameOfDay = date.NameOfDay,
+                        HourFrom = date.HourFrom,
+                        HourTo = date.HourTo,
+                        ServiceOffer = offer
+
+                    };
+                    _context.GetTable<WorkingDate>().InsertOnSubmit(datew);
+                    _context.SubmitChanges();
+                    result = datew;
+                }
+                catch (Exception e)
+                {
+                    result = null;
+                    throw e;
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+                return result;
         }
 
         public override ServiceOffer Create(ServiceOffer offer)
@@ -49,6 +82,7 @@ namespace Repository
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
                     _context.SubmitChanges();
+
                     result = s;
                     sql.Commit();
                 }

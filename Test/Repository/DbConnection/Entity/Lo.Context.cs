@@ -9,22 +9,27 @@
 
 namespace Repository.DbConnection.Entity
 {
+    using JobPortal.Model;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JobPortalEntities : DbContext
+    public partial class dmai0917_1067677Entities2 : IdentityDbContext<ApplicationUser>
     {
-        public JobPortalEntities()
-            : base("name=JobPortalEntities")
+        public dmai0917_1067677Entities2()
+            : base("data source = kraka.ucn.dk; initial catalog = dmai0917_1067677; user id = dmai0917_1067677; password=Password1!;MultipleActiveResultSets=True;App=EntityFramework")
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            base.OnModelCreating(modelBuilder);
         }
     
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public static dmai0917_1067677Entities2 Create()
+        {
+            return new dmai0917_1067677Entities2 { };
+        }
     }
 }

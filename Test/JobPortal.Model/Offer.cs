@@ -1,5 +1,6 @@
 ﻿using JobPortal.Model;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
@@ -20,19 +21,23 @@ namespace JobPortal.Model
         [DataMember]
         public virtual string Description { get; set; }
         [DataMember]
-        public virtual User Author{ get; set; }
+        public virtual string AuthorId{ get; set; }
         [DataMember]
         public virtual Category Category { get; set; }
         [DataMember]
         public virtual SubCategory Subcategory { get; set; }
+
         [DataMember]
+        public virtual IList<WorkingTime> ListOfWorkingDays { get; set; }
+       
+
+
+    }
+    public class WorkingTime
+    {
         public virtual TimeSpan HoursFrom { get; set; }
-        [DataMember]
         public virtual TimeSpan HoursTo { get; set; }
-        [DataMember]
         public virtual DayOfWeek WeekDay { get; set; }
-
-
     }
 
     [DataContract(Name = "Category")]

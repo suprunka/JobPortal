@@ -165,12 +165,8 @@ namespace WebJobPortal.Controllers
                 {
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
-                   
                     UserName = user.UserName,
-                   // Password = user.Password,
-                   
                 };
-
                 ModelState.Clear();
                 ViewBag.SuccessMessage = "Creation done.";
                 var result = await UserManager.CreateAsync(userapp, user.Password);
