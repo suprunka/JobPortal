@@ -1,0 +1,192 @@
+﻿@model MyWeb.Models.AddServiceOfferModel
+@using JobPortal.Model
+@{
+    ViewBag.Title = "Add";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(u => u.ManageOffers.Author, "PhoneNumber")
+    <style>
+        .hoursButton {
+            display: block;
+            width: auto;
+            height: 42px;
+        }
+
+        a.hoursButton {
+            background-color: lightgray;
+        }
+    </style>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.RatePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.RatePerHour, new { htmlAttributes = new { @class = "form-control", placeholder = "Rate per hour..." } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.RatePerHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Title" } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("Category", new SelectList(Enum.GetValues(typeof(Category)), selectedValue: Category.Home), new { @id = "cat", @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Subcategory, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Subcategory", new SelectList(Enum.GetValues(typeof(SubCategory))), new { @id = "subcat", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Offer" class="buttons" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="weekdays">
+            <div class="col-md-2" id="Monday">
+                <p>Monday</p>
+                @for (var i = 6; i < 21; i++)
+                {
+                    <div class="hours" id="M@i">
+                        @{var x = i + 1;
+                        }
+                        @Html.ActionLink(@i + ":00 -  " + @x + ":00", "AddtoArray", "ServiceOffer", new { day = DayOfWeek.Monday, id = i }, new { @class = "hoursButton" })
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="col-md-2" id="Tuesday">
+            <p>tuesday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="T@i">
+                    @{var x = i + 1;
+                    }
+                    @Html.ActionLink(@i + ":00 -  " + @x + ":00", "AddtoArray", "ServiceOffer", new { day = DayOfWeek.Tuesday, id = i }, new { @class = "hoursButton" })
+
+                </div>
+            }
+        </div>
+        <div class="col-md-2" id="Wednesday">
+            <p>Wednesday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="W@i">
+                    @{var x = i + 1;
+                    }
+                    @Html.ActionLink(@i + ":00 -  " + @x + ":00", "AddtoArray", "ServiceOffer", new { day = DayOfWeek.Wednesday, id = i }, new { @class = "hoursButton" })
+
+                </div>
+            }
+        </div>
+
+        <div class="col-sm-2" id="Thuesday">
+            <p>thuesday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="Th@i">
+                    @{var x = i + 1;
+                    }
+                    @Html.ActionLink(@i + ":00 -  " + @x + ":00", "AddtoArray", "ServiceOffer", new { day = DayOfWeek.Thursday, id = i }, new { @class = "hoursButton" })
+
+                </div>
+            }
+        </div>
+        <div class="col-md-2" id="Friday">
+            <p>Friday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="F@i">
+                    @{var x = i + 1;
+                    }
+                    @Html.ActionLink(@i + ":00 -  " + @x + ":00", "AddtoArray", "ServiceOffer", new { day = DayOfWeek.Friday, id = i }, new { @class = "hoursButton" })
+
+                </div>
+            }
+        </div>
+        <div class="col-md-2" id="Saturday">
+            <p>Saturday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="S@i">
+                    @{var x = i + 1;
+                    }
+                    @Html.ActionLink(@i + ":00 -  " + @x + ":00", "AddtoArray", "ServiceOffer", new { day = DayOfWeek.Saturday, id = i }, new { @class = "hoursButton" })
+
+                </div>
+
+            }
+        </div>
+    </div>
+    <p id="hiddnArray" hidden="hidden">
+    </p>
+
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+
+    $(".hoursButton").click(function (e) {
+
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr("href"), // comma here instead of semicolon
+            success: function () {
+
+                alert("Value Added");  // or any other indication if you want to show
+            }
+
+        });
+
+    });
+
+    $('#cat').change(function () {
+        var selectedCat = $("#cat").val();
+        var subCatSelect = $('#subcat');
+        subCatSelect.empty();
+        if (selectedCat != null && selectedCat != '') {
+            $.getJSON('@Url.Action("GetSubCategories")', { iso3: selectedCat }, function (sub) {
+                        if (sub != null && !jQuery.isEmptyObject(sub))
+                        {
+                            subCatSelect.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                            $.each(sub, function (index, subcats) {
+                                subCatSelect.append($('<option/>', {
+                                    value: subcats.Value,
+                                    text: subcats.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+</script>

@@ -16,6 +16,8 @@ using WebJobPortal.Models;
 using JobPortal.Model;
 using WebJobPortal;
 using WebJobPortal.Controllers;
+using AutoMapper;
+using MyWeb.Models;
 
 
 namespace MyWeb.Controllers

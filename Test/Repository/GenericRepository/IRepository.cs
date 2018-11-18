@@ -20,6 +20,6 @@ namespace Repository
         IQueryable<T> List(Expression<Func<T, bool>> predicate);
 
         AspNetUsers Login(AspNetUsers account);
-
+        
     }
 }

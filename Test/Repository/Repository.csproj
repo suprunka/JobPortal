@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.11\lib\net46\CommonServiceLocator.dll</HintPath>
@@ -128,6 +128,21 @@
     <Compile Include="DbConnection\Entity\AspNetUser.cs">
       <DependentUpon>Logging.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbConnection\Entity\Lo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbConnection\Entity\Lo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbConnection\Entity\Lo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lo.edmx</DependentUpon>
+    </Compile>
     <Compile Include="DbConnection\Entity\Logging.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +186,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Logging.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="DbConnection\Entity\Lo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Lo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DbConnection\Entity\Lo.edmx.diagram">
+      <DependentUpon>Lo.edmx</DependentUpon>
+    </None>
     <None Include="DbConnection\Entity\Logging.edmx.diagram">
       <DependentUpon>Logging.edmx</DependentUpon>
     </None>
@@ -203,6 +225,16 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DbConnection\Entity\Lo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Lo.edmx</DependentUpon>
+      <LastGenOutput>Lo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DbConnection\Entity\Lo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Lo.edmx</DependentUpon>
+      <LastGenOutput>Lo.cs</LastGenOutput>
+    </Content>
     <Content Include="DbConnection\Entity\Logging.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Logging.edmx</DependentUpon>

@@ -33,6 +33,8 @@ namespace Repository
         {
             try
             {
+                _Table.InsertOnSubmit(obj);
+                db.SubmitChanges();
                 return obj; 
             }
             catch

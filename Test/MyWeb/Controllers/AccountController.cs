@@ -165,12 +165,8 @@ namespace WebJobPortal.Controllers
                 {
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
-                   
                     UserName = user.UserName,
-                   // Password = user.Password,
-                   
                 };
-
                 ModelState.Clear();
                 ViewBag.SuccessMessage = "Creation done.";
                 var result = await UserManager.CreateAsync(userapp, user.Password);
@@ -185,7 +181,7 @@ namespace WebJobPortal.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("SetUserProperties", "Manage", routeValues: User.Identity.GetUserId());
+                    return RedirectToAction("Index", "Home");
                 }
                // AddErrors(result);
             }

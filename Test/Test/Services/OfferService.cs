@@ -30,13 +30,31 @@ namespace ServiceLibrary
 
         }
 
+        public bool AddtoOffer(ServiceOffer serviceOffer, Offer offer)
+        {
+            foreach (var item in offer.ListOfWorkingDays)
+            {
+                _database.AddToService(serviceOffer, new WorkingDate
+                {
+                    NameOfDay = item.WeekDay.ToString(),
+                    HourFrom = item.HoursFrom,
+                    HourTo = item.HoursTo,
+                    ServiceOffer = serviceOffer,
+
+                }
+                    );
+            }
+
+            return false;
+        }
+
         public bool CreateServiceOffer(Offer offer)
         {
             try
             {
                 if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
                 {
-                    _database.Create(new ServiceOffer
+                   var serviceOffer= _database.Create(new ServiceOffer
                     {
 
                         SubCategory = new Repository.DbConnection.SubCategory
@@ -50,9 +68,11 @@ namespace ServiceLibrary
                         Title = offer.Title,
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
-                        Employee_ID = offer.Author.ID,
+                        Employee_ID = offer.AuthorId,
 
                     });
+                    AddtoOffer(serviceOffer, offer);
+
                     return true;
                 }
                 else
@@ -73,11 +93,10 @@ namespace ServiceLibrary
             var dbResult = _database.Get(x => x.ID == ID);
             if (dbResult != null)
             {
-                var employeeID = dbResult.Employee_ID;
-                User user = new UserService().FindUserByID(employeeID);
+               
                 offer = new Offer {
                     Id = ID,
-                    Author = user,
+                    AuthorId = dbResult.Employee_ID,
                     Description = dbResult.Description,
                     Title = dbResult.Title,
                     RatePerHour = dbResult.RatePerHour,
@@ -153,12 +172,11 @@ namespace ServiceLibrary
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _database.GetAll())
             {
-                var employeePhone = item.Employee_ID;
-                User user = new UserService().FindUserByID(employeePhone);
+               
                 resultToReturn.Add(new Offer
                 {
                     Id = item.ID,
-                    Author = user,
+                    AuthorId = item.Employee_ID,
                     Description = item.Description,
                     Title = item.Title,
                     RatePerHour = item.RatePerHour,

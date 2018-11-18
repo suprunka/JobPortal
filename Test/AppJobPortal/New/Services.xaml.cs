@@ -26,6 +26,7 @@ namespace AppJobPortal.New
     public partial class Services : Page
     {
         private readonly IOfferService _proxy;
+        private readonly UserServiceReferenceTcp.IUserService _proxyUser;
         private IMapper _mapper;
         private ServiceAppModel _serviceOffer;
         private Offer[] _source;
@@ -34,7 +35,7 @@ namespace AppJobPortal.New
         {
             InitializeComponent();
             _proxy = new OfferServiceClient("offerService");
-
+            _proxyUser = new UserServiceReferenceTcp.UserServiceClient();
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<ServiceAppModel,Offer>();
             });
@@ -57,10 +58,13 @@ namespace AppJobPortal.New
             ObservableCollection<ServiceAppModel> offers = new ObservableCollection<ServiceAppModel>();
             foreach (Offer offer in _source)
             {
-                offers.Add(new ServiceAppModel() {Id = offer.Id, Author_phone = offer.Author.PhoneNumber,
+                UserServiceReferenceTcp.User u = _proxyUser.FindUser(offer.AuthorId);
+
+
+                     offers.Add(new ServiceAppModel() {Id = offer.Id, Author_phone = u.PhoneNumber,
                                                 Category = offer.Category, Description = offer.Description,
                                                 RatePerHour = offer.RatePerHour, Subcategory = offer.Subcategory,
-                                                Title = offer.Title, FullName = offer.Author.FirstName +" "+ offer.Author.LastName});
+                                                Title = offer.Title, FullName = u.FirstName +" "+ u.LastName});
 
             }
             servicesTable.ItemsSource = offers;
@@ -87,19 +91,19 @@ namespace AppJobPortal.New
             {
                 int id = int.Parse(txtId.Text);
                 var offer = _proxy.FindServiceOffer(id);
+                UserServiceReferenceTcp.User u = _proxyUser.FindUser(offer.AuthorId);
                 //UserAppModel user = _mapper.Map(offer.Author, new UserAppModel());
                 IList<ServiceAppModel> list = new List<ServiceAppModel>();
                 list.Add(new ServiceAppModel
                 {
                     Id = offer.Id,
-                    Author = offer.Author,
-                    Author_phone = offer.Author.PhoneNumber,
+                    Author_phone = u.PhoneNumber,
                     Category = offer.Category,
                     Description = offer.Description,
                     RatePerHour = offer.RatePerHour,
                     Subcategory = offer.Subcategory,
                     Title = offer.Title,
-                    FullName = offer.Author.FirstName + " " + offer.Author.LastName
+                    FullName = u.FirstName + " " + u.LastName
                 });
                 servicesTable.ItemsSource = list;
 
