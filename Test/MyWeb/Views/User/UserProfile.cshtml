@@ -32,7 +32,20 @@
                     @Html.DisplayFor(model => model.LastName)
                 </dd>
             </p>
-            <p>Hello, I am Anna and I live in a house with 7 bedrooms, 3 bathrooms and a large garden with swimming pool. My family and I travel a lot and at that time we rent our house. I am looking for somebody responsible who would clean after our guests.</p>
+            <div>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+            </div>
+            
+
+            
+
+            <div>
+                @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+
+            </div>
         </div>
     </div>
 
@@ -121,12 +134,7 @@
         </div>
 
         <!--button to open hidden Edit page-->
-        <input type="submit" value="Edit" class="buttons" id="confirmBtn" onclick="openFrame(event,'Edit')" />
-    </div>
-
-    <!--Update user-->
-    <div id="Edit" class="frameContentColumn">
-        @Html.ActionLink("Siema", "Edit", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+        @Html.ActionLink("Edit information", "Edit", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
     </div>
 
 
@@ -140,12 +148,11 @@
     <!--Privacy setting page-->
     <div id='PrivacySettings' class="frameContentColumn">
         <!-- Trigger/Open The Modal  - buttons for opening window -->
-        <button id="change-email-btn" class="buttons">Change Email</button>
-        <button id="change-password-btn" class="buttons">Change Password</button>
+        @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+
+        @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
         <!-- The Modal for changing password -->
-        
-
         <!-- The Modal for CHANGing EMAIL -->
         <div id="change-email-modal" class="changeEmailModal">
             @{ using (Html.BeginForm("EditEmail", "User", FormMethod.Post))
@@ -241,8 +248,10 @@
                 changeEmailModal.style.display = "block";
             }
             openChangePasswordBtn.onclick = function () {
-                changePasswordModal.style.display = "block";
+                changeEmailModal.style.display = "block";
             }
+
+
             openDeleteAccountBtn.onclick = function () {
                 deleteAccountModal.style.display = "block";
             }

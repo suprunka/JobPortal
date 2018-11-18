@@ -21,7 +21,7 @@ namespace ServiceLibrary
     public class UserService : IUserService
     {
         private readonly IUserRepository _database;
-        private readonly JobPortalEntities _logEntity;
+        // private readonly JobPortalEntities _logEntity;
 
         public UserService(IUserRepository database)
         {
@@ -86,6 +86,27 @@ namespace ServiceLibrary
             }
         }
 
+        public bool EditUserEmail(User u)
+        {
+            if (RegexMatch.DoesUserEmailMatch(u))
+            {
+                _database.UpdateUserMail(new Users
+                {
+                    ID = u.ID,
+                    AspNetUsers = new AspNetUsers
+                    {
+                        Email = u.Email,
+                    }
+
+                });
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool EditUser(User u)
         {
             try
@@ -130,34 +151,35 @@ namespace ServiceLibrary
         }
 
         public User FindUser(string phoneNumber)
-          {
-              try
-              {
-                  var result = _database.Get(t => t.Logging_ID == phoneNumber);
-                  return new User
-                  {
-                      ID = result.ID,
-                      PhoneNumber = result.AspNetUsers.PhoneNumber,
-                      FirstName = result.FirstName,
-                      LastName = result.LastName,
-                      Email = result.AspNetUsers.Email,
-                      UserName = result.AspNetUsers.UserName,
-                     // Password = result.AspNetUsers.PasswordHash,
-                      AddressLine = result.AddressLine,
-                      CityName = result.AddressTable.City,
-                      Postcode = result.AddressTable.Postcode,
-                      PayPalMail = result.PayPalMail,
-                      Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
-                      Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
-                  };
-              }
-              catch
-              {
-                  return null;
-              }
+        {
+            try
+            {
+                var result = _database.Get(t => t.Logging_ID == phoneNumber);
+                return new User
+                {
+                    ID = result.ID,
+                    PhoneNumber = result.AspNetUsers.PhoneNumber,
+                    FirstName = result.FirstName,
+                    LastName = result.LastName,
+                    Email = result.AspNetUsers.Email,
+                    UserName = result.AspNetUsers.UserName,
+                    // Password = result.AspNetUsers.PasswordHash,
+                    AddressLine = result.AddressLine,
+                    CityName = result.AddressTable.City,
+                    Postcode = result.AddressTable.Postcode,
+                    PayPalMail = result.PayPalMail,
+                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                    Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                    Description = result.Description,
+                };
+            }
+            catch
+            {
+                return null;
+            }
 
-          }
-          
+        }
+
         public User FindUserByID(int id)
         {
             try
@@ -180,6 +202,7 @@ namespace ServiceLibrary
                         PayPalMail = result.PayPalMail,
                         Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                         Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                        Description = result.Description,
                     };
                 }
                 return null;
@@ -312,11 +335,24 @@ namespace ServiceLibrary
             }
             return false;
         }
-        public JobPortalEntities GetLoginEntity()
+
+        public bool AddDescription(User u)
         {
-            return JobPortalEntities.Create();
+
+            _database.AddDescription(new Users
+            {
+                ID = u.ID,
+                Description = u.Description
+            });
+            return true;
         }
 
-       
+
+        /* public JobPortalEntities GetLoginEntity()
+{
+    return JobPortalEntities.Create();
+}*/
+
+
     }
 }

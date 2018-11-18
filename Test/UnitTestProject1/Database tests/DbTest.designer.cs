@@ -3546,6 +3546,8 @@ namespace UnitTestProject1.Database_tests
 		
 		private EntityRef<SubCategory> _SubCategory;
 		
+		private EntityRef<Users> _Users;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3570,6 +3572,7 @@ namespace UnitTestProject1.Database_tests
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
 			this._SubCategory = default(EntityRef<SubCategory>);
+			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
 		
@@ -3668,6 +3671,10 @@ namespace UnitTestProject1.Database_tests
 			{
 				if ((this._Employee_ID != value))
 				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnEmployee_IDChanging(value);
 					this.SendPropertyChanging();
 					this._Employee_ID = value;
@@ -3766,6 +3773,40 @@ namespace UnitTestProject1.Database_tests
 						this._Subcategory_ID = default(int);
 					}
 					this.SendPropertyChanged("SubCategory");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_ServiceOffer", Storage="_Users", ThisKey="Employee_ID", OtherKey="ID", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.ServiceOffer.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.ServiceOffer.Add(this);
+						this._Employee_ID = value.ID;
+					}
+					else
+					{
+						this._Employee_ID = default(int);
+					}
+					this.SendPropertyChanged("Users");
 				}
 			}
 		}
@@ -4028,9 +4069,13 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _Gender_ID;
 		
+		private string _Description;
+		
 		private EntitySet<Account> _Account;
 		
 		private EntitySet<Review> _Review;
+		
+		private EntitySet<ServiceOffer> _ServiceOffer;
 		
 		private EntityRef<Gender> _Gender;
 		
@@ -4058,12 +4103,15 @@ namespace UnitTestProject1.Database_tests
     partial void OnCity_IDChanged();
     partial void OnGender_IDChanging(int value);
     partial void OnGender_IDChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
     #endregion
 		
 		public Users()
 		{
 			this._Account = new EntitySet<Account>(new Action<Account>(this.attach_Account), new Action<Account>(this.detach_Account));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
+			this._ServiceOffer = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffer), new Action<ServiceOffer>(this.detach_ServiceOffer));
 			this._Gender = default(EntityRef<Gender>);
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
 			this._AddressTable = default(EntityRef<AddressTable>);
@@ -4242,6 +4290,26 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Account", Storage="_Account", ThisKey="ID", OtherKey="UserID")]
 		public EntitySet<Account> Account
 		{
@@ -4265,6 +4333,19 @@ namespace UnitTestProject1.Database_tests
 			set
 			{
 				this._Review.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_ServiceOffer", Storage="_ServiceOffer", ThisKey="ID", OtherKey="Employee_ID")]
+		public EntitySet<ServiceOffer> ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer;
+			}
+			set
+			{
+				this._ServiceOffer.Assign(value);
 			}
 		}
 		
@@ -4409,6 +4490,18 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		private void detach_Review(Review entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_ServiceOffer(ServiceOffer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_ServiceOffer(ServiceOffer entity)
 		{
 			this.SendPropertyChanging();
 			entity.Users = null;

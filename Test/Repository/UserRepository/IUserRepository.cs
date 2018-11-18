@@ -5,7 +5,7 @@ namespace Repository
     public interface IUserRepository : IRepository<Users>
     {
 
-
-        Users UpdateWeb(Users newInformation);
+        Users AddDescription(Users newInformation);
+        Users UpdateUserMail(Users newInformation);
     }
 }

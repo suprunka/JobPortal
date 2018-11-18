@@ -63,7 +63,7 @@ namespace WebJobPortal.Controllers
         //  var list = _offerProxy.GetAllOffers().Where(x => x.Author.ID == um.User.ID).Select(x => _mapper.Map(x, new ServiceOfferWebModel()));
         // 
         //  um.Services = (IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>)list;
-            return RedirectToAction("VerifyPhoneNumber");
+            return View("VerifyPhoneNumber");
 
         }
 
@@ -230,7 +230,7 @@ namespace WebJobPortal.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("UserProfile", "User", new {id= User.Identity.GetUserId(), Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -305,7 +305,7 @@ namespace WebJobPortal.Controllers
             {
                 return View(model);
             }
-            var result = _proxy.CreateUser(UserMapping.MapSetPropertiesViewModelToUser(model), User.Identity.GetUserId());
+            var result = _proxy.CreateUser(UserMapping.Map_SetPropertiesViewModel_To_User(model), User.Identity.GetUserId());
             if (result)
             {
                 return RedirectToAction("Index", "Home");

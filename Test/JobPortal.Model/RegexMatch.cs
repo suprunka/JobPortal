@@ -25,10 +25,20 @@ namespace ServiceLibrary.Models
             else
             {
                 return false;
+            } 
+        }
+
+        public static bool DoesUserEmailMatch(User user)
+        {
+
+            if (Regex.IsMatch(user.Email, "^[a-zA-Z0-9ÆæØøÅå]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
+            {
+                return true;
             }
-            
-           
-            
+            else
+            {
+                return false;
+            }
         }
 
         public static bool DoesWebUserMatch(User user)

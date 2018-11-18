@@ -241,9 +241,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\UserServiceReference\Microsoft.AspNet.Identity.EntityFramework.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\UserServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -263,9 +260,6 @@
     <None Include="Connected Services\UserServiceReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReference\Repository.DbConnection.Entity.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\UserServiceReference\service.wsdl" />
     <None Include="Connected Services\UserServiceReference\service.xsd">
       <SubType>Designer</SubType>
@@ -275,9 +269,6 @@
     </None>
     <Content Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.User.datasource" />
-    <None Include="Connected Services\UserServiceReference\System.Data.Entity.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Properties\DataSources\Repository.DbConnection.Entity.dmai0917_1067677Entities1.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -328,6 +319,8 @@
     <Content Include="Views\Manage\SetUserProperties.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\ChangeEmail.cshtml" />
+    <Content Include="Views\User\AddDescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

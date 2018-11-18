@@ -34,6 +34,9 @@ namespace JobPortal.Model
     {
 
         [DataMember]
+        public virtual String Description { get; set; }
+
+        [DataMember]
         public virtual int ID { get; set; }
 
         [DataMember]

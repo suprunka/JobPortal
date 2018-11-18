@@ -175,6 +175,7 @@
       <Association Name="ServiceOffer_Review" Member="Review" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Review" />
       <Association Name="ServiceOffer_Saleline" Member="Saleline" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Saleline" />
       <Association Name="SubCategory_ServiceOffer" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
+      <Association Name="Users_ServiceOffer" Member="Users" ThisKey="Employee_ID" OtherKey="ID" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SubCategory" Member="SubCategory">
@@ -196,8 +197,10 @@
       <Column Name="PayPalMail" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Users_Account" Member="Account" ThisKey="ID" OtherKey="UserID" Type="Account" />
       <Association Name="Users_Review" Member="Review" ThisKey="ID" OtherKey="Customer_ID" Type="Review" />
+      <Association Name="Users_ServiceOffer" Member="ServiceOffer" ThisKey="ID" OtherKey="Employee_ID" Type="ServiceOffer" />
       <Association Name="Gender_Users" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="AspNetUsers_Users" Member="AspNetUsers" ThisKey="Logging_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />

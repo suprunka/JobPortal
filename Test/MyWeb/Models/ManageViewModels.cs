@@ -66,6 +66,24 @@ namespace WebJobPortal.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangeEmailViewModel
+    {
+        public UserProfileViewModel userProfileViewModel { get; set; }
+
+        public int Id { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Current email")]
+        public string OldEmail { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "New email")]
+        public string NewEmail { get; set; }
+
+    }
+
     public class AddPhoneNumberViewModel
     {
         [Required]

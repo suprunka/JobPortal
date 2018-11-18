@@ -18,6 +18,13 @@ namespace WebJobPortal.Models
         public string ReturnUrl { get; set; }
     }
 
+    public class DescriptionViewModel
+    {
+        public int ID { get; set; }
+
+        public String Description { get; set; }
+    }
+
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -69,6 +76,8 @@ namespace WebJobPortal.Models
     {
         //public IEnumerable<ManageOffers> Services { get; set; }
 
+        public String Description { get; set; }
+
         public String Email { get; set; }
 
         //public String Password { get; set; }
@@ -95,7 +104,6 @@ namespace WebJobPortal.Models
 
         public Gender Gender { get; set; }
     }
-
 
     public class SetPropertiesViewModel
     {

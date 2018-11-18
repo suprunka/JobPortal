@@ -10,7 +10,7 @@ namespace MyWeb.Mapping
     public static class UserMapping
     {
 
-        public static User MapSetPropertiesViewModelToUser(SetPropertiesViewModel model)
+        public static User Map_SetPropertiesViewModel_To_User(SetPropertiesViewModel model)
         {
             return new User
             {
@@ -23,6 +23,40 @@ namespace MyWeb.Mapping
                 Postcode = model.Postcode,
                 Region = model.Region,
 
+            };
+        }
+
+        public static ChangeEmailViewModel Map_User_To_ChangeEmailViewModel(User model)
+        {
+            return new ChangeEmailViewModel
+            {
+                NewEmail = model.Email,
+            };
+        }
+
+        public static DescriptionViewModel Map_User_To_DescriptionViewModel(User model)
+        {
+            return new DescriptionViewModel
+            {
+                Description = model.Description,
+            };
+        }
+
+        public static User Map_DescriptionViewModel_To_User(DescriptionViewModel model)
+        {
+            return new User
+            {
+                ID = model.ID,
+                Description = model.Description,
+            };
+        }
+
+        public static User Map_ChangeEmailViewModel_To_User( ChangeEmailViewModel model)
+        {
+            return new User
+            {
+                ID = model.Id,
+                Email = model.NewEmail,
             };
         }
 
