@@ -99,9 +99,9 @@ namespace Repository
             }
         }
 
-        public virtual AspNetUsers Login(AspNetUsers obj)
+        public virtual AspNetUser Login(AspNetUser obj)
         {
-            return db.GetTable<AspNetUsers>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
+            return db.GetTable<AspNetUser>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
            
         }
     }

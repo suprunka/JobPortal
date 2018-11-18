@@ -17,7 +17,7 @@ namespace Repository.DbConnection.Entity
     public partial class dmai0917_1067677Entities1 : IdentityDbContext<JobPortal.Model.ApplicationUser>
     {
         public dmai0917_1067677Entities1()
-            : base("Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;User ID=sa;Password=root;MultipleActiveResultSets=True;App=EntityFramework")
         {
         }
     

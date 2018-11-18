@@ -11,6 +11,7 @@ using Repository;
 using Repository.DbConnection;
 using Repository.DbConnection.Entity;
 using ServiceLibrary.Models;
+using AspNetUser = Repository.DbConnection.AspNetUser;
 using Gender = JobPortal.Model.Gender;
 using Region = JobPortal.Model.Region;
 
@@ -21,7 +22,6 @@ namespace ServiceLibrary
     public class UserService : IUserService
     {
         private readonly IUserRepository _database;
-        private readonly JobPortalEntities _logEntity;
 
         public UserService(IUserRepository database)
         {
@@ -62,7 +62,7 @@ namespace ServiceLibrary
                 return false;
 
             }
-            catch (DuplicateKeyException)
+            catch (Exception)
             {
                 return false;
             }
@@ -101,11 +101,18 @@ namespace ServiceLibrary
                             City = u.CityName,
                             Region = u.Region.ToString(),
                         },
-                        AspNetUsers = new AspNetUsers
+                        AspNetUser = new AspNetUser
                         {
                             UserName = u.UserName,
                             PhoneNumber = u.PhoneNumber,
                             Email = u.Email,
+                            PasswordHash = u.Password,
+                            EmailConfirmed = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            LockoutEnabled = false,
+                            AccessFailedCount = 4,
+
 
                         },
                         Gender = new Repository.DbConnection.Gender
@@ -137,11 +144,11 @@ namespace ServiceLibrary
                   return new User
                   {
                       ID = result.ID,
-                      PhoneNumber = result.AspNetUsers.PhoneNumber,
+                      PhoneNumber = result.AspNetUser.PhoneNumber,
                       FirstName = result.FirstName,
                       LastName = result.LastName,
-                      Email = result.AspNetUsers.Email,
-                      UserName = result.AspNetUsers.UserName,
+                      Email = result.AspNetUser.Email,
+                      UserName = result.AspNetUser.UserName,
                      // Password = result.AspNetUsers.PasswordHash,
                       AddressLine = result.AddressLine,
                       CityName = result.AddressTable.City,
@@ -168,11 +175,11 @@ namespace ServiceLibrary
                     return new User
                     {
                         ID = result.ID,
-                        PhoneNumber = result.AspNetUsers.PhoneNumber,
+                        PhoneNumber = result.AspNetUser.PhoneNumber,
                         FirstName = result.FirstName,
                         LastName = result.LastName,
-                        Email = result.AspNetUsers.Email,
-                        UserName = result.AspNetUsers.UserName,
+                        Email = result.AspNetUser.Email,
+                        UserName = result.AspNetUser.UserName,
                         //Password = result.AspNetUsers.Password,
                         AddressLine = result.AddressLine,
                         CityName = result.AddressTable.City,
@@ -199,16 +206,16 @@ namespace ServiceLibrary
                 resultToReturn.Add(new User
                 {
                     ID = u.ID,
-                    PhoneNumber = u.AspNetUsers.PhoneNumber,
+                    PhoneNumber = u.AspNetUser.PhoneNumber,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.AspNetUsers.Email,
+                    Email = u.AspNetUser.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
                     // Password = u.AspNetUsers.Password,
-                    UserName = u.AspNetUsers.UserName,
+                    UserName = u.AspNetUser.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
             }
@@ -223,16 +230,16 @@ namespace ServiceLibrary
                 resultToReturn.Add(new User
                 {
                     ID = u.ID,
-                    PhoneNumber = u.AspNetUsers.PhoneNumber,
+                    PhoneNumber = u.AspNetUser.PhoneNumber,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.AspNetUsers.Email,
+                    Email = u.AspNetUser.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
                     //Password = u.AspNetUsers.Password,
-                    UserName = u.AspNetUsers.UserName,
+                    UserName = u.AspNetUser.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
             }
@@ -247,16 +254,16 @@ namespace ServiceLibrary
                 resultToReturn.Add(new User
                 {
                     ID = u.ID,
-                    PhoneNumber = u.AspNetUsers.PhoneNumber,
+                    PhoneNumber = u.AspNetUser.PhoneNumber,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.AspNetUsers.Email,
+                    Email = u.AspNetUser.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
                     //Password = u.AspNetUsers.Password,
-                    UserName = u.AspNetUsers.UserName,
+                    UserName = u.AspNetUser.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
             }
@@ -265,7 +272,7 @@ namespace ServiceLibrary
 
 
 
-        private AspNetUsers Register(String login, String password, string mail, string phonenumber)
+        private AspNetUser Register(String login, String password, string mail, string phonenumber)
         {
             if (login.Length == 0 || password.Length == 0)
             {
@@ -280,7 +287,7 @@ namespace ServiceLibrary
                 str.Append(result[i].ToString("x2"));
             }
             var pass = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result));
-            AspNetUsers logging = new AspNetUsers
+            AspNetUser logging = new AspNetUser
             {
                 Id= login+"."+phonenumber,
                 Email = mail,
@@ -300,7 +307,7 @@ namespace ServiceLibrary
         public bool Login(String login, String password)
         {
 
-            var existing = _database.Login(new AspNetUsers { UserName = login, PasswordHash = password });
+            var existing = _database.Login(new AspNetUser { UserName = login, PasswordHash = password });
             if (existing != null)
             {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -319,10 +326,7 @@ namespace ServiceLibrary
             }
             return false;
         }
-        public JobPortalEntities GetLoginEntity()
-        {
-            return JobPortalEntities.Create();
-        }
+      
 
        
     }

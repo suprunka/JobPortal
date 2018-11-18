@@ -15,7 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework";
+        private readonly string connection = "Data Source=DESKTOP-GQ6AKJT\\SA;Initial Catalog=JobPortal;User ID=sa;Password=root";
       public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
@@ -32,20 +32,83 @@ namespace Repository
                 {
                     try
                     {
-                       //if (loggingId == null)
-                       //{
-                       //    AspNetUsers logging = new AspNetUsers
-                       //    {
-                       //        UserName = obj.AspNetUsers.UserName,
-                       //        PasswordHash = obj.AspNetUsers.PasswordHash,
-                       //        Email = obj.AspNetUsers.Email,
-                       //        PhoneNumber = obj.AspNetUsers.PhoneNumber,
-                       //    };
-                       //
-                       //    _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
-                       //    _context.SubmitChanges();
-                       //    loggingId = logging.Id.ToString();
-                       //}
+                    
+                        var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                        if (addressExists == null)
+                        {
+                            addressExists = new AddressTable
+                            {
+                                Postcode = obj.AddressTable.Postcode,
+                                City = obj.AddressTable.City,
+                                Region = obj.AddressTable.Region,
+                            };
+                            _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
+
+
+                            _context.SubmitChanges();
+                        }
+
+                        Users u = new Users
+                        {
+                            FirstName = obj.FirstName,
+                            LastName = obj.LastName,
+                            Logging_ID = obj.Logging_ID,
+                            Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
+                                t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
+                            AddressLine = obj.AddressLine,
+                            City_ID = addressExists.ID,
+                            PayPalMail = obj.PayPalMail,
+                        };
+
+                        _context.GetTable<Users>().InsertOnSubmit(u);
+                        _context.SubmitChanges();
+
+                        myTran.Complete();
+                        result = u;
+                    }
+                    catch
+                    {
+                        result = null;
+                        throw new DuplicateKeyException(this);
+                    }
+                    finally
+                    {
+                        objConn.Close();
+                    }
+                }
+            }
+            return result;
+        }
+        public  Users Create(Users obj, string loggingId)
+        {
+            Users result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                using (var myTran = new TransactionScope())
+                {
+                    try
+                    {
+                      if (loggingId == null)
+                      {
+                          AspNetUser logging = new AspNetUser
+                          {
+                              Id=obj.AspNetUser.UserName,
+                              UserName = obj.AspNetUser.UserName,
+                              PasswordHash = obj.AspNetUser.PasswordHash,
+                              Email = obj.AspNetUser.Email,
+                              PhoneNumber = obj.AspNetUser.PhoneNumber,
+                              EmailConfirmed = false,
+                              PhoneNumberConfirmed = false,
+                              TwoFactorEnabled = false,
+                              LockoutEnabled = false,
+                              AccessFailedCount = 4,
+                          };
+                      
+                          _context.GetTable<AspNetUser>().InsertOnSubmit(logging);
+                          _context.SubmitChanges();
+                          loggingId = logging.Id.ToString();
+                      }
 
                         var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                         if (addressExists == null)
@@ -109,8 +172,8 @@ namespace Repository
 
 
 
-                    AspNetUsers foundLogging = _context.GetTable<AspNetUsers>().FirstOrDefault(t => t.Id.ToString() == found.Logging_ID.ToString());
-                    _context.GetTable<AspNetUsers>().DeleteOnSubmit(foundLogging);
+                    AspNetUser foundLogging = _context.GetTable<AspNetUser>().FirstOrDefault(t => t.Id.ToString() == found.Logging_ID.ToString());
+                    _context.GetTable<AspNetUser>().DeleteOnSubmit(foundLogging);
 
 
 
@@ -158,9 +221,9 @@ namespace Repository
         {
             return base.List(predicate);
         }
-        public  AspNetUsers Login(AspNetUsers account)
+        public  AspNetUser Login(AspNetUser account)
         {
-            return base.Login(account);
+            return Login(account);
         }
 
         public override bool Update(Users obj)
@@ -177,12 +240,12 @@ namespace Repository
                         Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                         int oldCity_ID = found.City_ID;
                         var oldPostCode = found.AddressTable.Postcode;
-                        found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
+                        found.AspNetUser.PhoneNumber = obj.AspNetUser.PhoneNumber;
                         found.FirstName = obj.FirstName;
                         found.LastName = obj.LastName;
-                        found.AspNetUsers.Email = obj.AspNetUsers.Email;
-                        found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
-                       // found.AspNetUsers.Password = obj.AspNetUsers.AspNetUsers.Password;
+                        found.AspNetUser.Email = obj.AspNetUser.Email;
+                        found.AspNetUser.UserName = obj.AspNetUser.UserName;
+                       // found.AspNetUser.Password = obj.AspNetUser.AspNetUser.Password;
                         found.AddressLine = obj.AddressLine;
                         if(obj.Gender.Gender1 == "Male")
                         {
@@ -205,7 +268,7 @@ namespace Repository
 
 
                             });
-                            string newPhoneNumber = obj.AspNetUsers.PhoneNumber;
+                            string newPhoneNumber = obj.AspNetUser.PhoneNumber;
                             _context.SubmitChanges();
 
 
@@ -260,7 +323,7 @@ namespace Repository
                     Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == newInformation.ID);
                     /*int oldCity_ID = found.City_ID;
                     var oldPostCode = found.AddressTable.Postcode;*/
-                    found.AspNetUsers.PhoneNumber = newInformation.AspNetUsers.PhoneNumber;
+                    found.AspNetUser.PhoneNumber = newInformation.AspNetUser.PhoneNumber;
                     found.FirstName = newInformation.FirstName;
                     found.LastName = newInformation.LastName;
                     found.AddressLine = newInformation.AddressLine;

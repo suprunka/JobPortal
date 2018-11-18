@@ -7,7 +7,7 @@ using UnitTestProject1.Database_tests;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Category = Repository.DbConnection.Category;
 using Gender = Repository.DbConnection.Gender;
-using AspNetUsers = Repository.DbConnection.AspNetUsers;
+using AspNetUser = Repository.DbConnection.AspNetUser;
 using ServiceOffer = Repository.DbConnection.ServiceOffer;
 using SubCategory = Repository.DbConnection.SubCategory;
 using Users = Repository.DbConnection.Users;
@@ -28,7 +28,7 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                AspNetUsers = new AspNetUsers
+                AspNetUser = new AspNetUser
                 {
                     PasswordHash = "Adama1",
                     UserName = "Username1",
@@ -59,7 +59,7 @@ namespace UnitTestProject1
                     City = "Aarhus",
                     Region = "Midtjylland"
                 },
-                AspNetUsers = new AspNetUsers
+                AspNetUser = new AspNetUser
                 {
                     PasswordHash = "Adama1",
                     UserName = "Username1",
@@ -83,7 +83,7 @@ namespace UnitTestProject1
         }
         private static ServiceOffer GetServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
                 Subcategory_ID = 1,
                 RatePerHour = 20,
@@ -91,11 +91,11 @@ namespace UnitTestProject1
                 Employee_ID = 1,
                 Title = "First",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
         private static ServiceOffer GetSecondServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
                 Subcategory_ID = 1,
                 RatePerHour = 40,
@@ -103,11 +103,11 @@ namespace UnitTestProject1
                 Employee_ID = 1,
                 Title = "Second",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
         private static ServiceOffer GetThirdServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
                 Subcategory_ID = 1,
                 RatePerHour = 30,
@@ -115,11 +115,11 @@ namespace UnitTestProject1
                 Employee_ID = 1,
                 Title = "Third",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
         private static ServiceOffer GetForthServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
                 Subcategory_ID = 1,
                 RatePerHour = 30,
@@ -127,12 +127,12 @@ namespace UnitTestProject1
                 Employee_ID = 12,
                 Title = "Third",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
 
         private static ServiceOffer ToUpdateServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
                 Subcategory_ID = 5,
                 RatePerHour = 100,
@@ -140,12 +140,12 @@ namespace UnitTestProject1
                 Employee_ID = 12,
                 Title = "Updated",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
 
         private static ServiceOffer GetInvalidServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
                 Subcategory_ID = -5,
                 RatePerHour = 20,
@@ -153,7 +153,7 @@ namespace UnitTestProject1
                 Employee_ID = 12,
                 Title = "Invalid",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
 
         //Testing adding service. [OK]
@@ -175,11 +175,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -204,11 +204,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -235,11 +235,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -267,11 +267,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -292,7 +292,7 @@ namespace UnitTestProject1
                     unitOfWork.Offers.Create(GetSecondServiceOffer());
                     unitOfWork.Offers.Create(GetThirdServiceOffer());
                     unitOfWork.Offers.Create(GetForthServiceOffer());
-                    var list = unitOfWork.Offers.List(t => t.Users.AspNetUsers.PhoneNumber == "35896452");
+                    var list = unitOfWork.Offers.List(t => t.Users.AspNetUser.PhoneNumber == "35896452");
                     Assert.AreEqual(1, list.Count());
                 }
                 catch
@@ -301,11 +301,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -335,11 +335,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -367,11 +367,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }
@@ -397,11 +397,11 @@ namespace UnitTestProject1
                 }
                 finally
                 {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
+                    context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
                     context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
+                    context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
             }

@@ -16,7 +16,7 @@ namespace WebJobPortal
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(JobPortalEntities.Create);
+            app.CreatePerOwinContext(dmai0917_1067677Entities1.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

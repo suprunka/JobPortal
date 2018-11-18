@@ -7,5 +7,6 @@ namespace Repository
 
 
         Users UpdateWeb(Users newInformation);
+        Users Create(Users users, string loggingId);
     }
 }

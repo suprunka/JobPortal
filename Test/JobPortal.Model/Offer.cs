@@ -25,6 +25,14 @@ namespace JobPortal.Model
         public virtual Category Category { get; set; }
         [DataMember]
         public virtual SubCategory Subcategory { get; set; }
+        [DataMember]
+        public virtual NodaTime.LocalTime HoursFrom { get; set; }
+        [DataMember]
+        public virtual NodaTime.LocalTime HoursTo { get; set; }
+        [DataMember]
+        public virtual DayOfWeek WeekDay { get; set; }
+
+
     }
 
     [DataContract(Name = "Category")]

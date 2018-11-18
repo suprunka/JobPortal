@@ -289,7 +289,7 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    AspNetUsers = new AspNetUsers
+                    AspNetUser = new AspNetUser
                     {
                         PasswordHash = "Adama1",
                         UserName = "Username1",
@@ -347,7 +347,7 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                                       AspNetUsers = new AspNetUsers
+                                       AspNetUser = new AspNetUser
                     {
                         PasswordHash = "Adama1",
                         UserName = "Username1",
@@ -392,7 +392,7 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                                       AspNetUsers = new AspNetUsers
+                                       AspNetUser = new AspNetUser
                     {
                         PasswordHash = "Adama1",
                         UserName = "Username1",
@@ -453,7 +453,7 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    AspNetUsers = new AspNetUsers
+                    AspNetUser = new AspNetUser
                     {
                         PasswordHash = "Adama1",
                         UserName = "Username1",
@@ -514,7 +514,7 @@ namespace UnitTestProject1.Service_tests
                         City = "Aalborg",
                         Region = "Nordjylland"
                     },
-                    AspNetUsers = new AspNetUsers
+                    AspNetUser = new AspNetUser
                     {
                         PasswordHash = "Adama1",
                         UserName = "Username1",

@@ -38,7 +38,6 @@ namespace ServiceLibrary
         [OperationContract]
         bool Login(string username, string password);
 
-        [OperationContract]
-        JobPortalEntities GetLoginEntity();
+        
     }
 }
