@@ -173,7 +173,7 @@ namespace WebJobPortal.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(userapp, isPersistent: false, rememberBrowser: false);
-                  //  _proxy.CreateUser()
+                    //  _proxy.CreateUser()
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -181,7 +181,7 @@ namespace WebJobPortal.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("SetUserProperties", "Manage", routeValues: User.Identity.GetUserId());
                 }
                // AddErrors(result);
             }
