@@ -96,5 +96,16 @@ namespace Repository.Properties {
                 return ((string)(this["dmai0917_1067677ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_106767" +
+            "7")]
+        public string dmai0917_1067677ConnectionString1 {
+            get {
+                return ((string)(this["dmai0917_1067677ConnectionString1"]));
+            }
+        }
     }
 }

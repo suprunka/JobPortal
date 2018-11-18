@@ -26,9 +26,9 @@ namespace JobPortal.Model
         [DataMember]
         public virtual SubCategory Subcategory { get; set; }
         [DataMember]
-        public virtual NodaTime.LocalTime HoursFrom { get; set; }
+        public virtual TimeSpan HoursFrom { get; set; }
         [DataMember]
-        public virtual NodaTime.LocalTime HoursTo { get; set; }
+        public virtual TimeSpan HoursTo { get; set; }
         [DataMember]
         public virtual DayOfWeek WeekDay { get; set; }
 

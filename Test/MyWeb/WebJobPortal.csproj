@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ServiceOfferController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,7 +218,7 @@
     <Compile Include="Mapping\UserMapping.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageOffers.cs" />
+    <Compile Include="Models\ManageOffersViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -321,10 +322,13 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\ChangeEmail.cshtml" />
     <Content Include="Views\User\AddDescription.cshtml" />
+    <Content Include="Views\Offers\Index.cshtml" />
+    <Content Include="Views\Offers\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Pictures\" />
+    <Folder Include="Views\ServiceOffer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
