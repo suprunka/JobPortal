@@ -36,8 +36,15 @@ namespace ServiceLibrary
         User[] ListByRegion(Region region);
 
         [OperationContract]
+        bool EditUserEmail(User u);
+
+        [OperationContract]
         bool Login(string username, string password);
 
-        
+        [OperationContract]
+        bool AddDescription(User u);
+
+        //[OperationContract]
+        //JobPortalEntities GetLoginEntity();
     }
 }

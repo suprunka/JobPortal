@@ -404,6 +404,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUserEmail_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUserEmail_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="UserServiceHttpEndpoint_Login_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -442,7 +480,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_GetLoginEntity_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_AddDescription_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -461,7 +499,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_GetLoginEntity_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_AddDescription_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -514,9 +552,6 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Repository.DbConnection.Entity" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data.Entity" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_CreateUser_InputMessage">
@@ -567,17 +602,23 @@
   <wsdl:message name="IUserService_ListByRegion_OutputMessage">
     <wsdl:part name="parameters" element="tns:ListByRegionResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_EditUserEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserEmail" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_EditUserEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserEmailResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_Login_InputMessage">
     <wsdl:part name="parameters" element="tns:Login" />
   </wsdl:message>
   <wsdl:message name="IUserService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
-  <wsdl:message name="IUserService_GetLoginEntity_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetLoginEntity" />
+  <wsdl:message name="IUserService_AddDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDescription" />
   </wsdl:message>
-  <wsdl:message name="IUserService_GetLoginEntity_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetLoginEntityResponse" />
+  <wsdl:message name="IUserService_AddDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDescriptionResponse" />
   </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="CreateUser">
@@ -612,13 +653,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ListByRegion" message="tns:IUserService_ListByRegion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ListByRegionResponse" message="tns:IUserService_ListByRegion_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="EditUserEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/EditUserEmail" message="tns:IUserService_EditUserEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/EditUserEmailResponse" message="tns:IUserService_EditUserEmail_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginResponse" message="tns:IUserService_Login_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetLoginEntity">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetLoginEntity" message="tns:IUserService_GetLoginEntity_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetLoginEntityResponse" message="tns:IUserService_GetLoginEntity_OutputMessage" />
+    <wsdl:operation name="AddDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddDescription" message="tns:IUserService_AddDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddDescriptionResponse" message="tns:IUserService_AddDescription_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UserServiceHttpEndpoint" type="tns:IUserService">
@@ -712,6 +757,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EditUserEmail">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditUserEmail" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUserEmail_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUserEmail_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/IUserService/Login" style="document" />
       <wsdl:input>
@@ -723,14 +779,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetLoginEntity">
-      <soap12:operation soapAction="http://tempuri.org/IUserService/GetLoginEntity" style="document" />
+    <wsdl:operation name="AddDescription">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/AddDescription" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetLoginEntity_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_AddDescription_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetLoginEntity_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_AddDescription_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -810,6 +866,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EditUserEmail">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditUserEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/IUserService/Login" style="document" />
       <wsdl:input>
@@ -819,8 +884,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetLoginEntity">
-      <soap12:operation soapAction="http://tempuri.org/IUserService/GetLoginEntity" style="document" />
+    <wsdl:operation name="AddDescription">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/AddDescription" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

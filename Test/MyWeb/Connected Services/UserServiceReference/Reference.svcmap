@@ -26,9 +26,6 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7871a12b-024e-4640-bee5-7409572d123b" SourceId="1" SourceUrl="http://localhost:8080/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="13ba8124-1cfc-47bb-86ab-daf7cf51fc6d" SourceId="1" SourceUrl="http://localhost:8080/mex" />
     <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="ad29d35b-83aa-4986-ae01-18c703ead0e8" SourceId="1" SourceUrl="http://localhost:8080/mex" />
-    <MetadataFile FileName="Repository.DbConnection.Entity.xsd" MetadataType="Schema" ID="96a50b78-ef66-4e3e-af04-de869cb1f80f" SourceId="1" SourceUrl="http://localhost:8080/mex" />
-    <MetadataFile FileName="Microsoft.AspNet.Identity.EntityFramework.xsd" MetadataType="Schema" ID="bdb6452c-c83b-4d57-976d-7049b8d08e0a" SourceId="1" SourceUrl="http://localhost:8080/mex" />
-    <MetadataFile FileName="System.Data.Entity.xsd" MetadataType="Schema" ID="70ff20ed-3786-4e0f-a88c-4c88cb78b45a" SourceId="1" SourceUrl="http://localhost:8080/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

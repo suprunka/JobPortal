@@ -118,11 +118,54 @@ namespace MyWeb.Controllers
                var isUpdated=  _proxy.EditUser(UserMapping.Map_UserProfileViewModel_To_User(u));
                 if (isUpdated)
                 {
+                    return UserProfile(User.Identity.GetUserId());
+                }
+            }
+            return View(u);
+
+        }
+
+        
+        public ActionResult AddDescription(int id)
+        {
+            return View(UserMapping.Map_User_To_DescriptionViewModel(_proxy.FindUserByID(id)));
+        }
+
+        [HttpPost]
+        public ActionResult AddDescription(DescriptionViewModel u)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = _proxy.AddDescription(UserMapping.Map_DescriptionViewModel_To_User(u));
+                if (isUpdated)
+                {
                     return RedirectToAction("Index", "Home");
                 }
             }
             return View(u);
 
+        }
+
+
+
+
+        public ActionResult ChangeEmail(int id)
+        {
+            return View(UserMapping.Map_User_To_ChangeEmailViewModel(_proxy.FindUserByID(id)));
+        }
+
+        [HttpPost]
+        public ActionResult ChangeEmail(ChangeEmailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var changeEmail = _proxy.EditUserEmail(UserMapping.Map_ChangeEmailViewModel_To_User(model));
+                if (changeEmail)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(model);
         }
 
 

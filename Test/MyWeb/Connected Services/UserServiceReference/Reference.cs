@@ -63,17 +63,23 @@ namespace MyWeb.UserServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByRegionAsync(JobPortal.Model.Region region);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
+        bool EditUserEmail(JobPortal.Model.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
+        System.Threading.Tasks.Task<bool> EditUserEmailAsync(JobPortal.Model.User u);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
         bool Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetLoginEntity", ReplyAction="http://tempuri.org/IUserService/GetLoginEntityResponse")]
-        Repository.DbConnection.Entity.dmai0917_1067677Entities1 GetLoginEntity();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
+        bool AddDescription(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetLoginEntity", ReplyAction="http://tempuri.org/IUserService/GetLoginEntityResponse")]
-        System.Threading.Tasks.Task<Repository.DbConnection.Entity.dmai0917_1067677Entities1> GetLoginEntityAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
+        System.Threading.Tasks.Task<bool> AddDescriptionAsync(JobPortal.Model.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +173,14 @@ namespace MyWeb.UserServiceReference {
             return base.Channel.ListByRegionAsync(region);
         }
         
+        public bool EditUserEmail(JobPortal.Model.User u) {
+            return base.Channel.EditUserEmail(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditUserEmailAsync(JobPortal.Model.User u) {
+            return base.Channel.EditUserEmailAsync(u);
+        }
+        
         public bool Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
@@ -175,12 +189,12 @@ namespace MyWeb.UserServiceReference {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public Repository.DbConnection.Entity.dmai0917_1067677Entities1 GetLoginEntity() {
-            return base.Channel.GetLoginEntity();
+        public bool AddDescription(JobPortal.Model.User u) {
+            return base.Channel.AddDescription(u);
         }
         
-        public System.Threading.Tasks.Task<Repository.DbConnection.Entity.dmai0917_1067677Entities1> GetLoginEntityAsync() {
-            return base.Channel.GetLoginEntityAsync();
+        public System.Threading.Tasks.Task<bool> AddDescriptionAsync(JobPortal.Model.User u) {
+            return base.Channel.AddDescriptionAsync(u);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MyWeb.Mapping;
 using WebJobPortal.Models;
 
 namespace WebJobPortal.Controllers
@@ -62,7 +63,7 @@ namespace WebJobPortal.Controllers
         //  var list = _offerProxy.GetAllOffers().Where(x => x.Author.ID == um.User.ID).Select(x => _mapper.Map(x, new ServiceOfferWebModel()));
         // 
         //  um.Services = (IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>)list;
-            return RedirectToAction("VerifyPhoneNumber");
+            return View("VerifyPhoneNumber");
 
         }
 
@@ -229,7 +230,7 @@ namespace WebJobPortal.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("UserProfile", "User", new {id= User.Identity.GetUserId(), Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -289,10 +290,30 @@ namespace WebJobPortal.Controllers
                 OtherLogins = otherLogins
             });
         }
+
+        [HttpGet]
         public ActionResult SetUserProperties()
         {
-
           return  View("SetUserProperties", new SetPropertiesViewModel());
+        }
+
+
+        [HttpPost]
+        public ActionResult SetUserProperties(SetPropertiesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = _proxy.CreateUser(UserMapping.Map_SetPropertiesViewModel_To_User(model), User.Identity.GetUserId());
+            if (result)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         //
