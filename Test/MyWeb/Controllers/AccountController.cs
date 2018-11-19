@@ -97,7 +97,7 @@ namespace WebJobPortal.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return View("Index");
             }
         }
 
@@ -410,7 +410,7 @@ namespace WebJobPortal.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "ServiceOffer");
         }
 
         //
@@ -467,7 +467,7 @@ namespace WebJobPortal.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "ServiceOffer");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

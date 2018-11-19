@@ -308,7 +308,7 @@ namespace WebJobPortal.Controllers
             var result = _proxy.CreateUser(UserMapping.Map_SetPropertiesViewModel_To_User(model), User.Identity.GetUserId());
             if (result)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
             }
             else
             {
