@@ -15,7 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework";
+        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_1067677;Password=Password1!";
       public UsersRepository(DataContext context) : base(context)
         {
             _context = context;

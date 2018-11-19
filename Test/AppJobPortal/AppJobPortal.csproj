@@ -222,6 +222,9 @@
     <None Include="Connected Services\OfferServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OfferServiceReference\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

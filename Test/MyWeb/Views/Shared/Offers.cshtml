@@ -27,7 +27,7 @@
                 <h4 class="card-title">@offer.Title</h4>
                 <p class="card-text">@offer.Description</p>
                 <h4 class="price">@offer.RatePerHour / hour</h4>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                @Html.ActionLink("See Details", "ViewDetails", "ServiceOffer", new { id= offer.Id },new { @class= "btn btn-primary" })
             </div>
 
         </div>

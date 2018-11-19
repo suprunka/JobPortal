@@ -231,8 +231,8 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser(), null);
-                    unitOfWork.Users.Create(ThirdUser(), null);
+                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(ThirdUser());
                     int numberOfAddressRecords = context.AddressTable.Count();
                     Assert.AreEqual(1, numberOfAddressRecords);
 
@@ -263,7 +263,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Create(GetAnotherUser());
                 }
                 catch (DuplicateKeyException)
@@ -298,9 +298,9 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    var result = unitOfWork.Users.Create(GetUser(), null);
+                    var result = unitOfWork.Users.Create(GetUser());
                     Assert.IsNotNull(result);
-                    unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(GetUser());
                 }
                 catch (DuplicateKeyException)
                 {
@@ -330,7 +330,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    var x = unitOfWork.Users.Create(GetUser(), null);
+                    var x = unitOfWork.Users.Create(GetUser());
                     bool result = unitOfWork.Users.Delete(t => t.ID == x.ID);
                     Assert.IsTrue(result);
 
@@ -363,8 +363,8 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    var user = unitOfWork.Users.Create(GetUser(), null);
-                    unitOfWork.Users.Create(ThirdUser(), null);
+                    var user = unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(ThirdUser());
                     unitOfWork.Users.Delete(t => t.ID == user.ID);
                     Assert.IsNotNull(context.AddressTable.First());
                 }
@@ -393,7 +393,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    var user = unitOfWork.Users.Create(GetUser(), null);
+                    var user = unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Delete(t => t.ID == user.ID);
                     Assert.AreEqual(0, context.AddressTable.Count());
                 }
@@ -422,7 +422,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Create(ThirdUser());
                     IQueryable<Users> listOfAvailableUsers = unitOfWork.Users.GetAll();
                     Assert.AreEqual(2, listOfAvailableUsers.ToArray().Count());
@@ -452,7 +452,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser(), null);
+                    unitOfWork.Users.Create(GetUser());
                     Users found = unitOfWork.Users.Get(t => t.AspNetUser.PhoneNumber == "12345670");
                     Assert.AreEqual("adam2@gmail.com", found.AspNetUser.Email);
                     Assert.AreEqual("Male", found.Gender.Gender1);
@@ -485,9 +485,9 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    unitOfWork.Users.Create(GetUser(), null);
-                    unitOfWork.Users.Create(ForthUser(), null);
-                    unitOfWork.Users.Create(ThirdUser(), null);
+                    unitOfWork.Users.Create(GetUser());
+                    unitOfWork.Users.Create(ForthUser());
+                    unitOfWork.Users.Create(ThirdUser());
                     IQueryable<Users> filtredList = unitOfWork.Users.List(u => u.AddressTable.City == "Aalborg");
                     Assert.AreEqual(3, filtredList.ToArray().Count());
                 }
@@ -516,7 +516,7 @@ namespace UnitTestProject1
             {
                 try
                 {
-                    Users u = unitOfWork.Users.Create(GetUser(), null);
+                    Users u = unitOfWork.Users.Create(GetUser());
                     Users toUpdate = ToUpdate();
                     toUpdate.ID = u.ID;
 

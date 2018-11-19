@@ -45,7 +45,7 @@ namespace WebJobPortal.Controllers
         {
             // var tuple = new Tuple<UserModel, IEnumerable<ServiceOfferWebModel>>(um, _serviceOffers);
             um.User = new UserModel() { ID = 1};
-           var list = _offerProxy.GetAllOffers().Where(x => x.Author.ID == um.User.ID).Select(x=> _mapper.Map(x, new ServiceOfferWebModel()));
+           var list = _offerProxy.GetAllOffers().Where(x => x.AuthorId == um.User.ID).Select(x=> _mapper.Map(x, new ServiceOfferWebModel()));
 
             um.Services = (IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>)list;
      // um.Services = new ServiceOfferWebModel[]{

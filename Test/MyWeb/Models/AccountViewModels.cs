@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MyWeb.OfferReference;
+using MyWeb.Models;
 
 namespace WebJobPortal.Models
 {
@@ -74,7 +75,7 @@ namespace WebJobPortal.Models
 
     public class UserProfileViewModel
     {
-        //public IEnumerable<ManageOffers> Services { get; set; }
+        public MyWeb.Models.ManageOffers[] Services { get; set; }
 
         public String Description { get; set; }
 

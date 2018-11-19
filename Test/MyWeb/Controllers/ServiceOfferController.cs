@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using JobPortal.Model;
 using MyWeb.Models;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace MyWeb.Controllers
 {
@@ -23,7 +24,7 @@ namespace MyWeb.Controllers
 ()
         {
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<JobPortal.Model.Offer, ServiceOfferViewModel>();
+                cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
             });
 
             _mapper = config.CreateMapper();
@@ -38,7 +39,7 @@ namespace MyWeb.Controllers
             }
             var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
 
-            return View("Index", condition);
+            return View("Index", condition.ToArray());
         }
 
         public ActionResult Add()
@@ -54,12 +55,12 @@ namespace MyWeb.Controllers
             bool result = _offerProxy.CreateServiceOffer(new Offer
             {
                 Description = model.ManageOffers.Description,
-                AuthorId = model.ManageOffers.Author,
+                AuthorId =  User.Identity.GetUserId(),
                 Title = model.ManageOffers.Title,
                 RatePerHour = model.ManageOffers.RatePerHour,
                 Category = model.ManageOffers.Category,
                 Subcategory = model.ManageOffers.Subcategory,
-                ListOfWorkingDays = workingdays.Select(x => _mapper.Map(x, new WorkingTime())).ToList(),
+                //ListOfWorkingDays = workingdays.Select(x => _mapper.Map(x, new WorkingTime())).ToList(),
             });
             if(result)
                 return View("Index");
@@ -94,28 +95,37 @@ namespace MyWeb.Controllers
             workingdays.Add(working);
             Console.WriteLine("" + day + "  " + hour + " " + hourTo);
         }
-
-        public ActionResult ViewDetails()
+        public ActionResult ViewDetails(int  id)
         {
-            return View("ViewDetails", new ManageOffers());
+            var found = _offerProxy.FindServiceOffer(id);
+            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour };
+            return View( model);
         }
-
+        [HttpPost]
         public ActionResult Edit(ManageOffers edited)
         {
+            if (
             _offerProxy.UpdateServiceOffer(new Offer
             {
+
                 Id = edited.Id,
                 Title = edited.Title,
                 Description = edited.Description,
                 RatePerHour = edited.RatePerHour,
-            });
-            return View("ViewDetails", new ManageOffers());
+            }))
+            {
+
+                TempData["msg"] = "<script>alert('You offer is updated');</script>";
+                return RedirectToAction("UserProfile","User", new { id= User.Identity.GetUserId()});
+
+            }
+            return View("ViewDetails", edited);
         }
         public ActionResult Delete(int id)
         {
             if (_offerProxy.DeleteServiceOffer(id))
                 return View("Index", "Home");
-            return View("Index", "Home");
+                return View("Index", "Home");
 
 
         }

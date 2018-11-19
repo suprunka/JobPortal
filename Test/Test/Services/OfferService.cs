@@ -57,21 +57,23 @@ namespace ServiceLibrary
                    var serviceOffer= _database.Create(new ServiceOffer
                     {
 
-                        SubCategory = new Repository.DbConnection.SubCategory
+                        SubCategory =  new Repository.DbConnection.SubCategory
                         {
                             Name = offer.Subcategory.ToString(),
                             Category = new Repository.DbConnection.Category
                             {
-                                Name = offer.Subcategory.ToString(),
+                                Name = offer.Category.ToString(),
                             },
                         },
+                        
+
                         Title = offer.Title,
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
                         Employee_ID = offer.AuthorId,
 
                     });
-                    AddtoOffer(serviceOffer, offer);
+              //      AddtoOffer(serviceOffer, offer);
 
                     return true;
                 }
