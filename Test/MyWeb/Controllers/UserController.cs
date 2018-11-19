@@ -71,10 +71,14 @@ namespace MyWeb.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> UserProfile(string id)
-        { 
-           return View(UserMapping.Map_User_To_UserProfileViewModel(await _proxy.FindUserAsync(id)));
+        public ActionResult UserProfile(string id)
+        {
+            UserProfileViewModel user = UserMapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
+            user.Services = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id).Select(x => new ManageOffers { Id = x.Id, Author = x.AuthorId, Description = x.Description, RatePerHour = x.RatePerHour, Title = x.Title, Subcategory = x.Subcategory, Category = x.Category }).ToArray();
+
+            return View(user);
         }
+
 
         [HttpGet]
         public async Task<ActionResult> DeleteAsync(int id)

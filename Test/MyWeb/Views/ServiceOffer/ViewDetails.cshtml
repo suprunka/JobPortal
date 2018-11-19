@@ -51,21 +51,26 @@
     <div class="form-group">
         @Html.ActionLink("Author", "UserProfile", "User", new { id = Model.Author }, null)
 
+        
     </div>
-    @{ if (Model.Author == User.Identity.GetUserId())
-        {
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    @Html.ActionLink("Delete", "Edit", "ServiceOffer", new { edited = Model.Id }, new { @class = "btn btn-danger" })
-                </div>
+}
+    @if (Model.Author == User.Identity.GetUserId())
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Delete", "Edit", "ServiceOffer", new { edited = Model.Id }, new { @class = "btn btn-danger" })
             </div>
-        }
-        else
-        {
-            @Html.ActionLink("Book", "Edit", "ServiceOffer", new { edited = Model.Id }, new { @class = "btn btn-danger" })
+        </div>
+    }
+    else
+    {
+        @Html.ActionLink("Book", "Edit", "ServiceOffer", new { edited = Model.Id }, new { @class = "btn btn-danger" })
 
-        }
 
     }
+
+
+
+
     @Html.Raw(TempData["msg"])
