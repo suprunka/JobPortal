@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿
 using JobPortal.Model;
 using System;
 using System.Collections;
@@ -19,51 +19,45 @@ namespace WebJobPortal.Controllers
         private readonly IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint");
         private readonly IOfferService _offerProxy = new OfferServiceClient("offerService");
         private IEnumerable<ServiceOfferWebModel> _serviceOffers = null;
-        private IMapper _mapper;
 
         public UserController(IUserService proxy)
         {
             this._proxy = proxy;
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Offer, ServiceOfferWebModel>();
-            });
 
-            _mapper = config.CreateMapper();
         }
         public UserController()
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Offer, ServiceOfferWebModel>();
-            });
 
-            _mapper = config.CreateMapper();
 
         }
 
+    }
+}
+/*
         [HttpGet]
         public ActionResult UserProfile(UserServicesViewModel um)
         {
             // var tuple = new Tuple<UserModel, IEnumerable<ServiceOfferWebModel>>(um, _serviceOffers);
-            um.User = new UserModel() { ID = 1};
-           var list = _offerProxy.GetAllOffers().Where(x => x.Author.ID == um.User.ID).Select(x=> _mapper.Map(x, new ServiceOfferWebModel()));
+            um.User = new UserModel() { ID = 1 };
+            var list = _offerProxy.GetAllOffers().Where(x => x.Author.ID == um.User.ID).Select(x => _mapper.Map(x, new ServiceOfferWebModel()));
 
             um.Services = (IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>)list;
-     // um.Services = new ServiceOfferWebModel[]{
-     //     new ServiceOfferWebModel {
-     //          Title = "Cleaning at you house",
-     //          Description = "I'm very nice person, who'd love to clean your dirty socks",
-     //          RatePerHour = 150 },
-     //     new ServiceOfferWebModel {
-     //         Title = "Gardening",
-     //         Description = "I'm very nice person, who'd love to clean your garden",
-     //         RatePerHour = 290 },
-     //     new ServiceOfferWebModel {
-     //         Title = "Graphic star",
-     //         Description = "I'm very nice person, who'd love to  prepare logo for you",
-     //         RatePerHour = 350 }, new ServiceOfferWebModel {
-     //             Title = "Babysitter",
-     //             Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
-     //             RatePerHour = 10 } };
+            // um.Services = new ServiceOfferWebModel[]{
+            //     new ServiceOfferWebModel {
+            //          Title = "Cleaning at you house",
+            //          Description = "I'm very nice person, who'd love to clean your dirty socks",
+            //          RatePerHour = 150 },
+            //     new ServiceOfferWebModel {
+            //         Title = "Gardening",
+            //         Description = "I'm very nice person, who'd love to clean your garden",
+            //         RatePerHour = 290 },
+            //     new ServiceOfferWebModel {
+            //         Title = "Graphic star",
+            //         Description = "I'm very nice person, who'd love to  prepare logo for you",
+            //         RatePerHour = 350 }, new ServiceOfferWebModel {
+            //             Title = "Babysitter",
+            //             Description = "I worked and au pair in NY for 3 months, then I was fired because I leart kid hhow to say f*ck",
+            //             RatePerHour = 10 } };
             return View(um);
         }
 
@@ -140,7 +134,7 @@ namespace WebJobPortal.Controllers
             {
                 ID = id,
                 Email = Request.Form["Email"],
-                Password= Request.Form["Password"],
+                Password = Request.Form["Password"],
                 UserName = Request.Form["Username"],
                 FirstName = Request.Form["firstName"],
                 LastName = Request.Form["lastName"],
@@ -175,6 +169,7 @@ namespace WebJobPortal.Controllers
             {
                 return RedirectToAction("Search", "Home", Int32.Parse(u.PhoneNumber));
             }
-        }       
+        }
     }
 }
+*/

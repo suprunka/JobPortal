@@ -32,9 +32,9 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Go back to user profile", "UserProfile", new { id = User.Identity.GetUserId() })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

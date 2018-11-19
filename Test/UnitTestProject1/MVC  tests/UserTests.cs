@@ -16,6 +16,8 @@ namespace UnitTestProject1.MVC__tests
     [TestClass]
     public class UserTests
     {
+    }
+}/*
         //Create
         #region
 
@@ -400,7 +402,7 @@ namespace UnitTestProject1.MVC__tests
         }
 
         #endregion
-        */
+     
         //Delete
         #region
         [TestMethod]
@@ -439,5 +441,5 @@ namespace UnitTestProject1.MVC__tests
     }
 }
 
-
+*/
 

@@ -78,6 +78,7 @@ namespace MyWeb.Mapping
                 Region = user.Region,
                 AddressLine = user.AddressLine,
                 UserName = user.UserName,
+                Description = user.Description,
             };
         }
 

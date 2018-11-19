@@ -13,7 +13,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;Integrated Security=True";
+        private readonly string connection = "Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677;Password= Password1!;MultipleActiveResultSets=True;App=EntityFramework";
 
 
 
@@ -77,7 +77,7 @@ namespace Repository
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_ID = offer.Employee_ID,
-                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.ID == offer.Subcategory_ID).ID
+                        Subcategory_ID = _context.GetTable<SubCategory>().FirstOrDefault(x => x.Name == offer.SubCategory.Name).ID
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);

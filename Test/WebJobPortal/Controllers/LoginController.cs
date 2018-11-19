@@ -19,15 +19,8 @@ namespace WebJobPortal.Controllers
         }
         public LoginController()
         {
-        }
 
-        /*<div class="form-group">
-            @Html.LabelFor(model => model.AuthorNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AuthorNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AuthorNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>*/
+        }
 
         // GET: Login
         public PartialViewResult Index()

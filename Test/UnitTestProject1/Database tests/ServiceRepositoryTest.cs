@@ -88,7 +88,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_ID = 1,
+                Employee_ID = "1",
                 Title = "First",
             };
             return ServiceOffertub;
@@ -100,7 +100,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 40,
                 Description = "Sample",
-                Employee_ID = 1,
+                Employee_ID = "1",
                 Title = "Second",
             };
             return ServiceOffertub;
@@ -112,7 +112,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_ID = 1,
+                Employee_ID = "1",
                 Title = "Third",
             };
             return ServiceOffertub;
@@ -124,7 +124,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 1,
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_ID = 12,
+                Employee_ID = "12",
                 Title = "Third",
             };
             return ServiceOffertub;
@@ -137,7 +137,7 @@ namespace UnitTestProject1
                 Subcategory_ID = 5,
                 RatePerHour = 100,
                 Description = "Updated",
-                Employee_ID = 12,
+                Employee_ID = "12",
                 Title = "Updated",
             };
             return ServiceOffertub;
@@ -150,7 +150,7 @@ namespace UnitTestProject1
                 Subcategory_ID = -5,
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_ID = 12,
+                Employee_ID = "12",
                 Title = "Invalid",
             };
             return ServiceOffertub;
@@ -292,7 +292,7 @@ namespace UnitTestProject1
                     unitOfWork.Offers.Create(GetSecondServiceOffer());
                     unitOfWork.Offers.Create(GetThirdServiceOffer());
                     unitOfWork.Offers.Create(GetForthServiceOffer());
-                    var list = unitOfWork.Offers.List(t => t.Users.AspNetUsers.PhoneNumber == "35896452");
+                    var list = unitOfWork.Offers.List(t => t.AspNetUsers.PhoneNumber == "35896452");
                     Assert.AreEqual(1, list.Count());
                 }
                 catch

@@ -37,7 +37,6 @@ namespace MyWeb.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -49,7 +48,6 @@ namespace MyWeb.Controllers
                 _signInManager = value;
             }
         }
-
         public ApplicationUserManager UserManager
         {
             get
@@ -61,9 +59,6 @@ namespace MyWeb.Controllers
                 _userManager = value;
             }
         }
-
-
-
         public UserController(IUserService proxy)
         {
             this._proxy = proxy;
@@ -76,20 +71,18 @@ namespace MyWeb.Controllers
 
 
         [HttpGet]
-        public ActionResult UserProfile(string id)
-        {
-            return View(UserMapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id)));
+        public async Task<ActionResult> UserProfile(string id)
+        { 
+           return View(UserMapping.Map_User_To_UserProfileViewModel(await _proxy.FindUserAsync(id)));
         }
 
-        
-       
         [HttpGet]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
             try
             {
-                var userDetails = this._proxy.DeleteUser(id);
-                if (userDetails == false)
+                var isUserDeleted = await this._proxy.DeleteUserAsync(id);
+                if (isUserDeleted == false)
                 {
                     return null;
                 }
@@ -105,66 +98,70 @@ namespace MyWeb.Controllers
             }
         }
         
-
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View(UserMapping.Map_User_To_UserProfileViewModel(_proxy.FindUserByID(id)));
+            return View(UserMapping.Map_User_To_UserProfileViewModel(await _proxy.FindUserByIDAsync(id)));
         }
 
         [HttpPost]
-        public ActionResult Edit(UserProfileViewModel u)
+        public async Task<ActionResult> Edit(UserProfileViewModel u)
         {
             if (ModelState.IsValid)
             {
-               var isUpdated=  _proxy.EditUser(UserMapping.Map_UserProfileViewModel_To_User(u));
+                var isUpdated=  await _proxy.EditUserAsync(UserMapping.Map_UserProfileViewModel_To_User(u));
                 if (isUpdated)
                 {
-                    return UserProfile(User.Identity.GetUserId());
+                    TempData["msg"] = "<script>alert('Successfully edited');</script>";
+                    return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
             }
             return View(u);
 
         }
 
-        
-        public ActionResult AddDescription(int id)
+        public async Task<ActionResult> AddDescription(int id)
         {
-            return View(UserMapping.Map_User_To_DescriptionViewModel(_proxy.FindUserByID(id)));
+            return View(UserMapping.Map_User_To_DescriptionViewModel(await _proxy.FindUserByIDAsync(id)));
         }
 
         [HttpPost]
-        public ActionResult AddDescription(DescriptionViewModel u)
+        public async Task<ActionResult> AddDescription(DescriptionViewModel u)
         {
+            string id = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
-                var isUpdated = _proxy.AddDescription(UserMapping.Map_DescriptionViewModel_To_User(u));
+                var isUpdated = await _proxy.AddDescriptionAsync(UserMapping.Map_DescriptionViewModel_To_User(u));
                 if (isUpdated)
                 {
-                    return RedirectToAction("Index", "Home");
+                    TempData["msg"] = "<script>alert('Description changed');</script>";
+                    return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId()});
                 }
+                return View(u);
             }
-            return View(u);
+            else
+            {
+                return View(u);
+            }
+           
 
         }
 
-
-
-
-        public ActionResult ChangeEmail(int id)
+        public async Task<ActionResult> ChangeEmail(int id)
         {
-            return View(UserMapping.Map_User_To_ChangeEmailViewModel(_proxy.FindUserByID(id)));
+            return View(UserMapping.Map_User_To_ChangeEmailViewModel(await _proxy.FindUserByIDAsync(id)));
         }
 
         [HttpPost]
-        public ActionResult ChangeEmail(ChangeEmailViewModel model)
+        public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && model.NewEmail != null)
             {
-                var changeEmail = _proxy.EditUserEmail(UserMapping.Map_ChangeEmailViewModel_To_User(model));
-                if (changeEmail)
+                var isEmailChanged = await _proxy.EditUserEmailAsync(UserMapping.Map_ChangeEmailViewModel_To_User(model));
+                if (isEmailChanged)
                 {
-                    return RedirectToAction("Index", "Home");
+                    TempData["msg"] = "<script>alert('Email changed');</script>";
+                    return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
             }
             return View(model);

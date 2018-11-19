@@ -19,8 +19,7 @@ namespace MyWeb.Controllers
 
         // GET: Offer
 
-        public ServiceOfferController 
-()
+        public ServiceOfferController ()
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<JobPortal.Model.Offer, ServiceOfferViewModel>();

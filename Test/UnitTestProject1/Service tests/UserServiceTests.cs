@@ -17,6 +17,9 @@ namespace UnitTestProject1.Service_tests
     [TestClass]
     public class UserServiceTests
     {
+    }
+}
+        /*
         //Create
         #region
 
@@ -890,3 +893,4 @@ namespace UnitTestProject1.Service_tests
         #endregion
     }
 }
+*/

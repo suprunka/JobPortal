@@ -54,21 +54,19 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
                 {
-                   var serviceOffer= _database.Create(new ServiceOffer
+                    var serviceOffer = _database.Create(new ServiceOffer
                     {
-
                         SubCategory = new Repository.DbConnection.SubCategory
                         {
-                            Name = offer.Subcategory.ToString(),
                             Category = new Repository.DbConnection.Category
                             {
-                                Name = offer.Subcategory.ToString(),
+                                Name = offer.Category.ToString(),
                             },
+                            Name = offer.Subcategory.ToString(),
                         },
                         Title = offer.Title,
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
-                        Employee_ID = offer.AuthorId,
 
                     });
                     AddtoOffer(serviceOffer, offer);

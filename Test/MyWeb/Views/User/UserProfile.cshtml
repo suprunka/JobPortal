@@ -33,21 +33,17 @@
                 <dd>
                     @Html.DisplayFor(model => model.LastName)
                 </dd>
+                <div>
+                    
+                </div>
+                <div>
+                    <dd>
+                        <h3>Profile Description</h3>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                </div>
             </p>
-            <div>
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
-
-            </div>
-            
-
-            
-
-            <div>
-                @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-
-            </div>
         </div>
     </div>
 
@@ -151,7 +147,7 @@
     <div id='PrivacySettings' class="frameContentColumn">
         <!-- Trigger/Open The Modal  - buttons for opening window -->
         @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-
+        @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
         @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
         <!-- The Modal for changing password -->
@@ -282,4 +278,5 @@
                 }
             }
         </script>
+        @Html.Raw(TempData["msg"])
 

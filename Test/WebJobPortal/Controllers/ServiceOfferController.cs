@@ -1,20 +1,12 @@
-﻿using AutoMapper;
-using JobPortal.Model;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using WebJobPortal.Models;
-using WebJobPortal.OfferReference;
-using WebJobPortal.UserServiceReference;
+﻿using System.Web.Mvc;
 
 namespace WebJobPortal.Controllers
 {
     public class ServiceOfferController : Controller
     {
+    }
+}
+/*
         private IOfferService _proxy;
         private IUserService userService;
         private IMapper _mapper;
@@ -238,4 +230,4 @@ namespace WebJobPortal.Controllers
             }
         }
     }
-}
+}*/
