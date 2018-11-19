@@ -4,21 +4,21 @@
     var counter = 0;
 }
 
-<div class="row">
+<div  style ="display: table-cell; "class="col-container">
 
     @foreach (ManageOffers offer in @Model)
     {
-        if (counter != 0 && counter % 4 == 0)
+        if (counter != 0 && counter % 3 == 0)
         {
 
         @:</div>
-        @:<div class="row">
+        @:<div class="col-container">
         }
+    counter++;
 
 
 
-
-<div class="col-sm-4">
+<div class="col">
     <div class="item">
         <div class="card" id="@offer.Title" style="width:auto">
             <img class="card-img-top" src="~/Pictures/male.png" alt="Card image" style="width:50%;display: block;
