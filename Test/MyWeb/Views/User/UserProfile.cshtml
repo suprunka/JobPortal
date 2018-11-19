@@ -8,6 +8,17 @@
     ViewBag.Title = "UserProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .col-container {
+        display: table; /* Make the container element behave like a table */
+        width: 100%; /* Set full-width to expand the whole page */
+    }
+    .col {
+        padding:10px;
+        display: table-cell;
+        width: 30%; /* Set full-width to expand the whole page */
+    }
+</style>
 
 <!--meant only for user's view-->
 
@@ -162,10 +173,18 @@ else
     user's bought services, table form form
 </div>
 <div id="Sell" class="frameContentColumn">
+
     @Html.Partial("Offers", Model.Services)
 
-
+    <div class="col-container">
+        <a href="@Url.Action("Add", "ServiceOffer")">
+            <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
+        </a>
+    </div>
 </div>
+
+
+
 <!--Privacy setting page-->
 <div id='PrivacySettings' class="frameContentColumn">
     <!-- Trigger/Open The Modal  - buttons for opening window -->

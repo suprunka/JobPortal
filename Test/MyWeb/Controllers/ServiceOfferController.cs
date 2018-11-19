@@ -62,7 +62,7 @@ namespace MyWeb.Controllers
                 //ListOfWorkingDays = workingdays.Select(x => _mapper.Map(x, new WorkingTime())).ToList(),
             });
             if(result)
-                return View("Index");
+                return RedirectToAction("Index");
             return View("Add", model);
 
 
@@ -94,37 +94,41 @@ namespace MyWeb.Controllers
             workingdays.Add(working);
             Console.WriteLine("" + day + "  " + hour + " " + hourTo);
         }
+        [HttpGet]
         public ActionResult ViewDetails(int  id)
         {
             var found = _offerProxy.FindServiceOffer(id);
             ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour };
             return View( model);
         }
+
         [HttpPost]
-        public ActionResult Edit(ManageOffers edited)
+        public ActionResult ViewDetails(ViewDetails edited)
         {
-            if (
-            _offerProxy.UpdateServiceOffer(new Offer
-            {
+           
+                var isUpdated = _offerProxy.UpdateServiceOffer(new Offer
+                {
 
-                Id = edited.Id,
-                Title = edited.Title,
-                Description = edited.Description,
-                RatePerHour = edited.RatePerHour,
-            }))
-            {
-
-                TempData["msg"] = "<script>alert('You offer is updated');</script>";
-                return RedirectToAction("UserProfile","User", new { id= User.Identity.GetUserId()});
-
-            }
+                    Id = edited.Id,
+                    Title = edited.Title,
+                    RatePerHour = edited.RatePerHour,
+                    Description = edited.Description,
+                });
+                if (isUpdated)
+                {
+                    TempData["msg"] = "<script>alert('You offer is updated');</script>";
+                    return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
+                }
+            
             return View("ViewDetails", edited);
         }
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idd)
         {
-            if (_offerProxy.DeleteServiceOffer(id))
-                return View("Index", "Home");
-                return View("Index", "Home");
+            var isDeleted = _offerProxy.DeleteServiceOffer(idd);
+            if (isDeleted)
+                return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = idd});
+
 
 
         }
