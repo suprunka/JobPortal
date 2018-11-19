@@ -295,6 +295,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IOfferService_CreateServiceOffer_InputMessage">
@@ -414,7 +415,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:8080/Offer/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>JAKUB\jakub</Upn>
+          <Upn>DESKTOP-GQ6AKJT\locac</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

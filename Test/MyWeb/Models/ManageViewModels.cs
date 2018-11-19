@@ -83,6 +83,8 @@ namespace WebJobPortal.Models
         [Display(Name = "New email")]
         public string NewEmail { get; set; }
 
+        
+
     }
 
     public class AddPhoneNumberViewModel
