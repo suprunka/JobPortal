@@ -126,7 +126,6 @@ namespace UnitTestProject1
             return userStub;
 
         }
-
         private static Users ForthUser()
         {
             var userStub = new Users

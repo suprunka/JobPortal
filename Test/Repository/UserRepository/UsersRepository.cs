@@ -184,6 +184,8 @@ namespace Repository
                         found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
                        // found.AspNetUsers.Password = obj.AspNetUsers.AspNetUsers.Password;
                         found.AddressLine = obj.AddressLine;
+                        found.Description = obj.Description;
+                        found.PayPalMail = obj.PayPalMail;
                         if(obj.Gender.Gender1 == "Male")
                         {
                             found.Gender_ID = 1;

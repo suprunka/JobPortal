@@ -81,8 +81,15 @@ namespace Repository
 
         public virtual IQueryable<T> GetAll()
         {
-            IQueryable<T> allOffers = db.GetTable<T>();
-            return allOffers;
+            try
+            {
+                IQueryable<T> allOffers = db.GetTable<T>();
+                return allOffers;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 

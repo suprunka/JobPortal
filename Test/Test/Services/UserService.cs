@@ -56,6 +56,7 @@ namespace ServiceLibrary
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         AddressLine = u.AddressLine,
+                        Description = u.Description,
                     });
                     return true;
                 }
@@ -209,7 +210,7 @@ namespace ServiceLibrary
             }
             catch
             {
-                return null;
+                throw new Exception();
             }
 
         }

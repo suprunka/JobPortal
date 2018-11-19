@@ -132,7 +132,7 @@ namespace ServiceLibrary
         {
             try
             {
-                if ((RegexMatch.DoesOfferMatch(serviceOffer)) && (serviceOffer.RatePerHour > 0))
+                if (RegexMatch.DoesOfferMatch(serviceOffer) && (serviceOffer.RatePerHour > 0))
                 {
                     _database.Update(new ServiceOffer
                     {
@@ -147,7 +147,7 @@ namespace ServiceLibrary
                             {
                                 Name = serviceOffer.Category.ToString()
                             }
-                        }
+                        },
                     });
                     return true;
                 }

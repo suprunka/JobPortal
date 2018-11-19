@@ -247,7 +247,7 @@
             @{ using (Html.BeginForm("EditPassword", "User", FormMethod.Post))
 
                 {
-                    @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken() 
                     @Html.HiddenFor(model => model.User.ID, "ID")
                     <!-- Modal content -->
                     <div class="modalContent">

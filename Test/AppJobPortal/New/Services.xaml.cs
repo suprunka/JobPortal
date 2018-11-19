@@ -14,9 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AppJobPortal.Models;
+using AppJobPortal.OfferServiceReference;
 using AutoMapper;
 using JobPortal.Model;
-using JobPortal.OfferServiceReference;
+
 
 namespace AppJobPortal.New
 {
