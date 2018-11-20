@@ -6,10 +6,6 @@
                 ViewBag.Title = "Services";
                 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@{
-    var counter = 0;
-}
 <style>
     .col-container {
         display: table; /* Make the container element behave like a table */
@@ -32,8 +28,6 @@
         </form>
     </div>
 </div>
-
-
 
 <div class="containerItems">
     @Html.Partial("Offers", Model);

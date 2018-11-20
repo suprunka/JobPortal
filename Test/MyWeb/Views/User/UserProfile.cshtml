@@ -41,23 +41,12 @@
     <!--description from DB-->
     <div class="col-md-4">
         <p>
-            <dd>
                 @Html.DisplayFor(model => model.FirstName)
-            </dd>
-            <dd>
                 @Html.DisplayFor(model => model.LastName)
-            </dd>
         </p>
-        <div>
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-
-        </div>
-
-
-
-
+        <p>
+            @Html.DisplayFor(model => model.Description)
+        </p>
         <div>
             @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
@@ -167,7 +156,6 @@ else
     @Html.ActionLink("Edit information", "Edit", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 </div>
 
-
 <!--Frames for Column menu-->
 <!--Buy page with table-->
 <div id="Buy" class="frameContentColumn">
@@ -179,14 +167,10 @@ else
 </div>
 
 <div id="Sell" class="frameContentColumn">
-
+    <a href="@Url.Action("Add", "ServiceOffer")">
+        <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
+    </a>
     @Html.Partial("Offers", Model.Services)
-
-    <div class="col-container">
-        <a href="@Url.Action("Add", "ServiceOffer")">
-            <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
-        </a>
-    </div>
 </div>
 
 <!--delete account option, code in the beginning - button delete account-->
@@ -202,11 +186,6 @@ else
     @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
 </div>
-
-
-
-
-
 
 <script>
     /*function for opening frames (Personal info, sell,...)*/
