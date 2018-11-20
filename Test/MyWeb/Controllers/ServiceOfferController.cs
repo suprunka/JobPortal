@@ -7,6 +7,7 @@ using JobPortal.Model;
 using MyWeb.Models;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace MyWeb.Controllers
 {
@@ -31,7 +32,7 @@ namespace MyWeb.Controllers
         }
         public ActionResult Index(string searchingString)
         {
-            var list = _offerProxy.GetAllOffers().Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var list =  _offerProxy.GetAllOffers().Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
             if (searchingString == null)
             {
                 return View("Index", list);
@@ -49,9 +50,9 @@ namespace MyWeb.Controllers
 
         }
         [HttpPost]
-        public ActionResult Add(AddServiceOfferModel model)
+        public async Task<ActionResult> Add(AddServiceOfferModel model)
         {
-            bool result = _offerProxy.CreateServiceOffer(new Offer
+            bool result = await _offerProxy.CreateServiceOfferAsync(new Offer
             {
                 Description = model.ManageOffers.Description,
                 AuthorId =  User.Identity.GetUserId(),
@@ -95,9 +96,9 @@ namespace MyWeb.Controllers
             Console.WriteLine("" + day + "  " + hour + " " + hourTo);
         }
         [HttpGet]
-        public ActionResult ViewDetails(int  id)
+        public async Task<ActionResult> ViewDetails(int  id)
         {
-            var found = _offerProxy.FindServiceOffer(id);
+            var found = await _offerProxy.FindServiceOfferAsync(id);
             ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour };
             return View( model);
         }
@@ -122,9 +123,9 @@ namespace MyWeb.Controllers
             
             return View("ViewDetails", edited);
         }
-        public ActionResult Delete(int idd)
+        public async Task<ActionResult> Delete(int idd)
         {
-            var isDeleted = _offerProxy.DeleteServiceOffer(idd);
+            var isDeleted = await _offerProxy.DeleteServiceOfferAsync(idd);
             if (isDeleted)
                 return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
             return RedirectToAction("ViewDetails", "ServiceOffer", new { id = idd});

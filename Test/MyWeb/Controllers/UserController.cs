@@ -81,11 +81,11 @@ namespace MyWeb.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult> DeleteAsync(int? id)
         {
             try
             {
-                var isUserDeleted = await this._proxy.DeleteUserAsync(id);
+                var isUserDeleted = await this._proxy.DeleteUserAsync((int) id);
                 if (isUserDeleted == false)
                 {
                     return null;
@@ -103,9 +103,9 @@ namespace MyWeb.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View(UserMapping.Map_User_To_UserProfileViewModel(await _proxy.FindUserByIDAsync(id)));
+            return View(UserMapping.Map_User_To_UserProfileViewModel(await _proxy.FindUserByIDAsync((int) id)));
         }
 
         [HttpPost]
@@ -124,9 +124,9 @@ namespace MyWeb.Controllers
 
         }
 
-        public async Task<ActionResult> AddDescription(int id)
+        public async Task<ActionResult> AddDescription(int? id)
         {
-            return View(UserMapping.Map_User_To_DescriptionViewModel(await _proxy.FindUserByIDAsync(id)));
+            return View(UserMapping.Map_User_To_DescriptionViewModel(await _proxy.FindUserByIDAsync((int)id)));
         }
 
         [HttpPost]
