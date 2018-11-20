@@ -161,7 +161,7 @@ namespace AppJobPortal.New
         private void btnRgister_Click(object sender, RoutedEventArgs e)
         {
             SetUserFromBoxes();
-            if (_proxy.CreateUser(_mapper.Map(_user, new User())))
+            if (_proxy.CreateUser(_mapper.Map(_user, new User()), null))
             {
                 GetAll();
             }
