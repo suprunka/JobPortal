@@ -93,7 +93,7 @@ namespace MyWeb.Controllers
                 else
                 {
                     AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    return RedirectToAction("Index", "Shared");
+                    return RedirectToAction("Index", "ServiceOffer");
                 }
             }
             catch

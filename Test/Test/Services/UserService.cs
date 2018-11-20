@@ -138,7 +138,7 @@ namespace ServiceLibrary
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         AddressLine = u.AddressLine,
-
+                        PayPalMail = u.PayPalMail,
                     });
                     return true;
                 }
