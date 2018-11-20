@@ -28,7 +28,7 @@
     <div class="col-md-4">
         @{
 
-            if (Enum.GetValues(typeof(Gender)).Equals("Female"))
+            if (Model.Gender.Equals(Gender.Female))
             {
                 <img src="~/Pictures/female.png" alt="User photo" />
             }
