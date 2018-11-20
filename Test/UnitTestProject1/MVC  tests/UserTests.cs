@@ -43,7 +43,7 @@ namespace UnitTestProject1.MVC__tests
                 Assert.Fail();
             }
         }
-
+        /*
         [TestMethod]
         public void Test_DeleteAsync_View()
         {
@@ -75,7 +75,7 @@ namespace UnitTestProject1.MVC__tests
             {
                 Assert.Fail("Sing out manager throws exception");
             }
-        }
+        }*/
 
         [TestMethod]
         public void Test_Edit_Get_Proper_User()
