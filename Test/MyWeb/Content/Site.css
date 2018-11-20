@@ -1,4 +1,5 @@
-﻿* {
+﻿
+* {
     box-sizing: border-box
 }
 body {
@@ -110,8 +111,8 @@ a.link-icon {
 /*search bar in header*/
 .search {
     margin-top: 12px;
-    margin-right:auto;
-    margin-left:300px;
+    margin-right: auto;
+    margin-left: 300px;
 }
 #search-text-field{
     border-radius: 4px;

@@ -10,7 +10,7 @@ namespace WebJobPortal.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email:")]
         public string Email { get; set; }
     }
 
@@ -40,7 +40,7 @@ namespace WebJobPortal.Models
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Code:")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
@@ -53,20 +53,20 @@ namespace WebJobPortal.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email:")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email:")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password:")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -79,30 +79,41 @@ namespace WebJobPortal.Models
 
         public String Description { get; set; }
 
+        [Display(Name = "Email:")]
         public String Email { get; set; }
 
         //public String Password { get; set; }
 
+        [Display(Name = "User name:")]
         public String UserName { get; set;}
 
+        [Display(Name = "Phone number:")]
         public String PhoneNumber { get; set; }
 
         public String ID { get; set; }
 
+        [Display(Name = "First Name:")]
         public String FirstName { get; set; }
 
+        [Display(Name = "Last Name:")]
         public String LastName { get; set; }
- 
+
+        [Display(Name = "Address:")]
         public String AddressLine { get; set; }
 
+        [Display(Name = "City:")]
         public String CityName { get; set; }
 
+        [Display(Name = "PayPal Mail:")]
         public String PayPalMail { get; set; }
 
+        [Display(Name = "Postcode:")]
         public String Postcode { get; set; }
-      
+
+        [Display(Name = "Region:")]
         public Region Region { get; set; }
 
+        [Display(Name = "Gender:")]
         public Gender Gender { get; set; }
     }
 
@@ -152,13 +163,13 @@ namespace WebJobPortal.Models
         public int ID { get; set; }
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email:")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password:")]
         public string Password { get; set; }
 
      
@@ -179,17 +190,17 @@ namespace WebJobPortal.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email:")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password:")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm password:")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -200,7 +211,7 @@ namespace WebJobPortal.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email:")]
         public string Email { get; set; }
     }
 }

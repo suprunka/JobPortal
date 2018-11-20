@@ -14,7 +14,24 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li><a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:20px;border:0;"></a></li>
+                    <li><a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:40px;border:0;"></a></li>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Tutoring</a>
+                    </li>
+                    <li>
+                        <a href="#">IT</a>
+                    </li>
+                    <li>
+                        <a href="#">Repairs</a>
+                    </li>
+                    <li>
+                        <a href="#">Architecture</a>
+                    </li>
+                    <li>
+                        <a href="#">Media</a>
                 </ul>
 
                 @Html.Partial("_LoginPartial")
@@ -23,15 +40,14 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    
+
     <footer>
-    <p>&copy; @DateTime.Now.Year - JobPortal</p>
+        <p>&copy; @DateTime.Now.Year - JobPortal</p>
     </footer>
 </body>
 
