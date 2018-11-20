@@ -105,8 +105,8 @@ namespace UnitTestProject1
                     Id = "Username12",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
-                    PhoneNumber = "12345670",
-                    Email = "adam2@gmail.com",
+                    PhoneNumber = "07654321",
+                    Email = "Updated",
                     EmailConfirmed = false,
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
@@ -115,13 +115,13 @@ namespace UnitTestProject1
                 },
                 Gender = new Gender
                 {
-                    Gender1 = "Male",
+                    Gender1 = "Female",
                 },
                 PayPalMail = "lal@wp.pl",
                 FirstName = "Updated",
-                LastName = "Adam",
-                AddressLine = "mickiewicza",
-
+                LastName = "Updated",
+                AddressLine = "Updated",
+                Description = "Description",
             };
             return userStub;
 
@@ -208,6 +208,7 @@ namespace UnitTestProject1
             var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
             {
+
                 var result = unitOfWork.Users.Create(GetUser());
 
                 Assert.IsNotNull(result);
@@ -332,7 +333,6 @@ namespace UnitTestProject1
                     var x = unitOfWork.Users.Create(GetUser());
                     bool result = unitOfWork.Users.Delete(t => t.ID == x.ID);
                     Assert.IsTrue(result);
-
                 }
                 catch
                 {
@@ -521,6 +521,70 @@ namespace UnitTestProject1
 
                     bool edited = unitOfWork.Users.Update(toUpdate);
                     Assert.IsTrue(edited);
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+            }
+
+            var secondContext = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(secondContext))
+            {
+                secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.SubmitChanges();
+            }
+        }
+
+        [TestMethod]
+        public void Edition_Of_Users_Mail_Returns_User_Is_Successed()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    Users u = unitOfWork.Users.Create(GetUser());
+                    Users toUpdate = ToUpdate();
+                    toUpdate.ID = u.ID;
+
+                    var result = unitOfWork.Users.UpdateUserMail(toUpdate);
+                    Assert.IsNotNull(result);
+                    Assert.AreEqual("Updated", result.AspNetUsers.Email);
+                }
+                catch
+                {
+                    Assert.Fail();
+                }
+            }
+
+            var secondContext = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(secondContext))
+            {
+                secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
+                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
+                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.SubmitChanges();
+            }
+        }
+
+        [TestMethod]
+        public void Edition_Of_Users_Description_Returns_User_Is_Successed()
+        {
+            var context = new DbTestDataContext();
+            using (var unitOfWork = new UnitOfWork(context))
+            {
+                try
+                {
+                    Users u = unitOfWork.Users.Create(GetUser());
+                    Users toUpdate = ToUpdate();
+                    toUpdate.ID = u.ID;
+
+                    var result = unitOfWork.Users.AddDescription(toUpdate);
+                    Assert.IsNotNull(result);
+                    Assert.AreEqual("Description", result.Description);
                 }
                 catch
                 {

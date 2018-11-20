@@ -30,49 +30,59 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
+                    Id = "Username12",
                     PasswordHash = "Adama1",
-                    UserName = "Username1",
-                    PhoneNumber = "12345678",
-                    Email = "adam@gmail.com",
-
-
+                    UserName = "Username12",
+                    PhoneNumber = "12345670",
+                    Email = "adam2@gmail.com",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
-
+                PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
 
             };
             return userStub;
+
         }
         private static Users SecondUser()
         {
             var userStub = new Users
             {
+
                 AddressTable = new AddressTable
                 {
-                    Postcode = "8000",
-                    City = "Aarhus",
-                    Region = "Midtjylland"
+                    Postcode = "9000",
+                    City = "Aalborg",
+                    Region = "Nordjylland"
                 },
                 AspNetUsers = new AspNetUser
                 {
+                    Id = "Username123",
                     PasswordHash = "Adama1",
-                    UserName = "Username1",
+                    UserName = "Username123",
                     PhoneNumber = "12345678",
-                    Email = "adam@gmail.com",
-
-
+                    Email = "adam2@gmail.com",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
-
+                PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
@@ -85,10 +95,17 @@ namespace UnitTestProject1
         {
             var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning", 
+                    Category= new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_ID = "1",
+                Employee_ID = "Username12",
                 Title = "First",
             };
             return ServiceOffertub;
@@ -97,10 +114,17 @@ namespace UnitTestProject1
         {
             var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning",
+                    Category = new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 40,
                 Description = "Sample",
-                Employee_ID = "1",
+                Employee_ID = "Username12",
                 Title = "Second",
             };
             return ServiceOffertub;
@@ -109,10 +133,17 @@ namespace UnitTestProject1
         {
             var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning",
+                    Category = new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_ID = "1",
+                Employee_ID = "Username12",
                 Title = "Third",
             };
             return ServiceOffertub;
@@ -121,37 +152,56 @@ namespace UnitTestProject1
         {
             var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning",
+                    Category = new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_ID = "12",
+                Employee_ID = "Username123",
                 Title = "Third",
             };
             return ServiceOffertub;
         }
-
         private static ServiceOffer ToUpdateServiceOffer()
         {
             var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 5,
+                SubCategory = new SubCategory
+                {
+                    Name = "Buildings",
+                    Category = new Category
+                    {
+                        Name = "Architecture",
+                    },
+                },
                 RatePerHour = 100,
                 Description = "Updated",
-                Employee_ID = "12",
+                Employee_ID = "Username123",
                 Title = "Updated",
             };
             return ServiceOffertub;
         }
-
         private static ServiceOffer GetInvalidServiceOffer()
         {
             var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = -5,
-                RatePerHour = 20,
-                Description = "Sample",
-                Employee_ID = "12",
-                Title = "Invalid",
+                SubCategory = new SubCategory
+                {
+                    Name = "Notexists",
+                    Category = new Category
+                    {
+                        Name = "Notexists",
+                    },
+                },
+                RatePerHour = -1,
+                Description = " ",
+                Employee_ID = "hftrtoerp[ggpohi54-6934-09-023",
+                Title = "Inval",
             };
             return ServiceOffertub;
         }
@@ -187,7 +237,7 @@ namespace UnitTestProject1
 
         //Testing adding service with not existing subcategory ID doesnt add. [OK]
         [TestMethod]
-        public void Test_Create_Offer_With_Not_Existing_SubOffer_ID_Throws_Exception_And_Do_Not_Add()
+        public void Test_Create_Offer_With_Not_Existing_SubOffer_Throws_Exception_And_Do_Not_Add()
         {
             var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
@@ -292,7 +342,7 @@ namespace UnitTestProject1
                     unitOfWork.Offers.Create(GetSecondServiceOffer());
                     unitOfWork.Offers.Create(GetThirdServiceOffer());
                     unitOfWork.Offers.Create(GetForthServiceOffer());
-                    var list = unitOfWork.Offers.List(t => t.AspNetUsers.PhoneNumber == "35896452");
+                    var list = unitOfWork.Offers.List(t => t.AspNetUsers.PhoneNumber == "12345678");
                     Assert.AreEqual(1, list.Count());
                 }
                 catch
