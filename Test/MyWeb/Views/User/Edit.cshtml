@@ -2,7 +2,7 @@
 @using Microsoft.AspNet.Identity
 @using JobPortal.Model
 @{
-    ViewBag.Title = "Change inforamtion about: " + Model.UserName ;
+    ViewBag.Title = "Change information about: " + Model.UserName ;
 }
 
 <h2>Edit</h2>
@@ -20,7 +20,6 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <h3>Personal information</h3>
-
 
     <div class="form-group">
         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -55,7 +54,6 @@
     </div>
 
     <br />
-
     <h3>Address information</h3>
 
     <div class="form-group">
@@ -74,10 +72,6 @@
         </div>
     </div>
 
-
-
-
-
     <div class="form-group">
         @Html.LabelFor(model => model.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -85,7 +79,6 @@
             @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
         </div>
     </div>
-
 
     <div class="form-group">
         @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -113,9 +106,6 @@
             @Html.ValidationMessageFor(model => model.PayPalMail, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
-
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

@@ -15,22 +15,24 @@
                 <ul class="nav navbar-nav">
 
                     <li><a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:20px;border:0;"></a></li>
-                    </ul>
+                </ul>
 
-                    @Html.Partial("_LoginPartial")
-</div>
-                            </div>
-                        </div>
-                        <div class="container body-content">
-                            @RenderBody()
-                            <hr />
-                            <footer>
-                                <p>&copy; @DateTime.Now.Year - JobPortal</p>
-                            </footer>
-                        </div>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
 
-                        @Scripts.Render("~/bundles/jquery")
-                        @Scripts.Render("~/bundles/bootstrap")
-                        @RenderSection("scripts", required: false)
-                    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    
+    <footer>
+    <p>&copy; @DateTime.Now.Year - JobPortal</p>
+    </footer>
+</body>
+
 </html>

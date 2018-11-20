@@ -166,10 +166,13 @@ namespace Repository
                     Users found = _context.GetTable<Users>().FirstOrDefault(predicate);
                     _context.GetTable<Users>().DeleteOnSubmit(found);
 
+                    _context.SubmitChanges();
 
 
                     AspNetUsers foundLogging = _context.GetTable<AspNetUsers>().FirstOrDefault(t => t.Id.ToString() == found.Logging_ID.ToString());
                     _context.GetTable<AspNetUsers>().DeleteOnSubmit(foundLogging);
+                    _context.SubmitChanges();
+
 
                     var services = _context.GetTable<ServiceOffer>().Where(t => t.Employee_ID == foundLogging.Id);
                     foreach (var t in services)
@@ -244,7 +247,7 @@ namespace Repository
                         found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
                         found.FirstName = obj.FirstName;
                         found.LastName = obj.LastName;
-                        found.AspNetUsers.Email = obj.AspNetUsers.Email;
+                       // found.AspNetUsers.Email = obj.AspNetUsers.Email;
                         found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
                         // found.AspNetUsers.Password = obj.AspNetUsers.AspNetUsers.Password;
                         found.AddressLine = obj.AddressLine;

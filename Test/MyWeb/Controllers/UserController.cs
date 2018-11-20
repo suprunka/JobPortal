@@ -93,7 +93,7 @@ namespace MyWeb.Controllers
                 else
                 {
                     AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    return RedirectToAction("Index", "Shared");
+                    return RedirectToAction("Index", "ServiceOffer");
                 }
             }
             catch
@@ -121,7 +121,6 @@ namespace MyWeb.Controllers
                 }
             }
             return View(u);
-
         }
 
         public async Task<ActionResult> AddDescription(int? id)

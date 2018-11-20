@@ -28,7 +28,7 @@
     <div class="col-md-4">
         @{
 
-            if (Enum.GetValues(typeof(Gender)).Equals("Female"))
+            if (Model.Gender.Equals(Gender.Female))
             {
                 <img src="~/Pictures/female.png" alt="User photo" />
             }
@@ -41,27 +41,13 @@
     <!--description from DB-->
     <div class="col-md-4">
         <p>
-            <dd>
                 @Html.DisplayFor(model => model.FirstName)
-            </dd>
-            <dd>
                 @Html.DisplayFor(model => model.LastName)
-            </dd>
         </p>
-        <div>
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+        <p>
+            @Html.DisplayFor(model => model.Description)
+        </p>
 
-        </div>
-
-
-
-
-        <div>
-            @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-
-        </div>
     </div>
 </div>
 @if (Model.UserName == User.Identity.GetUserName())
@@ -99,7 +85,7 @@
                         </div>
 
                         @Html.AntiForgeryToken()
-                        @Html.ActionLink("Delete", "Delete", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+                        @Html.ActionLink("Delete", "DeleteAsync", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
                     </div>
                 </div>
             </div>
@@ -167,7 +153,6 @@ else
     @Html.ActionLink("Edit information", "Edit", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 </div>
 
-
 <!--Frames for Column menu-->
 <!--Buy page with table-->
 <div id="Buy" class="frameContentColumn">
@@ -179,14 +164,10 @@ else
 </div>
 
 <div id="Sell" class="frameContentColumn">
-
+    <a href="@Url.Action("Add", "ServiceOffer")">
+        <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
+    </a>
     @Html.Partial("Offers", Model.Services)
-
-    <div class="col-container">
-        <a href="@Url.Action("Add", "ServiceOffer")">
-            <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
-        </a>
-    </div>
 </div>
 
 <!--delete account option, code in the beginning - button delete account-->
@@ -200,13 +181,9 @@ else
     @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
     <!-- The Modal for changing password -->
     @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+    @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
 </div>
-
-
-
-
-
 
 <script>
     /*function for opening frames (Personal info, sell,...)*/
