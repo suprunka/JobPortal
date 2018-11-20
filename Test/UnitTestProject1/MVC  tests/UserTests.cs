@@ -1,36 +1,42 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.AspNet.Identity;
 using Moq;
-using WebJobPortal.Controllers;
 using System.Web.Mvc;
-using WebJobPortal.UserServiceReference;
 using JobPortal.Model;
 using WebJobPortal.Models;
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
 using System;
+using MyWeb.Controllers;
+using MyWeb.UserServiceReference;
+using MyWeb.OfferReference;
+using MyWeb.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web;
-using TypeMock.ArrangeActAssert;
+using System.Security.Principal;
 
 namespace UnitTestProject1.MVC__tests
 {
     [TestClass]
     public class UserTests
     {
-    }
-}/*
+
+
         //Create
-        #region
+        //  #region
 
         [TestMethod]
-        public void Test_Create_View()
+        public void Test_UserProfile_View()
         {
             try
             {
                 var serviceMock = new Mock<IUserService>();
-                serviceMock.Setup(s => s.CreateUser(It.IsAny<User>())).Returns(true);
-                var controller = new UserController(serviceMock.Object);
-                var result = controller.Create() as ViewResult;
-                Assert.IsTrue("Create" == result.ViewName);
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.FindUser(It.IsAny<String>())).Returns(new User { ID = 2 });
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                var result = controller.UserProfile("2") as ViewResult;
+                Assert.IsTrue("" == result.ViewName);
             }
             catch
             {
@@ -38,6 +44,241 @@ namespace UnitTestProject1.MVC__tests
             }
         }
 
+        [TestMethod]
+        public void Test_DeleteAsync_View()
+        {
+            try
+            {
+                var controllerContext = new Mock<ControllerContext>();
+                var principal = new Moq.Mock<IPrincipal>();
+                principal.SetupGet(x => x.Identity.Name).Returns("uname");
+                controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.DeleteUserAsync(It.IsAny<int>())).ReturnsAsync(true);
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                controller.ControllerContext = controllerContext.Object;
+                var task = controller.DeleteAsync(2);//Task<actionRsult>>
+                var result = (RedirectToRouteResult)task.Result;
+
+                result.RouteValues["action"].Equals("Index");
+                result.RouteValues["controller"].Equals("ServiceOffer");
+
+                Assert.AreEqual("Index", result.RouteValues["action"]);
+                Assert.AreEqual("ServiceOffer", result.RouteValues["controller"]);
+            }
+
+
+
+            catch
+            {
+                Assert.Fail("Sing out manager throws exception");
+            }
+        }
+
+        [TestMethod]
+        public void Test_Edit_Get_Proper_User()
+        {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.FindUserByIDAsync(It.IsAny<int>())).ReturnsAsync(new User { ID = 2 });
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                var task = controller.Edit(2);//Task<actionRsult>>
+                var result = (ViewResult)task.Result;
+                var  model = result.Model as UserProfileViewModel;
+                Assert.AreEqual("2",model.ID );
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_Edit_View()
+        {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.FindUserByIDAsync(It.IsAny<int>())).ReturnsAsync(new User { ID = 2 });
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                var task = controller.Edit(2);//Task<actionRsult>>
+                var result = (ViewResult)task.Result;
+
+                Assert.AreEqual("", result.ViewName);
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void Test_Edit_View_OfProper_User()
+        {
+            try
+            {
+                var controllerContext = new Mock<ControllerContext>();
+                var principal = new Moq.Mock<IPrincipal>();
+                principal.SetupGet(x => x.Identity.Name).Returns("uname");
+                //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
+                controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+
+                ManageOffers[] array = { new ManageOffers(), new ManageOffers() };
+                UserProfileViewModel user = new UserProfileViewModel();
+                user.Email = "ww@wp.pl";
+                user.FirstName = "firstname";
+                user.Gender = Gender.Female;
+                user.ID = "1";
+                user.LastName = "lastname";
+                user.PayPalMail = "paypal.pl";
+                user.PhoneNumber = "90807090";
+                user.Postcode = "9000";
+                user.Region = Region.Hovedstaden;
+                user.Services = array;
+                user.UserName = "uname";
+                user.AddressLine = "ww";
+                user.CityName = "Aalborg";
+                user.Description = "this is description";
+                //mock.Setup(x => x.Services).Returns(new MyWeb.Models.ManageOffers[3]);
+                //UserProfileViewModel u = new UserProfileViewModel { Services = new MyWeb.Models.ManageOffers[4],  }
+
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.EditUserAsync(It.IsAny<User>())).ReturnsAsync(true);
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                controller.ControllerContext = controllerContext.Object;
+
+                var task = controller.Edit(user);//Task<actionRsult>>
+                var result = task.Result;
+                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+                RedirectToRouteResult routeResult = result as RedirectToRouteResult;
+                //  Assert.AreEqual(routeResult.RouteValues["UserProfile"], "asd");
+
+
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_AddDescription_View()
+        {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.FindUserByIDAsync(It.IsAny<int>())).ReturnsAsync(new User { ID = 2 });
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                var task = controller.AddDescription(2);//Task<actionRsult>>
+                var result = (ViewResult)task.Result;
+
+                Assert.AreEqual("", result.ViewName);
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void Test_AddDescription_checking()
+        {
+            try
+            {
+                var controllerContext = new Mock<ControllerContext>();
+                var principal = new Moq.Mock<IPrincipal>();
+                principal.SetupGet(x => x.Identity.Name).Returns("uname");
+                //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
+                controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+                var dmock = new Mock<DescriptionViewModel>();
+                dmock.SetupAllProperties();
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.AddDescriptionAsync(It.IsAny<User>())).ReturnsAsync(true);
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                controller.ControllerContext = controllerContext.Object;
+
+                var task = controller.AddDescription(dmock.Object);//Task<actionRsult>>
+                var result = task.Result;
+                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+                RedirectToRouteResult routeResult = result as RedirectToRouteResult;
+                Assert.AreEqual(routeResult.RouteValues["action"], "UserProfile");
+                Assert.AreEqual(routeResult.RouteValues["controller"], "User");
+
+
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        public void Change_Mail_view()
+        {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.EditUserEmailAsync(It.IsAny<User>())).ReturnsAsync(true);
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                var task = controller.ChangeEmail(2);//Task<actionRsult>>
+                var result = (ViewResult)task.Result;
+
+                Assert.AreEqual("", result.ViewName);
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void ChangeMail_check_if_redirect_to_correct_action()
+        {
+            try
+            {
+                var controllerContext = new Mock<ControllerContext>();
+                var principal = new Moq.Mock<IPrincipal>();
+                principal.SetupGet(x => x.Identity.Name).Returns("uname");
+                controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+
+                ChangeEmailViewModel mail = new ChangeEmailViewModel();
+               mail.NewEmail = "new@mail.pl";
+                mail.OldEmail = "www@w.pl";
+                mail.userProfileViewModel = new UserProfileViewModel();
+                mail.Id = 2;
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                serviceMock.Setup(s => s.EditUserEmailAsync(It.IsAny<User>())).ReturnsAsync(true);
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object);
+                controller.ControllerContext = controllerContext.Object;
+
+                var task = controller.ChangeEmail(mail);//Task<actionRsult>>
+                var result = task.Result;
+                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+                RedirectToRouteResult routeResult = result as RedirectToRouteResult;
+                Assert.AreEqual(routeResult.RouteValues["action"], "UserProfile");
+                Assert.AreEqual(routeResult.RouteValues["controller"], "User");
+
+
+            }
+
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        /*
 
         [TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
@@ -75,7 +316,7 @@ namespace UnitTestProject1.MVC__tests
         public void Test_Create_View_Exception_Expected()
         {
             var serviceMock = new Mock<IUserService>();
-            serviceMock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception());            var controller = new UserController(serviceMock.Object);
+            serviceMock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception()); var controller = new UserController(serviceMock.Object);
             var result = controller.Create(new UserModel
             {
                 PhoneNumber = "12345678",
@@ -294,7 +535,7 @@ namespace UnitTestProject1.MVC__tests
 
                 var controller = new HomeController(serviceMock.Object);
                 var result = controller.Search(1234567825) as ViewResult;
-                Assert.AreEqual("Index" , result.ViewName);
+                Assert.AreEqual("Index", result.ViewName);
             }
             catch
             {
@@ -322,7 +563,7 @@ namespace UnitTestProject1.MVC__tests
 
 
         //Update
-        /*
+
 
         #region
 
@@ -402,7 +643,7 @@ namespace UnitTestProject1.MVC__tests
         }
 
         #endregion
-     
+
         //Delete
         #region
         [TestMethod]
@@ -436,10 +677,11 @@ namespace UnitTestProject1.MVC__tests
         }
 
         #endregion
-
+        */
 
     }
 }
 
-*/
+
+
 

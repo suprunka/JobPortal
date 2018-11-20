@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using JobPortal.Model;
+
 namespace MyWeb.UserServiceReference {
     
     
@@ -16,7 +18,7 @@ namespace MyWeb.UserServiceReference {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        bool CreateUser(JobPortal.Model.User u, string loggingId);
+        bool CreateUser(JobPortal.Model.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
         System.Threading.Tasks.Task<bool> CreateUserAsync(JobPortal.Model.User u, string loggingId);
@@ -109,10 +111,7 @@ namespace MyWeb.UserServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateUser(JobPortal.Model.User u, string loggingId) {
-            return base.Channel.CreateUser(u, loggingId);
-        }
-        
+      
         public System.Threading.Tasks.Task<bool> CreateUserAsync(JobPortal.Model.User u, string loggingId) {
             return base.Channel.CreateUserAsync(u, loggingId);
         }
@@ -195,6 +194,11 @@ namespace MyWeb.UserServiceReference {
         
         public System.Threading.Tasks.Task<bool> AddDescriptionAsync(JobPortal.Model.User u) {
             return base.Channel.AddDescriptionAsync(u);
+        }
+
+        public bool CreateUser(User u)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
