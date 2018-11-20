@@ -41,20 +41,16 @@
     <!--description from DB-->
     <div class="col-md-4">
         <p>
-            <dd>
                 @Html.DisplayFor(model => model.FirstName)
-            </dd>
-            <dd>
                 @Html.DisplayFor(model => model.LastName)
-            </dd>
+        </p>
+        <p>
+            @Html.DisplayFor(model => model.Description)
         </p>
         <div>
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+            @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
         </div>
-
     </div>
 </div>
 @if (Model.UserName == User.Identity.GetUserName())
@@ -92,7 +88,7 @@
                         </div>
 
                         @Html.AntiForgeryToken()
-                        @Html.ActionLink("Delete", "DeleteAsync", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+                        @Html.ActionLink("Delete", "Delete", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
                     </div>
                 </div>
             </div>
@@ -160,7 +156,6 @@ else
     @Html.ActionLink("Edit information", "Edit", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 </div>
 
-
 <!--Frames for Column menu-->
 <!--Buy page with table-->
 <div id="Buy" class="frameContentColumn">
@@ -172,14 +167,10 @@ else
 </div>
 
 <div id="Sell" class="frameContentColumn">
-
+    <a href="@Url.Action("Add", "ServiceOffer")">
+        <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
+    </a>
     @Html.Partial("Offers", Model.Services)
-
-    <div class="col-container">
-        <a href="@Url.Action("Add", "ServiceOffer")">
-            <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
-        </a>
-    </div>
 </div>
 
 <!--delete account option, code in the beginning - button delete account-->
@@ -193,7 +184,6 @@ else
     @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
     <!-- The Modal for changing password -->
     @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-    @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
 </div>
 
@@ -243,19 +233,31 @@ else
     var openChangePasswordBtn = document.getElementById("change-password-btn");
 
     // Get the <span> element that closes the modal
-
+    var span3 = document.getElementsByClassName("close")[3];
     var span1 = document.getElementsByClassName("close")[1];
+    var span2 = document.getElementsByClassName("close")[2];
 
     // When the user clicks the button, open the modal
-
+    openChangeEmailBtn.onclick = function () {
+        changeEmailModal.style.display = "block";
+    }
+    openChangePasswordBtn.onclick = function () {
+        changePasswordModal.style.display = "block";
+    }
     openDeleteAccountBtn.onclick = function () {
 
         deleteAccountModal.style.display = "block";
     }
 
-
+    // When the user clicks on <span> (x), close the modal
+    span3.onclick = function () {
+        changeEmailModal.style.display = "none";
+    }
+    span2.onclick = function () {
+        changePasswordModal.style.display = "none";
+    }
     span1.onclick = function () {
-        deleteAccountModal.style.display = "block";
+        deleteAccountModal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
