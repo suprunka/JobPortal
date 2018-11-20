@@ -41,8 +41,8 @@
     <!--description from DB-->
     <div class="col-md-4" style="padding-top:10px">
         <h3>
-                @Html.DisplayFor(model => model.FirstName)
-                @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.LastName)
         </h3>
         <p>
             @Html.DisplayFor(model => model.Description)
@@ -59,14 +59,16 @@
         <div class="tabColumn">
             <!--Personal info set like default frame-->
             <button class="frameLinks" onclick="openFrame(event, 'Calendar')" id="defaultOpen">My calendar</button>
-            <button class="frameLinks" onclick="openFrame(event, 'Sell')">Sell</button>
-            <button class="frameLinks" onclick="openFrame(event, 'Buy')">Buy</button>
+            <button class="frameLinks" onclick="openFrame(event, 'Offers')">Offers</button>
+            <button class="frameLinks" onclick="openFrame(event, 'Bought')">Bought</button>
             <button class="frameLinks" onclick="openFrame(event, 'Personal Information')">Personal Information</button>
             <!--Settings button, when clickes, reveals other options-->
             <button class="dropdown-btn">Settings<i class="fa fa-caret-down"></i></button>
             <div class="dropdown-container">
                 <!--Button privacy settings, reveals frame with other options/buttons. Code lower with other frames-->
-                <button class="framelinks" onclick="openFrame(event, 'PrivacySettings')">Privacy Settings</button>
+                <button class="framelinks" onclick="openFrame(event, 'Change Email')">Change Email</button>
+                <button class="framelinks" onclick="openFrame(event, 'Change Password')">Change Password</button>
+                <button class="framelinks" onclick="openFrame(event, 'Description')">Description</button>
                 <!--Second options is delete account btn, it directly shows popup window where user can delete it's account-->
                 <!-- Trigger/Open The Modal/popup window -->
                 <button id="delete-account-btn">Delete Account</button>
@@ -94,7 +96,6 @@
 }
 else
 {
-
     <div class="column">
         <!--different tabs in menu-->
         <div class="tabColumn">
@@ -155,15 +156,15 @@ else
 
 <!--Frames for Column menu-->
 <!--Buy page with table-->
-<div id="Buy" class="frameContentColumn">
+<div id="Bought" class="frameContentColumn">
     user's bought services, table form form
 </div>
 
 <div id="Calendar" class="frameContentColumn">
     calendar
 </div>
-
-<div id="Sell" class="frameContentColumn">
+<!--user's own offers-->
+<div id="Offers" class="frameContentColumn">
     <a href="@Url.Action("Add", "ServiceOffer")">
         <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
     </a>
@@ -175,14 +176,16 @@ else
 
 </div>
 
-<!--Privacy setting page-->
-<div id='PrivacySettings' class="frameContentColumn">
-    <!-- Trigger/Open The Modal  - buttons for opening window -->
-    @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-    <!-- The Modal for changing password -->
-    @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
-    @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+<div id='Change Email' class="frameContentColumn">
+    @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @role = "button" })
+</div>
 
+<div id='Change Password' class="frameContentColumn">
+    @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @role = "button" })
+</div>
+
+<div id='Description' class="frameContentColumn">
+    @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @role = "button" })
 </div>
 
 <script>
@@ -222,51 +225,26 @@ else
     /* modals - popup windows*/
     // Get the modalS
     var deleteAccountModal = document.getElementById('delete-account-modal');
-    var changeEmailModal = document.getElementById('change-email-modal');
-    var changePasswordModal = document.getElementById('change-password-modal');
 
     // Get the button that opens the modal
     var openDeleteAccountBtn = document.getElementById("delete-account-btn");
-    var openChangeEmailBtn = document.getElementById("change-email-btn");
-    var openChangePasswordBtn = document.getElementById("change-password-btn");
 
     // Get the <span> element that closes the modal
-    var span3 = document.getElementsByClassName("close")[3];
     var span1 = document.getElementsByClassName("close")[1];
-    var span2 = document.getElementsByClassName("close")[2];
 
     // When the user clicks the button, open the modal
-    openChangeEmailBtn.onclick = function () {
-        changeEmailModal.style.display = "block";
-    }
-    openChangePasswordBtn.onclick = function () {
-        changePasswordModal.style.display = "block";
-    }
     openDeleteAccountBtn.onclick = function () {
-
         deleteAccountModal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
-    span3.onclick = function () {
-        changeEmailModal.style.display = "none";
-    }
-    span2.onclick = function () {
-        changePasswordModal.style.display = "none";
-    }
     span1.onclick = function () {
         deleteAccountModal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
-        if (event.target == changeEmailModal) {
-            changeEmailModal.style.display = "none";
-        }
-        else if (event.target == changePasswordModal) {
-            changePasswordModal.style.display = "none";
-        }
-        else if (event.target == deleteAccountModal) {
+        if (event.target == deleteAccountModal) {
             deleteAccountModal.style.display = "none";
         }
     }
