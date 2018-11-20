@@ -47,10 +47,7 @@
         <p>
             @Html.DisplayFor(model => model.Description)
         </p>
-        <div>
-            @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
-        </div>
     </div>
 </div>
 @if (Model.UserName == User.Identity.GetUserName())
@@ -88,7 +85,7 @@
                         </div>
 
                         @Html.AntiForgeryToken()
-                        @Html.ActionLink("Delete", "Delete", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+                        @Html.ActionLink("Delete", "DeleteAsync", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
                     </div>
                 </div>
             </div>
@@ -184,6 +181,7 @@ else
     @Html.ActionLink("Change email", "ChangeEmail", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
     <!-- The Modal for changing password -->
     @Html.ActionLink("Change password", "ChangePassword", "Manage", null, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
+    @Html.ActionLink("Add description", "AddDescription", "User", new { id = Model.ID }, htmlAttributes: new { @class = "buttons", @id = "confirmBtn", @role = "button" })
 
 </div>
 
