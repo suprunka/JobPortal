@@ -12,7 +12,7 @@ using Region = AppJobPortal.UserServiceReferenceTcp.Region;
 
 namespace AppJobPortal.Models
 {
-    public class UserAppModel : NotifyBase//, IDataErrorInfo
+    public class UserAppModelDisplay : NotifyBase//, IDataErrorInfo
     {
         string phoneNumber, firstName, lastName, email, userName, password,
              addressLine, cityName, postCode, paypalmail, description;
@@ -20,26 +20,24 @@ namespace AppJobPortal.Models
         Region region;
         Gender gender;
 
-        
 
-        public UserAppModel()
+
+        public UserAppModelDisplay()
         {
         }
 
-        public UserAppModel(int iD, string paypalmail, string phoneNumber, string firstName, string lastName, string email,string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
+        public UserAppModelDisplay(int iD, string paypalmail, string description, string phoneNumber, string firstName, string lastName, string email, string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
         {
             ID = iD;
             this.phoneNumber = phoneNumber;
             this.paypalmail = paypalmail;
-           
+            this.description = description;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.email = email; 
-
+            this.email = email;
             this.userName = username;
             this.addressLine = addressLine;
             this.cityName = cityName;
-
             this.postCode = postcode;
             this.region = region;
             this.gender = gender;
@@ -99,8 +97,6 @@ namespace AppJobPortal.Models
             }
         }
 
-      
-
         public virtual String AddressLine
         {
             get { return addressLine; }
@@ -128,6 +124,16 @@ namespace AppJobPortal.Models
             {
                 OnPropertyChanged("PayPalMail");
                 paypalmail = value;
+            }
+        }
+
+        public virtual String Description
+        {
+            get { return description; }
+            set
+            {
+                OnPropertyChanged("Description");
+                description = value;
             }
         }
 
@@ -160,35 +166,6 @@ namespace AppJobPortal.Models
                 gender = value;
             }
         }
-       /* #region implementing IDataErrorInfo
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
 
-        public string this[string columnName]
-        {
-            get
-            {
-                string result = null;
-                if (columnName == "FirstName")
-                {
-                    if (string.IsNullOrEmpty(FirstName))
-                        result = "Please enter a First Name";
-                }
-                if (columnName == "LastName")
-                {
-                    if (string.IsNullOrEmpty(LastName))
-                        result = "Please enter a Last Name";
-                }
-                if (columnName == "Email")
-                {
-                    if (!Email.Contains("@"))
-                        result = "Please enter a valid email";
-                }
-                return result;
-            }
-        }
-        #endregion*/
     }
 }

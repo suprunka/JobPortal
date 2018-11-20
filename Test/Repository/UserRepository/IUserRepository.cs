@@ -6,6 +6,7 @@ namespace Repository
     {
 
         Users AddDescription(Users newInformation);
+        Users CreateAdmin(Users obj);
         Users UpdateUserMail(Users newInformation);
     }
 }

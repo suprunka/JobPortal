@@ -16,7 +16,7 @@ namespace Repository
         private DataContext _context;
         private SqlTransaction sql = null;
         private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_1067677;Password=Password1!";
-      public UsersRepository(DataContext context) : base(context)
+        public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
 
@@ -32,20 +32,79 @@ namespace Repository
                 {
                     try
                     {
-                       //if (loggingId == null)
-                       //{
-                       //    AspNetUsers logging = new AspNetUsers
-                       //    {
-                       //        UserName = obj.AspNetUsers.UserName,
-                       //        PasswordHash = obj.AspNetUsers.PasswordHash,
-                       //        Email = obj.AspNetUsers.Email,
-                       //        PhoneNumber = obj.AspNetUsers.PhoneNumber,
-                       //    };
-                       //
-                       //    _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
-                       //    _context.SubmitChanges();
-                       //    loggingId = logging.Id.ToString();
-                       //}
+                        var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                        if (addressExists == null)
+                        {
+                            addressExists = new AddressTable
+                            {
+                                Postcode = obj.AddressTable.Postcode,
+                                City = obj.AddressTable.City,
+                                Region = obj.AddressTable.Region,
+                            };
+                            _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
+
+
+                            _context.SubmitChanges();
+                        }
+
+                        Users u = new Users
+                        {
+                            FirstName = obj.FirstName,
+                            LastName = obj.LastName,
+                            Logging_ID = obj.Logging_ID,
+                            Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
+                                t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
+                            AddressLine = obj.AddressLine,
+                            City_ID = addressExists.ID,
+                            PayPalMail = obj.PayPalMail,
+                        };
+
+                        _context.GetTable<Users>().InsertOnSubmit(u);
+                        _context.SubmitChanges();
+
+                        myTran.Complete();
+                        result = u;
+                    }
+                    catch
+                    {
+                        result = null;
+                        throw new DuplicateKeyException(this);
+                    }
+                    finally
+                    {
+                        objConn.Close();
+                    }
+                }
+            }
+            return result;
+        }
+
+        public Users CreateAdmin(Users obj)
+        {
+            Users result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                using (var myTran = new TransactionScope())
+                {
+                    try
+                    {
+                        AspNetUsers logging = new AspNetUsers
+                        {
+                            Id = obj.ID.ToString(),
+                            EmailConfirmed = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            LockoutEnabled = false,
+                            AccessFailedCount = 0,
+                            UserName = obj.AspNetUsers.UserName,
+                            PasswordHash = obj.AspNetUsers.PasswordHash,
+                            Email = obj.AspNetUsers.Email,
+                            PhoneNumber = obj.AspNetUsers.PhoneNumber,
+
+                        };
+                        _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
+                        _context.SubmitChanges();
 
                         var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                         if (addressExists == null)
@@ -166,7 +225,7 @@ namespace Repository
         {
             return base.List(predicate);
         }
-        public  AspNetUsers Login(AspNetUsers account)
+        public AspNetUsers Login(AspNetUsers account)
         {
             return base.Login(account);
         }
@@ -190,11 +249,11 @@ namespace Repository
                         found.LastName = obj.LastName;
                        // found.AspNetUsers.Email = obj.AspNetUsers.Email;
                         found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
-                       // found.AspNetUsers.Password = obj.AspNetUsers.AspNetUsers.Password;
+                        // found.AspNetUsers.Password = obj.AspNetUsers.AspNetUsers.Password;
                         found.AddressLine = obj.AddressLine;
                         found.Description = obj.Description;
                         found.PayPalMail = obj.PayPalMail;
-                        if(obj.Gender.Gender1 == "Male")
+                        if (obj.Gender.Gender1 == "Male")
                         {
                             found.Gender_ID = 1;
                         }
@@ -298,7 +357,7 @@ namespace Repository
                 try
                 {
                     Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == newInformation.ID);
-                    found.Description= newInformation.Description;
+                    found.Description = newInformation.Description;
                     _context.SubmitChanges();
                     sql.Commit();
                     result = found;
@@ -315,6 +374,6 @@ namespace Repository
                 }
             }
             return result;
-        }   
+        }
     }
 }
