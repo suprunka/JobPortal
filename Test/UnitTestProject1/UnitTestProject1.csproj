@@ -231,6 +231,10 @@
       <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
       <Name>JobPortal.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyWeb\WebJobPortal.csproj">
+      <Project>{210d4b66-bef0-48ed-a289-b76ba2dc7a6a}</Project>
+      <Name>WebJobPortal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
       <Name>Repository</Name>
@@ -242,10 +246,6 @@
     <ProjectReference Include="..\Test\ServiceLibrary.csproj">
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebJobPortal\WebJobPortal-old.csproj">
-      <Project>{ab35267b-52c2-4aec-8766-a0f9e8e26aab}</Project>
-      <Name>WebJobPortal</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

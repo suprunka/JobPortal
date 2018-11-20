@@ -2,7 +2,7 @@
 using Moq;
 using WebJobPortal.Controllers;
 using System.Web.Mvc;
-using WebJobPortal.UserServiceReference;
+
 using JobPortal.Model;
 using WebJobPortal.Models;
 using System.ComponentModel.DataAnnotations;

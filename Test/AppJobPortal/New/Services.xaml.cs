@@ -24,7 +24,7 @@ namespace AppJobPortal.New
     /// <summary>
     /// Interaction logic for Services.xaml
     /// </summary>
-    public partial class Services : Page
+    public partial class Services : Window
     {
         private readonly IOfferService _proxy;
         private readonly UserServiceReferenceTcp.IUserService _proxyUser;
@@ -36,7 +36,7 @@ namespace AppJobPortal.New
         {
             InitializeComponent();
             _proxy = new OfferServiceClient("offerService");
-            _proxyUser = new UserServiceReferenceTcp.UserServiceClient();
+            _proxyUser = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<ServiceAppModel,Offer>();
             });

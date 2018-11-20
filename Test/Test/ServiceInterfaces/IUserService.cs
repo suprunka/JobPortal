@@ -24,6 +24,9 @@ namespace ServiceLibrary
         bool DeleteUser(int id);
 
         [OperationContract]
+        bool CreateAdminUser(User u);
+
+        [OperationContract]
         bool EditUser(User u);
 
         [OperationContract]
