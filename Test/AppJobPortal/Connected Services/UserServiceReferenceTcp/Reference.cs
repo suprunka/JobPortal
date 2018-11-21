@@ -325,12 +325,6 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         System.Threading.Tasks.Task<bool> DeleteUserAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateAdminUser", ReplyAction="http://tempuri.org/IUserService/CreateAdminUserResponse")]
-        bool CreateAdminUser(AppJobPortal.UserServiceReferenceTcp.User u);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateAdminUser", ReplyAction="http://tempuri.org/IUserService/CreateAdminUserResponse")]
-        System.Threading.Tasks.Task<bool> CreateAdminUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
         bool EditUser(AppJobPortal.UserServiceReferenceTcp.User u);
         
@@ -372,6 +366,12 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
         System.Threading.Tasks.Task<bool> AddDescriptionAsync(AppJobPortal.UserServiceReferenceTcp.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUsernameOfUser", ReplyAction="http://tempuri.org/IUserService/UpdateUsernameOfUserResponse")]
+        bool UpdateUsernameOfUser(AppJobPortal.UserServiceReferenceTcp.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUsernameOfUser", ReplyAction="http://tempuri.org/IUserService/UpdateUsernameOfUserResponse")]
+        System.Threading.Tasks.Task<bool> UpdateUsernameOfUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -433,14 +433,6 @@ namespace AppJobPortal.UserServiceReferenceTcp {
             return base.Channel.DeleteUserAsync(id);
         }
         
-        public bool CreateAdminUser(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.CreateAdminUser(u);
-        }
-        
-        public System.Threading.Tasks.Task<bool> CreateAdminUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.CreateAdminUserAsync(u);
-        }
-        
         public bool EditUser(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.EditUser(u);
         }
@@ -495,6 +487,14 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         
         public System.Threading.Tasks.Task<bool> AddDescriptionAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
             return base.Channel.AddDescriptionAsync(u);
+        }
+        
+        public bool UpdateUsernameOfUser(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.UpdateUsernameOfUser(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateUsernameOfUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.UpdateUsernameOfUserAsync(u);
         }
     }
 }

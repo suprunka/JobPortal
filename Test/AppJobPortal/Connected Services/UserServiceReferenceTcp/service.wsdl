@@ -358,62 +358,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_CreateAdminUser_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_CreateAdminUser_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
-          </sp:Header>
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body>
-          </sp:Body>
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUser_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -806,6 +750,62 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_UpdateUsernameOfUser_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body>
+          </sp:Body>
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body>
+          </sp:Body>
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_UpdateUsernameOfUser_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body>
+          </sp:Body>
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing">
+          </sp:Header>
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body>
+          </sp:Body>
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="UserServiceTcpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -870,12 +870,6 @@
   <wsdl:message name="IUserService_DeleteUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IUserService_CreateAdminUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateAdminUser" />
-  </wsdl:message>
-  <wsdl:message name="IUserService_CreateAdminUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateAdminUserResponse" />
-  </wsdl:message>
   <wsdl:message name="IUserService_EditUser_InputMessage">
     <wsdl:part name="parameters" element="tns:EditUser" />
   </wsdl:message>
@@ -918,6 +912,12 @@
   <wsdl:message name="IUserService_AddDescription_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddDescriptionResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUsernameOfUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsernameOfUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUsernameOfUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsernameOfUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateUser" message="tns:IUserService_CreateUser_InputMessage" />
@@ -934,10 +934,6 @@
     <wsdl:operation name="DeleteUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/DeleteUser" message="tns:IUserService_DeleteUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/DeleteUserResponse" message="tns:IUserService_DeleteUser_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="CreateAdminUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateAdminUser" message="tns:IUserService_CreateAdminUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CreateAdminUserResponse" message="tns:IUserService_CreateAdminUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/EditUser" message="tns:IUserService_EditUser_InputMessage" />
@@ -966,6 +962,10 @@
     <wsdl:operation name="AddDescription">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddDescription" message="tns:IUserService_AddDescription_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddDescriptionResponse" message="tns:IUserService_AddDescription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsernameOfUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateUsernameOfUser" message="tns:IUserService_UpdateUsernameOfUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateUsernameOfUserResponse" message="tns:IUserService_UpdateUsernameOfUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UserServiceHttpEndpoint" type="tns:IUserService">
@@ -1020,19 +1020,6 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_output_policy">
-        </wsp:PolicyReference>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CreateAdminUser">
-      <soap12:operation soapAction="http://tempuri.org/IUserService/CreateAdminUser" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateAdminUser_Input_policy">
-        </wsp:PolicyReference>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateAdminUser_output_policy">
         </wsp:PolicyReference>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1128,6 +1115,19 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateUsernameOfUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateUsernameOfUser" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_UpdateUsernameOfUser_Input_policy">
+        </wsp:PolicyReference>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_UpdateUsernameOfUser_output_policy">
+        </wsp:PolicyReference>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="UserServiceTcpEndpoint" type="tns:IUserService">
     <wsp:PolicyReference URI="#UserServiceTcpEndpoint_policy">
@@ -1162,15 +1162,6 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/DeleteUser" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CreateAdminUser">
-      <soap12:operation soapAction="http://tempuri.org/IUserService/CreateAdminUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1234,6 +1225,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddDescription">
       <soap12:operation soapAction="http://tempuri.org/IUserService/AddDescription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsernameOfUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateUsernameOfUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

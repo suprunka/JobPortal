@@ -46,6 +46,9 @@ namespace ServiceLibrary
         [OperationContract]
         bool AddDescription(User u);
 
+        [OperationContract]
+        bool UpdateUsernameOfUser(User u);
+
         //[OperationContract]
         //JobPortalEntities GetLoginEntity();
     }

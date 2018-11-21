@@ -58,24 +58,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CreateAdminUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q4:User" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateAdminUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="CreateAdminUserResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="EditUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q5:User" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q4:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,42 +80,42 @@
   <xs:element name="GetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetAllResult" nillable="true" type="q6:ArrayOfUser" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetAllResult" nillable="true" type="q5:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListByGender">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="gender" type="q7:Gender" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="gender" type="q6:Gender" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListByGenderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="ListByGenderResult" nillable="true" type="q8:ArrayOfUser" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="ListByGenderResult" nillable="true" type="q7:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListByRegion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="region" type="q9:Region" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="region" type="q8:Region" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListByRegionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="ListByRegionResult" nillable="true" type="q10:ArrayOfUser" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="ListByRegionResult" nillable="true" type="q9:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EditUserEmail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q11:User" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q10:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -158,7 +144,7 @@
   <xs:element name="AddDescription">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q12:User" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q11:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -166,6 +152,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="AddDescriptionResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUsernameOfUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="u" nillable="true" type="q12:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUsernameOfUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateUsernameOfUserResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

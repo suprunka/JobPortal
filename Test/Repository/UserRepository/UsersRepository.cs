@@ -30,7 +30,8 @@ namespace Repository
                 objConn.Open();
                 using (var myTran = new TransactionScope())
                 {
-
+                    //For testing 
+                    #region
                     if (obj.Logging_ID == null)
                     {
                         try
@@ -98,6 +99,7 @@ namespace Repository
                             objConn.Close();
                         }
                     }
+                    #endregion
                     else
                     {
                         try
@@ -328,6 +330,36 @@ namespace Repository
                 {
                     Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == newInformation.ID);
                     found.AspNetUsers.Email = newInformation.AspNetUsers.Email;
+                    _context.SubmitChanges();
+                    sql.Commit();
+                    result = found;
+                }
+                catch
+                {
+                    sql.Rollback();
+                    result = null;
+                    throw new InvalidOperationException();
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
+        }
+
+        public Users UpdateUsernameOfUser(Users newInformation)
+        {
+            Users result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+
+                objConn.Open();
+                sql = objConn.BeginTransaction();
+                try
+                {
+                    Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == newInformation.ID);
+                    found.AspNetUsers.UserName = newInformation.AspNetUsers.UserName;
                     _context.SubmitChanges();
                     sql.Commit();
                     result = found;

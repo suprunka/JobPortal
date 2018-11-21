@@ -110,6 +110,29 @@ namespace ServiceLibrary
             }
         }
 
+        public bool UpdateUsernameOfUser(User u)
+        {
+            if (RegexMatch.DoesUsernameMatch(u))
+            {
+                _database.UpdateUsernameOfUser(new Users
+                {
+                    ID = u.ID,
+                    AspNetUsers = new AspNetUsers
+                    {
+                        UserName = u.UserName,
+                    }
+
+                });
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
         public bool EditUser(User u)
         {
             try

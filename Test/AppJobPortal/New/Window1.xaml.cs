@@ -121,7 +121,7 @@ namespace AppJobPortal.New
                 SetUserFromBoxes();
                 _user.ID = int.Parse(txtId.Text);
 
-                if (_proxy.EditUser(_mapper.Map(_user, new User())))
+                if (_proxy.EditUser(_mapper.Map(_user, new User())) && _proxy.EditUserEmail(_mapper.Map(_user, new User())) && _proxy.UpdateUsernameOfUser(_mapper.Map(_user, new User())))
                 {
                     GetAll();
                 }

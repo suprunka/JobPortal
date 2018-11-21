@@ -25,6 +25,19 @@ namespace ServiceLibrary.Models
             }
         }
 
+        public static bool DoesUsernameMatch(User user)
+        {
+
+            if (Regex.IsMatch(user.UserName, "^[a-zA-Z0-9ÆæØøÅå ]{1,}$"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static bool DoesUserEmailMatch(User user)
         {
 
