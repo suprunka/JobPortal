@@ -30,31 +30,30 @@ namespace Repository
                 objConn.Open();
                 using (var myTran = new TransactionScope())
                 {
+
+                    if (obj.Logging_ID == null)
+                    {
+                        AspNetUsers logging = new AspNetUsers
+                        {
+                            Id = obj.AspNetUsers.Id.ToString(),
+                            EmailConfirmed = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            LockoutEnabled = false,
+                            AccessFailedCount = 0,
+                            UserName = obj.AspNetUsers.UserName,
+                            PasswordHash = obj.AspNetUsers.PasswordHash,
+                            Email = obj.AspNetUsers.Email,
+                            PhoneNumber = obj.AspNetUsers.PhoneNumber,
+
+                        };
+                        _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
+                        _context.SubmitChanges();
+
+                    }
+
                     try
                     {
-                        //adding to aspnetUsers for testing
-                        #region
-                        if (_context.GetTable<AspNetUsers>().FirstOrDefault(t => t.UserName == obj.AspNetUsers.UserName) == null)
-                        {
-                            AspNetUsers logging = new AspNetUsers
-                            {
-                                Id = obj.AspNetUsers.Id.ToString(),
-                                EmailConfirmed = false,
-                                PhoneNumberConfirmed = false,
-                                TwoFactorEnabled = false,
-                                LockoutEnabled = false,
-                                AccessFailedCount = 0,
-                                UserName = obj.AspNetUsers.UserName,
-                                PasswordHash = obj.AspNetUsers.PasswordHash,
-                                Email = obj.AspNetUsers.Email,
-                                PhoneNumber = obj.AspNetUsers.PhoneNumber,
-
-                            };
-                            _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
-                            _context.SubmitChanges();
-
-                        }
-                        #endregion
                         var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                         if (addressExists == null)
                         {
@@ -74,7 +73,7 @@ namespace Repository
                         {
                             FirstName = obj.FirstName,
                             LastName = obj.LastName,
-                            Logging_ID = _context.GetTable<AspNetUsers>().Single(t => t.UserName == obj.AspNetUsers.UserName).Id,
+                            Logging_ID = obj.Logging_ID,
                             Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
                                 t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
                             AddressLine = obj.AddressLine,
@@ -200,18 +199,15 @@ namespace Repository
                             found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
                             found.FirstName = obj.FirstName;
                             found.LastName = obj.LastName;
-                            found.AspNetUsers.Email = obj.AspNetUsers.Email;
-                            found.AspNetUsers.UserName = obj.AspNetUsers.UserName;
                             found.AddressLine = obj.AddressLine;
-                            found.Description = obj.Description;
                             found.PayPalMail = obj.PayPalMail;
                             if (obj.Gender.Gender1 == "Male")
                             {
-                                found.Gender_ID = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Male").ID;
+                                found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Male");
                             }
                             else
                             {
-                                found.Gender_ID = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Female").ID;
+                                found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Female");
                             }
 
                             var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);

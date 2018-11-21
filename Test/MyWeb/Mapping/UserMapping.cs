@@ -66,17 +66,15 @@ namespace MyWeb.Mapping
 
             {
                 ID = user.ID.ToString(),
-                CityName = user.CityName,
-                Email = user.Email,
                 FirstName = user.FirstName,
-                Gender = user.Gender,
                 LastName = user.LastName,
-               // Password = user.Password,
-                PayPalMail = user.PayPalMail,
                 PhoneNumber = user.PhoneNumber,
+                Gender = user.Gender,
+                CityName = user.CityName,
+                AddressLine = user.AddressLine,
                 Postcode = user.Postcode,
                 Region = user.Region,
-                AddressLine = user.AddressLine,
+                PayPalMail = user.PayPalMail,
                 UserName = user.UserName,
                 Description = user.Description,
             };
@@ -88,17 +86,17 @@ namespace MyWeb.Mapping
             return new User
             {
                 ID = Int32.Parse(userProfileViewModel.ID),
-                AddressLine = userProfileViewModel.AddressLine,
-                CityName = userProfileViewModel.CityName,
-                Email = userProfileViewModel.Email,
                 FirstName = userProfileViewModel.FirstName,
-                Gender = userProfileViewModel.Gender,
                 LastName = userProfileViewModel.LastName,
-                PayPalMail = userProfileViewModel.PayPalMail,
                 PhoneNumber = userProfileViewModel.PhoneNumber,
+                Gender = userProfileViewModel.Gender,
+                CityName = userProfileViewModel.CityName,
+                AddressLine = userProfileViewModel.AddressLine,
                 Postcode = userProfileViewModel.Postcode,
                 Region = userProfileViewModel.Region,
+                PayPalMail = userProfileViewModel.PayPalMail,
                 UserName = userProfileViewModel.UserName,
+                Description = userProfileViewModel.Description,
             };
         }
     }

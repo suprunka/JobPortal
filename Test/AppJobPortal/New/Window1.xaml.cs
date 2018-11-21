@@ -237,7 +237,7 @@ namespace AppJobPortal.New
                 {
                     _user.Gender = Gender.Male;
                 }
-                else if ((bool)Male.IsChecked)
+                else if ((bool)Female.IsChecked)
                 {
                     _user.Gender = Gender.Female;
 
