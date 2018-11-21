@@ -11,21 +11,21 @@ namespace WebJobPortal.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserService _proxy;
+        private readonly IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint");
 
         public LoginController(IUserService proxy)
         {
             this._proxy = proxy;
         }
-
-        // GET: Login
-        public ActionResult Index()
+        public LoginController()
         {
 
-         //   bool result = this._proxy.lo
-         //   if (result)
-            
-                return View();
+        }
+
+        // GET: Login
+        public PartialViewResult Index()
+        {
+            return PartialView("Login", new UserModel());
         }
         [AllowAnonymous]
         public ActionResult Login()
@@ -87,3 +87,4 @@ namespace WebJobPortal.Controllers
         }
     }
 }
+ 

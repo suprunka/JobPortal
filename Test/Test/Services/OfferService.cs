@@ -9,6 +9,8 @@ using JobPortal.Model;
 using System.Data.Linq;
 using SubCategory = JobPortal.Model.SubCategory;
 using Category = JobPortal.Model.Category;
+using System.Linq.Expressions;
+using System.Collections;
 
 namespace ServiceLibrary
 {
@@ -28,16 +30,34 @@ namespace ServiceLibrary
 
         }
 
+        public bool AddtoOffer(ServiceOffer serviceOffer, Offer offer)
+        {
+            foreach (var item in offer.ListOfWorkingDays)
+            {
+                _database.AddToService(serviceOffer, new WorkingDate
+                {
+                    NameOfDay = item.WeekDay.ToString(),
+                    HourFrom = item.HoursFrom,
+                    HourTo = item.HoursTo,
+                    ServiceOffer = serviceOffer,
+
+                }
+                    );
+            }
+
+            return false;
+        }
+
         public bool CreateServiceOffer(Offer offer)
         {
             try
             {
                 if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
                 {
-                    _database.Create(new ServiceOffer
+                   var serviceOffer= _database.Create(new ServiceOffer
                     {
 
-                        SubCategory = new Repository.DbConnection.SubCategory
+                        SubCategory =  new Repository.DbConnection.SubCategory
                         {
                             Name = offer.Subcategory.ToString(),
                             Category = new Repository.DbConnection.Category
@@ -45,12 +65,16 @@ namespace ServiceLibrary
                                 Name = offer.Category.ToString(),
                             },
                         },
+                        
+
                         Title = offer.Title,
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
-                        Employee_Phone = offer.Author.ID.ToString()
+                        Employee_ID = offer.AuthorId,
 
                     });
+              //      AddtoOffer(serviceOffer, offer);
+
                     return true;
                 }
                 else
@@ -71,11 +95,10 @@ namespace ServiceLibrary
             var dbResult = _database.Get(x => x.ID == ID);
             if (dbResult != null)
             {
-                var employeePhone = dbResult.Employee_Phone;
-                User user = new UserService().FindUser(employeePhone);
+               
                 offer = new Offer {
                     Id = ID,
-                    Author = user,
+                    AuthorId = dbResult.Employee_ID,
                     Description = dbResult.Description,
                     Title = dbResult.Title,
                     RatePerHour = dbResult.RatePerHour,
@@ -109,7 +132,7 @@ namespace ServiceLibrary
         {
             try
             {
-                if ((RegexMatch.DoesOfferMatch(serviceOffer)) && (serviceOffer.RatePerHour > 0))
+                if (RegexMatch.DoesOfferMatch(serviceOffer) && (serviceOffer.RatePerHour > 0))
                 {
                     _database.Update(new ServiceOffer
                     {
@@ -124,7 +147,7 @@ namespace ServiceLibrary
                             {
                                 Name = serviceOffer.Category.ToString()
                             }
-                        }
+                        },
                     });
                     return true;
                 }
@@ -146,17 +169,16 @@ namespace ServiceLibrary
 
         }
 
-        public Offer[] GetAllOffers()
+        public IQueryable<Offer> GetAllOffers()
         {
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _database.GetAll())
             {
-                var employeePhone = item.Employee_Phone;
-                User user = new UserService().FindUser(employeePhone);
+               
                 resultToReturn.Add(new Offer
                 {
                     Id = item.ID,
-                    Author = user,
+                    AuthorId = item.Employee_ID,
                     Description = item.Description,
                     Title = item.Title,
                     RatePerHour = item.RatePerHour,
@@ -164,9 +186,10 @@ namespace ServiceLibrary
                     Category = (Category)Enum.Parse(typeof(Category), item.SubCategory.Category.Name),
                 });
             }
-            return resultToReturn.ToArray();
+            return resultToReturn.AsQueryable<Offer>();
         }
+       
+  
 
-        
     }
 }

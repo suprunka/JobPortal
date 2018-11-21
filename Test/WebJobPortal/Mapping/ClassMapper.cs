@@ -1,16 +1,15 @@
-﻿using ServiceLibrary.Models;
+﻿using JobPortal.Model;
 using WebJobPortal.Models;
 
-namespace WebJobPortal.Mapping
+namespace AppJobPortal.Mapping
 {
     public class ClassMapper : AutoMapper.Profile
     {
         public ClassMapper()
         {
 
-            CreateMap<UserWebModel, Users>().ReverseMap();
+            CreateMap<Offer, ServiceOfferWebModel>().ReverseMap();
 
-            CreateMap<Users, UserWebModel>().ReverseMap();
         }
     }
 }

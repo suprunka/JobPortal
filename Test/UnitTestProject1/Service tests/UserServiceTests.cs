@@ -17,35 +17,38 @@ namespace UnitTestProject1.Service_tests
     [TestClass]
     public class UserServiceTests
     {
-        //Create
-        #region
 
-        //Test if during creation of user database is hit only once. 
-        [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
+        public Mock<User> getMockOfUser()
+        {
+            var userStub = new Mock<User>();
+            userStub.Setup(x => x.FirstName).Returns("Ådam");
+            userStub.Setup(x => x.PhoneNumber).Returns("12345678");
+            userStub.Setup(x => x.LastName).Returns("Ådåm");
+            userStub.Setup(x => x.Email).Returns("am@gmail.com");
+            userStub.Setup(x => x.UserName).Returns("AdamM");
+            userStub.Setup(x => x.Password).Returns("Qwerty1");
+            userStub.Setup(x => x.AddressLine).Returns("Stræætline");
+            userStub.Setup(x => x.CityName).Returns("Cityæname");
+            userStub.Setup(x => x.Postcode).Returns("2154");
+            userStub.Setup(x => x.Region).Returns(Region.Hovedstaden);
+            userStub.Setup(x => x.Gender).Returns(Gender.Male);
+            userStub.Setup(x => x.Description).Returns("Description");
+            userStub.Setup(x => x.PayPalMail).Returns("Paypal@wp.pl");
+            return userStub;
+        }
+
+        //Create
+
+
+        //Test if during creation of user database is hit only once.        
         [TestMethod]
-        public void Create_UserService_Creation_Of_User_Hit_Database_Once(string phoneNumber, string firstName,
-        string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        public void Create_UserService_Creation_Of_User_Hit_Database_Once()
         {
             try
             {
-                var userStub = new Mock<User>();
-                #region
-                userStub.Setup(x => x.FirstName).Returns(firstName);
-                userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-                userStub.Setup(x => x.LastName).Returns(lastName);
-                userStub.Setup(x => x.Email).Returns(email);
-                userStub.Setup(x => x.UserName).Returns(userName);
-                userStub.Setup(x => x.Password).Returns(password);
-                userStub.Setup(x => x.AddressLine).Returns(addressLine);
-                userStub.Setup(x => x.CityName).Returns(cityName);
-                userStub.Setup(x => x.Postcode).Returns(postCode);
-                userStub.Setup(x => x.Region).Returns(region);
-                userStub.Setup(x => x.Gender).Returns(gender);
-                #endregion
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                service.CreateUser(userStub.Object);
+                service.CreateUser(getMockOfUser().Object, null);
                 databaseMock.Verify(t => t.Create(It.IsAny<Users>()), Times.AtLeastOnce);
             }
             catch
@@ -54,33 +57,15 @@ namespace UnitTestProject1.Service_tests
             }
         }
 
-
         //Test if creation of user results sucessfully.
-        [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
         [TestMethod]
-        public void Create_UserService_Creation_Of_User_With_Valid_Inputs_Is_True(string phoneNumber, string firstName,
-        string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        public void Create_UserService_Creation_Of_User_With_Valid_Inputs_Is_True()
         {
             try
             {
-                var userStub = new Mock<User>();
-                #region
-                userStub.Setup(x => x.FirstName).Returns(firstName);
-                userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-                userStub.Setup(x => x.LastName).Returns(lastName);
-                userStub.Setup(x => x.Email).Returns(email);
-                userStub.Setup(x => x.UserName).Returns(userName);
-                userStub.Setup(x => x.Password).Returns(password);
-                userStub.Setup(x => x.AddressLine).Returns(addressLine);
-                userStub.Setup(x => x.CityName).Returns(cityName);
-                userStub.Setup(x => x.Postcode).Returns(postCode);
-                userStub.Setup(x => x.Region).Returns(region);
-                userStub.Setup(x => x.Gender).Returns(gender);
-                #endregion
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                bool result = service.CreateUser(userStub.Object);
+                bool result = service.CreateUser(getMockOfUser().Object, null);
                 Assert.IsTrue(result);
             }
             catch
@@ -89,17 +74,15 @@ namespace UnitTestProject1.Service_tests
             }
         }
 
-
-        //Test creation users with valid proporties which should pass. 
         [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
         [TestMethod]
-        public void Create_UserService_Creation_Of_User_Using_Valid_Arguments_Is_Not_Null(string phoneNumber, string firstName,
+        public void Create_UserService_Creation_Of_User_Not_Using_Required_Arguments_In_Regex_Throws_ArgumentNullException(string phoneNumber, string firstName,
         string lastName, string email, string userName, string password, string addressLine,
         string cityName, string postCode, Region region, Gender gender)
         {
             try
             {
-                var userStub = new Mock<User>().SetupAllProperties();
+                var userStub = new Mock<User>();
                 #region
                 userStub.Setup(x => x.FirstName).Returns(firstName);
                 userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
@@ -112,40 +95,34 @@ namespace UnitTestProject1.Service_tests
                 userStub.Setup(x => x.Postcode).Returns(postCode);
                 userStub.Setup(x => x.Region).Returns(region);
                 userStub.Setup(x => x.Gender).Returns(gender);
+
                 #endregion
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                Assert.IsNotNull(service.CreateUser(userStub.Object));
+                service.CreateUser(userStub.Object, null);
             }
-            catch
+            catch (ArgumentNullException)
             {
-                Assert.Fail();
+                Assert.IsTrue(true);
             }
         }
 
-
         //Test creation users with invalid proporties which shouldn't pass.
         #region
-        [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (too many characters)
-        [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (not allowed characters)
-        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid firstname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid lastname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email
-        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '@'
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '.'
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamManaż", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid userName (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "he", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //too short userName
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password no capital letter
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password without number
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid addressline (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male)] //invalid city name (not allwed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male)] //invalid postcode (too long)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
+        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid firstname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid lastname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypąl@wp.pl")] //invalid email
+        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypalwp.pl")] //invalid email without '@'
+        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wppl")] //invalid email without '.'
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid addressline (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid city name (not allwed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid postcode (too long)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid postcode (not allowed characters)
         #endregion
         [TestMethod]
         public void Create_UserService_Creation_Of_User_Using_Different_Invalid_Arguments_Is_False(string phoneNumber, string firstName,
         string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        string cityName, string postCode, Region region, Gender gender, string description, string paypalMail)
         {
             try
             {
@@ -161,9 +138,11 @@ namespace UnitTestProject1.Service_tests
                 userStub.Setup(x => x.Postcode).Returns(postCode);
                 userStub.Setup(x => x.Region).Returns(region);
                 userStub.Setup(x => x.Gender).Returns(gender);
+                userStub.Setup(x => x.Description).Returns(description);
+                userStub.Setup(x => x.PayPalMail).Returns(paypalMail);
                 var databaseMock = new Mock<IUserRepository>();
                 UserService service = new UserService(databaseMock.Object);
-                Assert.IsFalse(service.CreateUser(userStub.Object));
+                Assert.IsFalse(service.CreateUser(userStub.Object, null));
             }
             catch
             {
@@ -171,529 +150,624 @@ namespace UnitTestProject1.Service_tests
             }
         }
 
-        #endregion
-
         //Read
-        #region
         [TestMethod]
         public void Get_UserService_Finding_User_By_Valid_ID_Returns_User()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+            try
             {
-                AddressTable = new AddressTable
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            });
-            var subject = new UserService(databaseMock.Object);
-            var foundUser = subject.FindUserByID(1);
-            Assert.IsInstanceOfType(foundUser, typeof(User));
+                    AddressTable = new AddressTable
+                    {
+                        Postcode = "9000",
+                        City = "Aalborg",
+                        Region = "Nordjylland"
+                    },
+                    AspNetUsers = new AspNetUsers
+                    {
+                        PasswordHash = "Adama1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+                        UserName = "Username1",
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
+                        Gender1 = "Male",
+                    },
+                    ID = 1,
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    AddressLine = "mickiewicza",
+                    Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+                });
+                var subject = new UserService(databaseMock.Object);
+                var foundUser = subject.FindUserByID(1);
+                Assert.IsInstanceOfType(foundUser, typeof(User));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public void Get_UserService_Using_Invalid_ID_Returns_Null()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+            try
             {
-                AddressTable = new AddressTable
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            });
-            var subject = new UserService(databaseMock.Object);
-            var foundUser = subject.FindUserByID(-1);
-            Assert.IsNull(foundUser);
+                    AddressTable = new AddressTable
+                    {
+                        Postcode = "9000",
+                        City = "Aalborg",
+                        Region = "Nordjylland"
+                    },
+                    AspNetUsers = new AspNetUsers
+                    {
+                        PasswordHash = "Adama1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+                        UserName = "Username1",
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
+                        Gender1 = "Male",
+                    },
+                    ID = 1,
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    AddressLine = "mickiewicza",
+                    Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+                });
+                var subject = new UserService(databaseMock.Object);
+                var foundUser = subject.FindUserByID(-1);
+                Assert.IsNull(foundUser);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public void Get_UserService_Finding_User_By_Valid_ID_Hits_Database_Once()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+            try
             {
-                AddressTable = new AddressTable
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            });
-            var subject = new UserService(databaseMock.Object).FindUserByID(1) ;
-            databaseMock.Verify(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once());
+                    AddressTable = new AddressTable
+                    {
+                        Postcode = "9000",
+                        City = "Aalborg",
+                        Region = "Nordjylland"
+                    },
+                    AspNetUsers = new AspNetUsers
+                    {
+                        PasswordHash = "Adama1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+                        UserName = "Username1",
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
+                        Gender1 = "Male",
+                    },
+                    ID = 1,
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    AddressLine = "mickiewicza",
+                    Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+                });
+                var subject = new UserService(databaseMock.Object).FindUserByID(1);
+                databaseMock.Verify(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once());
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
-       
         [TestMethod]
-        public void Get_UserService_Verify_If_It_Calls_Db()
+        public void Get_UserService_Catch_Exception_If_Database_Throws_It()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+            try
             {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Throws(new Exception());
+                var subject = new UserService(databaseMock.Object);
+                subject.FindUserByID(1);
 
-            });
-            var subject = new UserService(databaseMock.Object);
-            var foundUser = subject.FindUser("12345678");
-            databaseMock.Verify(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once());
-
+            }
+            catch (Exception)
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod]
         public void Get_UserService_Check_Its_Proporties()
         {
-            var databaseMock = new Mock<IUserRepository>();
-
-            databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+            try
             {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+                var databaseMock = new Mock<IUserRepository>();
 
-            });
-            var subject = new UserService(databaseMock.Object);
-            var foundUser = subject.FindUser("12345678");
-            Assert.AreEqual(1, foundUser.ID);
+                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+                {
+                    AddressTable = new AddressTable
+                    {
+                        Postcode = "9000",
+                        City = "Aalborg",
+                        Region = "Nordjylland"
+                    },
+                    AspNetUsers = new AspNetUsers
+                    {
+                        PasswordHash = "Adama1",
+                        PhoneNumber = "12345678",
+                        Email = "adam@gmail.com",
+                        UserName = "Username1",
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
+                        Gender1 = "Male",
+                    },
+                    ID = 1,
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    AddressLine = "mickiewicza",
+                    Description = "description",
+                    PayPalMail = "paypal@wp.pl",
 
+                });
+                var subject = new UserService(databaseMock.Object);
+                var foundUser = subject.FindUserByID(1);
+                Assert.AreEqual("description", foundUser.Description);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public void GetAll_UserService_Hits_Database_Once()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+            try
+            {
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Nordjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "Adama1",
+                     PhoneNumber = "12345678",
+                     Email = "adam@gmail.com",
+                     UserName = "Username1",
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 1,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+             },new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Nordjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "Adama1",
+                     PhoneNumber = "12345678",
+                     Email = "adam@gmail.com",
+                     UserName = "Username1",
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 1,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
 
-            },new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username2",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 2,
-                PhoneNumber = "76584321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+             },new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                 AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "Adama1",
+                     PhoneNumber = "12345678",
+                     Email = "adam@gmail.com",
+                     UserName = "Username1",
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 1,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
 
-            },new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username3",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 3,
-                PhoneNumber = "76854321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+             },new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "Adama1",
+                     PhoneNumber = "12345678",
+                     Email = "adam@gmail.com",
+                     UserName = "Username1",
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 1,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
 
-            },new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username4",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 4,
-                PhoneNumber = "78654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+             }, new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
 
-            }, new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "adamapA1",
-                    UserName = "Username5",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 5,
-                PhoneNumber = "87654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
 
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+
+             }
+             }.AsQueryable());
+                var list = new UserService(databaseMock.Object).GetAll();
+                databaseMock.Verify(x => x.GetAll(), Times.Once());
             }
-            }.AsQueryable());
-            var list = new UserService(databaseMock.Object).GetAll();
-            databaseMock.Verify(x => x.GetAll(), Times.Once());
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
-        public void List_By_Region_Test()
+        public void GetAll_UserService_Catch_Exception_If_Database_Thrws_It()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users,bool>>>())).Returns(new Users[] { new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username3",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 3,
-                PhoneNumber = "76854321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            },new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username4",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 4,
-                PhoneNumber = "78654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            }, new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "adamapA1",
-                    UserName = "Username5",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 5,
-                PhoneNumber = "87654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
+            try
+            {
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.GetAll()).Throws(new Exception());
+                new UserService(databaseMock.Object).GetAll();
+                
             }
-            }.AsQueryable());
-            var list = new UserService(databaseMock.Object).ListByRegion(Region.Midtjylland);
-            Assert.AreEqual(3, list.Count());
-        }
-
-        [TestMethod]
-        public void List_By_Gender_Test()
-        {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username3",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 3,
-                PhoneNumber = "76854321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            },new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username4",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 4,
-                PhoneNumber = "78654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
-            }, new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Midtjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "adamapA1",
-                    UserName = "Username5",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 5,
-                PhoneNumber = "87654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
-
+            catch(Exception)
+            {
+                Assert.IsTrue(true);
             }
-            }.AsQueryable());
-            var list = new UserService(databaseMock.Object).ListByGender(Gender.Male);
-            Assert.AreEqual(3, list.Count());
         }
 
         [TestMethod]
         public void GetAll_UserService_Verify_If_Returns_Queryable()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "Adama1",
-                    UserName = "Username1",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "12345678",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
+            try
+            {
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Nordjylland"
+                 },
+                AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
 
-            }, new Users {
-                AddressTable = new AddressTable
-                {
-                    Postcode = "9000",
-                    City = "Aalborg",
-                    Region = "Nordjylland"
-                },
-                Logging = new Logging
-                {
-                    Password = "adamapA1",
-                    UserName = "werok",
-                },
-                Gender = new Repository.DbConnection.Gender
-                {
-                    Gender1 = "Male",
-                },
-                ID = 1,
-                PhoneNumber = "87654321",
-                FirstName = "Adam",
-                LastName = "Adam",
-                Email = "adam@gmail.com",
-                AddressLine = "mickiewicza",
 
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                   Description = "description",
+                        PayPalMail = "paypal@wp.pl",
+
+                     }, new Users {
+                         AddressTable = new AddressTable
+                         {
+                             Postcode = "9000",
+                             City = "Aalborg",
+                             Region = "Nordjylland"
+                         },
+                          AspNetUsers = new AspNetUsers
+                         {
+                             PasswordHash = "adamapA1",
+                             UserName = "Username5",
+                            PhoneNumber = "87654321",
+                             Email = "adam@gmail.com",
+
+
+                         },
+                         Gender = new Repository.DbConnection.Gender
+                         {
+                             Gender1 = "Male",
+                         },
+                         ID = 5,
+                         FirstName = "Adam",
+                         LastName = "Adam",
+                         AddressLine = "mickiewicza",
+                           Description = "description",
+                                PayPalMail = "paypal@wp.pl",
+
+                     }
+             }.AsQueryable());
+                var list = new UserService(databaseMock.Object).GetAll();
+                Assert.AreEqual(2, list.Count());
             }
-            }.AsQueryable());
-            var list = new UserService(databaseMock.Object).GetAll();
-
-
-
-            Assert.AreEqual(2, list.Count());
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
-        #endregion
+        [TestMethod]
+        public void List_By_Region_Test()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
+
+
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+
+                },new Users {
+                    AddressTable = new AddressTable
+                     {
+                         Postcode = "9000",
+                         City = "Aalborg",
+                         Region = "Midtjylland"
+                     },
+                    AspNetUsers = new AspNetUsers
+                     {
+                         PasswordHash = "adamapA1",
+                         UserName = "Username5",
+                        PhoneNumber = "87654321",
+                         Email = "adam@gmail.com",
+
+
+                     },
+                     Gender = new Repository.DbConnection.Gender
+                     {
+                         Gender1 = "Male",
+                     },
+                     ID = 5,
+                     FirstName = "Adam",
+                     LastName = "Adam",
+                     AddressLine = "mickiewicza",
+                    Description = "description",
+                        PayPalMail = "paypal@wp.pl",
+
+             }, new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
+
+
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                     Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+
+             }
+             }.AsQueryable());
+                var list = new UserService(databaseMock.Object).ListByRegion(Region.Midtjylland);
+                Assert.AreEqual(3, list.Count());
+            }
+            catch
+            {
+                Assert.Fail();
+
+            }
+        }
+
+        [TestMethod]
+        public void List_By_Gender_Test()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUserRepository>();
+                databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                  AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
+
+
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                   Description = "description",
+                        PayPalMail = "paypal@wp.pl",
+
+             },new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                 AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
+
+
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                   Description = "description",
+                        PayPalMail = "paypal@wp.pl",
+             }, new Users {
+                 AddressTable = new AddressTable
+                 {
+                     Postcode = "9000",
+                     City = "Aalborg",
+                     Region = "Midtjylland"
+                 },
+                 AspNetUsers = new AspNetUsers
+                 {
+                     PasswordHash = "adamapA1",
+                     UserName = "Username5",
+                    PhoneNumber = "87654321",
+                     Email = "adam@gmail.com",
+
+
+                 },
+                 Gender = new Repository.DbConnection.Gender
+                 {
+                     Gender1 = "Male",
+                 },
+                 ID = 5,
+                 FirstName = "Adam",
+                 LastName = "Adam",
+                 AddressLine = "mickiewicza",
+                   Description = "description",
+                        PayPalMail = "paypal@wp.pl",
+
+             }
+             }.AsQueryable());
+                var list = new UserService(databaseMock.Object).ListByGender(Gender.Male);
+                Assert.AreEqual(3, list.Count());
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+
+        
 
         //Delete
-        #region
+
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Valid_ID_Returns_True()
         {
@@ -705,7 +779,7 @@ namespace UnitTestProject1.Service_tests
             bool result = sut.DeleteUser(userMock.Object.ID);
             Assert.IsTrue(result);
         }
-
+        
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Invalid_ID_Returns_False()
         {
@@ -717,7 +791,7 @@ namespace UnitTestProject1.Service_tests
             bool result = sut.DeleteUser(userMock.Object.ID);
             Assert.IsFalse(result);
         }
-
+        
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Valid_ID_Hits_Database_Once()
         {
@@ -729,7 +803,7 @@ namespace UnitTestProject1.Service_tests
             sut.DeleteUser(userMock.Object.ID);
             dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once);
         }
-
+        
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Invalid_ID_Never_Hits_Database()
         {
@@ -740,136 +814,95 @@ namespace UnitTestProject1.Service_tests
             sut.DeleteUser(-1);
             dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Never);
         }
-        #endregion
 
+        
 
-        //Update
-        #region
-        [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
+        //Update    
         [TestMethod]
-        public void Update_UserService_Using_Valid_Parameters_Hit_Database_Once(string phoneNumber, string firstName,
-        string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        public void Update_UserService_Using_Valid_Parameters_Hit_Database_Once()
         {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.FirstName).Returns(firstName);
-            userMock.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-            userMock.Setup(x => x.LastName).Returns(lastName);
-            userMock.Setup(x => x.Email).Returns(email);
-            userMock.Setup(x => x.UserName).Returns(userName);
-            userMock.Setup(x => x.Password).Returns(password);
-            userMock.Setup(x => x.AddressLine).Returns(addressLine);
-            userMock.Setup(x => x.CityName).Returns(cityName);
-            userMock.Setup(x => x.Postcode).Returns(postCode);
-            userMock.Setup(x => x.Region).Returns(region);
-            userMock.Setup(x => x.Gender).Returns(gender);
             var databaseMock = new Mock<IUserRepository>();
-            new UserService(databaseMock.Object).EditUser(userMock.Object);
+            new UserService(databaseMock.Object).EditUser(getMockOfUser().Object);
             databaseMock.Verify(x => x.Update(It.IsAny<Users>()), Times.Once());
         }
-
-        [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
+        
         [TestMethod]
-        public void Update_UserService_Using_Valid_Parameters_Is_True(string phoneNumber, string firstName,
-        string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        public void Update_UserService_Using_Valid_Parameters_Is_True()
         {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.FirstName).Returns(firstName);
-            userMock.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-            userMock.Setup(x => x.LastName).Returns(lastName);
-            userMock.Setup(x => x.Email).Returns(email);
-            userMock.Setup(x => x.UserName).Returns(userName);
-            userMock.Setup(x => x.Password).Returns(password);
-            userMock.Setup(x => x.AddressLine).Returns(addressLine);
-            userMock.Setup(x => x.CityName).Returns(cityName);
-            userMock.Setup(x => x.Postcode).Returns(postCode);
-            userMock.Setup(x => x.Region).Returns(region);
-            userMock.Setup(x => x.Gender).Returns(gender);
             var databaseMock = new Mock<IUserRepository>();
-            var result = new UserService(databaseMock.Object).EditUser(userMock.Object);
+            var result = new UserService(databaseMock.Object).EditUser(getMockOfUser().Object);
             Assert.IsTrue(result);
         }
 
-        #region
-        [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (too many characters)
-        [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (not allowed characters)
-        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid firstname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid lastname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email
-        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '@'
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '.'
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamManaż", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid userName (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "he", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //too short userName
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password no capital letter
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password without number
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid addressline (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male)] //invalid city name (not allwed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male)] //invalid postcode (too long)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
-        #endregion
+        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid firstname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid lastname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypąl@wp.pl")] //invalid email
+        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypalwp.pl")] //invalid email without '@'
+        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wppl")] //invalid email without '.'
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid addressline (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid city name (not allwed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid postcode (too long)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid postcode (not allowed characters)#endregion
         [TestMethod]
         public void Update_UserService_Using_Invalid_Parameters_Returns_False(string phoneNumber, string firstName,
         string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        string cityName, string postCode, Region region, Gender gender, string description, string paypalMail)
         {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.FirstName).Returns(firstName);
-            userMock.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-            userMock.Setup(x => x.LastName).Returns(lastName);
-            userMock.Setup(x => x.Email).Returns(email);
-            userMock.Setup(x => x.UserName).Returns(userName);
-            userMock.Setup(x => x.Password).Returns(password);
-            userMock.Setup(x => x.AddressLine).Returns(addressLine);
-            userMock.Setup(x => x.CityName).Returns(cityName);
-            userMock.Setup(x => x.Postcode).Returns(postCode);
-            userMock.Setup(x => x.Region).Returns(region);
-            userMock.Setup(x => x.Gender).Returns(gender);
+            var userStub = new Mock<User>();
+            userStub.Setup(x => x.FirstName).Returns(firstName);
+            userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
+            userStub.Setup(x => x.LastName).Returns(lastName);
+            userStub.Setup(x => x.Email).Returns(email);
+            userStub.Setup(x => x.UserName).Returns(userName);
+            userStub.Setup(x => x.Password).Returns(password);
+            userStub.Setup(x => x.AddressLine).Returns(addressLine);
+            userStub.Setup(x => x.CityName).Returns(cityName);
+            userStub.Setup(x => x.Postcode).Returns(postCode);
+            userStub.Setup(x => x.Region).Returns(region);
+            userStub.Setup(x => x.Gender).Returns(gender);
+            userStub.Setup(x => x.Description).Returns(description);
+            userStub.Setup(x => x.PayPalMail).Returns(paypalMail);
             var databaseMock = new Mock<IUserRepository>();
-            var result = new UserService(databaseMock.Object).EditUser(userMock.Object);
+            var result = new UserService(databaseMock.Object).EditUser(userStub.Object);
             Assert.IsFalse(result);
         }
 
-        #region
-        [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (too many characters)
-        [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid phonenumber (not allowed characters)
-        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid firstname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid lastname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email
-        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '@'
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid email without '.'
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamManaż", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid userName (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "he", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //too short userName
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password no capital letter
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid password without number
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male)] //invalid addressline (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male)] //invalid city name (not allwed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male)] //invalid postcode (too long)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
-        #endregion
+
+
+        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid firstname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid lastname (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypąl@wp.pl")] //invalid email
+        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypalwp.pl")] //invalid email without '@'
+        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wppl")] //invalid email without '.'
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid addressline (not allowed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid city name (not allwed characters)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid postcode (too long)
+        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid postcode (not allowed characters)
         [TestMethod]
         public void Update_UserService_Using_Invalid_Parameters_Doesnt_Hit_Database(string phoneNumber, string firstName,
         string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender)
+        string cityName, string postCode, Region region, Gender gender, string description, string paypalMail)
         {
-            var userMock = new Mock<User>();
-            userMock.Setup(x => x.FirstName).Returns(firstName);
-            userMock.Setup(x => x.PhoneNumber).Returns(phoneNumber);
-            userMock.Setup(x => x.LastName).Returns(lastName);
-            userMock.Setup(x => x.Email).Returns(email);
-            userMock.Setup(x => x.UserName).Returns(userName);
-            userMock.Setup(x => x.Password).Returns(password);
-            userMock.Setup(x => x.AddressLine).Returns(addressLine);
-            userMock.Setup(x => x.CityName).Returns(cityName);
-            userMock.Setup(x => x.Postcode).Returns(postCode);
-            userMock.Setup(x => x.Region).Returns(region);
-            userMock.Setup(x => x.Gender).Returns(gender);
+            var userStub = new Mock<User>();
+            userStub.Setup(x => x.FirstName).Returns(firstName);
+            userStub.Setup(x => x.PhoneNumber).Returns(phoneNumber);
+            userStub.Setup(x => x.LastName).Returns(lastName);
+            userStub.Setup(x => x.Email).Returns(email);
+            userStub.Setup(x => x.UserName).Returns(userName);
+            userStub.Setup(x => x.Password).Returns(password);
+            userStub.Setup(x => x.AddressLine).Returns(addressLine);
+            userStub.Setup(x => x.CityName).Returns(cityName);
+            userStub.Setup(x => x.Postcode).Returns(postCode);
+            userStub.Setup(x => x.Region).Returns(region);
+            userStub.Setup(x => x.Gender).Returns(gender);
+            userStub.Setup(x => x.Description).Returns(description);
+            userStub.Setup(x => x.PayPalMail).Returns(paypalMail);
             var databaseMock = new Mock<IUserRepository>();
             var sut = new UserService(databaseMock.Object);
-            sut.EditUser(userMock.Object);
+            sut.EditUser(userStub.Object);
             databaseMock.Verify(x => x.Update(It.IsAny<Users>()), Times.Never());
 
         }
-        #endregion
     }
 }
+

@@ -29,6 +29,9 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         private string CityNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -45,6 +48,9 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PayPalMailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
@@ -90,6 +96,19 @@ namespace AppJobPortal.UserServiceReferenceTcp {
                 if ((object.ReferenceEquals(this.CityNameField, value) != true)) {
                     this.CityNameField = value;
                     this.RaisePropertyChanged("CityName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
                 }
             }
         }
@@ -168,6 +187,19 @@ namespace AppJobPortal.UserServiceReferenceTcp {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PayPalMail {
+            get {
+                return this.PayPalMailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PayPalMailField, value) != true)) {
+                    this.PayPalMailField = value;
+                    this.RaisePropertyChanged("PayPalMail");
                 }
             }
         }
@@ -259,7 +291,7 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         Nordjylland = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Sjælland = 3,
+        Sjalland = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Syddanmark = 4,
@@ -270,10 +302,10 @@ namespace AppJobPortal.UserServiceReferenceTcp {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        bool CreateUser(AppJobPortal.UserServiceReferenceTcp.User u);
+        bool CreateUser(AppJobPortal.UserServiceReferenceTcp.User u, string loggingId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
-        System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
+        System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u, string loggingId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
         AppJobPortal.UserServiceReferenceTcp.User FindUser(string phoneNumber);
@@ -281,17 +313,23 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
         System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserAsync(string phoneNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUser", ReplyAction="http://tempuri.org/IUserService/EditWebUserResponse")]
-        bool EditWebUser(AppJobPortal.UserServiceReferenceTcp.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
+        AppJobPortal.UserServiceReferenceTcp.User FindUserByID(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUser", ReplyAction="http://tempuri.org/IUserService/EditWebUserResponse")]
-        System.Threading.Tasks.Task<bool> EditWebUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
+        System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserByIDAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         bool DeleteUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         System.Threading.Tasks.Task<bool> DeleteUserAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateAdminUser", ReplyAction="http://tempuri.org/IUserService/CreateAdminUserResponse")]
+        bool CreateAdminUser(AppJobPortal.UserServiceReferenceTcp.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateAdminUser", ReplyAction="http://tempuri.org/IUserService/CreateAdminUserResponse")]
+        System.Threading.Tasks.Task<bool> CreateAdminUserAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
         bool EditUser(AppJobPortal.UserServiceReferenceTcp.User u);
@@ -317,17 +355,23 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
         System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User[]> ListByRegionAsync(AppJobPortal.UserServiceReferenceTcp.Region region);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserPassword", ReplyAction="http://tempuri.org/IUserService/EditWebUserPasswordResponse")]
-        bool EditWebUserPassword(AppJobPortal.UserServiceReferenceTcp.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
+        bool EditUserEmail(AppJobPortal.UserServiceReferenceTcp.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserPassword", ReplyAction="http://tempuri.org/IUserService/EditWebUserPasswordResponse")]
-        System.Threading.Tasks.Task<bool> EditWebUserPasswordAsync(AppJobPortal.UserServiceReferenceTcp.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
+        System.Threading.Tasks.Task<bool> EditUserEmailAsync(AppJobPortal.UserServiceReferenceTcp.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserEmail", ReplyAction="http://tempuri.org/IUserService/EditWebUserEmailResponse")]
-        bool EditWebUserEmail(AppJobPortal.UserServiceReferenceTcp.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
+        bool Login(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditWebUserEmail", ReplyAction="http://tempuri.org/IUserService/EditWebUserEmailResponse")]
-        System.Threading.Tasks.Task<bool> EditWebUserEmailAsync(AppJobPortal.UserServiceReferenceTcp.User u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
+        bool AddDescription(AppJobPortal.UserServiceReferenceTcp.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
+        System.Threading.Tasks.Task<bool> AddDescriptionAsync(AppJobPortal.UserServiceReferenceTcp.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -357,12 +401,12 @@ namespace AppJobPortal.UserServiceReferenceTcp {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateUser(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.CreateUser(u);
+        public bool CreateUser(AppJobPortal.UserServiceReferenceTcp.User u, string loggingId) {
+            return base.Channel.CreateUser(u, loggingId);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.CreateUserAsync(u);
+        public System.Threading.Tasks.Task<bool> CreateUserAsync(AppJobPortal.UserServiceReferenceTcp.User u, string loggingId) {
+            return base.Channel.CreateUserAsync(u, loggingId);
         }
         
         public AppJobPortal.UserServiceReferenceTcp.User FindUser(string phoneNumber) {
@@ -373,12 +417,12 @@ namespace AppJobPortal.UserServiceReferenceTcp {
             return base.Channel.FindUserAsync(phoneNumber);
         }
         
-        public bool EditWebUser(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.EditWebUser(u);
+        public AppJobPortal.UserServiceReferenceTcp.User FindUserByID(int id) {
+            return base.Channel.FindUserByID(id);
         }
         
-        public System.Threading.Tasks.Task<bool> EditWebUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.EditWebUserAsync(u);
+        public System.Threading.Tasks.Task<AppJobPortal.UserServiceReferenceTcp.User> FindUserByIDAsync(int id) {
+            return base.Channel.FindUserByIDAsync(id);
         }
         
         public bool DeleteUser(int id) {
@@ -387,6 +431,14 @@ namespace AppJobPortal.UserServiceReferenceTcp {
         
         public System.Threading.Tasks.Task<bool> DeleteUserAsync(int id) {
             return base.Channel.DeleteUserAsync(id);
+        }
+        
+        public bool CreateAdminUser(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.CreateAdminUser(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateAdminUserAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.CreateAdminUserAsync(u);
         }
         
         public bool EditUser(AppJobPortal.UserServiceReferenceTcp.User u) {
@@ -421,20 +473,28 @@ namespace AppJobPortal.UserServiceReferenceTcp {
             return base.Channel.ListByRegionAsync(region);
         }
         
-        public bool EditWebUserPassword(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.EditWebUserPassword(u);
+        public bool EditUserEmail(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.EditUserEmail(u);
         }
         
-        public System.Threading.Tasks.Task<bool> EditWebUserPasswordAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.EditWebUserPasswordAsync(u);
+        public System.Threading.Tasks.Task<bool> EditUserEmailAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.EditUserEmailAsync(u);
         }
         
-        public bool EditWebUserEmail(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.EditWebUserEmail(u);
+        public bool Login(string username, string password) {
+            return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<bool> EditWebUserEmailAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
-            return base.Channel.EditWebUserEmailAsync(u);
+        public System.Threading.Tasks.Task<bool> LoginAsync(string username, string password) {
+            return base.Channel.LoginAsync(username, password);
+        }
+        
+        public bool AddDescription(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.AddDescription(u);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddDescriptionAsync(AppJobPortal.UserServiceReferenceTcp.User u) {
+            return base.Channel.AddDescriptionAsync(u);
         }
     }
 }

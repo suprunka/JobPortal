@@ -7,11 +7,8 @@
         mc:Ignorable="d"
         Title="Main" WindowState="Maximized" Height="497" Width="1000" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="89*"/>
-        </Grid.ColumnDefinitions>
-        <Frame Name="frame" Content="Frame" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" />
+
+       
 
     </Grid>
 </Window>

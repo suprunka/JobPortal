@@ -28,6 +28,7 @@ namespace AppJobPortal.New
         private UserAppModel _user;
         private User[] _source;
 
+
         public Window1()
         {
             InitializeComponent();
@@ -73,10 +74,11 @@ namespace AppJobPortal.New
             IList<UserAppModel> userAppModels = new List<UserAppModel>();
             foreach(User user in _source)
             {
-                userAppModels.Add(new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email,user.UserName, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender));
+                userAppModels.Add(new UserAppModel(user.ID, user.PayPalMail, user.PhoneNumber, user.FirstName, user.LastName, user.Email,user.UserName, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender));
              
             }
             usersTable.ItemsSource = userAppModels;
+           
 
 
         }
@@ -92,18 +94,23 @@ namespace AppJobPortal.New
             {
                 MessageBox.Show("Enter positive number", "Wrong input in search box");
             }
-           User u =  _proxy.FindUser(id.ToString());
-            if (u != null)
+            try
             {
-                _user = _mapper.Map(u, new UserAppModel());
-                SetTextBoxes();
-                usersTable.SelectedItem = _user;
-
-
+                User u = _proxy.FindUserByID(id);
+                if (u != null)
+                {
+                    _user = _mapper.Map(u, new UserAppModel());
+                    SetTextBoxes();
+                    usersTable.SelectedItem = _user;
+                }
+                else
+                {
+                    MessageBox.Show("I can't find user with ID: " + id, "Cannot find user");
+                }
             }
-            else
+            catch (InvalidOperationException)
             {
-                MessageBox.Show("I can't find user with phone"+ id, "Cannot find user");
+                MessageBox.Show("I can't find user with ID: " + id, "Cannot find user");
             }
         }
 
@@ -126,6 +133,13 @@ namespace AppJobPortal.New
             }
         }
 
+        private void btnServices_Click(object sender, RoutedEventArgs e)
+        {
+          
+           
+
+        }
+
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             txtAddress.Text = "";
@@ -137,46 +151,45 @@ namespace AppJobPortal.New
             txtPhonenumber.Text = "";
             txtPostcode.Text = "";
             txtUsername.Text = "";
-
+            txtPaypalMail.Text = "";
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            UserAppModel user =(UserAppModel) usersTable.SelectedItem;
+            UserAppModel user = (UserAppModel)usersTable.SelectedItem;
             if (MessageBox.Show("Are you sure that you want to delete the user?",
                         "Confirmation", MessageBoxButton.YesNo,
                         MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                _proxy.DeleteUser(user.ID);
-                GetAll();
+                var result = _proxy.DeleteUser(user.ID);
+                if (result)
+                {
+                    GetAll();
+                }
+                else
+                {
+                    MessageBox.Show("I can't delete the user.");
+                }
+
             }
             else
             {
-                MessageBox.Show("I can't uuuu user with id" + _user.ID, "Cannot find user");
-
+                MessageBox.Show("I can't user with ID: " + _user.ID, "Cannot find user");
             }
-
         }
 
-        private void btnRgister_Click(object sender, RoutedEventArgs e)
-        {
-            SetUserFromBoxes();
-            if (_proxy.CreateUser(_mapper.Map(_user, new User())))
-            {
-                GetAll();
-            }
-            else {
-                MessageBox.Show("Wrong input", "Input failure");
-
-            }
-
-        }
 
         private void usersTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _user = _mapper.Map(usersTable.SelectedItem, new UserAppModel());
-            SetTextBoxes();
+            try
+            {
+                _user = _mapper.Map(usersTable.SelectedItem, new UserAppModel());
+                SetTextBoxes();
+            }
+            catch
+            {
 
+            }
         }
         private void SetTextBoxes()
         {
@@ -192,44 +205,66 @@ namespace AppJobPortal.New
                 txtPostcode.Text = _user.Postcode;
                 txtUsername.Text = _user.UserName;
                 regBox.SelectedValue = _user.Region;
-
+                txtPaypalMail.Text = _user.PayPalMail;
+                if (_user.Gender.ToString() == "Male")
+                {
+                    Male.IsChecked = true;
+                }
+                else
+                {
+                    Female.IsChecked = true;
+                }
                 
             }
         }
         private void SetUserFromBoxes()
         {
-            _user.Region = (Region) regBox.SelectedItem;
-            _user.AddressLine = txtAddress.Text;
-            _user.CityName = txtCity.Text;
-            _user.Email = txtEmail.Text;
-            _user.FirstName = txtFname.Text;
-            _user.LastName = txtLname.Text;
-            _user.PhoneNumber = txtPhonenumber.Text;
-            _user.Postcode = txtPostcode.Text;
-            _user.UserName = txtUsername.Text;
-            _user.Password = txtPassword.Password;
-            if ((bool)Male.IsChecked)
+            try
             {
-                _user.Gender = Gender.Male;
-            }
-            else if ((bool)Male.IsChecked)
-            {
-                _user.Gender = Gender.Female;
+                _user.Region = (Region)regBox.SelectedItem;
+                _user.AddressLine = txtAddress.Text;
+                _user.CityName = txtCity.Text;
+                _user.Email = txtEmail.Text;
+                _user.FirstName = txtFname.Text;
+                _user.LastName = txtLname.Text;
+                _user.PhoneNumber = txtPhonenumber.Text;
+                _user.Postcode = txtPostcode.Text;
+                _user.UserName = txtUsername.Text;
+                _user.PayPalMail = txtPaypalMail.Text;
 
-            }
-            else
-            {
-            }
 
+                if ((bool)Male.IsChecked)
+                {
+                    _user.Gender = Gender.Male;
+                }
+                else if ((bool)Female.IsChecked)
+                {
+                    _user.Gender = Gender.Female;
+
+                }
+                else
+                {
+                }
+            }
+            catch
+            {
+                throw new FormatException();
+            }
         }
 
         private void usersTable_CurrentCellChanged(object sender, EventArgs e)
         {
-            _user = _mapper.Map(usersTable.SelectedItem, new UserAppModel());
-            SetTextBoxes();
+            try
+            {
+                _user = _mapper.Map(usersTable.SelectedItem, new UserAppModel());
+                SetTextBoxes();
+            }
+            catch
+            {
+
+            }
         }
 
        
-
     }
 }

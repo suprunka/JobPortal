@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.ServiceModel.Description;
 using JobPortal.Model;
+using System.Linq.Expressions;
 
 namespace ServiceLibrary
 {
@@ -28,7 +29,11 @@ namespace ServiceLibrary
         bool UpdateServiceOffer(Offer serviceOffer);
 
         [OperationContract]
-        Offer[] GetAllOffers();
+        IQueryable<Offer> GetAllOffers();
+
+ 
+
+
 
     }
 }

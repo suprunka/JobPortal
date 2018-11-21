@@ -1,5 +1,6 @@
 ﻿using System.ServiceModel;
 using JobPortal.Model;
+using Repository.DbConnection.Entity;
 
 namespace ServiceLibrary
 {
@@ -7,7 +8,7 @@ namespace ServiceLibrary
     public interface IUserService
     {
         [OperationContract]
-        bool CreateUser(User u);
+        bool CreateUser(User u, string loggingId);
 
         [OperationContract]
         User FindUser(string phoneNumber);
@@ -17,6 +18,8 @@ namespace ServiceLibrary
 
         [OperationContract]
         bool DeleteUser(int id);
+
+        
 
         [OperationContract]
         bool EditUser(User u);
@@ -31,6 +34,15 @@ namespace ServiceLibrary
         User[] ListByRegion(Region region);
 
         [OperationContract]
+        bool EditUserEmail(User u);
+
+        [OperationContract]
         bool Login(string username, string password);
+
+        [OperationContract]
+        bool AddDescription(User u);
+
+        //[OperationContract]
+        //JobPortalEntities GetLoginEntity();
     }
 }

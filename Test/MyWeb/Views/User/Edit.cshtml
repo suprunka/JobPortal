@@ -2,8 +2,11 @@
 @using Microsoft.AspNet.Identity
 @using JobPortal.Model
 @{
-    ViewBag.Title = "Edit information";
+    ViewBag.Title = "Change information about: " + Model.UserName ;
 }
+
+<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -11,7 +14,7 @@
     @Html.HiddenFor(model => model.ID)
 
 <div class="form-horizontal">
-    <h1>Edit personal information</h1>
+    <h4>@ViewBag.Title</h4>
 
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
