@@ -10,6 +10,8 @@ namespace AppJobPortal.Mapping
         {
 
             CreateMap<UserAppModel, UserServiceReferenceTcp.User>().ReverseMap();
+
+
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿@using WebJobPortal.Models
+@model  MyWeb.Models.ManageOffers[]
+
+
+@{
+                ViewBag.Title = "Services";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .col-container {
+        display: table; /* Make the container element behave like a table */
+        width: 100%; /* Set full-width to expand the whole page */
+    }
+
+    .col {
+        padding: 10px;
+        display: table-cell;
+        width: 30%; /* Set full-width to expand the whole page */
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <form>
+            <center>
+                @Html.TextBox("SearchingString")
+                <input class="btn btn-light" type="submit" value="Search" />
+            </center>
+        </form>
+    </div>
+</div>
+
+<table style="border-style: none;">
+    <colgroup>
+        <col class="col-md-4">
+        <col class="col-md-4">
+        <col class="col-md-4">
+    </colgroup>
+    @Html.Partial("Offers", Model)
+</table>

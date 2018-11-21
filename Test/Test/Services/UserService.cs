@@ -9,6 +9,7 @@ using System.Text;
 using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
+using Repository.DbConnection.Entity;
 using ServiceLibrary.Models;
 using Gender = JobPortal.Model.Gender;
 using Region = JobPortal.Model.Region;
@@ -20,7 +21,7 @@ namespace ServiceLibrary
     public class UserService : IUserService
     {
         private readonly IUserRepository _database;
-
+        // private readonly JobPortalEntities _logEntity;
 
         public UserService(IUserRepository database)
         {
@@ -32,7 +33,7 @@ namespace ServiceLibrary
             _database = new UsersRepository(new JobPortalDatabaseDataContext());
         }
 
-        public bool CreateUser(User u)
+        public bool CreateUser(User u, string loggingId)
         {
             try
             {
@@ -46,18 +47,16 @@ namespace ServiceLibrary
                             City = u.CityName,
                             Region = u.Region.ToString(),
                         },
-                        Logging = Register(u.UserName, u.Password),
+                        Logging_ID = loggingId,
                         Gender = new Repository.DbConnection.Gender
                         {
                             Gender1 = u.Gender.ToString(),
                         },
-
-                        PhoneNumber = u.PhoneNumber,
+                        PayPalMail = u.PayPalMail,
                         FirstName = u.FirstName,
                         LastName = u.LastName,
-                        Email = u.Email,
                         AddressLine = u.AddressLine,
-
+                        Description = u.Description,
                     });
                     return true;
                 }
@@ -71,6 +70,8 @@ namespace ServiceLibrary
 
         }
 
+
+       
         public bool DeleteUser(int id)
         {
             try
@@ -83,6 +84,27 @@ namespace ServiceLibrary
                 return false;
             }
             catch (InvalidOperationException)
+            {
+                return false;
+            }
+        }
+
+        public bool EditUserEmail(User u)
+        {
+            if (RegexMatch.DoesUserEmailMatch(u))
+            {
+                _database.UpdateUserMail(new Users
+                {
+                    ID = u.ID,
+                    AspNetUsers = new AspNetUsers
+                    {
+                        Email = u.Email,
+                    }
+
+                });
+                return true;
+            }
+            else
             {
                 return false;
             }
@@ -103,22 +125,22 @@ namespace ServiceLibrary
                             City = u.CityName,
                             Region = u.Region.ToString(),
                         },
-                        Logging = new Logging
+                        AspNetUsers = new AspNetUsers
                         {
-                            Password = u.Password,
                             UserName = u.UserName,
+                            PhoneNumber = u.PhoneNumber,
+                            Email = u.Email,
+
                         },
                         Gender = new Repository.DbConnection.Gender
                         {
                             Gender1 = u.Gender.ToString(),
                         },
                         ID = u.ID,
-                        PhoneNumber = u.PhoneNumber,
                         FirstName = u.FirstName,
                         LastName = u.LastName,
-                        Email = u.Email,
                         AddressLine = u.AddressLine,
-
+                        PayPalMail = u.PayPalMail,
                     });
                     return true;
                 }
@@ -135,21 +157,23 @@ namespace ServiceLibrary
         {
             try
             {
-                var result = _database.Get(t => t.PhoneNumber == phoneNumber);
+                var result = _database.Get(t => t.Logging_ID == phoneNumber);
                 return new User
                 {
                     ID = result.ID,
-                    PhoneNumber = result.PhoneNumber,
+                    PhoneNumber = result.AspNetUsers.PhoneNumber,
                     FirstName = result.FirstName,
                     LastName = result.LastName,
-                    Email = result.Email,
-                    UserName = result.Logging.UserName,
-                    Password = result.Logging.Password,
+                    Email = result.AspNetUsers.Email,
+                    UserName = result.AspNetUsers.UserName,
+                    // Password = result.AspNetUsers.PasswordHash,
                     AddressLine = result.AddressLine,
                     CityName = result.AddressTable.City,
                     Postcode = result.AddressTable.Postcode,
+                    PayPalMail = result.PayPalMail,
                     Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                     Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                    Description = result.Description,
                 };
             }
             catch
@@ -166,27 +190,36 @@ namespace ServiceLibrary
                 if (id > 0)
                 {
                     var result = _database.Get(t => t.ID == id);
-                    return new User
+                    if (result != null)
                     {
-                        ID = result.ID,
-                        PhoneNumber = result.PhoneNumber,
-                        FirstName = result.FirstName,
-                        LastName = result.LastName,
-                        Email = result.Email,
-                        UserName = result.Logging.UserName,
-                        Password = result.Logging.Password,
-                        AddressLine = result.AddressLine,
-                        CityName = result.AddressTable.City,
-                        Postcode = result.AddressTable.Postcode,
-                        Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
-                        Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
-                    };
+                        return new User
+                        {
+                            ID = result.ID,
+                            PhoneNumber = result.AspNetUsers.PhoneNumber,
+                            FirstName = result.FirstName,
+                            LastName = result.LastName,
+                            Email = result.AspNetUsers.Email,
+                            UserName = result.AspNetUsers.UserName,
+                            //Password = result.AspNetUsers.Password,
+                            AddressLine = result.AddressLine,
+                            CityName = result.AddressTable.City,
+                            Postcode = result.AddressTable.Postcode,
+                            PayPalMail = result.PayPalMail,
+                            Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                            Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
+                            Description = result.Description,
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 return null;
             }
             catch
             {
-                return null;
+                throw new InvalidOperationException();
             }
 
         }
@@ -199,16 +232,18 @@ namespace ServiceLibrary
                 resultToReturn.Add(new User
                 {
                     ID = u.ID,
-                    PhoneNumber = u.PhoneNumber,
+                    PhoneNumber = u.AspNetUsers.PhoneNumber,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.Email,
+                    Email = u.AspNetUsers.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
-                    Password = u.Logging.Password,
-                    UserName = u.Logging.UserName,
+                    // Password = u.AspNetUsers.Password,
+                    UserName = u.AspNetUsers.UserName,
+                    Description = u.Description,
+                    PayPalMail = u.PayPalMail,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
             }
@@ -223,16 +258,16 @@ namespace ServiceLibrary
                 resultToReturn.Add(new User
                 {
                     ID = u.ID,
-                    PhoneNumber = u.PhoneNumber,
+                    PhoneNumber = u.AspNetUsers.PhoneNumber,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.Email,
+                    Email = u.AspNetUsers.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
-                    Password = u.Logging.Password,
-                    UserName = u.Logging.UserName,
+                    //Password = u.AspNetUsers.Password,
+                    UserName = u.AspNetUsers.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
             }
@@ -247,29 +282,29 @@ namespace ServiceLibrary
                 resultToReturn.Add(new User
                 {
                     ID = u.ID,
-                    PhoneNumber = u.PhoneNumber,
+                    PhoneNumber = u.AspNetUsers.PhoneNumber,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.Email,
+                    Email = u.AspNetUsers.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
-                    Password = u.Logging.Password,
-                    UserName = u.Logging.UserName,
+                    //Password = u.AspNetUsers.Password,
+                    UserName = u.AspNetUsers.UserName,
                     Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
                 });
             }
             return resultToReturn.ToArray();
         }
 
-       
 
-        private Logging Register(String login, String password)
+
+        private AspNetUsers Register(String login, String password, string mail, string phonenumber)
         {
             if (login.Length == 0 || password.Length == 0)
             {
-                return null; 
+                return null;
             }
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
@@ -279,20 +314,22 @@ namespace ServiceLibrary
             {
                 str.Append(result[i].ToString("x2"));
             }
-            Logging logging = new Logging
+            AspNetUsers logging = new AspNetUsers
             {
+                Email = mail,
+                PhoneNumber = phonenumber,
                 UserName = login,
-                Password = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result))
+                PasswordHash = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result))
             };
             return logging;
-        
+
         }
 
         public bool Login(String login, String password)
         {
 
-            var existing = _database.Login(new Logging { UserName = login, Password = password });
-            if (existing!=  null)
+            var existing = _database.Login(new AspNetUsers { UserName = login, PasswordHash = password });
+            if (existing != null)
             {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
@@ -303,12 +340,31 @@ namespace ServiceLibrary
                     str.Append(result[i].ToString("x2"));
                 }
                 String t = Encoding.UTF8.GetString(result);
-                if (t.Equals(Encrypt.DecryptString(existing.Password)))
+                if (t.Equals(Encrypt.DecryptString(existing.PasswordHash)))
                 {
                     return true;
                 }
             }
             return false;
         }
+
+        public bool AddDescription(User u)
+        {
+
+            _database.AddDescription(new Users
+            {
+                ID = u.ID,
+                Description = u.Description
+            });
+            return true;
+        }
+
+
+        /* public JobPortalEntities GetLoginEntity()
+{
+    return JobPortalEntities.Create();
+}*/
+
+
     }
 }

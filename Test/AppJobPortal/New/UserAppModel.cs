@@ -15,57 +15,31 @@ namespace AppJobPortal.Models
     public class UserAppModel : NotifyBase//, IDataErrorInfo
     {
         string phoneNumber, firstName, lastName, email, userName, password,
-             addressLine, cityName, postCode;
+             addressLine, cityName, postCode, paypalmail, description;
         int Id;
         Region region;
         Gender gender;
 
-        public UserAppModel(int Id, string phoneNumber, string firstName, string lastName, string email, string userName, string password,
-            string addressLine, string cityName, string postCode, Region region, Gender gender)
-        {
-            this.Id = Id;
-            this.phoneNumber = phoneNumber;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-            this.userName = userName;
-            this.password = password;
-            this.addressLine = addressLine;
-            this.cityName = cityName;
-            this.postCode = postCode;
-            this.region = region;
-            this.gender = gender;
-        }
-        public UserAppModel( string phoneNumber, string firstName, string lastName, string email, string userName, string password,
-                   string addressLine, string cityName, string postCode, Region region, Gender gender)
-        {
-            this.phoneNumber = phoneNumber;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-            this.userName = userName;
-            this.password = password;
-            this.addressLine = addressLine;
-            this.cityName = cityName;
-            this.postCode = postCode;
-            this.region = region;
-            this.gender = gender;
-        }
+        
 
         public UserAppModel()
         {
         }
 
-        public UserAppModel(int iD, string phoneNumber, string firstName, string lastName, string email,string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
+        public UserAppModel(int iD, string paypalmail, string phoneNumber, string firstName, string lastName, string email,string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
         {
             ID = iD;
             this.phoneNumber = phoneNumber;
+            this.paypalmail = paypalmail;
+           
             this.firstName = firstName;
             this.lastName = lastName;
-            this.email = email;
+            this.email = email; 
+
             this.userName = username;
             this.addressLine = addressLine;
             this.cityName = cityName;
+
             this.postCode = postcode;
             this.region = region;
             this.gender = gender;
@@ -84,8 +58,6 @@ namespace AppJobPortal.Models
                 phoneNumber = value;
             }
         }
-
-
 
         public virtual String FirstName
         {
@@ -127,15 +99,7 @@ namespace AppJobPortal.Models
             }
         }
 
-        public virtual String Password
-        {
-            get { return password; }
-            set
-            {
-                OnPropertyChanged("Password");
-                password = value;
-            }
-        }
+      
 
         public virtual String AddressLine
         {
@@ -154,6 +118,16 @@ namespace AppJobPortal.Models
             {
                 OnPropertyChanged("City");
                 cityName = value;
+            }
+        }
+
+        public virtual String PayPalMail
+        {
+            get { return paypalmail; }
+            set
+            {
+                OnPropertyChanged("PayPalMail");
+                paypalmail = value;
             }
         }
 

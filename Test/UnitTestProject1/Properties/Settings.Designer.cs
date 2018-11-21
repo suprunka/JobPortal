@@ -66,5 +66,15 @@ namespace UnitTestProject1.Properties {
                 return ((string)(this["DataSourceConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kraka.ucn.dk;User ID=dmai0917_1067712;Password=Password1!")]
+        public string DataSourceConnectionString1 {
+            get {
+                return ((string)(this["DataSourceConnectionString1"]));
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace JobPortal.Model
         [EnumMember]
         Nordjylland,
         [EnumMember]
-        Sjælland,
+        Sjalland,
         [EnumMember]
         Syddanmark
     }
@@ -32,6 +32,9 @@ namespace JobPortal.Model
     [KnownType(typeof(Region))]
     public class User
     {
+
+        [DataMember]
+        public virtual String Description { get; set; }
 
         [DataMember]
         public virtual int ID { get; set; }
@@ -71,6 +74,9 @@ namespace JobPortal.Model
 
         [DataMember]
         public virtual Gender Gender { get; set; }
+
+        [DataMember]
+        public virtual string PayPalMail { get; set; }
         
         
     }

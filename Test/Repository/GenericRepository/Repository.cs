@@ -33,7 +33,9 @@ namespace Repository
         {
             try
             {
-                return null; 
+                _Table.InsertOnSubmit(obj);
+                db.SubmitChanges();
+                return obj; 
             }
             catch
             {
@@ -79,8 +81,15 @@ namespace Repository
 
         public virtual IQueryable<T> GetAll()
         {
-            IQueryable<T> allOffers = db.GetTable<T>();
-            return allOffers;
+            try
+            {
+                IQueryable<T> allOffers = db.GetTable<T>();
+                return allOffers;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 
@@ -97,19 +106,10 @@ namespace Repository
             }
         }
 
-        public virtual Logging Login(Logging obj)
+        public virtual AspNetUsers Login(AspNetUsers obj)
         {
-            var logging= db.GetTable<Logging>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
-            //Updating latest activity of account
-            var user = db.GetTable<Users>().FirstOrDefault(x => x.Logging_ID == obj.ID);
-            var account = db.GetTable<Account>().FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber);
-            account.LatestActivity = DateTime.Now.ToShortTimeString();
-            //
-            db.SubmitChanges();
-            return logging;
+            return db.GetTable<AspNetUsers>().Where(x => x.UserName == obj.UserName).FirstOrDefault();
            
         }
-
-        
     }
 }

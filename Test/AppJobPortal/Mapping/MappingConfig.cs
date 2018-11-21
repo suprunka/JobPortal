@@ -8,6 +8,8 @@ namespace AppJobPortal.Mapping
         public static void RegisterMaps()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<Models.UserAppModel, User>());
+
+
         }
     }
 }

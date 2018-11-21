@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-@model WebJobPortal.Models.UserModel
+﻿@using WebJobPortal.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,8 +15,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li><a href="~/Home/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:20px;border:0;"></a></li>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li><a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:20px;border:0;"></a></li>
+                    <li>@Html.ActionLink("Home", "Index", "ServiceOffer")</li>
                     <li>@Html.ActionLink("Profile", "UserProfile", "User")</li>
 
                     <!--menu items-->
@@ -26,39 +26,21 @@
                     <li>@Html.ActionLink("Sign up", "Create", "User")</li>
 
 
+                   @*
                     <li class="search">
                         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
                         {
                             @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "phone" });
                             <input type="submit" value="Search">
                         }
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </div>
     </div>
     <div id="login-modal" class="loginModal">
         <!-- Modal content -->
-        <div class="modalContent" id="loginModalContent">
-            <!--X button for closing-->
-            <span class="close">&times;</span>
-            <h1>Login</h1>
-
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-            {
-                <div class="form col">
-
-                    <div>
-                        @Html.LabelFor(f => f.UserName)
-                        @Html.TextBoxFor(f => f.UserName, new { title = "Enter Username", @Value = @ViewBag.Username })
-                    </div>
-                    <div>
-                        @Html.LabelFor(f => f.Password)
-                        @Html.PasswordFor(f => f.Password, new { title = "Enter Password.", @Value = @ViewBag.Password })
-                    </div>
-                    <button type="submit" class="small fr">Login</button><br class="cl" />
-                </div>
-            }</div>
+       @Html.Partial("Login", new UserModel())
             
     </div>
     <div class="container body-content">

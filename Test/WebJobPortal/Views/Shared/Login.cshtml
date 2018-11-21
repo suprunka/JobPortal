@@ -1,0 +1,26 @@
+﻿@model WebJobPortal.Models.UserModel
+
+    <!-- Modal content -->
+    <div class="modalContent" id="loginModalContent">
+        <!--X button for closing-->
+        <span class="close">&times;</span>
+        <h1>Login</h1>
+
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <div class="form col">
+
+                <div>
+                    @Html.LabelFor(model => model.UserName)
+                    @Html.TextBoxFor(model => model.UserName)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Password)
+                    @Html.PasswordFor(model => model.Password)
+                </div>
+                <button type="submit" class="small fr">Login</button><br class="cl" />
+            </div>
+        }
+    </div>
+
+

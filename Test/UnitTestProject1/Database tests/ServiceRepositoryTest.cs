@@ -7,7 +7,7 @@ using UnitTestProject1.Database_tests;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Category = Repository.DbConnection.Category;
 using Gender = Repository.DbConnection.Gender;
-using Logging = Repository.DbConnection.Logging;
+using AspNetUser = Repository.DbConnection.AspNetUsers;
 using ServiceOffer = Repository.DbConnection.ServiceOffer;
 using SubCategory = Repository.DbConnection.SubCategory;
 using Users = Repository.DbConnection.Users;
@@ -28,50 +28,62 @@ namespace UnitTestProject1
                     City = "Aalborg",
                     Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUser
                 {
-                    Password = "Adama1",
-                    UserName = "Username1",
+                    PasswordHash = "Adama1",
+                    UserName = "Username12",
+                    PhoneNumber = "12345670",
+                    Email = "adam2@gmail.com",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
-
-                PhoneNumber = "12345678",
+                PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
                 BankAccountNumber = "255",
 
             };
             return userStub;
+
         }
         private static Users SecondUser()
         {
             var userStub = new Users
             {
+
                 AddressTable = new AddressTable
                 {
-                    Postcode = "8000",
-                    City = "Aarhus",
-                    Region = "Midtjylland"
+                    Postcode = "9000",
+                    City = "Aalborg",
+                    Region = "Nordjylland"
                 },
-                Logging = new Logging
+                AspNetUsers = new AspNetUser
                 {
-                    Password = "Adama1",
-                    UserName = "Username100",
+                    PasswordHash = "Adama1",
+                    UserName = "Username123",
+                    PhoneNumber = "12345678",
+                    Email = "adam2@gmail.com",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 4,
                 },
                 Gender = new Gender
                 {
                     Gender1 = "Male",
                 },
-
-                PhoneNumber = "35896452",
+                PayPalMail = "mama@wp.pl",
                 FirstName = "Adam",
                 LastName = "Adam",
-                Email = "adam@gmail.com",
                 AddressLine = "mickiewicza",
                 BankAccountNumber = "255",
 
@@ -81,77 +93,117 @@ namespace UnitTestProject1
         }
         private static ServiceOffer GetServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning", 
+                    Category= new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 20,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = "Username12",
                 Title = "First",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
         private static ServiceOffer GetSecondServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning",
+                    Category = new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 40,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = "Username12",
                 Title = "Second",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
         private static ServiceOffer GetThirdServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning",
+                    Category = new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_Phone = "12345678",
+                Employee_ID = "Username12",
                 Title = "Third",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
         private static ServiceOffer GetForthServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 1,
+                SubCategory = new SubCategory
+                {
+                    Name = "Cleaning",
+                    Category = new Category
+                    {
+                        Name = "Home",
+                    },
+                },
                 RatePerHour = 30,
                 Description = "Sample",
-                Employee_Phone = "35896452",
+                Employee_ID = "Username123",
                 Title = "Third",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
-
         private static ServiceOffer ToUpdateServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = 5,
+                SubCategory = new SubCategory
+                {
+                    Name = "Buildings",
+                    Category = new Category
+                    {
+                        Name = "Architecture",
+                    },
+                },
                 RatePerHour = 100,
                 Description = "Updated",
-                Employee_Phone = "35896452",
+                Employee_ID = "Username123",
                 Title = "Updated",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
-
         private static ServiceOffer GetInvalidServiceOffer()
         {
-            var serviceOfferStub = new ServiceOffer
+            var ServiceOffertub = new ServiceOffer
             {
-                Subcategory_ID = -5,
-                RatePerHour = 20,
-                Description = "Sample",
-                Employee_Phone = "12345678",
-                Title = "Invalid",
+                SubCategory = new SubCategory
+                {
+                    Name = "Notexists",
+                    Category = new Category
+                    {
+                        Name = "Notexists",
+                    },
+                },
+                RatePerHour = -1,
+                Description = " ",
+                Employee_ID = "hftrtoerp[ggpohi54-6934-09-023",
+                Title = "Inval",
             };
-            return serviceOfferStub;
+            return ServiceOffertub;
         }
 
         //Testing adding service. [OK]
@@ -176,7 +228,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -185,7 +237,7 @@ namespace UnitTestProject1
 
         //Testing adding service with not existing subcategory ID doesnt add. [OK]
         [TestMethod]
-        public void Test_Create_Offer_With_Not_Existing_SubOffer_ID_Throws_Exception_And_Do_Not_Add()
+        public void Test_Create_Offer_With_Not_Existing_SubOffer_Throws_Exception_And_Do_Not_Add()
         {
             var context = new DbTestDataContext();
             using (var unitOfWork = new UnitOfWork(context))
@@ -205,7 +257,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -236,7 +288,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -268,7 +320,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -290,7 +342,7 @@ namespace UnitTestProject1
                     unitOfWork.Offers.Create(GetSecondServiceOffer());
                     unitOfWork.Offers.Create(GetThirdServiceOffer());
                     unitOfWork.Offers.Create(GetForthServiceOffer());
-                    var list = unitOfWork.Offers.List(t => t.Employee_Phone == "35896452");
+                    var list = unitOfWork.Offers.List(t => t.AspNetUsers.PhoneNumber == "12345678");
                     Assert.AreEqual(1, list.Count());
                 }
                 catch
@@ -302,7 +354,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -336,7 +388,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -368,7 +420,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }
@@ -398,7 +450,7 @@ namespace UnitTestProject1
                     context.ServiceOffer.DeleteAllOnSubmit(context.ServiceOffer);
                     context.SubmitChanges();
                     context.Users.DeleteAllOnSubmit(context.Users);
-                    context.Logging.DeleteAllOnSubmit(context.Logging);
+                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
                     context.AddressTable.DeleteAllOnSubmit(context.AddressTable);
                     context.SubmitChanges();
                 }

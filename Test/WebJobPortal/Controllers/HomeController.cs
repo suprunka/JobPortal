@@ -19,6 +19,11 @@ namespace WebJobPortal.Controllers
             this._proxy = proxy;
         }
 
+        public HomeController()
+        {
+
+        }
+
         public ActionResult Index()
         {
             return View("Index");
