@@ -118,7 +118,6 @@ namespace MyWeb.Controllers
                 var isUpdated=  await _proxy.EditUserAsync(UserMapping.Map_UserProfileViewModel_To_User(u));
                 if (isUpdated)
                 {
-                    TempData["msg"] = "<script>alert('Successfully edited');</script>";
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
             }
@@ -139,7 +138,6 @@ namespace MyWeb.Controllers
                 var isUpdated = await _proxy.AddDescriptionAsync(UserMapping.Map_DescriptionViewModel_To_User(u));
                 if (isUpdated)
                 {
-                    TempData["msg"] = "<script>alert('Description changed');</script>";
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId()});
                 }
                 return View(u);

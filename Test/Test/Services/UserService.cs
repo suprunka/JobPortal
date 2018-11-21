@@ -71,57 +71,7 @@ namespace ServiceLibrary
         }
 
 
-        public bool CreateAdminUser(User u)
-        {
-            try
-            {
-                if (RegexMatch.DoesUserMatch(u))
-                {
-                    _database.CreateAdmin(new Users
-                    {
-                        AddressTable = new AddressTable
-                        {
-                            Postcode = u.Postcode,
-                            City = u.CityName,
-                            Region = u.Region.ToString(),
-                        },
-                        AspNetUsers = new AspNetUsers
-                        {
-                            Id = u.ID.ToString(),
-                            EmailConfirmed = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            LockoutEnabled = false,
-                            AccessFailedCount = 0,
-                            UserName = u.UserName,
-                            Email = u.Email,
-                            PasswordHash = Encrypt.EncryptString(u.Password),
-                            PhoneNumber = u.PhoneNumber,
-                        },
-
-                        Gender = new Repository.DbConnection.Gender
-                        {
-                            Gender1 = u.Gender.ToString(),
-                        },
-                        ID = u.ID,
-                        PayPalMail = u.PayPalMail,
-                        FirstName = u.FirstName,
-                        LastName = u.LastName,
-                        AddressLine = u.AddressLine,
-                        Description = u.Description,
-                    });
-                    return true;
-                }
-                return false;
-
-            }
-            catch (DuplicateKeyException)
-            {
-                return false;
-            }
-
-        }
-
+       
         public bool DeleteUser(int id)
         {
             try
