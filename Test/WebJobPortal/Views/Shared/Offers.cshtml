@@ -1,0 +1,41 @@
+﻿@model  IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>
+    @using WebJobPortal.Models
+@{
+    var counter = 0;
+}
+
+<div class="row">
+
+    @foreach (ServiceOfferWebModel offer in @Model)
+    {
+        if (counter != 0 && counter % 4 == 0)
+        {
+
+        @:</div>
+        @:<div class="row">
+        }
+
+
+
+
+<div class="col-sm-4">
+    <div class="item">
+        <div class="card" id="@offer.Title" style="width:auto">
+            <img class="card-img-top" src="~/Pictures/male.png" alt="Card image" style="width:50%;display: block;
+          margin-left: auto; margin-right: auto;">
+            <div class="card-body">
+                <h4 class="card-title">@offer.Title</h4>
+                <p class="card-text">@offer.Description</p>
+                <h4 class="price">@offer.RatePerHour / hour</h4>
+                <a href="#" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "ServiceOffer",  new { id = offer.Id })'">See offer</a>
+                <a href="#" class="btn btn-primary" onclick="location.href='@Url.Action("Delete", "ServiceOffer",  new { id = offer.Id })'">Delete</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    }
+
+
+

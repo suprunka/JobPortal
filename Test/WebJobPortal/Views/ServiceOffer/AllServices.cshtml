@@ -1,0 +1,38 @@
+﻿@using WebJobPortal.Models
+@model  IEnumerable<WebJobPortal.Models.ServiceOfferWebModel>
+
+
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var counter = 0;
+}
+<style>
+    #xx {
+        height: 60px;
+        width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin: 30px auto 60px auto;
+    }
+</style>
+:<div class="row">
+     <div class="col-sm-12">
+
+         <form>
+             <center>
+                 @Html.TextBox("SearchingString")
+                 <input class="btn btn-light" type="submit" value="Search" />
+             </center>
+         </form>
+     </div>
+    </div>
+
+
+
+    <div class="containerItems">
+            @Html.Partial("Offers", Model);
+    </div>

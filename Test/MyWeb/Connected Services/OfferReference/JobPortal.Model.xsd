@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="Offer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" type="tns:Category" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ListOfWorkingDays" nillable="true" type="tns:ArrayOfWorkingTime" />
+      <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Offer" nillable="true" type="tns:Offer" />
+  <xs:simpleType name="Category">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home" />
+      <xs:enumeration value="Tutoring" />
+      <xs:enumeration value="IT" />
+      <xs:enumeration value="Repairs" />
+      <xs:enumeration value="Architecture" />
+      <xs:enumeration value="Media" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Category" nillable="true" type="tns:Category" />
+  <xs:complexType name="ArrayOfWorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
+  <xs:complexType name="WorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q1:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+  <xs:simpleType name="SubCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Cleaning" />
+      <xs:enumeration value="Gardening" />
+      <xs:enumeration value="Babysitting" />
+      <xs:enumeration value="Languages" />
+      <xs:enumeration value="Science" />
+      <xs:enumeration value="WebPrgramming" />
+      <xs:enumeration value="AppPrgramming" />
+      <xs:enumeration value="Design" />
+      <xs:enumeration value="Cars" />
+      <xs:enumeration value="Bikes" />
+      <xs:enumeration value="HouseholdGoods" />
+      <xs:enumeration value="Electronics" />
+      <xs:enumeration value="Buildings" />
+      <xs:enumeration value="InteriorDesign" />
+      <xs:enumeration value="Landscape" />
+      <xs:enumeration value="Video" />
+      <xs:enumeration value="Audio" />
+      <xs:enumeration value="Marketing" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SubCategory" nillable="true" type="tns:SubCategory" />
+  <xs:complexType name="ArrayOfOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Offer" nillable="true" type="tns:Offer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOffer" nillable="true" type="tns:ArrayOfOffer" />
+</xs:schema>
