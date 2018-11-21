@@ -28,9 +28,9 @@ namespace MyWeb.Controllers
         private ApplicationUserManager _userManager;
         private const int lenght = 8;
         private const int n = 100000000;
-        private readonly IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint");
-        private readonly IOfferService _offerProxy = new OfferServiceClient("offerService");
-        private IEnumerable<ManageOffers> _serviceOffers = null;
+        private readonly IUserService _proxy;//= new UserServiceClient("UserServiceHttpEndpoint");
+        private readonly IOfferService _offerProxy;// = new OfferServiceClient("offerService");
+       // private IEnumerable<ManageOffers> _serviceOffers = null;
 
         public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -59,14 +59,15 @@ namespace MyWeb.Controllers
                 _userManager = value;
             }
         }
-        public UserController(IUserService proxy)
+        public UserController(IUserService proxy, IOfferService offerService)
         {
             this._proxy = proxy;
-            
+            this._offerProxy = offerService;
         }
         public UserController()
         {
-           
+            this._proxy = new UserServiceClient("UserServiceHttpEndpoint");
+            this._offerProxy = new OfferServiceClient("offerService");
         }
 
 
@@ -85,7 +86,7 @@ namespace MyWeb.Controllers
         {
             try
             {
-                var isUserDeleted = await this._proxy.DeleteUserAsync((int) id);
+                var isUserDeleted = await this._proxy.DeleteUserAsync((int)id);
                 if (isUserDeleted == false)
                 {
                     return null;
@@ -96,6 +97,7 @@ namespace MyWeb.Controllers
                     return RedirectToAction("Index", "ServiceOffer");
                 }
             }
+            
             catch
             {
                 return null;
@@ -156,7 +158,7 @@ namespace MyWeb.Controllers
         [HttpPost]
         public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel model)
         {
-            if (!ModelState.IsValid && model.NewEmail != null)
+            if (!ModelState.IsValid || model.NewEmail != null)
             {
                 var isEmailChanged = await _proxy.EditUserEmailAsync(UserMapping.Map_ChangeEmailViewModel_To_User(model));
                 if (isEmailChanged)

@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f4d58ce6-1d0d-45c8-b0ef-7eac24d60379" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="92f14a79-1e15-4791-bffb-a9d11e7ce8a6" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
     <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="7b75c5d2-0b1c-407b-acb1-2dd02122a548" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="705b8477-e7e3-4789-929e-486571c1700c" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

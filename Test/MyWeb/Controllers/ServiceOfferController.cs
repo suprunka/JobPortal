@@ -8,20 +8,31 @@ using MyWeb.Models;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using MyWeb.OfferReference;
 
 namespace MyWeb.Controllers
 {
     public class ServiceOfferController : Controller
     {
 
-        private OfferReference.IOfferService _offerProxy = new OfferReference.OfferServiceClient("offerService");
+        private OfferReference.IOfferService _offerProxy;
         private IMapper _mapper;
         private IList<WorkingHours> workingdays = new List<WorkingHours>();
 
 
         // GET: Offer
 
-        public ServiceOfferController ()
+        public ServiceOfferController()
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
+            });
+
+            _mapper = config.CreateMapper();
+            _offerProxy = new OfferReference.OfferServiceClient("offerService");
+
+        }
+        public ServiceOfferController(IOfferService proxy)
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
@@ -29,6 +40,7 @@ namespace MyWeb.Controllers
 
             _mapper = config.CreateMapper();
 
+            _offerProxy = proxy;
         }
         public ActionResult Index(string searchingString)
         {

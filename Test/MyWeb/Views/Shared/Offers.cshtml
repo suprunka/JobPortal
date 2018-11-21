@@ -4,16 +4,16 @@
     var counter = 0;
 }
 
-<div style="display:table-cell;" class="col-container">
+<tr>
     @foreach (ManageOffers offer in @Model)
     {
         if (counter != 0 && counter % 3 == 0)
         {
-        @:</div>
-        @:<div class="col-container" >
+        @:</tr>
+        @:<tr>
         }
         counter++;
-                <div class="col">
+                <td>
                     <div class="item">
                         <div class="card" id="@offer.Title" style="width:auto">
                             @if (offer.Category.ToString() == "Home")
@@ -55,6 +55,6 @@
 
                         </div>
                     </div>
-                </div>
+                </td>
     }
-</div>
+</tr>

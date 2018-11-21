@@ -1,51 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:complexType name="Offer">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Author" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="AuthorId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Category" type="tns:Category" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ListOfWorkingDays" nillable="true" type="tns:ArrayOfWorkingTime" />
       <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
       <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Offer" nillable="true" type="tns:Offer" />
-  <xs:complexType name="User">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AddressLine" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Gender" type="tns:Gender" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Region" type="tns:Region" />
-      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="User" nillable="true" type="tns:User" />
-  <xs:simpleType name="Gender">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Male" />
-      <xs:enumeration value="Female" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="Gender" nillable="true" type="tns:Gender" />
-  <xs:simpleType name="Region">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Hovedstaden" />
-      <xs:enumeration value="Midtjylland" />
-      <xs:enumeration value="Nordjylland" />
-      <xs:enumeration value="Sjælland" />
-      <xs:enumeration value="Syddanmark" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="Region" nillable="true" type="tns:Region" />
   <xs:simpleType name="Category">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Home" />
@@ -57,6 +26,20 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Category" nillable="true" type="tns:Category" />
+  <xs:complexType name="ArrayOfWorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
+  <xs:complexType name="WorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q1:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
   <xs:simpleType name="SubCategory">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Cleaning" />

@@ -44,7 +44,7 @@
             @Html.DisplayFor(model => model.FirstName)
             @Html.DisplayFor(model => model.LastName)
         </h3>
-        <p>
+        <p style="word-break:break-all">
             @Html.DisplayFor(model => model.Description)
         </p>
 
@@ -230,7 +230,7 @@ else
     var openDeleteAccountBtn = document.getElementById("delete-account-btn");
 
     // Get the <span> element that closes the modal
-    var span1 = document.getElementsByClassName("close")[1];
+    var span = document.getElementsByClassName("close")[0];
 
     // When the user clicks the button, open the modal
     openDeleteAccountBtn.onclick = function () {
@@ -238,7 +238,7 @@ else
     }
 
     // When the user clicks on <span> (x), close the modal
-    span1.onclick = function () {
+    span.onclick = function () {
         deleteAccountModal.style.display = "none";
     }
 
