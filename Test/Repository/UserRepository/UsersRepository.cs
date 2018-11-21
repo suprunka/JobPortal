@@ -33,70 +33,122 @@ namespace Repository
 
                     if (obj.Logging_ID == null)
                     {
-                        AspNetUsers logging = new AspNetUsers
+                        try
                         {
-                            Id = obj.AspNetUsers.Id.ToString(),
-                            EmailConfirmed = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            LockoutEnabled = false,
-                            AccessFailedCount = 0,
-                            UserName = obj.AspNetUsers.UserName,
-                            PasswordHash = obj.AspNetUsers.PasswordHash,
-                            Email = obj.AspNetUsers.Email,
-                            PhoneNumber = obj.AspNetUsers.PhoneNumber,
-
-                        };
-                        _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
-                        _context.SubmitChanges();
-
-                    }
-
-                    try
-                    {
-                        var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
-                        if (addressExists == null)
-                        {
-                            addressExists = new AddressTable
+                            AspNetUsers logging = new AspNetUsers
                             {
-                                Postcode = obj.AddressTable.Postcode,
-                                City = obj.AddressTable.City,
-                                Region = obj.AddressTable.Region,
+                                Id= obj.AspNetUsers.UserName,
+                                EmailConfirmed = false,
+                                PhoneNumberConfirmed = false,
+                                TwoFactorEnabled = false,
+                                LockoutEnabled = false,
+                                AccessFailedCount = 0,
+                                UserName = obj.AspNetUsers.UserName,
+                                PasswordHash = obj.AspNetUsers.PasswordHash,
+                                Email = obj.AspNetUsers.Email,
+                                PhoneNumber = obj.AspNetUsers.PhoneNumber,
+
                             };
-                            _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
-
-
+                            _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
                             _context.SubmitChanges();
+
+                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                            if (addressExists == null)
+                            {
+                                addressExists = new AddressTable
+                                {
+                                    Postcode = obj.AddressTable.Postcode,
+                                    City = obj.AddressTable.City,
+                                    Region = obj.AddressTable.Region,
+                                };
+                                _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
+
+
+                                _context.SubmitChanges();
+                            }
+
+                            Users u = new Users
+                            {
+                                FirstName = obj.FirstName,
+                                LastName = obj.LastName,
+                                Logging_ID = logging.Id,
+                                Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
+                                    t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
+                                AddressLine = obj.AddressLine,
+                                City_ID = addressExists.ID,
+                                PayPalMail = obj.PayPalMail,
+                            };
+
+                            _context.GetTable<Users>().InsertOnSubmit(u);
+                            _context.SubmitChanges();
+
+                            myTran.Complete();
+                            result = u;
+
+
+                        }
+                        catch
+                        {
+                            result = null;
+                            throw new DuplicateKeyException(this);
+                        }
+                        finally
+                        {
+                            myTran.Dispose();
+                            objConn.Close();
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                            if (addressExists == null)
+                            {
+                                addressExists = new AddressTable
+                                {
+                                    Postcode = obj.AddressTable.Postcode,
+                                    City = obj.AddressTable.City,
+                                    Region = obj.AddressTable.Region,
+                                };
+                                _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
+
+
+                                _context.SubmitChanges();
+                            }
+
+                            Users u = new Users
+                            {
+                                FirstName = obj.FirstName,
+                                LastName = obj.LastName,
+                                Logging_ID = obj.Logging_ID,
+                                Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
+                                    t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
+                                AddressLine = obj.AddressLine,
+                                City_ID = addressExists.ID,
+                                PayPalMail = obj.PayPalMail,
+                            };
+
+                            _context.GetTable<Users>().InsertOnSubmit(u);
+                            _context.SubmitChanges();
+
+                            myTran.Complete();
+                            result = u;
+                        }
+                        catch
+                        {
+                            result = null;
+                            throw new DuplicateKeyException(this);
+                        }
+                        finally
+                        {
+                            myTran.Dispose();
+                            objConn.Close();
                         }
 
-                        Users u = new Users
-                        {
-                            FirstName = obj.FirstName,
-                            LastName = obj.LastName,
-                            Logging_ID = obj.Logging_ID,
-                            Gender_ID = _context.GetTable<Repository.DbConnection.Gender>().FirstOrDefault(
-                                t => t.Gender1 == obj.Gender.Gender1.ToString()).ID,
-                            AddressLine = obj.AddressLine,
-                            City_ID = addressExists.ID,
-                            PayPalMail = obj.PayPalMail,
-                        };
+                    }
 
-                        _context.GetTable<Users>().InsertOnSubmit(u);
-                        _context.SubmitChanges();
-
-                        myTran.Complete();
-                        result = u;
-                    }
-                    catch
-                    {
-                        result = null;
-                        throw new DuplicateKeyException(this);
-                    }
-                    finally
-                    {
-                        myTran.Dispose();
-                        objConn.Close();
-                    }
+                    
                 }
             }
             return result;

@@ -28,7 +28,6 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
-                    Id= "Username12",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
                     PhoneNumber = "12345670",
@@ -66,7 +65,6 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
-                    Id= "Username12",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
                     PhoneNumber = "12345670",
@@ -102,7 +100,6 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
-                    Id = "Username12",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
                     PhoneNumber = "07654321",
@@ -139,9 +136,8 @@ namespace UnitTestProject1
                      },
                 AspNetUsers = new AspNetUser
                      {
-                         Id = "Username123",
                          PasswordHash = "Adama1",
-                         UserName = "Username12",
+                         UserName = "Username11",
                          PhoneNumber = "12345670",
                          Email = "adam2@gmail.com",
                          EmailConfirmed = false,
@@ -175,7 +171,6 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
-                    Id = "UsernameThird",
                     PasswordHash = "Adama1",
                     UserName = "UsernameThird",
                     PhoneNumber = "09098999",

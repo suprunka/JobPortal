@@ -30,7 +30,6 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
-                    Id = "Username12",
                     PasswordHash = "Adama1",
                     UserName = "Username12",
                     PhoneNumber = "12345670",
@@ -67,7 +66,6 @@ namespace UnitTestProject1
                 },
                 AspNetUsers = new AspNetUser
                 {
-                    Id = "Username123",
                     PasswordHash = "Adama1",
                     UserName = "Username123",
                     PhoneNumber = "12345678",
