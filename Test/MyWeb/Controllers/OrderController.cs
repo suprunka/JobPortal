@@ -36,9 +36,9 @@ namespace MyWeb.Controllers
                 shoppingCard.AddToCard(new OrderedOffer { Title = "siemka", WeekDay = DayOfWeek.Friday, RatePerHour = 30, HoursFrom = new TimeSpan(17, 0, 0), HoursTo = new TimeSpan(19, 0, 0), Description = "Elo" });
                 shoppingCard.AddToCard(new OrderedOffer { Title = "ema", WeekDay = DayOfWeek.Monday, RatePerHour = 300, HoursFrom = new TimeSpan(12, 0, 0), HoursTo = new TimeSpan(22, 0, 0), Description = "Elo" });
                 shoppingCard.AddToCard(new OrderedOffer { Title = "Dzik", WeekDay = DayOfWeek.Wednesday, RatePerHour = 910, HoursFrom = new TimeSpan(17, 0, 0), HoursTo = new TimeSpan(19, 0, 0), Description = "Elo" });
-                ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
+                //ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
 
-                return View(scv);
+                return View();
             }
             else
             {

@@ -379,7 +379,7 @@ namespace Repository
         public bool SaveToShoppingCard(int id , OrderedOffer offer)
         
         {
-            
+            return false;
 
         }
 
@@ -390,21 +390,14 @@ namespace Repository
             {
                 objConn.Open();
 
-                var list = _context.GetTable<DbConnection.ShoppingCard>().Where(x => x.ID_User == id);
+                var list = _context.GetTable<DbConnection.ShoppingCart>().Where(x => x.User_ID == id);
 
                 foreach (var i in list)
                 {
                     result.AddToCard(new OrderedOffer
                     {
-                        RatePerHour = i.RatePerHour,
-                        Title = i.Title,
-                        Description = i.Description,
-                        AuthorId = i.ID_User,
-                        HoursFrom = i.HourFrom,
-                        HoursTo = i.HourTo,
-                        Subcategory = (JobPortal.Model.SubCategory)Enum.Parse(typeof(JobPortal.Model.SubCategory), _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x=> x.ID == i.Subcategory_ID).Name),
-                        Category = (JobPortal.Model.Category)Enum.Parse(typeof(JobPortal.Model.Category), _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.ID == i.Subcategory_ID).Category.Name),
-                        WeekDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), i.NameOfDay),
+                        
+
                     });
                 }
                 return result;

@@ -7,8 +7,9 @@ namespace Repository.OrderRepository
 {
     public interface IOrderRepository: IRepository<OrderTable>
     {
-        OrderTable CreateOrder(Users u, IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices);
-        OrderTable AddToExistingOrder(OrderTable o, ServiceOffer s, JobPortal.Model.BookedDate date);
+        OrderTable CreateOrder(Users u);
+        OrderTable AddToExistingOrder(OrderTable o, ShoppingCart cart);
         OrderTable PayForOrder(OrderTable o);
+        bool AddToCart(ShoppingCart cart);
     }
 }

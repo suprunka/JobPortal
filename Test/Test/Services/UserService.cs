@@ -41,7 +41,7 @@ namespace ServiceLibrary
                 {
                     _database.Create(new Users
                     {
-                        AddressTables = new AddressTables
+                        AddressTable = new AddressTable
                         {
                             Postcode = u.Postcode,
                             City = u.CityName,
