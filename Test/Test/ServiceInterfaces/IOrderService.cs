@@ -11,7 +11,7 @@ namespace ServiceLibrary.ServiceInterfaces
     {
         [OperationContract]
         [FaultContract(typeof(BookedTimeException))]
-        Order CreateOrder(Users u, IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices);
+        Order CreateOrder(Users u);
 
         [OperationContract]
         bool CancelOrder(Order o);

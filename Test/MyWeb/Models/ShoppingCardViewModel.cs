@@ -8,7 +8,7 @@ namespace MyWeb.Models
 {
     public class ShoppingCardView
     {
-      //  public ShoppingCard Card{ get; set; }
+        public ShoppingCard Card{ get; set; }
 
     }
 }

@@ -27,7 +27,7 @@ namespace ServiceLibrary.Services
             throw new NotImplementedException();
         }
 
-        public Order CreateOrder(Users u, IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices)
+        public Order CreateOrder(Users u)
         {
             Order order = null;
             try {
