@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,6 +33,10 @@
                     </li>
                     <li>
                         <a href="#">Media</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Shopping card", "Index", "Order", new { id = User.Identity.GetUserId() }, null)
+                    </li>
                 </ul>
 
                 @Html.Partial("_LoginPartial")

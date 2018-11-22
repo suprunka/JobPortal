@@ -232,6 +232,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ServiceOfferController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -242,6 +243,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageOffersViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderModels.cs" />
+    <Compile Include="Models\ShoppingCardViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -357,6 +360,7 @@
     <Content Include="Views\ServiceOffer\Index.cshtml" />
     <Content Include="Views\ServiceOffer\Add.cshtml" />
     <Content Include="Views\ServiceOffer\ViewDetails.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

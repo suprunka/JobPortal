@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyWeb.Models;
+using System;
 using System.Runtime.Serialization;
 
 namespace JobPortal.Model
@@ -77,6 +78,9 @@ namespace JobPortal.Model
 
         [DataMember]
         public virtual string PayPalMail { get; set; }
+
+        [DataMember]
+        public virtual ShoppingCard ShoppingCard { get; set; }
         
         
     }

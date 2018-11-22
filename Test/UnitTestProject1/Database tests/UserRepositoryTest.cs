@@ -3,7 +3,7 @@ using System.Data.Linq;
 using System.Linq;
 using Repository;
 using UnitTestProject1.Database_tests;
-using AddressTable = Repository.DbConnection.AddressTable;
+using AddressTable = Repository.DbConnection.AddressTables;
 using Users = Repository.DbConnection.Users;
 using AspNetUser = Repository.DbConnection.AspNetUsers;
 using Gender = Repository.DbConnection.Gender;
@@ -20,7 +20,7 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTables = new AddressTable
                 {
                     Postcode = "9000",
                     City = "Aalborg",
@@ -57,7 +57,7 @@ namespace UnitTestProject1
             var userStub = new Users
             {
                 
-                AddressTable = new AddressTable
+                AddressTables = new AddressTable
                 {
                     Postcode = "8000",
                     City = "Aarhus",
@@ -92,7 +92,7 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTables = new AddressTable
                 {
                     Postcode = "8000",
                     City = "Aarhus",
@@ -128,7 +128,7 @@ namespace UnitTestProject1
             var userStub = new Users
             {
 
-                     AddressTable = new AddressTable
+                     AddressTables = new AddressTable
                      {
                          Postcode = "9000",
                          City = "Aalborg",
@@ -163,7 +163,7 @@ namespace UnitTestProject1
         {
             var userStub = new Users
             {
-                AddressTable = new AddressTable
+                AddressTables = new AddressTable
                 {
                     Postcode = "9000",
                     City = "Aalborg",
@@ -451,7 +451,7 @@ namespace UnitTestProject1
                     Assert.AreEqual("adam2@gmail.com", found.AspNetUsers.Email);
                     Assert.AreEqual("Male", found.Gender.Gender1);
                     Assert.AreEqual("Username12", found.AspNetUsers.UserName);
-                    Assert.AreEqual("Nordjylland", found.AddressTable.Region);
+                    Assert.AreEqual("Nordjylland", found.AddressTables.Region);
                 }
                 catch
                 {
@@ -482,7 +482,7 @@ namespace UnitTestProject1
                     unitOfWork.Users.Create(GetUser());
                     unitOfWork.Users.Create(ForthUser());
                     unitOfWork.Users.Create(ThirdUser());
-                    IQueryable<Users> filtredList = unitOfWork.Users.List(u => u.AddressTable.City == "Aalborg");
+                    IQueryable<Users> filtredList = unitOfWork.Users.List(u => u.AddressTables.City == "Aalborg");
                     Assert.AreEqual(3, filtredList.ToArray().Count());
                 }
                 catch
@@ -560,7 +560,7 @@ namespace UnitTestProject1
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }
@@ -592,7 +592,7 @@ namespace UnitTestProject1
             {
                 secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
                 secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
+                secondContext.AddressTables.DeleteAllOnSubmit(secondContext.AddressTables);
                 secondContext.SubmitChanges();
             }
         }

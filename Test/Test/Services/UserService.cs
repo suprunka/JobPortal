@@ -41,7 +41,7 @@ namespace ServiceLibrary
                 {
                     _database.Create(new Users
                     {
-                        AddressTable = new AddressTable
+                        AddressTables = new AddressTables
                         {
                             Postcode = u.Postcode,
                             City = u.CityName,
@@ -119,7 +119,7 @@ namespace ServiceLibrary
                     _database.Update(new Users
                     {
 
-                        AddressTable = new AddressTable
+                        AddressTables = new AddressTables
                         {
                             Postcode = u.Postcode,
                             City = u.CityName,
@@ -168,10 +168,10 @@ namespace ServiceLibrary
                     UserName = result.AspNetUsers.UserName,
                     // Password = result.AspNetUsers.PasswordHash,
                     AddressLine = result.AddressLine,
-                    CityName = result.AddressTable.City,
-                    Postcode = result.AddressTable.Postcode,
+                    CityName = result.AddressTables.City,
+                    Postcode = result.AddressTables.Postcode,
                     PayPalMail = result.PayPalMail,
-                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                    Region = (Region)Enum.Parse(typeof(Region), result.AddressTables.Region),
                     Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                     Description = result.Description,
                 };
@@ -202,10 +202,10 @@ namespace ServiceLibrary
                             UserName = result.AspNetUsers.UserName,
                             //Password = result.AspNetUsers.Password,
                             AddressLine = result.AddressLine,
-                            CityName = result.AddressTable.City,
-                            Postcode = result.AddressTable.Postcode,
+                            CityName = result.AddressTables.City,
+                            Postcode = result.AddressTables.Postcode,
                             PayPalMail = result.PayPalMail,
-                            Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
+                            Region = (Region)Enum.Parse(typeof(Region), result.AddressTables.Region),
                             Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                             Description = result.Description,
                         };
@@ -238,13 +238,13 @@ namespace ServiceLibrary
                     Email = u.AspNetUsers.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
-                    CityName = u.AddressTable.City,
-                    Postcode = u.AddressTable.Postcode,
+                    CityName = u.AddressTables.City,
+                    Postcode = u.AddressTables.Postcode,
                     // Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
                     Description = u.Description,
                     PayPalMail = u.PayPalMail,
-                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTables.Region)
                 });
             }
             return resultToReturn.ToArray();
@@ -264,11 +264,11 @@ namespace ServiceLibrary
                     Email = u.AspNetUsers.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
-                    CityName = u.AddressTable.City,
-                    Postcode = u.AddressTable.Postcode,
+                    CityName = u.AddressTables.City,
+                    Postcode = u.AddressTables.Postcode,
                     //Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
-                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTables.Region)
                 });
             }
             return resultToReturn.ToArray();
@@ -277,7 +277,7 @@ namespace ServiceLibrary
         public User[] ListByRegion(Region region)
         {
             IList<User> resultToReturn = new List<User>();
-            foreach (var u in _database.List(Users => Users.AddressTable.Region == region.ToString()))
+            foreach (var u in _database.List(Users => Users.AddressTables.Region == region.ToString()))
             {
                 resultToReturn.Add(new User
                 {
@@ -288,11 +288,11 @@ namespace ServiceLibrary
                     Email = u.AspNetUsers.Email,
                     AddressLine = u.AddressLine,
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
-                    CityName = u.AddressTable.City,
-                    Postcode = u.AddressTable.Postcode,
+                    CityName = u.AddressTables.City,
+                    Postcode = u.AddressTables.Postcode,
                     //Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
-                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTables.Region)
                 });
             }
             return resultToReturn.ToArray();

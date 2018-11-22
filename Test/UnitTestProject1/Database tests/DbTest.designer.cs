@@ -30,9 +30,9 @@ namespace UnitTestProject1.Database_tests
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAddressTable(AddressTable instance);
-    partial void UpdateAddressTable(AddressTable instance);
-    partial void DeleteAddressTable(AddressTable instance);
+    partial void InsertAddressTables(AddressTables instance);
+    partial void UpdateAddressTables(AddressTables instance);
+    partial void DeleteAddressTables(AddressTables instance);
     partial void InsertWorkingDates(WorkingDates instance);
     partial void UpdateWorkingDates(WorkingDates instance);
     partial void DeleteWorkingDates(WorkingDates instance);
@@ -75,9 +75,9 @@ namespace UnitTestProject1.Database_tests
     partial void InsertSaleline(Saleline instance);
     partial void UpdateSaleline(Saleline instance);
     partial void DeleteSaleline(Saleline instance);
-    partial void InsertServiceOffer(ServiceOffer instance);
-    partial void UpdateServiceOffer(ServiceOffer instance);
-    partial void DeleteServiceOffer(ServiceOffer instance);
+    partial void InsertServiceOffers(ServiceOffers instance);
+    partial void UpdateServiceOffers(ServiceOffers instance);
+    partial void DeleteServiceOffers(ServiceOffers instance);
     partial void InsertSubCategory(SubCategory instance);
     partial void UpdateSubCategory(SubCategory instance);
     partial void DeleteSubCategory(SubCategory instance);
@@ -116,11 +116,11 @@ namespace UnitTestProject1.Database_tests
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<AddressTable> AddressTable
+		public System.Data.Linq.Table<AddressTables> AddressTables
 		{
 			get
 			{
-				return this.GetTable<AddressTable>();
+				return this.GetTable<AddressTables>();
 			}
 		}
 		
@@ -236,11 +236,11 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<ServiceOffer> ServiceOffer
+		public System.Data.Linq.Table<ServiceOffers> ServiceOffers
 		{
 			get
 			{
-				return this.GetTable<ServiceOffer>();
+				return this.GetTable<ServiceOffers>();
 			}
 		}
 		
@@ -262,7 +262,7 @@ namespace UnitTestProject1.Database_tests
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AddressTable")]
-	public partial class AddressTable : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class AddressTables : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -291,7 +291,7 @@ namespace UnitTestProject1.Database_tests
     partial void OnRegionChanged();
     #endregion
 		
-		public AddressTable()
+		public AddressTables()
 		{
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
 			OnCreated();
@@ -413,13 +413,13 @@ namespace UnitTestProject1.Database_tests
 		private void attach_Users(Users entity)
 		{
 			this.SendPropertyChanging();
-			entity.AddressTable = this;
+			entity.AddressTables = this;
 		}
 		
 		private void detach_Users(Users entity)
 		{
 			this.SendPropertyChanging();
-			entity.AddressTable = null;
+			entity.AddressTables = null;
 		}
 	}
 	
@@ -1272,7 +1272,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private EntitySet<Review> _Review;
 		
-		private EntitySet<ServiceOffer> _ServiceOffer;
+		private EntitySet<ServiceOffers> _ServiceOffer;
 		
 		private EntitySet<Users> _Users;
 		
@@ -1314,7 +1314,7 @@ namespace UnitTestProject1.Database_tests
 			this._AspNetUserRoles = new EntitySet<AspNetUserRoles>(new Action<AspNetUserRoles>(this.attach_AspNetUserRoles), new Action<AspNetUserRoles>(this.detach_AspNetUserRoles));
 			this._OrderTable = new EntitySet<OrderTable>(new Action<OrderTable>(this.attach_OrderTable), new Action<OrderTable>(this.detach_OrderTable));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
-			this._ServiceOffer = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffer), new Action<ServiceOffer>(this.detach_ServiceOffer));
+			this._ServiceOffer = new EntitySet<ServiceOffers>(new Action<ServiceOffers>(this.attach_ServiceOffer), new Action<ServiceOffers>(this.detach_ServiceOffer));
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
 			OnCreated();
 		}
@@ -1638,7 +1638,7 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_ServiceOffer", Storage="_ServiceOffer", ThisKey="Id", OtherKey="Employee_ID")]
-		public EntitySet<ServiceOffer> ServiceOffer
+		public EntitySet<ServiceOffers> ServiceOffers
 		{
 			get
 			{
@@ -1755,13 +1755,13 @@ namespace UnitTestProject1.Database_tests
 			entity.AspNetUsers = null;
 		}
 		
-		private void attach_ServiceOffer(ServiceOffer entity)
+		private void attach_ServiceOffer(ServiceOffers entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUsers = this;
 		}
 		
-		private void detach_ServiceOffer(ServiceOffer entity)
+		private void detach_ServiceOffer(ServiceOffers entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUsers = null;
@@ -2710,7 +2710,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private EntityRef<Rate> _Rate;
 		
-		private EntityRef<ServiceOffer> _ServiceOffer;
+		private EntityRef<ServiceOffers> _ServiceOffer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2732,7 +2732,7 @@ namespace UnitTestProject1.Database_tests
 		{
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
 			this._Rate = default(EntityRef<Rate>);
-			this._ServiceOffer = default(EntityRef<ServiceOffer>);
+			this._ServiceOffer = default(EntityRef<ServiceOffers>);
 			OnCreated();
 		}
 		
@@ -2917,7 +2917,7 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Review", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true)]
-		public ServiceOffer ServiceOffer
+		public ServiceOffers ServiceOffers
 		{
 			get
 			{
@@ -2925,7 +2925,7 @@ namespace UnitTestProject1.Database_tests
 			}
 			set
 			{
-				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				ServiceOffers previousValue = this._ServiceOffer.Entity;
 				if (((previousValue != value) 
 							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
 				{
@@ -2945,7 +2945,7 @@ namespace UnitTestProject1.Database_tests
 					{
 						this._ServiceOffer_ID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("ServiceOffer");
+					this.SendPropertyChanged("ServiceOffers");
 				}
 			}
 		}
@@ -2989,7 +2989,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private EntityRef<OrderTable> _OrderTable;
 		
-		private EntityRef<ServiceOffer> _ServiceOffer;
+		private EntityRef<ServiceOffers> _ServiceOffer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3009,7 +3009,7 @@ namespace UnitTestProject1.Database_tests
 		{
 			this._BookedDates = default(EntityRef<BookedDates>);
 			this._OrderTable = default(EntityRef<OrderTable>);
-			this._ServiceOffer = default(EntityRef<ServiceOffer>);
+			this._ServiceOffer = default(EntityRef<ServiceOffers>);
 			OnCreated();
 		}
 		
@@ -3174,7 +3174,7 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Saleline", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true)]
-		public ServiceOffer ServiceOffer
+		public ServiceOffers ServiceOffers
 		{
 			get
 			{
@@ -3182,7 +3182,7 @@ namespace UnitTestProject1.Database_tests
 			}
 			set
 			{
-				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				ServiceOffers previousValue = this._ServiceOffer.Entity;
 				if (((previousValue != value) 
 							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
 				{
@@ -3202,7 +3202,7 @@ namespace UnitTestProject1.Database_tests
 					{
 						this._ServiceOffer_ID = default(int);
 					}
-					this.SendPropertyChanged("ServiceOffer");
+					this.SendPropertyChanged("ServiceOffers");
 				}
 			}
 		}
@@ -3229,7 +3229,7 @@ namespace UnitTestProject1.Database_tests
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceOffer")]
-	public partial class ServiceOffer : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ServiceOffers : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3272,7 +3272,7 @@ namespace UnitTestProject1.Database_tests
     partial void OnTitleChanged();
     #endregion
 		
-		public ServiceOffer()
+		public ServiceOffers()
 		{
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
@@ -3452,12 +3452,12 @@ namespace UnitTestProject1.Database_tests
 					if ((previousValue != null))
 					{
 						this._AspNetUsers.Entity = null;
-						previousValue.ServiceOffer.Remove(this);
+						previousValue.ServiceOffers.Remove(this);
 					}
 					this._AspNetUsers.Entity = value;
 					if ((value != null))
 					{
-						value.ServiceOffer.Add(this);
+						value.ServiceOffers.Add(this);
 						this._Employee_ID = value.Id;
 					}
 					else
@@ -3486,12 +3486,12 @@ namespace UnitTestProject1.Database_tests
 					if ((previousValue != null))
 					{
 						this._SubCategory.Entity = null;
-						previousValue.ServiceOffer.Remove(this);
+						previousValue.ServiceOffers.Remove(this);
 					}
 					this._SubCategory.Entity = value;
 					if ((value != null))
 					{
-						value.ServiceOffer.Add(this);
+						value.ServiceOffers.Add(this);
 						this._Subcategory_ID = value.ID;
 					}
 					else
@@ -3526,25 +3526,25 @@ namespace UnitTestProject1.Database_tests
 		private void attach_Review(Review entity)
 		{
 			this.SendPropertyChanging();
-			entity.ServiceOffer = this;
+			entity.ServiceOffers = this;
 		}
 		
 		private void detach_Review(Review entity)
 		{
 			this.SendPropertyChanging();
-			entity.ServiceOffer = null;
+			entity.ServiceOffers = null;
 		}
 		
 		private void attach_Saleline(Saleline entity)
 		{
 			this.SendPropertyChanging();
-			entity.ServiceOffer = this;
+			entity.ServiceOffers = this;
 		}
 		
 		private void detach_Saleline(Saleline entity)
 		{
 			this.SendPropertyChanging();
-			entity.ServiceOffer = null;
+			entity.ServiceOffers = null;
 		}
 	}
 	
@@ -3560,7 +3560,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private System.Nullable<int> _Category_ID;
 		
-		private EntitySet<ServiceOffer> _ServiceOffer;
+		private EntitySet<ServiceOffers> _ServiceOffer;
 		
 		private EntityRef<Category> _Category;
 		
@@ -3578,7 +3578,7 @@ namespace UnitTestProject1.Database_tests
 		
 		public SubCategory()
 		{
-			this._ServiceOffer = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffer), new Action<ServiceOffer>(this.detach_ServiceOffer));
+			this._ServiceOffer = new EntitySet<ServiceOffers>(new Action<ServiceOffers>(this.attach_ServiceOffer), new Action<ServiceOffers>(this.detach_ServiceOffer));
 			this._Category = default(EntityRef<Category>);
 			OnCreated();
 		}
@@ -3648,7 +3648,7 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubCategory_ServiceOffer", Storage="_ServiceOffer", ThisKey="ID", OtherKey="Subcategory_ID")]
-		public EntitySet<ServiceOffer> ServiceOffer
+		public EntitySet<ServiceOffers> ServiceOffers
 		{
 			get
 			{
@@ -3714,13 +3714,13 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		private void attach_ServiceOffer(ServiceOffer entity)
+		private void attach_ServiceOffer(ServiceOffers entity)
 		{
 			this.SendPropertyChanging();
 			entity.SubCategory = this;
 		}
 		
-		private void detach_ServiceOffer(ServiceOffer entity)
+		private void detach_ServiceOffer(ServiceOffers entity)
 		{
 			this.SendPropertyChanging();
 			entity.SubCategory = null;
@@ -3755,7 +3755,7 @@ namespace UnitTestProject1.Database_tests
 		
 		private EntityRef<AspNetUsers> _AspNetUsers;
 		
-		private EntityRef<AddressTable> _AddressTable;
+		private EntityRef<AddressTables> _AddressTable;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3785,7 +3785,7 @@ namespace UnitTestProject1.Database_tests
 		{
 			this._Gender = default(EntityRef<Gender>);
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
-			this._AddressTable = default(EntityRef<AddressTable>);
+			this._AddressTable = default(EntityRef<AddressTables>);
 			OnCreated();
 		}
 		
@@ -4050,7 +4050,7 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true)]
-		public AddressTable AddressTable
+		public AddressTables AddressTables
 		{
 			get
 			{
@@ -4058,7 +4058,7 @@ namespace UnitTestProject1.Database_tests
 			}
 			set
 			{
-				AddressTable previousValue = this._AddressTable.Entity;
+				AddressTables previousValue = this._AddressTable.Entity;
 				if (((previousValue != value) 
 							|| (this._AddressTable.HasLoadedOrAssignedValue == false)))
 				{
@@ -4078,7 +4078,7 @@ namespace UnitTestProject1.Database_tests
 					{
 						this._City_ID = default(int);
 					}
-					this.SendPropertyChanged("AddressTable");
+					this.SendPropertyChanged("AddressTables");
 				}
 			}
 		}

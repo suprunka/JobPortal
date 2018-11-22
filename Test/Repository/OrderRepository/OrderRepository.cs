@@ -42,7 +42,7 @@ namespace Repository.OrderRepository
                 {
                     OrderTable newOrder = new OrderTable
                     {
-                        Account_ID = _context.GetTable<Account>().FirstOrDefault(x => x.PhoneNumber == u.PhoneNumber).ID,
+                        Users_ID = _context.GetTable<AspNetUsers>().FirstOrDefault(x => x.Id== u.Logging_ID).Id.ToString(),
                         OrderStatus_ID = 1,
                         TotalPrice= 0,
                         Date = DateTime.Now,

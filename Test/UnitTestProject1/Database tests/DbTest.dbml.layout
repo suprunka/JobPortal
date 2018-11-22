@@ -3,7 +3,7 @@
   <DataContextMoniker Name="/DbTestDataContext" />
   <nestedChildShapes>
     <classShape Id="452f2d2f-4eb4-4f0e-9d4a-d7030211eea9" absoluteBounds="0.75, 5.625, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/DbTestDataContext/AddressTable" />
+      <DataClassMoniker Name="/DbTestDataContext/AddressTables" />
       <nestedChildShapes>
         <elementListCompartment Id="909f97f3-0737-41c9-b9b1-c74d037358ea" absoluteBounds="0.765, 6.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
@@ -93,7 +93,7 @@
       </nestedChildShapes>
     </classShape>
     <classShape Id="cc2b628f-69f0-4e72-9a2d-868e43374ee8" absoluteBounds="6.5, 13.375, 2, 1.9631982421874987">
-      <DataClassMoniker Name="/DbTestDataContext/ServiceOffer" />
+      <DataClassMoniker Name="/DbTestDataContext/ServiceOffers" />
       <nestedChildShapes>
         <elementListCompartment Id="114449d4-85dd-4c09-bc76-79a9482455da" absoluteBounds="6.515, 13.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
@@ -110,77 +110,77 @@
         <elementListCompartment Id="5c525d19-a5ad-4fb0-8a5e-153fc4ba1f00" absoluteBounds="3.515, 4.585, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 13.75); (3.125 : 13.375); (3.125 : 9.31899251302083); (3.25357443490112 : 9.19041807811971 : JumpStart); (3.37142556509888 : 9.07256694792196 : JumpEnd); (3.5 : 8.94399251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 13.75); (3.125 : 13.375); (3.125 : 9.31899251302083); (3.5 : 8.94399251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetRoles/AspNetRoles_AspNetUserRoles" />
       <nodes>
         <classShapeMoniker Id="958a5e8d-60f0-4bf9-bbc1-62e5b7337904" />
         <classShapeMoniker Id="d1581ef0-19ff-4635-9a27-7ad6ee319356" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 12.930467374399); (3.3125 : 13.492967374399); (3.3125 : 15.6354484049479); (3.5 : 15.6354484049479)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 12.930467374399); (3.3125 : 13.492967374399); (3.3125 : 15.6354484049479); (3.5 : 15.6354484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_WorkingDates" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="51f4ce23-3e00-4725-a8a6-0b4eb714d972" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 12.6214811871995); (3.04166666666667 : 12.6214811871995 : JumpStart); (3.20833333333333 : 12.6214811871995 : JumpEnd); (3.5 : 12.6214811871995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 12.6214811871995); (3.5 : 12.6214811871995)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_AspNetUserClaims" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="c8bd8f3c-e44b-423d-a366-5193d6ca0794" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 10.9431469726562); (3.04166666666667 : 10.9431469726562 : JumpStart); (3.20833333333333 : 10.9431469726562 : JumpEnd); (3.5 : 10.9431469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.9431469726562); (3.04166666666667 : 10.9431469726562 : JumpStart); (3.20833333333333 : 10.9431469726562 : JumpEnd); (3.5 : 10.9431469726562)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_AspNetUserLogins" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="36fead9e-db7d-431e-877b-8ea2fecb6495" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 9.875); (1.75 : 8.31574375651042); (3.22916666666667 : 8.31574375651042 : JumpStart); (3.39583333333333 : 8.31574375651042 : JumpEnd); (3.5 : 8.31574375651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 9.875); (1.75 : 8.31574375651042); (3.22916666666667 : 8.31574375651042 : JumpStart); (3.39583333333333 : 8.31574375651042 : JumpEnd); (3.5 : 8.31574375651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_AspNetUserRoles" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="d1581ef0-19ff-4635-9a27-7ad6ee319356" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 11.9848453776042); (3.04166666666667 : 11.9848453776042 : JumpStart); (3.20833333333333 : 11.9848453776042 : JumpEnd); (6.04166666666667 : 11.9848453776042 : JumpStart); (6.20833333333333 : 11.9848453776042 : JumpEnd); (6.22916666666667 : 11.9848453776042 : JumpStart); (6.39583333333333 : 11.9848453776042 : JumpEnd); (6.5 : 11.9848453776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 11.9848453776042); (6.22916666666667 : 11.9848453776042 : JumpStart); (6.39583333333333 : 11.9848453776042 : JumpEnd); (6.5 : 11.9848453776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_OrderTable" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="fd69331d-46fc-428c-82f9-4c62f054680c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 20.75); (6.125 : 20.375); (6.125 : 11.2111706888021); (6.22916666666667 : 11.2111706888021 : JumpStart); (6.39583333333333 : 11.2111706888021 : JumpEnd); (6.5 : 11.2111706888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 20.75); (6.125 : 20.375); (6.125 : 11.2111706888021); (6.22916666666667 : 11.2111706888021 : JumpStart); (6.39583333333333 : 11.2111706888021 : JumpEnd); (6.5 : 11.2111706888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/OrderStatus/OrderStatus_OrderTable" />
       <nodes>
         <classShapeMoniker Id="2b8767a6-b69b-49ab-a397-d6c1b8f5b92b" />
         <classShapeMoniker Id="fd69331d-46fc-428c-82f9-4c62f054680c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.2812525 : 9.875); (2.2812525 : 9.13869466145833); (3.22196451822917 : 9.13869466145833 : JumpStart); (3.39583333333333 : 9.13869466145833 : JumpEnd); (6.5 : 9.13869466145833)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.2812525 : 9.875); (2.2812525 : 9.13869466145833); (3.22196451822917 : 9.13869466145833 : JumpStart); (3.39583333333333 : 9.13869466145833 : JumpEnd); (6.5 : 9.13869466145833)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_Review" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="476294c0-ceee-437b-b96e-2c57b2875096" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.65625 : 2.94399251302083); (5.65625 : 7.59375); (6.5 : 7.59375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.65625 : 2.94399251302083); (5.65625 : 7.59375); (6.5 : 7.59375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/Rate/Rate_Review" />
       <nodes>
         <classShapeMoniker Id="246436a6-31fc-4602-8f05-de096d179a09" />
         <classShapeMoniker Id="476294c0-ceee-437b-b96e-2c57b2875096" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 17.8854484049479); (10.25 : 17.8854484049479); (10.25 : 13.7035953776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 17.8854484049479); (10.25 : 17.8854484049479); (10.25 : 13.7035953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/BookedDates/BookedDates_Saleline" />
       <nodes>
         <classShapeMoniker Id="6b2e69c9-ec7c-4cab-9618-a06b54820568" />
         <classShapeMoniker Id="16c46f4d-097f-40b1-ad79-ca1760258780" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 11.3124995); (10.25 : 11.3124995); (10.25 : 12.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 11.3124995); (10.25 : 11.3124995); (10.25 : 12.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/OrderTable/OrderTable_Saleline" />
       <nodes>
         <classShapeMoniker Id="fd69331d-46fc-428c-82f9-4c62f054680c" />
@@ -188,56 +188,56 @@
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(6.56191525225361 : 13.375); (6.3125 : 13.1255847477464); (6.3125 : 9.45975803821114); (6.5013612283153 : 9.27089680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DbTestDataContext/ServiceOffer/ServiceOffer_Review" />
+      <AssociationMoniker Name="/DbTestDataContext/ServiceOffers/ServiceOffer_Review" />
       <nodes>
         <classShapeMoniker Id="cc2b628f-69f0-4e72-9a2d-868e43374ee8" />
         <classShapeMoniker Id="476294c0-ceee-437b-b96e-2c57b2875096" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 14.5521493098958); (9.7187475 : 14.5521493098958); (9.7187475 : 13.7035953776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/DbTestDataContext/ServiceOffer/ServiceOffer_Saleline" />
+    <associationConnector edgePoints="[(8.5 : 14.5521493098958); (9.7187475 : 14.5521493098958); (9.7187475 : 13.7035953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbTestDataContext/ServiceOffers/ServiceOffer_Saleline" />
       <nodes>
         <classShapeMoniker Id="cc2b628f-69f0-4e72-9a2d-868e43374ee8" />
         <classShapeMoniker Id="16c46f4d-097f-40b1-ad79-ca1760258780" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 12.9920068359375); (1.75 : 13.5); (3 : 13.5); (3 : 14.3517976888021); (3.22916666666667 : 14.3517976888021 : JumpStart); (3.39583333333333 : 14.3517976888021 : JumpEnd); (6.04166666666667 : 14.3517976888021 : JumpStart); (6.20833333333333 : 14.3517976888021 : JumpEnd); (6.5 : 14.3517976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 12.9920068359375); (1.75 : 13.5); (3 : 13.5); (3 : 14.3517976888021); (3.22916666666667 : 14.3517976888021 : JumpStart); (3.39583333333333 : 14.3517976888021 : JumpEnd); (6.5 : 14.3517976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_ServiceOffer" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="cc2b628f-69f0-4e72-9a2d-868e43374ee8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.65625 : 17.75); (5.65625 : 14.550901344401); (6.04166666666667 : 14.550901344401 : JumpStart); (6.20833333333333 : 14.550901344401 : JumpEnd); (6.5 : 14.550901344401)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.65625 : 17.75); (5.65625 : 14.550901344401); (6.5 : 14.550901344401)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/SubCategory/SubCategory_ServiceOffer" />
       <nodes>
         <classShapeMoniker Id="708c9fcb-3986-477a-a8b3-61e65a891679" />
         <classShapeMoniker Id="cc2b628f-69f0-4e72-9a2d-868e43374ee8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3 : 18.3469962565104); (3.75 : 18.3469962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3 : 18.3469962565104); (3.75 : 18.3469962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/Category/Category_SubCategory" />
       <nodes>
         <classShapeMoniker Id="041f185a-f4ad-48b7-ae5c-d1862091fb0a" />
         <classShapeMoniker Id="708c9fcb-3986-477a-a8b3-61e65a891679" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.47199625651042); (3.5 : 4.47199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 4.47199625651042); (3.5 : 4.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/Gender/Gender_Users" />
       <nodes>
         <classShapeMoniker Id="ae0d93cd-6e53-4ba4-9308-af1bed0d61e7" />
         <classShapeMoniker Id="c10cd299-4655-4afe-a5c7-f8e72df751ec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 9.93807592307692); (3.06607443490112 : 9.6220014881758 : JumpStart); (3.18392556509888 : 9.50415035797804 : JumpEnd); (3.3125 : 9.37557592307692); (3.3125 : 5.59980139778646); (3.5 : 5.59980139778646)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 9.93807592307692); (3.06607443490112 : 9.6220014881758 : JumpStart); (3.18392556509888 : 9.50415035797804 : JumpEnd); (3.3125 : 9.37557592307692); (3.3125 : 5.59980139778646); (3.5 : 5.59980139778646)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DbTestDataContext/AspNetUsers/AspNetUsers_Users" />
       <nodes>
         <classShapeMoniker Id="61255ab5-dd72-46b7-980f-98ff282c7c24" />
         <classShapeMoniker Id="c10cd299-4655-4afe-a5c7-f8e72df751ec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.14505126953125); (3.22916666666667 : 6.14505126953125 : JumpStart); (3.39583333333333 : 6.14505126953125 : JumpEnd); (3.5 : 6.14505126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/DbTestDataContext/AddressTable/AddressTable_Users" />
+    <associationConnector edgePoints="[(2.75 : 6.14505126953125); (3.5 : 6.14505126953125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbTestDataContext/AddressTables/AddressTable_Users" />
       <nodes>
         <classShapeMoniker Id="452f2d2f-4eb4-4f0e-9d4a-d7030211eea9" />
         <classShapeMoniker Id="c10cd299-4655-4afe-a5c7-f8e72df751ec" />
