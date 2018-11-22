@@ -196,6 +196,7 @@
       <DependentUpon>DbTest.dbml</DependentUpon>
     </Compile>
     <Compile Include="Database tests\ServiceRepositoryTest.cs" />
+    <Compile Include="Database tests\OrderRepositoryTest.cs" />
     <Compile Include="MVC  tests\OfferTests.cs" />
     <Compile Include="MVC  tests\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
