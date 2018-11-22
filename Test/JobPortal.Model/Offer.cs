@@ -33,6 +33,32 @@ namespace JobPortal.Model
 
 
     }
+
+    public class OrderedOffer
+    {
+        [DataMember]
+        public virtual int Id { get; set; }
+        [DataMember]
+        public virtual decimal RatePerHour { get; set; }
+        [DataMember]
+        public virtual string Title { get; set; }
+        [DataMember]
+        public virtual string Description { get; set; }
+        [DataMember]
+        public virtual string AuthorId { get; set; }
+        [DataMember]
+        public virtual Category Category { get; set; }
+        [DataMember]
+        public virtual SubCategory Subcategory { get; set; }
+        [DataMember]
+        public virtual TimeSpan HoursFrom { get; set; }
+        [DataMember]
+        public virtual TimeSpan HoursTo { get; set; }
+        [DataMember]
+        public virtual DayOfWeek WeekDay { get; set; }
+    }
+
+
     public class WorkingTime
     {
         public virtual TimeSpan HoursFrom { get; set; }

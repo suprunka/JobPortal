@@ -1,0 +1,37 @@
+﻿@model MyWeb.Models.ShoppingCardView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<section class="ShoppingCard">
+    <div class="header" style="margin-bottom:auto">
+        <h1> Your shopping card</h1>
+    </div>
+
+
+    <table id="yShoppingCard">
+        @foreach (var itemInShoppingcard in Model.Card.List)
+        {
+            <tr>
+                <td> Title: @itemInShoppingcard.Title </td>
+                <td> Description: @itemInShoppingcard.Description </td>
+                <td> Day: @itemInShoppingcard.WeekDay </td>
+                <td> Hour from: @itemInShoppingcard.HoursFrom</td>
+                <td> Hour to @itemInShoppingcard.HoursTo </td>
+                <td> Rate per hour: @itemInShoppingcard.RatePerHour </td>
+                <td> Price: @itemInShoppingcard.RatePerHour * (@itemInShoppingcard.HoursTo - @itemInShoppingcard.HoursFrom).Hours </td>
+            </tr>
+        }
+        <tr id="empty-message" @if (Model.Card != null && Model.Card.List.Count > 0) { <text> class="hidden" </text> }>
+            <td> The shopping card is empty </td>
+        </tr>
+    </table>
+    <div id="tPrice">
+        Order price: @Model.Card.GetTotalPrice()
+    </div>
+</section>
+

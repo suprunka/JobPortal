@@ -6,6 +6,29 @@ using System.ComponentModel.DataAnnotations;
 using JobPortal.Model;
 namespace MyWeb.Models
 {
+    public class ServiceOfferToOrder
+    {
+        public int Id { get; set; }
+
+        public DateTime Date { get; set; }
+            
+        public TimeSpan From { get; set; }
+            
+        public TimeSpan To { get;  set; }
+
+        public decimal RatePerHour { get; set; }
+
+    
+        public string Title { get; set; }
+
+
+        public string Description { get; set; }
+
+        public string Author { get; set; }
+
+
+    }
+
 
     public class ServiceOfferViewModel
     {

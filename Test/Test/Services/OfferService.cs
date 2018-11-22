@@ -30,11 +30,11 @@ namespace ServiceLibrary
 
         }
 
-        public bool AddtoOffer(ServiceOffer serviceOffer, Offer offer)
+        /*public bool AddtoOffer(ServiceOffer serviceOffer, Offer offer)
         {
             foreach (var item in offer.ListOfWorkingDays)
             {
-                _database.AddToService(serviceOffer, new WorkingDate
+                _database.AddWorkingDates(serviceOffer, new WorkingDates
                 {
                     NameOfDay = item.WeekDay.ToString(),
                     HourFrom = item.HoursFrom,
@@ -46,7 +46,7 @@ namespace ServiceLibrary
             }
 
             return false;
-        }
+        }*/
 
         public bool CreateServiceOffer(Offer offer)
         {

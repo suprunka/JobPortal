@@ -46,13 +46,13 @@
                                 <img class="card-img-top" src="~/Pictures/media.png" alt="Card image" style="width:50%;display: block;
                           margin-left: auto; margin-right: auto;">
                             }
+                            <br />
                             <div class="card-body" >
-                                <h4 class="card-title" style="word-break:break-all">@offer.Title</h4>
-                                <p class="card-text" style="word-break:break-all">@offer.Description</p>
+                                <h4 class="card-title" style="word-break:break-word;">@offer.Title</h4>
+                                <p class="card-text" style="word-break:break-word;">@offer.Description</p>
                                 <h4 class="price">@decimal.Round(offer.RatePerHour, 2, MidpointRounding.AwayFromZero) DKK/ hour</h4>
                                 @Html.ActionLink("See Details", "ViewDetails", "ServiceOffer", new { id = offer.Id }, new { @class = "btn btn-primary" })
                             </div>
-
                         </div>
                     </div>
                 </td>

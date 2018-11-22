@@ -129,7 +129,6 @@ namespace MyWeb.Controllers
                 });
                 if (isUpdated)
                 {
-                    TempData["msg"] = "<script>alert('You offer is updated');</script>";
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
             

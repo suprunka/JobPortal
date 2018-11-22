@@ -52,16 +52,16 @@ namespace Repository
                             _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
                             _context.SubmitChanges();
 
-                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                            var addressExists = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == obj.AddressTables.Postcode);
                             if (addressExists == null)
                             {
-                                addressExists = new AddressTable
+                                addressExists = new AddressTables
                                 {
-                                    Postcode = obj.AddressTable.Postcode,
-                                    City = obj.AddressTable.City,
-                                    Region = obj.AddressTable.Region,
+                                    Postcode = obj.AddressTables.Postcode,
+                                    City = obj.AddressTables.City,
+                                    Region = obj.AddressTables.Region,
                                 };
-                                _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
+                                _context.GetTable<AddressTables>().InsertOnSubmit(addressExists);
 
 
                                 _context.SubmitChanges();
@@ -102,16 +102,16 @@ namespace Repository
                     {
                         try
                         {
-                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                            var addressExists = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == obj.AddressTables.Postcode);
                             if (addressExists == null)
                             {
-                                addressExists = new AddressTable
+                                addressExists = new AddressTables
                                 {
-                                    Postcode = obj.AddressTable.Postcode,
-                                    City = obj.AddressTable.City,
-                                    Region = obj.AddressTable.Region,
+                                    Postcode = obj.AddressTables.Postcode,
+                                    City = obj.AddressTables.City,
+                                    Region = obj.AddressTables.Region,
                                 };
-                                _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
+                                _context.GetTable<AddressTables>().InsertOnSubmit(addressExists);
 
 
                                 _context.SubmitChanges();
@@ -189,8 +189,8 @@ namespace Repository
                     if (numberOfAddressRecords < 2)
                     {
 
-                        var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == found.AddressTable.Postcode);
-                        _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
+                        var addressToDelete = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == found.AddressTables.Postcode);
+                        _context.GetTable<AddressTables>().DeleteOnSubmit(addressToDelete);
                     }
 
                     _context.SubmitChanges();
@@ -247,7 +247,7 @@ namespace Repository
                         {
                             Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                             int oldCity_ID = found.City_ID;
-                            var oldPostCode = found.AddressTable.Postcode;
+                            var oldPostCode = found.AddressTables.Postcode;
                             found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
                             found.FirstName = obj.FirstName;
                             found.LastName = obj.LastName;
@@ -262,35 +262,35 @@ namespace Repository
                                 found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Female");
                             }
 
-                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                            var addressExists = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == obj.AddressTables.Postcode);
                             if (addressExists == null)
                             {
 
-                                _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
+                                _context.GetTable<AddressTables>().InsertOnSubmit(new AddressTables
                                 {
-                                    Postcode = obj.AddressTable.Postcode,
-                                    City = obj.AddressTable.City,
-                                    Region = obj.AddressTable.Region,
+                                    Postcode = obj.AddressTables.Postcode,
+                                    City = obj.AddressTables.City,
+                                    Region = obj.AddressTables.Region,
 
 
                                 });
                                 string newPhoneNumber = obj.AspNetUsers.PhoneNumber;
                                 _context.SubmitChanges();
-                                found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == obj.AddressTable.Postcode);
+                                found.AddressTables = _context.GetTable<AddressTables>().Single(x => x.Postcode == obj.AddressTables.Postcode);
                                 _context.SubmitChanges();
                                 int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
                                 if (numberOfAddressRecords < 2)
                                 {
-                                    var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
-                                    _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
+                                    var addressToDelete = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == oldPostCode);
+                                    _context.GetTable<AddressTables>().DeleteOnSubmit(addressToDelete);
                                 }
                                 _context.SubmitChanges();
                             }
                             else
                             {
-                                found.AddressTable.Postcode = obj.AddressTable.Postcode;
-                                found.AddressTable.City = obj.AddressTable.City;
-                                found.AddressTable.Region = obj.AddressTable.Region;
+                                found.AddressTables.Postcode = obj.AddressTables.Postcode;
+                                found.AddressTables.City = obj.AddressTables.City;
+                                found.AddressTables.Region = obj.AddressTables.Region;
                             }
 
                             
