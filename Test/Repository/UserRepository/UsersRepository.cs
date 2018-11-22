@@ -15,7 +15,7 @@ namespace Repository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_1067677;Password=Password1!";
+        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067712;User ID=dmai0917_1067712;Password=Password1!";
         public UsersRepository(DataContext context) : base(context)
         {
             _context = context;
@@ -37,7 +37,7 @@ namespace Repository
                         {
                             AspNetUsers logging = new AspNetUsers
                             {
-                                Id= obj.AspNetUsers.UserName,
+                                Id = obj.AspNetUsers.UserName,
                                 EmailConfirmed = false,
                                 PhoneNumberConfirmed = false,
                                 TwoFactorEnabled = false,
@@ -52,16 +52,16 @@ namespace Repository
                             _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
                             _context.SubmitChanges();
 
-                            var addressExists = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == obj.AddressTables.Postcode);
+                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                             if (addressExists == null)
                             {
-                                addressExists = new AddressTables
+                                addressExists = new AddressTable
                                 {
-                                    Postcode = obj.AddressTables.Postcode,
-                                    City = obj.AddressTables.City,
-                                    Region = obj.AddressTables.Region,
+                                    Postcode = obj.AddressTable.Postcode,
+                                    City = obj.AddressTable.City,
+                                    Region = obj.AddressTable.Region,
                                 };
-                                _context.GetTable<AddressTables>().InsertOnSubmit(addressExists);
+                                _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
 
 
                                 _context.SubmitChanges();
@@ -102,16 +102,16 @@ namespace Repository
                     {
                         try
                         {
-                            var addressExists = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == obj.AddressTables.Postcode);
+                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                             if (addressExists == null)
                             {
-                                addressExists = new AddressTables
+                                addressExists = new AddressTable
                                 {
-                                    Postcode = obj.AddressTables.Postcode,
-                                    City = obj.AddressTables.City,
-                                    Region = obj.AddressTables.Region,
+                                    Postcode = obj.AddressTable.Postcode,
+                                    City = obj.AddressTable.City,
+                                    Region = obj.AddressTable.Region,
                                 };
-                                _context.GetTable<AddressTables>().InsertOnSubmit(addressExists);
+                                _context.GetTable<AddressTable>().InsertOnSubmit(addressExists);
 
 
                                 _context.SubmitChanges();
@@ -148,7 +148,7 @@ namespace Repository
 
                     }
 
-                    
+
                 }
             }
             return result;
@@ -189,8 +189,8 @@ namespace Repository
                     if (numberOfAddressRecords < 2)
                     {
 
-                        var addressToDelete = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == found.AddressTables.Postcode);
-                        _context.GetTable<AddressTables>().DeleteOnSubmit(addressToDelete);
+                        var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == found.AddressTable.Postcode);
+                        _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
                     }
 
                     _context.SubmitChanges();
@@ -241,13 +241,13 @@ namespace Repository
                     objConn.Open();
                     using (var myTran = new TransactionScope())
                     {
-                        
+
 
                         try
                         {
                             Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                             int oldCity_ID = found.City_ID;
-                            var oldPostCode = found.AddressTables.Postcode;
+                            var oldPostCode = found.AddressTable.Postcode;
                             found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
                             found.FirstName = obj.FirstName;
                             found.LastName = obj.LastName;
@@ -262,38 +262,38 @@ namespace Repository
                                 found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Female");
                             }
 
-                            var addressExists = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == obj.AddressTables.Postcode);
+                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
                             if (addressExists == null)
                             {
 
-                                _context.GetTable<AddressTables>().InsertOnSubmit(new AddressTables
+                                _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
                                 {
-                                    Postcode = obj.AddressTables.Postcode,
-                                    City = obj.AddressTables.City,
-                                    Region = obj.AddressTables.Region,
+                                    Postcode = obj.AddressTable.Postcode,
+                                    City = obj.AddressTable.City,
+                                    Region = obj.AddressTable.Region,
 
 
                                 });
                                 string newPhoneNumber = obj.AspNetUsers.PhoneNumber;
                                 _context.SubmitChanges();
-                                found.AddressTables = _context.GetTable<AddressTables>().Single(x => x.Postcode == obj.AddressTables.Postcode);
+                                found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == obj.AddressTable.Postcode);
                                 _context.SubmitChanges();
                                 int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
                                 if (numberOfAddressRecords < 2)
                                 {
-                                    var addressToDelete = _context.GetTable<AddressTables>().FirstOrDefault(t => t.Postcode == oldPostCode);
-                                    _context.GetTable<AddressTables>().DeleteOnSubmit(addressToDelete);
+                                    var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
+                                    _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
                                 }
                                 _context.SubmitChanges();
                             }
                             else
                             {
-                                found.AddressTables.Postcode = obj.AddressTables.Postcode;
-                                found.AddressTables.City = obj.AddressTables.City;
-                                found.AddressTables.Region = obj.AddressTables.Region;
+                                found.AddressTable.Postcode = obj.AddressTable.Postcode;
+                                found.AddressTable.City = obj.AddressTable.City;
+                                found.AddressTable.Region = obj.AddressTable.Region;
                             }
 
-                            
+
 
 
                             _context.SubmitChanges();
@@ -302,7 +302,7 @@ namespace Repository
                         }
                         catch
                         {
-                            
+
                             result = false;
                             throw new InvalidOperationException();
                         }
@@ -374,6 +374,41 @@ namespace Repository
                 }
             }
             return result;
+        }
+
+        public bool SaveToShoppingCard(int id , OrderedOffer offer)
+        
+        {
+            
+
+        }
+
+        public JobPortal.Model.ShoppingCard GetShoppingCard(string id)
+        {
+            JobPortal.Model.ShoppingCard result = null;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+
+                var list = _context.GetTable<DbConnection.ShoppingCard>().Where(x => x.ID_User == id);
+
+                foreach (var i in list)
+                {
+                    result.AddToCard(new OrderedOffer
+                    {
+                        RatePerHour = i.RatePerHour,
+                        Title = i.Title,
+                        Description = i.Description,
+                        AuthorId = i.ID_User,
+                        HoursFrom = i.HourFrom,
+                        HoursTo = i.HourTo,
+                        Subcategory = (JobPortal.Model.SubCategory)Enum.Parse(typeof(JobPortal.Model.SubCategory), _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x=> x.ID == i.Subcategory_ID).Name),
+                        Category = (JobPortal.Model.Category)Enum.Parse(typeof(JobPortal.Model.Category), _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.ID == i.Subcategory_ID).Category.Name),
+                        WeekDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), i.NameOfDay),
+                    });
+                }
+                return result;
+            }
         }
     }
 }

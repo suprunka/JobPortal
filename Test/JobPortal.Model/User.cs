@@ -1,5 +1,4 @@
-﻿using MyWeb.Models;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace JobPortal.Model

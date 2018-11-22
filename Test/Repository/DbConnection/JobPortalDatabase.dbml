@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.AddressTable" Member="AddressTables">
-    <Type Name="AddressTables">
+  <Table Name="dbo.AddressTable" Member="AddressTable">
+    <Type Name="AddressTable">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -71,6 +71,7 @@
       <Association Name="AspNetUsers_OrderTable" Member="OrderTable" ThisKey="Id" OtherKey="Users_ID" Type="OrderTable" />
       <Association Name="AspNetUsers_Review" Member="Review" ThisKey="Id" OtherKey="Customer_ID" Type="Review" />
       <Association Name="AspNetUsers_ServiceOffer" Member="ServiceOffer" ThisKey="Id" OtherKey="Employee_ID" Type="ServiceOffer" />
+      <Association Name="AspNetUsers_ShoppingCard" Member="ShoppingCard" ThisKey="Id" OtherKey="ID_User" Type="ShoppingCard" />
       <Association Name="AspNetUsers_Users" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
     </Type>
   </Table>
@@ -162,12 +163,27 @@
       <Association Name="SubCategory_ServiceOffer" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.ShoppingCard" Member="ShoppingCard">
+    <Type Name="ShoppingCard">
+      <Column Name="ID_User" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Subcategory_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="NameOfDay" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="HourFrom" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HourTo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUsers_ShoppingCard" Member="AspNetUsers" ThisKey="ID_User" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
+      <Association Name="SubCategory_ShoppingCard" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.SubCategory" Member="SubCategory">
     <Type Name="SubCategory">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Category_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SubCategory_ServiceOffer" Member="ServiceOffer" ThisKey="ID" OtherKey="Subcategory_ID" Type="ServiceOffer" />
+      <Association Name="SubCategory_ShoppingCard" Member="ShoppingCard" ThisKey="ID" OtherKey="Subcategory_ID" Type="ShoppingCard" />
       <Association Name="Category_SubCategory" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
@@ -184,7 +200,7 @@
       <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Gender_Users" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="AspNetUsers_Users" Member="AspNetUsers" ThisKey="Logging_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AddressTable_Users" Member="AddressTables" ThisKey="City_ID" OtherKey="ID" Type="AddressTables" IsForeignKey="true" />
+      <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
