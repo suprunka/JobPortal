@@ -122,7 +122,7 @@ namespace WebJobPortal.Models
 
         [Display(Name = "First Name:")]
         [Required(ErrorMessage = "First name required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$", ErrorMessage = "At least one character required.")]
         public String FirstName { get; set; }
 
         [Display(Name = "Last Name:")]
@@ -132,12 +132,12 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Address:")]
         [Required(ErrorMessage = "Address (street and number) required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$", ErrorMessage = "At least one character required.")]
         public String AddressLine { get; set; }
 
         [Display(Name = "City:")]
         [Required(ErrorMessage = "City required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{1,}$", ErrorMessage = "At least one character required.")]
         public String CityName { get; set; }
 
         [Display(Name = "PayPal mail:")]
@@ -146,7 +146,7 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Postcode:")]
         [Required(ErrorMessage = "Postcode required")]
-        [RegularExpression("^[0-9]{4}$")]
+        [RegularExpression("^[0-9]{4}$", ErrorMessage = "Four digits required.")]
         public String Postcode { get; set; }
 
         [Display(Name = "Region:")]
@@ -176,13 +176,13 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Phone Number:")]
         [Required(ErrorMessage = "Phone number required")]
-        [RegularExpression("^[0-9]{8}$")]
+        [RegularExpression("^[0-9]{8}$", ErrorMessage = "8 digits required.")]
         public String PhoneNumber { get; set; }
 
       
         [Display(Name = "User Name:")]
         [Required(ErrorMessage = "User name required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{3,}$")]
+        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{3,}$", ErrorMessage = "At leat 3 characters required.")]
         public String UserName { get; set; }
 
     }

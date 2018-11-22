@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using BookedDate = Repository.DbConnection.BookedDate;
 
 namespace Repository.OrderRepository
 {
@@ -15,7 +16,7 @@ namespace Repository.OrderRepository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection = "Data Source=JAKUB\\SQLEXPRESS;Initial Catalog=JobPortalTestDB;Integrated Security=True";
+        private readonly string connection;
 
 
 
@@ -31,7 +32,7 @@ namespace Repository.OrderRepository
 
         }
 
-        public OrderTable CreateOrder(Users u)
+        public OrderTable CreateOrder(Users u, IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices)
         {
             OrderTable result = null;
             using (SqlConnection objConn = new SqlConnection(connection))
@@ -42,13 +43,18 @@ namespace Repository.OrderRepository
                 {
                     OrderTable newOrder = new OrderTable
                     {
-                        Account_ID = _context.GetTable<Account>().FirstOrDefault(x => x.PhoneNumber == u.PhoneNumber).ID,
+                        AspNetUsers = _context.GetTable<AspNetUsers>().FirstOrDefault(x => x.Id == u.Logging_ID),
                         OrderStatus_ID = 1,
                         TotalPrice= 0,
                         Date = DateTime.Now,
                     };
                     _context.GetTable<OrderTable>().InsertOnSubmit(newOrder);
                     _context.SubmitChanges();
+                    //add to existiing order in for loop
+                    foreach (var item in choosenServices)
+                    {
+                        AddToExistingOrder(newOrder, item.Key, item.Value);
+                    }
                     result = newOrder;
                     sql.Commit();
                 }
@@ -66,30 +72,34 @@ namespace Repository.OrderRepository
             return result;
         }
 
-        public OrderTable AddToExistingOrder(OrderTable o, ServiceOffer s, DateTime date, TimeSpan from, TimeSpan to)
+        public OrderTable AddToExistingOrder(OrderTable o, ServiceOffer s, JobPortal.Model.BookedDate date)//DateTime date, TimeSpan from, TimeSpan to)
         {
             OrderTable result = null;
             using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
-                if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == s.ID).Any(t=> t.NameOfDay == date.DayOfWeek.ToString()) && 
-                    HoursAvailable(s,date,from,to) &&
-                    o.OrderStatus_ID != 2)
+                if (_context.GetTable<WorkingDate>().Where(t => t.ServiceOffer_ID == s.ID).Any(t=> t.NameOfDay == date.Day.DayOfWeek.ToString()) &&  o.OrderStatus_ID != 2)
                 {
                     try
                     {
-                        var span = to - from;
+                        var span = date.HoursTo - date.HoursFrom;
                         var numberOfHours = span.Hours;
-                        
-                        BookedDates dates = new BookedDates
+
+                        var timeIsBooked = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == s.ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == date.Day).Select(x => x.BookedDate).Where(x => new TimeRange(x.HourFrom, x.HourTo).Clashes(new TimeRange(date.HoursFrom, date.HoursTo))).Select(x => x).ToArray();
+                        //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
+                        if (timeIsBooked.Length > 0)
+                        {
+                            throw new BookedTimeException(s.ID, s.Employee_ID);
+                        }
+                        BookedDate dates = new BookedDate
                         {
                             NumberOfHours = numberOfHours,
-                            BookedDate = date,
-                            HourFrom = from,
-                            HourTo = to + new TimeSpan(0,30,0),
+                            BookedDate1 = date.Day,
+                            HourFrom = date.HoursFrom,
+                            HourTo = date.HoursTo + new TimeSpan(0, 30, 0),
                         };
-                        _context.GetTable<BookedDates>().InsertOnSubmit(dates);
+                        _context.GetTable<BookedDate>().InsertOnSubmit(dates);
                         _context.SubmitChanges();
 
                         Saleline saleline = new Saleline
@@ -98,6 +108,7 @@ namespace Repository.OrderRepository
                             Order_ID = o.ID,
                             BookedDates_ID = dates.ID,
                         };
+
                         _context.GetTable<Saleline>().InsertOnSubmit(saleline);
                         _context.SubmitChanges();
 
@@ -118,8 +129,6 @@ namespace Repository.OrderRepository
                     {
                         objConn.Close();
                     }
-
-
                 }
                 else
                 {
@@ -137,13 +146,13 @@ namespace Repository.OrderRepository
                 sql = objConn.BeginTransaction();
                 try
                 {
-                    var saleLineToDelete = _context.GetTable<Saleline>().FirstOrDefault(x => x.ServiceOffer_ID == s.ID && x.Order_ID == o.ID && x.BookedDates.BookedDate == date &&
-                    x.BookedDates.HourFrom == from && x.BookedDates.HourTo == to + new TimeSpan(0, 30, 0));
+                    var saleLineToDelete = _context.GetTable<Saleline>().FirstOrDefault(x => x.ServiceOffer_ID == s.ID && x.Order_ID == o.ID && x.BookedDate.BookedDate1 == date &&
+                    x.BookedDate.HourFrom == from && x.BookedDate.HourTo == to + new TimeSpan(0, 30, 0));
                     var order = _context.GetTable<OrderTable>().FirstOrDefault(x => x.ID == o.ID);
-                    var bookedDateToDelete = _context.GetTable<BookedDates>().Single(x => x.ID == saleLineToDelete.BookedDates_ID);
-                    order.TotalPrice -= (s.RatePerHour * saleLineToDelete.BookedDates.NumberOfHours);
+                    var bookedDateToDelete = _context.GetTable<BookedDate>().Single(x => x.ID == saleLineToDelete.BookedDates_ID);
+                    order.TotalPrice -= (s.RatePerHour * saleLineToDelete.BookedDate.NumberOfHours);
                     _context.GetTable<Saleline>().DeleteOnSubmit(saleLineToDelete);
-                    _context.GetTable<BookedDates>().DeleteOnSubmit(bookedDateToDelete);
+                    _context.GetTable<BookedDate>().DeleteOnSubmit(bookedDateToDelete);
                     _context.SubmitChanges();
                     result = o;
                     sql.Commit();
@@ -168,7 +177,7 @@ namespace Repository.OrderRepository
             _context.SubmitChanges();
             return orderToFinish;
         }
-
+/*
         public bool HoursAvailable(ServiceOffer s, DateTime date, TimeSpan from, TimeSpan to)
         {
             TimeRange timeRange = new TimeRange(from, to);
@@ -177,9 +186,9 @@ namespace Repository.OrderRepository
 
             foreach (var t in salelines)
             {
-                if (t.BookedDates.BookedDate.ToShortDateString() == date.ToShortDateString())
+                if (t.BookedDate.BookedDate1.ToShortDateString() == date.ToShortDateString())
                 {
-                    times.Add(new TimeRange(t.BookedDates.HourFrom, t.BookedDates.HourTo));
+                    times.Add(new TimeRange(t.BookedDate.HourFrom, t.BookedDate.HourTo));
                 }
             }
 
@@ -191,9 +200,10 @@ namespace Repository.OrderRepository
                 }
             }
             return true;
-        }
+        }*/
 
   
     }
-}
+    }
+
 
