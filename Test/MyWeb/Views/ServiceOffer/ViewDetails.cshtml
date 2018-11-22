@@ -1,24 +1,21 @@
 ﻿@model MyWeb.Models.ViewDetails
 @using Microsoft.AspNet.Identity;
 
-
 @{
     ViewBag.Title = "ViewDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
 
-    <div class="form-horizontal">
-        <h4>@ViewBag.Title</h4>
+    <div class="offerCard">
+        <h2>Offer details</h2>
 
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title)
@@ -40,17 +37,13 @@
             @Html.LabelFor(model => model.Description)
 
             <div class="col-md-12" id="edit">
-                @Html.TextAreaFor(model => model.Description, new { style = "width:250px;" })
+                @Html.TextAreaFor(model => model.Description, new { style = "width:250px; word-break:break-word;" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
-
         <div class="form-group">
             @Html.ActionLink("Author", "UserProfile", "User", new { id = Model.Author }, null)
-
-
         </div>
 
         @if (Model.Author == User.Identity.GetUserId())
@@ -67,8 +60,6 @@
             @Html.ActionLink("Book", "Edit", "ServiceOffer", new { edited = Model.Id }, new { @class = "btn btn-danger" })
 
         }
-
-
     </div>
 }
 @Html.Raw(TempData["msg"])

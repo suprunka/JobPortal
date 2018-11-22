@@ -141,7 +141,7 @@ button {
 /*------------------------------------------------*/
 /*Modals - popup windows*/
 /* background */
-.changePasswordModal, .changeEmailModal, .deleteAccountModal, .loginModal {
+.deleteAccountModal, .loginModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -348,4 +348,35 @@ a.hoursButton {
     width: 150px;
     height: 150px;
     text-indent: -9999px; /* hides the link text */
+}
+
+
+serviceOfferTable.collapsed {
+    border-collapse: collapse;
+}
+
+col.col-md-4 {
+    border-style:hidden;
+    
+}
+.item {
+    border: 1px #8c8c8c;
+    border-style: solid;
+    border-radius: 4px;
+    padding: 8px;
+    min-height: 400px;
+    max-width: 350px;
+}
+.item:hover {
+    background-color: #e6e6e6;
+    color: #333;
+}
+.card-title .price{
+    text-align:center;
+}
+.card-title{
+    padding-bottom:5px;
+}
+.price{
+    padding-top:10px;
 }

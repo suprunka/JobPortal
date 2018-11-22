@@ -161,14 +161,21 @@ else
 </div>
 
 <div id="Calendar" class="frameContentColumn">
-    calendar
+    @Html.Partial("Calendar",Model.Services)
 </div>
 <!--user's own offers-->
 <div id="Offers" class="frameContentColumn">
+    <table class="serviceOfferTable">
+        <colgroup>
+            <col class="col-md-4">
+            <col class="col-md-4">
+            <col class="col-md-4">
+        </colgroup>
+        @Html.Partial("Offers", Model.Services)
+    </table>
     <a href="@Url.Action("Add", "ServiceOffer")">
-        <img style="width:100px ;padding-top:40px;" src="@Url.Content("~/Pictures/addBtn.png")" />
+        <img style="width:90px ;padding-top:10px;" src="@Url.Content("~/Pictures/addBtn.png")" />
     </a>
-    @Html.Partial("Offers", Model.Services)
 </div>
 
 <!--delete account option, code in the beginning - button delete account-->
