@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.Model
 {
-  public  class BookedTimeException :Exception
+    public class BookedTimeException : Exception
     {
         public int OfferId { get; set; }
         public string EmployeeId { get; set; }

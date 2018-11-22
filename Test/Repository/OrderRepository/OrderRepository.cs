@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using BookedDate = Repository.DbConnection.BookedDate;
+using BookedDate = Repository.DbConnection.BookedDates;
+using Saleline = Repository.DbConnection.Saleline;
 
 namespace Repository.OrderRepository
 {
@@ -79,14 +77,14 @@ namespace Repository.OrderRepository
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
-                if (_context.GetTable<WorkingDate>().Where(t => t.ServiceOffer_ID == s.ID).Any(t=> t.NameOfDay == date.Day.DayOfWeek.ToString()) &&  o.OrderStatus_ID != 2)
+                if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == s.ID).Any(t=> t.NameOfDay == date.Day.DayOfWeek.ToString()) &&  o.OrderStatus_ID != 2)
                 {
                     try
                     {
                         var span = date.HoursTo - date.HoursFrom;
                         var numberOfHours = span.Hours;
 
-                        var timeIsBooked = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == s.ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == date.Day).Select(x => x.BookedDate).Where(x => new TimeRange(x.HourFrom, x.HourTo).Clashes(new TimeRange(date.HoursFrom, date.HoursTo))).Select(x => x).ToArray();
+                        var timeIsBooked = _context.GetTable<DbConnection.Saleline>().Where(x => x.ServiceOffer_ID == s.ID).Select(x => x).Where(x => x.BookedDates.BookedDate == date.Day).Select(x => x.BookedDates).Where(x => new TimeRange(x.HourFrom, x.HourTo).Clashes(new TimeRange(date.HoursFrom, date.HoursTo))).Select(x => x).ToArray();
                         //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
                         if (timeIsBooked.Length > 0)
                         {
@@ -95,7 +93,7 @@ namespace Repository.OrderRepository
                         BookedDate dates = new BookedDate
                         {
                             NumberOfHours = numberOfHours,
-                            BookedDate1 = date.Day,
+                            BookedDate = date.Day,
                             HourFrom = date.HoursFrom,
                             HourTo = date.HoursTo + new TimeSpan(0, 30, 0),
                         };
@@ -137,39 +135,7 @@ namespace Repository.OrderRepository
             }
             return result;
         }
-        public OrderTable DeleteFromExistingOrder(OrderTable o, ServiceOffer s, DateTime date, TimeSpan from, TimeSpan to)
-        {
-            OrderTable result = null;
-            using (SqlConnection objConn = new SqlConnection(connection))
-            {
-                objConn.Open();
-                sql = objConn.BeginTransaction();
-                try
-                {
-                    var saleLineToDelete = _context.GetTable<Saleline>().FirstOrDefault(x => x.ServiceOffer_ID == s.ID && x.Order_ID == o.ID && x.BookedDate.BookedDate1 == date &&
-                    x.BookedDate.HourFrom == from && x.BookedDate.HourTo == to + new TimeSpan(0, 30, 0));
-                    var order = _context.GetTable<OrderTable>().FirstOrDefault(x => x.ID == o.ID);
-                    var bookedDateToDelete = _context.GetTable<BookedDate>().Single(x => x.ID == saleLineToDelete.BookedDates_ID);
-                    order.TotalPrice -= (s.RatePerHour * saleLineToDelete.BookedDate.NumberOfHours);
-                    _context.GetTable<Saleline>().DeleteOnSubmit(saleLineToDelete);
-                    _context.GetTable<BookedDate>().DeleteOnSubmit(bookedDateToDelete);
-                    _context.SubmitChanges();
-                    result = o;
-                    sql.Commit();
-                }
-                catch (Exception e)
-                {
-                    sql.Rollback();
-                    result = null;
-                    throw e;
-                }
-                finally
-                {
-                    objConn.Close();
-                }
-            }
-            return result;
-        }
+       
         public OrderTable PayForOrder(OrderTable o)
         {
             var orderToFinish = _context.GetTable<OrderTable>().Single(x => x.ID == o.ID);
