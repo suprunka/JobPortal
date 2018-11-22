@@ -50,14 +50,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ManageOffers.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">
-                @Html.DropDownList("Category", new SelectList(Enum.GetValues(typeof(Category)), selectedValue: Category.Home), new { @id = "cat", @class = "form-control" })
+                @Html.DropDownListFor(model => model.ManageOffers.Category, new SelectList(Enum.GetValues(typeof(Category)), selectedValue: Category.Home), new { @id = "cat", @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ManageOffers.Subcategory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Subcategory", new SelectList(Enum.GetValues(typeof(SubCategory))), new { @id = "subcat", @class = "form-control" })
+                @Html.DropDownListFor(model => model.ManageOffers.Subcategory, new SelectList(Enum.GetValues(typeof(SubCategory))), new { @id = "subcat", @class = "form-control" })
             </div>
         </div>
         <div class="form-group">

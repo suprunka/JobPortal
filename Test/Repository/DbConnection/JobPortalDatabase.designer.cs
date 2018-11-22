@@ -30,9 +30,9 @@ namespace Repository.DbConnection
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAddressTables(AddressTables instance);
-    partial void UpdateAddressTables(AddressTables instance);
-    partial void DeleteAddressTables(AddressTables instance);
+    partial void InsertAddressTable(AddressTable instance);
+    partial void UpdateAddressTable(AddressTable instance);
+    partial void DeleteAddressTable(AddressTable instance);
     partial void InsertWorkingDates(WorkingDates instance);
     partial void UpdateWorkingDates(WorkingDates instance);
     partial void DeleteWorkingDates(WorkingDates instance);
@@ -116,11 +116,11 @@ namespace Repository.DbConnection
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<AddressTables> AddressTables
+		public System.Data.Linq.Table<AddressTable> AddressTable
 		{
 			get
 			{
-				return this.GetTable<AddressTables>();
+				return this.GetTable<AddressTable>();
 			}
 		}
 		
@@ -244,6 +244,14 @@ namespace Repository.DbConnection
 			}
 		}
 		
+		public System.Data.Linq.Table<ShoppingCard> ShoppingCard
+		{
+			get
+			{
+				return this.GetTable<ShoppingCard>();
+			}
+		}
+		
 		public System.Data.Linq.Table<SubCategory> SubCategory
 		{
 			get
@@ -262,7 +270,7 @@ namespace Repository.DbConnection
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AddressTable")]
-	public partial class AddressTables : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class AddressTable : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -291,7 +299,7 @@ namespace Repository.DbConnection
     partial void OnRegionChanged();
     #endregion
 		
-		public AddressTables()
+		public AddressTable()
 		{
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
 			OnCreated();
@@ -413,13 +421,13 @@ namespace Repository.DbConnection
 		private void attach_Users(Users entity)
 		{
 			this.SendPropertyChanging();
-			entity.AddressTables = this;
+			entity.AddressTable = this;
 		}
 		
 		private void detach_Users(Users entity)
 		{
 			this.SendPropertyChanging();
-			entity.AddressTables = null;
+			entity.AddressTable = null;
 		}
 	}
 	
@@ -3550,6 +3558,159 @@ namespace Repository.DbConnection
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ShoppingCard")]
+	public partial class ShoppingCard
+	{
+		
+		private string _ID_User;
+		
+		private decimal _RatePerHour;
+		
+		private string _Description;
+		
+		private int _Subcategory_ID;
+		
+		private string _Title;
+		
+		private string _NameOfDay;
+		
+		private System.TimeSpan _HourFrom;
+		
+		private System.TimeSpan _HourTo;
+		
+		public ShoppingCard()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					this._ID_User = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RatePerHour", DbType="Money NOT NULL")]
+		public decimal RatePerHour
+		{
+			get
+			{
+				return this._RatePerHour;
+			}
+			set
+			{
+				if ((this._RatePerHour != value))
+				{
+					this._RatePerHour = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subcategory_ID", DbType="Int NOT NULL")]
+		public int Subcategory_ID
+		{
+			get
+			{
+				return this._Subcategory_ID;
+			}
+			set
+			{
+				if ((this._Subcategory_ID != value))
+				{
+					this._Subcategory_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this._Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameOfDay", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string NameOfDay
+		{
+			get
+			{
+				return this._NameOfDay;
+			}
+			set
+			{
+				if ((this._NameOfDay != value))
+				{
+					this._NameOfDay = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourFrom", DbType="Time NOT NULL")]
+		public System.TimeSpan HourFrom
+		{
+			get
+			{
+				return this._HourFrom;
+			}
+			set
+			{
+				if ((this._HourFrom != value))
+				{
+					this._HourFrom = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourTo", DbType="Time NOT NULL")]
+		public System.TimeSpan HourTo
+		{
+			get
+			{
+				return this._HourTo;
+			}
+			set
+			{
+				if ((this._HourTo != value))
+				{
+					this._HourTo = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SubCategory")]
 	public partial class SubCategory : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3757,7 +3918,7 @@ namespace Repository.DbConnection
 		
 		private EntityRef<AspNetUsers> _AspNetUsers;
 		
-		private EntityRef<AddressTables> _AddressTables;
+		private EntityRef<AddressTable> _AddressTable;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3787,7 +3948,7 @@ namespace Repository.DbConnection
 		{
 			this._Gender = default(EntityRef<Gender>);
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
-			this._AddressTables = default(EntityRef<AddressTables>);
+			this._AddressTable = default(EntityRef<AddressTable>);
 			OnCreated();
 		}
 		
@@ -3946,7 +4107,7 @@ namespace Repository.DbConnection
 			{
 				if ((this._City_ID != value))
 				{
-					if (this._AddressTables.HasLoadedOrAssignedValue)
+					if (this._AddressTable.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -4051,26 +4212,26 @@ namespace Repository.DbConnection
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTables", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true)]
-		public AddressTables AddressTables
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AddressTable_Users", Storage="_AddressTable", ThisKey="City_ID", OtherKey="ID", IsForeignKey=true)]
+		public AddressTable AddressTable
 		{
 			get
 			{
-				return this._AddressTables.Entity;
+				return this._AddressTable.Entity;
 			}
 			set
 			{
-				AddressTables previousValue = this._AddressTables.Entity;
+				AddressTable previousValue = this._AddressTable.Entity;
 				if (((previousValue != value) 
-							|| (this._AddressTables.HasLoadedOrAssignedValue == false)))
+							|| (this._AddressTable.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._AddressTables.Entity = null;
+						this._AddressTable.Entity = null;
 						previousValue.Users.Remove(this);
 					}
-					this._AddressTables.Entity = value;
+					this._AddressTable.Entity = value;
 					if ((value != null))
 					{
 						value.Users.Add(this);
@@ -4080,7 +4241,7 @@ namespace Repository.DbConnection
 					{
 						this._City_ID = default(int);
 					}
-					this.SendPropertyChanged("AddressTables");
+					this.SendPropertyChanged("AddressTable");
 				}
 			}
 		}

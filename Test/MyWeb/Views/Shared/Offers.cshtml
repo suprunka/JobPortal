@@ -4,7 +4,7 @@
     var counter = 0;
 }
 
-<tr>
+<tr class="offers">
     @foreach (ManageOffers offer in @Model)
     {
         if (counter != 0 && counter % 3 == 0)
@@ -13,7 +13,7 @@
         @:<tr>
         }
         counter++;
-                <td>
+                <td class="offersWindow">
                     <div class="item">
                         <div class="card" id="@offer.Title" style="width:auto">
                             @if (offer.Category.ToString() == "Home")
@@ -50,8 +50,8 @@
                             <div class="card-body" >
                                 <h4 class="card-title" style="word-break:break-word;">@offer.Title</h4>
                                 <p class="card-text" style="word-break:break-word;">@offer.Description</p>
-                                <h4 class="price">@decimal.Round(offer.RatePerHour, 2, MidpointRounding.AwayFromZero) DKK/ hour</h4>
-                                @Html.ActionLink("See Details", "ViewDetails", "ServiceOffer", new { id = offer.Id }, new { @class = "btn btn-primary" })
+                                <h4  class="price">@decimal.Round(offer.RatePerHour, 2, MidpointRounding.AwayFromZero) DKK/ hour</h4>
+                                @Html.ActionLink("See Details", "ViewDetails", "ServiceOffer", new { id = offer.Id }, new { @class = "buttons",@id="details-btn" })
                             </div>
                         </div>
                     </div>

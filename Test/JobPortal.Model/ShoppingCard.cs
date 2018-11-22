@@ -78,7 +78,7 @@ namespace JobPortal.Model
             decimal totalPrice = 0;
             foreach(var i in listOfItems)
             {
-                totalPrice += i.RatePerHour * (i.HoursFrom - i.HoursTo).Hours;
+                totalPrice += i.RatePerHour * (i.HoursTo - i.HoursFrom).Hours;
             }
             return totalPrice;
         }

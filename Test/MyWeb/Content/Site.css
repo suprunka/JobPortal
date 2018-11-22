@@ -365,18 +365,23 @@ col.col-md-4 {
     border-radius: 4px;
     padding: 8px;
     min-height: 400px;
-    max-width: 350px;
+    max-width: 300px;
 }
 .item:hover {
     background-color: #e6e6e6;
     color: #333;
 }
-.card-title .price{
+.card-body{
     text-align:center;
 }
 .card-title{
     padding-bottom:5px;
 }
-.price{
-    padding-top:10px;
+.price {
+    padding-top: 10px;
 }
+#details-btn{
+    padding-top: 10px;
+}
+
+
