@@ -48,7 +48,6 @@ namespace UnitTestProject1
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
-  
 
             };
             return userStub;

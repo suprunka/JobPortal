@@ -31,13 +31,14 @@ namespace ServiceLibrary.Services
             throw new NotImplementedException();
         }
 
-        public Order CreateOrder(Users u , IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices)
+        public Order CreateOrder(Users u, IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices)
         {
             Order order = null;
             try {
+               // IList<KeyValuePair<ServiceOffer, JobPortal.Model.BookedDate>> choosenServices = new List<ServiceOffer, JobPortal.Model.BookedDate>();
                OrderTable o =  _database.CreateOrder(u, choosenServices);
                 List<JobPortal.Model.Saleline> salelines = new List<JobPortal.Model.Saleline>();
-                foreach (var item in o.Salelines)
+                foreach (var item in o.Saleline)
                 {
                     salelines.Add( new JobPortal.Model.Saleline {Id=  item.ID, ServiceOfferId= item.ServiceOffer_ID });
                 }

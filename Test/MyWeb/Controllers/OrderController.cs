@@ -24,12 +24,12 @@ namespace MyWeb.Controllers
             
         }
         // GET: Order
-        public ActionResult Index(string id)
-        {
-            u = _userProxy.FindUser(id);
-            ShoppingCardView scv = new ShoppingCardView { Card = u.ShoppingCard };
-            return View(scv);
-        }
+      // public ActionResult Index(string id)
+      // {
+      //     u = _userProxy.FindUser(id);
+      //     //ShoppingCardView scv = new ShoppingCardView { Card = u.ShoppingCard };
+      //    // return View(scv);
+      // }
 
       
     }

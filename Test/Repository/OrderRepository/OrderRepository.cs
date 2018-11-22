@@ -14,7 +14,7 @@ namespace Repository.OrderRepository
     {
         private DataContext _context;
         private SqlTransaction sql = null;
-        private readonly string connection;
+        private readonly string connection = "Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_1067677;Password=Password1!";
 
 
 
@@ -167,6 +167,7 @@ namespace Repository.OrderRepository
             }
             return true;
         }*/
+
 
   
     }
