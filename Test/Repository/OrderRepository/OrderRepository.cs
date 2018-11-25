@@ -30,6 +30,25 @@ namespace Repository.OrderRepository
 
         }
 
+        public List<ShoppingCart> GetShoppingCart(string id)
+        {
+            List<ShoppingCart> orderedServices = new List<ShoppingCart>();
+            var shoppingCardInDB = _context.GetTable<ShoppingCart>().Where(x => x.User_ID == id);
+            foreach (var i in shoppingCardInDB)
+            {
+                var so = _context.GetTable<ServiceOffer>().Single(x => x.ID == i.Service_ID);
+                orderedServices.Add(new ShoppingCart
+                {
+                    Service_ID = i.Service_ID,
+                    HourFrom = i.HourFrom,
+                    HourTo = i.HourTo,
+                    Date = i.Date,
+                });
+            }
+
+            return orderedServices;
+        }
+
         public OrderTable CreateOrder(Users u)
         {
             OrderTable result = null;
@@ -37,7 +56,7 @@ namespace Repository.OrderRepository
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
-                ShoppingCart cart =null;
+                ShoppingCart cart = null;
                 try
                 {
                     ShoppingCart[] choosenServices = _context.GetTable<ShoppingCart>().Where(x => x.User_ID == u.Logging_ID).Select(x => x).ToArray();
@@ -71,7 +90,7 @@ namespace Repository.OrderRepository
                 catch (Exception e)
                 {
                     sql.Rollback();
-                   
+
                     throw e;
                 }
                 finally
@@ -89,7 +108,7 @@ namespace Repository.OrderRepository
             {
                 objConn.Open();
                 sql = objConn.BeginTransaction();
-                if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == cart.Service_ID).Any(t=> t.NameOfDay == cart.Date.DayOfWeek.ToString()) &&  o.OrderStatus_ID != 2)
+                if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == cart.Service_ID).Any(t => t.NameOfDay == cart.Date.DayOfWeek.ToString()) && o.OrderStatus_ID != 2)
                 {
                     try
                     {
@@ -100,7 +119,7 @@ namespace Repository.OrderRepository
                         //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
                         if (timeIsBooked.Length > 0)
                         {
-                            throw new BookedTimeException(cart.Service_ID,cart.User_ID);
+                            throw new BookedTimeException(cart.Service_ID, cart.User_ID);
                         }
                         BookedDate dates = new BookedDate
                         {
@@ -148,14 +167,16 @@ namespace Repository.OrderRepository
             }
             return result;
         }
-       
+
         public OrderTable PayForOrder(OrderTable o)
         {
             var orderToFinish = _context.GetTable<OrderTable>().Single(x => x.ID == o.ID);
             orderToFinish.OrderStatus_ID = 2;
             _context.SubmitChanges();
             return orderToFinish;
-        }       
+        }
+
+
         public bool AddToCart(ShoppingCart cart)
         {
             bool result = false;
@@ -187,9 +208,38 @@ namespace Repository.OrderRepository
                     objConn.Close();
                 }
             }
-            return result; 
+            return result;
         }
+
+
+        public bool DeleteFromCart(ShoppingCart cart)
+        {
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    var found = _context.GetTable<ShoppingCart>().Single(x => x.User_ID == cart.User_ID && x.HourTo == cart.HourTo && x.HourFrom == cart.HourFrom && x.Service_ID == cart.Service_ID && x.Date == cart.Date);
+                    _context.GetTable<ShoppingCart>().DeleteOnSubmit(found);
+                    _context.SubmitChanges();
+                }
+                catch
+                {
+                    throw new InvalidOperationException();
+                }
+                finally
+                {
+                    objConn.Close();
+                }
+            }
+            return result;
         }
+    }
+}
+
+
+
 /*
         public bool HoursAvailable(ServiceOffer s, DateTime date, TimeSpan from, TimeSpan to)
         {
@@ -214,10 +264,3 @@ namespace Repository.OrderRepository
             }
             return true;
         }*/
-
-
-  
-    }
-    
-
-

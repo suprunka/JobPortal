@@ -17,6 +17,7 @@ namespace MyWeb.Controllers
         private User u;
         private OfferReference.IOfferService _offerProxy;
         private UserServiceReference.IUserService _userProxy;
+        
         private ShoppingCard shoppingCard;
         private bool hasShoppingCard;
 
@@ -33,11 +34,9 @@ namespace MyWeb.Controllers
         {
             if (shoppingCard == null)
             {
-                u = _userProxy.FindUser(id);
-                shoppingCard = new ShoppingCard(u);
-                shoppingCard.AddToCard(new OrderedOffer { Title = "siemka", WeekDay = DayOfWeek.Friday, RatePerHour = 30, HoursFrom = new TimeSpan(17, 0, 0), HoursTo = new TimeSpan(19, 0, 0), Description = "Elo" });
-                shoppingCard.AddToCard(new OrderedOffer { Title = "ema", WeekDay = DayOfWeek.Monday, RatePerHour = 300, HoursFrom = new TimeSpan(12, 0, 0), HoursTo = new TimeSpan(22, 0, 0), Description = "Elo" });
-                shoppingCard.AddToCard(new OrderedOffer { Title = "Dzik", WeekDay = DayOfWeek.Wednesday, RatePerHour = 910, HoursFrom = new TimeSpan(17, 0, 0), HoursTo = new TimeSpan(19, 0, 0), Description = "Elo" });
+                //var shoppingcard =  _orderProxy.GetShoppingCard(id);
+                //ShoppingCardView scv = new ShoppingCardView{Card = shoppingCard};
+                //return View(scv);
                 //ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
 
                 return View();
@@ -48,6 +47,30 @@ namespace MyWeb.Controllers
             }
         }
 
+        
+
+
+        public ActionResult AddToCard(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
+        {
+            if(userID != null && serviceID < 0 && (to - from).Hours > 0) 
+            {
+                //var result = _orderService.AddToCard(userID, serviceID, from, to, date)
+                //if(result){
+                return View("Index");
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public ActionResult DeleteFromCard(string idU, int id, DateTime date, TimeSpan from, TimeSpan to)
+        {
+            //var resut = _orderService.DeleteFromCard(idU, id, date, from, to);
+            //if(result{
+            return View("Index");
+        }
 
 
 

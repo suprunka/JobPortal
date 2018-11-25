@@ -31,6 +31,13 @@ namespace JobPortal.Model
         public virtual TimeSpan HoursTo { get; set; }
         public virtual DateTime Day { get; set; }
     }
+
+    [DataContract]
+    public enum AvailableHours
+    {
+     
+    }
+
     [DataContract]
     public class Saleline
     {

@@ -359,12 +359,6 @@ namespace ServiceLibrary
             return true;
         }
 
-
-        /* public JobPortalEntities GetLoginEntity()
-{
-    return JobPortalEntities.Create();
-}*/
-
-
+       
     }
 }

@@ -18,6 +18,11 @@ namespace JobPortal.Model
 
         }
 
+        public ShoppingCard()
+        {
+
+        }
+
         public User Author
         {
             get
