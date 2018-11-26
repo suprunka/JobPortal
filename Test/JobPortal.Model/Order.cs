@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.Model
 {
+    [Serializable]
     [DataContract]
     public class Order
     {
@@ -23,7 +24,7 @@ namespace JobPortal.Model
 
 
     }
- 
+    [Serializable]
     [DataContract]
     public class BookedDate
     {
@@ -31,6 +32,7 @@ namespace JobPortal.Model
         public virtual TimeSpan HoursTo { get; set; }
         public virtual DateTime Day { get; set; }
     }
+    [Serializable]
     [DataContract]
     public class Saleline
     {

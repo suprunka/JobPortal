@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.Model
 {
+    [Serializable]
     public class BookedTimeException : Exception
     {
         public int OfferId { get; set; }

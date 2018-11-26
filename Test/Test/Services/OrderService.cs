@@ -20,6 +20,10 @@ namespace ServiceLibrary.Services
             _database = database;
         }
 
+        public OrderService()
+        {
+        }
+
 
 
         public bool CancelOrder(Order o)

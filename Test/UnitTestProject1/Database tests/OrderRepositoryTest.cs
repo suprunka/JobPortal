@@ -12,7 +12,7 @@ namespace UnitTestProject1.Database_tests
         {
             var userStub = new Repository.DbConnection.Users
             {
-                AddressTables = new Repository.DbConnection.AddressTables
+                AddressTable = new Repository.DbConnection.AddressTable
                 {
                     Postcode = "9000",
                     City = "Aalborg",
