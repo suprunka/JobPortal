@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OrderService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_policy">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SymmetricBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -100,7 +100,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_CreateOrder_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_CreateUser_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -119,7 +119,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_CreateOrder_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_CreateUser_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -138,7 +138,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_CreateOrder_BookedTimeExceptionFault_Fault">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_FindUser_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -157,7 +157,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_CancelOrder_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_FindUser_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -176,7 +176,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_CancelOrder_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_FindUserByID_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -195,7 +195,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_FindUserByID_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -214,7 +214,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_DeleteUser_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -233,7 +233,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_PayForOrder_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_DeleteUser_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -252,7 +252,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_PayForOrder_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUser_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -271,7 +271,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUser_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -290,7 +290,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_GetAll_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -309,7 +309,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_AddToCart_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_GetAll_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -328,7 +328,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_AddToCart_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_ListByGender_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -347,7 +347,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_DeleteFromCart_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_ListByGender_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -366,7 +366,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_DeleteFromCart_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_ListByRegion_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -385,7 +385,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetHoursFrom_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_ListByRegion_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -404,7 +404,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetHoursFrom_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUserEmail_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -423,7 +423,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetHoursTo_Input_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_EditUserEmail_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -442,7 +442,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetHoursTo_output_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_Login_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -461,7 +461,64 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceTcpEndpoint_policy">
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_Login_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_AddDescription_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceHttpEndpoint_AddDescription_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="UserServiceTcpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -493,233 +550,253 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Repository.DbConnection" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IOrderService_CreateOrder_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrder" />
+  <wsdl:message name="IUserService_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_CreateOrder_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
+  <wsdl:message name="IUserService_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_CreateOrder_BookedTimeExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/JobPortal.Model" name="detail" element="q1:BookedTimeException" />
+  <wsdl:message name="IUserService_FindUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindUser" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_CancelOrder_InputMessage">
-    <wsdl:part name="parameters" element="tns:CancelOrder" />
+  <wsdl:message name="IUserService_FindUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_CancelOrder_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CancelOrderResponse" />
+  <wsdl:message name="IUserService_FindUserByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserByID" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCard_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCard" />
+  <wsdl:message name="IUserService_FindUserByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserByIDResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCard_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCardResponse" />
+  <wsdl:message name="IUserService_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_PayForOrder_InputMessage">
-    <wsdl:part name="parameters" element="tns:PayForOrder" />
+  <wsdl:message name="IUserService_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_PayForOrder_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PayForOrderResponse" />
+  <wsdl:message name="IUserService_EditUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUser" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCard_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCard" />
+  <wsdl:message name="IUserService_EditUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCard_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCardResponse" />
+  <wsdl:message name="IUserService_GetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAll" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_AddToCart_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddToCart" />
+  <wsdl:message name="IUserService_GetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_AddToCart_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddToCartResponse" />
+  <wsdl:message name="IUserService_ListByGender_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListByGender" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_DeleteFromCart_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFromCart" />
+  <wsdl:message name="IUserService_ListByGender_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByGenderResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_DeleteFromCart_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFromCartResponse" />
+  <wsdl:message name="IUserService_ListByRegion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListByRegion" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetHoursFrom_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetHoursFrom" />
+  <wsdl:message name="IUserService_ListByRegion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByRegionResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetHoursFrom_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetHoursFromResponse" />
+  <wsdl:message name="IUserService_EditUserEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserEmail" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetHoursTo_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetHoursTo" />
+  <wsdl:message name="IUserService_EditUserEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserEmailResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetHoursTo_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetHoursToResponse" />
+  <wsdl:message name="IUserService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
   </wsdl:message>
-  <wsdl:portType name="IOrderService">
-    <wsdl:operation name="CreateOrder">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrder" message="tns:IOrderService_CreateOrder_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderResponse" message="tns:IOrderService_CreateOrder_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IOrderService/CreateOrderBookedTimeExceptionFault" name="BookedTimeExceptionFault" message="tns:IOrderService_CreateOrder_BookedTimeExceptionFault_FaultMessage" />
+  <wsdl:message name="IUserService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDescription" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUserService">
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateUser" message="tns:IUserService_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CreateUserResponse" message="tns:IUserService_CreateUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CancelOrder">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CancelOrder" message="tns:IOrderService_CancelOrder_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CancelOrderResponse" message="tns:IOrderService_CancelOrder_OutputMessage" />
+    <wsdl:operation name="FindUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/FindUser" message="tns:IUserService_FindUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/FindUserResponse" message="tns:IUserService_FindUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCard" message="tns:IOrderService_GetShoppingCard_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardResponse" message="tns:IOrderService_GetShoppingCard_OutputMessage" />
+    <wsdl:operation name="FindUserByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/FindUserByID" message="tns:IUserService_FindUserByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/FindUserByIDResponse" message="tns:IUserService_FindUserByID_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PayForOrder">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/PayForOrder" message="tns:IOrderService_PayForOrder_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/PayForOrderResponse" message="tns:IOrderService_PayForOrder_OutputMessage" />
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/DeleteUser" message="tns:IUserService_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/DeleteUserResponse" message="tns:IUserService_DeleteUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCard" message="tns:IOrderService_GetShoppingCard_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardResponse" message="tns:IOrderService_GetShoppingCard_OutputMessage" />
+    <wsdl:operation name="EditUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/EditUser" message="tns:IUserService_EditUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/EditUserResponse" message="tns:IUserService_EditUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AddToCart">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/AddToCart" message="tns:IOrderService_AddToCart_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/AddToCartResponse" message="tns:IOrderService_AddToCart_OutputMessage" />
+    <wsdl:operation name="GetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAll" message="tns:IUserService_GetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllResponse" message="tns:IUserService_GetAll_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteFromCart">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteFromCart" message="tns:IOrderService_DeleteFromCart_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/DeleteFromCartResponse" message="tns:IOrderService_DeleteFromCart_OutputMessage" />
+    <wsdl:operation name="ListByGender">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ListByGender" message="tns:IUserService_ListByGender_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ListByGenderResponse" message="tns:IUserService_ListByGender_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetHoursFrom">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetHoursFrom" message="tns:IOrderService_GetHoursFrom_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetHoursFromResponse" message="tns:IOrderService_GetHoursFrom_OutputMessage" />
+    <wsdl:operation name="ListByRegion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ListByRegion" message="tns:IUserService_ListByRegion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ListByRegionResponse" message="tns:IUserService_ListByRegion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetHoursTo">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetHoursTo" message="tns:IOrderService_GetHoursTo_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetHoursToResponse" message="tns:IOrderService_GetHoursTo_OutputMessage" />
+    <wsdl:operation name="EditUserEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/EditUserEmail" message="tns:IUserService_EditUserEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/EditUserEmailResponse" message="tns:IUserService_EditUserEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginResponse" message="tns:IUserService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddDescription" message="tns:IUserService_AddDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddDescriptionResponse" message="tns:IUserService_AddDescription_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="OrderServiceHttpEndpoint" type="tns:IOrderService">
-    <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_policy" />
+  <wsdl:binding name="UserServiceHttpEndpoint" type="tns:IUserService">
+    <wsp:PolicyReference URI="#UserServiceHttpEndpoint_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="CreateOrder">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/CreateOrder" style="document" />
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/CreateUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_CreateOrder_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_CreateOrder_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="BookedTimeExceptionFault">
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_CreateOrder_BookedTimeExceptionFault_Fault" />
-        <soap12:fault use="literal" name="BookedTimeExceptionFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="CancelOrder">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/CancelOrder" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_CancelOrder_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_CancelOrder_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_CreateUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+    <wsdl:operation name="FindUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/FindUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PayForOrder">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/PayForOrder" style="document" />
+    <wsdl:operation name="FindUserByID">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/FindUserByID" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_PayForOrder_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUserByID_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_PayForOrder_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_FindUserByID_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/DeleteUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_DeleteUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddToCart">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/AddToCart" style="document" />
+    <wsdl:operation name="EditUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditUser" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_AddToCart_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUser_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_AddToCart_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteFromCart">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/DeleteFromCart" style="document" />
+    <wsdl:operation name="GetAll">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAll" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_DeleteFromCart_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetAll_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_DeleteFromCart_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_GetAll_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetHoursFrom">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetHoursFrom" style="document" />
+    <wsdl:operation name="ListByGender">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/ListByGender" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetHoursFrom_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByGender_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetHoursFrom_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByGender_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetHoursTo">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetHoursTo" style="document" />
+    <wsdl:operation name="ListByRegion">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/ListByRegion" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetHoursTo_Input_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByRegion_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetHoursTo_output_policy" />
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_ListByRegion_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUserEmail">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditUserEmail" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUserEmail_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_EditUserEmail_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/Login" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_Login_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_Login_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDescription">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/AddDescription" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_AddDescription_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#UserServiceHttpEndpoint_AddDescription_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="OrderServiceTcpEndpoint" type="tns:IOrderService">
-    <wsp:PolicyReference URI="#OrderServiceTcpEndpoint_policy" />
+  <wsdl:binding name="UserServiceTcpEndpoint" type="tns:IUserService">
+    <wsp:PolicyReference URI="#UserServiceTcpEndpoint_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="CreateOrder">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/CreateOrder" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="BookedTimeExceptionFault">
-        <soap12:fault use="literal" name="BookedTimeExceptionFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="CancelOrder">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/CancelOrder" style="document" />
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/CreateUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -727,8 +804,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+    <wsdl:operation name="FindUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/FindUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -736,8 +813,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PayForOrder">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/PayForOrder" style="document" />
+    <wsdl:operation name="FindUserByID">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/FindUserByID" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -745,8 +822,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/DeleteUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -754,8 +831,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddToCart">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/AddToCart" style="document" />
+    <wsdl:operation name="EditUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -763,8 +840,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteFromCart">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/DeleteFromCart" style="document" />
+    <wsdl:operation name="GetAll">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAll" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -772,8 +849,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetHoursFrom">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetHoursFrom" style="document" />
+    <wsdl:operation name="ListByGender">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/ListByGender" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -781,8 +858,35 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetHoursTo">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetHoursTo" style="document" />
+    <wsdl:operation name="ListByRegion">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/ListByRegion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUserEmail">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/EditUserEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDescription">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/AddDescription" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -791,22 +895,22 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="OrderService">
-    <wsdl:port name="OrderServiceHttpEndpoint" binding="tns:OrderServiceHttpEndpoint">
-      <soap12:address location="http://localhost:8080/Order" />
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserServiceHttpEndpoint" binding="tns:UserServiceHttpEndpoint">
+      <soap12:address location="http://localhost:8080/User/" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:8080/Order</wsa10:Address>
+        <wsa10:Address>http://localhost:8080/User/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-LNM21H7\locac</Upn>
+          <Upn>JAKUB\jakub</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="OrderServiceTcpEndpoint" binding="tns:OrderServiceTcpEndpoint">
-      <soap12:address location="net.tcp://localhost:8090/Order" />
+    <wsdl:port name="UserServiceTcpEndpoint" binding="tns:UserServiceTcpEndpoint">
+      <soap12:address location="net.tcp://localhost:8090/User/" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Order</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8090/User/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-LNM21H7\locac</Upn>
+          <Upn>JAKUB\jakub</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

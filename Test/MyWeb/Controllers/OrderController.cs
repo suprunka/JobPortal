@@ -16,19 +16,17 @@ namespace MyWeb.Controllers
     {
         private User u;
         private OfferReference.IOfferService _offerProxy;
-        private UserServiceReference.IUserService _userProxy;
+        private UserReference1.IUserService _userProxy;
         private OrderReference.IOrderService _orderProxy;
-
         private ShoppingCard shoppingCard;
-        private bool hasShoppingCard;
 
         public OrderController()
         {
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
-            _userProxy = new UserServiceReference.UserServiceClient("UserServiceHttpEndpoint");
+            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
-            
-            
+
+
         }
         // GET: Order
         public ActionResult Index(string id)
@@ -36,11 +34,8 @@ namespace MyWeb.Controllers
             if (shoppingCard == null)
             {
                 var shoppingcard = _orderProxy.GetShoppingCard(id);
-                ShoppingCardView scv = new ShoppingCardView{Card = shoppingcard };
+                ShoppingCardView scv = new ShoppingCardView { Card = shoppingcard };
                 return View(scv);
-               // ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
-               //
-               // return View();
             }
             else
             {
@@ -48,17 +43,17 @@ namespace MyWeb.Controllers
             }
         }
 
-        
+
 
 
         public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
-            if (userID != null && serviceID > 0 )
+            if (userID != null && serviceID > 0)
             {
                 var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
                 if (result)
                 {
-                    return RedirectToAction("Index","Order", new {id=userID.Trim()});
+                    return RedirectToAction("Index", "Order", new { id = userID.Trim() });
                 }
                 return null;
             }
@@ -69,7 +64,7 @@ namespace MyWeb.Controllers
         }
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
-            var result = _orderProxy.DeleteFromCart(idU, (int)id,(DateTime) date, (TimeSpan)from, (TimeSpan)to);
+            var result = _orderProxy.DeleteFromCart(idU, (int)id, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
             if (result)
             {
                 return RedirectToAction("Index", "Order", new { id = idU.Trim() });
@@ -79,7 +74,8 @@ namespace MyWeb.Controllers
 
 
 
-            public ActionResult PaymentWithPaypal(string Cancel = null)
+
+        public ActionResult PaymentWithPaypal(string Cancel = null)
         {
             //getting the apiContext  
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
@@ -149,7 +145,7 @@ namespace MyWeb.Controllers
             };
             return this.payment.Execute(apiContext, paymentExecution);
         }
-         
+
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
             //create itemlist and add item objects to it  

@@ -218,11 +218,6 @@
     <Compile Include="App_Start\PaypalConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Connected Services\ASPSMSX2\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\OfferReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -233,7 +228,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\UserServiceReference\Reference.cs">
+    <Compile Include="Connected Services\UserReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -259,10 +254,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ASPSMSX2\aspsmsx2.wsdl" />
-    <Content Include="Connected Services\ASPSMSX2\MyWeb.ASPSMSX2.vouchers.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Connected Services\OfferReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -285,37 +276,31 @@
     <None Include="Connected Services\OrderReference\Repository.DbConnection.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\service.wsdl" />
     <None Include="Connected Services\OrderReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OrderReference\service1.wsdl" />
     <None Include="Connected Services\OrderReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\OrderReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\UserServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\OfferReference\configuration91.svcinfo" />
     <None Include="Connected Services\OfferReference\configuration.svcinfo" />
     <None Include="Connected Services\OfferReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\UserServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\ASPSMSX2\configuration91.svcinfo" />
-    <None Include="Connected Services\ASPSMSX2\configuration.svcinfo" />
-    <None Include="Connected Services\ASPSMSX2\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Connected Services\OrderReference\configuration91.svcinfo" />
     <None Include="Connected Services\OrderReference\configuration.svcinfo" />
     <None Include="Connected Services\OrderReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UserReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\UserReference1\configuration.svcinfo" />
+    <None Include="Connected Services\UserReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -331,21 +316,24 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\UserServiceReference\JobPortal.Model.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserServiceReference\service.wsdl" />
-    <None Include="Connected Services\UserServiceReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserServiceReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.User.datasource" />
     <Content Include="Properties\DataSources\Repository.DbConnection.Entity.dmai0917_1067677Entities1.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.Order.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.ShoppingCard.datasource" />
+    <None Include="Connected Services\UserReference1\JobPortal.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\service.wsdl" />
+    <None Include="Connected Services\UserReference1\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -421,10 +409,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ASPSMSX2\" />
     <WCFMetadataStorage Include="Connected Services\OfferReference\" />
     <WCFMetadataStorage Include="Connected Services\OrderReference\" />
-    <WCFMetadataStorage Include="Connected Services\UserServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\UserReference1\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">

@@ -262,8 +262,10 @@ namespace Repository.OrderRepository
                 try
                 {
                     var found = _context.GetTable<ShoppingCart>().Single(x => x.User_ID == cart.User_ID && x.HourTo == cart.HourTo && x.HourFrom == cart.HourFrom && x.Service_ID == cart.Service_ID && x.Date == cart.Date);
+                   
                     _context.GetTable<ShoppingCart>().DeleteOnSubmit(found);
                     _context.SubmitChanges();
+                    result = true;
                 }
                 catch
                 {

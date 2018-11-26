@@ -17,7 +17,7 @@ using WebJobPortal;
 using WebJobPortal.Controllers;
 using AutoMapper;
 using MyWeb.Models;
-using MyWeb.UserReference;
+using MyWeb.UserReference1;
 
 namespace MyWeb.Controllers
 {
@@ -27,9 +27,8 @@ namespace MyWeb.Controllers
         private ApplicationUserManager _userManager;
         private const int lenght = 8;
         private const int n = 100000000;
-        private readonly IUserService _proxy;//= new UserServiceClient("UserServiceHttpEndpoint");
-        private readonly IOfferService _offerProxy;// = new OfferServiceClient("offerService");
-       // private IEnumerable<ManageOffers> _serviceOffers = null;
+        private readonly IUserService _proxy;
+        private readonly IOfferService _offerProxy;
 
         public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -65,7 +64,7 @@ namespace MyWeb.Controllers
         }
         public UserController()
         {
-            this._proxy = new UserServiceClient("UserServiceHttpEndpoint");
+            this._proxy = new UserServiceClient("UserServiceHttpEndpoint1");
             this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
         }
 
@@ -162,7 +161,6 @@ namespace MyWeb.Controllers
                 var isEmailChanged = await _proxy.EditUserEmailAsync(UserMapping.Map_ChangeEmailViewModel_To_User(model));
                 if (isEmailChanged)
                 {
-                    TempData["msg"] = "<script>alert('Email changed');</script>";
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
             }

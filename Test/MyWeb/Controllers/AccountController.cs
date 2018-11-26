@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebJobPortal.Models;
 using JobPortal.Model;
-using MyWeb.UserReference;
+using MyWeb.UserReference1;
 
 namespace WebJobPortal.Controllers
 {
@@ -19,11 +19,11 @@ namespace WebJobPortal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint");
+        private IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint1");
 
         public AccountController()
         {
-            _proxy = new UserServiceClient("UserServiceHttpEndpoint");
+            _proxy = new UserServiceClient("UserServiceHttpEndpoint1");
 
         }
         public AccountController(IUserService proxy)

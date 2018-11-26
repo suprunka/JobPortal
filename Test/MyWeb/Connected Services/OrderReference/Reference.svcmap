@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:8080/Order/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="024e8710-119d-432c-85a2-74dd34b9662f" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="73431b7f-5e49-4adb-8c02-dcc0b9942af4" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="18462bc3-9995-49d2-b53a-4cd64a51a186" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="9ee5f2e0-fb44-4636-ba0a-67949f85b906" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="Repository.DbConnection.xsd" MetadataType="Schema" ID="e70f6bed-993c-4d0c-8359-f0e4e0da2a65" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />

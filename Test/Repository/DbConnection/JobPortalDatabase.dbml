@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dmai0917_1067677" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_1067677" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="dmai0917_1067677ConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AddressTable" Member="AddressTables">
     <Type Name="AddressTable">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -72,7 +72,7 @@
       <Association Name="AspNetUsers_Review" Member="Reviews" ThisKey="Id" OtherKey="Customer_ID" Type="Review" />
       <Association Name="AspNetUsers_ServiceOffer" Member="ServiceOffers" ThisKey="Id" OtherKey="Employee_ID" Type="ServiceOffer" />
       <Association Name="AspNetUsers_Users" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
-      <Association Name="AspNetUsers_ShoppingCart" Member="ShoppingCarts" ThisKey="Id" OtherKey="User_ID" Type="ShoppingCart" />
+      <Association Name="AspNetUsers_ShoppingCart" Member="ShoppingCart" ThisKey="Id" OtherKey="User_ID" Type="ShoppingCart" />
     </Type>
   </Table>
   <Table Name="dbo.BookedDates" Member="BookedDates">
@@ -159,7 +159,7 @@
       <Association Name="ServiceOffer_WorkingDates" Member="WorkingDates" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="WorkingDates" />
       <Association Name="ServiceOffer_Review" Member="Reviews" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Review" />
       <Association Name="ServiceOffer_Salelines" Member="Salelines" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Salelines" />
-      <Association Name="ServiceOffer_ShoppingCart" Member="ShoppingCarts" ThisKey="ID" OtherKey="Service_ID" Type="ShoppingCart" />
+      <Association Name="ServiceOffer_ShoppingCart" Member="ShoppingCart" ThisKey="ID" OtherKey="Service_ID" Type="ShoppingCart" />
       <Association Name="AspNetUsers_ServiceOffer" Member="AspNetUsers" ThisKey="Employee_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
       <Association Name="SubCategory_ServiceOffer" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
     </Type>
@@ -189,7 +189,7 @@
       <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ShoppingCart" Member="ShoppingCarts">
+  <Table Name="dbo.ShoppingCart" Member="ShoppingCart">
     <Type Name="ShoppingCart">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="User_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />

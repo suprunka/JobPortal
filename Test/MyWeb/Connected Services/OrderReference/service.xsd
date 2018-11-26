@@ -60,20 +60,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetShoppingCard">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetShoppingCardResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetShoppingCardResult" nillable="true" type="q5:ShoppingCard" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="AddToCart">
     <xs:complexType>
       <xs:sequence>

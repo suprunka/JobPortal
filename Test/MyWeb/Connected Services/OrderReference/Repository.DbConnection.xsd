@@ -52,6 +52,7 @@
       <xs:element minOccurs="0" name="Reviews" nillable="true" type="tns:ArrayOfReview" />
       <xs:element minOccurs="0" name="SecurityStamp" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ServiceOffers" nillable="true" type="tns:ArrayOfServiceOffer" />
+      <xs:element minOccurs="0" name="ShoppingCart" nillable="true" type="tns:ArrayOfShoppingCart" />
       <xs:element minOccurs="0" name="TwoFactorEnabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUsers" />
@@ -177,6 +178,7 @@
       <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
       <xs:element minOccurs="0" name="Reviews" nillable="true" type="tns:ArrayOfReview" />
       <xs:element minOccurs="0" name="Salelines" nillable="true" type="tns:ArrayOfSalelines" />
+      <xs:element minOccurs="0" name="ShoppingCart" nillable="true" type="tns:ArrayOfShoppingCart" />
       <xs:element minOccurs="0" name="SubCategory" nillable="true" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Subcategory_ID" type="xs:int" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
@@ -211,6 +213,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Rate" nillable="true" type="tns:Rate" />
+  <xs:complexType name="ArrayOfShoppingCart">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ShoppingCart" nillable="true" type="tns:ShoppingCart" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShoppingCart" nillable="true" type="tns:ArrayOfShoppingCart" />
+  <xs:complexType name="ShoppingCart">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AspNetUsers" nillable="true" type="tns:AspNetUsers" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HourFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HourTo" type="ser:duration" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceOffer" nillable="true" type="tns:ServiceOffer" />
+      <xs:element minOccurs="0" name="Service_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShoppingCart" nillable="true" type="tns:ShoppingCart" />
   <xs:complexType name="SubCategory">
     <xs:sequence>
       <xs:element minOccurs="0" name="Category" nillable="true" type="tns:Category" />

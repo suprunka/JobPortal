@@ -22,8 +22,7 @@ namespace ServiceLibrary
         [OperationContract]
         bool PayForOrder(Order o);
 
-        [OperationContract]
-        ShoppingCard GetShoppingCard(string id);
+       
 
         [OperationContract]
         bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
