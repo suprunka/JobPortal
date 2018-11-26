@@ -1,6 +1,7 @@
 ﻿using JobPortal.Model;
 using Repository.DbConnection;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace ServiceLibrary
@@ -20,9 +21,20 @@ namespace ServiceLibrary
         bool PayForOrder(Order o);
 
         [OperationContract]
+        ShoppingCard GetShoppingCard(string id);
+
+        [OperationContract]
         bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
 
         [OperationContract]
         bool DeleteFromCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
+
+        [OperationContract]
+        IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
+
+        [OperationContract]
+        IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
+
+
     }
 }

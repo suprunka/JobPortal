@@ -16,5 +16,7 @@ namespace Repository.OrderRepository
         List<ShoppingCart> GetShoppingCart(string id);
         bool CancelServiceInOrder(Saleline o);
         bool CancelOrder(Order o);
+        IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
+        IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
     }
 }

@@ -8,4 +8,16 @@
     <xs:attribute ref="ser:FactoryType" />
   </xs:complexType>
   <xs:element name="Exception" nillable="true" type="tns:Exception" />
+  <xs:simpleType name="DayOfWeek">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sunday" />
+      <xs:enumeration value="Monday" />
+      <xs:enumeration value="Tuesday" />
+      <xs:enumeration value="Wednesday" />
+      <xs:enumeration value="Thursday" />
+      <xs:enumeration value="Friday" />
+      <xs:enumeration value="Saturday" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DayOfWeek" nillable="true" type="tns:DayOfWeek" />
 </xs:schema>

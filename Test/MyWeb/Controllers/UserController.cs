@@ -67,7 +67,7 @@ namespace MyWeb.Controllers
         public UserController()
         {
             this._proxy = new UserServiceClient("UserServiceHttpEndpoint");
-            this._offerProxy = new OfferServiceClient("offerService");
+            this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
         }
 
 

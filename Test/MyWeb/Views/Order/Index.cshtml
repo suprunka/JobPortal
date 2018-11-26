@@ -17,17 +17,18 @@
         @foreach (var itemInShoppingcard in Model.Card.List)
         {
 
-            <tr>
+        <tr>
+            <td> id: @itemInShoppingcard.Id </td>
 
-                <td> Title: @itemInShoppingcard.Title </td>
-                <td> Description: @itemInShoppingcard.Description </td>
-                <td> Day: @itemInShoppingcard.WeekDay </td>
-                <td> Hour from: @itemInShoppingcard.HoursFrom</td>
-                <td> Hour to @itemInShoppingcard.HoursTo </td>
-                <td> Rate per hour: @itemInShoppingcard.RatePerHour </td>
-                <td> Price: @(@itemInShoppingcard.RatePerHour * ((@itemInShoppingcard.HoursTo - @itemInShoppingcard.HoursFrom).Hours))</td>
-                <td> @Html.ActionLink("Delete", "Delete", new { id = itemInShoppingcard.Id, idU = User.Identity.GetUserId() })</td>
-            </tr>
+            <td> Title: @itemInShoppingcard.Title </td>
+            <td> Description: @itemInShoppingcard.Description </td>
+            <td> Day: @itemInShoppingcard.WeekDay </td>
+            <td> Hour from: @itemInShoppingcard.HoursFrom</td>
+            <td> Hour to @itemInShoppingcard.HoursTo </td>
+            <td> Rate per hour: @itemInShoppingcard.RatePerHour </td>
+            <td> Price: @(@itemInShoppingcard.RatePerHour * ((@itemInShoppingcard.HoursTo - @itemInShoppingcard.HoursFrom).Hours))</td>
+            <td> @(@Html.ActionLink("Delete", "DeleteFromCard", "Order", new {  idU = "jjjjj", id = @itemInShoppingcard.Id, date = @itemInShoppingcard.Date, hourfrom = @itemInShoppingcard.HoursFrom, hourto = @itemInShoppingcard.HoursTo }, null))</td>
+        </tr>
         }
         <tr id="empty-message" @if (Model.Card != null && Model.Card.List.Count > 0) { <text> class="hidden" </text> }>
             <td> The shopping card is empty </td>

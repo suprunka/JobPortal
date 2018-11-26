@@ -5,8 +5,9 @@ using System.Web;
 
 namespace MyWeb.Models
 {
-    public class UserScheduler
+    public class ServiceScheduler
     {
+        int ServiceID { get; set; }
 
     }
 }

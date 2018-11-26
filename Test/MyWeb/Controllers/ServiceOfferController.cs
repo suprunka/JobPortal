@@ -16,6 +16,7 @@ namespace MyWeb.Controllers
     {
 
         private OfferReference.IOfferService _offerProxy;
+        private OrderReference.IOrderService _orderProxy;
         private IMapper _mapper;
         private IList<WorkingHours> workingdays = new List<WorkingHours>();
 
@@ -29,7 +30,8 @@ namespace MyWeb.Controllers
             });
 
             _mapper = config.CreateMapper();
-            _offerProxy = new OfferReference.OfferServiceClient("offerService");
+            _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
+            _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
 
         }
         public ServiceOfferController(IOfferService proxy)
@@ -88,24 +90,45 @@ namespace MyWeb.Controllers
                 var repo = Enum.GetValues(typeof(SubCategory));
                 var myenum = (Category)Enum.Parse(typeof(Category), iso3.ToString(), true);
                 IEnumerable<SelectListItem> subcats = Enum.GetValues(typeof(SubCategory)).Cast<SubCategory>().Where(x => x.IsSubcategoryOf(myenum)).Cast<SubCategory>().Select(p => new SelectListItem()
-                    {
-                        Text = p.ToString(),
-                        Value = p.ToString()
-                    })
+                {
+                    Text = p.ToString(),
+                    Value = p.ToString()
+                })
                 .ToList();
-               
+
                 return Json(subcats, JsonRequestBehavior.AllowGet);
             }
             return null;
         }
-        public void AddtoArray(DayOfWeek day, int id)
+        [HttpGet]
+        public ActionResult GetHoursFrom(int serviceId, DateTime date)
         {
 
-            string hour = id + ":00";
-            string hourTo = id+1 + ":00";
-            WorkingHours working = new WorkingHours { NameOfDay = day, HourFrom = TimeSpan.Parse(hour) , HourTo = TimeSpan.Parse(hourTo) };
-            workingdays.Add(working);
-            Console.WriteLine("" + day + "  " + hour + " " + hourTo);
+
+            IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
+                {
+                    Text = x.ToString(),
+                    Value = x.ToString()
+                })
+                .ToList();
+
+                return Json(hoursFrom, JsonRequestBehavior.AllowGet);
+            
+        }
+
+        [HttpGet]
+        public ActionResult GetHoursTo(int serviceId, DateTime date,TimeSpan from)
+        {
+
+            IEnumerable<SelectListItem> hoursto = _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
+            {
+                Text = x.ToString(),
+                Value = x.ToString()
+            })
+                .ToList();
+
+            return Json(hoursto, JsonRequestBehavior.AllowGet);
+
         }
         [HttpGet]
         public async Task<ActionResult> ViewDetails(int  id)

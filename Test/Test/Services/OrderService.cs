@@ -43,6 +43,7 @@ namespace ServiceLibrary
                     RatePerHour = offerDetails.RatePerHour,
                     Title = offerDetails.Title,
                     WeekDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), item.Date.DayOfWeek.ToString()),
+                    Date = item.Date,
                 });
             }
             return items;
@@ -84,7 +85,6 @@ namespace ServiceLibrary
 
             });
         }
-
         public bool DeleteFromCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo)
         {
             return _database.DeleteFromCart(new ShoppingCart
@@ -113,5 +113,15 @@ namespace ServiceLibrary
                 return false;
             }
         }
+        public IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
+        {
+           return _database.GetHoursFrom(serviceId, date);
+        }
+        public IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from)
+        {
+            return _database.GetHoursTo(serviceId, date, from);
+
+        }
+
     }
 }

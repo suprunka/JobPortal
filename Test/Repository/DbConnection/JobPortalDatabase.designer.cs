@@ -84,6 +84,9 @@ namespace Repository.DbConnection
     partial void InsertUsers(Users instance);
     partial void UpdateUsers(Users instance);
     partial void DeleteUsers(Users instance);
+    partial void InsertShoppingCart(ShoppingCart instance);
+    partial void UpdateShoppingCart(ShoppingCart instance);
+    partial void DeleteShoppingCart(ShoppingCart instance);
     #endregion
 		
 		public JobPortalDatabaseDataContext() : 
@@ -1282,6 +1285,8 @@ namespace Repository.DbConnection
 		
 		private EntitySet<Users> _Users;
 		
+		private EntitySet<ShoppingCart> _ShoppingCarts;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1321,6 +1326,7 @@ namespace Repository.DbConnection
 			this._Reviews = new EntitySet<Review>(new Action<Review>(this.attach_Reviews), new Action<Review>(this.detach_Reviews));
 			this._ServiceOffers = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffers), new Action<ServiceOffer>(this.detach_ServiceOffers));
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
+			this._ShoppingCarts = new EntitySet<ShoppingCart>(new Action<ShoppingCart>(this.attach_ShoppingCarts), new Action<ShoppingCart>(this.detach_ShoppingCarts));
 			OnCreated();
 		}
 		
@@ -1655,6 +1661,19 @@ namespace Repository.DbConnection
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_ShoppingCart", Storage="_ShoppingCarts", ThisKey="Id", OtherKey="User_ID")]
+		public EntitySet<ShoppingCart> ShoppingCarts
+		{
+			get
+			{
+				return this._ShoppingCarts;
+			}
+			set
+			{
+				this._ShoppingCarts.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1754,6 +1773,18 @@ namespace Repository.DbConnection
 		}
 		
 		private void detach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+		
+		private void attach_ShoppingCarts(ShoppingCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_ShoppingCarts(ShoppingCart entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUsers = null;
@@ -3232,6 +3263,8 @@ namespace Repository.DbConnection
 		
 		private EntitySet<Salelines> _Salelines;
 		
+		private EntitySet<ShoppingCart> _ShoppingCarts;
+		
 		private EntityRef<AspNetUsers> _AspNetUsers;
 		
 		private EntityRef<SubCategory> _SubCategory;
@@ -3259,6 +3292,7 @@ namespace Repository.DbConnection
 			this._WorkingDates = new EntitySet<WorkingDates>(new Action<WorkingDates>(this.attach_WorkingDates), new Action<WorkingDates>(this.detach_WorkingDates));
 			this._Reviews = new EntitySet<Review>(new Action<Review>(this.attach_Reviews), new Action<Review>(this.detach_Reviews));
 			this._Salelines = new EntitySet<Salelines>(new Action<Salelines>(this.attach_Salelines), new Action<Salelines>(this.detach_Salelines));
+			this._ShoppingCarts = new EntitySet<ShoppingCart>(new Action<ShoppingCart>(this.attach_ShoppingCarts), new Action<ShoppingCart>(this.detach_ShoppingCarts));
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
 			this._SubCategory = default(EntityRef<SubCategory>);
 			OnCreated();
@@ -3431,6 +3465,19 @@ namespace Repository.DbConnection
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_ShoppingCart", Storage="_ShoppingCarts", ThisKey="ID", OtherKey="Service_ID")]
+		public EntitySet<ShoppingCart> ShoppingCarts
+		{
+			get
+			{
+				return this._ShoppingCarts;
+			}
+			set
+			{
+				this._ShoppingCarts.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_ServiceOffer", Storage="_AspNetUsers", ThisKey="Employee_ID", OtherKey="Id", IsForeignKey=true)]
 		public AspNetUsers AspNetUsers
 		{
@@ -3550,6 +3597,18 @@ namespace Repository.DbConnection
 		}
 		
 		private void detach_Salelines(Salelines entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
+		}
+		
+		private void attach_ShoppingCarts(ShoppingCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_ShoppingCarts(ShoppingCart entity)
 		{
 			this.SendPropertyChanging();
 			entity.ServiceOffer = null;
@@ -4113,8 +4172,12 @@ namespace Repository.DbConnection
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ShoppingCart")]
-	public partial class ShoppingCart
+	public partial class ShoppingCart : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
 		
 		private string _User_ID;
 		
@@ -4126,8 +4189,53 @@ namespace Repository.DbConnection
 		
 		private System.TimeSpan _HourTo;
 		
+		private EntityRef<ServiceOffer> _ServiceOffer;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUser_IDChanging(string value);
+    partial void OnUser_IDChanged();
+    partial void OnService_IDChanging(int value);
+    partial void OnService_IDChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnHourFromChanging(System.TimeSpan value);
+    partial void OnHourFromChanged();
+    partial void OnHourToChanging(System.TimeSpan value);
+    partial void OnHourToChanged();
+    #endregion
+		
 		public ShoppingCart()
 		{
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
@@ -4141,7 +4249,15 @@ namespace Repository.DbConnection
 			{
 				if ((this._User_ID != value))
 				{
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_IDChanging(value);
+					this.SendPropertyChanging();
 					this._User_ID = value;
+					this.SendPropertyChanged("User_ID");
+					this.OnUser_IDChanged();
 				}
 			}
 		}
@@ -4157,12 +4273,20 @@ namespace Repository.DbConnection
 			{
 				if ((this._Service_ID != value))
 				{
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnService_IDChanging(value);
+					this.SendPropertyChanging();
 					this._Service_ID = value;
+					this.SendPropertyChanged("Service_ID");
+					this.OnService_IDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
 		public System.DateTime Date
 		{
 			get
@@ -4173,7 +4297,11 @@ namespace Repository.DbConnection
 			{
 				if ((this._Date != value))
 				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
 					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
 				}
 			}
 		}
@@ -4189,7 +4317,11 @@ namespace Repository.DbConnection
 			{
 				if ((this._HourFrom != value))
 				{
+					this.OnHourFromChanging(value);
+					this.SendPropertyChanging();
 					this._HourFrom = value;
+					this.SendPropertyChanged("HourFrom");
+					this.OnHourFromChanged();
 				}
 			}
 		}
@@ -4205,8 +4337,100 @@ namespace Repository.DbConnection
 			{
 				if ((this._HourTo != value))
 				{
+					this.OnHourToChanging(value);
+					this.SendPropertyChanging();
 					this._HourTo = value;
+					this.SendPropertyChanged("HourTo");
+					this.OnHourToChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_ShoppingCart", Storage="_ServiceOffer", ThisKey="Service_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public ServiceOffer ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer.Entity;
+			}
+			set
+			{
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceOffer.Entity = null;
+						previousValue.ShoppingCarts.Remove(this);
+					}
+					this._ServiceOffer.Entity = value;
+					if ((value != null))
+					{
+						value.ShoppingCarts.Add(this);
+						this._Service_ID = value.ID;
+					}
+					else
+					{
+						this._Service_ID = default(int);
+					}
+					this.SendPropertyChanged("ServiceOffer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_ShoppingCart", Storage="_AspNetUsers", ThisKey="User_ID", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.ShoppingCarts.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.ShoppingCarts.Add(this);
+						this._User_ID = value.Id;
+					}
+					else
+					{
+						this._User_ID = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

@@ -22,7 +22,7 @@ namespace JobPortal.Model
 
         public ShoppingCard()
         {
-
+            listOfItems = new LinkedList<OrderedOffer>();
         }
 
         public User Author

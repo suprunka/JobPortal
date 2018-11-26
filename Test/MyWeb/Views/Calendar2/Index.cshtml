@@ -1,4 +1,5 @@
-﻿@{
+﻿@Model 
+@{
     ViewBag.Title = "Calendar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -56,15 +57,27 @@
             //Drag and drop moving of calendar events.The event calendar updates the event position after drop and
             //fires onEventMoved event.You can use this event to update the database using an AJAX call.
             dp.onEventMoved = function (args) {
-                $.post("backend/move",
-                    {
-                        id: args.e.id(),
-                        newStart: args.newStart.toString(),
-                        newEnd: args.newEnd.toString()
+                $.ajax({
+                    url: '/Controller/Action/Id',
+                    success: function (data) { alert(data); },
+                    statusCode: {
+                        404: function (content) { alert('cannot find resource'); },
+                        500: function (content) { alert('internal server error'); }
                     },
-                    function () {
-                        console.log("Moved.");
-                    });
+                    error: function (req, status, errorObj) {
+                        // handle status === "timeout"
+                        // handle other errors
+                    }
+                });
+              //  $.post("backend/move",
+              //      {
+              //          id: args.e.id(),
+              //          newStart: args.newStart.toString(),
+              //          newEnd: args.newEnd.toString()
+              //      },
+              //      function () {
+              //          console.log("Moved.");
+              //      });
             };
             //change hours of events
             dp.onEventResized = function (args) {
@@ -84,13 +97,27 @@
                 var name = prompt("New event name:", "Event");
                 dp.clearSelection();
                 if (!name) return;
-
-                $.post("backend/create",
-                    {
-                        start: args.start.toString(),
-                        end: args.end.toString(),
-                        name: name
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/Order/AddToCart',
+                    data: { id: '67', name: 'Deepak' },  
+                    success: function (data) { alert(data); },
+                    statusCode: {
+                        404: function (content) { alert('cannot find resource'); },
+                        500: function (content) { alert('internal server error'); }
                     },
+                    error: function (req, status, errorObj) {
+                        // handle status === "timeout"
+                        // handle other errors
+                    }
+                });
+               //$.post("backend/create",
+               //    {
+               //        start: args.start.toString(),
+               //        end: args.end.toString(),
+               //        name: name
+               //    },
                     //add individual events (DayPilot.Event object) using events.add() method:
                     //This method is not suitable for adding large number of events because it updates the calendar during every .events.add() call.
                     function (data) {

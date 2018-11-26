@@ -191,9 +191,10 @@
   </Table>
   <Table Name="dbo.ShoppingCart" Member="ShoppingCarts">
     <Type Name="ShoppingCart">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="User_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Service_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="HourFrom" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="HourTo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Association Name="ServiceOffer_ShoppingCart" Member="ServiceOffer" ThisKey="Service_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />

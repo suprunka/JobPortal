@@ -17,15 +17,16 @@ namespace MyWeb.Controllers
         private User u;
         private OfferReference.IOfferService _offerProxy;
         private UserServiceReference.IUserService _userProxy;
-        
+        private OrderReference.IOrderService _orderProxy;
+
         private ShoppingCard shoppingCard;
         private bool hasShoppingCard;
 
         public OrderController()
         {
-            _offerProxy = new OfferReference.OfferServiceClient("offerService");
+            _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
             _userProxy = new UserServiceReference.UserServiceClient("UserServiceHttpEndpoint");
-            
+            _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
             
             
         }
@@ -34,12 +35,12 @@ namespace MyWeb.Controllers
         {
             if (shoppingCard == null)
             {
-                //var shoppingcard =  _orderProxy.GetShoppingCard(id);
-                //ShoppingCardView scv = new ShoppingCardView{Card = shoppingCard};
-                //return View(scv);
-                //ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
-
-                return View();
+                var shoppingcard = _orderProxy.GetShoppingCard(id);
+                ShoppingCardView scv = new ShoppingCardView{Card = shoppingcard };
+                return View(scv);
+               // ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
+               //
+               // return View();
             }
             else
             {
@@ -50,32 +51,35 @@ namespace MyWeb.Controllers
         
 
 
-        public ActionResult AddToCard(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
+        public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
-            if(userID != null && serviceID < 0 && (to - from).Hours > 0) 
+            if (userID != null && serviceID > 0 )
             {
-                //var result = _orderService.AddToCard(userID, serviceID, from, to, date)
-                //if(result){
-                return View("Index");
-
+                var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                if (result)
+                {
+                    return RedirectToAction("Index","Order", new {id=userID.Trim()});
+                }
+                return null;
             }
             else
             {
                 return null;
             }
         }
-
-        public ActionResult DeleteFromCard(string idU, int id, DateTime date, TimeSpan from, TimeSpan to)
+        public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
-            //var resut = _orderService.DeleteFromCard(idU, id, date, from, to);
-            //if(result{
-            return View("Index");
+            var result = _orderProxy.DeleteFromCart(idU, (int)id,(DateTime) date, (TimeSpan)from, (TimeSpan)to);
+            if (result)
+            {
+                return RedirectToAction("Index", "Order", new { id = idU.Trim() });
+            }
+            return null;
         }
 
 
 
-
-        public ActionResult PaymentWithPaypal(string Cancel = null)
+            public ActionResult PaymentWithPaypal(string Cancel = null)
         {
             //getting the apiContext  
             APIContext apiContext = PaypalConfiguration.GetAPIContext();

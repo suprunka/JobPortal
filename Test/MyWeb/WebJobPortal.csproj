@@ -276,6 +276,9 @@
     <None Include="Connected Services\OfferReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OrderReference\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -342,6 +345,7 @@
     <Content Include="Properties\DataSources\JobPortal.Model.User.datasource" />
     <Content Include="Properties\DataSources\Repository.DbConnection.Entity.dmai0917_1067677Entities1.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.Order.datasource" />
+    <Content Include="Properties\DataSources\JobPortal.Model.ShoppingCard.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -395,7 +399,6 @@
     <Content Include="Views\ServiceOffer\ViewDetails.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Calendar2\Index.cshtml" />
-    <Content Include="Views\Shared\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

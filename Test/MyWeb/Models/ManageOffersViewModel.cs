@@ -129,5 +129,7 @@ namespace MyWeb.Models
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{10,}$", ErrorMessage = "Description has to be at least 10 characters long.")]
         public string Description { get; set; }
         public string Author { get; set; }
+        public IEnumerable<TimeSpan> hoursfrom { get; set; }
+        public IEnumerable<TimeSpan> hoursTo { get; set; }
     }
 }
