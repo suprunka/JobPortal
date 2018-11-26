@@ -56,6 +56,7 @@ namespace JobPortal.Model
         public virtual TimeSpan HoursTo { get; set; }
         [DataMember]
         public virtual DayOfWeek WeekDay { get; set; }
+        public virtual DateTime Date { get; set; }
     }
 
 

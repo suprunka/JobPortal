@@ -52,7 +52,7 @@ namespace Repository.OrderRepository
         }
 
 
-   
+
         public bool CancelServiceInOrder(JobPortal.Model.Saleline o)
         {
             var found = _context.GetTable<Salelines>().Single(x => x.ID == o.Id);
@@ -216,33 +216,37 @@ namespace Repository.OrderRepository
 
         public bool AddToCart(ShoppingCart cart)
         {
-            bool result = false;
-            using (SqlConnection objConn = new SqlConnection(connection))
-            {
-                objConn.Open();
-                try
-                {
-                    ShoppingCart myCart = new ShoppingCart
-                    {
-                        User_ID = cart.User_ID,
-                        Service_ID = cart.Service_ID,
-                        Date = cart.Date,
-                        HourFrom = cart.HourFrom,
-                        HourTo = cart.HourTo,
-                    };
-                    objConn.Open();
-                    _context.GetTable<ShoppingCart>().InsertOnSubmit(cart);
-                    _context.SubmitChanges();
-                    result = true;
 
-                }
-                catch
+            bool result = false;
+            if (HoursAvailable(cart.Service_ID, cart.Date, cart.HourFrom, cart.HourTo))
+            {
+                using (SqlConnection objConn = new SqlConnection(connection))
                 {
-                    throw new InvalidOperationException();
-                }
-                finally
-                {
-                    objConn.Close();
+                    objConn.Open();
+                    try
+                    {
+                        ShoppingCart myCart = new ShoppingCart
+                        {
+                            User_ID = cart.User_ID,
+                            Service_ID = cart.Service_ID,
+                            Date =      DateTime.Parse(cart.Date.ToShortDateString()),
+                            HourFrom = cart.HourFrom,
+                            HourTo = cart.HourTo,
+                        };
+                        _context.GetTable<ShoppingCart>().InsertOnSubmit(myCart);
+                        _context.SubmitChanges();
+                        result = true;
+
+                    }
+                    catch(Exception e)
+                    {
+                        throw e;
+                        //throw new InvalidOperationException();
+                    }
+                    finally
+                    {
+                        objConn.Close();
+                    }
                 }
             }
             return result;
@@ -272,16 +276,9 @@ namespace Repository.OrderRepository
             }
             return result;
         }
-
-       
-    }
-}
-
-
-
-/*
-        public bool HoursAvailable(ServiceOffer s, DateTime date, TimeSpan from, TimeSpan to)
+        public bool HoursAvailable(int serviceOfferId, DateTime date, TimeSpan from, TimeSpan to)
         {
+            ServiceOffer s = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == serviceOfferId);
             TimeRange timeRange = new TimeRange(from, to);
             IList<TimeRange> times = new List<TimeRange>();
             var salelines = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == s.ID);
@@ -302,4 +299,88 @@ namespace Repository.OrderRepository
                 }
             }
             return true;
-        }*/
+        }
+
+        public IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
+        {
+            IList<TimeSpan> hourTo = new List<TimeSpan>();
+            DayOfWeek day = date.DayOfWeek;
+            var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
+            var unavailable = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == serviceId).Select(x => x.BookedDate).Where(x => x.BookedDate1 == date).ToArray();
+            for (TimeSpan from = workingdates.Select(x => x.HourFrom).Min(); from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)))
+            {
+                TimeSpan time = from;
+                TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
+                bool result = true;
+                foreach (var i in unavailable)
+                {
+                    TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
+                    if (!range.Clashes(timeRange,true))
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+
+                }
+                if (result)
+                {
+                    hourTo.Add(time);
+                }
+
+            }
+            return hourTo;
+        }
+
+            public IEnumerable<TimeSpan> GetHoursTo(int serviceId ,DateTime date, TimeSpan timefrom)
+        {
+            IList<TimeSpan> hourTo = new List<TimeSpan>();
+            DayOfWeek day = date.DayOfWeek;
+            var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
+            var unavailable= _context.GetTable<Saleline>().Where(x=>x.ServiceOffer_ID == serviceId).Select(x=>x.BookedDate).Where(x=> x.BookedDate1 == date).ToArray();
+           
+            for(TimeSpan from = timefrom; from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)) )
+            {
+                TimeSpan time = from;
+                TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01,30,00)));
+                bool result = false;
+                unavailable.OrderBy(x=>x.HourFrom);
+                foreach (var i in unavailable)
+                {
+                    TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
+                    if (!range.Clashes(timeRange))
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                       // break;
+                    }
+                   
+                }
+                if (result)
+                {
+                    hourTo.Add(time.Add(new TimeSpan(01, 00, 00)));
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+            return hourTo;
+        }
+         
+    }
+
+}
+
+
+
+
+
+

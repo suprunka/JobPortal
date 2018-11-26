@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using MyWeb.App_Start;
 
@@ -14,32 +14,33 @@ namespace MyWeb.Controllers
 {
     public class OrderController : Controller
     {
-        private OrderReference.IOrderService _orderProxy;
+        private User u;
         private OfferReference.IOfferService _offerProxy;
-        private UserReference.IUserService _userProxy;
+        private UserServiceReference.IUserService _userProxy;
+        private OrderReference.IOrderService _orderProxy;
 
+        private ShoppingCard shoppingCard;
+        private bool hasShoppingCard;
 
         public OrderController()
         {
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
-            _userProxy = new UserReference.UserServiceClient("UserServiceHttpEndpoint");
+            _userProxy = new UserServiceReference.UserServiceClient("UserServiceHttpEndpoint");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
+            
+            
         }
         // GET: Order
         public ActionResult Index(string id)
         {
-
-            var shoppingcard =  _orderProxy.GetShoppingCard(id);
-            ShoppingCardView scv = new ShoppingCardView{Card = shoppingcard };
-            return View(scv);
-        }
-
-        public ActionResult AddToCard(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
-        {
-            if(userID != null && serviceID < 0 && (to - from).Hours > 0) 
+            if (shoppingCard == null)
             {
-                var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
-                return View("Index", User.Identity.GetUserId());
+                var shoppingcard = _orderProxy.GetShoppingCard(id);
+                ShoppingCardView scv = new ShoppingCardView{Card = shoppingcard };
+                return View(scv);
+               // ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
+               //
+               // return View();
             }
             else
             {
@@ -47,16 +48,38 @@ namespace MyWeb.Controllers
             }
         }
 
-        public ActionResult DeleteFromCard(string idU, int id, DateTime date, TimeSpan from, TimeSpan to)
+        
+
+
+        public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
-            var resut = _orderProxy.DeleteFromCart(idU, id, date, from, to);
-            return View("Index", User.Identity.GetUserId());
+            if (userID != null && serviceID > 0 )
+            {
+                var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                if (result)
+                {
+                    return RedirectToAction("Index","Order", new {id=userID.Trim()});
+                }
+                return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
+        {
+            var result = _orderProxy.DeleteFromCart(idU, (int)id,(DateTime) date, (TimeSpan)from, (TimeSpan)to);
+            if (result)
+            {
+                return RedirectToAction("Index", "Order", new { id = idU.Trim() });
+            }
+            return null;
         }
 
 
 
-
-        public ActionResult PaymentWithPaypal(string Cancel = null)
+            public ActionResult PaymentWithPaypal(string Cancel = null)
         {
             //getting the apiContext  
             APIContext apiContext = PaypalConfiguration.GetAPIContext();

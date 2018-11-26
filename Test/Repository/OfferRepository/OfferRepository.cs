@@ -45,7 +45,7 @@ namespace Repository
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_ID = offer.Employee_ID,
-                        Subcategory_ID = _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.ID == offer.Subcategory_ID).ID,
+                        Subcategory_ID = _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.Name == offer.SubCategory.Name).ID
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
