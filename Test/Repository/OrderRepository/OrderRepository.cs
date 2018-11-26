@@ -28,6 +28,43 @@ namespace Repository.OrderRepository
         public OrderRepository()
         {
 
+
+
+        }
+
+        public bool CancelOrder(Order o)
+        {
+            var found = _context.GetTable<Salelines>().Where(x => x.ID == o.ID);
+            foreach (var i in found)
+            {
+                if (i.BookedDate.BookedDate1 > DateTime.Now.AddHours(24))
+                {
+                    _context.GetTable<Salelines>().DeleteOnSubmit(i);
+                }
+                else
+                {
+                    return false;
+                }
+                _context.GetTable<OrderTable>().DeleteOnSubmit(_context.GetTable<OrderTable>().Single(x => x.ID == o.ID));
+            }
+
+            return true;
+        }
+
+
+   
+        public bool CancelServiceInOrder(JobPortal.Model.Saleline o)
+        {
+            var found = _context.GetTable<Salelines>().Single(x => x.ID == o.Id);
+            if (found.BookedDate.BookedDate1 > DateTime.Now.AddHours(24))
+            {
+                _context.GetTable<Salelines>().DeleteOnSubmit(found);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<ShoppingCart> GetShoppingCart(string id)
@@ -235,6 +272,8 @@ namespace Repository.OrderRepository
             }
             return result;
         }
+
+       
     }
 }
 

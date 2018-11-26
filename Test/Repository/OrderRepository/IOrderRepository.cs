@@ -14,5 +14,7 @@ namespace Repository.OrderRepository
         bool DeleteFromCart(ShoppingCart cart);
         bool AddToCart(ShoppingCart cart);
         List<ShoppingCart> GetShoppingCart(string id);
+        bool CancelServiceInOrder(Saleline o);
+        bool CancelOrder(Order o);
     }
 }
