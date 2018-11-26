@@ -1,43 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="Order">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="OrderStatus" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Salelines" nillable="true" type="tns:ArrayOfSaleline" />
-      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
-      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Order" nillable="true" type="tns:Order" />
-  <xs:complexType name="ArrayOfSaleline">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Saleline" nillable="true" type="tns:Saleline" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSaleline" nillable="true" type="tns:ArrayOfSaleline" />
-  <xs:complexType name="Saleline">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="ServiceOfferId" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Saleline" nillable="true" type="tns:Saleline" />
-  <xs:complexType name="BookedTimeException">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="BookedTimeException" nillable="true" type="tns:BookedTimeException" />
-  <xs:complexType name="ShoppingCard">
-    <xs:sequence>
-      <xs:element name="author" nillable="true" type="tns:User" />
-      <xs:element name="listOfItems" nillable="true" type="tns:ArrayOfOrderedOffer" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ShoppingCard" nillable="true" type="tns:ShoppingCard" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element minOccurs="0" name="AddressLine" nillable="true" type="xs:string" />
@@ -76,6 +40,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Region" nillable="true" type="tns:Region" />
+  <xs:complexType name="ShoppingCard">
+    <xs:sequence>
+      <xs:element name="author" nillable="true" type="tns:User" />
+      <xs:element name="listOfItems" nillable="true" type="tns:ArrayOfOrderedOffer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShoppingCard" nillable="true" type="tns:ShoppingCard" />
   <xs:complexType name="ArrayOfOrderedOffer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderedOffer" nillable="true" type="tns:OrderedOffer" />
@@ -93,7 +64,7 @@
       <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
       <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q2:DayOfWeek" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q1:DayOfWeek" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderedOffer" nillable="true" type="tns:OrderedOffer" />
@@ -131,4 +102,10 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="SubCategory" nillable="true" type="tns:SubCategory" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
 </xs:schema>

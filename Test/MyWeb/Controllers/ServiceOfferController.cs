@@ -29,7 +29,7 @@ namespace MyWeb.Controllers
             });
 
             _mapper = config.CreateMapper();
-            _offerProxy = new OfferReference.OfferServiceClient("offerService");
+            _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
 
         }
         public ServiceOfferController(IOfferService proxy)

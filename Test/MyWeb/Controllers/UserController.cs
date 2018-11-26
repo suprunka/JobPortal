@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using MyWeb.Mapping;
 using MyWeb.OfferReference;
-using MyWeb.UserServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ using WebJobPortal;
 using WebJobPortal.Controllers;
 using AutoMapper;
 using MyWeb.Models;
-
+using MyWeb.UserReference;
 
 namespace MyWeb.Controllers
 {
@@ -67,7 +66,7 @@ namespace MyWeb.Controllers
         public UserController()
         {
             this._proxy = new UserServiceClient("UserServiceHttpEndpoint");
-            this._offerProxy = new OfferServiceClient("offerService");
+            this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
         }
 
 

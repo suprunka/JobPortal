@@ -28,6 +28,12 @@ namespace MyWeb.OrderReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CancelOrder", ReplyAction="http://tempuri.org/IOrderService/CancelOrderResponse")]
         System.Threading.Tasks.Task<bool> CancelOrderAsync(JobPortal.Model.Order o);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCard", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCardResponse")]
+        JobPortal.Model.ShoppingCard GetShoppingCard(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCard", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCardResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCardAsync(string id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/PayForOrder", ReplyAction="http://tempuri.org/IOrderService/PayForOrderResponse")]
         bool PayForOrder(JobPortal.Model.Order o);
         
@@ -88,6 +94,14 @@ namespace MyWeb.OrderReference {
         
         public System.Threading.Tasks.Task<bool> CancelOrderAsync(JobPortal.Model.Order o) {
             return base.Channel.CancelOrderAsync(o);
+        }
+        
+        public JobPortal.Model.ShoppingCard GetShoppingCard(string id) {
+            return base.Channel.GetShoppingCard(id);
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCardAsync(string id) {
+            return base.Channel.GetShoppingCardAsync(id);
         }
         
         public bool PayForOrder(JobPortal.Model.Order o) {

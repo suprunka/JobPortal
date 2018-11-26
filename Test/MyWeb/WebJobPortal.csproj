@@ -233,7 +233,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\UserServiceReference\Reference.cs">
+    <Compile Include="Connected Services\UserReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -291,15 +291,9 @@
     <None Include="Connected Services\OrderReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\UserServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\OfferReference\configuration91.svcinfo" />
     <None Include="Connected Services\OfferReference\configuration.svcinfo" />
     <None Include="Connected Services\OfferReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\UserServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -315,6 +309,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\UserReference\configuration91.svcinfo" />
+    <None Include="Connected Services\UserReference\configuration.svcinfo" />
+    <None Include="Connected Services\UserReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
@@ -327,20 +327,24 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\UserServiceReference\JobPortal.Model.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserServiceReference\service.wsdl" />
-    <None Include="Connected Services\UserServiceReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserServiceReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.User.datasource" />
     <Content Include="Properties\DataSources\Repository.DbConnection.Entity.dmai0917_1067677Entities1.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.Order.datasource" />
+    <None Include="Connected Services\UserReference\JobPortal.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference\service.wsdl" />
+    <None Include="Connected Services\UserReference\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Properties\DataSources\JobPortal.Model.ShoppingCard.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -419,7 +423,7 @@
     <WCFMetadataStorage Include="Connected Services\ASPSMSX2\" />
     <WCFMetadataStorage Include="Connected Services\OfferReference\" />
     <WCFMetadataStorage Include="Connected Services\OrderReference\" />
-    <WCFMetadataStorage Include="Connected Services\UserServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\UserReference\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">

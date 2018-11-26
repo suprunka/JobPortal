@@ -31,10 +31,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetShoppingCard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetShoppingCardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetShoppingCardResult" nillable="true" type="q4:ShoppingCard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="PayForOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="o" nillable="true" type="q4:Order" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="o" nillable="true" type="q5:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -51,8 +65,8 @@
         <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="serviceId" type="xs:int" />
         <xs:element minOccurs="0" name="date" type="xs:dateTime" />
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourfrom" type="q5:duration" />
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourTo" type="q6:duration" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourfrom" type="q6:duration" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourTo" type="q7:duration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -69,8 +83,8 @@
         <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="serviceId" type="xs:int" />
         <xs:element minOccurs="0" name="date" type="xs:dateTime" />
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourfrom" type="q7:duration" />
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourTo" type="q8:duration" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourfrom" type="q8:duration" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="hourTo" type="q9:duration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

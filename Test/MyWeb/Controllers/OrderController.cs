@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+
 using PayPal.Api;
 using MyWeb.App_Start;
 
@@ -14,50 +14,32 @@ namespace MyWeb.Controllers
 {
     public class OrderController : Controller
     {
-        private User u;
+        private OrderReference.IOrderService _orderProxy;
         private OfferReference.IOfferService _offerProxy;
-        private UserServiceReference.IUserService _userProxy;
-        
-        private ShoppingCard shoppingCard;
-        private bool hasShoppingCard;
+        private UserReference.IUserService _userProxy;
+
 
         public OrderController()
         {
-            _offerProxy = new OfferReference.OfferServiceClient("offerService");
-            _userProxy = new UserServiceReference.UserServiceClient("UserServiceHttpEndpoint");
-            
-            
-            
+            _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
+            _userProxy = new UserReference.UserServiceClient("UserServiceHttpEndpoint");
+            _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
         }
         // GET: Order
         public ActionResult Index(string id)
         {
-            if (shoppingCard == null)
-            {
-                //var shoppingcard =  _orderProxy.GetShoppingCard(id);
-                //ShoppingCardView scv = new ShoppingCardView{Card = shoppingCard};
-                //return View(scv);
-                //ShoppingCardView scv = new ShoppingCardView { Card = shoppingCard };
 
-                return View();
-            }
-            else
-            {
-                return null;
-            }
+            var shoppingcard =  _orderProxy.GetShoppingCard(id);
+            ShoppingCardView scv = new ShoppingCardView{Card = shoppingcard };
+            return View(scv);
         }
-
-        
-
 
         public ActionResult AddToCard(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
             if(userID != null && serviceID < 0 && (to - from).Hours > 0) 
             {
-                //var result = _orderService.AddToCard(userID, serviceID, from, to, date)
-                //if(result){
-                return View("Index");
-
+                var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                return View("Index", User.Identity.GetUserId());
             }
             else
             {
@@ -67,9 +49,8 @@ namespace MyWeb.Controllers
 
         public ActionResult DeleteFromCard(string idU, int id, DateTime date, TimeSpan from, TimeSpan to)
         {
-            //var resut = _orderService.DeleteFromCard(idU, id, date, from, to);
-            //if(result{
-            return View("Index");
+            var resut = _orderProxy.DeleteFromCart(idU, id, date, from, to);
+            return View("Index", User.Identity.GetUserId());
         }
 
 

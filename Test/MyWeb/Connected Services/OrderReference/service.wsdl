@@ -195,6 +195,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_PayForOrder_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -362,6 +400,12 @@
   <wsdl:message name="IOrderService_CancelOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_GetShoppingCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCard" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_GetShoppingCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCardResponse" />
+  </wsdl:message>
   <wsdl:message name="IOrderService_PayForOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:PayForOrder" />
   </wsdl:message>
@@ -389,6 +433,10 @@
     <wsdl:operation name="CancelOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CancelOrder" message="tns:IOrderService_CancelOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CancelOrderResponse" message="tns:IOrderService_CancelOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShoppingCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCard" message="tns:IOrderService_GetShoppingCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardResponse" message="tns:IOrderService_GetShoppingCard_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PayForOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/PayForOrder" message="tns:IOrderService_PayForOrder_InputMessage" />
@@ -429,6 +477,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_CancelOrder_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShoppingCard">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -483,6 +542,15 @@
     </wsdl:operation>
     <wsdl:operation name="CancelOrder">
       <soap12:operation soapAction="http://tempuri.org/IOrderService/CancelOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShoppingCard">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

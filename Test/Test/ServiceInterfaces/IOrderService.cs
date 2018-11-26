@@ -15,6 +15,8 @@ namespace ServiceLibrary
         [OperationContract]
         bool CancelOrder(Order o);
 
+        [OperationContract]
+        ShoppingCard GetShoppingCard(string id);
 
         [OperationContract]
         bool PayForOrder(Order o);
