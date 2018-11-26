@@ -1,10 +1,12 @@
 ﻿using JobPortal.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Runtime.Serialization;
 
 namespace JobPortal.Model
 {
+    [Serializable]
     public class ShoppingCard
     {
         private User author;

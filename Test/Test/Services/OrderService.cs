@@ -2,16 +2,14 @@
 using Repository;
 using Repository.DbConnection;
 using Repository.OrderRepository;
-using ServiceLibrary.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 
-namespace ServiceLibrary.Services
+namespace ServiceLibrary
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
-                 ConcurrencyMode = ConcurrencyMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Single, IncludeExceptionDetailInFaults =true)]
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _database;

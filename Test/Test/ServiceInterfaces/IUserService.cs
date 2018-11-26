@@ -1,8 +1,5 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using JobPortal.Model;
-using Repository.DbConnection;
-using Repository.DbConnection.Entity;
 
 namespace ServiceLibrary
 {
@@ -20,8 +17,6 @@ namespace ServiceLibrary
 
         [OperationContract]
         bool DeleteUser(int id);
-
-        
 
         [OperationContract]
         bool EditUser(User u);
@@ -43,8 +38,6 @@ namespace ServiceLibrary
 
         [OperationContract]
         bool AddDescription(User u);
-       
-        //[OperationContract]
-        //JobPortalEntities GetLoginEntity();
+      
     }
 }
