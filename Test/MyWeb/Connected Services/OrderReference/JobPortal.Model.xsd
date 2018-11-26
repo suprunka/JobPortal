@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salelines" nillable="true" type="tns:ArrayOfSaleline" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Order" nillable="true" type="tns:Order" />
+  <xs:complexType name="ArrayOfSaleline">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Saleline" nillable="true" type="tns:Saleline" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSaleline" nillable="true" type="tns:ArrayOfSaleline" />
+  <xs:complexType name="Saleline">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceOfferId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Saleline" nillable="true" type="tns:Saleline" />
+  <xs:complexType name="BookedTimeException">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookedTimeException" nillable="true" type="tns:BookedTimeException" />
+</xs:schema>

@@ -1,10 +1,9 @@
 ﻿using JobPortal.Model;
 using Repository.DbConnection;
 using System;
-using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace ServiceLibrary.ServiceInterfaces
+namespace ServiceLibrary
 {
     [ServiceContract]
     public interface IOrderService
@@ -16,12 +15,14 @@ namespace ServiceLibrary.ServiceInterfaces
         [OperationContract]
         bool CancelOrder(Order o);
 
-     
+
         [OperationContract]
         bool PayForOrder(Order o);
 
         [OperationContract]
-       bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
+        bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
 
+        [OperationContract]
+        bool DeleteFromCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
     }
 }

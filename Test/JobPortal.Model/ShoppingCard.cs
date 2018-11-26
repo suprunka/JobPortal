@@ -1,11 +1,12 @@
 ﻿using JobPortal.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
 namespace JobPortal.Model
 {
-    [DataContract]
+    [Serializable]
     public class ShoppingCard
     {
         private User author;
@@ -18,7 +19,12 @@ namespace JobPortal.Model
             listOfItems = new LinkedList<OrderedOffer>();
 
         }
-        [DataMember]
+
+        public ShoppingCard()
+        {
+
+        }
+
         public User Author
         {
             get

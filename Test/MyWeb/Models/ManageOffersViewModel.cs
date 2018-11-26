@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using JobPortal.Model;
 namespace MyWeb.Models
 {
+
     public class ServiceOfferToOrder
     {
         public int Id { get; set; }
@@ -17,16 +18,12 @@ namespace MyWeb.Models
         public TimeSpan To { get;  set; }
 
         public decimal RatePerHour { get; set; }
-
     
         public string Title { get; set; }
-
 
         public string Description { get; set; }
 
         public string Author { get; set; }
-
-
     }
 
 
@@ -52,6 +49,7 @@ namespace MyWeb.Models
         public JobPortal.Model.Category Category { get; set; }
         public JobPortal.Model.SubCategory Subcategory { get; set; }
     }
+
     public class ManageOffers
     {
         public int Id { get; set; }
@@ -71,10 +69,12 @@ namespace MyWeb.Models
         public string Description { get; set; }
 
         public string Author { get; set; }
-        public Category Category { get; set; }
-        public SubCategory Subcategory { get; set; }
 
+        public Category Category { get; set; }
+
+        public SubCategory Subcategory { get; set; }
     }
+
     public class EditOffer
     {
         public int Id { get; set; }
@@ -93,7 +93,6 @@ namespace MyWeb.Models
         [Required(ErrorMessage = "Descritpion required")]
         [RegularExpression(" ^[a - zA - Z0 - 9ÆæØøÅå]{10,}$")]
         public string Description { get; set; }
-
     }
 
     public class AddServiceOfferModel
@@ -101,6 +100,7 @@ namespace MyWeb.Models
         public ManageOffers ManageOffers { get; set; }
         public IEnumerable<WorkingHours> WorkingDays { get; set; }
     }
+
     public class WorkingHours
     {
         [Display(Name = "Day:")]
@@ -110,6 +110,7 @@ namespace MyWeb.Models
         [Display(Name = "To:")]
         public TimeSpan HourTo;
     }
+
     public class ViewDetails
     {
         public int Id { get; set; }
