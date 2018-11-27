@@ -6,6 +6,6 @@ namespace Repository
 {
     public interface IOfferRepository : IRepository<ServiceOffer>
     {
-        bool AddWorkingDates(Days day, TimeSpan hourFrom, TimeSpan hourTo, ServiceOffer s);
+        bool AddWorkingDates(WorkingDates days);
     }
 }
