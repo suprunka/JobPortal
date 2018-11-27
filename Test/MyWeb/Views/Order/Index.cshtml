@@ -22,7 +22,7 @@
                 <td> Date: @itemInShoppingcard.Date.Date.ToShortDateString()</td>
                 <td> Hour from: @itemInShoppingcard.HoursFrom</td>
                 <td> Hour to @itemInShoppingcard.HoursTo </td>
-                <td> Rate per hour: @(decimal.Round(itemInShoppingcard.RatePerHour, 2, MidpointRounding.AwayFromZero)) DKK</td>
+                <td> Rate per hour: @(decimal.Round(itemInShoppingcard.RatePerHour, 0, MidpointRounding.AwayFromZero)) DKK</td>
                 <td> Price: @((decimal.Round((@itemInShoppingcard.RatePerHour * (@itemInShoppingcard.HoursTo - @itemInShoppingcard.HoursFrom).Hours), 2, MidpointRounding.AwayFromZero))) DKK</td>
                 <td> @(@Html.ActionLink("Delete", "DeleteFromCard", "Order", new { idU = User.Identity.GetUserId(), id = @itemInShoppingcard.Id, date = @itemInShoppingcard.Date, from = @itemInShoppingcard.HoursFrom, to = @itemInShoppingcard.HoursTo }, null))</td>
             </tr>
@@ -34,9 +34,10 @@
     <div id="tPrice">
         <h2>Order price: @(decimal.Round(Model.Card.GetTotalPrice(), 2, MidpointRounding.AwayFromZero)) DKK   </h2>
     </div>
-    @Html.ActionLink("Complete order", "CreateOrder", "Order", new {userID = User.Identity.GetUserId()}, null)
-    
-    
+    @Html.ActionLink("Complete order", "CreateOrder", "Order", new { userID = User.Identity.GetUserId() }, null)
+    @Html.ActionLink("Paypal", "PaymentWithPaypal", "Order")
+
+
     @if (Model.Card.List.Count > 0)
     {
         <div id="finishTable">

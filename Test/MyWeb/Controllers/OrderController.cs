@@ -182,20 +182,27 @@ namespace MyWeb.Controllers
 
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
+            var shoppingCard = _orderProxy.GetShoppingCardForPaypal(User.Identity.GetUserId());
             //create itemlist and add item objects to it  
             var itemList = new ItemList()
             {
                 items = new List<Item>()
             };
+
+            var lista = shoppingCard.PayPalList;
             //Adding Item Details like name, currency, price etc  
-            itemList.items.Add(new Item()
+            foreach (var i in lista)
             {
-                name = "Item Name comes here",
-                currency = "USD",
-                price = "1",
-                quantity = "1",
-                sku = "sku"
-            });
+                itemList.items.Add(new Item()
+                {
+                    name = i.Title,
+                    currency = "DKK",
+                    price = decimal.Round(i.RatePerHour, 0, MidpointRounding.AwayFromZero).ToString(),
+                    quantity = decimal.Round((i.HoursTo - i.HoursFrom).Hours, 0, MidpointRounding.AwayFromZero).ToString(),
+                    sku = "sku"
+                });
+            }
+
             var payer = new Payer()
             {
                 payment_method = "paypal"
@@ -209,15 +216,15 @@ namespace MyWeb.Controllers
             // Adding Tax, shipping and Subtotal details  
             var details = new Details()
             {
-                tax = "1",
-                shipping = "1",
-                subtotal = "1"
+                tax = "0",
+                shipping = "0",
+                subtotal = decimal.Round(shoppingCard.GetTotalPricePayPal(), 0, MidpointRounding.AwayFromZero).ToString()
             };
             //Final amount with details  
             var amount = new Amount()
             {
-                currency = "USD",
-                total = "3", // Total must be equal to sum of tax, shipping and subtotal.  
+                currency = "DKK",
+                total = decimal.Round(shoppingCard.GetTotalPricePayPal(), 0, MidpointRounding.AwayFromZero).ToString(), // Total must be equal to sum of tax, shipping and subtotal.  
                 details = details
             };
             var transactionList = new List<Transaction>();

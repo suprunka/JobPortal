@@ -49,6 +49,25 @@ namespace ServiceLibrary
             return items;
         }
 
+        public ShoppingCard GetShoppingCardForPaypal(string id)
+        {
+            ShoppingCard items = new ShoppingCard();
+
+            foreach (var item in _database.GetShoppingCart(id))
+            {
+                var offerDetails = _offerRepository.Get(x => x.ID == item.Service_ID);
+                items.AddToCardPayPal(new PayPalOffer
+                {
+                    Id = offerDetails.ID,
+                    HoursFrom = item.HourFrom,
+                    HoursTo = item.HourTo,
+                    RatePerHour = offerDetails.RatePerHour,
+                    Title = offerDetails.Title,
+                });
+            }
+            return items;
+        }
+
 
 
         public Order CreateOrder(string u)

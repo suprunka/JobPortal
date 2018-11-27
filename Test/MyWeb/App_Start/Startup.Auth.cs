@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Repository.DbConnection.Entity;
+
 using WebJobPortal.Models;
 
 namespace WebJobPortal
@@ -15,6 +16,7 @@ namespace WebJobPortal
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+           
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(dmai0917_1067677Entities2.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

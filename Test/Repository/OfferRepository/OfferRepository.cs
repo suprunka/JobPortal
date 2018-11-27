@@ -124,7 +124,6 @@ namespace Repository
                         foundService.RatePerHour = modified.RatePerHour;
                         foundService.Title = modified.Title;
                         foundService.Description = modified.Description;
-                        foundService.Subcategory_ID = modified.Subcategory_ID;
                         result = true;
                         _context.SubmitChanges();
                     }

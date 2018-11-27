@@ -461,6 +461,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCardForPaypal_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCardForPaypal_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OrderServiceTcpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -556,6 +594,12 @@
   <wsdl:message name="IOrderService_GetHoursTo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetHoursToResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_GetShoppingCardForPaypal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCardForPaypal" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_GetShoppingCardForPaypal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCardForPaypalResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOrderService">
     <wsdl:operation name="CreateOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrder" message="tns:IOrderService_CreateOrder_InputMessage" />
@@ -593,6 +637,10 @@
     <wsdl:operation name="GetHoursTo">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetHoursTo" message="tns:IOrderService_GetHoursTo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetHoursToResponse" message="tns:IOrderService_GetHoursTo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShoppingCardForPaypal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypal" message="tns:IOrderService_GetShoppingCardForPaypal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypalResponse" message="tns:IOrderService_GetShoppingCardForPaypal_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OrderServiceHttpEndpoint" type="tns:IOrderService">
@@ -701,6 +749,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetShoppingCardForPaypal">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypal" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCardForPaypal_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCardForPaypal_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OrderServiceTcpEndpoint" type="tns:IOrderService">
     <wsp:PolicyReference URI="#OrderServiceTcpEndpoint_policy" />
@@ -782,6 +841,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetHoursTo">
       <soap12:operation soapAction="http://tempuri.org/IOrderService/GetHoursTo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShoppingCardForPaypal">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

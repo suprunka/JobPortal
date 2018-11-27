@@ -37,6 +37,9 @@ namespace ServiceLibrary
         [OperationContract]
         IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
 
+        [OperationContract]
+        ShoppingCard GetShoppingCardForPaypal(string id);
+
 
     }
 }

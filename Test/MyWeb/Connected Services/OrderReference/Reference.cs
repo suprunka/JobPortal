@@ -69,6 +69,12 @@ namespace MyWeb.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetHoursTo", ReplyAction="http://tempuri.org/IOrderService/GetHoursToResponse")]
         System.Threading.Tasks.Task<System.TimeSpan[]> GetHoursToAsync(int serviceId, System.DateTime date, System.TimeSpan from);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypalResponse")]
+        JobPortal.Model.ShoppingCard GetShoppingCardForPaypal(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypalResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCardForPaypalAsync(string id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -168,6 +174,14 @@ namespace MyWeb.OrderReference {
         
         public System.Threading.Tasks.Task<System.TimeSpan[]> GetHoursToAsync(int serviceId, System.DateTime date, System.TimeSpan from) {
             return base.Channel.GetHoursToAsync(serviceId, date, from);
+        }
+        
+        public JobPortal.Model.ShoppingCard GetShoppingCardForPaypal(string id) {
+            return base.Channel.GetShoppingCardForPaypal(id);
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCardForPaypalAsync(string id) {
+            return base.Channel.GetShoppingCardForPaypalAsync(id);
         }
     }
 }

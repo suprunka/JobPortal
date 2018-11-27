@@ -146,10 +146,8 @@ namespace MyWeb.Controllers
         [HttpPost]
         public ActionResult ViewDetails(ViewDetails edited)
         {
-           
                 var isUpdated = _offerProxy.UpdateServiceOffer(new Offer
                 {
-
                     Id = edited.Id,
                     Title = edited.Title,
                     RatePerHour = edited.RatePerHour,
@@ -159,8 +157,8 @@ namespace MyWeb.Controllers
                 {
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
-            
-            return View("ViewDetails", edited);
+
+            return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
         }
         public async Task<ActionResult> Delete(int idd)
         {
