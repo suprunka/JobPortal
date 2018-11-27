@@ -157,7 +157,14 @@ else
 <!--Frames for Column menu-->
 <!--Buy page with table-->
 <div id="Bought" class="frameContentColumn">
-    user's bought services, table form form
+    <table class="serviceOfferTable">
+        <colgroup>
+            <col class="col-md-4">
+            <col class="col-md-4">
+            <col class="col-md-4">
+        </colgroup>
+        @Html.Partial("Bought", Model.Bought)
+    </table>
 </div>
 
 <div id="Calendar" class="frameContentColumn">

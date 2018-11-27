@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using MyWeb.App_Start;
+using Repository.DbConnection;
 
 namespace MyWeb.Controllers
 {
@@ -43,7 +44,16 @@ namespace MyWeb.Controllers
             }
         }
 
-
+        public ActionResult CreateOrder(string userID)
+        {
+            if (userID != null)
+            {
+                _orderProxy.CreateOrder(userID);
+                CleanCart(userID);
+                return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+            }
+            return null;
+        }
 
 
         public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
@@ -72,6 +82,19 @@ namespace MyWeb.Controllers
             return null;
         }
 
+
+        public ActionResult CleanCart(string id)
+        {
+            if (_orderProxy.CleanCart(id))
+            {
+                return RedirectToAction("Index", "Order", new { id = id.Trim() });
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
 
 
@@ -132,7 +155,9 @@ namespace MyWeb.Controllers
             //on successful payment, show success page to user.  
             return View("SuccessView");
         }
+
         private PayPal.Api.Payment payment;
+
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
         {
             var paymentExecution = new PaymentExecution()

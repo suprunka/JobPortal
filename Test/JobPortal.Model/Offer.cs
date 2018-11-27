@@ -26,12 +26,8 @@ namespace JobPortal.Model
         public virtual Category Category { get; set; }
         [DataMember]
         public virtual SubCategory Subcategory { get; set; }
-
         [DataMember]
         public virtual IList<WorkingTime> ListOfWorkingDays { get; set; }
-       
-
-
     }
 
     public class OrderedOffer

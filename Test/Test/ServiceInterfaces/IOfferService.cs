@@ -23,5 +23,8 @@ namespace ServiceLibrary
         [OperationContract]
         IQueryable<Offer> GetAllOffers();
 
+        [OperationContract]
+        IQueryable<Offer> GetAllBought(string id);
+
     }
 }

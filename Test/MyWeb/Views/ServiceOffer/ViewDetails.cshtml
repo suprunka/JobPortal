@@ -13,41 +13,37 @@
 
     <div class="offerCard">
         <h2>Offer details</h2>
-
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title)
-
-            <div class="col-md-12" id="edit">
-                @Html.EditorFor(model => model.Title)
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.RatePerHour)
-
-            <div class="col-md-12" id="edit">
-                @Html.EditorFor(model => model.RatePerHour)
-                @Html.ValidationMessageFor(model => model.RatePerHour, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description)
-
-            <div class="col-md-12" id="edit">
-                @Html.TextAreaFor(model => model.Description, new { style = "width:250px; word-break:break-word;" })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.ActionLink("See an author of the service offer", "UserProfile", "User", new { id = Model.Author }, null)
-        </div>
-
         @if (Model.Author == User.Identity.GetUserId())
+
         {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title)
+
+                <div class="col-md-12" id="edit">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RatePerHour)
+
+                <div class="col-md-12" id="edit">
+                    @Html.EditorFor(model => model.RatePerHour)
+                    @Html.ValidationMessageFor(model => model.RatePerHour, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+
+                <div class="col-md-12" id="edit">
+                    @Html.TextAreaFor(model => model.Description, new { style = "width:250px; word-break:break-word;" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-primary" />
@@ -57,47 +53,66 @@
         }
         else
         {
+            <div class="form-group">
+                <h4>@Html.LabelFor(model => model.Title) @Model.Title</h4>
+            </div>
+            <div class="form-group">
+                <h4>@Html.LabelFor(model => model.RatePerHour) @(decimal.Round(@Model.RatePerHour, 2, MidpointRounding.AwayFromZero)) DKK/Hour </h4>
+            </div>
+            <div class="form-group">
+                <h4>@Html.LabelFor(model => model.Description)  </h4>
+                <div>
+                    <h5>@Model.Description </h5>
+                </div>
+            </div>
+            <hr />
             <h3>Book a service offer.</h3>
             <div class="col-md-10">
-                <input type="date" name="days" id="selecteddate">
+                <div>
+                    <p>Choose a date:</p>
+                    <input type="date" name="days" id="selecteddate">
+                </div>
                 <br />
-
-                @Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "form-control" })
-                @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "form-control" })
-
-                @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId()}, new { @class = "btn btn-danger", @id="addToCart" })
-
-
-
-
+                <div>
+                    <p>Choose hour from when you want to order the offer:</p>
+                    @Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "form-control" })
+                </div>
+                <br />
+                <div>
+                    <p>Choose hour to when you want to order the offer:</p>
+                    @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "form-control" })
+                </div>
+                <br />
+                    @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-danger", @id = "addToCart" })
+                <br />
+                <div class="form-group">
+                    @Html.ActionLink("See an author of the service offer", "UserProfile", "User", new { id = Model.Author }, null)
+                </div>
             </div>
+        }
 
-
-           }
     </div>
 }
-@Html.Raw(TempData["msg"])
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
 <script>
-  
+
     $('#selecteddate').change(function () {
         var selectedDate = $("#selecteddate").val();
         var hourFrom = $('#hoursfrom');
         hourFrom.empty();
-        console.log(selectedDate);
+      
         if (selectedDate != null && selectedDate != '') {
             $.getJSON('@Url.Action("GetHoursFrom")', { serviceId: @Model.Id, date: selectedDate }, function (sub) {
                         if (sub != null && !jQuery.isEmptyObject(sub))
                         {
-                            console.log(selectedDate);
+                           
 
                             hourFrom.append($('<option/>', {
                                 value: null,
                                 text: ""
                             }));
                             $.each(sub, function (index, subcats) {
-                                console.log(subcats);
+                                
 
                                 hourFrom.append($('<option/>', {
                                     value: subcats.Value,
@@ -115,11 +130,12 @@
         var selectedHour= $("#hoursfrom").val();
         var hourto = $('#hoursto');
         hourto.empty();
-        console.log(selectedDate);
         if (selectedDate != null && selectedDate != '') {
-            $.getJSON('@Url.Action("GetHoursTo")', { serviceId: @Model.Id, date: selectedDate, from: selectedHour}, function (sub) {
+            $.getJSON('@Url.Action("GetHoursTo")', { serviceId: @Model.Id, date: selectedDate, from: selectedHour }, function (sub) {
+                
                         if (sub != null && !jQuery.isEmptyObject(sub))
                         {
+                            console.log(selectedDate);
                             hourto.append($('<option/>', {
                                 value: null,
                                 text: ""
@@ -135,9 +151,10 @@
                     });
                 }
     });
+
       $('#addToCart').click(function () {
-        var date = $('#selecteddate').val(); 
-        var from = $('#hoursfrom').val(); 
+        var date = $('#selecteddate').val();
+        var from = $('#hoursfrom').val();
         var to = $('#hoursto').val();
         var path = '@Url.Content("~/Order/AddToCart")' + "?serviceID=@Model.Id+&userID=@User.Identity.GetUserId()+&date=" + date + "+&from=" + from + "+&to=" + to;
         $(this).attr("href", path);

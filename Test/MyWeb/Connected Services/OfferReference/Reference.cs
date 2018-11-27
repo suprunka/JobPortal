@@ -44,6 +44,12 @@ namespace MyWeb.OfferReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllOffersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
+        JobPortal.Model.Offer[] GetAllBought(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllBoughtAsync(string id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace MyWeb.OfferReference {
         
         public System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllOffersAsync() {
             return base.Channel.GetAllOffersAsync();
+        }
+        
+        public JobPortal.Model.Offer[] GetAllBought(string id) {
+            return base.Channel.GetAllBought(id);
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllBoughtAsync(string id) {
+            return base.Channel.GetAllBoughtAsync(id);
         }
     }
 }

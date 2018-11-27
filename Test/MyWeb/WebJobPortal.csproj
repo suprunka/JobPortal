@@ -273,9 +273,6 @@
     <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\Repository.DbConnection.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\OrderReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -387,6 +384,7 @@
     <Content Include="Views\ServiceOffer\ViewDetails.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Calendar2\Index.cshtml" />
+    <Content Include="Views\Shared\Bought.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -69,4 +69,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllBought">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllBoughtResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetAllBoughtResult" nillable="true" type="q5:ArrayOfOffer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

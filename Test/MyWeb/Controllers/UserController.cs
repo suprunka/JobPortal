@@ -74,7 +74,7 @@ namespace MyWeb.Controllers
         {
             UserProfileViewModel user = UserMapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
             user.Services = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id).Select(x => new ManageOffers { Id = x.Id, Author = x.AuthorId, Description = x.Description, RatePerHour = x.RatePerHour, Title = x.Title, Subcategory = x.Subcategory, Category = x.Category }).ToArray();
-
+            user.Bought = _offerProxy.GetAllBought(id).Select(x=> new ManageOffers {Id = x.Id, Author = x.AuthorId, Description = x.Description, RatePerHour = x.RatePerHour, Title = x.Title, Subcategory = x.Subcategory, Category = x.Category}).ToArray();
             return View(user);
         }
 

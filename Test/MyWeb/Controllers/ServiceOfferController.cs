@@ -39,9 +39,7 @@ namespace MyWeb.Controllers
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
             });
-
             _mapper = config.CreateMapper();
-
             _offerProxy = proxy;
         }
         public ActionResult Index(string searchingString)
@@ -52,7 +50,6 @@ namespace MyWeb.Controllers
                 return View("Index", list);
             }
             var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-
             return View("Index", condition.ToArray());
         }
 

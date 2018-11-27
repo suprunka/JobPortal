@@ -103,7 +103,7 @@ namespace ServiceLibrary
                     Title = dbResult.Title,
                     RatePerHour = dbResult.RatePerHour,
                     Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), dbResult.SubCategory.Name),
-                    Category = (Category)Enum.Parse(typeof(Category), dbResult.SubCategory.Category.Name)
+                    Category = (Category)Enum.Parse(typeof(Category), dbResult.SubCategory.Category.Name),                 
                 };
 
             }
@@ -188,8 +188,25 @@ namespace ServiceLibrary
             }
             return resultToReturn.AsQueryable<Offer>();
         }
-       
-  
 
+        public IQueryable<Offer> GetAllBought(string id)
+        {
+            IList<Offer> resultToReturn = new List<Offer>();
+            foreach(var i in _database.GetAllBought(id))
+            {
+                resultToReturn.Add(new Offer
+                {
+                    Id = i.ID,
+                    AuthorId = id,
+                    Description = i.Description,
+                    Title = i.Title,
+                    RatePerHour = i.RatePerHour,
+                    Category = (Category)Enum.Parse(typeof(Category), i.SubCategory.Category.Name),
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), i.SubCategory.Name),
+                    
+                });
+            }
+            return resultToReturn.AsQueryable<Offer>();
+        }
     }
 }

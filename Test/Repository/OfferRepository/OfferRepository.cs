@@ -2,6 +2,7 @@
 using JobPortal.Model;
 using Repository.DbConnection;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Linq;
 using System.Data.SqlClient;
@@ -176,5 +177,19 @@ namespace Repository
             }
 
         }
+
+        public IQueryable<ServiceOffer> GetAllBought(string ID)
+        {
+            try
+            {
+                return _context.GetTable<Salelines>().Where(x => x.OrderTable.Users_ID == ID).Select(x => x.ServiceOffer).AsQueryable();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+   
     }
 }

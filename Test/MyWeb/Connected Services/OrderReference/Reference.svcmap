@@ -25,7 +25,6 @@
     <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="73431b7f-5e49-4adb-8c02-dcc0b9942af4" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="18462bc3-9995-49d2-b53a-4cd64a51a186" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="9ee5f2e0-fb44-4636-ba0a-67949f85b906" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
-    <MetadataFile FileName="Repository.DbConnection.xsd" MetadataType="Schema" ID="e70f6bed-993c-4d0c-8359-f0e4e0da2a65" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="e5b297e8-056a-4339-84ae-ecae83575766" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="56664c53-6f30-4c15-86e1-5991b6293b30" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="648df6ce-3e08-49ac-9db5-393691b1f68b" SourceId="1" SourceUrl="http://localhost:8080/Order/mex" />

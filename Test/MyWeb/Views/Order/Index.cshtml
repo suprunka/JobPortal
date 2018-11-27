@@ -15,24 +15,75 @@
         @foreach (var itemInShoppingcard in Model.Card.List)
         {
 
-        <tr>
-            <td> Title: @itemInShoppingcard.Title </td>
-            <td> Description: @itemInShoppingcard.Description </td>
-            <td> Day: @itemInShoppingcard.WeekDay </td>
-            <td> Date: @itemInShoppingcard.Date.Date.ToShortDateString()</td>
-            <td> Hour from: @itemInShoppingcard.HoursFrom</td>
-            <td> Hour to @itemInShoppingcard.HoursTo </td>
-            <td> Rate per hour: @(decimal.Round(itemInShoppingcard.RatePerHour,2, MidpointRounding.AwayFromZero)) DKK</td>
-            <td> Price: @((decimal.Round((@itemInShoppingcard.RatePerHour * (@itemInShoppingcard.HoursTo-@itemInShoppingcard.HoursFrom).Hours), 2, MidpointRounding.AwayFromZero))) DKK</td>
-            <td> @(@Html.ActionLink("Delete", "DeleteFromCard", "Order", new {idU = User.Identity.GetUserId(), id = @itemInShoppingcard.Id, date = @itemInShoppingcard.Date, from = @itemInShoppingcard.HoursFrom, to = @itemInShoppingcard.HoursTo }, null))</td>
-        </tr>
+            <tr>
+                <td> Title: @itemInShoppingcard.Title </td>
+                <td> Description: @itemInShoppingcard.Description </td>
+                <td> Day: @itemInShoppingcard.WeekDay </td>
+                <td> Date: @itemInShoppingcard.Date.Date.ToShortDateString()</td>
+                <td> Hour from: @itemInShoppingcard.HoursFrom</td>
+                <td> Hour to @itemInShoppingcard.HoursTo </td>
+                <td> Rate per hour: @(decimal.Round(itemInShoppingcard.RatePerHour, 2, MidpointRounding.AwayFromZero)) DKK</td>
+                <td> Price: @((decimal.Round((@itemInShoppingcard.RatePerHour * (@itemInShoppingcard.HoursTo - @itemInShoppingcard.HoursFrom).Hours), 2, MidpointRounding.AwayFromZero))) DKK</td>
+                <td> @(@Html.ActionLink("Delete", "DeleteFromCard", "Order", new { idU = User.Identity.GetUserId(), id = @itemInShoppingcard.Id, date = @itemInShoppingcard.Date, from = @itemInShoppingcard.HoursFrom, to = @itemInShoppingcard.HoursTo }, null))</td>
+            </tr>
         }
         <tr id="empty-message" @if (Model.Card != null && Model.Card.List.Count > 0) { <text> class="hidden" </text> }>
             <td> The shopping card is empty </td>
         </tr>
     </table>
     <div id="tPrice">
-        Order price: @(decimal.Round(Model.Card.GetTotalPrice(), 2, MidpointRounding.AwayFromZero)) DKK
+        <h2>Order price: @(decimal.Round(Model.Card.GetTotalPrice(), 2, MidpointRounding.AwayFromZero)) DKK   </h2>
     </div>
+    @Html.ActionLink("Complete order", "CreateOrder", "Order", new {userID = User.Identity.GetUserId()}, null)
+    
+    
+    @if (Model.Card.List.Count > 0)
+    {
+        <div id="finishTable">
+            <div id="paypal-button"></div>
+            <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+            <script>
+                paypal.Button.render({
+                    // Configure environment
+                    env: 'sandbox',
+                    client: {
+                        sandbox: 'demo_sandbox_client_id',
+                        production: 'demo_production_client_id'
+                    },
+                    // Customize button (optional)
+                    locale: 'en_US',
+                    style: {
+                        size: 'small',
+                        color: 'gold',
+                        shape: 'pill',
+                    },
+
+                    // Enable Pay Now checkout flow (optional)
+                    commit: true,
+
+                    // Set up a payment
+                    payment: function (data, actions) {
+                        return actions.payment.create({
+                            transactions: [{
+                                amount: {
+                                    total: '@string.Format("{0:0.00}", Model.Card.GetTotalPrice())',
+                                    currency: 'DKK'
+                                }
+                            }]
+                        });
+                    },
+                    // Execute the payment
+                    onAuthorize: function (data, actions) {
+                        return actions.payment.execute().then(function () {
+                            // Show a confirmation message to the buyer
+                            window.alert('Thank you for your purchase!');
+                        });
+                    }
+                }, '#paypal-button');
+
+            </script>
+        </div>
+    }
+
 </section>
 

@@ -51,7 +51,7 @@ namespace ServiceLibrary
 
 
 
-        public Order CreateOrder(Users u)
+        public Order CreateOrder(string u)
         {
             Order order = null;
             try
@@ -123,5 +123,9 @@ namespace ServiceLibrary
 
         }
 
+        public bool CleanCart(string userId)
+        {
+            return _database.CleanCart(userId);
+        }
     }
 }
