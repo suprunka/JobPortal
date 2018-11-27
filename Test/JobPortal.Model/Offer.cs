@@ -27,7 +27,7 @@ namespace JobPortal.Model
         [DataMember]
         public virtual SubCategory Subcategory { get; set; }
         [DataMember]
-        public virtual IList<WorkingTime> ListOfWorkingDays { get; set; }
+        public virtual WorkingTime WorkingDetails { get; set; }
     }
 
     public class OrderedOffer
@@ -66,6 +66,8 @@ namespace JobPortal.Model
         public virtual DayOfWeek WeekDay { get; set; }
         [DataMember]
         public virtual int OfferId { get; set; }
+        [DataMember]
+        public virtual DateTime Date { get; set; }
        
 
     }

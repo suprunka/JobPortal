@@ -36,6 +36,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
       <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element minOccurs="0" name="OfferId" type="xs:int" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q1:DayOfWeek" />
     </xs:sequence>
   </xs:complexType>

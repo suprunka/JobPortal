@@ -182,11 +182,11 @@ namespace Repository
 
         }
 
-        public IQueryable<ServiceOffer> GetAllBought(string ID)
+        public IQueryable<Salelines> GetAllBought(string ID)
         {
             try
             {
-                return _context.GetTable<Salelines>().Where(x => x.OrderTable.Users_ID == ID).Select(x => x.ServiceOffer).AsQueryable();
+                return _context.GetTable<Salelines>().Where(x => x.OrderTable.Users_ID == ID);     
             }
             catch
             {

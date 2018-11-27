@@ -8,6 +8,6 @@ namespace Repository
     public interface IOfferRepository : IRepository<ServiceOffer>
     {
         bool AddWorkingDates(WorkingDates days);
-        IQueryable<ServiceOffer> GetAllBought(string ID);
+        IQueryable<Salelines> GetAllBought(string ID);
     }
 }

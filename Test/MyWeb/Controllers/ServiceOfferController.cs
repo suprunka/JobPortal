@@ -101,15 +101,23 @@ namespace MyWeb.Controllers
         public ActionResult GetHoursFrom(int serviceId, DateTime date)
         {
 
-
-            IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
+            try
+            {
+                IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
                 {
                     Text = x.ToString(),
                     Value = x.ToString()
                 })
-                .ToList();
+                                .ToList();
 
                 return Json(hoursFrom, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json(null, JsonRequestBehavior.DenyGet);
+            }
+            
             
         }
 

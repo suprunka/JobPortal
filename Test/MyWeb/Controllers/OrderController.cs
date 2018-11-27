@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using MyWeb.App_Start;
 using Repository.DbConnection;
+using System.Data.SqlClient;
 
 namespace MyWeb.Controllers
 {
@@ -58,19 +59,27 @@ namespace MyWeb.Controllers
 
         public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
+
             if (userID != null && serviceID > 0)
             {
-                var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
-                if (result)
+                try
                 {
-                    return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+                    var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                    if (result)
+                    {
+                        return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+                    }
+                    else
+                    {
+                        return View("Error", null);
+                    }
                 }
-                return null;
+                catch (InvalidOperationException)
+                {
+                    return View("Error", null);
+                }
             }
-            else
-            {
-                return null;
-            }
+            return View("Error", null);
         }
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
         {

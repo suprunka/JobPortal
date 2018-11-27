@@ -231,7 +231,12 @@ namespace Repository.OrderRepository
                         result = true;
 
                     }
-                    catch(Exception e)
+                   
+                    catch (SqlException)
+                    {
+                        return false;
+                    }
+                    catch (Exception e)
                     {
                         throw e;
                     }
@@ -297,36 +302,45 @@ namespace Repository.OrderRepository
 
         public IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
         {
-            IList<TimeSpan> hourTo = new List<TimeSpan>();
-            DayOfWeek day = date.DayOfWeek;
-            var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
-            var unavailable = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == serviceId).Select(x => x.BookedDate).Where(x => x.BookedDate1 == date).ToArray();
-            for (TimeSpan from = workingdates.Select(x => x.HourFrom).Min(); from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)))
+            try
             {
-                TimeSpan time = from;
-                TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
-                bool result = true;
-                foreach (var i in unavailable)
+                IList<TimeSpan> hourTo = new List<TimeSpan>();
+                DayOfWeek day = date.DayOfWeek;
+                var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
+                var unavailable = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == serviceId).Select(x => x.BookedDate).Where(x => x.BookedDate1 == date).ToArray();
+                for (TimeSpan from = workingdates.Select(x => x.HourFrom).Min(); from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)))
                 {
-                    TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
-                    if (!range.Clashes(timeRange,true))
+                    TimeSpan time = from;
+                    TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
+                    bool result = true;
+                    foreach (var i in unavailable)
                     {
-                        result = true;
+                        TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
+                        if (!range.Clashes(timeRange, true))
+                        {
+                            result = true;
+                        }
+                        else
+                        {
+                            result = false;
+                            break;
+                        }
+
                     }
-                    else
+                    if (result)
                     {
-                        result = false;
-                        break;
+                        hourTo.Add(time);
                     }
 
                 }
-                if (result)
-                {
-                    hourTo.Add(time);
-                }
+                return hourTo;
 
             }
-            return hourTo;
+            catch (InvalidOperationException)
+            {
+                throw new Exception();
+                
+            }
         }
 
             public IEnumerable<TimeSpan> GetHoursTo(int serviceId ,DateTime date, TimeSpan timefrom)
@@ -339,8 +353,13 @@ namespace Repository.OrderRepository
             for(TimeSpan from = timefrom; from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)) )
             {
                 TimeSpan time = from;
-                TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01,30,00)));
-                bool result = false;
+                TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
+
+                bool result = true;
+                if(unavailable.Count() != 0)
+                {
+                    result = false;
+                }
                 unavailable.OrderBy(x=>x.HourFrom);
                 foreach (var i in unavailable)
                 {

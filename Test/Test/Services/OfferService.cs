@@ -192,14 +192,20 @@ namespace ServiceLibrary
             {
                 resultToReturn.Add(new Offer
                 {
-                    Id = i.ID,
+                    Id = i.ServiceOffer.ID,
                     AuthorId = id,
-                    Description = i.Description,
-                    Title = i.Title,
-                    RatePerHour = i.RatePerHour,
-                    Category = (Category)Enum.Parse(typeof(Category), i.SubCategory.Category.Name),
-                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), i.SubCategory.Name),
-                    
+                    Description = i.ServiceOffer.Description,
+                    Title = i.ServiceOffer.Title,
+                    RatePerHour = i.ServiceOffer.RatePerHour,
+                    Category = (Category)Enum.Parse(typeof(Category), i.ServiceOffer.SubCategory.Category.Name),
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), i.ServiceOffer.SubCategory.Name),
+                    WorkingDetails= new WorkingTime
+                    {
+                        Date = i.BookedDate.BookedDate1,
+                        HoursFrom = i.BookedDate.HourFrom,
+                        HoursTo = i.BookedDate.HourTo,
+                        WeekDay = i.BookedDate.BookedDate1.DayOfWeek,
+                    }
                 });
             }
             return resultToReturn.AsQueryable<Offer>();

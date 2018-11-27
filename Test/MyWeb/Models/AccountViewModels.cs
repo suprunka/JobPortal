@@ -77,7 +77,7 @@ namespace WebJobPortal.Models
     {
         public MyWeb.Models.ManageOffers[] Services { get; set; }
 
-        public MyWeb.Models.ManageOffers[] Bought { get; set; }
+        public MyWeb.Models.BoughtOffers[] Bought { get; set; }
 
         public String Description { get; set; }
 

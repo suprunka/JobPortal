@@ -1,11 +1,10 @@
-﻿@model MyWeb.Models.ManageOffers[]
+﻿@model MyWeb.Models.BoughtOffers[]
 @using MyWeb.Models
 @{
     var counter = 0;
 }
-
 <tr class="offers">
-    @foreach (ManageOffers offer in @Model)
+    @foreach (BoughtOffers offer in Model)
     {
         if (counter != 0 && counter % 3 == 0)
         {
@@ -50,6 +49,10 @@
                     <div class="card-body">
                         <h4 class="card-title" style="word-break:break-word;">@offer.Title</h4>
                         <p class="card-text" style="word-break:break-word;">@offer.Description</p>
+                        <p class="card-text" style="word-break:break-word;">Date: @offer.Date.ToShortDateString()</p>
+                        <p class="card-text" style="word-break:break-word;">Hour from: @offer.HourFrom</p>
+                        <p class="card-text" style="word-break:break-word;">Hour to: @offer.HourTo</p>
+
                         <h4 class="price">@decimal.Round(offer.RatePerHour, 2, MidpointRounding.AwayFromZero) DKK/ hour</h4>
                         @Html.ActionLink("See Details", "ViewDetails", "ServiceOffer", new { id = offer.Id }, new { @class = "buttons", @id = "details-btn" })
                     </div>
