@@ -154,9 +154,8 @@ namespace MyWeb.Controllers
 
                 if (day.WeekDay == DateTime.Now.DayOfWeek)
                 {
-
-                    startdate = startdate.Subtract(TimeSpan.FromDays(7)).Date.Add(day.Start);
-                    enddate  = enddate.AddDays(-7).Date.Add(day.End);
+                    startdate= startdate.Subtract(TimeSpan.FromDays(7)).Date.Add(day.Start);
+                    enddate= enddate.AddDays(-7).Date.Add(day.End);
                 }
                 else if (day.WeekDay == DateTime.Now.AddDays(1).DayOfWeek)
                 {
@@ -197,7 +196,7 @@ namespace MyWeb.Controllers
 
                 list.Add(new WorkingDate { Id = day.Id, OfferId = day.OfferId, Text = day.Text, Start = startdate, End = enddate });
 
-                //from e in dc.Events where !((e.End <= VisibleStart) || (e.Start >= VisibleEnd)) select e;
+                
             }
             Events = list;
         }

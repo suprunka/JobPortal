@@ -7,7 +7,6 @@ namespace ServiceLibrary
     [ServiceContract]
     public interface IOfferService
     {
-
         [OperationContract]
         bool CreateServiceOffer(Offer offer);
 
@@ -22,9 +21,14 @@ namespace ServiceLibrary
 
         [OperationContract]
         IQueryable<Offer> GetAllOffers();
+
         [OperationContract]
         bool AddHoursToOffer(WorkingTime tme);
+
         [OperationContract]
         IQueryable<WorkingTime> GetAllWorkingDays();
+
+        [OperationContract]
+        IQueryable<Offer> GetAllBought(string ID);
     }
 }

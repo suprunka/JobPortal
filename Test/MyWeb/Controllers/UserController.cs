@@ -79,8 +79,8 @@ namespace MyWeb.Controllers
 
             user.Bought = _offerProxy.GetAllBought(id).Select(x=> new BoughtOffers {
                 Id = x.Id, Author = x.AuthorId, Description = x.Description, RatePerHour = x.RatePerHour,
-                Title = x.Title, Subcategory = x.Subcategory, Category = x.Category, Date = x.WorkingDetails.Date,
-                HourFrom = x.WorkingDetails.HoursFrom, HourTo = x.WorkingDetails.HoursTo}).ToArray();
+                Title = x.Title, Subcategory = x.Subcategory, Category = x.Category, Date = x.WorkingTime.Date,
+                HourFrom = x.WorkingTime.HoursFrom, HourTo = x.WorkingTime.HoursTo}).ToArray();
 
             return View(user);
         }

@@ -30,10 +30,10 @@ namespace ServiceLibrary
 
         }
 
-        public bool AddHoursToOffer( WorkingTime days)
+        public bool AddHoursToOffer(WorkingTime days)
         {
 
-           return  _database.AddWorkingDates(new WorkingDates
+            return _database.AddWorkingDates(new WorkingDates
             {
                 NameOfDay = days.WeekDay.ToString(),
                 HourFrom = days.Start,
@@ -41,7 +41,7 @@ namespace ServiceLibrary
                 ServiceOffer_ID = days.OfferId,
 
             });
-          
+
         }
 
         public bool CreateServiceOffer(Offer offer)
@@ -50,10 +50,10 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
                 {
-                   var serviceOffer= _database.Create(new ServiceOffer
+                    var serviceOffer = _database.Create(new ServiceOffer
                     {
 
-                        SubCategory =  new Repository.DbConnection.SubCategory
+                        SubCategory = new Repository.DbConnection.SubCategory
                         {
                             Name = offer.Subcategory.ToString(),
                             Category = new Repository.DbConnection.Category
@@ -61,7 +61,7 @@ namespace ServiceLibrary
                                 Name = offer.Category.ToString(),
                             },
                         },
-                        
+
 
                         Title = offer.Title,
                         Description = offer.Description,
@@ -69,7 +69,7 @@ namespace ServiceLibrary
                         Employee_ID = offer.AuthorId,
 
                     });
-              //      AddtoOffer(serviceOffer, offer);
+                    //      AddtoOffer(serviceOffer, offer);
 
                     return true;
                 }
@@ -82,7 +82,7 @@ namespace ServiceLibrary
             {
                 return false;
             }
-           
+
         }
 
         public Offer FindServiceOffer(int ID)
@@ -91,8 +91,9 @@ namespace ServiceLibrary
             var dbResult = _database.Get(x => x.ID == ID);
             if (dbResult != null)
             {
-               
-                offer = new Offer {
+
+                offer = new Offer
+                {
                     Id = ID,
                     AuthorId = dbResult.Employee_ID,
                     Description = dbResult.Description,
@@ -112,8 +113,8 @@ namespace ServiceLibrary
             {
                 if (ID > -1)
                 {
-                   return _database.Delete(t => t.ID == ID);
-                   
+                    return _database.Delete(t => t.ID == ID);
+
                 }
                 return false;
             }
@@ -192,14 +193,43 @@ namespace ServiceLibrary
 
                 resultToReturn.Add(new WorkingTime
                 {
-                    Start =  item.HourFrom,
+                    Start = item.HourFrom,
                     End = item.HourTo,
                     OfferId = item.ServiceOffer_ID,
-                    WeekDay =(DayOfWeek) Enum.Parse(typeof(DayOfWeek), item.NameOfDay),
-                    
+                    WeekDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), item.NameOfDay),
+
                 });
             }
             return resultToReturn.AsQueryable<WorkingTime>();
+        }
+
+
+
+
+        public IQueryable<Offer> GetAllBought(string id)
+        {
+            IList<Offer> resultToReturn = new List<Offer>();
+            foreach (var i in _database.GetAllBought(id))
+            {
+                resultToReturn.Add(new Offer
+                {
+                    Id = i.ServiceOffer.ID,
+                    AuthorId = id,
+                    Description = i.ServiceOffer.Description,
+                    Title = i.ServiceOffer.Title,
+                    RatePerHour = i.ServiceOffer.RatePerHour,
+                    Category = (Category)Enum.Parse(typeof(Category), i.ServiceOffer.SubCategory.Category.Name),
+                    Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), i.ServiceOffer.SubCategory.Name),
+                    WorkingTime = new WorkingDetails
+                    {
+                        Date = i.BookedDate.BookedDate1,
+                        HoursFrom = i.BookedDate.HourFrom,
+                        HoursTo = i.BookedDate.HourTo,
+                        WeekDay = i.BookedDate.BookedDate1.DayOfWeek,
+                    }
+                });
+            }
+            return resultToReturn.AsQueryable<Offer>();
         }
 
 

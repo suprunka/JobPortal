@@ -159,7 +159,7 @@ namespace UnitTestProject1.Service_tests
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    AddressTables = new AddressTables
+                    AddressTable = new AddressTable
                     {
                         Postcode = "9000",
                         City = "Aalborg",
@@ -201,7 +201,7 @@ namespace UnitTestProject1.Service_tests
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    AddressTables = new AddressTables
+                    AddressTable = new AddressTable
                     {
                         Postcode = "9000",
                         City = "Aalborg",
@@ -243,7 +243,7 @@ namespace UnitTestProject1.Service_tests
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    AddressTables = new AddressTables
+                    AddressTable = new AddressTable
                     {
                         Postcode = "9000",
                         City = "Aalborg",
@@ -302,7 +302,7 @@ namespace UnitTestProject1.Service_tests
 
                 databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
-                    AddressTables = new AddressTables
+                    AddressTable = new AddressTable
                     {
                         Postcode = "9000",
                         City = "Aalborg",
@@ -344,7 +344,7 @@ namespace UnitTestProject1.Service_tests
             {
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -368,7 +368,7 @@ namespace UnitTestProject1.Service_tests
                      Description = "description",
                     PayPalMail = "paypal@wp.pl",
              },new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -393,7 +393,7 @@ namespace UnitTestProject1.Service_tests
                     PayPalMail = "paypal@wp.pl",
 
              },new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -418,7 +418,7 @@ namespace UnitTestProject1.Service_tests
                     PayPalMail = "paypal@wp.pl",
 
              },new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -443,7 +443,7 @@ namespace UnitTestProject1.Service_tests
                     PayPalMail = "paypal@wp.pl",
 
              }, new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -503,7 +503,7 @@ namespace UnitTestProject1.Service_tests
             {
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -530,7 +530,7 @@ namespace UnitTestProject1.Service_tests
                         PayPalMail = "paypal@wp.pl",
 
                      }, new Users {
-                         AddressTables = new AddressTables
+                         AddressTable = new AddressTable
                          {
                              Postcode = "9000",
                              City = "Aalborg",
@@ -574,7 +574,7 @@ namespace UnitTestProject1.Service_tests
             {
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -601,7 +601,7 @@ namespace UnitTestProject1.Service_tests
                     PayPalMail = "paypal@wp.pl",
 
                 },new Users {
-                    AddressTables = new AddressTables
+                    AddressTable = new AddressTable
                      {
                          Postcode = "9000",
                          City = "Aalborg",
@@ -628,7 +628,7 @@ namespace UnitTestProject1.Service_tests
                         PayPalMail = "paypal@wp.pl",
 
              }, new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -673,7 +673,7 @@ namespace UnitTestProject1.Service_tests
             {
                 var databaseMock = new Mock<IUserRepository>();
                 databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -700,7 +700,7 @@ namespace UnitTestProject1.Service_tests
                         PayPalMail = "paypal@wp.pl",
 
              },new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",
@@ -726,7 +726,7 @@ namespace UnitTestProject1.Service_tests
                    Description = "description",
                         PayPalMail = "paypal@wp.pl",
              }, new Users {
-                 AddressTables = new AddressTables
+                 AddressTable = new AddressTable
                  {
                      Postcode = "9000",
                      City = "Aalborg",

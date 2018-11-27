@@ -26,12 +26,37 @@ namespace JobPortal.Model
         public virtual Category Category { get; set; }
         [DataMember]
         public virtual SubCategory Subcategory { get; set; }
-
         [DataMember]
-        public virtual IList<WorkingTime> ListOfWorkingDays { get; set; }
+        public virtual WorkingDetails WorkingTime { get; set; }
        
 
 
+    }
+
+    public class PayPalOffer
+    {
+        [DataMember]
+        public virtual int Id { get; set; }
+        [DataMember]
+        public virtual decimal RatePerHour { get; set; }
+        [DataMember]
+        public virtual string Title { get; set; }
+        [DataMember]
+        public virtual TimeSpan HoursFrom { get; set; }
+        [DataMember]
+        public virtual TimeSpan HoursTo { get; set; }
+    }
+
+    public class WorkingDetails
+    {
+        [DataMember]
+        public virtual TimeSpan HoursFrom { get; set; }
+        [DataMember]
+        public virtual TimeSpan HoursTo { get; set; }
+        [DataMember]
+        public virtual DateTime Date{ get; set; }
+        [DataMember]
+        public virtual DayOfWeek WeekDay { get; set; }
     }
 
     public class OrderedOffer
@@ -56,6 +81,7 @@ namespace JobPortal.Model
         public virtual TimeSpan HoursTo { get; set; }
         [DataMember]
         public virtual DayOfWeek WeekDay { get; set; }
+        [DataMember]
         public virtual DateTime Date { get; set; }
     }
 
@@ -74,9 +100,8 @@ namespace JobPortal.Model
         public virtual int Id { get; set; }
         [DataMember]
         public virtual string Text { get; set; }
-
-
     }
+
     public class WorkingDate
     {
         [DataMember]
