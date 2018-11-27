@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Transactions;
 using BookedDate = Repository.DbConnection.BookedDate;
 using Saleline = Repository.DbConnection.Salelines;
 
@@ -85,47 +86,47 @@ namespace Repository.OrderRepository
             using (SqlConnection objConn = new SqlConnection(connection))
             {
                 objConn.Open();
-                sql = objConn.BeginTransaction();
-                ShoppingCart cart = null;
-                try
+                using (var myTran = new TransactionScope())
                 {
-                    ShoppingCart[] choosenServices = _context.GetTable<ShoppingCart>().Where(x => x.User_ID == Logging_ID).Select(x => x).ToArray();
+                    ShoppingCart cart = null;
+                    try
+                    {
+                        ShoppingCart[] choosenServices = _context.GetTable<ShoppingCart>().Where(x => x.User_ID == Logging_ID).Select(x => x).ToArray();
 
-                    OrderTable newOrder = new OrderTable
-                    {
-                        AspNetUsers = _context.GetTable<AspNetUsers>().FirstOrDefault(x => x.Id == Logging_ID),
-                        OrderStatus_ID = 1,
-                        TotalPrice = 0,
-                        Date = DateTime.Now,
-                    };
-                    _context.GetTable<OrderTable>().InsertOnSubmit(newOrder);
-                    _context.SubmitChanges();
-                    //add to existiing order in for loop
-                    foreach (var item in choosenServices)
-                    {
-                        cart = item;
-                        AddToExistingOrder(newOrder, item);
+                        OrderTable newOrder = new OrderTable
+                        {
+                            AspNetUsers = _context.GetTable<AspNetUsers>().FirstOrDefault(x => x.Id == Logging_ID),
+                            OrderStatus_ID = 1,
+                            TotalPrice = 0,
+                            Date = DateTime.Now,
+                        };
+                        _context.GetTable<OrderTable>().InsertOnSubmit(newOrder);
+                        _context.SubmitChanges();
+                        //add to existiing order in for loop
+                        foreach (var item in choosenServices)
+                        {
+                            cart = item;
+                            AddToExistingOrder(newOrder, item);
+                        }
+                        result = newOrder;
+                        myTran.Complete();
                     }
-                    result = newOrder;
-                    sql.Commit();
-                }
-                catch (BookedTimeException)
-                {
-                    sql.Rollback();
-                    result = null;
-                    _context.GetTable<ShoppingCart>().DeleteOnSubmit(cart);
-                    _context.SubmitChanges();
+                    catch (BookedTimeException)
+                    {
+                        result = null;
+                        _context.GetTable<ShoppingCart>().DeleteOnSubmit(cart);
+                        _context.SubmitChanges();
 
-                }
-                catch (Exception e)
-                {
-                    sql.Rollback();
-
-                    throw e;
-                }
-                finally
-                {
-                    objConn.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                    finally
+                    {
+                        myTran.Dispose();
+                        objConn.Close();
+                    }
                 }
             }
             return result;
@@ -136,65 +137,66 @@ namespace Repository.OrderRepository
             OrderTable result = null;
             //using (SqlConnection objConn = new SqlConnection(connection))
             //{
-               
-                //sql = objConn.BeginTransaction();
-                if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == cart.Service_ID).Any(t => t.NameOfDay == cart.Date.DayOfWeek.ToString()) && o.OrderStatus_ID != 2)
+
+            //sql = objConn.BeginTransaction();
+            if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == cart.Service_ID).Any(t => t.NameOfDay == cart.Date.DayOfWeek.ToString()) && o.OrderStatus_ID != 2)
+            {
+                try
                 {
-                    try
+                    var span = cart.HourTo - cart.HourFrom;
+                    var numberOfHours = span.Hours;
+
+                    bool isAvailable = HoursAvailable(cart.Service_ID, cart.Date, cart.HourFrom, cart.HourTo);
+                    //var timeIsBooked = _context.GetTable<DbConnection.Salelines>().Where(x => x.ServiceOffer_ID == cart.Service_ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == cart.Date).Select(x => x.BookedDate).Where(x => new TimeRange(x.HourFrom, x.HourTo).Clashes(new TimeRange(cart.HourFrom, cart.HourTo))).Select(x => x).ToArray();
+                    //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
+                    if (!isAvailable)
                     {
-                        var span = cart.HourTo - cart.HourFrom;
-                        var numberOfHours = span.Hours;
-
-                       // var timeIsBooked = _context.GetTable<DbConnection.Salelines>().Where(x => x.ServiceOffer_ID == cart.Service_ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == cart.Date).Select(x => x.BookedDate).Where(x => new TimeRange(x.HourFrom, x.HourTo).Clashes(new TimeRange(cart.HourFrom, cart.HourTo))).Select(x => x).ToArray();
-                        //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
-                       // if (timeIsBooked.Length > 0)
-                       // {
-                       //     throw new BookedTimeException(cart.Service_ID, cart.User_ID);
-                       // }
-                        BookedDate dates = new BookedDate
-                        {
-                            NumberOfHours = numberOfHours,
-                            BookedDate1 = cart.Date,
-                            HourFrom = cart.HourFrom,
-                            HourTo = cart.HourTo + new TimeSpan(0, 30, 0),
-                        };
-                        _context.GetTable<BookedDate>().InsertOnSubmit(dates);
-                        _context.SubmitChanges();
-
-                        Saleline saleline = new Saleline
-                        {
-                            ServiceOffer = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == cart.Service_ID),
-                            Order_ID = o.ID,
-                            BookedDates_ID = dates.ID,
-                        };
-
-                        _context.GetTable<Saleline>().InsertOnSubmit(saleline);
-                        _context.SubmitChanges();
-
-
-                        var order = _context.GetTable<OrderTable>().FirstOrDefault(x => x.ID == o.ID);
-                        var service = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == cart.Service_ID);
-                        order.TotalPrice += service.RatePerHour * numberOfHours;
-                        _context.SubmitChanges();
-                        result = o;
-                       // sql.Commit();
+                        throw new BookedTimeException(cart.Service_ID, cart.User_ID);
                     }
-                    catch (Exception e)
+                    BookedDate dates = new BookedDate
                     {
-                       // sql.Rollback();
-                        result = null;
-                        throw e;
-                    }
-                    finally
+                        NumberOfHours = numberOfHours,
+                        BookedDate1 = cart.Date,
+                        HourFrom = cart.HourFrom,
+                        HourTo = cart.HourTo + new TimeSpan(0, 30, 0),
+                    };
+                    _context.GetTable<BookedDate>().InsertOnSubmit(dates);
+                    _context.SubmitChanges();
+
+                    Saleline saleline = new Saleline
                     {
-                       
-                    }
+                        ServiceOffer = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == cart.Service_ID),
+                        Order_ID = o.ID,
+                        BookedDates_ID = dates.ID,
+                    };
+
+                    _context.GetTable<Saleline>().InsertOnSubmit(saleline);
+                    _context.SubmitChanges();
+
+
+                    var order = _context.GetTable<OrderTable>().FirstOrDefault(x => x.ID == o.ID);
+                    var service = _context.GetTable<ServiceOffer>().FirstOrDefault(x => x.ID == cart.Service_ID);
+                    order.TotalPrice += service.RatePerHour * numberOfHours;
+                    _context.SubmitChanges();
+                    result = o;
+                    // sql.Commit();
                 }
-                else
+                catch (Exception e)
                 {
+                    // sql.Rollback();
                     result = null;
+                    throw e;
                 }
-           // }
+                finally
+                {
+
+                }
+            }
+            else
+            {
+                result = null;
+            }
+            // }
             return result;
         }
 
@@ -222,7 +224,7 @@ namespace Repository.OrderRepository
                         {
                             User_ID = cart.User_ID,
                             Service_ID = cart.Service_ID,
-                            Date =      DateTime.Parse(cart.Date.ToShortDateString()),
+                            Date = DateTime.Parse(cart.Date.ToShortDateString()),
                             HourFrom = cart.HourFrom,
                             HourTo = cart.HourTo,
                         };
@@ -231,7 +233,7 @@ namespace Repository.OrderRepository
                         result = true;
 
                     }
-                   
+
                     catch (SqlException)
                     {
                         return false;
@@ -259,7 +261,7 @@ namespace Repository.OrderRepository
                 try
                 {
                     var found = _context.GetTable<ShoppingCart>().Single(x => x.User_ID == cart.User_ID && x.HourTo == cart.HourTo && x.HourFrom == cart.HourFrom && x.Service_ID == cart.Service_ID && x.Date == cart.Date);
-                   
+
                     _context.GetTable<ShoppingCart>().DeleteOnSubmit(found);
                     _context.SubmitChanges();
                     result = true;
@@ -339,28 +341,28 @@ namespace Repository.OrderRepository
             catch (InvalidOperationException)
             {
                 throw new Exception();
-                
+
             }
         }
 
-            public IEnumerable<TimeSpan> GetHoursTo(int serviceId ,DateTime date, TimeSpan timefrom)
+        public IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan timefrom)
         {
             IList<TimeSpan> hourTo = new List<TimeSpan>();
             DayOfWeek day = date.DayOfWeek;
             var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
-            var unavailable= _context.GetTable<Saleline>().Where(x=>x.ServiceOffer_ID == serviceId).Select(x=>x.BookedDate).Where(x=> x.BookedDate1 == date).ToArray();
-           
-            for(TimeSpan from = timefrom; from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)) )
+            var unavailable = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == serviceId).Select(x => x.BookedDate).Where(x => x.BookedDate1 == date).ToArray();
+
+            for (TimeSpan from = timefrom; from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)))
             {
                 TimeSpan time = from;
                 TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
 
                 bool result = true;
-                if(unavailable.Count() != 0)
+                if (unavailable.Count() != 0)
                 {
                     result = false;
                 }
-                unavailable.OrderBy(x=>x.HourFrom);
+                unavailable.OrderBy(x => x.HourFrom);
                 foreach (var i in unavailable)
                 {
                     TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
@@ -371,9 +373,9 @@ namespace Repository.OrderRepository
                     else
                     {
                         result = false;
-                       // break;
+                        // break;
                     }
-                   
+
                 }
                 if (result)
                 {
@@ -390,8 +392,8 @@ namespace Repository.OrderRepository
 
         public bool CleanCart(string userID)
         {
-            
-            foreach(var i in _context.GetTable<ShoppingCart>().Where(x => x.User_ID == userID))
+
+            foreach (var i in _context.GetTable<ShoppingCart>().Where(x => x.User_ID == userID))
             {
                 _context.GetTable<ShoppingCart>().DeleteOnSubmit(i);
             }

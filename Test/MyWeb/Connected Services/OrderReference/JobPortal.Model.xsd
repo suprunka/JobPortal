@@ -141,14 +141,11 @@
   <xs:element name="ArrayOfPayPalOffer" nillable="true" type="tns:ArrayOfPayPalOffer" />
   <xs:complexType name="PayPalOffer">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
       <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q3:DayOfWeek" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PayPalOffer" nillable="true" type="tns:PayPalOffer" />

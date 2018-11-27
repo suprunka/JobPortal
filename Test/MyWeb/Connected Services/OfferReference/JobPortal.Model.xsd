@@ -8,10 +8,10 @@
       <xs:element minOccurs="0" name="Category" type="tns:Category" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="ListOfWorkingDays" nillable="true" type="tns:ArrayOfWorkingTime" />
       <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
       <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkingDetails" nillable="true" type="tns:WorkingTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Offer" nillable="true" type="tns:Offer" />
@@ -26,21 +26,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Category" nillable="true" type="tns:Category" />
-  <xs:complexType name="ArrayOfWorkingTime">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
-  <xs:complexType name="WorkingTime">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
-      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
-      <xs:element minOccurs="0" name="OfferId" type="xs:int" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q1:DayOfWeek" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
   <xs:simpleType name="SubCategory">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Cleaning" />
@@ -64,6 +49,16 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="SubCategory" nillable="true" type="tns:SubCategory" />
+  <xs:complexType name="WorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element minOccurs="0" name="OfferId" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q1:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
   <xs:complexType name="ArrayOfOffer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Offer" nillable="true" type="tns:Offer" />
