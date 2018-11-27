@@ -290,7 +290,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OfferServiceHttpEndpoint_GetAllBought_Input_policy">
+  <wsp:Policy wsu:Id="OfferServiceHttpEndpoint_AddHoursToOffer_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -309,7 +309,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OfferServiceHttpEndpoint_GetAllBought_output_policy">
+  <wsp:Policy wsu:Id="OfferServiceHttpEndpoint_AddHoursToOffer_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -395,11 +395,11 @@
   <wsdl:message name="IOfferService_GetAllOffers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllOffersResponse" />
   </wsdl:message>
-  <wsdl:message name="IOfferService_GetAllBought_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllBought" />
+  <wsdl:message name="IOfferService_AddHoursToOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddHoursToOffer" />
   </wsdl:message>
-  <wsdl:message name="IOfferService_GetAllBought_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllBoughtResponse" />
+  <wsdl:message name="IOfferService_AddHoursToOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddHoursToOfferResponse" />
   </wsdl:message>
   <wsdl:portType name="IOfferService">
     <wsdl:operation name="CreateServiceOffer">
@@ -422,9 +422,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAllOffers" message="tns:IOfferService_GetAllOffers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAllOffersResponse" message="tns:IOfferService_GetAllOffers_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllBought">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAllBought" message="tns:IOfferService_GetAllBought_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAllBoughtResponse" message="tns:IOfferService_GetAllBought_OutputMessage" />
+    <wsdl:operation name="AddHoursToOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/AddHoursToOffer" message="tns:IOfferService_AddHoursToOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/AddHoursToOfferResponse" message="tns:IOfferService_AddHoursToOffer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OfferServiceHttpEndpoint" type="tns:IOfferService">
@@ -485,14 +485,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllBought">
-      <soap12:operation soapAction="http://tempuri.org/IOfferService/GetAllBought" style="document" />
+    <wsdl:operation name="AddHoursToOffer">
+      <soap12:operation soapAction="http://tempuri.org/IOfferService/AddHoursToOffer" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OfferServiceHttpEndpoint_GetAllBought_Input_policy" />
+        <wsp:PolicyReference URI="#OfferServiceHttpEndpoint_AddHoursToOffer_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OfferServiceHttpEndpoint_GetAllBought_output_policy" />
+        <wsp:PolicyReference URI="#OfferServiceHttpEndpoint_AddHoursToOffer_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -545,8 +545,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllBought">
-      <soap12:operation soapAction="http://tempuri.org/IOfferService/GetAllBought" style="document" />
+    <wsdl:operation name="AddHoursToOffer">
+      <soap12:operation soapAction="http://tempuri.org/IOfferService/AddHoursToOffer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -561,7 +561,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:8080/Offer/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>JAKUB\jakub</Upn>
+          <Upn>DESKTOP-LNM21H7\locac</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -570,7 +570,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Offer/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>JAKUB\jakub</Upn>
+          <Upn>DESKTOP-LNM21H7\locac</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

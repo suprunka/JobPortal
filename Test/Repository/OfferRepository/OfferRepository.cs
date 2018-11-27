@@ -144,8 +144,12 @@ namespace Repository
 
         }
 
-        public bool AddWorkingDates(Days day, TimeSpan hourFrom, TimeSpan hourTo, ServiceOffer s)
+        public bool AddWorkingDates(WorkingDates days)
         {
+            string employeeId = _context.GetTable<WorkingDates>().Where(x => x.ServiceOffer_ID == days.ServiceOffer_ID).Select(x => x.ServiceOffer).Select(x => x.Employee_ID).First();
+
+            var allServicesForThatDayForThatEmployee = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == days.NameOfDay).Select(x => x.ServiceOffer).Where(x => x.Employee_ID == employeeId);
+
             bool result = false;
             using (SqlConnection objConn = new SqlConnection(connection))
             {
@@ -154,10 +158,10 @@ namespace Repository
                 {
                     WorkingDates workingDates = new WorkingDates
                     {
-                        NameOfDay = day.ToString(),
-                        HourFrom = hourFrom,
-                        HourTo = hourTo,
-                        ServiceOffer_ID = s.ID,
+                        NameOfDay = days.NameOfDay,
+                        HourFrom = days.HourFrom,
+                        HourTo = days.HourTo,
+                        ServiceOffer_ID = days.ServiceOffer_ID,
                     };
                     _context.GetTable<WorkingDates>().InsertOnSubmit(workingDates);
                     _context.SubmitChanges();

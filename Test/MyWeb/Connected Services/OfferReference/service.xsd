@@ -69,17 +69,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllBought">
+  <xs:element name="AddHoursToOffer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="tme" nillable="true" type="q5:WorkingTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllBoughtResponse">
+  <xs:element name="AddHoursToOfferResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetAllBoughtResult" nillable="true" type="q5:ArrayOfOffer" />
+        <xs:element minOccurs="0" name="AddHoursToOfferResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

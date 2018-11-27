@@ -58,9 +58,16 @@ namespace JobPortal.Model
 
     public class WorkingTime
     {
+        [DataMember]
         public virtual TimeSpan HoursFrom { get; set; }
+        [DataMember]
         public virtual TimeSpan HoursTo { get; set; }
+        [DataMember]
         public virtual DayOfWeek WeekDay { get; set; }
+        [DataMember]
+        public virtual int OfferId { get; set; }
+       
+
     }
 
     [DataContract(Name = "Category")]

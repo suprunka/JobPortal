@@ -50,6 +50,13 @@
     <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="DayPilot, Version=5.0.303.0, Culture=neutral, PublicKeyToken=ce5d34538e20ef65, processorArchitecture=MSIL">
+      <HintPath>..\packages\DayPilot.5.0.303\lib\DayPilot.dll</HintPath>
+    </Reference>
+    <Reference Include="DayPilot.Web.Mvc, Version=2018.1.5927.0, Culture=neutral, PublicKeyToken=b8d928e6588028e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DayPilot.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -234,6 +241,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -271,6 +279,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\Repository.DbConnection.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\OrderReference\service.xsd">
@@ -384,7 +395,8 @@
     <Content Include="Views\ServiceOffer\ViewDetails.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Calendar2\Index.cshtml" />
-    <Content Include="Views\Shared\Bought.cshtml" />
+    <Content Include="Views\Calendar\AddHours.cshtml" />
+    <Content Include="Views\Calendar\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

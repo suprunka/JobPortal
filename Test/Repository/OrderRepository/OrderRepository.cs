@@ -21,15 +21,10 @@ namespace Repository.OrderRepository
         public OrderRepository(DataContext context) : base(context)
         {
             _context = context;
-
-
         }
 
         public OrderRepository()
         {
-
-
-
         }
 
         public bool CancelOrder(Order o)
@@ -50,8 +45,6 @@ namespace Repository.OrderRepository
 
             return true;
         }
-
-
 
         public bool CancelServiceInOrder(JobPortal.Model.Saleline o)
         {
