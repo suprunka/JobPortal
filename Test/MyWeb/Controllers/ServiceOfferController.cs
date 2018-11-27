@@ -32,7 +32,7 @@ namespace MyWeb.Controllers
             _mapper = config.CreateMapper();
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
-
+            
         }
         public ServiceOfferController(IOfferService proxy)
         {

@@ -24,5 +24,7 @@ namespace ServiceLibrary
         IQueryable<Offer> GetAllOffers();
         [OperationContract]
         bool AddHoursToOffer(WorkingTime tme);
+        [OperationContract]
+        IQueryable<WorkingTime> GetAllWorkingDays();
     }
 }

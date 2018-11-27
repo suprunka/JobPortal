@@ -328,6 +328,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OfferServiceHttpEndpoint_GetAllWorkingDays_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OfferServiceHttpEndpoint_GetAllWorkingDays_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OfferServiceTcpEndpoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -401,6 +439,12 @@
   <wsdl:message name="IOfferService_AddHoursToOffer_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddHoursToOfferResponse" />
   </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllWorkingDays_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWorkingDays" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllWorkingDays_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWorkingDaysResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOfferService">
     <wsdl:operation name="CreateServiceOffer">
       <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/CreateServiceOffer" message="tns:IOfferService_CreateServiceOffer_InputMessage" />
@@ -425,6 +469,10 @@
     <wsdl:operation name="AddHoursToOffer">
       <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/AddHoursToOffer" message="tns:IOfferService_AddHoursToOffer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/AddHoursToOfferResponse" message="tns:IOfferService_AddHoursToOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWorkingDays">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAllWorkingDays" message="tns:IOfferService_GetAllWorkingDays_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse" message="tns:IOfferService_GetAllWorkingDays_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OfferServiceHttpEndpoint" type="tns:IOfferService">
@@ -496,6 +544,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllWorkingDays">
+      <soap12:operation soapAction="http://tempuri.org/IOfferService/GetAllWorkingDays" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#OfferServiceHttpEndpoint_GetAllWorkingDays_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#OfferServiceHttpEndpoint_GetAllWorkingDays_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OfferServiceTcpEndpoint" type="tns:IOfferService">
     <wsp:PolicyReference URI="#OfferServiceTcpEndpoint_policy" />
@@ -547,6 +606,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddHoursToOffer">
       <soap12:operation soapAction="http://tempuri.org/IOfferService/AddHoursToOffer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWorkingDays">
+      <soap12:operation soapAction="http://tempuri.org/IOfferService/GetAllWorkingDays" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -2,6 +2,7 @@
 using JobPortal.Model;
 using Repository.DbConnection;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Linq;
 using System.Data.SqlClient;
@@ -145,40 +146,73 @@ namespace Repository
 
         public bool AddWorkingDates(WorkingDates days)
         {
-            string employeeId = _context.GetTable<WorkingDates>().Where(x => x.ServiceOffer_ID == days.ServiceOffer_ID).Select(x => x.ServiceOffer).Select(x => x.Employee_ID).First();
+            TimeRange timeRange = new TimeRange(days.HourFrom, days.HourTo);
+            string employeeId = _context.GetTable<ServiceOffer>().Where(x => x.ID == days.ServiceOffer_ID).Select(x => x.Employee_ID).First();
+            //string employeeId = _context.GetTable<WorkingDates>().Where(x => x.ServiceOffer_ID == days.ServiceOffer_ID).Select(x => x.ServiceOffer).Select(x => x.Employee_ID).First();
+            bool result = true;
+            bool resultDb = false;
 
-            var allServicesForThatDayForThatEmployee = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == days.NameOfDay).Select(x => x.ServiceOffer).Where(x => x.Employee_ID == employeeId);
+            var allServicesForThatDayForThatEmployee = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == days.NameOfDay).Select(x=>x.ServiceOffer).Where(x => x.Employee_ID == employeeId);
 
-            bool result = false;
-            using (SqlConnection objConn = new SqlConnection(connection))
+            foreach (var item in allServicesForThatDayForThatEmployee)
             {
-                objConn.Open();
-                try
+                foreach (var time in item.WorkingDates)
                 {
-                    WorkingDates workingDates = new WorkingDates
+                    TimeRange itemTime= new TimeRange(time.HourFrom, time.HourTo);
+                    if (itemTime.Clashes(timeRange))
                     {
-                        NameOfDay = days.NameOfDay,
-                        HourFrom = days.HourFrom,
-                        HourTo = days.HourTo,
-                        ServiceOffer_ID = days.ServiceOffer_ID,
-                    };
-                    _context.GetTable<WorkingDates>().InsertOnSubmit(workingDates);
-                    _context.SubmitChanges();
-                    result = true;
+                        result = false;
+                        break;
+                    }
+                    else
+                    {
+                        result = true;
+                    }
                 }
-                catch
+                if (!result)
                 {
-                    result = false;
-
+                    break;
                 }
-                finally
-                {
-                    objConn.Close();
-                }
-                return result;
 
             }
+            if (result) {
+                using (SqlConnection objConn = new SqlConnection(connection))
+                {
+                    objConn.Open();
+                    try
+                    {
+                        WorkingDates workingDates = new WorkingDates
+                        {
+                            NameOfDay = days.NameOfDay,
+                            HourFrom = days.HourFrom,
+                            HourTo = days.HourTo,
+                            ServiceOffer_ID = days.ServiceOffer_ID,
+                        };
+                        _context.GetTable<WorkingDates>().InsertOnSubmit(workingDates);
+                        _context.SubmitChanges();
+                        resultDb = true;
+                    }
+                    catch
+                    {
+                        resultDb = false;
 
+                    }
+                    finally
+                    {
+                        objConn.Close();
+                    }
+
+                }
+
+            }
+            return resultDb;
+
+
+        }
+
+        public IQueryable<WorkingDates> GetAllWorkingDays()
+        {
+            return _context.GetTable<WorkingDates>().AsQueryable<WorkingDates>();
         }
     }
 }

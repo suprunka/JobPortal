@@ -63,14 +63,35 @@ namespace JobPortal.Model
     public class WorkingTime
     {
         [DataMember]
-        public virtual TimeSpan HoursFrom { get; set; }
+        public virtual TimeSpan Start { get; set; }
         [DataMember]
-        public virtual TimeSpan HoursTo { get; set; }
+        public virtual TimeSpan End { get; set; }
         [DataMember]
         public virtual DayOfWeek WeekDay { get; set; }
         [DataMember]
         public virtual int OfferId { get; set; }
-       
+        [DataMember]
+        public virtual int Id { get; set; }
+        [DataMember]
+        public virtual string Text { get; set; }
+
+
+    }
+    public class WorkingDate
+    {
+        [DataMember]
+        public virtual DateTime Start { get; set; }
+        [DataMember]
+        public virtual DateTime End { get; set; }
+        [DataMember]
+        public virtual DayOfWeek WeekDay { get; set; }
+        [DataMember]
+        public virtual int OfferId { get; set; }
+        [DataMember]
+        public virtual int Id { get; set; }
+        [DataMember]
+        public virtual string Text { get; set; }
+
 
     }
 

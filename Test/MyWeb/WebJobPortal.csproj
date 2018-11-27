@@ -342,6 +342,7 @@
     <None Include="Connected Services\UserReference1\System.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Properties\DataSources\JobPortal.Model.WorkingTime.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

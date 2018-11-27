@@ -50,6 +50,12 @@ namespace MyWeb.OfferReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
         System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime tme);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
+        JobPortal.Model.WorkingTime[] GetAllWorkingDays();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.WorkingTime[]> GetAllWorkingDaysAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -125,6 +131,14 @@ namespace MyWeb.OfferReference {
         
         public System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime tme) {
             return base.Channel.AddHoursToOfferAsync(tme);
+        }
+        
+        public JobPortal.Model.WorkingTime[] GetAllWorkingDays() {
+            return base.Channel.GetAllWorkingDays();
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.WorkingTime[]> GetAllWorkingDaysAsync() {
+            return base.Channel.GetAllWorkingDaysAsync();
         }
     }
 }

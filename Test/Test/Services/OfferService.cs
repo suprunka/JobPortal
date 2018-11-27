@@ -36,8 +36,8 @@ namespace ServiceLibrary
            return  _database.AddWorkingDates(new WorkingDates
             {
                 NameOfDay = days.WeekDay.ToString(),
-                HourFrom = days.HoursFrom,
-                HourTo = days.HoursTo,
+                HourFrom = days.Start,
+                HourTo = days.End,
                 ServiceOffer_ID = days.OfferId,
 
             });
@@ -170,7 +170,7 @@ namespace ServiceLibrary
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _database.GetAll())
             {
-               
+
                 resultToReturn.Add(new Offer
                 {
                     Id = item.ID,
@@ -184,8 +184,25 @@ namespace ServiceLibrary
             }
             return resultToReturn.AsQueryable<Offer>();
         }
-       
-  
+        public IQueryable<WorkingTime> GetAllWorkingDays()
+        {
+            IList<WorkingTime> resultToReturn = new List<WorkingTime>();
+            foreach (var item in _database.GetAllWorkingDays())
+            {
+
+                resultToReturn.Add(new WorkingTime
+                {
+                    Start =  item.HourFrom,
+                    End = item.HourTo,
+                    OfferId = item.ServiceOffer_ID,
+                    WeekDay =(DayOfWeek) Enum.Parse(typeof(DayOfWeek), item.NameOfDay),
+                    
+                });
+            }
+            return resultToReturn.AsQueryable<WorkingTime>();
+        }
+
+
 
     }
 }
