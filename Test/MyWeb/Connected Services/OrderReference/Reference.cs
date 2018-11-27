@@ -17,10 +17,10 @@ namespace MyWeb.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(JobPortal.Model.BookedTimeException), Action="http://tempuri.org/IOrderService/CreateOrderBookedTimeExceptionFault", Name="BookedTimeException", Namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model")]
-        JobPortal.Model.Order CreateOrder(Repository.DbConnection.Users u);
+        JobPortal.Model.Order CreateOrder(string Logging_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
-        System.Threading.Tasks.Task<JobPortal.Model.Order> CreateOrderAsync(Repository.DbConnection.Users u);
+        System.Threading.Tasks.Task<JobPortal.Model.Order> CreateOrderAsync(string Logging_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CancelOrder", ReplyAction="http://tempuri.org/IOrderService/CancelOrderResponse")]
         bool CancelOrder(JobPortal.Model.Order o);
@@ -39,6 +39,12 @@ namespace MyWeb.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/PayForOrder", ReplyAction="http://tempuri.org/IOrderService/PayForOrderResponse")]
         System.Threading.Tasks.Task<bool> PayForOrderAsync(JobPortal.Model.Order o);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CleanCart", ReplyAction="http://tempuri.org/IOrderService/CleanCartResponse")]
+        bool CleanCart(string userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CleanCart", ReplyAction="http://tempuri.org/IOrderService/CleanCartResponse")]
+        System.Threading.Tasks.Task<bool> CleanCartAsync(string userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/AddToCart", ReplyAction="http://tempuri.org/IOrderService/AddToCartResponse")]
         bool AddToCart(string userId, int serviceId, System.DateTime date, System.TimeSpan hourfrom, System.TimeSpan hourTo);
@@ -63,6 +69,12 @@ namespace MyWeb.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetHoursTo", ReplyAction="http://tempuri.org/IOrderService/GetHoursToResponse")]
         System.Threading.Tasks.Task<System.TimeSpan[]> GetHoursToAsync(int serviceId, System.DateTime date, System.TimeSpan from);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypalResponse")]
+        JobPortal.Model.ShoppingCard GetShoppingCardForPaypal(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypalResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCardForPaypalAsync(string id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -92,12 +104,12 @@ namespace MyWeb.OrderReference {
                 base(binding, remoteAddress) {
         }
         
-        public JobPortal.Model.Order CreateOrder(Repository.DbConnection.Users u) {
-            return base.Channel.CreateOrder(u);
+        public JobPortal.Model.Order CreateOrder(string Logging_ID) {
+            return base.Channel.CreateOrder(Logging_ID);
         }
         
-        public System.Threading.Tasks.Task<JobPortal.Model.Order> CreateOrderAsync(Repository.DbConnection.Users u) {
-            return base.Channel.CreateOrderAsync(u);
+        public System.Threading.Tasks.Task<JobPortal.Model.Order> CreateOrderAsync(string Logging_ID) {
+            return base.Channel.CreateOrderAsync(Logging_ID);
         }
         
         public bool CancelOrder(JobPortal.Model.Order o) {
@@ -122,6 +134,14 @@ namespace MyWeb.OrderReference {
         
         public System.Threading.Tasks.Task<bool> PayForOrderAsync(JobPortal.Model.Order o) {
             return base.Channel.PayForOrderAsync(o);
+        }
+        
+        public bool CleanCart(string userId) {
+            return base.Channel.CleanCart(userId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CleanCartAsync(string userId) {
+            return base.Channel.CleanCartAsync(userId);
         }
         
         public bool AddToCart(string userId, int serviceId, System.DateTime date, System.TimeSpan hourfrom, System.TimeSpan hourTo) {
@@ -154,6 +174,14 @@ namespace MyWeb.OrderReference {
         
         public System.Threading.Tasks.Task<System.TimeSpan[]> GetHoursToAsync(int serviceId, System.DateTime date, System.TimeSpan from) {
             return base.Channel.GetHoursToAsync(serviceId, date, from);
+        }
+        
+        public JobPortal.Model.ShoppingCard GetShoppingCardForPaypal(string id) {
+            return base.Channel.GetShoppingCardForPaypal(id);
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCardForPaypalAsync(string id) {
+            return base.Channel.GetShoppingCardForPaypalAsync(id);
         }
     }
 }

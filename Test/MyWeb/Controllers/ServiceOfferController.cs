@@ -39,9 +39,7 @@ namespace MyWeb.Controllers
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
             });
-
             _mapper = config.CreateMapper();
-
             _offerProxy = proxy;
         }
         public ActionResult Index(string searchingString)
@@ -52,7 +50,6 @@ namespace MyWeb.Controllers
                 return View("Index", list);
             }
             var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-
             return View("Index", condition.ToArray());
         }
 
@@ -104,15 +101,23 @@ namespace MyWeb.Controllers
         public ActionResult GetHoursFrom(int serviceId, DateTime date)
         {
 
-
-            IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
+            try
+            {
+                IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
                 {
                     Text = x.ToString(),
                     Value = x.ToString()
                 })
-                .ToList();
+                                .ToList();
 
                 return Json(hoursFrom, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json(null, JsonRequestBehavior.DenyGet);
+            }
+            
             
         }
 
@@ -141,10 +146,8 @@ namespace MyWeb.Controllers
         [HttpPost]
         public ActionResult ViewDetails(ViewDetails edited)
         {
-           
                 var isUpdated = _offerProxy.UpdateServiceOffer(new Offer
                 {
-
                     Id = edited.Id,
                     Title = edited.Title,
                     RatePerHour = edited.RatePerHour,
@@ -154,8 +157,8 @@ namespace MyWeb.Controllers
                 {
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
-            
-            return View("ViewDetails", edited);
+
+            return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
         }
         public async Task<ActionResult> Delete(int idd)
         {

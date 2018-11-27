@@ -11,18 +11,19 @@ namespace JobPortal.Model
     {
         private User author;
         private LinkedList<OrderedOffer> listOfItems;
-        
+        private LinkedList<PayPalOffer> payPallistOfItems;
 
         public ShoppingCard(User u)
         {
             author = u;
             listOfItems = new LinkedList<OrderedOffer>();
-
+            payPallistOfItems = new LinkedList<PayPalOffer>();
         }
 
         public ShoppingCard()
         {
             listOfItems = new LinkedList<OrderedOffer>();
+            payPallistOfItems = new LinkedList<PayPalOffer>();
         }
 
         public User Author
@@ -49,6 +50,18 @@ namespace JobPortal.Model
             }
         }
 
+        public LinkedList<PayPalOffer> PayPalList
+        {
+            get
+            {
+                return payPallistOfItems;
+            }
+            private set
+            {
+                payPallistOfItems = value;
+            }
+        }
+
         public LinkedList<OrderedOffer> AddToCard(OrderedOffer orderedOffer)
         {
             if (orderedOffer != null)
@@ -58,6 +71,17 @@ namespace JobPortal.Model
             }
             return null;
         }
+
+        public LinkedList<PayPalOffer> AddToCardPayPal(PayPalOffer orderedOffer)
+        {
+            if (orderedOffer != null)
+            {
+                payPallistOfItems.AddLast(orderedOffer);
+                return payPallistOfItems;
+            }
+            return null;
+        }
+
 
         public LinkedList<OrderedOffer> RemoveFromCard(int id)
         {
@@ -84,6 +108,16 @@ namespace JobPortal.Model
         {
             decimal totalPrice = 0;
             foreach(var i in listOfItems)
+            {
+                totalPrice += i.RatePerHour * (i.HoursTo - i.HoursFrom).Hours;
+            }
+            return totalPrice;
+        }
+
+        public decimal GetTotalPricePayPal()
+        {
+            decimal totalPrice = 0;
+            foreach (var i in payPallistOfItems)
             {
                 totalPrice += i.RatePerHour * (i.HoursTo - i.HoursFrom).Hours;
             }

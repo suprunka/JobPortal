@@ -6,7 +6,7 @@ using JobPortal.Model;
 using WebJobPortal.Models;
 using System;
 using MyWeb.Controllers;
-using MyWeb.UserServiceReference;
+using MyWeb.UserReference1;
 using MyWeb.OfferReference;
 using MyWeb.Models;
 using Microsoft.AspNet.Identity.Owin;

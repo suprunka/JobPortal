@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using MyWeb.App_Start;
+using Repository.DbConnection;
+using System.Data.SqlClient;
 
 namespace MyWeb.Controllers
 {
@@ -43,24 +45,41 @@ namespace MyWeb.Controllers
             }
         }
 
-
+        public ActionResult CreateOrder(string userID)
+        {
+            if (userID != null)
+            {
+                _orderProxy.CreateOrder(userID);
+                CleanCart(userID);
+                return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+            }
+            return null;
+        }
 
 
         public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
+
             if (userID != null && serviceID > 0)
             {
-                var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
-                if (result)
+                try
                 {
-                    return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+                    var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                    if (result)
+                    {
+                        return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+                    }
+                    else
+                    {
+                        return View("Error", null);
+                    }
                 }
-                return null;
+                catch (InvalidOperationException)
+                {
+                    return View("Error", null);
+                }
             }
-            else
-            {
-                return null;
-            }
+            return View("Error", null);
         }
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
@@ -72,6 +91,19 @@ namespace MyWeb.Controllers
             return null;
         }
 
+
+        public ActionResult CleanCart(string id)
+        {
+            if (_orderProxy.CleanCart(id))
+            {
+                return RedirectToAction("Index", "Order", new { id = id.Trim() });
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
 
 
@@ -132,7 +164,9 @@ namespace MyWeb.Controllers
             //on successful payment, show success page to user.  
             return View("SuccessView");
         }
+
         private PayPal.Api.Payment payment;
+
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
         {
             var paymentExecution = new PaymentExecution()
@@ -148,20 +182,27 @@ namespace MyWeb.Controllers
 
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
+            var shoppingCard = _orderProxy.GetShoppingCardForPaypal(User.Identity.GetUserId());
             //create itemlist and add item objects to it  
             var itemList = new ItemList()
             {
                 items = new List<Item>()
             };
+
+            var lista = shoppingCard.PayPalList;
             //Adding Item Details like name, currency, price etc  
-            itemList.items.Add(new Item()
+            foreach (var i in lista)
             {
-                name = "Item Name comes here",
-                currency = "USD",
-                price = "1",
-                quantity = "1",
-                sku = "sku"
-            });
+                itemList.items.Add(new Item()
+                {
+                    name = i.Title,
+                    currency = "DKK",
+                    price = decimal.Round(i.RatePerHour, 0, MidpointRounding.AwayFromZero).ToString(),
+                    quantity = decimal.Round((i.HoursTo - i.HoursFrom).Hours, 0, MidpointRounding.AwayFromZero).ToString(),
+                    sku = "sku"
+                });
+            }
+
             var payer = new Payer()
             {
                 payment_method = "paypal"
@@ -175,15 +216,15 @@ namespace MyWeb.Controllers
             // Adding Tax, shipping and Subtotal details  
             var details = new Details()
             {
-                tax = "1",
-                shipping = "1",
-                subtotal = "1"
+                tax = "0",
+                shipping = "0",
+                subtotal = decimal.Round(shoppingCard.GetTotalPricePayPal(), 0, MidpointRounding.AwayFromZero).ToString()
             };
             //Final amount with details  
             var amount = new Amount()
             {
-                currency = "USD",
-                total = "3", // Total must be equal to sum of tax, shipping and subtotal.  
+                currency = "DKK",
+                total = decimal.Round(shoppingCard.GetTotalPricePayPal(), 0, MidpointRounding.AwayFromZero).ToString(), // Total must be equal to sum of tax, shipping and subtotal.  
                 details = details
             };
             var transactionList = new List<Transaction>();

@@ -213,5 +213,19 @@ namespace Repository
         {
             return _context.GetTable<WorkingDates>().AsQueryable<WorkingDates>();
         }
+
+        public IQueryable<Salelines> GetAllBought(string ID)
+        {
+            try
+            {
+                return _context.GetTable<Salelines>().Where(x => x.OrderTable.Users_ID == ID);     
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+   
     }
 }

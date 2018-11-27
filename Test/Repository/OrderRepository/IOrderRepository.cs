@@ -8,7 +8,7 @@ namespace Repository.OrderRepository
 {
     public interface IOrderRepository: IRepository<OrderTable>
     {
-        OrderTable CreateOrder(Users u);
+        OrderTable CreateOrder(string u);
         OrderTable AddToExistingOrder(OrderTable o, ShoppingCart cart);
         OrderTable PayForOrder(OrderTable o);
         bool DeleteFromCart(ShoppingCart cart);
@@ -18,5 +18,6 @@ namespace Repository.OrderRepository
         bool CancelOrder(Order o);
         IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
         IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
+        bool CleanCart(string userID);
     }
 }

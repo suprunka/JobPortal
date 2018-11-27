@@ -11,7 +11,7 @@ namespace ServiceLibrary
     {
         [OperationContract]
         [FaultContract(typeof(BookedTimeException))]
-        Order CreateOrder(Users u);
+        Order CreateOrder(string Logging_ID);
 
         [OperationContract]
         bool CancelOrder(Order o);
@@ -22,7 +22,8 @@ namespace ServiceLibrary
         [OperationContract]
         bool PayForOrder(Order o);
 
-       
+        [OperationContract]
+        bool CleanCart(string userId);
 
         [OperationContract]
         bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
@@ -35,6 +36,9 @@ namespace ServiceLibrary
 
         [OperationContract]
         IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
+
+        [OperationContract]
+        ShoppingCard GetShoppingCardForPaypal(string id);
 
 
     }
