@@ -22,7 +22,12 @@ namespace ServiceLibrary
 
         [OperationContract]
         IQueryable<Offer> GetAllOffers();
+
+
         [OperationContract]
         bool AddHoursToOffer(WorkingTime tme);
+
+        [OperationContract]
+        IQueryable<Offer> GetAllBought(string id);
     }
 }

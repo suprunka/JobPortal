@@ -397,6 +397,7 @@
     <Content Include="Views\Calendar2\Index.cshtml" />
     <Content Include="Views\Calendar\AddHours.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
+    <Content Include="Views\Shared\Bought.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
