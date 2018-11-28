@@ -10,5 +10,9 @@ namespace MyWeb.Models
     {
         public ShoppingCard Card{ get; set; }
 
+        public string Error{ get; set; }
+
+        
+
     }
 }

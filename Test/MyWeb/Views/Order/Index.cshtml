@@ -8,6 +8,13 @@
 <section class="ShoppingCard">
     <div class="header" style="margin-bottom:auto">
         <h1> Your shopping card</h1>
+        @if (Model.Error != null)
+        {
+            <div class="alert alert-danger">
+                <strong> We couldn't process your order. Reason:</strong> @Model.Error.ToString()
+            </div>
+        }
+
     </div>
 
 

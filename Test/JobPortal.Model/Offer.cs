@@ -28,9 +28,6 @@ namespace JobPortal.Model
         public virtual SubCategory Subcategory { get; set; }
         [DataMember]
         public virtual WorkingDetails WorkingTime { get; set; }
-       
-
-
     }
 
     public class PayPalOffer
@@ -84,7 +81,6 @@ namespace JobPortal.Model
         [DataMember]
         public virtual DateTime Date { get; set; }
     }
-
 
     public class WorkingTime
     {
@@ -180,7 +176,6 @@ namespace JobPortal.Model
         [SubcategoryOf(Category.Repairs)]
         Electronics,
 
-
         [EnumMember]
         [SubcategoryOf(Category.Architecture)]
         Buildings,
@@ -202,7 +197,6 @@ namespace JobPortal.Model
         Marketing,
 
     }
-
 
     [DataContract]
     public enum Days

@@ -86,7 +86,7 @@ namespace ServiceLibrary
             catch (BookedTimeException e)
             {
                 throw new FaultException<BookedTimeException>
-                 (e, new FaultReason(e.Message), new FaultCode("Sender"));
+                 (e, new FaultReason(e.GetMessage()), new FaultCode("Sender"));
             }
             return order;
 

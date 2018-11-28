@@ -11,6 +11,7 @@ using PayPal.Api;
 using MyWeb.App_Start;
 using Repository.DbConnection;
 using System.Data.SqlClient;
+using System.ServiceModel;
 
 namespace MyWeb.Controllers
 {
@@ -31,12 +32,12 @@ namespace MyWeb.Controllers
 
         }
         // GET: Order
-        public ActionResult Index(string id)
+        public ActionResult Index(string id, string error)
         {
             if (shoppingCard == null)
             {
                 var shoppingcard = _orderProxy.GetShoppingCard(id);
-                ShoppingCardView scv = new ShoppingCardView { Card = shoppingcard };
+                ShoppingCardView scv = new ShoppingCardView { Card = shoppingcard, Error = error };
                 return View(scv);
             }
             else
@@ -49,9 +50,17 @@ namespace MyWeb.Controllers
         {
             if (userID != null)
             {
-                _orderProxy.CreateOrder(userID);
-                CleanCart(userID);
-                return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+                try
+                {
+                    _orderProxy.CreateOrder(userID);
+                    CleanCart(userID);
+                    return RedirectToAction("Index", "Order", new { id = userID.Trim() });
+                }catch(FaultException e)
+                {
+                   
+                    return RedirectToAction("Index", "Order", new { id = userID.Trim(), error = e.Reason.ToString() });
+                }
+                
             }
             return null;
         }
@@ -232,7 +241,7 @@ namespace MyWeb.Controllers
             transactionList.Add(new Transaction()
             {
                 description = "Transaction description",
-                invoice_number = "your generated invoice number", //Generate an Invoice No  
+                invoice_number = "3542", //Generate an Invoice No  
                 amount = amount,
                 item_list = itemList
             });

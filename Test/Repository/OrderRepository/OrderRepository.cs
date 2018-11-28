@@ -111,11 +111,12 @@ namespace Repository.OrderRepository
                         result = newOrder;
                         myTran.Complete();
                     }
-                    catch (BookedTimeException)
+                    catch (BookedTimeException e)
                     {
                         result = null;
                         _context.GetTable<ShoppingCart>().DeleteOnSubmit(cart);
                         _context.SubmitChanges();
+                        throw e;
 
                     }
                     catch (Exception e)
@@ -145,13 +146,20 @@ namespace Repository.OrderRepository
                 {
                     var span = cart.HourTo - cart.HourFrom;
                     var numberOfHours = span.Hours;
-
-                    bool isAvailable = HoursAvailable(cart.Service_ID, cart.Date, cart.HourFrom, cart.HourTo);
-                    //var timeIsBooked = _context.GetTable<DbConnection.Salelines>().Where(x => x.ServiceOffer_ID == cart.Service_ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == cart.Date).Select(x => x.BookedDate).Where(x => new TimeRange(x.HourFrom, x.HourTo).Clashes(new TimeRange(cart.HourFrom, cart.HourTo))).Select(x => x).ToArray();
-                    //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
-                    if (!isAvailable)
+                    IList<BookedDate> list = new List<BookedDate>();
+                    //bool isAvailable = HoursAvailable(cart.Service_ID, cart.Date, cart.HourFrom, cart.HourTo);
+                    var timeIsBooked = _context.GetTable<DbConnection.Salelines>().Where(x => x.ServiceOffer_ID == cart.Service_ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == cart.Date).Select(x => x.BookedDate);
+                    foreach(var t in timeIsBooked)
                     {
-                        throw new BookedTimeException(cart.Service_ID, cart.User_ID);
+                        if(new TimeRange(t.HourFrom, t.HourTo).Clashes(new TimeRange(cart.HourFrom, cart.HourTo)))
+                        {
+                            list.Add(t);
+                        }
+                    }
+                    //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
+                    if (list.Count() > 0)
+                    {
+                        throw new BookedTimeException(cart.Service_ID, cart.User_ID, cart.HourFrom, cart.HourTo, cart.Date, cart.ServiceOffer.Title);
                     }
                     BookedDate dates = new BookedDate
                     {
