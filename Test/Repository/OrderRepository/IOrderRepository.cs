@@ -19,5 +19,6 @@ namespace Repository.OrderRepository
         IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
         IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
         bool CleanCart(string userID);
+        IQueryable<Salelines> GetJobCalendar(DateTime date, string employeeId);
     }
 }

@@ -72,12 +72,22 @@ namespace WebJobPortal.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+    public class JobOffer
+    {
+        public DateTime CurrentDate { get; set; }
+        public string Customer_ID { get; set; }
+        public decimal TotalPrice { get; set; }
+        public BoughtOffers Offer { get; set; }
+
+    }
 
     public class UserProfileViewModel
     {
         public MyWeb.Models.ManageOffers[] Services { get; set; }
 
         public MyWeb.Models.BoughtOffers[] Bought { get; set; }
+        public WebJobPortal.Models.JobOffer[] Jobs { get; set; }
+        public DateTime Date { get; set; }
 
         public String Description { get; set; }
 

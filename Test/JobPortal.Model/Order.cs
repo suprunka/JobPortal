@@ -21,21 +21,6 @@ namespace JobPortal.Model
         [DataMember]
         public virtual IEnumerable<Saleline> Salelines { get; set; }
 
-
-    }
- 
-    [DataContract]
-    public class BookedDate
-    {
-        public virtual TimeSpan HoursFrom { get; set; }
-        public virtual TimeSpan HoursTo { get; set; }
-        public virtual DateTime Day { get; set; }
-    }
-
-    [DataContract]
-    public enum AvailableHours
-    {
-     
     }
 
     [DataContract]
@@ -47,4 +32,16 @@ namespace JobPortal.Model
         public virtual int ServiceOfferId { get; set; }
     }
 
+    [DataContract]
+    public class JobOffer
+    {
+        [DataMember]
+        public virtual string Customer_ID { get; set; }
+        [DataMember]
+        public virtual decimal TotalPrice { get; set; }
+        [DataMember]
+        public virtual Offer Offer { get; set; }
+       
+
+    }
 }

@@ -7,7 +7,7 @@ namespace MyWeb.Models
 {
     public class OrderModel
     {
-        public LinkedList<ServiceOfferViewModel> ListOfItems { get; set; }
+       // public LinkedList<ServiceOfferViewModel> ListOfItems { get; set; }
         public decimal TotalPrice { get; set; }
     }
 }

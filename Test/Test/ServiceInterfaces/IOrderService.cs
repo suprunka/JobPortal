@@ -39,7 +39,8 @@ namespace ServiceLibrary
 
         [OperationContract]
         ShoppingCard GetShoppingCardForPaypal(string id);
-
+        [OperationContract]
+        IEnumerable<JobOffer> GetJobCallendar(DateTime date, string employeeId);
 
     }
 }
