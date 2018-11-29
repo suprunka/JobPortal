@@ -168,7 +168,7 @@ else
 </div>
 
 <div id="Calendar" class="frameContentColumn">
-    <table class="jobCalendarOfferTable">
+    <table class="table table-sm">
         <colgroup>
             <col class="col-md-4">
             <col class="col-md-4">
@@ -176,7 +176,14 @@ else
         </colgroup>
         <thead>
             <tr>
-                <th scope="col"></th>
+                <th scope="col">
+                    @Html.ActionLink(
+                    "<<",
+                    "UserProfile",
+                    "User",
+                    new {id= User.Identity.GetUserId(), date = Model.Date.AddDays(-1) },
+                    new { @class = " btn btn-default btn-sm pull-left" })
+                </th>
                 <th scope="col">@Model.Date.ToString(@"D")</th>
                 <th scope="col">
                     @Html.ActionLink(
@@ -188,8 +195,17 @@ else
                 </th>
             </tr>
         </thead>
-
-        @Html.Partial("Jobs", Model.Jobs)  
+        @if (Model.Jobs.Count() == 0)
+        {
+            <tr>
+                <td colspan="3">
+                    <div class="alert alert-info" role="alert">
+                        You don't have any jobs for this day.
+                    </div>
+                </td>
+            </tr>
+        }
+        @Html.Partial("Jobs", Model.Jobs)
     </table>
 </div>
 <!--user's own offers-->

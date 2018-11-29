@@ -93,8 +93,8 @@ namespace MyWeb.Controllers
             user.Jobs = _orderProxy.GetJobCallendar((DateTime)date, id).Select(x => new WebJobPortal.Models.JobOffer
             {
                 CurrentDate = (DateTime)date,
-            TotalPrice = x.TotalPrice,
-                Customer_ID = x.Customer_ID,
+                TotalPrice = x.TotalPrice,
+                Customer = new CustomerViewModel {AddressLine=user.AddressLine, CityName =user.CityName, FirstName=user.FirstName, Gender=user.Gender, LastName=user.LastName, PayPalMail=user.PayPalMail, Email = user.Email, PhoneNumber=user.PhoneNumber, Postcode =user.Postcode, Region = user.Region  },
                 Offer = new BoughtOffers
                 {
                     Id = x.Offer.Id,

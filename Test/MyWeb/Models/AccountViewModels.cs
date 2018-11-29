@@ -75,7 +75,7 @@ namespace WebJobPortal.Models
     public class JobOffer
     {
         public DateTime CurrentDate { get; set; }
-        public string Customer_ID { get; set; }
+        public CustomerViewModel Customer { get; set; }
         public decimal TotalPrice { get; set; }
         public BoughtOffers Offer { get; set; }
 
@@ -94,7 +94,6 @@ namespace WebJobPortal.Models
         [Display(Name = "Email:")]
         public String Email { get; set; }
 
-        //public String Password { get; set; }
 
         [Display(Name = "User name:")]
         public String UserName { get; set;}
@@ -127,6 +126,29 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Gender:")]
         public Gender Gender { get; set; }
+    }
+    public class CustomerViewModel
+    {
+        public String PhoneNumber { get; set; }
+
+        public String FirstName { get; set; }
+
+        public String LastName { get; set; }
+
+        public String AddressLine { get; set; }
+
+        public String CityName { get; set; }
+
+        public String PayPalMail { get; set; }
+
+        public String Postcode { get; set; }
+
+        public Region Region { get; set; }
+
+        public Gender Gender { get; set; }
+        public string Email { get; set; }
+
+
     }
 
     public class SetPropertiesViewModel
