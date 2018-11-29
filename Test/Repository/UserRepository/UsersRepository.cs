@@ -241,14 +241,9 @@ namespace Repository
                     objConn.Open();
                     using (var myTran = new TransactionScope())
                     {
-
-
                         try
                         {
-
-
                             Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
-
                             int oldCity_ID = found.City_ID;
                             var oldPostCode = found.AddressTable.Postcode;
                             found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
@@ -274,8 +269,6 @@ namespace Repository
                                     Postcode = obj.AddressTable.Postcode,
                                     City = obj.AddressTable.City,
                                     Region = obj.AddressTable.Region,
-
-
                                 });
                                 string newPhoneNumber = obj.AspNetUsers.PhoneNumber;
                                 _context.SubmitChanges();
@@ -295,10 +288,6 @@ namespace Repository
                                 found.AddressTable.City = obj.AddressTable.City;
                                 found.AddressTable.Region = obj.AddressTable.Region;
                             }
-
-
-
-
                             _context.SubmitChanges();
                             Users foundAtTheEnd = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                             /*if (found.AddressLine == foundAtTheEnd.AddressLine && found.AddressTable.City == foundAtTheEnd.AddressTable.City &&
@@ -384,34 +373,6 @@ namespace Repository
                 }
             }
             return result;
-        }
-
-        public bool SaveToShoppingCard(int id , OrderedOffer offer)
-        
-        {
-            return false;
-
-        }
-
-        public JobPortal.Model.ShoppingCard GetShoppingCard(string id)
-        {
-            JobPortal.Model.ShoppingCard result = null;
-            using (SqlConnection objConn = new SqlConnection(connection))
-            {
-                objConn.Open();
-
-                var list = _context.GetTable<DbConnection.ShoppingCart>().Where(x => x.User_ID == id);
-
-                foreach (var i in list)
-                {
-                    result.AddToCard(new OrderedOffer
-                    {
-                        
-
-                    });
-                }
-                return result;
-            }
         }
     }
 }

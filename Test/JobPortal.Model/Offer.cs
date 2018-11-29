@@ -10,6 +10,7 @@ namespace JobPortal.Model
     [DataContract]
     [KnownType(typeof(Category))]
     [KnownType(typeof(SubCategory))]
+    [KnownType(typeof(WorkingDetails))]
     public class Offer
     {
         [DataMember]
@@ -56,7 +57,7 @@ namespace JobPortal.Model
         public virtual DayOfWeek WeekDay { get; set; }
     }
 
-    public class OrderedOffer
+    /*public class OrderedOffer
     {
         [DataMember]
         public virtual int Id { get; set; }
@@ -80,7 +81,7 @@ namespace JobPortal.Model
         public virtual DayOfWeek WeekDay { get; set; }
         [DataMember]
         public virtual DateTime Date { get; set; }
-    }
+    }*/
 
     public class WorkingTime
     {
@@ -112,9 +113,8 @@ namespace JobPortal.Model
         public virtual int Id { get; set; }
         [DataMember]
         public virtual string Text { get; set; }
-
-
     }
+
 
     [DataContract(Name = "Category")]
     public enum Category
@@ -196,24 +196,5 @@ namespace JobPortal.Model
         [SubcategoryOf(Category.Media)]
         Marketing,
 
-    }
-
-    [DataContract]
-    public enum Days
-    {
-        [EnumMember]
-        Monday,
-        [EnumMember]
-        Thursday,
-        [EnumMember]
-        Wednesday,
-        [EnumMember]
-        Tuesday,
-        [EnumMember]
-        Friday,
-        [EnumMember]
-        Saturday,
-        [EnumMember]
-        Sunday
     }
 }

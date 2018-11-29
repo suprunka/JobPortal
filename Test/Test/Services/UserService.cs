@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
-using Repository.DbConnection.Entity;
 using ServiceLibrary.Models;
 using Gender = JobPortal.Model.Gender;
 using Region = JobPortal.Model.Region;
@@ -20,17 +18,16 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        private readonly IUserRepository _database;
-        // private readonly JobPortalEntities _logEntity;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository database)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            _database = database;
+            _unitOfWork = unitOfWork;
         }
 
         public UserService()
         {
-            _database = new UsersRepository(new JobPortalDatabaseDataContext());
+            _unitOfWork = new UnitOfWork(new JobPortalDatabaseDataContext());
         }
 
         public bool CreateUser(User u, string loggingId)
@@ -39,7 +36,7 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesUserMatch(u))
                 {
-                    _database.Create(new Users
+                    _unitOfWork.Users.Create(new Users
                     {
                         AddressTable = new AddressTable
                         {
@@ -78,7 +75,7 @@ namespace ServiceLibrary
             {
                 if (id > 0)
                 {
-                    _database.Delete(t => t.ID == id);
+                    _unitOfWork.Users.Delete(t => t.ID == id);
                     return true;
                 }
                 return false;
@@ -93,7 +90,7 @@ namespace ServiceLibrary
         {
             if (RegexMatch.DoesUserEmailMatch(u))
             {
-                _database.UpdateUserMail(new Users
+                _unitOfWork.Users.UpdateUserMail(new Users
                 {
                     ID = u.ID,
                     AspNetUsers = new AspNetUsers
@@ -116,7 +113,7 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesUserMatch(u))
                 {
-                    _database.Update(new Users
+                    _unitOfWork.Users.Update(new Users
                     {
 
                         AddressTable = new AddressTable
@@ -157,7 +154,7 @@ namespace ServiceLibrary
         {
             try
             {
-                var result = _database.Get(t => t.Logging_ID == phoneNumber);
+                var result = _unitOfWork.Users.Get(t => t.Logging_ID == phoneNumber);
                 return new User
                 {
                     ID = result.ID,
@@ -189,7 +186,7 @@ namespace ServiceLibrary
             {
                 if (id > 0)
                 {
-                    var result = _database.Get(t => t.ID == id);
+                    var result = _unitOfWork.Users.Get(t => t.ID == id);
                     if (result != null)
                     {
                         return new User
@@ -227,7 +224,7 @@ namespace ServiceLibrary
         public User[] GetAll()
         {
             IList<User> resultToReturn = new List<User>();
-            foreach (var u in _database.GetAll())
+            foreach (var u in _unitOfWork.Users.GetAll())
             {
                 resultToReturn.Add(new User
                 {
@@ -253,7 +250,7 @@ namespace ServiceLibrary
         public User[] ListByGender(Gender gender)
         {
             IList<User> resultToReturn = new List<User>();
-            foreach (var u in _database.List(Users => Users.Gender.Gender1 == gender.ToString()))
+            foreach (var u in _unitOfWork.Users.List(Users => Users.Gender.Gender1 == gender.ToString()))
             {
                 resultToReturn.Add(new User
                 {
@@ -277,7 +274,7 @@ namespace ServiceLibrary
         public User[] ListByRegion(Region region)
         {
             IList<User> resultToReturn = new List<User>();
-            foreach (var u in _database.List(Users => Users.AddressTable.Region == region.ToString()))
+            foreach (var u in _unitOfWork.Users.List(Users => Users.AddressTable.Region == region.ToString()))
             {
                 resultToReturn.Add(new User
                 {
@@ -298,67 +295,14 @@ namespace ServiceLibrary
             return resultToReturn.ToArray();
         }
 
-
-
-        private AspNetUsers Register(String login, String password, string mail, string phonenumber)
-        {
-            if (login.Length == 0 || password.Length == 0)
-            {
-                return null;
-            }
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
-            byte[] result = md5.Hash;
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < result.Length; i++)
-            {
-                str.Append(result[i].ToString("x2"));
-            }
-            AspNetUsers logging = new AspNetUsers
-            {
-                Email = mail,
-                PhoneNumber = phonenumber,
-                UserName = login,
-                PasswordHash = Encrypt.EncryptString(System.Text.Encoding.UTF8.GetString(result))
-            };
-            return logging;
-
-        }
-
-        public bool Login(String login, String password)
-        {
-
-            var existing = _database.Login(new AspNetUsers { UserName = login, PasswordHash = password });
-            if (existing != null)
-            {
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
-                byte[] result = md5.Hash;
-                StringBuilder str = new StringBuilder();
-                for (int i = 0; i < result.Length; i++)
-                {
-                    str.Append(result[i].ToString("x2"));
-                }
-                String t = Encoding.UTF8.GetString(result);
-                if (t.Equals(Encrypt.DecryptString(existing.PasswordHash)))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public bool AddDescription(User u)
         {
-
-            _database.AddDescription(new Users
+            _unitOfWork.Users.AddDescription(new Users
             {
                 ID = u.ID,
                 Description = u.Description
             });
             return true;
         }
-
-       
     }
 }

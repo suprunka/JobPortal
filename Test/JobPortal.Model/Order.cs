@@ -25,20 +25,6 @@ namespace JobPortal.Model
     }
  
     [DataContract]
-    public class BookedDate
-    {
-        public virtual TimeSpan HoursFrom { get; set; }
-        public virtual TimeSpan HoursTo { get; set; }
-        public virtual DateTime Day { get; set; }
-    }
-
-    [DataContract]
-    public enum AvailableHours
-    {
-     
-    }
-
-    [DataContract]
     public class Saleline
     {
         [DataMember]

@@ -10,20 +10,22 @@ namespace JobPortal.Model
     public class ShoppingCard
     {
         private User author;
-        private LinkedList<OrderedOffer> listOfItems;
+        private LinkedList<Offer> listOfItems;
         private LinkedList<PayPalOffer> payPallistOfItems;
-
+        private Random random;
         public ShoppingCard(User u)
         {
             author = u;
-            listOfItems = new LinkedList<OrderedOffer>();
+            listOfItems = new LinkedList<Offer>();
             payPallistOfItems = new LinkedList<PayPalOffer>();
+            random = new Random();
         }
 
         public ShoppingCard()
         {
-            listOfItems = new LinkedList<OrderedOffer>();
+            listOfItems = new LinkedList<Offer>();
             payPallistOfItems = new LinkedList<PayPalOffer>();
+            random = new Random();
         }
 
         public User Author
@@ -38,7 +40,7 @@ namespace JobPortal.Model
             }
         }
 
-        public LinkedList<OrderedOffer> List
+        public LinkedList<Offer> List
         {
             get
             {
@@ -62,7 +64,7 @@ namespace JobPortal.Model
             }
         }
 
-        public LinkedList<OrderedOffer> AddToCard(OrderedOffer orderedOffer)
+        public LinkedList<Offer> AddToCard(Offer orderedOffer)
         {
             if (orderedOffer != null)
             {
@@ -83,7 +85,7 @@ namespace JobPortal.Model
         }
 
 
-        public LinkedList<OrderedOffer> RemoveFromCard(int id)
+        public LinkedList<Offer> RemoveFromCard(int id)
         {
 
             var found = listOfItems.Single(x => x.Id == id);
@@ -98,7 +100,7 @@ namespace JobPortal.Model
             }
         }
 
-        public LinkedList<OrderedOffer> EmptyCard()
+        public LinkedList<Offer> EmptyCard()
         {
             listOfItems.Clear();
             return listOfItems;
@@ -109,7 +111,7 @@ namespace JobPortal.Model
             decimal totalPrice = 0;
             foreach(var i in listOfItems)
             {
-                totalPrice += i.RatePerHour * (i.HoursTo - i.HoursFrom).Hours;
+                totalPrice += i.RatePerHour * (i.WorkingTime.HoursTo - i.WorkingTime.HoursFrom).Hours;
             }
             return totalPrice;
         }
@@ -122,6 +124,14 @@ namespace JobPortal.Model
                 totalPrice += i.RatePerHour * (i.HoursTo - i.HoursFrom).Hours;
             }
             return totalPrice;
+        }
+
+
+        public string RandomString()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, 15)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

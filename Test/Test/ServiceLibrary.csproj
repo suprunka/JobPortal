@@ -156,8 +156,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\ClassMapper.cs" />
-    <Compile Include="Mapping\MappingConfig.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -167,7 +165,6 @@
     <Compile Include="ServiceInterfaces\IOfferService.cs" />
     <Compile Include="ServiceInterfaces\IOrderService.cs" />
     <Compile Include="ServiceInterfaces\IUserService.cs" />
-    <Compile Include="Services\Encrypt.cs" />
     <Compile Include="Services\OfferService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\UserService.cs" />

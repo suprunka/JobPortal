@@ -97,6 +97,7 @@ namespace MyWeb.Controllers
             }
             return null;
         }
+
         [HttpGet]
         public ActionResult GetHoursFrom(int serviceId, DateTime date)
         {

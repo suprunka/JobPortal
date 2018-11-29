@@ -17,23 +17,23 @@ namespace ServiceLibrary
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class OfferService : IOfferService
     {
-        private readonly IOfferRepository _database;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OfferService(IOfferRepository database)
+        public OfferService(IUnitOfWork unitOfWork)
         {
-            _database = database;
+            _unitOfWork = unitOfWork;
         }
 
         public OfferService()
         {
-            _database = new OfferRepository(new JobPortalDatabaseDataContext());
+            _unitOfWork = new UnitOfWork(new JobPortalDatabaseDataContext());
 
         }
 
         public bool AddHoursToOffer(WorkingTime days)
         {
 
-            return _database.AddWorkingDates(new WorkingDates
+            return _unitOfWork.Offers.AddWorkingDates(new WorkingDates
             {
                 NameOfDay = days.WeekDay.ToString(),
                 HourFrom = days.Start,
@@ -50,7 +50,7 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
                 {
-                    var serviceOffer = _database.Create(new ServiceOffer
+                    var serviceOffer = _unitOfWork.Offers.Create(new ServiceOffer
                     {
 
                         SubCategory = new Repository.DbConnection.SubCategory
@@ -88,7 +88,7 @@ namespace ServiceLibrary
         public Offer FindServiceOffer(int ID)
         {
             Offer offer = null;
-            var dbResult = _database.Get(x => x.ID == ID);
+            var dbResult = _unitOfWork.Offers.Get(x => x.ID == ID);
             if (dbResult != null)
             {
 
@@ -113,7 +113,7 @@ namespace ServiceLibrary
             {
                 if (ID > -1)
                 {
-                    return _database.Delete(t => t.ID == ID);
+                    return _unitOfWork.Offers.Delete(t => t.ID == ID);
 
                 }
                 return false;
@@ -131,7 +131,7 @@ namespace ServiceLibrary
             {
                 if (RegexMatch.DoesOfferMatch(serviceOffer) && (serviceOffer.RatePerHour > 0))
                 {
-                    _database.Update(new ServiceOffer
+                    _unitOfWork.Offers.Update(new ServiceOffer
                     {
                         ID = serviceOffer.Id,
                         Description = serviceOffer.Description,
@@ -169,7 +169,7 @@ namespace ServiceLibrary
         public IQueryable<Offer> GetAllOffers()
         {
             IList<Offer> resultToReturn = new List<Offer>();
-            foreach (var item in _database.GetAll())
+            foreach (var item in _unitOfWork.Offers.GetAll())
             {
 
                 resultToReturn.Add(new Offer
@@ -188,7 +188,7 @@ namespace ServiceLibrary
         public IQueryable<WorkingTime> GetAllWorkingDays()
         {
             IList<WorkingTime> resultToReturn = new List<WorkingTime>();
-            foreach (var item in _database.GetAllWorkingDays())
+            foreach (var item in _unitOfWork.Offers.GetAllWorkingDays())
             {
 
                 resultToReturn.Add(new WorkingTime
@@ -209,7 +209,7 @@ namespace ServiceLibrary
         public IQueryable<Offer> GetAllBought(string id)
         {
             IList<Offer> resultToReturn = new List<Offer>();
-            foreach (var i in _database.GetAllBought(id))
+            foreach (var i in _unitOfWork.Offers.GetAllBought(id))
             {
                 resultToReturn.Add(new Offer
                 {

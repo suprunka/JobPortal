@@ -67,9 +67,6 @@ namespace JobPortal.Model
         public virtual String Postcode { get; set; }
 
         [DataMember]
-        public virtual String BankAccountNumber { get; set; }
-
-        [DataMember]
         public virtual Region Region { get; set; }
 
         [DataMember]
@@ -79,8 +76,6 @@ namespace JobPortal.Model
         public virtual string PayPalMail { get; set; }
 
         [DataMember]
-        public virtual ShoppingCard ShoppingCard { get; set; }
-        
-        
+        public virtual ShoppingCard ShoppingCard { get; set; } 
     }
 }

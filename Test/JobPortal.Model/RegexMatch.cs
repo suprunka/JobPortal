@@ -38,27 +38,6 @@ namespace ServiceLibrary.Models
             }
         }
 
-        /*public static bool DoesWebUserMatch(User user)
-        {
-
-            if (
-                Regex.IsMatch(user.PhoneNumber, "^[0-9]{8}$") &&
-                Regex.IsMatch(user.FirstName, "^[a-zA-Z0-9ÆæØøÅå ]{1,}$") &&
-                Regex.IsMatch(user.LastName, "^[a-zA-Z0-9ÆæØøÅå ]{1,}$") &&
-                Regex.IsMatch(user.AddressLine, "^[a-zA-Z0-9ÆæØøÅå ]{1,}$") &&
-                Regex.IsMatch(user.CityName, "^[a-zA-Z0-9ÆæØøÅå ]{1,}$") &&
-                Regex.IsMatch(user.Postcode, "^[0-9]{4}$"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-
-
-        }*/
         public static bool DoesOfferMatch(Offer offer)
         {
             if (Regex.IsMatch(offer.Description, "^[a-zA-Z0-9ÆæØøÅå.,: ]{10,}$") &&

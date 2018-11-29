@@ -12,50 +12,50 @@ namespace ServiceLibrary
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Single, IncludeExceptionDetailInFaults =true)]
     public class OrderService : IOrderService
     {
-        private readonly IOrderRepository _database;
-        private readonly IOfferRepository _offerRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IOrderRepository database, IOfferRepository offerRepository)
+        public OrderService(IUnitOfWork unitOfWork)
         {
-            _database = database;
-            _offerRepository = offerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public OrderService()
         {
-            _database = new OrderRepository(new JobPortalDatabaseDataContext());
-            _offerRepository = new OfferRepository(new JobPortalDatabaseDataContext());
+            _unitOfWork = new UnitOfWork(new JobPortalDatabaseDataContext());
         }
 
-        public ShoppingCard GetShoppingCard(string id)
+        public ShoppingCard GetShoppingCart(string id)
         {
             ShoppingCard items = new ShoppingCard();
 
-            foreach (var item in _database.GetShoppingCart(id))
+            foreach (var item in _unitOfWork.Orders.GetShoppingCart(id))
             {
-                var offerDetails = _offerRepository.Get(x => x.ID == item.Service_ID);
-                items.AddToCard(new OrderedOffer
+                var offerDetails = _unitOfWork.Offers.Get(x => x.ID == item.Service_ID);
+                items.AddToCard(new Offer
                 {
                     Id = offerDetails.ID,
-                    HoursFrom = item.HourFrom,
                     Description = offerDetails.Description,
-                    HoursTo = item.HourTo,
                     RatePerHour = offerDetails.RatePerHour,
                     Title = offerDetails.Title,
-                    WeekDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), item.Date.DayOfWeek.ToString()),
-                    Date = item.Date,
+                    WorkingTime = new WorkingDetails
+                    {
+                        Date = item.Date,
+                        HoursFrom = item.HourFrom,
+                        HoursTo = item.HourTo,
+                        WeekDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), item.Date.DayOfWeek.ToString()),
+                    },
                 });
             }
             return items;
         }
 
-        public ShoppingCard GetShoppingCardForPaypal(string id)
+        public ShoppingCard GetShoppingCartForPaypal(string id)
         {
             ShoppingCard items = new ShoppingCard();
 
-            foreach (var item in _database.GetShoppingCart(id))
+            foreach (var item in _unitOfWork.Orders.GetShoppingCart(id))
             {
-                var offerDetails = _offerRepository.Get(x => x.ID == item.Service_ID);
+                var offerDetails = _unitOfWork.Offers.Get(x => x.ID == item.Service_ID);
                 items.AddToCardPayPal(new PayPalOffer
                 {
                     Id = offerDetails.ID,
@@ -75,7 +75,7 @@ namespace ServiceLibrary
             Order order = null;
             try
             {
-                OrderTable o = _database.CreateOrder(u);
+                OrderTable o = _unitOfWork.Orders.CreateOrder(u);
                 List<JobPortal.Model.Saleline> salelines = new List<JobPortal.Model.Saleline>();
                 foreach (var item in o.Salelines)
                 {
@@ -94,7 +94,7 @@ namespace ServiceLibrary
 
         public bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo)
         {
-            return _database.AddToCart(new ShoppingCart
+            return _unitOfWork.Orders.AddToCart(new ShoppingCart
             {
                 User_ID = userId,
                 Service_ID = serviceId,
@@ -106,7 +106,7 @@ namespace ServiceLibrary
         }
         public bool DeleteFromCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo)
         {
-            return _database.DeleteFromCart(new ShoppingCart
+            return _unitOfWork.Orders.DeleteFromCart(new ShoppingCart
             {
                 User_ID = userId,
                 Service_ID = serviceId,
@@ -123,7 +123,7 @@ namespace ServiceLibrary
 
         public bool PayForOrder(Order o)
         {
-            if (_database.PayForOrder(new OrderTable { ID = o.ID}) != null)
+            if (_unitOfWork.Orders.PayForOrder(new OrderTable { ID = o.ID}) != null)
             {
                 return true;
             }
@@ -134,17 +134,17 @@ namespace ServiceLibrary
         }
         public IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
         {
-           return _database.GetHoursFrom(serviceId, date);
+           return _unitOfWork.Orders.GetHoursFrom(serviceId, date);
         }
         public IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from)
         {
-            return _database.GetHoursTo(serviceId, date, from);
+            return _unitOfWork.Orders.GetHoursTo(serviceId, date, from);
 
         }
 
         public bool CleanCart(string userId)
         {
-            return _database.CleanCart(userId);
+            return _unitOfWork.Orders.CleanCart(userId);
         }
     }
 }

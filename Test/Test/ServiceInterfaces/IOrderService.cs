@@ -17,7 +17,7 @@ namespace ServiceLibrary
         bool CancelOrder(Order o);
 
         [OperationContract]
-        ShoppingCard GetShoppingCard(string id);
+        ShoppingCard GetShoppingCart(string id);
 
         [OperationContract]
         bool PayForOrder(Order o);
@@ -38,7 +38,7 @@ namespace ServiceLibrary
         IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
 
         [OperationContract]
-        ShoppingCard GetShoppingCardForPaypal(string id);
+        ShoppingCard GetShoppingCartForPaypal(string id);
 
 
     }

@@ -241,7 +241,7 @@ namespace MyWeb.Controllers
             transactionList.Add(new Transaction()
             {
                 description = "Transaction description",
-                invoice_number = "3542", //Generate an Invoice No  
+                invoice_number = shoppingCard.RandomString(),
                 amount = amount,
                 item_list = itemList
             });
