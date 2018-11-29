@@ -72,19 +72,28 @@ namespace WebJobPortal.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+    public class JobOffer
+    {
+        public DateTime CurrentDate { get; set; }
+        public CustomerViewModel Customer { get; set; }
+        public decimal TotalPrice { get; set; }
+        public BoughtOffers Offer { get; set; }
+
+    }
 
     public class UserProfileViewModel
     {
         public MyWeb.Models.ManageOffers[] Services { get; set; }
 
         public MyWeb.Models.BoughtOffers[] Bought { get; set; }
+        public WebJobPortal.Models.JobOffer[] Jobs { get; set; }
+        public DateTime Date { get; set; }
 
         public String Description { get; set; }
 
         [Display(Name = "Email:")]
         public String Email { get; set; }
 
-        //public String Password { get; set; }
 
         [Display(Name = "User name:")]
         public String UserName { get; set;}
@@ -117,6 +126,29 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Gender:")]
         public Gender Gender { get; set; }
+    }
+    public class CustomerViewModel
+    {
+        public String PhoneNumber { get; set; }
+
+        public String FirstName { get; set; }
+
+        public String LastName { get; set; }
+
+        public String AddressLine { get; set; }
+
+        public String CityName { get; set; }
+
+        public String PayPalMail { get; set; }
+
+        public String Postcode { get; set; }
+
+        public Region Region { get; set; }
+
+        public Gender Gender { get; set; }
+        public string Email { get; set; }
+
+
     }
 
     public class SetPropertiesViewModel

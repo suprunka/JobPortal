@@ -408,6 +408,12 @@ namespace Repository.OrderRepository
             _context.SubmitChanges();
             return true;
         }
+        public IQueryable<Saleline> GetJobCalendar(DateTime date, string employeeId)
+        {
+
+         return _context.GetTable<Saleline>().Where(x => x.BookedDate.BookedDate1.Equals(date) && x.ServiceOffer.Employee_ID == employeeId);
+        }
+
     }
 
 }

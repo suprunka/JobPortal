@@ -9,10 +9,7 @@ namespace MyWeb.Models
     public class ShoppingCardView
     {
         public ShoppingCard Card{ get; set; }
-
         public string Error{ get; set; }
-
-        
 
     }
 }

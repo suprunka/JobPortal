@@ -18,6 +18,7 @@ using WebJobPortal.Controllers;
 using AutoMapper;
 using MyWeb.Models;
 using MyWeb.UserReference1;
+using MyWeb.OrderReference;
 
 namespace MyWeb.Controllers
 {
@@ -29,6 +30,7 @@ namespace MyWeb.Controllers
         private const int n = 100000000;
         private readonly IUserService _proxy;
         private readonly IOfferService _offerProxy;
+        private readonly IOrderService _orderProxy;
 
         public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -57,30 +59,57 @@ namespace MyWeb.Controllers
                 _userManager = value;
             }
         }
-        public UserController(IUserService proxy, IOfferService offerService)
+        public UserController(IUserService proxy, IOfferService offerService, IOrderService orderProxy)
         {
             this._proxy = proxy;
             this._offerProxy = offerService;
+            this._orderProxy = orderProxy;
         }
         public UserController()
         {
             this._proxy = new UserServiceClient("UserServiceHttpEndpoint1");
             this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
+            _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
         }
 
 
         [HttpGet]
-        public ActionResult UserProfile(string id)
+        public ActionResult UserProfile(string id, DateTime? date = null)
         {
+            if (date == null)
+            {
+                date = DateTime.Now;
+            }
+
             UserProfileViewModel user = UserMapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
             user.Services = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id).Select(x => new ManageOffers {
                 Id = x.Id, Author = x.AuthorId, Description = x.Description, RatePerHour = x.RatePerHour, Title = x.Title,
                 Subcategory = x.Subcategory, Category = x.Category }).ToArray();
-
             user.Bought = _offerProxy.GetAllBought(id).Select(x=> new BoughtOffers {
                 Id = x.Id, Author = x.AuthorId, Description = x.Description, RatePerHour = x.RatePerHour,
                 Title = x.Title, Subcategory = x.Subcategory, Category = x.Category, Date = x.WorkingTime.Date,
                 HourFrom = x.WorkingTime.HoursFrom, HourTo = x.WorkingTime.HoursTo}).ToArray();
+            user.Date = (DateTime)date;
+            user.Jobs = _orderProxy.GetJobCallendar((DateTime)date, id).Select(x => new WebJobPortal.Models.JobOffer
+            {
+                CurrentDate = (DateTime)date,
+                TotalPrice = x.TotalPrice,
+                Customer = new CustomerViewModel {AddressLine=user.AddressLine, CityName =user.CityName, FirstName=user.FirstName, Gender=user.Gender, LastName=user.LastName, PayPalMail=user.PayPalMail, Email = user.Email, PhoneNumber=user.PhoneNumber, Postcode =user.Postcode, Region = user.Region  },
+                Offer = new BoughtOffers
+                {
+                    Id = x.Offer.Id,
+                    Author = x.Offer.AuthorId,
+                    Description = x.Offer.Description,
+                    RatePerHour = x.Offer.RatePerHour,
+                    Title = x.Offer.Title,
+                    Subcategory = x.Offer.Subcategory,
+                    Category = x.Offer.Category,
+                    Date = x.Offer.WorkingTime.Date,
+                    HourFrom = x.Offer.WorkingTime.HoursFrom,
+                    HourTo = x.Offer.WorkingTime.HoursTo
+                }
+
+            }).ToArray();
 
             return View(user);
         }

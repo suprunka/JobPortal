@@ -1,0 +1,226 @@
+﻿@model WebJobPortal.Models.JobOffer[]
+@using WebJobPortal.Models
+@using Microsoft.AspNet.Identity.Owin;
+
+@{
+    var counter = 0;
+}
+<style>
+    .modal-body {
+        min-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+
+    .table,.table td, .table tr {
+        border: none;
+    }
+</style>
+<tr class="job">
+    @foreach (JobOffer offer in Model)
+    {
+        if (counter != 0 && counter % 3 == 0)
+        {
+        @:</tr>
+        @:<>
+        }
+        counter++;
+
+
+        <td class="offersWindow">
+            @{
+                var timeTo = (@offer.Offer.HourFrom - DateTime.Now.TimeOfDay).TotalMinutes;
+                string message = "Your job starts in " + timeTo + ". Click to see all details.";
+                if (offer.Offer.Date.CompareTo(DateTime.Now) >= 1)
+                {
+                    timeTo = 111;
+
+                }
+
+                if (timeTo <= 0)
+                {
+                    <style>
+                        .popover-title {
+                            background-color: tomato;
+                        }
+                    </style>
+                    if (timeTo >= -60)
+                    {
+                        message = "You should start your job " + Math.Round((DateTime.Now.TimeOfDay - @offer.Offer.HourFrom).TotalMinutes, 0) + " minutes ago. Click to see all details.";
+                    }
+                    else
+                    {
+                        message = "You should start your job " + (DateTime.Now.TimeOfDay - @offer.Offer.HourFrom).ToString(@"hh\:mm") + " hours ago. Click to see all details.";
+                    }
+                }
+                else
+                {
+                    if (timeTo <= 60)
+                    {
+                        message = "Your job starts in " + Math.Round((DateTime.Now.TimeOfDay - @offer.Offer.HourFrom).TotalMinutes, 0) + " minutes. Click to see all details.";
+                    }
+                    else
+                    {
+                        message = "Your job starts in " + (DateTime.Now.TimeOfDay - @offer.Offer.HourFrom).ToString(@"hh\:mm") + " hours. Click to see all details.";
+                    }
+
+                }
+
+
+            }
+            <div id="showModal" data-toggle="modal" data-target="#myModal">
+                <div class="item" data-toggle="popover" title="See details" data-content="@message" style="min-height:280px;">
+                    <div class="card" id="@offer.Offer.Title" style="width:auto;height:100px;">
+                        @if (offer.Offer.Category.ToString() == "Home")
+                        {
+                            <img class="card-img-top" src="~/Pictures/home.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                        }
+                        else if (offer.Offer.Category.ToString() == "Tutoring")
+                        {
+                            <img class="card-img-top" src="~/Pictures/tutoring.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                        }
+                        else if (offer.Offer.Category.ToString() == "IT")
+                        {
+                            <img class="card-img-top" src="~/Pictures/it.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                        }
+                        else if (offer.Offer.Category.ToString() == "Repairs")
+                        {
+                            <img class="card-img-top" src="~/Pictures/repairs.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                        }
+                        else if (offer.Offer.Category.ToString() == "Architecture")
+                        {
+                            <img class="card-img-top" src="~/Pictures/architecture.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                        }
+                        else if (offer.Offer.Category.ToString() == "Media")
+                        {
+                            <img class="card-img-top" src="~/Pictures/media.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                        }
+                        <br />
+                        <div class="card-body">
+                            <h4 class="card-title" style="word-break:break-word; ">@offer.Offer.Title</h4>
+                            <div class="row">
+                                <div class="col-md-6"  style="padding:5px; padding-left:12px;">
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="@offer.Offer.HourFrom.ToString(@"hh\:mm")" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="padding:5px; padding-right:12px;">
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="@offer.Offer.HourTo.ToString(@"hh\:mm")" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade " id='myModal' data-backdrop="false">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title">@offer.Offer.Title, @offer.Offer.HourFrom- @offer.Offer.HourTo</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <colgroup>
+                                        <col class="col-md-4">
+                                        <col class="col-md-1">
+                                        <col class="col-md-7">
+                                    </colgroup>
+                                    <thead></thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td rowspan="5">Customer:</td>
+                                            <td><span class="glyphicon glyphicon-user" /></td>
+                                            <td>@offer.Customer.FirstName @offer.Customer.LastName </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><span class="glyphicon glyphicon-home" /></td>
+
+                                            <td>@offer.Customer.AddressLine,</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>@offer.Customer.Postcode, @offer.Customer.CityName, @offer.Customer.Region</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="glyphicon glyphicon-phone" /></td>
+                                            <td>@offer.Customer.PhoneNumber</td>
+                                        <tr>
+                                            <td><span class="glyphicon glyphicon-envelope" /></td>
+                                            <td><a href="mailto:@string.Format("{0}",offer.Customer.Email) target="_blank">@offer.Customer.Email</a> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Service's author:</td>
+                                            <td><span class="glyphicon glyphicon-info-sign" /></td>
+                                            <td>@Html.ActionLink("Profile", "UserProfile", "User", new { id = offer.Offer.Author }, null)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Date:</td>
+                                            <td><span class="glyphicon glyphicon-calendar" /></td>
+                                            <td>@offer.Offer.Date</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><span class="glyphicon glyphicon-time" /></td>
+                                            <td>@offer.Offer.HourFrom - @offer.Offer.HourTo</td>
+
+                                        </tr>
+                                
+                                        <tr>
+                                            <td >Total price:</td>
+                                            <td><span class="glyphicon glyphicon-usd" /></td>
+                                            <td>@offer.TotalPrice</td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </td>
+
+    }
+</tr>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').hover().popover({
+            placement: 'right',
+            trigger: 'hover'
+        });
+
+
+    });
+    $('.clockpicker').clockpicker();
+
+</script>

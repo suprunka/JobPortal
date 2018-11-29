@@ -146,5 +146,34 @@ namespace ServiceLibrary
         {
             return _unitOfWork.Orders.CleanCart(userId);
         }
+        public IEnumerable<JobOffer> GetJobCallendar(DateTime date, string employeeId)
+        {
+            IList<JobOffer> joboffers = new List<JobOffer>();
+            var listofSalelines = _database.GetJobCalendar(date, employeeId);
+            foreach (var saleline in listofSalelines)
+            {
+                var customerId = saleline.OrderTable.Users_ID;
+                WorkingDetails workingDetailsTime = new WorkingDetails() { Date = date, HoursFrom = saleline.BookedDate.HourFrom, HoursTo = saleline.BookedDate.HourTo, WeekDay = date.DayOfWeek };
+                int workingtime = (workingDetailsTime.HoursTo - workingDetailsTime.HoursFrom).Hours;
+
+                Offer o = new Offer()
+                {
+                    Id = saleline.ServiceOffer_ID,
+                    AuthorId = saleline.ServiceOffer.Employee_ID,
+                    Category = (JobPortal.Model.Category)Enum.Parse(typeof(JobPortal.Model.Category), saleline.ServiceOffer.SubCategory.Category.Name.ToString()),
+                    Subcategory = (JobPortal.Model.SubCategory)Enum.Parse(typeof(JobPortal.Model.SubCategory), saleline.ServiceOffer.SubCategory.Name.ToString()),
+                    Description = saleline.ServiceOffer.Description,
+                    RatePerHour = saleline.ServiceOffer.RatePerHour,
+                    Title = saleline.ServiceOffer.Title,
+                    WorkingTime = workingDetailsTime,
+                };
+                var joboffer= new JobOffer() { Customer_ID = customerId, Offer = o, TotalPrice = o.RatePerHour * workingtime };
+                joboffers.Add(joboffer);
+            }
+
+            return joboffers.AsEnumerable<JobOffer>().OrderBy(x=>x.Offer.WorkingTime.HoursFrom);
+
+        }
+
     }
 }

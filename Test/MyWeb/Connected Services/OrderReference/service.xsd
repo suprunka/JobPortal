@@ -154,4 +154,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetJobCallendar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="employeeId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJobCallendarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/JobPortal.Model" minOccurs="0" name="GetJobCallendarResult" nillable="true" type="q13:ArrayOfJobOffer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

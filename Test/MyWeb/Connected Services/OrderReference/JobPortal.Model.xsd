@@ -149,4 +149,40 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PayPalOffer" nillable="true" type="tns:PayPalOffer" />
+  <xs:complexType name="ArrayOfJobOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JobOffer" nillable="true" type="tns:JobOffer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJobOffer" nillable="true" type="tns:ArrayOfJobOffer" />
+  <xs:complexType name="JobOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Customer_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Offer" nillable="true" type="tns:Offer" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JobOffer" nillable="true" type="tns:JobOffer" />
+  <xs:complexType name="Offer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" type="tns:Category" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkingTime" nillable="true" type="tns:WorkingDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Offer" nillable="true" type="tns:Offer" />
+  <xs:complexType name="WorkingDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q3:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingDetails" nillable="true" type="tns:WorkingDetails" />
 </xs:schema>

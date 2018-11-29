@@ -67,6 +67,7 @@ namespace MyWeb.Mapping
             {
                 ID = user.ID.ToString(),
                 FirstName = user.FirstName,
+                Email = user.Email,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 Gender = user.Gender,
