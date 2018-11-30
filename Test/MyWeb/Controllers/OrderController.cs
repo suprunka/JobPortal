@@ -13,6 +13,7 @@ using Repository.DbConnection;
 using System.Data.SqlClient;
 using System.ServiceModel;
 using System.Transactions;
+using System.Net.Mail;
 
 namespace MyWeb.Controllers
 {
@@ -29,10 +30,8 @@ namespace MyWeb.Controllers
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
             _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
-
-
         }
-        // GET: Order
+
         public ActionResult Index(string id, string error)
         {
             if (shoppingCard == null)
@@ -93,6 +92,7 @@ namespace MyWeb.Controllers
             }
             return View("Error", null);
         }
+
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
             var result = _orderProxy.DeleteFromCart(idU, (int)id, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
@@ -102,7 +102,6 @@ namespace MyWeb.Controllers
             }
             return null;
         }
-
 
         public ActionResult CleanCart(string id)
         {
@@ -116,8 +115,6 @@ namespace MyWeb.Controllers
             }
 
         }
-
-
 
         public ActionResult PaymentWithPaypal(string Cancel = null)
         {
@@ -169,18 +166,43 @@ namespace MyWeb.Controllers
                     {
                         return View("FailureView");
                     }
-                    CleanCart(User.Identity.GetUserId());
+                    
+                    var user = _userProxy.FindUser(User.Identity.GetUserId());
                     _orderProxy.PayForOrder(_orderProxy.FindOrder(User.Identity.GetUserId()));
+                    IList<string> listOfEmailsToSend = new List<string>();
+                    var shoppingCard = _orderProxy.GetShoppingCart(User.Identity.GetUserId());
+                    foreach(var item in shoppingCard.List)
+                    {
+                        listOfEmailsToSend.Add(_userProxy.FindUser(item.AuthorId).Email);
+                    }
+                    listOfEmailsToSend.Distinct();
+                    foreach(var emailAddress in listOfEmailsToSend)
+                    {
+                        MailMessage mail = new MailMessage();
+                        mail.From = new MailAddress("theticker5@gmail.com", "JobPortal");
+                        mail.To.Add(new MailAddress(emailAddress, "Receiver"));
+                        mail.Subject = "JobPortal";
+                        mail.Body = "Hey, someone bought your offer service, log in to our website and check" +
+                            "upcoming events";
+                        mail.Priority = MailPriority.Normal;
+                        using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
+                        {
+                            MailClient.EnableSsl = true;
+                            MailClient.Credentials = new System.Net.NetworkCredential("theticker5@gmail.com", "90809988Qwe");
+                            MailClient.Send(mail);
+                        }
+                    }
+                    CleanCart(User.Identity.GetUserId());
                     return RedirectToAction("Index", "Order", new { id = User.Identity.GetUserId()});
+                    
                 }
             }
             catch (Exception ex)
             {
                 return View("FailureView");
-            }
+            } 
 
         }
-
 
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
@@ -249,7 +271,6 @@ namespace MyWeb.Controllers
             return this.payment.Create(apiContext);
         }
 
-
         private PayPal.Api.Payment payment;
 
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
@@ -264,8 +285,5 @@ namespace MyWeb.Controllers
             };
             return this.payment.Execute(apiContext, paymentExecution);
         }
-
-
-
     }
 }
