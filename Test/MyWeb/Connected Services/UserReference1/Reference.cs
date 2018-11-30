@@ -69,12 +69,6 @@ namespace MyWeb.UserReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
         System.Threading.Tasks.Task<bool> EditUserEmailAsync(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
-        bool Login(string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
-        System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
         bool AddDescription(JobPortal.Model.User u);
         
@@ -179,14 +173,6 @@ namespace MyWeb.UserReference1 {
         
         public System.Threading.Tasks.Task<bool> EditUserEmailAsync(JobPortal.Model.User u) {
             return base.Channel.EditUserEmailAsync(u);
-        }
-        
-        public bool Login(string username, string password) {
-            return base.Channel.Login(username, password);
-        }
-        
-        public System.Threading.Tasks.Task<bool> LoginAsync(string username, string password) {
-            return base.Channel.LoginAsync(username, password);
         }
         
         public bool AddDescription(JobPortal.Model.User u) {

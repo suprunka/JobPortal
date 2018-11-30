@@ -12,16 +12,17 @@ using MyWeb.App_Start;
 using Repository.DbConnection;
 using System.Data.SqlClient;
 using System.ServiceModel;
+using System.Transactions;
 
 namespace MyWeb.Controllers
 {
     public class OrderController : Controller
     {
-        private User u;
         private OfferReference.IOfferService _offerProxy;
         private UserReference1.IUserService _userProxy;
         private OrderReference.IOrderService _orderProxy;
         private ShoppingCard shoppingCard;
+        private JobPortal.Model.Order _order;
 
         public OrderController()
         {
@@ -36,7 +37,8 @@ namespace MyWeb.Controllers
         {
             if (shoppingCard == null)
             {
-                var shoppingcard = _orderProxy.GetShoppingCard(id);
+                _orderProxy.CancelOrder(_orderProxy.FindOrder(User.Identity.GetUserId()));
+                var shoppingcard = _orderProxy.GetShoppingCart(id);
                 ShoppingCardView scv = new ShoppingCardView { Card = shoppingcard, Error = error };
                 return View(scv);
             }
@@ -53,18 +55,18 @@ namespace MyWeb.Controllers
                 try
                 {
                     _orderProxy.CreateOrder(userID);
-                    CleanCart(userID);
-                    return RedirectToAction("Index", "Order", new { id = userID.Trim() });
-                }catch(FaultException e)
+                    return PaymentWithPaypal();
+
+                }
+                catch (FaultException e)
                 {
-                   
+
                     return RedirectToAction("Index", "Order", new { id = userID.Trim(), error = e.Reason.ToString() });
                 }
-                
             }
             return null;
-        }
 
+        }
 
         public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
         {
@@ -87,6 +89,7 @@ namespace MyWeb.Controllers
                 {
                     return View("Error", null);
                 }
+
             }
             return View("Error", null);
         }
@@ -118,6 +121,7 @@ namespace MyWeb.Controllers
 
         public ActionResult PaymentWithPaypal(string Cancel = null)
         {
+
             //getting the apiContext  
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
             try
@@ -158,46 +162,35 @@ namespace MyWeb.Controllers
                 {
                     // This function exectues after receving all parameters for the payment  
                     var guid = Request.Params["guid"];
+
                     var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
                     //If executed payment failed then we will show payment failure message to user  
                     if (executedPayment.state.ToLower() != "approved")
                     {
                         return View("FailureView");
                     }
+                    CleanCart(User.Identity.GetUserId());
+                    _orderProxy.PayForOrder(_orderProxy.FindOrder(User.Identity.GetUserId()));
+                    return RedirectToAction("Index", "Order", new { id = User.Identity.GetUserId()});
                 }
             }
             catch (Exception ex)
             {
                 return View("FailureView");
             }
-            //on successful payment, show success page to user.  
-            return View("SuccessView");
+
         }
 
-        private PayPal.Api.Payment payment;
-
-        private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
-        {
-            var paymentExecution = new PaymentExecution()
-            {
-                payer_id = payerId
-            };
-            this.payment = new Payment()
-            {
-                id = paymentId
-            };
-            return this.payment.Execute(apiContext, paymentExecution);
-        }
 
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
-            var shoppingCard = _orderProxy.GetShoppingCardForPaypal(User.Identity.GetUserId());
-            //create itemlist and add item objects to it  
+            var shoppingCard = _orderProxy.GetShoppingCartForPaypal(User.Identity.GetUserId());
+            //create itemlist and add item objects to it
+
             var itemList = new ItemList()
             {
                 items = new List<Item>()
             };
-
             var lista = shoppingCard.PayPalList;
             //Adding Item Details like name, currency, price etc  
             foreach (var i in lista)
@@ -236,9 +229,9 @@ namespace MyWeb.Controllers
                 total = decimal.Round(shoppingCard.GetTotalPricePayPal(), 0, MidpointRounding.AwayFromZero).ToString(), // Total must be equal to sum of tax, shipping and subtotal.  
                 details = details
             };
-            var transactionList = new List<Transaction>();
+            var transactionList = new List<PayPal.Api.Transaction>();
             // Adding description about the transaction  
-            transactionList.Add(new Transaction()
+            transactionList.Add(new PayPal.Api.Transaction()
             {
                 description = "Transaction description",
                 invoice_number = shoppingCard.RandomString(),
@@ -255,5 +248,24 @@ namespace MyWeb.Controllers
             // Create a payment using a APIContext  
             return this.payment.Create(apiContext);
         }
+
+
+        private PayPal.Api.Payment payment;
+
+        private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
+        {
+            var paymentExecution = new PaymentExecution()
+            {
+                payer_id = payerId
+            };
+            this.payment = new Payment()
+            {
+                id = paymentId
+            };
+            return this.payment.Execute(apiContext, paymentExecution);
+        }
+
+
+
     }
 }

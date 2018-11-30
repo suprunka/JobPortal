@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Transactions;
 using BookedDate = Repository.DbConnection.BookedDate;
 using Saleline = Repository.DbConnection.Salelines;
@@ -30,21 +31,31 @@ namespace Repository.OrderRepository
 
         public bool CancelOrder(Order o)
         {
-            var found = _context.GetTable<Salelines>().Where(x => x.ID == o.ID);
-            foreach (var i in found)
+            try
             {
-                if (i.BookedDate.BookedDate1 > DateTime.Now.AddHours(24))
+                var found = _context.GetTable<Salelines>().Where(x => x.Order_ID == o.ID);
+                foreach (var i in found)
                 {
-                    _context.GetTable<Salelines>().DeleteOnSubmit(i);
-                }
-                else
-                {
-                    return false;
+                    if (i.OrderTable.OrderStatus_ID == 1)
+                    {
+                        _context.GetTable<BookedDate>().DeleteOnSubmit(i.BookedDate);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                   
                 }
                 _context.GetTable<OrderTable>().DeleteOnSubmit(_context.GetTable<OrderTable>().Single(x => x.ID == o.ID));
+                _context.SubmitChanges();
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
             }
 
-            return true;
         }
 
         public bool CancelServiceInOrder(JobPortal.Model.Saleline o)
@@ -131,6 +142,19 @@ namespace Repository.OrderRepository
                 }
             }
             return result;
+        }
+
+        public override OrderTable Get(Expression<Func<OrderTable, bool>> predicate)
+        {
+            try
+            {
+                return _context.GetTable<OrderTable>().Where(predicate).Single(x => x.OrderStatus_ID == 1);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         public OrderTable AddToExistingOrder(OrderTable o, ShoppingCart cart)//DateTime date, TimeSpan from, TimeSpan to)

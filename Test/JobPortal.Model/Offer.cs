@@ -29,6 +29,8 @@ namespace JobPortal.Model
         public virtual SubCategory Subcategory { get; set; }
         [DataMember]
         public virtual WorkingDetails WorkingTime { get; set; }
+        [DataMember]
+        public virtual IEnumerable<WorkingTime> WorkingTimes { get; set; }
     }
 
     public class PayPalOffer

@@ -54,7 +54,6 @@
                         <p class="card-text" style="word-break:break-word;">Hour to: @offer.HourTo</p>
 
                         <h4 class="price">@decimal.Round(offer.RatePerHour, 2, MidpointRounding.AwayFromZero) DKK/ hour</h4>
-                        @Html.ActionLink("See Details", "ViewDetails", "ServiceOffer", new { id = offer.Id }, new { @class = "buttons", @id = "details-btn" })
                     </div>
                 </div>
             </div>

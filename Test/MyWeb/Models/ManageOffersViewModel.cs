@@ -50,6 +50,7 @@ namespace MyWeb.Models
         public DateTime Date { get; set; }
         public TimeSpan HourFrom { get; set; }
         public TimeSpan HourTo { get; set; }
+
     }
 
     public class AddServiceOfferModel
@@ -86,6 +87,7 @@ namespace MyWeb.Models
         public string Author { get; set; }
         public IEnumerable<TimeSpan> hoursfrom { get; set; }
         public IEnumerable<TimeSpan> hoursTo { get; set; }
+        public IEnumerable<WorkingTime> Dates { get; set; }
  
     }
 

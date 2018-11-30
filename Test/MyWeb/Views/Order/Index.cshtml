@@ -41,57 +41,8 @@
     <div id="tPrice">
         <h2>Order price: @(decimal.Round(Model.Card.GetTotalPrice(), 2, MidpointRounding.AwayFromZero)) DKK   </h2>
     </div>
-    @Html.ActionLink("Complete order", "CreateOrder", "Order", new { userID = User.Identity.GetUserId() }, null)
-    @Html.ActionLink("Paypal", "PaymentWithPaypal", "Order")
 
-
-    @if (Model.Card.List.Count > 0)
-    {
-        <div id="finishTable">
-            <div id="paypal-button"></div>
-            <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-            <script>
-                paypal.Button.render({
-                    // Configure environment
-                    env: 'sandbox',
-                    client: {
-                        sandbox: 'demo_sandbox_client_id',
-                        production: 'demo_production_client_id'
-                    },
-                    // Customize button (optional)
-                    locale: 'en_US',
-                    style: {
-                        size: 'small',
-                        color: 'gold',
-                        shape: 'pill',
-                    },
-
-                    // Enable Pay Now checkout flow (optional)
-                    commit: true,
-
-                    // Set up a payment
-                    payment: function (data, actions) {
-                        return actions.payment.create({
-                            transactions: [{
-                                amount: {
-                                    total: '@string.Format("{0:0.00}", Model.Card.GetTotalPrice())',
-                                    currency: 'DKK'
-                                }
-                            }]
-                        });
-                    },
-                    // Execute the payment
-                    onAuthorize: function (data, actions) {
-                        return actions.payment.execute().then(function () {
-                            // Show a confirmation message to the buyer
-                            window.alert('Thank you for your purchase!');
-                        });
-                    }
-                }, '#paypal-button');
-
-            </script>
-        </div>
-    }
+    @Html.ActionLink("Complete order and pay.", "CreateOrder", "Order", new { userID = User.Identity.GetUserId() }, null)
 
 </section>
 

@@ -79,6 +79,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -306,6 +307,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\UserReference1\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UserReference1\configuration91.svcinfo" />
     <None Include="Connected Services\UserReference1\configuration.svcinfo" />
     <None Include="Connected Services\UserReference1\Reference.svcmap">
@@ -355,6 +359,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Bought.cshtml" />
+    <Content Include="Views\Error.cshtml" />
+    <Content Include="Views\Jobs.cshtml" />
+    <Content Include="Views\Lockout.cshtml" />
+    <Content Include="Views\Offers.cshtml" />
+    <Content Include="Views\_Layout.cshtml" />
+    <Content Include="Views\_LoginPartial.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -363,9 +374,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -384,9 +392,6 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\Offers.cshtml" />
     <Content Include="Views\Manage\SetUserProperties.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
@@ -399,12 +404,12 @@
     <Content Include="Views\Calendar2\Index.cshtml" />
     <Content Include="Views\Calendar\AddHours.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
-    <Content Include="Views\Shared\Jobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Pictures\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\NewFolder1\" />
     <Folder Include="Views\Paypal\" />
   </ItemGroup>
   <ItemGroup>

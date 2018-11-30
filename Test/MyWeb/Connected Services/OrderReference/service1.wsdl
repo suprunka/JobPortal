@@ -195,7 +195,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_Input_policy">
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCart_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -214,7 +214,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCard_output_policy">
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCart_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -461,7 +461,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCardForPaypal_Input_policy">
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCartForPaypal_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -480,7 +480,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCardForPaypal_output_policy">
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetShoppingCartForPaypal_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -519,6 +519,44 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_GetJobCallendar_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_FindOrder_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OrderServiceHttpEndpoint_FindOrder_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -590,11 +628,11 @@
   <wsdl:message name="IOrderService_CancelOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelOrderResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCard_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCard" />
+  <wsdl:message name="IOrderService_GetShoppingCart_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCart" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCard_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCardResponse" />
+  <wsdl:message name="IOrderService_GetShoppingCart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCartResponse" />
   </wsdl:message>
   <wsdl:message name="IOrderService_PayForOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:PayForOrder" />
@@ -632,17 +670,23 @@
   <wsdl:message name="IOrderService_GetHoursTo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetHoursToResponse" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCardForPaypal_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCardForPaypal" />
+  <wsdl:message name="IOrderService_GetShoppingCartForPaypal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCartForPaypal" />
   </wsdl:message>
-  <wsdl:message name="IOrderService_GetShoppingCardForPaypal_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetShoppingCardForPaypalResponse" />
+  <wsdl:message name="IOrderService_GetShoppingCartForPaypal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShoppingCartForPaypalResponse" />
   </wsdl:message>
   <wsdl:message name="IOrderService_GetJobCallendar_InputMessage">
     <wsdl:part name="parameters" element="tns:GetJobCallendar" />
   </wsdl:message>
   <wsdl:message name="IOrderService_GetJobCallendar_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetJobCallendarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_FindOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrder" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_FindOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrderResponse" />
   </wsdl:message>
   <wsdl:portType name="IOrderService">
     <wsdl:operation name="CreateOrder">
@@ -654,9 +698,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CancelOrder" message="tns:IOrderService_CancelOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CancelOrderResponse" message="tns:IOrderService_CancelOrder_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCard" message="tns:IOrderService_GetShoppingCard_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardResponse" message="tns:IOrderService_GetShoppingCard_OutputMessage" />
+    <wsdl:operation name="GetShoppingCart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCart" message="tns:IOrderService_GetShoppingCart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCartResponse" message="tns:IOrderService_GetShoppingCart_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PayForOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/PayForOrder" message="tns:IOrderService_PayForOrder_InputMessage" />
@@ -682,13 +726,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetHoursTo" message="tns:IOrderService_GetHoursTo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetHoursToResponse" message="tns:IOrderService_GetHoursTo_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCardForPaypal">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypal" message="tns:IOrderService_GetShoppingCardForPaypal_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCardForPaypalResponse" message="tns:IOrderService_GetShoppingCardForPaypal_OutputMessage" />
+    <wsdl:operation name="GetShoppingCartForPaypal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCartForPaypal" message="tns:IOrderService_GetShoppingCartForPaypal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetShoppingCartForPaypalResponse" message="tns:IOrderService_GetShoppingCartForPaypal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetJobCallendar">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetJobCallendar" message="tns:IOrderService_GetJobCallendar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetJobCallendarResponse" message="tns:IOrderService_GetJobCallendar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/FindOrder" message="tns:IOrderService_FindOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/FindOrderResponse" message="tns:IOrderService_FindOrder_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OrderServiceHttpEndpoint" type="tns:IOrderService">
@@ -720,14 +768,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+    <wsdl:operation name="GetShoppingCart">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCart" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_Input_policy" />
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCart_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCard_output_policy" />
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCart_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -797,14 +845,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCardForPaypal">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypal" style="document" />
+    <wsdl:operation name="GetShoppingCartForPaypal">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCartForPaypal" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCardForPaypal_Input_policy" />
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCartForPaypal_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCardForPaypal_output_policy" />
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetShoppingCartForPaypal_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -816,6 +864,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_GetJobCallendar_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/FindOrder" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_FindOrder_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#OrderServiceHttpEndpoint_FindOrder_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -844,8 +903,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCard">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCard" style="document" />
+    <wsdl:operation name="GetShoppingCart">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCart" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -907,8 +966,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetShoppingCardForPaypal">
-      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCardForPaypal" style="document" />
+    <wsdl:operation name="GetShoppingCartForPaypal">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/GetShoppingCartForPaypal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -925,6 +984,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrderService/FindOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="OrderService">
     <wsdl:port name="OrderServiceHttpEndpoint" binding="tns:OrderServiceHttpEndpoint">
@@ -932,7 +1000,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:8080/Order</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-LNM21H7\locac</Upn>
+          <Upn>JAKUB\jakub</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -941,7 +1009,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Order</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-LNM21H7\locac</Upn>
+          <Upn>JAKUB\jakub</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

@@ -57,7 +57,7 @@
                     @Html.ActionLink("Delete", "Delete", "ServiceOffer", new { idd = Model.Id }, new { @class = "btn btn-danger" })
                 </div>
             </div>
-            <br/>
+            <br />
 
             <script src="@Url.Content("~/Scripts/daypilot-all.min.js")" type="text/javascript"></script>
 
@@ -96,10 +96,25 @@
         {
             <h3>Book a service offer.</h3>
             <div class="col-md-10">
+
+                Available days when you can order the service:
+                <div>
+                    @foreach (var t in Model.Dates)
+                    {
+                        <div>
+                            @t.WeekDay.ToString()s
+                        </div>
+                    }
+                </div>
                 <input type="date" name="days" id="selecteddate">
                 <br />
 
+
+
+
+
                 @Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "form-control" })
+
                 @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "form-control" })
 
                 @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-danger", @id = "addToCart" })
@@ -191,7 +206,7 @@
 <script type="text/javascript">
 
     function create(start, end) {
-       
+
         var m = new DayPilot.Modal();
         m.closed = function () {
             if (this.result == "Hours are added") {
@@ -200,7 +215,7 @@
 
             dp.clearSelection();
         };
-        
+
         m.showUrl('@Url.Action("AddHours", "Calendar")?startT=' + start + '&endT=' + end + '&serviceId='+@Model.Id );
     }
 

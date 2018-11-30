@@ -72,6 +72,8 @@ namespace WebJobPortal.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+
+
     public class JobOffer
     {
         public DateTime CurrentDate { get; set; }

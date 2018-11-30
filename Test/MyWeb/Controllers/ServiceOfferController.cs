@@ -90,9 +90,7 @@ namespace MyWeb.Controllers
                 {
                     Text = p.ToString(),
                     Value = p.ToString()
-                })
-                .ToList();
-
+                }).ToList();
                 return Json(subcats, JsonRequestBehavior.AllowGet);
             }
             return null;
@@ -101,25 +99,20 @@ namespace MyWeb.Controllers
         [HttpGet]
         public ActionResult GetHoursFrom(int serviceId, DateTime date)
         {
-
             try
             {
                 IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
                 {
                     Text = x.ToString(),
                     Value = x.ToString()
-                })
-                                .ToList();
+                }).ToList();
 
                 return Json(hoursFrom, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception)
             {
                 return Json(null, JsonRequestBehavior.DenyGet);
             }
-            
-            
         }
 
         [HttpGet]
@@ -140,7 +133,8 @@ namespace MyWeb.Controllers
         public async Task<ActionResult> ViewDetails(int  id)
         {
             var found = await _offerProxy.FindServiceOfferAsync(id);
-            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour };
+            var foundDates = _offerProxy.GetAllWorkingDays().Where(x => x.OfferId == id);
+            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates};
             return View( model);
         }
 
@@ -153,6 +147,7 @@ namespace MyWeb.Controllers
                     Title = edited.Title,
                     RatePerHour = edited.RatePerHour,
                     Description = edited.Description,
+                    WorkingTimes = edited.Dates,
                 });
                 if (isUpdated)
                 {
@@ -161,6 +156,7 @@ namespace MyWeb.Controllers
 
             return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
         }
+
         public async Task<ActionResult> Delete(int idd)
         {
             var isDeleted = await _offerProxy.DeleteServiceOfferAsync(idd);

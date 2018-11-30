@@ -46,10 +46,10 @@ namespace MyWeb.OfferReference {
         System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllOffersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
-        bool AddHoursToOffer(JobPortal.Model.WorkingTime tme);
+        bool AddHoursToOffer(JobPortal.Model.WorkingTime time);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
-        System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime tme);
+        System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime time);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
         JobPortal.Model.WorkingTime[] GetAllWorkingDays();
@@ -131,12 +131,12 @@ namespace MyWeb.OfferReference {
             return base.Channel.GetAllOffersAsync();
         }
         
-        public bool AddHoursToOffer(JobPortal.Model.WorkingTime tme) {
-            return base.Channel.AddHoursToOffer(tme);
+        public bool AddHoursToOffer(JobPortal.Model.WorkingTime time) {
+            return base.Channel.AddHoursToOffer(time);
         }
         
-        public System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime tme) {
-            return base.Channel.AddHoursToOfferAsync(tme);
+        public System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime time) {
+            return base.Channel.AddHoursToOfferAsync(time);
         }
         
         public JobPortal.Model.WorkingTime[] GetAllWorkingDays() {

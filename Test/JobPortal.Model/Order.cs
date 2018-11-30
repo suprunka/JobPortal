@@ -23,7 +23,20 @@ namespace JobPortal.Model
 
 
     }
- 
+
+    [DataContract]
+    public class JobOffer
+    {
+        [DataMember]
+        public virtual string Customer_ID { get; set; }
+        [DataMember]
+        public virtual decimal TotalPrice { get; set; }
+        [DataMember]
+        public virtual Offer Offer { get; set; }
+
+
+    }
+
     [DataContract]
     public class Saleline
     {

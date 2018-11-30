@@ -236,6 +236,7 @@ namespace Repository
         {
             {
                 bool result = false;
+                Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                 using (SqlConnection objConn = new SqlConnection(connection))
                 {
                     objConn.Open();
@@ -243,7 +244,7 @@ namespace Repository
                     {
                         try
                         {
-                            Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
+                            
                             int oldCity_ID = found.City_ID;
                             var oldPostCode = found.AddressTable.Postcode;
                             found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
@@ -290,14 +291,20 @@ namespace Repository
                             }
                             _context.SubmitChanges();
                             Users foundAtTheEnd = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
-                            /*if (found.AddressLine == foundAtTheEnd.AddressLine && found.AddressTable.City == foundAtTheEnd.AddressTable.City &&
+                            if (found.AddressLine == foundAtTheEnd.AddressLine && found.AddressTable.City == foundAtTheEnd.AddressTable.City &&
                                 found.AddressTable.Postcode == foundAtTheEnd.AddressTable.Postcode && found.AddressTable.Region == foundAtTheEnd.AddressTable.Region&&
                                 found.AspNetUsers.Email == foundAtTheEnd.AspNetUsers.Email && found.AspNetUsers.PasswordHash == foundAtTheEnd.AspNetUsers.PasswordHash&&
                                 found.AspNetUsers.UserName == foundAtTheEnd.AspNetUsers.UserName && found.AspNetUsers.PhoneNumber == foundAtTheEnd.AspNetUsers.PhoneNumber &&
                                 found.Description == foundAtTheEnd.Description && found.FirstName == foundAtTheEnd.FirstName && found.Gender.Gender1 == foundAtTheEnd.Gender.Gender1 &&
-                                found.LastName == foundAtTheEnd.LastName && found.PayPalMail == foundAtTheEnd.PayPalMail)*/
-                            myTran.Complete();
-                            result = true;
+                                found.LastName == foundAtTheEnd.LastName && found.PayPalMail == foundAtTheEnd.PayPalMail)
+                            {
+                                myTran.Complete();
+                                result = true;
+                            }else
+                            {
+                                return false;
+                            }
+                           
                         }
                         catch
                         {

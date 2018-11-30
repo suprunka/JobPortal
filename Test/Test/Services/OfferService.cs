@@ -226,7 +226,9 @@ namespace ServiceLibrary
                         HoursFrom = i.BookedDate.HourFrom,
                         HoursTo = i.BookedDate.HourTo,
                         WeekDay = i.BookedDate.BookedDate1.DayOfWeek,
-                    }
+                    },
+
+                    
                 });
             }
             return resultToReturn.AsQueryable<Offer>();

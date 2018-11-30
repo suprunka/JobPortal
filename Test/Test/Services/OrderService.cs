@@ -118,7 +118,14 @@ namespace ServiceLibrary
 
         public bool CancelOrder(Order o)
         {
-            throw new NotImplementedException();
+            if(_unitOfWork.Orders.CancelOrder(o))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool PayForOrder(Order o)
@@ -149,7 +156,7 @@ namespace ServiceLibrary
         public IEnumerable<JobOffer> GetJobCallendar(DateTime date, string employeeId)
         {
             IList<JobOffer> joboffers = new List<JobOffer>();
-            var listofSalelines = _database.GetJobCalendar(date, employeeId);
+            var listofSalelines = _unitOfWork.Orders.GetJobCalendar(date, employeeId);
             foreach (var saleline in listofSalelines)
             {
                 var customerId = saleline.OrderTable.Users_ID;
@@ -175,5 +182,20 @@ namespace ServiceLibrary
 
         }
 
+        public Order FindOrder(string id)
+        { 
+            if(_unitOfWork.Orders.Get(x => x.Users_ID == id) == null)
+            {
+                return null;
+            }
+            else
+            {
+                return new Order
+                {
+                    ID = _unitOfWork.Orders.Get(x => x.Users_ID == id).ID,
+                };
+            }
+          
+        }
     }
 }
