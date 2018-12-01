@@ -88,7 +88,9 @@ namespace MyWeb.Models
         public IEnumerable<TimeSpan> hoursfrom { get; set; }
         public IEnumerable<TimeSpan> hoursTo { get; set; }
         public IEnumerable<WorkingTime> Dates { get; set; }
- 
+        public Category Category { get; set; }
+        public SubCategory Subcategory { get; set; }
+
     }
 
     public class JobOffer

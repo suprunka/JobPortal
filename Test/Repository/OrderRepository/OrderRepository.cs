@@ -438,6 +438,15 @@ namespace Repository.OrderRepository
          return _context.GetTable<Saleline>().Where(x => x.BookedDate.BookedDate1.Equals(date) && x.ServiceOffer.Employee_ID == employeeId);
         }
 
+        public bool AddReview(Review review)
+        {
+            _context.GetTable<Review>().InsertOnSubmit(review);
+            _context.SubmitChanges();
+
+            return true;
+
+        }
+
     }
 
 }

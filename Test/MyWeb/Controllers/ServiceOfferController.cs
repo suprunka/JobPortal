@@ -134,7 +134,7 @@ namespace MyWeb.Controllers
         {
             var found = await _offerProxy.FindServiceOfferAsync(id);
             var foundDates = _offerProxy.GetAllWorkingDays().Where(x => x.OfferId == id);
-            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates};
+            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates, Category = found.Category, Subcategory= found.Subcategory};
             return View( model);
         }
 
