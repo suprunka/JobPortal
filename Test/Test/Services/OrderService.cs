@@ -184,8 +184,8 @@ namespace ServiceLibrary
         }
 
         public Order FindOrder(string id)
-        { 
-            if(_unitOfWork.Orders.Get(x => x.Users_ID == id) == null)
+        {
+            if (_unitOfWork.Orders.Get(x => x.Users_ID == id) == null)
             {
                 return null;
             }
@@ -196,7 +196,30 @@ namespace ServiceLibrary
                     ID = _unitOfWork.Orders.Get(x => x.Users_ID == id).ID,
                 };
             }
-          
+
+        }
+        public bool AddReview(OfferReview review)
+        {
+            if ((review.Rate.Value <= 5 || review.Rate.Value >= 0) && review.Comment.Length <=255)
+            {
+                try
+                {
+                    return _unitOfWork.Orders.AddReview(new Review
+                    {
+                        Comment = review.Comment,
+                        Customer_ID = review.CustomerId,
+                        Rate = new Repository.DbConnection.Rate() { RateValue = (int)review.Rate.Value, }
+                    }
+                 );
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return false;
+
+
         }
     }
 }
