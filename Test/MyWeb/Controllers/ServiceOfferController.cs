@@ -53,6 +53,73 @@ namespace MyWeb.Controllers
             return View("Index", condition.ToArray());
         }
 
+        public ActionResult Home(string searchingString)
+        {
+            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Home").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            if (searchingString == null)
+            {
+                return View("Index", list);
+            }
+            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            return View("Index", condition.ToArray());
+        }
+
+        public ActionResult Tutoring(string searchingString)
+        {
+            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Tutoring").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            if (searchingString == null)
+            {
+                return View("Index", list);
+            }
+            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            return View("Index", condition.ToArray());
+        }
+
+        public ActionResult IT(string searchingString)
+        {
+            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "IT").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            if (searchingString == null)
+            {
+                return View("Index", list);
+            }
+            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            return View("Index", condition.ToArray());
+        }
+
+        public ActionResult Repairs(string searchingString)
+        {
+            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Repairs").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            if (searchingString == null)
+            {
+                return View("Index", list);
+            }
+            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            return View("Index", condition.ToArray());
+        }
+
+        public ActionResult Architecture(string searchingString)
+        {
+            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Architecture").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            if (searchingString == null)
+            {
+                return View("Index", list);
+            }
+            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            return View("Index", condition.ToArray());
+        }
+
+        public ActionResult Media(string searchingString)
+        {
+            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Media").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            if (searchingString == null)
+            {
+                return View("Index", list);
+            }
+            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            return View("Index", condition.ToArray());
+        }
+
+
         public ActionResult Add()
         {
 

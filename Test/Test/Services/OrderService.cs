@@ -33,6 +33,7 @@ namespace ServiceLibrary
                 var offerDetails = _unitOfWork.Offers.Get(x => x.ID == item.Service_ID);
                 items.AddToCard(new Offer
                 {
+                    AuthorId = offerDetails.Employee_ID,
                     Id = offerDetails.ID,
                     Description = offerDetails.Description,
                     RatePerHour = offerDetails.RatePerHour,
