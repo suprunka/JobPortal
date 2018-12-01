@@ -183,7 +183,8 @@ namespace MyWeb.Controllers
                         mail.To.Add(new MailAddress(emailAddress, "Receiver"));
                         mail.Subject = "JobPortal";
                         mail.Body = "Hey, someone bought your offer service, log in to our website and check" +
-                            "upcoming events";
+                            "upcoming events or call the person the phone number is: " + user.PhoneNumber + "his full name is: " + 
+                            user.FirstName + " " + user.LastName;
                         mail.Priority = MailPriority.Normal;
                         using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                         {
