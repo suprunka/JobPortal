@@ -226,6 +226,27 @@ namespace Repository
             }
         }
 
-   
+
+        public bool AddReview(Review review)
+        {
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    _context.GetTable<Review>().InsertOnSubmit(review);
+                    _context.SubmitChanges();
+                    result = true;
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+            }
+
+            return result;
+
+        }
     }
 }

@@ -12,6 +12,7 @@
       <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WorkingTime" nillable="true" type="tns:WorkingDetails" />
+      <xs:element minOccurs="0" name="WorkingTimes" nillable="true" type="tns:ArrayOfWorkingTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Offer" nillable="true" type="tns:Offer" />
@@ -58,12 +59,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkingDetails" nillable="true" type="tns:WorkingDetails" />
-  <xs:complexType name="ArrayOfOffer">
+  <xs:complexType name="ArrayOfWorkingTime">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Offer" nillable="true" type="tns:Offer" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfOffer" nillable="true" type="tns:ArrayOfOffer" />
+  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
   <xs:complexType name="WorkingTime">
     <xs:sequence>
       <xs:element minOccurs="0" name="End" type="ser:duration" />
@@ -75,10 +76,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
-  <xs:complexType name="ArrayOfWorkingTime">
+  <xs:complexType name="ArrayOfOffer">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Offer" nillable="true" type="tns:Offer" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
+  <xs:element name="ArrayOfOffer" nillable="true" type="tns:ArrayOfOffer" />
 </xs:schema>

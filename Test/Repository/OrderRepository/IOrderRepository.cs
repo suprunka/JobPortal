@@ -20,6 +20,5 @@ namespace Repository.OrderRepository
         IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
         bool CleanCart(string userID);
         IQueryable<Salelines> GetJobCalendar(DateTime date, string employeeId);
-        bool AddReview(Review review);
     }
 }

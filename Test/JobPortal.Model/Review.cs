@@ -11,11 +11,7 @@ namespace JobPortal.Model
        public string CustomerId { get; set; }
        public string ServiceOfferId { get; set; }
        public string Comment { get; set; }
-       public Rate Rate { get; set; }
+       public double Rate { get; set; }
     }
-   public class Rate
-    {
-        public int Id { get; set; }
-        public double Value { get; set; }
-    }
+
 }

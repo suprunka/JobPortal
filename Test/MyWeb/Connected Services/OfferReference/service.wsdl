@@ -697,7 +697,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:8080/Offer/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>JAKUB\jakub</Upn>
+          <Upn>DESKTOP-LNM21H7\locac</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -706,7 +706,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Offer/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>JAKUB\jakub</Upn>
+          <Upn>DESKTOP-LNM21H7\locac</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

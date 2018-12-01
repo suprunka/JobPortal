@@ -10,5 +10,7 @@ namespace Repository
         bool AddWorkingDates(WorkingDates days);
         IQueryable<WorkingDates> GetAllWorkingDays();
         IQueryable<Salelines> GetAllBought(string ID);
+        bool AddReview(Review review);
+
     }
 }

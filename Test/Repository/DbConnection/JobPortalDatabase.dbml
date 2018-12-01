@@ -118,22 +118,14 @@
       <Association Name="OrderStatus_OrderTable" Member="OrderStatus" ThisKey="OrderStatus_ID" OtherKey="ID" Type="OrderStatus" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Rate" Member="Rates">
-    <Type Name="Rate">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="RateValue" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Rate_Review" Member="Reviews" ThisKey="RateValue" OtherKey="Rate_ID" Type="Review" />
-    </Type>
-  </Table>
   <Table Name="dbo.Review" Member="Reviews">
     <Type Name="Review">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Customer_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Rate_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RateValue" Storage="_Rate_ID" Type="System.Double" DbType="double" CanBeNull="true" />
       <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="AspNetUsers_Review" Member="AspNetUsers" ThisKey="Customer_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
-      <Association Name="Rate_Review" Member="Rate" ThisKey="Rate_ID" OtherKey="RateValue" Type="Rate" IsForeignKey="true" />
       <Association Name="ServiceOffer_Review" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
     </Type>
   </Table>

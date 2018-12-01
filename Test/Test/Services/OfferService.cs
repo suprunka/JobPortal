@@ -234,8 +234,30 @@ namespace ServiceLibrary
             return resultToReturn.AsQueryable<Offer>();
         }
 
+        public bool AddReview(OfferReview review)
+        {
+            if ((review.Rate <= 5 || review.Rate >= 0) && review.Comment.Length <= 255)
+            {
+                try
+                {
+                    return _unitOfWork.Orders.AddReview(new Review
+                    {
+                        Comment = review.Comment,
+                        Customer_ID = review.CustomerId,
+                        RateValue = review.Rate,
+                    }
+                 );
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return false;
 
-      
+
+        }
+
 
 
     }
