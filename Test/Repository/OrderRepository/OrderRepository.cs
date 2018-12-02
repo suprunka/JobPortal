@@ -266,7 +266,7 @@ namespace Repository.OrderRepository
 
                     }
 
-                    catch (SqlException)
+                    catch (SqlException e)
                     {
                         return false;
                     }
@@ -437,6 +437,7 @@ namespace Repository.OrderRepository
 
          return _context.GetTable<Saleline>().Where(x => x.BookedDate.BookedDate1.Equals(date) && x.ServiceOffer.Employee_ID == employeeId);
         }
+
 
     }
 

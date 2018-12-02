@@ -184,8 +184,8 @@ namespace ServiceLibrary
         }
 
         public Order FindOrder(string id)
-        { 
-            if(_unitOfWork.Orders.Get(x => x.Users_ID == id) == null)
+        {
+            if (_unitOfWork.Orders.Get(x => x.Users_ID == id) == null)
             {
                 return null;
             }
@@ -196,7 +196,7 @@ namespace ServiceLibrary
                     ID = _unitOfWork.Orders.Get(x => x.Users_ID == id).ID,
                 };
             }
-          
+
         }
     }
 }

@@ -30,5 +30,9 @@ namespace ServiceLibrary
 
         [OperationContract]
         IQueryable<Offer> GetAllBought(string ID);
+        [OperationContract]
+        bool AddReview(OfferReview review);
+        [OperationContract]
+        IQueryable<OfferReview> GetServiceReviews(int serviceId);
     }
 }

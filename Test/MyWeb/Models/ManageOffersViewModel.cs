@@ -58,6 +58,18 @@ namespace MyWeb.Models
         public ManageOffers ManageOffers { get; set; }
         public IEnumerable<WorkingHours> WorkingDays { get; set; }
     }
+    public class ReviewModel
+    {
+      public ReviewAuthor Customer { get; set; }
+        public int ServiceOfferId { get; set; }
+        public string Comment { get; set; }
+        public double Rate { get; set; }
+    }
+    public class ReviewAuthor
+    {
+       public Gender Gender { get; set; }
+       public string Username { get; set; }
+    }
 
     public class WorkingHours
     {
@@ -88,7 +100,10 @@ namespace MyWeb.Models
         public IEnumerable<TimeSpan> hoursfrom { get; set; }
         public IEnumerable<TimeSpan> hoursTo { get; set; }
         public IEnumerable<WorkingTime> Dates { get; set; }
- 
+        public Category Category { get; set; }
+        public SubCategory Subcategory { get; set; }
+        public ReviewModel[] Reviews { get; set; }
+
     }
 
     public class JobOffer

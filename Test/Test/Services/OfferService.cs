@@ -234,8 +234,42 @@ namespace ServiceLibrary
             return resultToReturn.AsQueryable<Offer>();
         }
 
+        public bool AddReview(OfferReview review)
+        {
+            if ((review.Rate <= 5 || review.Rate >= 0) && review.Comment.Length <= 255)
+            {
+                try
+                {
+                    return _unitOfWork.Offers.AddReview(new Review
+                    {
+                        Comment = review.Comment,
+                        Customer_ID = review.CustomerId,
+                        RateValue = review.Rate,
+                        ServiceOffer_ID= review.ServiceOfferId
+                    }
+                 );
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return false;
 
-      
+
+        }
+        public IQueryable<OfferReview> GetServiceReviews(int serviceId)
+        {
+            if (_unitOfWork.Offers.GetServiceReviews(serviceId).Count() < 1)
+            {
+                return null;
+            }
+            else
+            {
+                return _unitOfWork.Offers.GetServiceReviews(serviceId).Select(x => new OfferReview { CustomerId = x.Customer_ID, Comment = x.Comment, Rate = (double)x.RateValue, ServiceOfferId = serviceId });
+            }
+        }
+
 
 
     }

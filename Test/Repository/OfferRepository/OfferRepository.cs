@@ -226,6 +226,31 @@ namespace Repository
             }
         }
 
-   
+
+        public bool AddReview(Review review)
+        {
+            bool result = false;
+            using (SqlConnection objConn = new SqlConnection(connection))
+            {
+                objConn.Open();
+                try
+                {
+                    _context.GetTable<Review>().InsertOnSubmit(review);
+                    _context.SubmitChanges();
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    result = false;
+                }
+            }
+
+            return result;
+
+        }
+        public IQueryable<Review> GetServiceReviews(int serviceOfferId)
+        {
+           return _context.GetTable<Review>().Where(x => x.ServiceOffer_ID == serviceOfferId);
+        }
     }
 }
