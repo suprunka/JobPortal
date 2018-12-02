@@ -60,10 +60,15 @@ namespace MyWeb.Models
     }
     public class ReviewModel
     {
-      public string CustomerID { get; set; }
+      public ReviewAuthor Customer { get; set; }
         public int ServiceOfferId { get; set; }
         public string Comment { get; set; }
         public double Rate { get; set; }
+    }
+    public class ReviewAuthor
+    {
+       public Gender Gender { get; set; }
+       public string Username { get; set; }
     }
 
     public class WorkingHours

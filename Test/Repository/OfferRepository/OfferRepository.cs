@@ -239,7 +239,7 @@ namespace Repository
                     _context.SubmitChanges();
                     result = true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     result = false;
                 }

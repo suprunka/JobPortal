@@ -16,6 +16,7 @@ namespace MyWeb.Controllers
     {
 
         private OfferReference.IOfferService _offerProxy;
+        private UserReference1.IUserService _userProxy;
         private OrderReference.IOrderService _orderProxy;
         private IMapper _mapper;
         private IList<WorkingHours> workingdays = new List<WorkingHours>();
@@ -32,7 +33,9 @@ namespace MyWeb.Controllers
             _mapper = config.CreateMapper();
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
-            
+            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
+
+
         }
         public ServiceOfferController(IOfferService proxy)
         {
@@ -204,7 +207,8 @@ namespace MyWeb.Controllers
             var foundDates = _offerProxy.GetAllWorkingDays().Where(x => x.OfferId == id);
             var reviews = _offerProxy.GetServiceReviews(id);
             if (reviews != null)
-                reviewstomodel= reviews.Select(x => new ReviewModel { CustomerID = x.CustomerId, Comment = x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
+                
+                reviewstomodel= reviews.Select(x => new ReviewModel { Customer = new ReviewAuthor {Gender = _userProxy.FindUser(x.CustomerId).Gender, Username = _userProxy.FindUser(x.CustomerId).UserName }, Comment = x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
             ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates, Category = found.Category, Subcategory= found.Subcategory, Reviews = reviewstomodel };
             return View( model);
         }
@@ -236,6 +240,39 @@ namespace MyWeb.Controllers
             return RedirectToAction("ViewDetails", "ServiceOffer", new { id = idd});
 
 
+
+        }
+        public ActionResult AddReview(int serviceId, string customer, string rate, string comment)
+        {
+
+            if (customer.Length <= 1)
+            {
+                TempData["msg"] = "<script>alert('You are not logged in.');</script>";
+
+            }
+            else
+            {
+                try
+                {
+                    bool wasOrdered = _offerProxy.GetAllBought(customer).Where(x => x.Id == serviceId).Count() > 0;
+                    if (wasOrdered)
+                    {
+                        double rateD = Double.Parse(rate);
+                        _offerProxy.AddReview(new OfferReview { Comment = comment, CustomerId = customer, Rate = rateD, ServiceOfferId = serviceId });
+                    }
+                    else
+                    {
+                        TempData["msg"] = "<script>alert('You haven't bought that service.');</script>";
+
+                    }
+                }
+                catch
+                {
+                    return View("Error", null);
+
+                }
+            }
+           return RedirectToAction("ViewDetails","ServiceOffer", new { id=serviceId });
 
         }
     }

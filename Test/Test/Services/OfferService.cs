@@ -245,6 +245,7 @@ namespace ServiceLibrary
                         Comment = review.Comment,
                         Customer_ID = review.CustomerId,
                         RateValue = review.Rate,
+                        ServiceOffer_ID= review.ServiceOfferId
                     }
                  );
                 }
