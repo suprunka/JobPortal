@@ -165,12 +165,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\OfferServiceReference\Reference.cs">
+    <Compile Include="Connected Services\TcpOfferReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\UserServiceReferenceTcp\Reference.cs">
+    <Compile Include="Connected Services\TcpUserReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -186,8 +186,8 @@
     </Compile>
     <Compile Include="New\UserAppModel.cs" />
     <Compile Include="New\UserAppModelDisplay.cs" />
-    <Compile Include="New\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="New\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
     <Page Include="New\Main.xaml">
       <SubType>Designer</SubType>
@@ -197,7 +197,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="New\Window1.xaml">
+    <Page Include="New\Users.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,41 +226,42 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\OfferServiceReference\JobPortal.Model.xsd">
+    <None Include="Connected Services\TcpOfferReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferServiceReference\service.wsdl" />
-    <None Include="Connected Services\OfferServiceReference\service.xsd">
+    <None Include="Connected Services\TcpOfferReference\service.wsdl" />
+    <None Include="Connected Services\TcpOfferReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferServiceReference\service1.xsd">
+    <None Include="Connected Services\TcpOfferReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferServiceReference\System.xsd">
+    <None Include="Connected Services\TcpOfferReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\AppJobPortal.UserServiceReferenceTcp.User.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model.xsd">
+    <None Include="Connected Services\TcpUserReference\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model1.xsd">
+    <None Include="Connected Services\TcpUserReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\JobPortal.Model2.xsd">
+    <None Include="Connected Services\TcpUserReference\service.wsdl" />
+    <None Include="Connected Services\TcpUserReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\service.wsdl" />
-    <None Include="Connected Services\UserServiceReferenceTcp\service.xsd">
+    <None Include="Connected Services\TcpUserReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceReferenceTcp\service1.xsd">
+    <None Include="Connected Services\TcpUserReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\AppJobPortal.Model.Offer.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
+    <None Include="Properties\DataSources\JobPortal.Model.User.datasource" />
+    <None Include="Properties\DataSources\JobPortal.Model.WorkingTime.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -273,36 +274,35 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UserServiceReferenceTcp\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\OfferServiceReference\" />
-    <WCFMetadataStorage Include="Connected Services\UserServiceReferenceTcp\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UserServiceReferenceTcp\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UserServiceReferenceTcp\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
       <Project>{54C02908-1940-4080-9B75-A3879245C02B}</Project>
       <Name>JobPortal.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\OfferServiceReference\configuration91.svcinfo" />
+    <WCFMetadataStorage Include="Connected Services\TcpOfferReference\" />
+    <WCFMetadataStorage Include="Connected Services\TcpUserReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\OfferServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\TcpUserReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\OfferServiceReference\Reference.svcmap">
+    <None Include="Connected Services\TcpUserReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpOfferReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpOfferReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpOfferReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

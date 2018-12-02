@@ -1,27 +1,18 @@
 ﻿using AppJobPortal.Models;
-using AppJobPortal.UserServiceReferenceTcp;
+using AppJobPortal.TcpUserReference;
 using AutoMapper;
+using JobPortal.Model;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AppJobPortal.New
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Users : UserControl
     {
         private readonly IUserService _proxy;
         private IMapper _mapper;
@@ -29,13 +20,13 @@ namespace AppJobPortal.New
         private User[] _source;
 
 
-        public Window1()
+        public Users()
         {
             InitializeComponent();
-            _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
+            _proxy = new UserServiceClient("UserServiceTcpEndpoint");
 
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<UserAppModel, UserServiceReferenceTcp.User>();
+                cfg.CreateMap<UserAppModel, User>();
             });
 
             _mapper = config.CreateMapper();
@@ -46,13 +37,13 @@ namespace AppJobPortal.New
            
 
         }
-        public Window1(UserAppModel user)
+        public Users(UserAppModel user)
         {
             InitializeComponent();
-            _proxy = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
+            _proxy = new TcpUserReference.UserServiceClient("UserServiceTcpEndpoint");
 
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<UserAppModel, UserServiceReferenceTcp.User>();
+                cfg.CreateMap<UserAppModel, User>();
             });
 
             _mapper = config.CreateMapper();
@@ -66,7 +57,7 @@ namespace AppJobPortal.New
 
         public void Init()
         {
-            regBox.ItemsSource = Enum.GetValues(typeof(UserServiceReferenceTcp.Region));
+            regBox.ItemsSource = Enum.GetValues(typeof(Region));
         }
         private void GetAll() {
             _source = _proxy.GetAll();

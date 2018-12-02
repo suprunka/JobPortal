@@ -1,33 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using AppJobPortal.Models;
-using AppJobPortal.OfferServiceReference;
+using AppJobPortal.TcpUserReference;
 using AutoMapper;
+using AppJobPortal.TcpOfferReference;
 using JobPortal.Model;
-
+using System.Windows.Controls;
 
 namespace AppJobPortal.New
 {
-    /// <summary>
-    /// Interaction logic for Services.xaml
-    /// </summary>
-    public partial class Services : Window
+
+    public partial class Services : UserControl
     {
-        private readonly IOfferService _proxy;
-        private readonly UserServiceReferenceTcp.IUserService _proxyUser;
+        private readonly IOfferService _proxyOffer;
+        private readonly IUserService _proxyUser;
         private IMapper _mapper;
         private ServiceAppModel _serviceOffer;
         private Offer[] _source;
@@ -35,8 +23,8 @@ namespace AppJobPortal.New
         public Services()
         {
             InitializeComponent();
-            _proxy = new OfferServiceClient("offerService");
-            _proxyUser = new UserServiceReferenceTcp.UserServiceClient("UserServiceTcpEndpoint");
+            _proxyOffer = new TcpOfferReference.OfferServiceClient("OfferServiceTcpEndpoint");
+            _proxyUser = new TcpUserReference.UserServiceClient("UserServiceTcpEndpoint");
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<ServiceAppModel,Offer>();
             });
@@ -55,11 +43,11 @@ namespace AppJobPortal.New
         }
         private void GetAll()
         {
-            _source = _proxy.GetAllOffers();
+            _source = _proxyOffer.GetAllOffers();
             ObservableCollection<ServiceAppModel> offers = new ObservableCollection<ServiceAppModel>();
             foreach (Offer offer in _source)
             {
-                UserServiceReferenceTcp.User u = _proxyUser.FindUser(offer.AuthorId);
+                var u = _proxyUser.FindUser(offer.AuthorId);
 
 
                      offers.Add(new ServiceAppModel() {Id = offer.Id, Author_phone = u.PhoneNumber,
@@ -75,7 +63,7 @@ namespace AppJobPortal.New
         void Delete(object sender, RoutedEventArgs e)
         {
             ServiceAppModel offer = (ServiceAppModel)servicesTable.SelectedItem;
-            if (_proxy.DeleteServiceOffer(offer.Id))
+            if (_proxyOffer.DeleteServiceOffer(offer.Id))
             {
                 GetAll();
             }
@@ -91,8 +79,8 @@ namespace AppJobPortal.New
             try
             {
                 int id = int.Parse(txtId.Text);
-                var offer = _proxy.FindServiceOffer(id);
-                UserServiceReferenceTcp.User u = _proxyUser.FindUser(offer.AuthorId);
+                var offer = _proxyOffer.FindServiceOffer(id);
+                var u = _proxyUser.FindUser(offer.AuthorId);
                 //UserAppModel user = _mapper.Map(offer.Author, new UserAppModel());
                 IList<ServiceAppModel> list = new List<ServiceAppModel>();
                 list.Add(new ServiceAppModel
@@ -125,7 +113,7 @@ namespace AppJobPortal.New
         {
             ServiceAppModel offer = (ServiceAppModel)servicesTable.SelectedItem;
            
-            new Window1(_mapper.Map(offer.Author, new UserAppModel()));
+            new Users(_mapper.Map(offer.Author, new UserAppModel()));
         }
 
         private void RefreshBtn_Click(object sender, RoutedEventArgs e)

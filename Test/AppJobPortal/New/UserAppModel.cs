@@ -1,14 +1,7 @@
 ﻿using AppJobPortal.New;
-using AppJobPortal.UserServiceReferenceTcp;
 using JobPortal.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gender = AppJobPortal.UserServiceReferenceTcp.Gender;
-using Region = AppJobPortal.UserServiceReferenceTcp.Region;
+
 
 namespace AppJobPortal.Models
 {

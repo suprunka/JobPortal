@@ -1,7 +1,7 @@
 ﻿using AppJobPortal.New;
+using JobPortal.Model;
 using System;
-using Gender = AppJobPortal.UserServiceReferenceTcp.Gender;
-using Region = AppJobPortal.UserServiceReferenceTcp.Region;
+
 
 namespace AppJobPortal.Models
 {

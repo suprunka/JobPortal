@@ -1,5 +1,5 @@
-﻿using AppJobPortal.UserServiceReferenceTcp;
-using AutoMapper;
+﻿using AutoMapper;
+using JobPortal.Model;
 
 namespace AppJobPortal.Mapping
 {

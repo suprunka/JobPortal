@@ -3,12 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AppJobPortal.New"
         mc:Ignorable="d"
-        Title="Main" WindowState="Maximized" Height="497" Width="1000" Loaded="Window_Loaded">
+        Title="MainWindow" Height="350" Width="525">
+   
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
        
+        <DockPanel Background="YellowGreen" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5">
+            <StackPanel>
+                <Button Content="Users" Click="Users_Clicked"/>
+                <Button Content="Services" Click="Services_Clicked"/>
+            </StackPanel>
+        </DockPanel>
+
+        <ContentControl Background="AliceBlue" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
 
     </Grid>
 </Window>
