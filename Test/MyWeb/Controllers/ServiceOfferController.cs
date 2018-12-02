@@ -199,9 +199,13 @@ namespace MyWeb.Controllers
         [HttpGet]
         public async Task<ActionResult> ViewDetails(int  id)
         {
+            ReviewModel[] reviewstomodel = null;
             var found = await _offerProxy.FindServiceOfferAsync(id);
             var foundDates = _offerProxy.GetAllWorkingDays().Where(x => x.OfferId == id);
-            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates, Category = found.Category, Subcategory= found.Subcategory};
+            var reviews = _offerProxy.GetServiceReviews(id);
+            if (reviews != null)
+                reviewstomodel= reviews.Select(x => new ReviewModel { CustomerID = x.CustomerId, Comment = x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
+            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates, Category = found.Category, Subcategory= found.Subcategory, Reviews = reviewstomodel };
             return View( model);
         }
 
@@ -221,7 +225,7 @@ namespace MyWeb.Controllers
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
 
-            return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = edited.Id });
         }
 
         public async Task<ActionResult> Delete(int idd)

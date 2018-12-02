@@ -248,5 +248,9 @@ namespace Repository
             return result;
 
         }
+        public IQueryable<Review> GetServiceReviews(int serviceOfferId)
+        {
+           return _context.GetTable<Review>().Where(x => x.ServiceOffer_ID == serviceOfferId);
+        }
     }
 }

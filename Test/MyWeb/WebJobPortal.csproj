@@ -349,6 +349,7 @@
     </None>
     <Content Include="Properties\DataSources\JobPortal.Model.WorkingTime.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.JobOffer.datasource" />
+    <Content Include="Properties\DataSources\JobPortal.Model.OfferReview.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

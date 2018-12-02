@@ -240,7 +240,7 @@ namespace ServiceLibrary
             {
                 try
                 {
-                    return _unitOfWork.Orders.AddReview(new Review
+                    return _unitOfWork.Offers.AddReview(new Review
                     {
                         Comment = review.Comment,
                         Customer_ID = review.CustomerId,
@@ -256,6 +256,17 @@ namespace ServiceLibrary
             return false;
 
 
+        }
+        public IQueryable<OfferReview> GetServiceReviews(int serviceId)
+        {
+            if (_unitOfWork.Offers.GetServiceReviews(serviceId).Count() < 1)
+            {
+                return null;
+            }
+            else
+            {
+                return _unitOfWork.Offers.GetServiceReviews(serviceId).Select(x => new OfferReview { CustomerId = x.Customer_ID, Comment = x.Comment, Rate = (double)x.RateValue, ServiceOfferId = serviceId });
+            }
         }
 
 

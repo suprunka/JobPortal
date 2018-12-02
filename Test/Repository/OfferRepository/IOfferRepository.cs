@@ -11,6 +11,7 @@ namespace Repository
         IQueryable<WorkingDates> GetAllWorkingDays();
         IQueryable<Salelines> GetAllBought(string ID);
         bool AddReview(Review review);
+        IQueryable<Review> GetServiceReviews(int serviceOfferId);
 
     }
 }

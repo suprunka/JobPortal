@@ -266,7 +266,7 @@ namespace Repository.OrderRepository
 
                     }
 
-                    catch (SqlException)
+                    catch (SqlException e)
                     {
                         return false;
                     }

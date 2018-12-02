@@ -8,8 +8,10 @@
     ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/Rating.css")
 
-         @using (Html.BeginForm()) { @Html.AntiForgeryToken()   @Html.HiddenFor(model => model.Id)
+@using (Html.BeginForm())
+{@Html.AntiForgeryToken() @Html.HiddenFor(model => model.Id)
 
 <div class="offerCard">
     <h2>@Model.Title</h2>
@@ -96,93 +98,93 @@
                     @Html.ActionLink("See an author of the service offer", "UserProfile", "User", new { id = Model.Author }, null)
                 </div>
 
-                <div class="row">
-                    <div class="col-md-10">
-                        Available days when you can order the service:
-                        <div>
-                            @foreach (var t in Model.Dates)
-                            {
-                                <div>
-                                    @t.WeekDay.ToString()s
-                                </div>
-                            }
-                        </div>
-                        <p><span class="glyphicon glyphicon-calendar" style="height:150%"> Date: </span><input type="date" name="days" id="selecteddate"></p>
-                        <br />
-                        <span class="glyphicon glyphicon-time"></span>@Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "form-control" })
-
-                        <span class="glyphicon glyphicon-time"></span> @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "form-control" })
-
-                        <br />
-
-                        @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-danger", @id = "addToCart" })
-                    </div>
-                </div>
             }
         </div>
 
     </div>
 
+    @if (Model.Author != User.Identity.GetUserId())
+    {<div class="row">
+            <div class="col-md-10">
+                Available days when you can order the service:
+                <div>
+                    @foreach (var t in Model.Dates)
+                    {
+                        <div>
+                            @t.WeekDay.ToString()s
+                        </div>
+                    }
+                </div>
+                <p><span class="glyphicon glyphicon-calendar" style="padding-right:20px;"></span><input type="date" name="days" id="selecteddate"></p>
+                <br />
+                <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span>@Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "form-control" }) </p>                
+                <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span> @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "form-control" }) </p> 
+                <br />
 
-
-
-    @if (Model.Author == User.Identity.GetUserId())
-    {
-
-        <br />
-
-        <script src="@Url.Content("~/Scripts/daypilot-all.min.js")" type="text/javascript"></script>
-
-        <div id="dp">
-            <br />
-            <br />
-            <br />
-
-
-            @Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig
-       {
-           BackendUrl = Url.Action("Backend", "Calendar",new {serviceId = Model.Id }),
-           ViewType = ViewType.Week,
-           CellDuration = 60,
-           Height = 600,
-           CellHeight = 30,
-           HeightSpec = DayPilot.Web.Mvc.Enums.Calendar.HeightSpec.Full,
-           DayBeginsHour= 5,
-           DayEndsHour= 22,
-           AutoRefreshEnabled = true,
-           AutoRefreshInterval = 10,
-           DurationBarVisible = true,
-           TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.JavaScript,
-           TimeRangeSelectedJavaScript = "create(start, end)",
-           EventClickHandling = EventClickHandlingType.JavaScript,
-           EventDeleteHandling = EventDeleteHandlingType.CallBack,
-           HeaderDateFormat = "dddd",
-
-
-       })
-
+                @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-danger", @id = "addToCart" })
+            </div>
         </div>
-
     }
-    else
-    {
-        
-        <fieldset class="rating">
-            <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
-            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-            <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
-            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Good - 3.5 stars"></label>
-            <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Not that bad - 3 stars"></label>
-            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Bad - 2.5 stars"></label>
-            <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Bad - 2 stars"></label>
-            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Terrible - 1.5 stars"></label>
-            <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Terrible - 1 star"></label>
-            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Terrible - 0.5 stars"></label>
-        </fieldset>
-        
 
-    }
-</div>
+
+
+        @if (Model.Author == User.Identity.GetUserId())
+        {
+
+            <br />
+
+            <script src="@Url.Content("~/Scripts/daypilot-all.min.js")" type="text/javascript"></script>
+
+            <div id="dp">
+                <br />
+                <br />
+                <br />
+
+
+                @Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig
+           {
+               BackendUrl = Url.Action("Backend", "Calendar",new {serviceId = Model.Id }),
+               ViewType = ViewType.Week,
+               CellDuration = 60,
+               Height = 600,
+               CellHeight = 30,
+               HeightSpec = DayPilot.Web.Mvc.Enums.Calendar.HeightSpec.Full,
+               DayBeginsHour= 5,
+               DayEndsHour= 22,
+               AutoRefreshEnabled = true,
+               AutoRefreshInterval = 10,
+               DurationBarVisible = true,
+               TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.JavaScript,
+               TimeRangeSelectedJavaScript = "create(start, end)",
+               EventClickHandling = EventClickHandlingType.JavaScript,
+               EventDeleteHandling = EventDeleteHandlingType.CallBack,
+               HeaderDateFormat = "dddd",
+
+
+           })
+
+            </div>
+
+        }
+        else
+        {
+
+            <fieldset class="rating">
+                <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Good - 3.5 stars"></label>
+                <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Not that bad - 3 stars"></label>
+                <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Bad - 2.5 stars"></label>
+                <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Bad - 2 stars"></label>
+                <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Terrible - 1.5 stars"></label>
+                <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Terrible - 1 star"></label>
+                <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Terrible - 0.5 stars"></label>
+            </fieldset>
+
+
+        }
+    </div>
 }
 @Html.Raw(TempData["msg"])
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

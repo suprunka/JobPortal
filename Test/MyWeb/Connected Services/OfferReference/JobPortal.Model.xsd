@@ -82,4 +82,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOffer" nillable="true" type="tns:ArrayOfOffer" />
+  <xs:complexType name="OfferReview">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rate" type="xs:double" />
+      <xs:element minOccurs="0" name="ServiceOfferId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OfferReview" nillable="true" type="tns:OfferReview" />
+  <xs:complexType name="ArrayOfOfferReview">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OfferReview" nillable="true" type="tns:OfferReview" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOfferReview" nillable="true" type="tns:ArrayOfOfferReview" />
 </xs:schema>

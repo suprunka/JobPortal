@@ -62,6 +62,18 @@ namespace MyWeb.OfferReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllBoughtAsync(string ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddReview", ReplyAction="http://tempuri.org/IOfferService/AddReviewResponse")]
+        bool AddReview(JobPortal.Model.OfferReview review);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddReview", ReplyAction="http://tempuri.org/IOfferService/AddReviewResponse")]
+        System.Threading.Tasks.Task<bool> AddReviewAsync(JobPortal.Model.OfferReview review);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
+        JobPortal.Model.OfferReview[] GetServiceReviews(int serviceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.OfferReview[]> GetServiceReviewsAsync(int serviceId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -153,6 +165,22 @@ namespace MyWeb.OfferReference {
         
         public System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllBoughtAsync(string ID) {
             return base.Channel.GetAllBoughtAsync(ID);
+        }
+        
+        public bool AddReview(JobPortal.Model.OfferReview review) {
+            return base.Channel.AddReview(review);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddReviewAsync(JobPortal.Model.OfferReview review) {
+            return base.Channel.AddReviewAsync(review);
+        }
+        
+        public JobPortal.Model.OfferReview[] GetServiceReviews(int serviceId) {
+            return base.Channel.GetServiceReviews(serviceId);
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.OfferReview[]> GetServiceReviewsAsync(int serviceId) {
+            return base.Channel.GetServiceReviewsAsync(serviceId);
         }
     }
 }
