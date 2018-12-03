@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="816e1def-d3b9-4254-b9b7-e4ce6af36a87" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="240ec707-e651-43d2-b871-00df0ef4da78" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/User/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:8090/User/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="82e3dbac-efd5-41dc-bcda-7a4481e161ca" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="cddf4c9d-d8dc-467a-9522-360489407261" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="785aae87-4c1a-4151-8b34-eae17869654d" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
-    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="37b35964-ac81-4a4d-b039-96dd5b79ae4c" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
-    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="8877b255-e463-4361-866a-c4f2781bacb9" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="b220b63b-a504-4e46-9e13-f42b5ea3248b" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="8982e4a0-41ef-4ffc-8703-c728eeee8f7f" SourceId="1" SourceUrl="net.tcp://localhost:8090/User/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9128612e-9bb1-45b8-83f6-8803738eca30" SourceId="1" SourceUrl="net.tcp://localhost:8090/User/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="34f2f60a-d8ff-4e47-91ca-0c2c9c45738f" SourceId="1" SourceUrl="net.tcp://localhost:8090/User/mex" />
+    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="7e1a3066-f409-4004-8ca3-5ad40019b5c5" SourceId="1" SourceUrl="net.tcp://localhost:8090/User/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="0011af51-c9e8-4d87-9bcf-a83ace09c9ea" SourceId="1" SourceUrl="net.tcp://localhost:8090/User/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="d80e47a2-6a98-4655-bfb4-3032aefb7c31" SourceId="1" SourceUrl="net.tcp://localhost:8090/User/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

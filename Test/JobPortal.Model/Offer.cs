@@ -32,7 +32,7 @@ namespace JobPortal.Model
         [DataMember]
         public virtual IEnumerable<WorkingTime> WorkingTimes { get; set; }
     }
-
+    [DataContract]
     public class PayPalOffer
     {
         [DataMember]
@@ -46,7 +46,7 @@ namespace JobPortal.Model
         [DataMember]
         public virtual TimeSpan HoursTo { get; set; }
     }
-
+    [DataContract]
     public class WorkingDetails
     {
         [DataMember]
@@ -84,7 +84,7 @@ namespace JobPortal.Model
         [DataMember]
         public virtual DateTime Date { get; set; }
     }*/
-
+    [DataContract]
     public class WorkingTime
     {
         [DataMember]
@@ -100,7 +100,7 @@ namespace JobPortal.Model
         [DataMember]
         public virtual string Text { get; set; }
     }
-
+    [DataContract]
     public class WorkingDate
     {
         [DataMember]

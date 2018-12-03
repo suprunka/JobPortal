@@ -284,18 +284,6 @@
     <WCFMetadataStorage Include="Connected Services\TcpUserReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TcpUserReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\TcpUserReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\TcpUserReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\TcpOfferReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +291,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\TcpOfferReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

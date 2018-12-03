@@ -67,14 +67,15 @@ namespace MyWeb.Controllers
 
         }
 
-        public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
+
+        public ActionResult AddToCart(string userID, int? serviceID, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
 
-            if (userID != null && serviceID > 0)
+            if (userID.Trim().Length > 0 && serviceID > 0)
             {
                 try
                 {
-                    var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                    var result = _orderProxy.AddToCart(userID, (int)serviceID, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
                     if (result)
                     {
                         return RedirectToAction("Index", "Order", new { id = userID.Trim() });
@@ -90,7 +91,11 @@ namespace MyWeb.Controllers
                 }
 
             }
-            return View("Error", null);
+            else
+            {
+                TempData["msg"] = "<script>alert('You are not logged in.');</script>";
+            }
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = serviceID });
         }
 
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
