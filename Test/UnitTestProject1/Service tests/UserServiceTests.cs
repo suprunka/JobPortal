@@ -18,7 +18,7 @@ namespace UnitTestProject1.Service_tests
     public class UserServiceTests
     {
 
-        public Mock<User> getMockOfUser()
+        public Mock<User> GetMockOfUser()
         {
             var userStub = new Mock<User>();
             userStub.Setup(x => x.FirstName).Returns("Ådam");
@@ -37,35 +37,32 @@ namespace UnitTestProject1.Service_tests
             return userStub;
         }
 
-        //Create
-
-
-        //Test if during creation of user database is hit only once.        
+        //CreateUser    
         [TestMethod]
         public void Create_UserService_Creation_Of_User_Hit_Database_Once()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.Create(It.IsAny<Users>()));
                 UserService service = new UserService(databaseMock.Object);
-                service.CreateUser(getMockOfUser().Object, null);
-                databaseMock.Verify(t => t.Create(It.IsAny<Users>()), Times.AtLeastOnce);
+                service.CreateUser(GetMockOfUser().Object, null);
+                databaseMock.Verify(t => t.Users.Create(It.IsAny<Users>()), Times.Once);
             }
             catch
             {
                 Assert.Fail();
             }
         }
-
-        //Test if creation of user results sucessfully.
         [TestMethod]
         public void Create_UserService_Creation_Of_User_With_Valid_Inputs_Is_True()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.Create(It.IsAny<Users>()));
                 UserService service = new UserService(databaseMock.Object);
-                bool result = service.CreateUser(getMockOfUser().Object, null);
+                bool result = service.CreateUser(GetMockOfUser().Object, null);
                 Assert.IsTrue(result);
             }
             catch
@@ -73,7 +70,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [DataRow("12345678", "Ådam", "Ådåm", "Ådåm@gmail.com", "AdamMånå", "Qwerty1", "Stræætline", "Cityæname", "2154", Region.Hovedstaden, Gender.Male)]
         [TestMethod]
         public void Create_UserService_Creation_Of_User_Not_Using_Required_Arguments_In_Regex_Throws_ArgumentNullException(string phoneNumber, string firstName,
@@ -97,7 +93,7 @@ namespace UnitTestProject1.Service_tests
                 userStub.Setup(x => x.Gender).Returns(gender);
 
                 #endregion
-                var databaseMock = new Mock<IUserRepository>();
+                var databaseMock = new Mock<IUnitOfWork>();
                 UserService service = new UserService(databaseMock.Object);
                 service.CreateUser(userStub.Object, null);
             }
@@ -106,8 +102,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.IsTrue(true);
             }
         }
-
-        //Test creation users with invalid proporties which shouldn't pass.
         #region
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid firstname (not allowed characters)
         [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid lastname (not allowed characters)
@@ -140,7 +134,7 @@ namespace UnitTestProject1.Service_tests
                 userStub.Setup(x => x.Gender).Returns(gender);
                 userStub.Setup(x => x.Description).Returns(description);
                 userStub.Setup(x => x.PayPalMail).Returns(paypalMail);
-                var databaseMock = new Mock<IUserRepository>();
+                var databaseMock = new Mock<IUnitOfWork>();
                 UserService service = new UserService(databaseMock.Object);
                 Assert.IsFalse(service.CreateUser(userStub.Object, null));
             }
@@ -150,14 +144,14 @@ namespace UnitTestProject1.Service_tests
             }
         }
 
-        //Read
+        //FindUser
         [TestMethod]
         public void Get_UserService_Finding_User_By_Valid_ID_Returns_User()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
                     AddressTable = new AddressTable
                     {
@@ -192,7 +186,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void Get_UserService_Using_Invalid_ID_Returns_Null()
         {
@@ -235,14 +228,13 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void Get_UserService_Finding_User_By_Valid_ID_Hits_Database_Once()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
                     AddressTable = new AddressTable
                     {
@@ -269,21 +261,20 @@ namespace UnitTestProject1.Service_tests
                     PayPalMail = "paypal@wp.pl",
                 });
                 var subject = new UserService(databaseMock.Object).FindUserByID(1);
-                databaseMock.Verify(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once());
+                databaseMock.Verify(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once());
             }
             catch
             {
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void Get_UserService_Catch_Exception_If_Database_Throws_It()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Throws(new Exception());
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Throws(new Exception());
                 var subject = new UserService(databaseMock.Object);
                 subject.FindUserByID(1);
 
@@ -293,15 +284,14 @@ namespace UnitTestProject1.Service_tests
                 Assert.IsTrue(true);
             }
         }
-
         [TestMethod]
         public void Get_UserService_Check_Its_Proporties()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
+                var databaseMock = new Mock<IUnitOfWork>();
 
-                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+                databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
                     AddressTable = new AddressTable
                     {
@@ -337,14 +327,13 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void GetAll_UserService_Hits_Database_Once()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.GetAll()).Returns(new Users[] { new Users {
                  AddressTable = new AddressTable
                  {
                      Postcode = "9000",
@@ -473,21 +462,20 @@ namespace UnitTestProject1.Service_tests
              }
              }.AsQueryable());
                 var list = new UserService(databaseMock.Object).GetAll();
-                databaseMock.Verify(x => x.GetAll(), Times.Once());
+                databaseMock.Verify(x => x.Users.GetAll(), Times.Once());
             }
             catch
             {
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void GetAll_UserService_Catch_Exception_If_Database_Thrws_It()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.GetAll()).Throws(new Exception());
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.GetAll()).Throws(new Exception());
                 new UserService(databaseMock.Object).GetAll();
                 
             }
@@ -496,14 +484,13 @@ namespace UnitTestProject1.Service_tests
                 Assert.IsTrue(true);
             }
         }
-
         [TestMethod]
         public void GetAll_UserService_Verify_If_Returns_Queryable()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.GetAll()).Returns(new Users[] { new Users {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.GetAll()).Returns(new Users[] { new Users {
                  AddressTable = new AddressTable
                  {
                      Postcode = "9000",
@@ -568,13 +555,14 @@ namespace UnitTestProject1.Service_tests
             }
         }
 
+        //ListByRegion
         [TestMethod]
         public void List_By_Region_Test()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
                  AddressTable = new AddressTable
                  {
                      Postcode = "9000",
@@ -666,14 +654,14 @@ namespace UnitTestProject1.Service_tests
 
             }
         }
-
+        //ListByGender
         [TestMethod]
         public void List_By_Gender_Test()
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Users.List(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users[] { new Users {
                  AddressTable = new AddressTable
                  {
                      Postcode = "9000",
@@ -764,76 +752,69 @@ namespace UnitTestProject1.Service_tests
             }
         }
 
-
-        
-
-        //Delete
-
+        //DeleteUser
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Valid_ID_Returns_True()
         {
             var userMock = new Mock<User>();
             userMock.Setup(x => x.ID).Returns(1);
-            var dbMock = new Mock<IUserRepository>();
-            dbMock.Setup(t => t.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
+            var dbMock = new Mock<IUnitOfWork>();
+            dbMock.Setup(t => t.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
             var sut = new UserService(dbMock.Object);
             bool result = sut.DeleteUser(userMock.Object.ID);
             Assert.IsTrue(result);
-        }
-        
+        }   
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Invalid_ID_Returns_False()
         {
             var userMock = new Mock<User>();
             userMock.Setup(x => x.ID).Returns(-1);
-            var dbMock = new Mock<IUserRepository>();
-            dbMock.Setup(t => t.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
+            var dbMock = new Mock<IUnitOfWork>();
+            dbMock.Setup(t => t.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
             var sut = new UserService(dbMock.Object);
             bool result = sut.DeleteUser(userMock.Object.ID);
             Assert.IsFalse(result);
-        }
-        
+        }       
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Valid_ID_Hits_Database_Once()
         {
             var userMock = new Mock<User>();
             userMock.Setup(x => x.ID).Returns(1);
-            var dbMock = new Mock<IUserRepository>();
-            dbMock.Setup(t => t.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
+            var dbMock = new Mock<IUnitOfWork>();
+            dbMock.Setup(t => t.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
             var sut = new UserService(dbMock.Object);
             sut.DeleteUser(userMock.Object.ID);
-            dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once);
-        }
-        
+            dbMock.Verify(x => x.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once);
+        }        
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Invalid_ID_Never_Hits_Database()
         {
             var userMock = new Mock<User>();
-            var dbMock = new Mock<IUserRepository>();
-            dbMock.Setup(t => t.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
+            var dbMock = new Mock<IUnitOfWork>();
+            dbMock.Setup(t => t.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>())).Returns(true);
             var sut = new UserService(dbMock.Object);
             sut.DeleteUser(-1);
-            dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Never);
+            dbMock.Verify(x => x.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Never);
         }
-
-        
 
         //Update    
         [TestMethod]
         public void Update_UserService_Using_Valid_Parameters_Hit_Database_Once()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            new UserService(databaseMock.Object).EditUser(getMockOfUser().Object);
-            databaseMock.Verify(x => x.Update(It.IsAny<Users>()), Times.Once());
+            var databaseMock = new Mock<IUnitOfWork>();
+            databaseMock.Setup(x => x.Users.Update(It.IsAny<Users>()));
+            new UserService(databaseMock.Object).EditUser(GetMockOfUser().Object);
+            databaseMock.Verify(x => x.Users.Update(It.IsAny<Users>()), Times.Once());
         }
-        
         [TestMethod]
         public void Update_UserService_Using_Valid_Parameters_Is_True()
         {
-            var databaseMock = new Mock<IUserRepository>();
-            var result = new UserService(databaseMock.Object).EditUser(getMockOfUser().Object);
+            var databaseMock = new Mock<IUnitOfWork>();
+            databaseMock.Setup(t => t.Users.Update(It.IsAny<Users>()));
+            var result = new UserService(databaseMock.Object).EditUser(GetMockOfUser().Object);
             Assert.IsTrue(result);
         }
+
 
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid firstname (not allowed characters)
         [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid lastname (not allowed characters)
@@ -863,12 +844,10 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Gender).Returns(gender);
             userStub.Setup(x => x.Description).Returns(description);
             userStub.Setup(x => x.PayPalMail).Returns(paypalMail);
-            var databaseMock = new Mock<IUserRepository>();
+            var databaseMock = new Mock<IUnitOfWork>();
             var result = new UserService(databaseMock.Object).EditUser(userStub.Object);
             Assert.IsFalse(result);
         }
-
-
 
         [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid firstname (not allowed characters)
         [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, "Description", "Paypal@wp.pl")] //invalid lastname (not allowed characters)
@@ -898,10 +877,10 @@ namespace UnitTestProject1.Service_tests
             userStub.Setup(x => x.Gender).Returns(gender);
             userStub.Setup(x => x.Description).Returns(description);
             userStub.Setup(x => x.PayPalMail).Returns(paypalMail);
-            var databaseMock = new Mock<IUserRepository>();
+            var databaseMock = new Mock<IUnitOfWork>();
             var sut = new UserService(databaseMock.Object);
             sut.EditUser(userStub.Object);
-            databaseMock.Verify(x => x.Update(It.IsAny<Users>()), Times.Never());
+            databaseMock.Verify(x => x.Users.Update(It.IsAny<Users>()), Times.Never());
 
         }
     }

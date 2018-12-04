@@ -16,7 +16,6 @@ namespace UnitTestProject1.Service_tests
     public class ServiceOfferServiceTests
     {
         //Create
-
         [TestMethod]
         public void Create_OfferService_Verify_If_It_Calls_Db()
         {
@@ -30,6 +29,7 @@ namespace UnitTestProject1.Service_tests
                 offerServiceMock.Setup(x => x.Title).Returns("Title");
                 offerServiceMock.Setup(x => x.Description).Returns("Description");
                 var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(t => t.Offers.Create(It.IsAny<ServiceOffer>()));
                 OfferService service = new OfferService(dbMock.Object);
                 service.CreateServiceOffer(offerServiceMock.Object);
                 dbMock.Verify(x => x.Offers.Create(It.IsAny<ServiceOffer>()), Times.AtLeastOnce);
@@ -39,7 +39,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void Create_OfferService_Check_If_Is_True()
         {
@@ -53,6 +52,7 @@ namespace UnitTestProject1.Service_tests
                 offerServiceMock.Setup(x => x.Title).Returns("Title");
                 offerServiceMock.Setup(x => x.Description).Returns("Description");
                 var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(t => t.Offers.Create(It.IsAny<ServiceOffer>()));
                 OfferService service = new OfferService(dbMock.Object);
                 var created = service.CreateServiceOffer(offerServiceMock.Object);
                 Assert.IsTrue(created);
@@ -62,7 +62,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         [DataRow(-1, "My Title 10", "This is description..20", DisplayName = "Test with rate per hour<0 and another valid data")]
         [DataRow(0, "My Title 10", "This is description..20", DisplayName = "Test with rate per hour == 0 and another valid data")]
@@ -94,13 +93,13 @@ namespace UnitTestProject1.Service_tests
 
 
         //Delete 
-
         [TestMethod]
         public void Delete_OfferService_Verify_If_It_Calls_Db()
         {
             try
             {
                 var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>()));
                 var subject = new OfferService(dbMock.Object);
                 subject.DeleteServiceOffer(1);
                 dbMock.Verify(x => x.Offers.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.AtLeastOnce);
@@ -112,7 +111,6 @@ namespace UnitTestProject1.Service_tests
 
 
         }
-
         [TestMethod]
         public void Delete_OfferService_Verify_If_Returns_true()
         {
@@ -129,7 +127,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void Delete_OfferService_Using_Invalid_ID_Returns_False()
         {
@@ -148,7 +145,6 @@ namespace UnitTestProject1.Service_tests
         }
 
         //Read
-
         [TestMethod]
         public void Get_OfferService_Verify_If_It_Calls_Db()
         {
@@ -188,7 +184,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void GetAll_OfferService_Verify_If_Returns_Queryable()
         {
@@ -243,9 +238,8 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-      
-        }
 
+        }
         [TestMethod]
         public void Get_OfferService_Returns_Offer()
         {
@@ -281,7 +275,6 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void Get_OfferService_Compare_Attributes()
         {
@@ -316,9 +309,8 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-            
-        }
 
+        }
         [TestMethod]
         public void Get_Test_Proprties_Of_Found_Offer()
         {
@@ -354,11 +346,11 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-           
+
         }
 
 
-        //Update
+        //UpdateServiceOffer
         [TestMethod]
         public void Update_OfferService_Verify_If_It_Calls_Db()
         {
@@ -372,6 +364,7 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.Title).Returns("Title");
                 offerMock.Setup(x => x.Description).Returns("Description");
                 var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.Update(It.IsAny<ServiceOffer>()));
                 var subject = new OfferService(dbMock.Object);
                 subject.UpdateServiceOffer(offerMock.Object);
                 dbMock.Verify(x => x.Offers.Update(It.IsAny<ServiceOffer>()), Times.Once());
@@ -380,10 +373,9 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-       
+
 
         }
-
         [TestMethod]
         public void Update_OfferService_With_Invalid_Title_Is_False()
         {
@@ -405,10 +397,9 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-            
+
 
         }
-
         [TestMethod]
         public void Update_OfferService_With_Invalid_Description_Is_False()
         {
@@ -430,10 +421,9 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-           
+
 
         }
-
         [TestMethod]
         public void Update_OfferService_With_Invalid_Rate_Per_Hour_Is_False()
         {
@@ -455,9 +445,8 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-            
-        }
 
+        }
         [TestMethod]
         public void Update_OfferService_Verify_If_Returns_True()
         {
@@ -471,6 +460,7 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.Title).Returns("Title");
                 offerMock.Setup(x => x.Description).Returns("Description");
                 var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.Update(It.IsAny<ServiceOffer>()));
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.UpdateServiceOffer(offerMock.Object);
                 Assert.IsTrue(result);
@@ -479,7 +469,287 @@ namespace UnitTestProject1.Service_tests
             {
                 Assert.Fail();
             }
-           
+
+        }
+        
+        //AddHoursToOffer
+        [TestMethod]
+        public void Test_Add_Hours_To_Offer_Returns_True()
+        {
+            try
+            {
+                var workingTimeMock = new Mock<WorkingTime>();
+                workingTimeMock.SetupAllProperties();
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.AddWorkingDates(It.IsAny<WorkingDates>())).Returns(true);
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsTrue(subject.AddHoursToOffer(workingTimeMock.Object));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_Add_Hours_To_Offer_Returns_False()
+        {
+            try
+            {
+                var workingTimeMock = new Mock<WorkingTime>();
+                workingTimeMock.SetupAllProperties();
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.AddWorkingDates(It.IsAny<WorkingDates>())).Returns(false);
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsFalse(subject.AddHoursToOffer(workingTimeMock.Object));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+       
+        //GetAllWorkingDays
+        [TestMethod]
+        public void Test_Get_All_Working_Days_Returns_TypeOf_IQuaryable()
+        {
+            try
+            {
+
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetAllWorkingDays()).Returns(new List<WorkingDates>() {
+                new WorkingDates {
+                    ID = 1,
+                    HourFrom = new TimeSpan(3, 0, 0),
+                    HourTo = new TimeSpan(5,0,0),
+                    NameOfDay = DayOfWeek.Friday.ToString(),
+                    ServiceOffer_ID = 3,
+                }, new WorkingDates
+                {
+                    ID = 2,
+                    HourFrom = new TimeSpan(5, 0, 0),
+                    HourTo = new TimeSpan(10, 0, 0),
+                    NameOfDay = DayOfWeek.Sunday.ToString(),
+                    ServiceOffer_ID = 10,
+                }}.AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsInstanceOfType(subject.GetAllWorkingDays(), typeof(IQueryable<WorkingTime>));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_Get_All_Working_Days_Returns_Empty_IQuaryable()
+        {
+            try
+            {
+
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetAllWorkingDays()).Returns(new List<WorkingDates>().AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                Assert.AreEqual(0, subject.GetAllWorkingDays().Count());
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        
+        //GetAllBought
+        [TestMethod]
+        public void Test_Get_All_Bought_Services_Of_User()
+        {
+            try
+            {
+
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetAllBought(It.IsAny<string>())).Returns(new List<Salelines>() {
+                new Salelines {
+                    ServiceOffer_ID = 3,
+                    ServiceOffer = new ServiceOffer
+                    {
+                        Description ="dsadasdasd",
+                        Title = "sdsadas",
+                        RatePerHour = 32,
+                        SubCategory = new Repository.DbConnection.SubCategory
+                        {
+                            Category = new Repository.DbConnection.Category
+                            {
+                                Name = "Home",
+                            },
+                            Name= "Cleaning",
+                        },
+                    },
+                    BookedDate = new BookedDate
+                    {
+                        BookedDate1 =  new DateTime(2018,12,21),
+                        HourFrom = new TimeSpan(13,0,0),
+                        HourTo = new TimeSpan(17,0,0),
+                    }
+                }}.AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                Assert.AreEqual(1, subject.GetAllBought("12").Count());
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        
+        //AddReview
+        [TestMethod]
+        public void Test_Adding_Review_Above_Scale_Returns_False()
+        {
+            try
+            {
+                var reviewMock = new Mock<OfferReview>();
+                reviewMock.Setup(x => x.Rate).Returns(500);
+                reviewMock.Setup(x => x.Comment).Returns("dsa");
+                var dbMock = new Mock<IUnitOfWork>();                
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsFalse(subject.AddReview(reviewMock.Object));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_Adding_Too_Long_Comment_Returns_False()
+        {
+            try
+            {
+                var reviewMock = new Mock<OfferReview>();
+                reviewMock.Setup(x => x.Rate).Returns(3);
+                reviewMock.Setup(x => x.Comment).Returns("dsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsaddsadsadsad");
+                var dbMock = new Mock<IUnitOfWork>();
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsFalse(subject.AddReview(reviewMock.Object));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_Adding_Valid_Comment_Returns_True()
+        {
+            try
+            {
+                var reviewMock = new Mock<OfferReview>();
+                reviewMock.Setup(x => x.Rate).Returns(3);
+                reviewMock.Setup(x => x.Comment).Returns("Good");
+                reviewMock.Setup(x => x.CustomerId).Returns("23");
+                reviewMock.Setup(x => x.ServiceOfferId).Returns(2);
+
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.AddReview(It.IsAny<Review>())).Returns(true);
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsTrue(subject.AddReview(reviewMock.Object));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        
+        //GetServiceReviews
+        [TestMethod]
+        public void Test_Getting_Service_Reviews_Returns_IQuaryable()
+        {
+            try
+            {
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetServiceReviews(It.IsAny<int>())).Returns(new List<Review>()
+                { new Review
+                {
+                    Customer_ID = "121",
+                    Comment = "zxcasd",
+                    RateValue = 3,
+                    ServiceOffer_ID = 21
+
+                }, new Review
+                {
+                     Customer_ID = "121",
+                    Comment = "zxcasd",
+                    RateValue = 3,
+                    ServiceOffer_ID = 21
+                }
+                    
+                }.AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsInstanceOfType(subject.GetServiceReviews(21), typeof(IQueryable<OfferReview>));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Test_Getting_Service_Reviews_Returns_Null()
+        {
+            try
+            {
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetServiceReviews(It.IsAny<int>())).Returns(new List<Review>().AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                Assert.IsNull(subject.GetServiceReviews(21));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+        //GetAvgOfServiceRates
+        [TestMethod]
+        public void Test_Calculating_Average()
+        {
+            try
+            {
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetServiceReviews(It.IsAny<int>())).Returns(new List<Review>()
+                { new Review
+                {
+                    Customer_ID = "121",
+                    Comment = "zxcasd",
+                    RateValue = 3,
+                    ServiceOffer_ID = 21
+
+                }, new Review
+                {
+                     Customer_ID = "121",
+                    Comment = "zxcasd",
+                    RateValue = 3,
+                    ServiceOffer_ID = 21
+                }
+
+                }.AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                Assert.AreEqual(3, subject.GetAvgOfServiceRates(21));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+
+        }
+        [TestMethod]
+        public void Test_Calculating_Average2()
+        {
+            try
+            {
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetServiceReviews(It.IsAny<int>())).Returns(new List<Review>().AsQueryable());
+                var subject = new OfferService(dbMock.Object);
+                //throws exception because getavgofservicerates can't calculate avg of null
+                subject.GetAvgOfServiceRates(21);
+            }
+            catch
+            {
+                Assert.IsTrue(true);
+            }
         }
     }
 }
