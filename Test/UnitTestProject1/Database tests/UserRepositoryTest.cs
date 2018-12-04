@@ -7,7 +7,6 @@ using AddressTable = Repository.DbConnection.AddressTable;
 using Users = Repository.DbConnection.Users;
 using AspNetUser = Repository.DbConnection.AspNetUsers;
 using Gender = Repository.DbConnection.Gender;
-using System;
 
 namespace UnitTestProject1
 {

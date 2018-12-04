@@ -29,10 +29,10 @@ namespace UnitTestProject1.Service_tests
                 offerServiceMock.Setup(x => x.RatePerHour).Returns(20);
                 offerServiceMock.Setup(x => x.Title).Returns("Title");
                 offerServiceMock.Setup(x => x.Description).Returns("Description");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 OfferService service = new OfferService(dbMock.Object);
                 service.CreateServiceOffer(offerServiceMock.Object);
-                dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.AtLeastOnce);
+                dbMock.Verify(x => x.Offers.Create(It.IsAny<ServiceOffer>()), Times.AtLeastOnce);
             }
             catch
             {
@@ -52,7 +52,7 @@ namespace UnitTestProject1.Service_tests
                 offerServiceMock.Setup(x => x.RatePerHour).Returns(20);
                 offerServiceMock.Setup(x => x.Title).Returns("Title");
                 offerServiceMock.Setup(x => x.Description).Returns("Description");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 OfferService service = new OfferService(dbMock.Object);
                 var created = service.CreateServiceOffer(offerServiceMock.Object);
                 Assert.IsTrue(created);
@@ -81,10 +81,10 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.RatePerHour).Returns(ratePerHour);
                 offerMock.Setup(x => x.Title).Returns(title);
                 offerMock.Setup(x => x.Description).Returns(description);
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 subject.CreateServiceOffer(offerMock.Object);
-                dbMock.Verify(x => x.Create(It.IsAny<ServiceOffer>()), Times.Never);
+                dbMock.Verify(x => x.Offers.Create(It.IsAny<ServiceOffer>()), Times.Never);
             }
             catch
             {
@@ -118,8 +118,8 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
-                dbMock.Setup(t => t.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(true);
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(t => t.Offers.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(true);
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.DeleteServiceOffer(1);
                 Assert.IsTrue(result);
@@ -135,8 +135,8 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
-                dbMock.Setup(t => t.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(true);
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(t => t.Offers.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(true);
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.DeleteServiceOffer(-1);
                 Assert.IsFalse(result);
@@ -156,9 +156,9 @@ namespace UnitTestProject1.Service_tests
             {
                 var offerMock = new Mock<Offer>();
                 offerMock.Setup(x => x.Id).Returns(1);
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
 
-                dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
+                dbMock.Setup(x => x.Offers.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
                 {
                     ID = 1,
                     Employee_ID = "1",
@@ -181,7 +181,7 @@ namespace UnitTestProject1.Service_tests
 
                 var subject = new OfferService(dbMock.Object);
                 subject.FindServiceOffer(offerMock.Object.Id);
-                dbMock.Verify(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.Once());
+                dbMock.Verify(x => x.Offers.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.Once());
             }
             catch
             {
@@ -194,8 +194,8 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
-                dbMock.Setup(x => x.GetAll()).Returns(new List<ServiceOffer>(){ new ServiceOffer
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.GetAll()).Returns(new List<ServiceOffer>(){ new ServiceOffer
             {
                 ID = 1,
                 Employee_ID = "1",
@@ -251,8 +251,8 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
-                dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
                 {
                     ID = 1,
                     Employee_ID = "1",
@@ -287,8 +287,8 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
-                dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
                 {
                     ID = 1,
                     Employee_ID = "1",
@@ -324,8 +324,8 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
-                dbMock.Setup(x => x.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
+                var dbMock = new Mock<IUnitOfWork>();
+                dbMock.Setup(x => x.Offers.Get(It.IsAny<Expression<Func<ServiceOffer, bool>>>())).Returns(new ServiceOffer
                 {
                     ID = 1,
                     Employee_ID = "1",
@@ -371,10 +371,10 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.RatePerHour).Returns(20);
                 offerMock.Setup(x => x.Title).Returns("Title");
                 offerMock.Setup(x => x.Description).Returns("Description");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 subject.UpdateServiceOffer(offerMock.Object);
-                dbMock.Verify(x => x.Update(It.IsAny<ServiceOffer>()), Times.Once());
+                dbMock.Verify(x => x.Offers.Update(It.IsAny<ServiceOffer>()), Times.Once());
             }
             catch
             {
@@ -396,7 +396,7 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.RatePerHour).Returns(20);
                 offerMock.Setup(x => x.Title).Returns("T");
                 offerMock.Setup(x => x.Description).Returns("Description");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.UpdateServiceOffer(offerMock.Object);
                 Assert.IsFalse(result);
@@ -421,7 +421,7 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.RatePerHour).Returns(20);
                 offerMock.Setup(x => x.Title).Returns("Title");
                 offerMock.Setup(x => x.Description).Returns("Short");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.UpdateServiceOffer(offerMock.Object);
                 Assert.IsFalse(result);
@@ -446,7 +446,7 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.RatePerHour).Returns(-10);
                 offerMock.Setup(x => x.Title).Returns("Title");
                 offerMock.Setup(x => x.Description).Returns("Description");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.UpdateServiceOffer(offerMock.Object);
                 Assert.IsFalse(result);
@@ -470,7 +470,7 @@ namespace UnitTestProject1.Service_tests
                 offerMock.Setup(x => x.RatePerHour).Returns(20);
                 offerMock.Setup(x => x.Title).Returns("Title");
                 offerMock.Setup(x => x.Description).Returns("Description");
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 var result = subject.UpdateServiceOffer(offerMock.Object);
                 Assert.IsTrue(result);

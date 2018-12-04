@@ -1,5 +1,4 @@
 ﻿using System.Data.Linq;
-using Repository.OrderRepository;
 
 namespace Repository
 {
@@ -11,9 +10,9 @@ namespace Repository
         public UnitOfWork(DataContext context)
         {
             _context = context;
-            Users = new UsersRepository(_context);
+            Users = new  UsersRepository(_context);
             Offers = new OfferRepository(_context);
-            Orders = new OrderRepository.OrderRepository(_context);
+            Orders = new OrderRepository(_context);
         }
 
 

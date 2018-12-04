@@ -66,9 +66,6 @@ namespace UnitTestProject1.Database_tests
     partial void InsertOrderTable(OrderTable instance);
     partial void UpdateOrderTable(OrderTable instance);
     partial void DeleteOrderTable(OrderTable instance);
-    partial void InsertRate(Rate instance);
-    partial void UpdateRate(Rate instance);
-    partial void DeleteRate(Rate instance);
     partial void InsertReview(Review instance);
     partial void UpdateReview(Review instance);
     partial void DeleteReview(Review instance);
@@ -78,6 +75,9 @@ namespace UnitTestProject1.Database_tests
     partial void InsertServiceOffer(ServiceOffer instance);
     partial void UpdateServiceOffer(ServiceOffer instance);
     partial void DeleteServiceOffer(ServiceOffer instance);
+    partial void InsertShoppingCart(ShoppingCart instance);
+    partial void UpdateShoppingCart(ShoppingCart instance);
+    partial void DeleteShoppingCart(ShoppingCart instance);
     partial void InsertSubCategory(SubCategory instance);
     partial void UpdateSubCategory(SubCategory instance);
     partial void DeleteSubCategory(SubCategory instance);
@@ -212,14 +212,6 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<Rate> Rate
-		{
-			get
-			{
-				return this.GetTable<Rate>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Review> Review
 		{
 			get
@@ -244,11 +236,11 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		public System.Data.Linq.Table<ShoppingCard> ShoppingCard
+		public System.Data.Linq.Table<ShoppingCart> ShoppingCart
 		{
 			get
 			{
-				return this.GetTable<ShoppingCard>();
+				return this.GetTable<ShoppingCart>();
 			}
 		}
 		
@@ -445,9 +437,9 @@ namespace UnitTestProject1.Database_tests
 		
 		private System.TimeSpan _HourTo;
 		
-		private string _Users_ID;
+		private int _ServiceOffer_ID;
 		
-		private EntityRef<AspNetUsers> _AspNetUsers;
+		private EntityRef<ServiceOffer> _ServiceOffer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -461,13 +453,13 @@ namespace UnitTestProject1.Database_tests
     partial void OnHourFromChanged();
     partial void OnHourToChanging(System.TimeSpan value);
     partial void OnHourToChanged();
-    partial void OnUsers_IDChanging(string value);
-    partial void OnUsers_IDChanged();
+    partial void OnServiceOffer_IDChanging(int value);
+    partial void OnServiceOffer_IDChanged();
     #endregion
 		
 		public WorkingDates()
 		{
-			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
 			OnCreated();
 		}
 		
@@ -551,60 +543,60 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Users_ID", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string Users_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceOffer_ID", DbType="Int NOT NULL")]
+		public int ServiceOffer_ID
 		{
 			get
 			{
-				return this._Users_ID;
+				return this._ServiceOffer_ID;
 			}
 			set
 			{
-				if ((this._Users_ID != value))
+				if ((this._ServiceOffer_ID != value))
 				{
-					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnUsers_IDChanging(value);
+					this.OnServiceOffer_IDChanging(value);
 					this.SendPropertyChanging();
-					this._Users_ID = value;
-					this.SendPropertyChanged("Users_ID");
-					this.OnUsers_IDChanged();
+					this._ServiceOffer_ID = value;
+					this.SendPropertyChanged("ServiceOffer_ID");
+					this.OnServiceOffer_IDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_WorkingDates", Storage="_AspNetUsers", ThisKey="Users_ID", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public AspNetUsers AspNetUsers
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_WorkingDates", Storage="_ServiceOffer", ThisKey="ServiceOffer_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public ServiceOffer ServiceOffer
 		{
 			get
 			{
-				return this._AspNetUsers.Entity;
+				return this._ServiceOffer.Entity;
 			}
 			set
 			{
-				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
 				if (((previousValue != value) 
-							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._AspNetUsers.Entity = null;
+						this._ServiceOffer.Entity = null;
 						previousValue.WorkingDates.Remove(this);
 					}
-					this._AspNetUsers.Entity = value;
+					this._ServiceOffer.Entity = value;
 					if ((value != null))
 					{
 						value.WorkingDates.Add(this);
-						this._Users_ID = value.Id;
+						this._ServiceOffer_ID = value.ID;
 					}
 					else
 					{
-						this._Users_ID = default(string);
+						this._ServiceOffer_ID = default(int);
 					}
-					this.SendPropertyChanged("AspNetUsers");
+					this.SendPropertyChanged("ServiceOffer");
 				}
 			}
 		}
@@ -1268,8 +1260,6 @@ namespace UnitTestProject1.Database_tests
 		
 		private string _UserName;
 		
-		private EntitySet<WorkingDates> _WorkingDates;
-		
 		private EntitySet<AspNetUserClaims> _AspNetUserClaims;
 		
 		private EntitySet<AspNetUserLogins> _AspNetUserLogins;
@@ -1281,6 +1271,8 @@ namespace UnitTestProject1.Database_tests
 		private EntitySet<Review> _Review;
 		
 		private EntitySet<ServiceOffer> _ServiceOffer;
+		
+		private EntitySet<ShoppingCart> _ShoppingCart;
 		
 		private EntitySet<Users> _Users;
 		
@@ -1316,13 +1308,13 @@ namespace UnitTestProject1.Database_tests
 		
 		public AspNetUsers()
 		{
-			this._WorkingDates = new EntitySet<WorkingDates>(new Action<WorkingDates>(this.attach_WorkingDates), new Action<WorkingDates>(this.detach_WorkingDates));
 			this._AspNetUserClaims = new EntitySet<AspNetUserClaims>(new Action<AspNetUserClaims>(this.attach_AspNetUserClaims), new Action<AspNetUserClaims>(this.detach_AspNetUserClaims));
 			this._AspNetUserLogins = new EntitySet<AspNetUserLogins>(new Action<AspNetUserLogins>(this.attach_AspNetUserLogins), new Action<AspNetUserLogins>(this.detach_AspNetUserLogins));
 			this._AspNetUserRoles = new EntitySet<AspNetUserRoles>(new Action<AspNetUserRoles>(this.attach_AspNetUserRoles), new Action<AspNetUserRoles>(this.detach_AspNetUserRoles));
 			this._OrderTable = new EntitySet<OrderTable>(new Action<OrderTable>(this.attach_OrderTable), new Action<OrderTable>(this.detach_OrderTable));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
 			this._ServiceOffer = new EntitySet<ServiceOffer>(new Action<ServiceOffer>(this.attach_ServiceOffer), new Action<ServiceOffer>(this.detach_ServiceOffer));
+			this._ShoppingCart = new EntitySet<ShoppingCart>(new Action<ShoppingCart>(this.attach_ShoppingCart), new Action<ShoppingCart>(this.detach_ShoppingCart));
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
 			OnCreated();
 		}
@@ -1567,19 +1559,6 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_WorkingDates", Storage="_WorkingDates", ThisKey="Id", OtherKey="Users_ID")]
-		public EntitySet<WorkingDates> WorkingDates
-		{
-			get
-			{
-				return this._WorkingDates;
-			}
-			set
-			{
-				this._WorkingDates.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_AspNetUserClaims", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
 		public EntitySet<AspNetUserClaims> AspNetUserClaims
 		{
@@ -1658,6 +1637,19 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_ShoppingCart", Storage="_ShoppingCart", ThisKey="Id", OtherKey="User_ID")]
+		public EntitySet<ShoppingCart> ShoppingCart
+		{
+			get
+			{
+				return this._ShoppingCart;
+			}
+			set
+			{
+				this._ShoppingCart.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_Users", Storage="_Users", ThisKey="Id", OtherKey="Logging_ID")]
 		public EntitySet<Users> Users
 		{
@@ -1689,18 +1681,6 @@ namespace UnitTestProject1.Database_tests
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_WorkingDates(WorkingDates entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUsers = this;
-		}
-		
-		private void detach_WorkingDates(WorkingDates entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUsers = null;
 		}
 		
 		private void attach_AspNetUserClaims(AspNetUserClaims entity)
@@ -1770,6 +1750,18 @@ namespace UnitTestProject1.Database_tests
 		}
 		
 		private void detach_ServiceOffer(ServiceOffer entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+		
+		private void attach_ShoppingCart(ShoppingCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_ShoppingCart(ShoppingCart entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUsers = null;
@@ -2584,120 +2576,6 @@ namespace UnitTestProject1.Database_tests
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rate")]
-	public partial class Rate : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _RateValue;
-		
-		private EntitySet<Review> _Review;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnRateValueChanging(int value);
-    partial void OnRateValueChanged();
-    #endregion
-		
-		public Rate()
-		{
-			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RateValue", DbType="Int NOT NULL")]
-		public int RateValue
-		{
-			get
-			{
-				return this._RateValue;
-			}
-			set
-			{
-				if ((this._RateValue != value))
-				{
-					this.OnRateValueChanging(value);
-					this.SendPropertyChanging();
-					this._RateValue = value;
-					this.SendPropertyChanged("RateValue");
-					this.OnRateValueChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rate_Review", Storage="_Review", ThisKey="RateValue", OtherKey="Rate_ID")]
-		public EntitySet<Review> Review
-		{
-			get
-			{
-				return this._Review;
-			}
-			set
-			{
-				this._Review.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Review(Review entity)
-		{
-			this.SendPropertyChanging();
-			entity.Rate = this;
-		}
-		
-		private void detach_Review(Review entity)
-		{
-			this.SendPropertyChanging();
-			entity.Rate = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Review")]
 	public partial class Review : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2706,17 +2584,15 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _ID;
 		
+		private System.Nullable<double> _RateValue;
+		
 		private string _Customer_ID;
 		
 		private string _Comment;
 		
-		private System.Nullable<int> _Rate_ID;
-		
 		private System.Nullable<int> _ServiceOffer_ID;
 		
 		private EntityRef<AspNetUsers> _AspNetUsers;
-		
-		private EntityRef<Rate> _Rate;
 		
 		private EntityRef<ServiceOffer> _ServiceOffer;
 		
@@ -2726,12 +2602,12 @@ namespace UnitTestProject1.Database_tests
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
+    partial void OnRateValueChanging(System.Nullable<double> value);
+    partial void OnRateValueChanged();
     partial void OnCustomer_IDChanging(string value);
     partial void OnCustomer_IDChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnRate_IDChanging(System.Nullable<int> value);
-    partial void OnRate_IDChanged();
     partial void OnServiceOffer_IDChanging(System.Nullable<int> value);
     partial void OnServiceOffer_IDChanged();
     #endregion
@@ -2739,7 +2615,6 @@ namespace UnitTestProject1.Database_tests
 		public Review()
 		{
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
-			this._Rate = default(EntityRef<Rate>);
 			this._ServiceOffer = default(EntityRef<ServiceOffer>);
 			OnCreated();
 		}
@@ -2760,6 +2635,26 @@ namespace UnitTestProject1.Database_tests
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RateValue", DbType="Float")]
+		public System.Nullable<double> RateValue
+		{
+			get
+			{
+				return this._RateValue;
+			}
+			set
+			{
+				if ((this._RateValue != value))
+				{
+					this.OnRateValueChanging(value);
+					this.SendPropertyChanging();
+					this._RateValue = value;
+					this.SendPropertyChanged("RateValue");
+					this.OnRateValueChanged();
 				}
 			}
 		}
@@ -2804,30 +2699,6 @@ namespace UnitTestProject1.Database_tests
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rate_ID", DbType="Int")]
-		public System.Nullable<int> Rate_ID
-		{
-			get
-			{
-				return this._Rate_ID;
-			}
-			set
-			{
-				if ((this._Rate_ID != value))
-				{
-					if (this._Rate.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRate_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Rate_ID = value;
-					this.SendPropertyChanged("Rate_ID");
-					this.OnRate_IDChanged();
 				}
 			}
 		}
@@ -2886,40 +2757,6 @@ namespace UnitTestProject1.Database_tests
 						this._Customer_ID = default(string);
 					}
 					this.SendPropertyChanged("AspNetUsers");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rate_Review", Storage="_Rate", ThisKey="Rate_ID", OtherKey="RateValue", IsForeignKey=true)]
-		public Rate Rate
-		{
-			get
-			{
-				return this._Rate.Entity;
-			}
-			set
-			{
-				Rate previousValue = this._Rate.Entity;
-				if (((previousValue != value) 
-							|| (this._Rate.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Rate.Entity = null;
-						previousValue.Review.Remove(this);
-					}
-					this._Rate.Entity = value;
-					if ((value != null))
-					{
-						value.Review.Add(this);
-						this._Rate_ID = value.RateValue;
-					}
-					else
-					{
-						this._Rate_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Rate");
 				}
 			}
 		}
@@ -3254,9 +3091,13 @@ namespace UnitTestProject1.Database_tests
 		
 		private string _Title;
 		
+		private EntitySet<WorkingDates> _WorkingDates;
+		
 		private EntitySet<Review> _Review;
 		
 		private EntitySet<Saleline> _Saleline;
+		
+		private EntitySet<ShoppingCart> _ShoppingCart;
 		
 		private EntityRef<AspNetUsers> _AspNetUsers;
 		
@@ -3282,8 +3123,10 @@ namespace UnitTestProject1.Database_tests
 		
 		public ServiceOffer()
 		{
+			this._WorkingDates = new EntitySet<WorkingDates>(new Action<WorkingDates>(this.attach_WorkingDates), new Action<WorkingDates>(this.detach_WorkingDates));
 			this._Review = new EntitySet<Review>(new Action<Review>(this.attach_Review), new Action<Review>(this.detach_Review));
 			this._Saleline = new EntitySet<Saleline>(new Action<Saleline>(this.attach_Saleline), new Action<Saleline>(this.detach_Saleline));
+			this._ShoppingCart = new EntitySet<ShoppingCart>(new Action<ShoppingCart>(this.attach_ShoppingCart), new Action<ShoppingCart>(this.detach_ShoppingCart));
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
 			this._SubCategory = default(EntityRef<SubCategory>);
 			OnCreated();
@@ -3417,6 +3260,19 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_WorkingDates", Storage="_WorkingDates", ThisKey="ID", OtherKey="ServiceOffer_ID")]
+		public EntitySet<WorkingDates> WorkingDates
+		{
+			get
+			{
+				return this._WorkingDates;
+			}
+			set
+			{
+				this._WorkingDates.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_Review", Storage="_Review", ThisKey="ID", OtherKey="ServiceOffer_ID")]
 		public EntitySet<Review> Review
 		{
@@ -3440,6 +3296,19 @@ namespace UnitTestProject1.Database_tests
 			set
 			{
 				this._Saleline.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_ShoppingCart", Storage="_ShoppingCart", ThisKey="ID", OtherKey="Service_ID")]
+		public EntitySet<ShoppingCart> ShoppingCart
+		{
+			get
+			{
+				return this._ShoppingCart;
+			}
+			set
+			{
+				this._ShoppingCart.Assign(value);
 			}
 		}
 		
@@ -3531,6 +3400,18 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
+		private void attach_WorkingDates(WorkingDates entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_WorkingDates(WorkingDates entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
+		}
+		
 		private void attach_Review(Review entity)
 		{
 			this.SendPropertyChanging();
@@ -3554,124 +3435,151 @@ namespace UnitTestProject1.Database_tests
 			this.SendPropertyChanging();
 			entity.ServiceOffer = null;
 		}
+		
+		private void attach_ShoppingCart(ShoppingCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = this;
+		}
+		
+		private void detach_ShoppingCart(ShoppingCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceOffer = null;
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ShoppingCard")]
-	public partial class ShoppingCard
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ShoppingCart")]
+	public partial class ShoppingCart : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private string _ID_User;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private decimal _RatePerHour;
+		private int _ID;
 		
-		private string _Description;
+		private string _User_ID;
 		
-		private int _Subcategory_ID;
+		private int _Service_ID;
 		
-		private string _Title;
-		
-		private string _NameOfDay;
+		private System.DateTime _Date;
 		
 		private System.TimeSpan _HourFrom;
 		
 		private System.TimeSpan _HourTo;
 		
-		public ShoppingCard()
+		private EntityRef<ServiceOffer> _ServiceOffer;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUser_IDChanging(string value);
+    partial void OnUser_IDChanged();
+    partial void OnService_IDChanging(int value);
+    partial void OnService_IDChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnHourFromChanging(System.TimeSpan value);
+    partial void OnHourFromChanged();
+    partial void OnHourToChanging(System.TimeSpan value);
+    partial void OnHourToChanged();
+    #endregion
+		
+		public ShoppingCart()
 		{
+			this._ServiceOffer = default(EntityRef<ServiceOffer>);
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string ID_User
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this._ID_User;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._ID_User != value))
+				if ((this._ID != value))
 				{
-					this._ID_User = value;
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RatePerHour", DbType="Money NOT NULL")]
-		public decimal RatePerHour
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string User_ID
 		{
 			get
 			{
-				return this._RatePerHour;
+				return this._User_ID;
 			}
 			set
 			{
-				if ((this._RatePerHour != value))
+				if ((this._User_ID != value))
 				{
-					this._RatePerHour = value;
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_IDChanging(value);
+					this.SendPropertyChanging();
+					this._User_ID = value;
+					this.SendPropertyChanged("User_ID");
+					this.OnUser_IDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(255)")]
-		public string Description
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Service_ID", DbType="Int NOT NULL")]
+		public int Service_ID
 		{
 			get
 			{
-				return this._Description;
+				return this._Service_ID;
 			}
 			set
 			{
-				if ((this._Description != value))
+				if ((this._Service_ID != value))
 				{
-					this._Description = value;
+					if (this._ServiceOffer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnService_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Service_ID = value;
+					this.SendPropertyChanged("Service_ID");
+					this.OnService_IDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subcategory_ID", DbType="Int NOT NULL")]
-		public int Subcategory_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Date
 		{
 			get
 			{
-				return this._Subcategory_ID;
+				return this._Date;
 			}
 			set
 			{
-				if ((this._Subcategory_ID != value))
+				if ((this._Date != value))
 				{
-					this._Subcategory_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this._Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameOfDay", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string NameOfDay
-		{
-			get
-			{
-				return this._NameOfDay;
-			}
-			set
-			{
-				if ((this._NameOfDay != value))
-				{
-					this._NameOfDay = value;
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
 				}
 			}
 		}
@@ -3687,7 +3595,11 @@ namespace UnitTestProject1.Database_tests
 			{
 				if ((this._HourFrom != value))
 				{
+					this.OnHourFromChanging(value);
+					this.SendPropertyChanging();
 					this._HourFrom = value;
+					this.SendPropertyChanged("HourFrom");
+					this.OnHourFromChanged();
 				}
 			}
 		}
@@ -3703,8 +3615,100 @@ namespace UnitTestProject1.Database_tests
 			{
 				if ((this._HourTo != value))
 				{
+					this.OnHourToChanging(value);
+					this.SendPropertyChanging();
 					this._HourTo = value;
+					this.SendPropertyChanged("HourTo");
+					this.OnHourToChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceOffer_ShoppingCart", Storage="_ServiceOffer", ThisKey="Service_ID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public ServiceOffer ServiceOffer
+		{
+			get
+			{
+				return this._ServiceOffer.Entity;
+			}
+			set
+			{
+				ServiceOffer previousValue = this._ServiceOffer.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceOffer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceOffer.Entity = null;
+						previousValue.ShoppingCart.Remove(this);
+					}
+					this._ServiceOffer.Entity = value;
+					if ((value != null))
+					{
+						value.ShoppingCart.Add(this);
+						this._Service_ID = value.ID;
+					}
+					else
+					{
+						this._Service_ID = default(int);
+					}
+					this.SendPropertyChanged("ServiceOffer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_ShoppingCart", Storage="_AspNetUsers", ThisKey="User_ID", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.ShoppingCart.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.ShoppingCart.Add(this);
+						this._User_ID = value.Id;
+					}
+					else
+					{
+						this._User_ID = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

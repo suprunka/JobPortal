@@ -5,8 +5,9 @@ using JobPortal.Model;
 using System.Linq;
 using MyWeb.Controllers;
 using System.Web.Mvc;
-using MyWeb.Models;
+using WebJobPortal.Models;
 using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace UnitTestProject1.MVC__tests
 {
@@ -14,16 +15,16 @@ namespace UnitTestProject1.MVC__tests
     public class OfferTests
     {
         [TestMethod]
-        public void Test_Index_Show_All_Offers()
+        public async void Test_Index_Show_All_Offers()
         {
             Offer[] array = { new Offer(), new Offer(), new Offer() };
             var all = array.AsQueryable<Offer>();
 
             var serviceMock = new Mock<MyWeb.OfferReference.IOfferService>();
-            serviceMock.Setup(x => x.GetAllOffers()).Returns(array);
+            serviceMock.Setup(x => x.GetAllOffersAsync()).Returns(Task.FromResult(array));
 
             var ctr = new ServiceOfferController(serviceMock.Object);
-            var result = ctr.Index(null) as ViewResult;
+            var result = await ctr.Index(null, 0) as ViewResult;
             ManageOffers[] model = (ManageOffers[])result.Model;
             Assert.AreEqual(3, model.Length);
         }
@@ -34,7 +35,7 @@ namespace UnitTestProject1.MVC__tests
         [DataRow("", 5, DisplayName = "Emptystring")] 
 
         [TestMethod]
-        public void Test_Index_Show_All_Offers_Which_Contains_searching_string(string searchingString, int foundOffers)
+        public async void  Test_Index_Show_All_Offers_Which_Contains_searching_string(string searchingString, int foundOffers)
         {
             Offer[] array = { new Offer { Title= "Cleaning at your house"},
                               new Offer {Title = "Very good Cleaning" },
@@ -48,7 +49,7 @@ namespace UnitTestProject1.MVC__tests
             serviceMock.Setup(x => x.GetAllOffers()).Returns(array);
 
             var ctr = new ServiceOfferController(serviceMock.Object);
-            var result = ctr.Index(searchingString) as ViewResult;
+            var result = await ctr.Index(searchingString, 0) as ViewResult;
             ManageOffers[] model = (ManageOffers[])result.Model;
             Assert.AreEqual(foundOffers, model.Length);
         }
@@ -95,7 +96,7 @@ namespace UnitTestProject1.MVC__tests
         }
 
         [TestMethod]
-        public void ViewDetails_UpdateOffer_View_Tests_If_Rederict_to_Action()
+        public async void ViewDetails_UpdateOffer_View_Tests_If_Rederict_to_Action()
         {
             try
             {
@@ -118,7 +119,7 @@ namespace UnitTestProject1.MVC__tests
                 ctr.ControllerContext = controllerContext.Object;
                 var result = ctr.ViewDetails(detail);//Task<actionRsult>>
                 Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-                RedirectToRouteResult routeResult = result as RedirectToRouteResult;
+                RedirectToRouteResult routeResult = await result as RedirectToRouteResult;
                 Assert.AreEqual(routeResult.RouteValues["action"], "UserProfile");
             }
             catch

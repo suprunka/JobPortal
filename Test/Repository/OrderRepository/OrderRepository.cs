@@ -10,7 +10,7 @@ using System.Transactions;
 using BookedDate = Repository.DbConnection.BookedDate;
 using Saleline = Repository.DbConnection.Salelines;
 
-namespace Repository.OrderRepository
+namespace Repository
 {
     public class OrderRepository : Repository<OrderTable>, IOrderRepository
     {
@@ -58,20 +58,7 @@ namespace Repository.OrderRepository
 
         }
 
-        public bool CancelServiceInOrder(JobPortal.Model.Saleline o)
-        {
-            var found = _context.GetTable<Salelines>().Single(x => x.ID == o.Id);
-            if (found.BookedDate.BookedDate1 > DateTime.Now.AddHours(24))
-            {
-                _context.GetTable<Salelines>().DeleteOnSubmit(found);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
+        
         public List<ShoppingCart> GetShoppingCart(string id)
         {
             List<ShoppingCart> orderedServices = new List<ShoppingCart>();
@@ -337,40 +324,43 @@ namespace Repository.OrderRepository
             return true;
         }
 
-        public IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
+        public IList<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
         {
             try
             {
                 IList<TimeSpan> hourTo = new List<TimeSpan>();
                 DayOfWeek day = date.DayOfWeek;
-                var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
+                var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId).OrderBy(x=> x.HourFrom);
                 var unavailable = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == serviceId).Select(x => x.BookedDate).Where(x => x.BookedDate1 == date).ToArray();
-                for (TimeSpan from = workingdates.Select(x => x.HourFrom).Min(); from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)))
+                foreach(var t in workingdates)
                 {
-                    TimeSpan time = from;
-                    TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
-                    bool result = true;
-                    foreach (var i in unavailable)
+                    for (TimeSpan from = t.HourFrom; from < t.HourTo; from = +from.Add(new TimeSpan(01, 00, 00)))
                     {
-                        TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
-                        if (!range.Clashes(timeRange, true))
+                        TimeSpan time = from;
+                        TimeRange timeRange = new TimeRange(time, time.Add(new TimeSpan(01, 30, 00)));
+                        bool result = true;
+                        foreach (var i in unavailable)
                         {
-                            result = true;
+                            TimeRange range = new TimeRange(i.HourFrom, i.HourTo);
+                            if (!range.Clashes(timeRange, true))
+                            {
+                                result = true;
+                            }
+                            else
+                            {
+                                result = false;
+                                break;
+                            }
+
                         }
-                        else
+                        if (result)
                         {
-                            result = false;
-                            break;
+                            hourTo.Add(time);
                         }
 
                     }
-                    if (result)
-                    {
-                        hourTo.Add(time);
-                    }
-
                 }
-                return hourTo;
+                return hourTo.ToList();
 
             }
             catch (InvalidOperationException)
@@ -380,13 +370,12 @@ namespace Repository.OrderRepository
             }
         }
 
-        public IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan timefrom)
+        public IList<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan timefrom)
         {
             IList<TimeSpan> hourTo = new List<TimeSpan>();
             DayOfWeek day = date.DayOfWeek;
-            var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId);
+            var workingdates = _context.GetTable<WorkingDates>().Where(x => x.NameOfDay == day.ToString() && x.ServiceOffer_ID == serviceId && x.HourFrom <= timefrom && x.HourTo >= timefrom).OrderBy(x=> x.HourFrom);
             var unavailable = _context.GetTable<Saleline>().Where(x => x.ServiceOffer_ID == serviceId).Select(x => x.BookedDate).Where(x => x.BookedDate1 == date).ToArray();
-
             for (TimeSpan from = timefrom; from < workingdates.Select(x => x.HourTo).Max(); from = +from.Add(new TimeSpan(01, 00, 00)))
             {
                 TimeSpan time = from;
@@ -422,7 +411,7 @@ namespace Repository.OrderRepository
                 }
 
             }
-            return hourTo;
+            return hourTo.ToList();
         }
 
         public bool CleanCart(string userID)
@@ -437,7 +426,6 @@ namespace Repository.OrderRepository
         }
         public IQueryable<Saleline> GetJobCalendar(DateTime date, string employeeId)
         {
-
          return _context.GetTable<Saleline>().Where(x => x.BookedDate.BookedDate1.Equals(date) && x.ServiceOffer.Employee_ID == employeeId);
         }
 

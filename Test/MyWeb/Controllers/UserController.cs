@@ -66,7 +66,7 @@ namespace MyWeb.Controllers
         {
             this._proxy = new UserServiceClient("UserServiceHttpEndpoint1");
             this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
-            _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
+            this._orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
         }
 
 

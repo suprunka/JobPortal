@@ -1,7 +1,6 @@
 ﻿using JobPortal.Model;
 using Repository;
 using Repository.DbConnection;
-using Repository.OrderRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
