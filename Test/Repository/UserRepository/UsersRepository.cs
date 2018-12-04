@@ -168,9 +168,6 @@ namespace Repository
                     Users found = _context.GetTable<Users>().FirstOrDefault(predicate);
                     _context.GetTable<Users>().DeleteOnSubmit(found);
 
-
-
-
                     AspNetUsers foundLogging = _context.GetTable<AspNetUsers>().FirstOrDefault(t => t.Id.ToString() == found.Logging_ID.ToString());
                     _context.GetTable<AspNetUsers>().DeleteOnSubmit(foundLogging);
 

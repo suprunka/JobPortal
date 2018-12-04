@@ -9,15 +9,17 @@ using AutoMapper;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using MyWeb.OfferReference;
+using MyWeb.OrderReference;
+using MyWeb.UserReference1;
 
 namespace MyWeb.Controllers
 {
     public class ServiceOfferController : Controller
     {
 
-        private OfferReference.IOfferService _offerProxy;
-        private UserReference1.IUserService _userProxy;
-        private OrderReference.IOrderService _orderProxy;
+        private IOfferService _offerProxy;
+        private IUserService _userProxy;
+        private IOrderService _orderProxy;
         private IMapper _mapper;
         private IList<WorkingHours> workingdays = new List<WorkingHours>();
 
@@ -26,18 +28,16 @@ namespace MyWeb.Controllers
 
         public ServiceOfferController()
         {
+            _offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
+            _orderProxy = new OrderServiceClient("OrderServiceHttpEndpoint");
+            _userProxy = new  UserServiceClient("UserServiceHttpEndpoint1");
+
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
             });
-
             _mapper = config.CreateMapper();
-            _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
-            _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
-            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
-
-
         }
-        public ServiceOfferController(IOfferService proxy)
+        public ServiceOfferController(IOfferService proxy, IOrderService orderproxy, IUserService userproxy)
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();

@@ -96,8 +96,11 @@ namespace Repository.OrderRepository
             OrderTable result = null;
             using (SqlConnection objConn = new SqlConnection(connection))
             {
+                var txOptions = new System.Transactions.TransactionOptions();
+                txOptions.IsolationLevel = System.Transactions.IsolationLevel.Serializable;
+
                 objConn.Open();
-                using (var myTran = new TransactionScope())
+                using (var myTran = new TransactionScope(TransactionScopeOption.Required,txOptions))
                 {
                     ShoppingCart cart = null;
                     try

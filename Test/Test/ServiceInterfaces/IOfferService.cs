@@ -34,5 +34,7 @@ namespace ServiceLibrary
         bool AddReview(OfferReview review);
         [OperationContract]
         IQueryable<OfferReview> GetServiceReviews(int serviceId);
+        [OperationContract]
+        int GetAvgOfServiceRates(int serviceId);
     }
 }

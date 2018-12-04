@@ -100,10 +100,10 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var dbMock = new Mock<IOfferRepository>();
+                var dbMock = new Mock<IUnitOfWork>();
                 var subject = new OfferService(dbMock.Object);
                 subject.DeleteServiceOffer(1);
-                dbMock.Verify(x => x.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.AtLeastOnce);
+                dbMock.Verify(x => x.Offers.Delete(It.IsAny<Expression<Func<ServiceOffer, bool>>>()), Times.AtLeastOnce);
             }
             catch
             {

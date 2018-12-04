@@ -198,8 +198,9 @@ namespace UnitTestProject1.Service_tests
         {
             try
             {
-                var databaseMock = new Mock<IUserRepository>();
-                databaseMock.Setup(x => x.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+                var databaseMock = new Mock<IUnitOfWork>();
+
+               databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
                     AddressTable = new AddressTable
                     {
