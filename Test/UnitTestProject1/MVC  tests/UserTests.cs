@@ -27,9 +27,7 @@ namespace UnitTestProject1.MVC__tests
     {
 
 
-        //Create
-        //  #region
-
+    
         [TestMethod]
         public void Test_UserProfile_View()
         {
@@ -48,7 +46,7 @@ namespace UnitTestProject1.MVC__tests
                 Assert.Fail();
             }
         }
-
+        //TODO
         [TestMethod]
         public void Test_DeleteAsync_View()
         {
@@ -292,7 +290,7 @@ namespace UnitTestProject1.MVC__tests
             }
         }
 
-
+        //TODO
         [TestMethod]
         public void Test_Create_View_Passing_A_Valid_Object()
         {
@@ -322,13 +320,13 @@ namespace UnitTestProject1.MVC__tests
         }
 
 
-
+        //TODO
         [TestMethod]
         public void Test_Create_View_Exception_Expected()
         {
             var serviceMock = new Mock<IUserService>();
             serviceMock.Setup(x => x.CreateUser(It.IsAny<User>(), It.IsAny<String>())).Throws(new Exception());
-            var controller = new ManageController();
+            var controller = new ManageController(serviceMock.Object);
             var result = controller.SetUserProperties(new SetPropertiesViewModel
             {
                 FirstName = "Adam",
@@ -360,6 +358,7 @@ namespace UnitTestProject1.MVC__tests
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (not allowed characters)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true)] //valid all data
         [TestMethod]
+        //TODO
         public void Test_UserWebModel_validation(string phoneNumber, string firstName,
           string lastName, string email, string userName, string password, string addressLine,
           string cityName, string postCode, Region region, Gender gender, bool shouldValidate)
@@ -391,7 +390,7 @@ namespace UnitTestProject1.MVC__tests
             }
         }
 
-
+        //TODO
         [TestMethod]
         public void Test_MVCController_Can_Create_User_With_Valid_Inputs()
         {
@@ -443,6 +442,7 @@ namespace UnitTestProject1.MVC__tests
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male)] //invalid postcode (too long)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
         #endregion
+        //TODO
         [TestMethod]
         public void Test_MVCController_Will_Not_Create_A_Movie_With_Invalid_Model_State(string phoneNumber, string firstName,
          string lastName, string email, string userName, string password, string addressLine,
@@ -517,7 +517,7 @@ namespace UnitTestProject1.MVC__tests
 
      
 
-        [TestMethod]//To do
+        [TestMethod]
         public async void Edit_With_Valid_inputs()
         {
             var userMock = new Mock<SetPropertiesViewModel>();

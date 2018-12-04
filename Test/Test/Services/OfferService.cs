@@ -199,10 +199,6 @@ namespace ServiceLibrary
             }
             return resultToReturn.AsQueryable<WorkingTime>();
         }
-
-
-
-
         public IQueryable<Offer> GetAllBought(string id)
         {
             IList<Offer> resultToReturn = new List<Offer>();
@@ -225,7 +221,7 @@ namespace ServiceLibrary
                         WeekDay = i.BookedDate.BookedDate1.DayOfWeek,
                     },
 
-                    
+
                 });
             }
             return resultToReturn.AsQueryable<Offer>();
@@ -242,7 +238,7 @@ namespace ServiceLibrary
                         Comment = review.Comment,
                         Customer_ID = review.CustomerId,
                         RateValue = review.Rate,
-                        ServiceOffer_ID= review.ServiceOfferId
+                        ServiceOffer_ID = review.ServiceOfferId
                     }
                  );
                 }
@@ -255,6 +251,7 @@ namespace ServiceLibrary
 
 
         }
+
         public IQueryable<OfferReview> GetServiceReviews(int serviceId)
         {
             if (_unitOfWork.Offers.GetServiceReviews(serviceId).Count() < 1)
@@ -271,6 +268,5 @@ namespace ServiceLibrary
         {
             return (int)Math.Ceiling(GetServiceReviews(serviceId).Select(x => x.Rate).Average());
         }
-
     }
 }

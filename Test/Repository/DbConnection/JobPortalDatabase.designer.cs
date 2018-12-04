@@ -2831,7 +2831,12 @@ namespace Repository.DbConnection
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
+
+        public static implicit operator EntitySet<object>(Salelines v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceOffer")]
 	public partial class ServiceOffer : INotifyPropertyChanging, INotifyPropertyChanged
