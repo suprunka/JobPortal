@@ -1,9 +1,10 @@
-﻿@using WebJobPortal.Models
-@model  MyWeb.Models.ManageOffers[]
-
+﻿@model PagedList.IPagedList<ManageOffers>
+@using PagedList
+@using PagedList.Mvc
+@using WebJobPortal.Models
 @{
-                ViewBag.Title = "Services";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">

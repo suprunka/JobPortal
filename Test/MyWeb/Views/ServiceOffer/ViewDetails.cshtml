@@ -1,5 +1,5 @@
-﻿@model MyWeb.Models.ViewDetails
-@using MyWeb.Models;
+﻿@model WebJobPortal.Models.ViewDetails
+@using WebJobPortal.Models
 @using Microsoft.AspNet.Identity;
 @using DayPilot.Web.Mvc
 @using DayPilot.Web.Mvc.Events.Calendar
@@ -16,7 +16,9 @@
 
 
 @using (Html.BeginForm())
-{@Html.AntiForgeryToken() @Html.HiddenFor(model => model.Id)
+{
+    @Html.AntiForgeryToken() 
+    @Html.HiddenFor(model => model.Id)
 
 <div class="offerCard">
     <h2>@Model.Title</h2>

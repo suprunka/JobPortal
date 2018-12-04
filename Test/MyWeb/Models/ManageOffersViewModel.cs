@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using JobPortal.Model;
-namespace MyWeb.Models
-{
 
+namespace WebJobPortal.Models
+{
     public class ManageOffers
     {
         public int Id { get; set; }
@@ -50,7 +50,6 @@ namespace MyWeb.Models
         public DateTime Date { get; set; }
         public TimeSpan HourFrom { get; set; }
         public TimeSpan HourTo { get; set; }
-
     }
 
     public class AddServiceOfferModel
@@ -58,13 +57,15 @@ namespace MyWeb.Models
         public ManageOffers ManageOffers { get; set; }
         public IEnumerable<WorkingHours> WorkingDays { get; set; }
     }
+
     public class ReviewModel
     {
-      public ReviewAuthor Customer { get; set; }
+        public ReviewAuthor Customer { get; set; }
         public int ServiceOfferId { get; set; }
         public string Comment { get; set; }
         public double Rate { get; set; }
     }
+
     public class ReviewAuthor
     {
        public Gender Gender { get; set; }
@@ -103,12 +104,5 @@ namespace MyWeb.Models
         public Category Category { get; set; }
         public SubCategory Subcategory { get; set; }
         public ReviewModel[] Reviews { get; set; }
-
-    }
-
-    public class JobOffer
-    {
-        public BoughtOffers offer;
-
     }
 }

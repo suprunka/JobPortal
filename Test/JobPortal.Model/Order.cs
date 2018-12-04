@@ -30,6 +30,8 @@ namespace JobPortal.Model
         [DataMember]
         public virtual string Customer_ID { get; set; }
         [DataMember]
+        public virtual User Customer { get; set; }
+        [DataMember]
         public virtual decimal TotalPrice { get; set; }
         [DataMember]
         public virtual Offer Offer { get; set; }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using JobPortal.Model;
-using MyWeb.Models;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using MyWeb.OfferReference;
+using PagedList;
+using WebJobPortal.Models;
+using JobPortal.Model;
 
 namespace MyWeb.Controllers
 {
@@ -45,80 +46,94 @@ namespace MyWeb.Controllers
             _mapper = config.CreateMapper();
             _offerProxy = proxy;
         }
-        public ActionResult Index(string searchingString)
+        public async Task<ActionResult> Index(string searchingString, int? page)
         {
-            var list =  _offerProxy.GetAllOffers().Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
-                return View("Index", list);
+                return View(list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
-        public ActionResult Home(string searchingString)
+        public async Task<ActionResult> Home(string searchingString, int? page)
         {
-            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Home").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.Where(x => x.Category.ToString() == "Home").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
-        public ActionResult Tutoring(string searchingString)
+        public async Task<ActionResult> Tutoring(string searchingString, int? page)
         {
-            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Tutoring").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.Where(x => x.Category.ToString() == "Tutoring").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
-        public ActionResult IT(string searchingString)
+        public async Task<ActionResult> IT(string searchingString, int? page)
         {
-            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "IT").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.Where(x => x.Category.ToString() == "IT").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
-        public ActionResult Repairs(string searchingString)
+        public async Task<ActionResult> Repairs(string searchingString, int? page)
         {
-            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Repairs").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.Where(x => x.Category.ToString() == "Repairs").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
-        public ActionResult Architecture(string searchingString)
+        public async Task<ActionResult> Architecture(string searchingString, int? page)
         {
-            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Architecture").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.Where(x => x.Category.ToString() == "Architecture").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
-        public ActionResult Media(string searchingString)
+        public async Task<ActionResult> Media(string searchingString, int? page)
         {
-            var list = _offerProxy.GetAllOffers().Where(x => x.Category.ToString() == "Media").Select(x => _mapper.Map(x, new ManageOffers())).ToArray();
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var all = await _offerProxy.GetAllOffersAsync();
+            var list = all.Where(x => x.Category.ToString() == "Media").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
             return View("Index", condition.ToArray());
         }
 
@@ -126,25 +141,18 @@ namespace MyWeb.Controllers
         public ActionResult Add()
         {
 
-            return View("Add", new Models.AddServiceOfferModel());
+            return View("Add", new AddServiceOfferModel());
 
 
         }
         [HttpPost]
         public async Task<ActionResult> Add(AddServiceOfferModel model)
         {
-            bool result = await _offerProxy.CreateServiceOfferAsync(new Offer
-            {
-                Description = model.ManageOffers.Description,
-                AuthorId =  User.Identity.GetUserId(),
-                Title = model.ManageOffers.Title,
-                RatePerHour = model.ManageOffers.RatePerHour,
-                Category = model.ManageOffers.Category,
-                Subcategory = model.ManageOffers.Subcategory,
-                //ListOfWorkingDays = workingdays.Select(x => _mapper.Map(x, new WorkingTime())).ToList(),
-            });
+            bool result = await _offerProxy.CreateServiceOfferAsync(
+                Mapping.Mapping.Map_AddServiceOfferModel_To_Offer(model, User.Identity.GetUserId()));
             if(result)
                 return RedirectToAction("Index");
+
             return View("Add", model);
 
 
@@ -186,10 +194,11 @@ namespace MyWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetHoursTo(int serviceId, DateTime date,TimeSpan from)
+        public async Task<ActionResult> GetHoursTo(int serviceId, DateTime date,TimeSpan from)
         {
 
-            IEnumerable<SelectListItem> hoursto = _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
+            var hoursto = await _orderProxy.GetHoursToAsync(serviceId, date, from);
+            hoursto.Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
                 Value = x.ToString()
@@ -208,22 +217,16 @@ namespace MyWeb.Controllers
             var reviews = _offerProxy.GetServiceReviews(id);
             if (reviews != null)
                 
-                reviewstomodel= reviews.Select(x => new ReviewModel { Customer = new ReviewAuthor {Gender = _userProxy.FindUser(x.CustomerId).Gender, Username = _userProxy.FindUser(x.CustomerId).UserName }, Comment = x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
+            reviewstomodel= reviews.Select(x => new ReviewModel { Customer = new ReviewAuthor {Gender = _userProxy.FindUser(x.CustomerId).Gender, Username = _userProxy.FindUser(x.CustomerId).UserName }, Comment = x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
             ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates, Category = found.Category, Subcategory= found.Subcategory, Reviews = reviewstomodel };
             return View( model);
         }
 
         [HttpPost]
-        public ActionResult ViewDetails(ViewDetails edited)
+        public async Task<ActionResult> ViewDetails(ViewDetails edited)
         {
-                var isUpdated = _offerProxy.UpdateServiceOffer(new Offer
-                {
-                    Id = edited.Id,
-                    Title = edited.Title,
-                    RatePerHour = edited.RatePerHour,
-                    Description = edited.Description,
-                    WorkingTimes = edited.Dates,
-                });
+            var isUpdated = await _offerProxy.UpdateServiceOfferAsync
+                (Mapping.Mapping.Map_ViewDetails_To_Offer(edited));
                 if (isUpdated)
                 {
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
@@ -242,38 +245,35 @@ namespace MyWeb.Controllers
 
 
         }
-        public ActionResult AddReview(int serviceId, string customer, string rate, string comment)
+        public async Task<ActionResult> AddReview(int serviceId, string customer, string rate, string comment)
         {
 
             if (customer.Length <= 1)
             {
                 TempData["msg"] = "<script>alert('You are not logged in.');</script>";
-
             }
             else
             {
                 try
                 {
-                    bool wasOrdered = _offerProxy.GetAllBought(customer).Where(x => x.Id == serviceId).Count() > 0;
+                    var getAllBought  = await _offerProxy.GetAllBoughtAsync(customer);
+                    var wasOrdered= getAllBought.Where(x => x.Id == serviceId).Count() > 0;
                     if (wasOrdered)
                     {
                         double rateD = Double.Parse(rate);
-                        _offerProxy.AddReview(new OfferReview { Comment = comment, CustomerId = customer, Rate = rateD, ServiceOfferId = serviceId });
+                        await _offerProxy.AddReviewAsync(new OfferReview { Comment = comment, CustomerId = customer, Rate = rateD, ServiceOfferId = serviceId });
                     }
                     else
                     {
                         TempData["msg"] = "<script>alert('You haven't bought that service.');</script>";
-
                     }
                 }
                 catch
                 {
                     return View("Error", null);
-
                 }
             }
            return RedirectToAction("ViewDetails","ServiceOffer", new { id=serviceId });
-
         }
     }
 }
