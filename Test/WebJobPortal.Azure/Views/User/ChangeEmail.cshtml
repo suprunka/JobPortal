@@ -1,0 +1,39 @@
+﻿@model WebJobPortal.Models.ChangeEmailViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Change Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ChangeEmail", "User"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        <h1>Change Email</h1>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NewEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="buttons" id="confirmBtn" />
+
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to profile", "UserProfile", new { id = User.Identity.GetUserId() })
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

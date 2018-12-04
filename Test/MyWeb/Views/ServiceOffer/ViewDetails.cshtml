@@ -116,10 +116,11 @@
         <div class="col-md-10">
             Available days when you can order the service:
             <div>
-                @foreach (var t in Model.Dates)
+                @foreach (var t in Model.Dates.GroupBy(x=>x.WeekDay).Where(x => x.Count() >= 1).Select(y => y.Key))
                 {
+
                     <div>
-                        @t.WeekDay.ToString()s
+                        @t.ToString()
                     </div>
                 }
             </div>
@@ -259,18 +260,17 @@ else
         if (selectedDate != null && selectedDate != '') {
 
             $.getJSON('@Url.Action("GetHoursTo")', { serviceId: @Model.Id, date: selectedDate, from: selectedHour }, function (sub) {
-                console.log(sub);
+                console.log("hhhhh");
 
                         if (sub != null && !jQuery.isEmptyObject(sub))
                         {
-                            console.log(selectedDate);
 
                             hourto.append($('<option/>', {
                                 value: null,
                                 text: ""
                             }));
                             $.each(sub, function (index, subcats) {
-
+                                console.log(subcats);
                                 hourto.append($('<option/>', {
                                     value: subcats.Value,
                                     text: subcats.Text

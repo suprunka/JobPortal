@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Layout</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:40px;border:0;"></a></li>
+                    <li>
+                        <a href="~/ServiceOffer/Home">Home</a>
+                    </li>
+                    <li>
+                        <a href="~/ServiceOffer/Tutoring">Tutoring</a>
+                    </li>
+                    <li>
+                        <a href="~/ServiceOffer/IT">IT</a>
+                    </li>
+                    <li>
+                        <a href="~/ServiceOffer/Repairs">Repairs</a>
+                    </li>
+                    <li>
+                        <a href="~/ServiceOffer/Architecture">Architecture</a>
+                    </li>
+                    <li>
+                        <a href="~/ServiceOffer/Media">Media</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Shopping card", "Index", "Order", new { id = User.Identity.GetUserId() }, null)
+                    </li>
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - JobPortal</p>
+    </footer>
+</body>
+
+</html>

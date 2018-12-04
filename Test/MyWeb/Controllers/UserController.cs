@@ -79,10 +79,16 @@ namespace MyWeb.Controllers
             }
 
             UserProfileViewModel user = Mapping.Mapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
-
-            user.Services = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id).Select(x =>
-            Mapping.Mapping.Map_Offer_To_ManageOffers(x)).ToPagedList(1, _offerProxy.GetAllOffers().Where(x => x.AuthorId == id).Count());
-
+            var userServices = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id);
+            if (userServices.Count() < 1)
+            {
+                user.Services = userServices.Select(x =>
+                Mapping.Mapping.Map_Offer_To_ManageOffers(x)).ToPagedList(1, 1);
+            }
+            else
+            {
+                user.Services= userServices.Select(y =>Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, userServices.Count());
+            }
             user.Bought = _offerProxy.GetAllBought(id).Select(x => Mapping.Mapping.Map_Offer_To_BoughtOffers(x)).ToArray();
 
             user.Date = (DateTime)date;

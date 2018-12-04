@@ -1,0 +1,160 @@
+﻿@Model 
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <link type="text/css" rel="stylesheet" href="themes/calendar_g.css" />
+
+    <!-- helper libraries -->
+    <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+    <!-- daypilot libraries -->
+    <script src="Scripts/DayPilot/daypilot-all.min.js" type="text/javascript"></script>
+
+    <div class="main">
+        <!--date navigator-->
+        <div style="float:left; width: 160px;">
+            <div id="nav"></div>
+        </div>
+        <div style="margin-left: 160px;">
+            <!--where week calendar is-->
+            <div class="weekCalendar" id="theme">
+                <div value="calendar_g"></div>
+            </div>
+            <!--The JavaScript date navigator requires a placeholder div-->
+            <div id="dp"></div>
+        </div>
+
+        <script type="text/javascript">
+            //Initialize the navigator using DayPilot.Navigator class:
+            var nav = new DayPilot.Navigator("nav");
+            nav.showMonths = 1;
+            nav.skipMonths = 1;
+            nav.selectMode = "week";
+            //change the event calendar .startDate property to change the visible week:
+            nav.onTimeRangeSelected = function (args) {
+                dp.startDate = args.day;
+                dp.update();
+                loadEvents();
+            };
+            nav.init();
+
+            //Use DayPilot.Calendar class to render the event calendar
+            var dp = new DayPilot.Calendar("dp");
+            dp.viewType = "Week";
+            dp.eventDeleteHandling = "Update";
+            dp.businessBeginsHour = 8;
+            dp.businessEndsHour = 20;
+            dp.onEventDeleted = function (args) {
+                $.post("backend/delete",
+                    {
+                        id: args.e.id()
+                    },
+                    function () {
+                        console.log("Deleted.");
+                    });
+            };
+            //Drag and drop moving of calendar events.The event calendar updates the event position after drop and
+            //fires onEventMoved event.You can use this event to update the database using an AJAX call.
+            dp.onEventMoved = function (args) {
+                $.ajax({
+                    url: '/Controller/Action/Id',
+                    success: function (data) { alert(data); },
+                    statusCode: {
+                        404: function (content) { alert('cannot find resource'); },
+                        500: function (content) { alert('internal server error'); }
+                    },
+                    error: function (req, status, errorObj) {
+                        // handle status === "timeout"
+                        // handle other errors
+                    }
+                });
+              //  $.post("backend/move",
+              //      {
+              //          id: args.e.id(),
+              //          newStart: args.newStart.toString(),
+              //          newEnd: args.newEnd.toString()
+              //      },
+              //      function () {
+              //          console.log("Moved.");
+              //      });
+            };
+            //change hours of events
+            dp.onEventResized = function (args) {
+                $.post("backend/resize",
+                    {
+                        id: args.e.id(),
+                        newStart: args.newStart.toString(),
+                        newEnd: args.newEnd.toString()
+                    },
+                    function () {
+                        console.log("Resized.");
+                    });
+            };
+
+            // event creating
+            dp.onTimeRangeSelected = function (args) {
+                var name = prompt("New event name:", "Event");
+                dp.clearSelection();
+                if (!name) return;
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/Order/AddToCart',
+                    data: { id: '67', name: 'Deepak' },  
+                    success: function (data) { alert(data); },
+                    statusCode: {
+                        404: function (content) { alert('cannot find resource'); },
+                        500: function (content) { alert('internal server error'); }
+                    },
+                    error: function (req, status, errorObj) {
+                        // handle status === "timeout"
+                        // handle other errors
+                    }
+                });
+               //$.post("backend/create",
+               //    {
+               //        start: args.start.toString(),
+               //        end: args.end.toString(),
+               //        name: name
+               //    },
+                    //add individual events (DayPilot.Event object) using events.add() method:
+                    //This method is not suitable for adding large number of events because it updates the calendar during every .events.add() call.
+                    function (data) {
+                        var e = new DayPilot.Event({
+                            start: args.start,
+                            end: args.end,
+                            id: data.id,
+                            resource: args.resource,
+                            text: name
+                        });
+                        dp.events.add(e);
+                    });
+            };
+
+            dp.onEventClick = function (args) {
+                alert("clicked: " + args.e.id());
+            };
+            //initialize calendar
+            dp.init();
+            //load existing events
+            loadEvents();
+
+            function loadEvents() {
+                dp.events.load("backend/events");
+            }
+
+        </script>
+        <!--load theme for calendar-->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#theme").change(function (e) {
+                    dp.theme = this.value;
+                });
+            });
+        </script>
+
+    </div>
+    <div class="clear">
+    </div>
+

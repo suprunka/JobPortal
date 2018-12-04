@@ -55,8 +55,8 @@ namespace MyWeb.Controllers
             {
                 return View(list);
             }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
+            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
+            return View("Index", condition);
         }
 
         public async Task<ActionResult> Home(string searchingString, int? page)
@@ -201,7 +201,7 @@ namespace MyWeb.Controllers
             hoursto.Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
-                Value = x.ToString()
+                Value = x.TotalHours.ToString(),
             })
                 .ToList();
 

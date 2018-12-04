@@ -1,0 +1,62 @@
+﻿@model WebJobPortal.Models.BoughtOffers[]
+@using WebJobPortal.Models
+@{
+    var counter = 0;
+}
+<tr class="offers">
+    @foreach (BoughtOffers offer in Model)
+    {
+        if (counter != 0 && counter % 3 == 0)
+        {
+        @:</tr>
+        @:<tr>
+        }
+        counter++;
+        <td class="offersWindow">
+            <div class="item">
+                <div class="card" id="@offer.Title" style="width:auto">
+                    @if (offer.Category.ToString() == "Home")
+                    {
+                        <img class="card-img-top" src="~/Pictures/home.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                    }
+                    else if (offer.Category.ToString() == "Tutoring")
+                    {
+                        <img class="card-img-top" src="~/Pictures/tutoring.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                    }
+                    else if (offer.Category.ToString() == "IT")
+                    {
+                        <img class="card-img-top" src="~/Pictures/it.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                    }
+                    else if (offer.Category.ToString() == "Repairs")
+                    {
+                        <img class="card-img-top" src="~/Pictures/repairs.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                    }
+                    else if (offer.Category.ToString() == "Architecture")
+                    {
+                        <img class="card-img-top" src="~/Pictures/architecture.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                    }
+                    else if (offer.Category.ToString() == "Media")
+                    {
+                        <img class="card-img-top" src="~/Pictures/media.png" alt="Card image" style="width:50%;display: block;
+                          margin-left: auto; margin-right: auto;">
+                    }
+                    <br />
+                    <div class="card-body">
+                        <h4 class="card-title" style="word-break:break-word;">@offer.Title</h4>
+                        <p class="card-text" style="word-break:break-word;">@offer.Description</p>
+                        <p class="card-text" style="word-break:break-word;">Date: @offer.Date.ToShortDateString()</p>
+                        <p class="card-text" style="word-break:break-word;">Hour from: @offer.HourFrom</p>
+                        <p class="card-text" style="word-break:break-word;">Hour to: @offer.HourTo</p>
+
+                        <h4 class="price">@decimal.Round(offer.RatePerHour, 2, MidpointRounding.AwayFromZero) DKK/ hour</h4>
+                    </div>
+                </div>
+            </div>
+        </td>
+    }
+</tr>

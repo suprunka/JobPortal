@@ -1,0 +1,48 @@
+﻿@model WebJobPortal.Models.ShoppingCardView
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="ShoppingCard">
+    <div class="header" style="margin-bottom:auto">
+        <h1> Your shopping card</h1>
+        @if (Model.Error != null)
+        {
+            <div class="alert alert-danger">
+                <strong> We couldn't process your order. Reason:</strong> @Model.Error.ToString()
+            </div>
+        }
+
+    </div>
+
+
+    <table id="yShoppingCard">
+        @foreach (var itemInShoppingcard in Model.Card.List)
+        {
+
+            <tr>
+                <td> Title: @itemInShoppingcard.Title </td>
+                <td> Description: @itemInShoppingcard.Description </td>
+                <td> Day: @itemInShoppingcard.WorkingTime.WeekDay </td>
+                <td> Date: @itemInShoppingcard.WorkingTime.Date.Date.ToShortDateString()</td>
+                <td> Hour from: @itemInShoppingcard.WorkingTime.HoursFrom</td>
+                <td> Hour to @itemInShoppingcard.WorkingTime.HoursTo </td>
+                <td> Rate per hour: @(decimal.Round(itemInShoppingcard.RatePerHour, 0, MidpointRounding.AwayFromZero)) DKK</td>
+                <td> Price: @((decimal.Round((@itemInShoppingcard.RatePerHour * (@itemInShoppingcard.WorkingTime.HoursTo - @itemInShoppingcard.WorkingTime.HoursFrom).Hours), 2, MidpointRounding.AwayFromZero))) DKK</td>
+                <td> @(@Html.ActionLink("Delete", "DeleteFromCard", "Order", new { idU = User.Identity.GetUserId(), id = @itemInShoppingcard.Id, date = @itemInShoppingcard.WorkingTime.Date, from = @itemInShoppingcard.WorkingTime.HoursFrom, to = @itemInShoppingcard.WorkingTime.HoursTo }, null))</td>
+            </tr>
+        }
+        <tr id="empty-message" @if (Model.Card != null && Model.Card.List.Count > 0) { <text> class="hidden" </text> }>
+            <td> The shopping card is empty </td>
+        </tr>
+    </table>
+    <div id="tPrice">
+        <h2>Order price: @(decimal.Round(Model.Card.GetTotalPrice(), 2, MidpointRounding.AwayFromZero)) DKK   </h2>
+    </div>
+
+    @Html.ActionLink("Complete order and pay.", "CreateOrder", "Order", new { userID = User.Identity.GetUserId() }, null)
+
+</section>
+

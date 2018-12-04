@@ -1,0 +1,62 @@
+﻿@model WebJobPortal.Models.AddServiceOfferModel
+@using JobPortal.Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(u => u.ManageOffers.Author, "PhoneNumber")
+
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.RatePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.RatePerHour, new { htmlAttributes = new { @class = "form-control", placeholder = "Rate per hour..." } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.RatePerHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Title" } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.ManageOffers.Category, new SelectList(Enum.GetValues(typeof(Category)), selectedValue: Category.Home), new { @id = "cat", @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Subcategory, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ManageOffers.Subcategory, new SelectList(Enum.GetValues(typeof(SubCategory))), new { @id = "subcat", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Offer" class="buttons" />
+            </div>
+        </div>
+    </div>
+
+}

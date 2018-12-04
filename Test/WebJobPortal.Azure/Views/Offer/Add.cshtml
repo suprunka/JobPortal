@@ -1,0 +1,139 @@
+﻿@model WebJobPortal.Models.AddServiceOfferModel
+@using JobPortal.Model
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{string[] s = new string[22]; }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(u => u.ManageOffers.Author, "PhoneNumber")
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.RatePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.RatePerHour, new { htmlAttributes = new { @class = "form-control", placeholder = "Rate per hour..." } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.RatePerHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Title" } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ManageOffers.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                @Html.ValidationMessageFor(model => model.ManageOffers.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("Category", new SelectList(Enum.GetValues(typeof(Category)), selectedValue: Category.Home), new { @class = "form-control" }))
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageOffers.Subcategory, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Subcategory", new SelectList(Enum.GetValues(typeof(SubCategory))), new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="weekdays">
+            <div class="col-md-2" id="Monday">
+                <p>Monday</p>
+                @for (var i = 6; i < 21; i++)
+                {
+                    <div class="hours" id="@i">
+                        <button type="button" class="btn btn-primary">@i:00 - @(i + 1):00</button>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="col-md-2" id="Tuesday">
+            <p>tuesday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="@i">
+                    <button type="button" class="btn btn-primary">@i:00 - @(i + 1):00</button>
+
+                </div>
+            }
+        </div>
+        <div class="col-md-2" id="Wednesday">
+            <p>Wednesday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="@i">
+                    <button type="button" class="btn btn-primary">@i:00 - @(i + 1):00</button>
+
+                </div>
+            }
+        </div>
+
+        <div class="col-md-2" id="Thuesday">
+            <p>thuesday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="@i">
+                    <button type="button" class="btn btn-primary">@i:00 - @(i + 1):00</button>
+
+                </div>
+            }
+        </div>
+        <div class="col-md-2" id="Friday">
+            <p>Friday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+                <div class="hours" id="@i">
+                    <button type="button" class="btn btn-primary">@i:00 - @(i + 1):00</button>
+
+                </div>
+            }
+        </div>
+        <div class="col-md-2" id="Saturday">
+            <p>Saturday</p>
+            @for (var i = 6; i < 21; i++)
+            {
+            <div class="hours" id="@i">
+                @{var x = i + 1;
+                }
+                @Html.ActionLink(@i+":00 -  "+@x+":00", "AddtoArray", "Offer", new {day = DayOfWeek.Saturday, id = i }, new { @class = "btn btn-primary" })
+
+            </div>
+            }
+        </div>
+    </div>
+    <p id="hiddenArray" hidden ="hidden">
+    </p>
+
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+
+    document.ready(){
+
+        function addToarray(id) {
+            var clicked = $("<p class=\"clicked\"></p>").text("Text.");
+
+        }
+    }
+</script>

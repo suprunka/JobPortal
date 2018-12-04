@@ -1,0 +1,318 @@
+﻿@model WebJobPortal.Models.ViewDetails
+@using WebJobPortal.Models
+@using Microsoft.AspNet.Identity;
+@using DayPilot.Web.Mvc
+@using DayPilot.Web.Mvc.Events.Calendar
+@using ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+<link href="@Url.Content("~/Content/Rating.css")" rel="stylesheet" type="text/css" />
+@Html.Raw(TempData["msg"])
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken() 
+    @Html.HiddenFor(model => model.Id)
+
+<div class="offerCard">
+    <h2>@Model.Title</h2>
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-6">
+            @if (Model.Category.ToString() == "Home")
+            {
+                <img class="card-img-top" src="~/Pictures/home.png" alt="Card image" style="width:40%;
+                          margin-left:0; margin-right: auto;">
+            }
+            else if (Model.Category.ToString() == "Tutoring")
+            {
+                <img class="card-img-top" src="~/Pictures/tutoring.png" alt="Card image" style="width:40%;
+                          margin-left:0; margin-right: auto;">
+            }
+            else if (Model.Category.ToString() == "IT")
+            {
+                <img class="card-img-top" src="~/Pictures/it.png" alt="Card image" style="width:40%;
+                          margin-left:0; margin-right: auto;">
+            }
+            else if (Model.Category.ToString() == "Repairs")
+            {
+                <img class="card-img-top" src="~/Pictures/repairs.png" alt="Card image" style="width:40%;
+                          margin-left:0; margin-right: auto;">
+            }
+            else if (Model.Category.ToString() == "Architecture")
+            {
+                <img class="card-img-top" src="~/Pictures/architecture.png" alt="Card image" style="width:40%;
+                          margin-left:0; margin-right: auto;">
+            }
+            else if (Model.Category.ToString() == "Media")
+            {
+                <img class="card-img-top" src="~/Pictures/media.png" alt="Card image" style="width:40%;
+                          margin-left:0; margin-right: auto;">
+            }
+        </div>
+        <div class="col-md-6">
+            @if (Model.Author == User.Identity.GetUserId())
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title)
+
+                    <div class="col-md-12" id="edit">
+                        @Html.EditorFor(model => model.Title)
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RatePerHour)
+
+                    <div class="col-md-12" id="edit">
+                        @Html.EditorFor(model => model.RatePerHour)
+                        @Html.ValidationMessageFor(model => model.RatePerHour, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description)
+
+                    <div class="col-md-12" id="edit">
+                        @Html.TextAreaFor(model => model.Description, new { style = "width:250px; word-break:break-word;" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Delete", "Delete", "ServiceOffer", new { idd = Model.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="panel panel-default" style="margin-top:20px;">
+                    <div class="panel-heading" style="font-size:20px;">@Html.DisplayTextFor(model => model.Title)</div>
+                    <div class="panel-body" style="height:130px;">@Html.DisplayTextFor(model => model.Description)</div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.ActionLink("See an author of the service offer", "UserProfile", "User", new { id = Model.Author }, null)
+                </div>
+
+            }
+        </div>
+
+    </div>
+</div>
+}
+@if (Model.Author != User.Identity.GetUserId())
+{<div class="row">
+        <div class="col-md-10">
+            Available days when you can order the service:
+            <div>
+                @foreach (var t in Model.Dates)
+                {
+                    <div>
+                        @t.WeekDay.ToString()s
+                    </div>
+                }
+            </div>
+            <p><span class="glyphicon glyphicon-calendar" style="padding-right:20px;"></span><input type="date" name="days" id="selecteddate"></p>
+            <br />
+            <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span>@Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "selectlistReview" }) </p>
+            <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span> @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "selectlistReview" }) </p>
+            <br />
+
+            @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-info", @id = "addToCart" })
+        </div>
+    </div>
+}
+
+
+
+@if (Model.Author == User.Identity.GetUserId())
+{
+
+    <br />
+
+    <script src="@Url.Content("~/Scripts/daypilot-all.min.js")" type="text/javascript"></script>
+
+    <div id="dp">
+        <br />
+        <br />
+        <br />
+
+
+        @Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig
+   {
+       BackendUrl = Url.Action("Backend", "Calendar",new {serviceId = Model.Id }),
+       ViewType = ViewType.Week,
+       CellDuration = 60,
+       Height = 600,
+       CellHeight = 30,
+       HeightSpec = DayPilot.Web.Mvc.Enums.Calendar.HeightSpec.Full,
+       DayBeginsHour= 5,
+       DayEndsHour= 22,
+       AutoRefreshEnabled = true,
+       AutoRefreshInterval = 10,
+       DurationBarVisible = true,
+       TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.JavaScript,
+       TimeRangeSelectedJavaScript = "create(start, end)",
+       EventClickHandling = EventClickHandlingType.JavaScript,
+       EventDeleteHandling = EventDeleteHandlingType.CallBack,
+       HeaderDateFormat = "dddd",
+
+
+   })
+
+    </div>
+
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Reviews</h2>
+
+            <hr />
+        </div>
+        <div class="stars">
+            <form action="">
+                <input class="star star-5" value="5" id="star-5" type="radio" name="star" />
+                <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" value="4" checked id="star-4" type="radio" name="star" />
+                <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" value="3" id="star-3" type="radio" name="star" />
+                <label class="star star-3" for="star-3"></label>
+                <input class="star star-2" value="2" id="star-2" type="radio" name="star" />
+                <label class="star star-2" for="star-2"></label>
+                <input class="star star-1" value="1" id="star-1" type="radio" name="star" />
+                <label class="star star-1" for="star-1"></label>
+            </form>
+        </div>
+        <p hidden id="selectedStar"></p>
+
+        <div class="col-lg-12">
+            @Html.TextArea("Your comment", "Your comment", new { style = "max-width: 900px; width:100%;", @id = "commenttxt" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ActionLink("Add review", "AddReview", "ServiceOffer", new { serviceId = Model.Id, customer = User.Identity.GetUserId() }, new { style = "margin-bottom:30px;", @class = "btn btn-danger", @id = "AddReview" })
+            <hr />
+        </div>
+        @if (Model.Reviews != null)
+        {
+            foreach (ReviewModel review in Model.Reviews)
+            {
+                @Html.Partial("Review", review)
+
+            }
+        }
+    </div>
+
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+    $('#selecteddate').change(function () {
+        var selectedDate = $("#selecteddate").val();
+        var hourFrom = $('#hoursfrom');
+        hourFrom.empty();
+        console.log(selectedDate);
+        if (selectedDate != null && selectedDate != '') {
+            $.getJSON('@Url.Action("GetHoursFrom")', { serviceId: @Model.Id, date: selectedDate }, function (sub) {
+                        if (sub != null && !jQuery.isEmptyObject(sub))
+                        {
+                            console.log(selectedDate);
+
+                            hourFrom.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                            $.each(sub, function (index, subcats) {
+                                console.log(subcats);
+
+                                hourFrom.append($('<option/>', {
+                                    value: subcats.Value,
+                                    text: subcats.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+
+
+    $('#hoursfrom').change(function () {
+        var selectedDate = $("#selecteddate").val();
+        var selectedHour= $("#hoursfrom").val();
+        var hourto = $('#hoursto');
+
+        hourto.empty();
+        if (selectedDate != null && selectedDate != '') {
+
+            $.getJSON('@Url.Action("GetHoursTo")', { serviceId: @Model.Id, date: selectedDate, from: selectedHour }, function (sub) {
+                console.log(sub);
+
+                        if (sub != null && !jQuery.isEmptyObject(sub))
+                        {
+                            console.log(selectedDate);
+
+                            hourto.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                            $.each(sub, function (index, subcats) {
+
+                                hourto.append($('<option/>', {
+                                    value: subcats.Value,
+                                    text: subcats.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+    });
+      $('#addToCart').click(function () {
+        var date = $('#selecteddate').val();
+        var from = $('#hoursfrom').val();
+        var to = $('#hoursto').val();
+        var path = '@Url.Content("~/Order/AddToCart")' + "?serviceID=@Model.Id+&userID=@User.Identity.GetUserId()+&date=" + date + "+&from=" + from + "+&to=" + to;
+        $(this).attr("href", path);
+    });
+
+    $('#AddReview').click(function () {
+        var radioValue = $("input[name='star']:checked").val();
+        var comment = $('#commenttxt').val();
+        var path = '@Url.Content("~/ServiceOffer/AddReview")' + "?serviceId=@Model.Id+&customer=@User.Identity.GetUserId()+&rate=" + radioValue+ "+&comment=" + comment;
+
+        $(this).attr("href", path)
+
+    });
+
+
+
+    function create(start, end) {
+
+        var m = new DayPilot.Modal();
+        m.closed = function () {
+            if (this.result == "Hours are added") {
+                dpc.commandCallBack('refresh');
+            }
+
+            dpc.clearSelection();
+        };
+
+       m.showUrl('@Url.Action("AddHours", "Calendar")?startT=' + start + '&endT=' + end + '&serviceId='+@Model.Id );
+    }
+
+
+
+</script>

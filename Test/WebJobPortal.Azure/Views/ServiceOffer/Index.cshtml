@@ -1,0 +1,29 @@
+﻿@model PagedList.IPagedList<ManageOffers>
+@using PagedList
+@using PagedList.Mvc
+@using WebJobPortal.Models
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <form>
+            <center>
+                @Html.TextBox("SearchingString")
+                <input class="btn btn-light" type="submit" value="Search" />
+            </center>
+        </form>
+    </div>
+</div>
+<div>
+    <table class="serviceOfferTable" align="center">
+        <colgroup>
+            <col class="col-md-4">
+            <col class="col-md-4">
+            <col class="col-md-4">
+        </colgroup>
+        @Html.Partial("Offers", Model)
+    </table>
+</div>
