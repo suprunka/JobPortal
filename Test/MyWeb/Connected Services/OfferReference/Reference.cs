@@ -74,6 +74,12 @@ namespace MyWeb.OfferReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.OfferReview[]> GetServiceReviewsAsync(int serviceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates", ReplyAction="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse")]
+        int GetAvgOfServiceRates(int serviceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates", ReplyAction="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse")]
+        System.Threading.Tasks.Task<int> GetAvgOfServiceRatesAsync(int serviceId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -181,6 +187,14 @@ namespace MyWeb.OfferReference {
         
         public System.Threading.Tasks.Task<JobPortal.Model.OfferReview[]> GetServiceReviewsAsync(int serviceId) {
             return base.Channel.GetServiceReviewsAsync(serviceId);
+        }
+        
+        public int GetAvgOfServiceRates(int serviceId) {
+            return base.Channel.GetAvgOfServiceRates(serviceId);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetAvgOfServiceRatesAsync(int serviceId) {
+            return base.Channel.GetAvgOfServiceRatesAsync(serviceId);
         }
     }
 }

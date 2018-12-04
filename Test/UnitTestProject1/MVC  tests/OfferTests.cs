@@ -29,10 +29,10 @@ namespace UnitTestProject1.MVC__tests
             Assert.AreEqual(3, model.Length);
         }
 
-        [DataRow("Cleaning", 2, DisplayName = "The same cases and word length, 2 maches")] //invalid phonenumber (too many characters)
-        [DataRow("Gardening", 2, DisplayName = "Different letter cases.")] //invalid phonenumber (too many characters)
-        [DataRow("Garden", 3, DisplayName = "Part of the word(garden/gardening), 2 maches")] //invalid phonenumber (too many characters)
-        [DataRow("", 5, DisplayName = "Emptystring")] //invalid phonenumber (too many characters)
+        [DataRow("Cleaning", 2, DisplayName = "The same cases and word length, 2 maches")] 
+        [DataRow("Gardening", 2, DisplayName = "Different letter cases.")] 
+        [DataRow("Garden", 3, DisplayName = "Part of the word(garden/gardening), 2 maches")] 
+        [DataRow("", 5, DisplayName = "Emptystring")] 
 
         [TestMethod]
         public async void  Test_Index_Show_All_Offers_Which_Contains_searching_string(string searchingString, int foundOffers)
