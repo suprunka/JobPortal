@@ -19,13 +19,14 @@ namespace WebJobPortal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint1");
+        private IUserService _proxy;
 
         public AccountController()
         {
             _proxy = new UserServiceClient("UserServiceHttpEndpoint1");
 
         }
+
         public AccountController(IUserService proxy)
         {
             _proxy = proxy;

@@ -10,11 +10,12 @@ using Gender = Repository.DbConnection.Gender;
 
 namespace UnitTestProject1
 {
+    //Works
     [TestClass]
     public class RepositoryTest
     {
         //Creating users for test purpose
-        #region
+
         private static Users GetUser()
         {
             var userStub = new Users
@@ -192,7 +193,7 @@ namespace UnitTestProject1
             };
             return userStub;
         }
-        #endregion
+
 
 
         //Testing adding a valid object to a database. [OK]

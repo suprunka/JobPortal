@@ -17,16 +17,24 @@ namespace WebJobPortal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IUserService _proxy = new UserServiceClient("UserServiceHttpEndpoint1");
+        private IUserService _userProxy;
+        
 
         public ManageController()
         {
+            _userProxy = new UserServiceClient("UserServiceHttpEndpoint1");
+        }
+
+        public ManageController(IUserService userProxy)
+        {
+            _userProxy = userProxy;
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userProxy = new UserServiceClient("UserServiceHttpEndpoint1");
         }
 
         public ApplicationSignInManager SignInManager
@@ -306,7 +314,7 @@ namespace WebJobPortal.Controllers
             {
                 return View(model);
             }
-            var result = _proxy.CreateUser(Mapping.Map_SetPropertiesViewModel_To_User(model), User.Identity.GetUserId());
+            var result = _userProxy.CreateUser(Mapping.Map_SetPropertiesViewModel_To_User(model), User.Identity.GetUserId());
             if (result)
             {
                 return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });

@@ -93,6 +93,7 @@
       <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WorkingTime" nillable="true" type="tns:WorkingDetails" />
+      <xs:element minOccurs="0" name="WorkingTimes" nillable="true" type="tns:ArrayOfWorkingTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Offer" nillable="true" type="tns:Offer" />
@@ -139,6 +140,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkingDetails" nillable="true" type="tns:WorkingDetails" />
+  <xs:complexType name="ArrayOfWorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
+  <xs:complexType name="WorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="End" type="ser:duration" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="OfferId" type="xs:int" />
+      <xs:element minOccurs="0" name="Start" type="ser:duration" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q4:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
   <xs:complexType name="ArrayOfPayPalOffer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PayPalOffer" nillable="true" type="tns:PayPalOffer" />
@@ -163,6 +181,7 @@
   <xs:element name="ArrayOfJobOffer" nillable="true" type="tns:ArrayOfJobOffer" />
   <xs:complexType name="JobOffer">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:User" />
       <xs:element minOccurs="0" name="Customer_ID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Offer" nillable="true" type="tns:Offer" />
       <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />

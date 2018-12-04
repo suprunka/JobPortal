@@ -15,77 +15,77 @@ namespace MyWeb.OrderReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OrderReference.IOrderService")]
     public interface IOrderService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(JobPortal.Model.BookedTimeException), Action="http://tempuri.org/IOrderService/CreateOrderBookedTimeExceptionFault", Name="BookedTimeException", Namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(JobPortal.Model.BookedTimeException), Action="http://tempuri.org/IOrderService/CreateOrderBookedTimeExceptionFault", ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Name="BookedTimeException", Namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model")]
         JobPortal.Model.Order CreateOrder(string Logging_ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Order> CreateOrderAsync(string Logging_ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CancelOrder", ReplyAction="http://tempuri.org/IOrderService/CancelOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CancelOrder", ReplyAction="http://tempuri.org/IOrderService/CancelOrderResponse")]
         bool CancelOrder(JobPortal.Model.Order o);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CancelOrder", ReplyAction="http://tempuri.org/IOrderService/CancelOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CancelOrder", ReplyAction="http://tempuri.org/IOrderService/CancelOrderResponse")]
         System.Threading.Tasks.Task<bool> CancelOrderAsync(JobPortal.Model.Order o);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCart", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetShoppingCart", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartResponse")]
         JobPortal.Model.ShoppingCard GetShoppingCart(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCart", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetShoppingCart", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCartAsync(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/PayForOrder", ReplyAction="http://tempuri.org/IOrderService/PayForOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/PayForOrder", ReplyAction="http://tempuri.org/IOrderService/PayForOrderResponse")]
         bool PayForOrder(JobPortal.Model.Order o);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/PayForOrder", ReplyAction="http://tempuri.org/IOrderService/PayForOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/PayForOrder", ReplyAction="http://tempuri.org/IOrderService/PayForOrderResponse")]
         System.Threading.Tasks.Task<bool> PayForOrderAsync(JobPortal.Model.Order o);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CleanCart", ReplyAction="http://tempuri.org/IOrderService/CleanCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CleanCart", ReplyAction="http://tempuri.org/IOrderService/CleanCartResponse")]
         bool CleanCart(string userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CleanCart", ReplyAction="http://tempuri.org/IOrderService/CleanCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CleanCart", ReplyAction="http://tempuri.org/IOrderService/CleanCartResponse")]
         System.Threading.Tasks.Task<bool> CleanCartAsync(string userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/AddToCart", ReplyAction="http://tempuri.org/IOrderService/AddToCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/AddToCart", ReplyAction="http://tempuri.org/IOrderService/AddToCartResponse")]
         bool AddToCart(string userId, int serviceId, System.DateTime date, System.TimeSpan hourfrom, System.TimeSpan hourTo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/AddToCart", ReplyAction="http://tempuri.org/IOrderService/AddToCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/AddToCart", ReplyAction="http://tempuri.org/IOrderService/AddToCartResponse")]
         System.Threading.Tasks.Task<bool> AddToCartAsync(string userId, int serviceId, System.DateTime date, System.TimeSpan hourfrom, System.TimeSpan hourTo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteFromCart", ReplyAction="http://tempuri.org/IOrderService/DeleteFromCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/DeleteFromCart", ReplyAction="http://tempuri.org/IOrderService/DeleteFromCartResponse")]
         bool DeleteFromCart(string userId, int serviceId, System.DateTime date, System.TimeSpan hourfrom, System.TimeSpan hourTo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteFromCart", ReplyAction="http://tempuri.org/IOrderService/DeleteFromCartResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/DeleteFromCart", ReplyAction="http://tempuri.org/IOrderService/DeleteFromCartResponse")]
         System.Threading.Tasks.Task<bool> DeleteFromCartAsync(string userId, int serviceId, System.DateTime date, System.TimeSpan hourfrom, System.TimeSpan hourTo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetHoursFrom", ReplyAction="http://tempuri.org/IOrderService/GetHoursFromResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetHoursFrom", ReplyAction="http://tempuri.org/IOrderService/GetHoursFromResponse")]
         System.TimeSpan[] GetHoursFrom(int serviceId, System.DateTime date);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetHoursFrom", ReplyAction="http://tempuri.org/IOrderService/GetHoursFromResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetHoursFrom", ReplyAction="http://tempuri.org/IOrderService/GetHoursFromResponse")]
         System.Threading.Tasks.Task<System.TimeSpan[]> GetHoursFromAsync(int serviceId, System.DateTime date);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetHoursTo", ReplyAction="http://tempuri.org/IOrderService/GetHoursToResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetHoursTo", ReplyAction="http://tempuri.org/IOrderService/GetHoursToResponse")]
         System.TimeSpan[] GetHoursTo(int serviceId, System.DateTime date, System.TimeSpan from);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetHoursTo", ReplyAction="http://tempuri.org/IOrderService/GetHoursToResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetHoursTo", ReplyAction="http://tempuri.org/IOrderService/GetHoursToResponse")]
         System.Threading.Tasks.Task<System.TimeSpan[]> GetHoursToAsync(int serviceId, System.DateTime date, System.TimeSpan from);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCartForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartForPaypalResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetShoppingCartForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartForPaypalResponse")]
         JobPortal.Model.ShoppingCard GetShoppingCartForPaypal(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetShoppingCartForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartForPaypalResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetShoppingCartForPaypal", ReplyAction="http://tempuri.org/IOrderService/GetShoppingCartForPaypalResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.ShoppingCard> GetShoppingCartForPaypalAsync(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetJobCallendar", ReplyAction="http://tempuri.org/IOrderService/GetJobCallendarResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetJobCallendar", ReplyAction="http://tempuri.org/IOrderService/GetJobCallendarResponse")]
         JobPortal.Model.JobOffer[] GetJobCallendar(System.DateTime date, string employeeId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetJobCallendar", ReplyAction="http://tempuri.org/IOrderService/GetJobCallendarResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetJobCallendar", ReplyAction="http://tempuri.org/IOrderService/GetJobCallendarResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.JobOffer[]> GetJobCallendarAsync(System.DateTime date, string employeeId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
         JobPortal.Model.Order FindOrder(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Order> FindOrderAsync(string id);
     }
     
