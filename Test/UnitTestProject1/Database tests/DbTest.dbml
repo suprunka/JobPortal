@@ -15,8 +15,8 @@
       <Column Name="NameOfDay" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="HourFrom" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="HourTo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Users_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUsers_WorkingDates" Member="AspNetUsers" ThisKey="Users_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ServiceOffer_WorkingDates" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
@@ -65,14 +65,13 @@
       <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUsers_WorkingDates" Member="WorkingDates" ThisKey="Id" OtherKey="Users_ID" Type="WorkingDates" />
       <Association Name="AspNetUsers_AspNetUserClaims" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaims" />
       <Association Name="AspNetUsers_AspNetUserLogins" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogins" />
       <Association Name="AspNetUsers_AspNetUserRoles" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRoles" />
       <Association Name="AspNetUsers_OrderTable" Member="OrderTable" ThisKey="Id" OtherKey="Users_ID" Type="OrderTable" />
       <Association Name="AspNetUsers_Review" Member="Review" ThisKey="Id" OtherKey="Customer_ID" Type="Review" />
       <Association Name="AspNetUsers_ServiceOffer" Member="ServiceOffer" ThisKey="Id" OtherKey="Employee_ID" Type="ServiceOffer" />
-      <Association Name="AspNetUsers_ShoppingCard" Member="ShoppingCard" ThisKey="Id" OtherKey="ID_User" Type="ShoppingCard" />
+      <Association Name="AspNetUsers_ShoppingCart" Member="ShoppingCart" ThisKey="Id" OtherKey="User_ID" Type="ShoppingCart" />
       <Association Name="AspNetUsers_Users" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
     </Type>
   </Table>
@@ -119,22 +118,14 @@
       <Association Name="OrderStatus_OrderTable" Member="OrderStatus" ThisKey="OrderStatus_ID" OtherKey="ID" Type="OrderStatus" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Rate" Member="Rate">
-    <Type Name="Rate">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="RateValue" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Rate_Review" Member="Review" ThisKey="RateValue" OtherKey="Rate_ID" Type="Review" />
-    </Type>
-  </Table>
   <Table Name="dbo.Review" Member="Review">
     <Type Name="Review">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RateValue" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Customer_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Rate_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="AspNetUsers_Review" Member="AspNetUsers" ThisKey="Customer_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
-      <Association Name="Rate_Review" Member="Rate" ThisKey="Rate_ID" OtherKey="RateValue" Type="Rate" IsForeignKey="true" />
       <Association Name="ServiceOffer_Review" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
     </Type>
   </Table>
@@ -157,24 +148,24 @@
       <Column Name="Subcategory_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Employee_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="ServiceOffer_WorkingDates" Member="WorkingDates" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="WorkingDates" />
       <Association Name="ServiceOffer_Review" Member="Review" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Review" />
       <Association Name="ServiceOffer_Saleline" Member="Saleline" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Saleline" />
+      <Association Name="ServiceOffer_ShoppingCart" Member="ShoppingCart" ThisKey="ID" OtherKey="Service_ID" Type="ShoppingCart" />
       <Association Name="AspNetUsers_ServiceOffer" Member="AspNetUsers" ThisKey="Employee_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
       <Association Name="SubCategory_ServiceOffer" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ShoppingCard" Member="ShoppingCard">
-    <Type Name="ShoppingCard">
-      <Column Name="ID_User" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Subcategory_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="NameOfDay" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.ShoppingCart" Member="ShoppingCart">
+    <Type Name="ShoppingCart">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="User_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Service_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="HourFrom" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="HourTo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUsers_ShoppingCard" Member="AspNetUsers" ThisKey="ID_User" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
-      <Association Name="SubCategory_ShoppingCard" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
+      <Association Name="ServiceOffer_ShoppingCart" Member="ServiceOffer" ThisKey="Service_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUsers_ShoppingCart" Member="AspNetUsers" ThisKey="User_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.SubCategory" Member="SubCategory">
@@ -183,7 +174,6 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Category_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SubCategory_ServiceOffer" Member="ServiceOffer" ThisKey="ID" OtherKey="Subcategory_ID" Type="ServiceOffer" />
-      <Association Name="SubCategory_ShoppingCard" Member="ShoppingCard" ThisKey="ID" OtherKey="Subcategory_ID" Type="ShoppingCard" />
       <Association Name="Category_SubCategory" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>

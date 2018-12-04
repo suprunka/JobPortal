@@ -32,16 +32,13 @@ namespace ServiceLibrary
 
         public bool AddHoursToOffer(WorkingTime days)
         {
-
             return _unitOfWork.Offers.AddWorkingDates(new WorkingDates
             {
                 NameOfDay = days.WeekDay.ToString(),
                 HourFrom = days.Start,
                 HourTo = days.End,
                 ServiceOffer_ID = days.OfferId,
-
             });
-
         }
 
         public bool CreateServiceOffer(Offer offer)

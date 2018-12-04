@@ -194,11 +194,10 @@ namespace MyWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetHoursTo(int serviceId, DateTime date,TimeSpan from)
+        public ActionResult GetHoursTo(int serviceId, DateTime date,TimeSpan from)
         {
 
-            var hoursto = await _orderProxy.GetHoursToAsync(serviceId, date, from);
-            hoursto.Select(x => new SelectListItem()
+            var hoursto =  _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
                 Value = x.ToString()

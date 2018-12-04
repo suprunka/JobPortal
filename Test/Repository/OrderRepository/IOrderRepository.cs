@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Repository.OrderRepository
+namespace Repository
 {
     public interface IOrderRepository: IRepository<OrderTable>
     {
@@ -14,10 +14,9 @@ namespace Repository.OrderRepository
         bool DeleteFromCart(ShoppingCart cart);
         bool AddToCart(ShoppingCart cart);
         List<ShoppingCart> GetShoppingCart(string id);
-        bool CancelServiceInOrder(Saleline o);
         bool CancelOrder(Order o);
-        IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
-        IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
+        IList<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
+        IList<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
         bool CleanCart(string userID);
         IQueryable<Salelines> GetJobCalendar(DateTime date, string employeeId);
     }
