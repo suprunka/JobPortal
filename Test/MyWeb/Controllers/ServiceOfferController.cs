@@ -200,7 +200,7 @@ namespace MyWeb.Controllers
             var hoursto =  _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
-                Value = x.TotalHours.ToString(),
+                Value = x.ToString(),
             })
                 .ToList();
 
