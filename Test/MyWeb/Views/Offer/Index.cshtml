@@ -1,11 +1,11 @@
-﻿@using WebJobPortal.Models
-@model  IEnumerable<WebJobPortal.Models.ServiceOfferViewModel>
-
+﻿@model WebJobPortal.Models.ManageOffers[]
+@using WebJobPortal.Models
 
 @{
     ViewBag.Title = "Services";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @{
     var counter = 0;
 }
@@ -30,8 +30,6 @@
         </form>
     </div>
 </div>
-
-
 
 <div class="containerItems">
     @Html.Partial("Offers", Model);

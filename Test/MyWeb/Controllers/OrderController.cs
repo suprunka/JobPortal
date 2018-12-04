@@ -1,12 +1,9 @@
-﻿using JobPortal.Model;
-using Microsoft.AspNet.Identity;
-using MyWeb.Models;
+﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using MyWeb.App_Start;
 using Repository.DbConnection;
@@ -14,6 +11,9 @@ using System.Data.SqlClient;
 using System.ServiceModel;
 using System.Transactions;
 using System.Net.Mail;
+using WebJobPortal.Models;
+using JobPortal.Model;
+using System.Configuration;
 
 namespace MyWeb.Controllers
 {
@@ -67,14 +67,15 @@ namespace MyWeb.Controllers
 
         }
 
-        public ActionResult AddToCart(string userID, int serviceID, DateTime date, TimeSpan from, TimeSpan to)
+
+        public ActionResult AddToCart(string userID, int? serviceID, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
 
-            if (userID != null && serviceID > 0)
+            if (userID.Trim().Length > 0 && serviceID > 0)
             {
                 try
                 {
-                    var result = _orderProxy.AddToCart(userID, serviceID, date, from, to);
+                    var result = _orderProxy.AddToCart(userID, (int)serviceID, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
                     if (result)
                     {
                         return RedirectToAction("Index", "Order", new { id = userID.Trim() });
@@ -90,7 +91,11 @@ namespace MyWeb.Controllers
                 }
 
             }
-            return View("Error", null);
+            else
+            {
+                TempData["msg"] = "<script>alert('You are not logged in.');</script>";
+            }
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = serviceID });
         }
 
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
@@ -179,7 +184,7 @@ namespace MyWeb.Controllers
                     foreach(var emailAddress in listOfEmailsToSend)
                     {
                         MailMessage mail = new MailMessage();
-                        mail.From = new MailAddress("theticker5@gmail.com", "JobPortal");
+                        mail.From = new MailAddress(ConfigurationManager.AppSettings["Glogin"], "JobPortal");
                         mail.To.Add(new MailAddress(emailAddress, "Receiver"));
                         mail.Subject = "JobPortal";
                         mail.Body = "Hey, someone bought your offer service, log in to our website and check" +
@@ -189,7 +194,7 @@ namespace MyWeb.Controllers
                         using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                         {
                             MailClient.EnableSsl = true;
-                            MailClient.Credentials = new System.Net.NetworkCredential("theticker5@gmail.com", "90809988Qwe");
+                            MailClient.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Glogin"], ConfigurationManager.AppSettings["Gpassowrd"]);
                             MailClient.Send(mail);
                         }
                     }

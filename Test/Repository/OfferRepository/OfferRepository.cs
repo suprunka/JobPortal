@@ -80,6 +80,8 @@ namespace Repository
             return base.GetAll();
         }
 
+        
+
         public override IQueryable<ServiceOffer> List(Expression<Func<ServiceOffer, bool>> predicate)
         {
             return base.List(predicate);

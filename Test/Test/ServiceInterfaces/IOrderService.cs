@@ -26,22 +26,26 @@ namespace ServiceLibrary
         bool CleanCart(string userId);
 
         [OperationContract]
-        bool AddToCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
+        bool AddToCart(string userId, int serviceId,
+            DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
 
         [OperationContract]
-        bool DeleteFromCart(string userId, int serviceId, DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
+        bool DeleteFromCart(string userId, int serviceId,
+            DateTime date, TimeSpan hourfrom, TimeSpan hourTo);
 
         [OperationContract]
         IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date);
 
         [OperationContract]
-        IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
+        IEnumerable<TimeSpan> GetHoursTo(int serviceId,
+            DateTime date, TimeSpan from);
 
         [OperationContract]
         ShoppingCard GetShoppingCartForPaypal(string id);
 
         [OperationContract]
-        IEnumerable<JobOffer> GetJobCallendar(DateTime date, string employeeId);
+        IEnumerable<JobOffer> GetJobCallendar(DateTime date,
+            string employeeId);
 
         [OperationContract]
         Order FindOrder(string id);

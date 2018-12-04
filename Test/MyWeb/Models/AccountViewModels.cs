@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MyWeb.OfferReference;
-using MyWeb.Models;
+using PagedList;
 
 namespace WebJobPortal.Models
 {
@@ -85,9 +85,9 @@ namespace WebJobPortal.Models
 
     public class UserProfileViewModel
     {
-        public MyWeb.Models.ManageOffers[] Services { get; set; }
+        public IPagedList<ManageOffers> Services { get; set; }
 
-        public MyWeb.Models.BoughtOffers[] Bought { get; set; }
+        public BoughtOffers[] Bought { get; set; }
         public WebJobPortal.Models.JobOffer[] Jobs { get; set; }
         public DateTime Date { get; set; }
 
@@ -129,6 +129,7 @@ namespace WebJobPortal.Models
         [Display(Name = "Gender:")]
         public Gender Gender { get; set; }
     }
+
     public class CustomerViewModel
     {
         public String PhoneNumber { get; set; }
