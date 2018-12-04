@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ManageOffers.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">
-                @Html.DropDownListFor(model => model.ManageOffers.Category, new SelectList(Enum.GetValues(typeof(Category)), selectedValue: Category.Home), new { @id = "cat", @class = "form-control" })
+                @Html.DropDownListFor(model => model.ManageOffers.Category, new SelectList(Enum.GetValues(typeof(Category))), new { @id = "cat", @class = "form-control" })
             </div>
         </div>
 
@@ -60,3 +60,52 @@
     </div>
 
 }
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+    $('#cat').mouseenter(function () {
+        var selectedCat = $("#cat").val();
+        var subCatSelect = $('#subcat');
+        subCatSelect.empty();
+        if (selectedCat != null && selectedCat != '') {
+            $.getJSON('@Url.Action("GetSubCategories")', { iso3: selectedCat }, function (sub) {
+                        if (sub != null && !jQuery.isEmptyObject(sub))
+                        {
+                            subCatSelect.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                            $.each(sub, function (index, subcats) {
+                                subCatSelect.append($('<option/>', {
+                                    value: subcats.Value,
+                                    text: subcats.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+     $('#cat').change(function () {
+        var selectedCat = $("#cat").val();
+        var subCatSelect = $('#subcat');
+        subCatSelect.empty();
+        if (selectedCat != null && selectedCat != '') {
+            $.getJSON('@Url.Action("GetSubCategories")', { iso3: selectedCat }, function (sub) {
+                        if (sub != null && !jQuery.isEmptyObject(sub))
+                        {
+                            subCatSelect.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                            $.each(sub, function (index, subcats) {
+                                subCatSelect.append($('<option/>', {
+                                    value: subcats.Value,
+                                    text: subcats.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+    
+</script>

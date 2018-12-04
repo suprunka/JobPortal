@@ -264,7 +264,7 @@ namespace MyWeb.Controllers
                     }
                     else
                     {
-                        TempData["msg"] = "<script>alert('You haven't bought that service.');</script>";
+                        TempData["msg"] = "<script>alert('You haven\'t bought that service.');</script>";
                     }
                 }
                 catch
