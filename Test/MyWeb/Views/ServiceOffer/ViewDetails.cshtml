@@ -154,6 +154,7 @@
    {
        BackendUrl = Url.Action("Backend", "Calendar",new {serviceId = Model.Id }),
        ViewType = ViewType.Week,
+       HeaderDateFormat = "dddd",
        CellDuration = 60,
        Height = 600,
        CellHeight = 30,
@@ -167,7 +168,6 @@
        TimeRangeSelectedJavaScript = "create(start, end)",
        EventClickHandling = EventClickHandlingType.JavaScript,
        EventDeleteHandling = EventDeleteHandlingType.CallBack,
-       HeaderDateFormat = "dddd",
 
 
    })
@@ -270,7 +270,7 @@ else
                                 text: ""
                             }));
                             $.each(sub, function (index, subcats) {
-                                console.log(subcats);
+                                console.log(subcats.value);
                                 hourto.append($('<option/>', {
                                     value: subcats.Value,
                                     text: subcats.Text

@@ -157,7 +157,7 @@ namespace Repository
 
             foreach (var item in allServicesForThatDayForThatEmployee)
             {
-                foreach (var time in item.WorkingDates)
+                foreach (var time in item.WorkingDates.Where(x=>x.NameOfDay==days.NameOfDay))
                 {
                     TimeRange itemTime= new TimeRange(time.HourFrom, time.HourTo);
                     if (itemTime.Clashes(timeRange))
