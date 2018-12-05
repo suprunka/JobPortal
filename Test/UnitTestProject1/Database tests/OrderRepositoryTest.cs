@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AddressTable = Repository.DbConnection.AddressTable;
 using Category = Repository.DbConnection.Category;
@@ -949,42 +948,5 @@ namespace UnitTestProject1
                 secondContext.SubmitChanges();
             }
         }
-
-
-
-
-
-
-        /*[TestMethod]
-        public void CreateOrderTest()
-        {
-            var context = new DbTestDataContext();
-            using (var unitOfWork = new UnitOfWork(context))
-            {
-                try
-                {
-                    var user = unitOfWork.Users.Create(GetUser());
-                    var service = unitOfWork.Offers.Create(GetServiceOffer());
-                    var 
-                    var y = unitOfWork.Orders.CreateOrder(user, new List<KeyValuePair<ServiceOffer, BookedDates>>() {
-                                    new KeyValuePair<ServiceOffer, Repository.DbConnection.BookedDate>(service, new JobPortal.Model.BookedDates{ Day= DateTime.Now, HoursFrom = new TimeSpan(10, 30, 0), HoursTo = new TimeSpan(12, 00, 0) }) });
-
-                    //Assert.IsNotNull(result);
-                }
-                catch
-                {
-                    Assert.Fail();
-                }
-                finally
-                {
-                    context.ServiceOffers.DeleteAllOnSubmit(context.ServiceOffers);
-                    context.SubmitChanges();
-                    context.Users.DeleteAllOnSubmit(context.Users);
-                    context.AspNetUsers.DeleteAllOnSubmit(context.AspNetUsers);
-                    context.AddressTables.DeleteAllOnSubmit(context.AddressTables);
-                    context.SubmitChanges();
-                }
-            }
-        }*/
     }
 }
