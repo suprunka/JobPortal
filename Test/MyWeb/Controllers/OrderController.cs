@@ -28,7 +28,7 @@ namespace MyWeb.Controllers
         public OrderController()
         {
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
-            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint");
+            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
         }
 
@@ -187,7 +187,7 @@ namespace MyWeb.Controllers
                         mail.From = new MailAddress(ConfigurationManager.AppSettings["Glogin"], "JobPortal");
                         mail.To.Add(new MailAddress(emailAddress, "Receiver"));
                         mail.Subject = "JobPortal";
-                        mail.Body = "Hey, someone bought your offer service, log in to our website and check" +
+                        mail.Body = "Hey, someone bought your offer service, log in to our website and check " +
                             "upcoming events or call the person the phone number is: " + user.PhoneNumber + "his full name is: " + 
                             user.FirstName + " " + user.LastName;
                         mail.Priority = MailPriority.Normal;
