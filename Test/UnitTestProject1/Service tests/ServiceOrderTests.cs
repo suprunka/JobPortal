@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.ServiceModel;
 using JobPortal.Model;
@@ -345,13 +346,148 @@ namespace UnitTestProject1.Service_tests
                 Assert.Fail();
             }
         }
+        
         //CleanCart
+        [TestMethod]
+        public void CleanCart_Returns_True_If_Cart_Was_Empited()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Orders.CleanCart(It.IsAny<string>())).Returns(true);
+                OrderService service = new OrderService(databaseMock.Object);
+                var result = service.CleanCart("123");
+                Assert.IsTrue(result);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void CleanCart_Returns_False_If_Cart_To_Be_Cleaned_Was_Not_Found()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Orders.CleanCart(It.IsAny<string>())).Returns(false);
+                OrderService service = new OrderService(databaseMock.Object);
+                var result = service.CleanCart("123");
+                Assert.IsFalse(result);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
 
         //GetJobCallendar
-
+        [TestMethod]
+        public void GetJobCallednar_Returns_List_Of_JobOffers_If_Database_Returns_Data()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Orders.GetJobCalendar(It.IsAny<DateTime>(), It.IsAny<string>())).Returns(new List<Salelines> {
+                    new Salelines
+                    {
+                        OrderTable = new OrderTable
+                        {
+                            Users_ID= "123",
+                        },
+                        BookedDate = new BookedDate
+                        {
+                            HourFrom = new TimeSpan(13,0,0),
+                            HourTo = new TimeSpan(17,0,0),
+                        },
+                        ServiceOffer_ID = 1,
+                        ServiceOffer = new ServiceOffer
+                        {
+                            Employee_ID = "123",
+                            SubCategory = new Repository.DbConnection.SubCategory
+                            {
+                                Name= "Cleaning",
+                                Category = new Repository.DbConnection.Category
+                                {
+                                    Name ="Home",
+                                }
+                            },
+                            Description = "Description",
+                            RatePerHour = 23,
+                            Title = "Title",
+                        }
+                    }}.AsQueryable());
+                OrderService service = new OrderService(databaseMock.Object);
+                var result = service.GetJobCallendar(new DateTime(2018, 12, 12), "123").GetEnumerator();
+                int number = 0;
+                while (result.MoveNext())
+                {
+                    number++;
+                }
+                Assert.AreEqual(1, number);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void GetJobCallendar_Returns_Empty_List_If_Database_Returns_Nothing()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Orders.GetJobCalendar(It.IsAny<DateTime>(), It.IsAny<string>())).Returns(new List<Salelines>().AsQueryable());
+                OrderService service = new OrderService(databaseMock.Object);
+                var result = service.GetJobCallendar(new DateTime(2018, 12, 12), "123").GetEnumerator();
+                int number = 0;
+                while (result.MoveNext())
+                {
+                    number++;
+                }
+                Assert.AreEqual(0, number);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        
         //FindOrder
-
-
+        [TestMethod]
+        public void FindOrder_Returns_Order_Object_If_One_Was_Found()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Orders.Get(It.IsAny<Expression<Func<OrderTable, bool>>>())).Returns(new OrderTable
+                {
+                    ID = 21,
+                });
+                OrderService service = new OrderService(databaseMock.Object);
+                var result = service.FindOrder("123");
+                Assert.AreEqual(21, result.ID);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void FindOrder_Returns_Null_If_Order_Object_Was_Not_Found()
+        {
+            try
+            {
+                var databaseMock = new Mock<IUnitOfWork>();
+                databaseMock.Setup(x => x.Orders.Get(It.IsAny<Expression<Func<OrderTable, bool>>>())).Returns((OrderTable)null);
+                OrderService service = new OrderService(databaseMock.Object);
+                var result = service.FindOrder("123");
+                Assert.IsNull(result);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
     }
 }
-
