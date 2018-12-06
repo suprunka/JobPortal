@@ -199,7 +199,7 @@ namespace AppJobPortal.New
                 txtUsername.Text = _user.UserName;
                 regBox.SelectedValue = _user.Region;
                 txtPaypalMail.Text = _user.PayPalMail;
-                lastUpdate.Text = ""+_user.LastUpdate;
+                lastUpdate.DataContext = _user.LastUpdate;
                 if (_user.Gender.ToString() == "Male")
                 {
                     Male.IsChecked = true;
@@ -225,7 +225,7 @@ namespace AppJobPortal.New
                 _user.Postcode = txtPostcode.Text;
                 _user.UserName = txtUsername.Text;
                 _user.PayPalMail = txtPaypalMail.Text;
-                _user.LastUpdate = new ASCIIEncoding().GetBytes(lastUpdate.Text);
+                _user.LastUpdate =(System.Data.Linq.Binary) lastUpdate.DataContext;
 
                 if ((bool)Male.IsChecked)
                 {

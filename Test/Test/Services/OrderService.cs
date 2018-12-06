@@ -201,8 +201,18 @@ namespace ServiceLibrary
         {
           return   _unitOfWork.Orders.GetAllSalelines().Select(x=> new Saleline { Id = x.ID, ServiceOfferId = x.ServiceOffer_ID });
         }
+        public IQueryable<Order> GetAllOrders()
 
-
+        {
+            IQueryable < Order > orders = _unitOfWork.Orders.GetAllOrders().Select(x=> new Order { ID = x.ID, TotalPrice = x.TotalPrice, OrderStatus = x.OrderStatus_ID.ToString(),
+                    User_ID = x.Users_ID, Salelines = x.Salelines.Select(s=> new Saleline {Date = s.BookedDate.BookedDate1, ServiceOfferId = s.ServiceOffer_ID, Id = s.ID })
+            });
+            return orders;
         }
+
+
+
+
     }
+}
 

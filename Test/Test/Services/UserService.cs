@@ -246,7 +246,8 @@ namespace ServiceLibrary
                     UserName = u.AspNetUsers.UserName,
                     Description = u.Description,
                     PayPalMail = u.PayPalMail,
-                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region),
+                    LastUpdate = u.LastUpdate
                 });
             }
             return resultToReturn.ToArray();

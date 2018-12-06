@@ -8,6 +8,7 @@ using AppJobPortal.Models;
 using System.Linq;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using JobPortal.Model;
 
 namespace AppJobPortal
 
@@ -23,34 +24,21 @@ namespace AppJobPortal
         {
 
             InitializeComponent();
-            //_offerproxy = new OfferServiceClient()
-            SeriesCollection = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title = "2015",
-                    Values = new ChartValues<double> { 10, 50, 39, 50 }
-                }
-            };
-
-            //adding series will update and animate the chart automatically
-            SeriesCollection.Add(new ColumnSeries
-            {
-                Title = "2016",
-                Values = new ChartValues<double> { 11, 56, 42,10 }
-            });
-
-            //also adding values updates and animates the chart automatically
-
-            Labels = new[] { "Home", "IT", "Tutoring", "Media" };
-            Formatter = value => value.ToString("N");
-
-            DataContext = this;
+            _offerproxy = new OfferServiceClient();
+           
+            DataContext = new AllServices();
         }
 
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> Formatter { get; set; }
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = new AllServices();
 
+        }
+
+        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = new EarnedMoney();
+
+        }
     }
 }

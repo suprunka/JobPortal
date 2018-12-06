@@ -435,7 +435,12 @@ namespace Repository
         {
             return _context.GetTable<Salelines>();
         }
+        public IQueryable<OrderTable> GetAllOrders()
+        {
+            return _context.GetTable<OrderTable>();
+        }
 
+      
 
     }
 

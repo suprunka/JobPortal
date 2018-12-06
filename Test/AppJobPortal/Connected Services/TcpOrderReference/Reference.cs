@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppJobPortal.OrderReference {
+namespace AppJobPortal.TcpOrderReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OrderReference.IOrderService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TcpOrderReference.IOrderService")]
     public interface IOrderService {
         
         [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
@@ -87,15 +87,27 @@ namespace AppJobPortal.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Order> FindOrderAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetAllSalelines", ReplyAction="http://tempuri.org/IOrderService/GetAllSalelinesResponse")]
+        JobPortal.Model.Saleline[] GetAllSalelines();
+        
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetAllSalelines", ReplyAction="http://tempuri.org/IOrderService/GetAllSalelinesResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.Saleline[]> GetAllSalelinesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetAllOrders", ReplyAction="http://tempuri.org/IOrderService/GetAllOrdersResponse")]
+        JobPortal.Model.Order[] GetAllOrders();
+        
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOrderService/GetAllOrders", ReplyAction="http://tempuri.org/IOrderService/GetAllOrdersResponse")]
+        System.Threading.Tasks.Task<JobPortal.Model.Order[]> GetAllOrdersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IOrderServiceChannel : AppJobPortal.OrderReference.IOrderService, System.ServiceModel.IClientChannel {
+    public interface IOrderServiceChannel : AppJobPortal.TcpOrderReference.IOrderService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class OrderServiceClient : System.ServiceModel.ClientBase<AppJobPortal.OrderReference.IOrderService>, AppJobPortal.OrderReference.IOrderService {
+    public partial class OrderServiceClient : System.ServiceModel.ClientBase<AppJobPortal.TcpOrderReference.IOrderService>, AppJobPortal.TcpOrderReference.IOrderService {
         
         public OrderServiceClient() {
         }
@@ -210,6 +222,22 @@ namespace AppJobPortal.OrderReference {
         
         public System.Threading.Tasks.Task<JobPortal.Model.Order> FindOrderAsync(string id) {
             return base.Channel.FindOrderAsync(id);
+        }
+        
+        public JobPortal.Model.Saleline[] GetAllSalelines() {
+            return base.Channel.GetAllSalelines();
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.Saleline[]> GetAllSalelinesAsync() {
+            return base.Channel.GetAllSalelinesAsync();
+        }
+        
+        public JobPortal.Model.Order[] GetAllOrders() {
+            return base.Channel.GetAllOrders();
+        }
+        
+        public System.Threading.Tasks.Task<JobPortal.Model.Order[]> GetAllOrdersAsync() {
+            return base.Channel.GetAllOrdersAsync();
         }
     }
 }
