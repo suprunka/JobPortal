@@ -6,7 +6,7 @@
       <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Region" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Association Name="AddressTable_Users" Member="Users" ThisKey="ID" OtherKey="City_ID" Type="Users" />
+      <Association Name="AddressTable_User" Member="Users" ThisKey="ID" OtherKey="City_ID" Type="Users" />
     </Type>
   </Table>
   <Table Name="dbo.WorkingDates" Member="WorkingDates">
@@ -70,9 +70,9 @@
       <Association Name="AspNetUsers_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
       <Association Name="AspNetUsers_OrderTable" Member="OrderTables" ThisKey="Id" OtherKey="Users_ID" Type="OrderTable" />
       <Association Name="AspNetUsers_ServiceOffer" Member="ServiceOffers" ThisKey="Id" OtherKey="Employee_ID" Type="ServiceOffer" />
-      <Association Name="AspNetUsers_Users" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
       <Association Name="AspNetUsers_ShoppingCart" Member="ShoppingCart" ThisKey="Id" OtherKey="User_ID" Type="ShoppingCart" />
       <Association Name="AspNetUsers_Review" Member="Reviews" ThisKey="Id" OtherKey="Customer_ID" Type="Review" />
+      <Association Name="AspNetUsers_User" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
     </Type>
   </Table>
   <Table Name="dbo.BookedDates" Member="BookedDates">
@@ -96,7 +96,7 @@
     <Type Name="Gender">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Gender" Member="Gender1" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Association Name="Gender_Users" Member="Users" ThisKey="ID" OtherKey="Gender_ID" Type="Users" />
+      <Association Name="Gender_User" Member="Users" ThisKey="ID" OtherKey="Gender_ID" Type="Users" />
     </Type>
   </Table>
   <Table Name="dbo.OrderStatus" Member="OrderStatus">
@@ -154,22 +154,6 @@
       <Association Name="Category_SubCategory" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="Users">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="LastName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Logging_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressLine" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PayPalMail" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Gender_Users" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AspNetUsers_Users" Member="AspNetUsers" ThisKey="Logging_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ShoppingCart" Member="ShoppingCart">
     <Type Name="ShoppingCart">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -191,6 +175,23 @@
       <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="AspNetUsers_Review" Member="AspNetUsers" ThisKey="Customer_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
       <Association Name="ServiceOffer_Review" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Logging_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PayPalMail" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdate" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Gender_User" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUsers_User" Member="AspNetUsers" ThisKey="Logging_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AddressTable_User" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
