@@ -208,6 +208,7 @@ namespace ServiceLibrary
                             Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                             Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                             Description = result.Description,
+                            LastUpdate = result.LastUpdate,
                         };
                     }
                     else
