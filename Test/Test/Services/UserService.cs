@@ -209,6 +209,7 @@ namespace ServiceLibrary
                             Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                             Description = result.Description,
                             LastUpdate = result.LastUpdate,
+
                         };
                     }
                     else
