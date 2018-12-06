@@ -79,6 +79,7 @@ namespace MyWeb.Mapping
                 PayPalMail = user.PayPalMail,
                 UserName = user.UserName,
                 Description = user.Description,
+                Lastupdate = user.LastUpdate,
             };
         }
 
@@ -98,6 +99,7 @@ namespace MyWeb.Mapping
                 PayPalMail = userProfileViewModel.PayPalMail,
                 UserName = userProfileViewModel.UserName,
                 Description = userProfileViewModel.Description,
+                LastUpdate = userProfileViewModel.Lastupdate,
             };
         }
 

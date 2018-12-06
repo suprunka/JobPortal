@@ -138,6 +138,8 @@ namespace ServiceLibrary
                         LastName = u.LastName,
                         AddressLine = u.AddressLine,
                         PayPalMail = u.PayPalMail,
+                        LastUpdate = u.LastUpdate
+
                     });
                     return true;
                 }
@@ -171,6 +173,7 @@ namespace ServiceLibrary
                     Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                     Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                     Description = result.Description,
+                    LastUpdate = result.LastUpdate,
                 };
             }
             catch

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MyWeb.OfferReference;
 using PagedList;
+using System.Data.Linq;
 
 namespace WebJobPortal.Models
 {
@@ -128,6 +129,7 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Gender:")]
         public Gender Gender { get; set; }
+        public Binary Lastupdate { get; set; }
     }
 
     public class CustomerViewModel
