@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System;
-using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Wpf;
 using AppJobPortal.TcpOfferReference;

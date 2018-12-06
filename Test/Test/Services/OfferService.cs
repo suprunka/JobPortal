@@ -266,7 +266,15 @@ namespace ServiceLibrary
 
         public int GetAvgOfServiceRates(int serviceId)
         {
-            return (int)Math.Ceiling(GetServiceReviews(serviceId).Select(x => x.Rate).Average());
+            try
+            {
+                return (int)Math.Ceiling(GetServiceReviews(serviceId).Select(x => x.Rate).Average());
+            }
+            catch
+            {
+                return 0;
+            }
+            
         }
     }
 }

@@ -22,7 +22,7 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Descritpion:")]
         [Required(ErrorMessage = "Descritpion required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{10,}$", ErrorMessage = "Description has to be at least 10 characters long.")]
+     
         public string Description { get; set; }
         public string Author { get; set; }
         public Category Category { get; set; }
@@ -42,7 +42,7 @@ namespace WebJobPortal.Models
         public string Title { get; set; }
         [Display(Name = "Descritpion:")]
         [Required(ErrorMessage = "Descritpion required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{10,}$", ErrorMessage = "Description has to be at least 10 characters long.")]
+     
         public string Description { get; set; }
         public string Author { get; set; }
         public Category Category { get; set; }
@@ -95,7 +95,7 @@ namespace WebJobPortal.Models
         public string Title { get; set; }
         [Display(Name = "Descritpion:")]
         [Required(ErrorMessage = "Descritpion required")]
-        [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{10,}$", ErrorMessage = "Description has to be at least 10 characters long.")]
+        
         public string Description { get; set; }
         public string Author { get; set; }
         public IEnumerable<TimeSpan> hoursfrom { get; set; }

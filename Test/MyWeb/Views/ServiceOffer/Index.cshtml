@@ -2,6 +2,7 @@
 @using PagedList
 @using PagedList.Mvc
 @using WebJobPortal.Models
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Services";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,6 +14,16 @@
             <center>
                 @Html.TextBox("SearchingString")
                 <input class="btn btn-light" type="submit" value="Search" />
+                @if (User.Identity.GetUserId() != null)
+                {
+                    <div class="form-check">
+                        <p>Show in your region  </p>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" @if (Request.Url.ToString().Contains("showInRegion=true")) { <text> checked</text>} />
+
+                    </div>
+
+                }
+
             </center>
         </form>
     </div>
@@ -27,3 +38,20 @@
         @Html.Partial("Offers", Model)
     </table>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+        $('#exampleCheck1').click(function () {
+
+            if ($("#exampleCheck1").is(':checked')) {
+                var path = '@Url.Content("~/ServiceOffer/"+ @HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() +"")' + "?showInRegion=true";
+                window.location.href = path;
+            }
+            else {
+                var path = '@Url.Content("~/ServiceOffer/"+ @HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() +"")' + "?showInRegion=false";
+                window.location.href = path;
+            }
+    });
+</script>
+
+

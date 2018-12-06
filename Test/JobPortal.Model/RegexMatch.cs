@@ -40,8 +40,7 @@ namespace ServiceLibrary.Models
 
         public static bool DoesOfferMatch(Offer offer)
         {
-            if (Regex.IsMatch(offer.Description, "^[a-zA-Z0-9ÆæØøÅå.,: ]{10,}$") &&
-                Regex.IsMatch(offer.Title, "^[a-zA-Z0-9ÆæØøÅå.,: ]{5,}$"))
+            if (Regex.IsMatch(offer.Title, "^[a-zA-Z0-9ÆæØøÅå.,: ]{5,}$"))
             {
                 return true;
             }
