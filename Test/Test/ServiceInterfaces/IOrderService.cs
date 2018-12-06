@@ -2,6 +2,7 @@
 using Repository.DbConnection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 
 namespace ServiceLibrary
@@ -49,6 +50,9 @@ namespace ServiceLibrary
 
         [OperationContract]
         Order FindOrder(string id);
+
+        [OperationContract]
+        IQueryable<Saleline> GetAllSalelines();
 
     }
 }

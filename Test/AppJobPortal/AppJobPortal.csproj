@@ -171,6 +171,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\OrderReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\TcpOfferReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,6 +244,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\OrderReference\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\service.wsdl" />
+    <None Include="Connected Services\OrderReference\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\TcpOfferReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -272,7 +293,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\AppJobPortal.Model.Offer.datasource" />
+    <None Include="Properties\DataSources\JobPortal.Model.JobOffer.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
+    <None Include="Properties\DataSources\JobPortal.Model.Order.datasource" />
+    <None Include="Properties\DataSources\JobPortal.Model.ShoppingCard.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.User.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.WorkingTime.datasource" />
     <None Include="Properties\Settings.settings">
@@ -293,6 +317,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\OrderReference\" />
     <WCFMetadataStorage Include="Connected Services\TcpOfferReference\" />
     <WCFMetadataStorage Include="Connected Services\TcpUserReference\" />
   </ItemGroup>
@@ -316,6 +341,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\TcpUserReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\OrderReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\OrderReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\OrderReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

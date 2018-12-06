@@ -19,5 +19,7 @@ namespace Repository
         IList<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from);
         bool CleanCart(string userID);
         IQueryable<Salelines> GetJobCalendar(DateTime date, string employeeId);
+        IQueryable<Salelines> GetAllSalelines();
+
     }
 }

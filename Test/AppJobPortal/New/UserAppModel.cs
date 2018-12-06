@@ -184,4 +184,11 @@ namespace AppJobPortal.Models
         }
         #endregion*/
     }
+    public class UserListModel
+    {
+        public int Id { get; set; }
+        public String FirstName { get; set; }
+        public String LastName  { get; set; }
+            
+    }
 }

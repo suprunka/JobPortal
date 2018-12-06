@@ -23,5 +23,10 @@ namespace AppJobPortal.New
         {
             DataContext = new AppJobPortal.New.Services();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new Statistics();
+        }
     }
 }

@@ -9,14 +9,37 @@
              d:DesignHeight="300" d:DesignWidth="500" 
              d:DataContext="{d:DesignInstance local:Statistics}">
     <Grid>
-        <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}">
-            <lvc:PieChart.Series>
-                <lvc:PieSeries Title="Women" Values="1" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}"/>
-                <lvc:PieSeries Title="Man" Values="1" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-               
-            </lvc:PieChart.Series>
-        </lvc:PieChart>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+  
+        </Grid.RowDefinitions>
+        <DockPanel Background="YellowGreen" Grid.Row="0" Grid.Column="0" >
+            <StackPanel>
+                <Button Content="Statistics" />
+            </StackPanel>
+        </DockPanel>
+         
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" >
+
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Categories" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sold in past 2 months" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+            </DockPanel>
     </Grid>
 </UserControl>
+

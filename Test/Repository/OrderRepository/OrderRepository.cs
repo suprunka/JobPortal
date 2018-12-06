@@ -83,8 +83,10 @@ namespace Repository
             OrderTable result = null;
             using (SqlConnection objConn = new SqlConnection(connection))
             {
-                var txOptions = new System.Transactions.TransactionOptions();
-                txOptions.IsolationLevel = System.Transactions.IsolationLevel.Serializable;
+                var txOptions = new TransactionOptions
+                {
+                    IsolationLevel = IsolationLevel.Serializable
+                };
 
                 objConn.Open();
                 using (var myTran = new TransactionScope(TransactionScopeOption.Required,txOptions))
@@ -92,7 +94,8 @@ namespace Repository
                     ShoppingCart cart = null;
                     try
                     {
-                        ShoppingCart[] choosenServices = _context.GetTable<ShoppingCart>().Where(x => x.User_ID == Logging_ID).Select(x => x).ToArray();
+                        ShoppingCart[] choosenServices = _context.GetTable<ShoppingCart>().
+                            Where(x => x.User_ID == Logging_ID).Select(x => x).ToArray();
 
                         OrderTable newOrder = new OrderTable
                         {
@@ -147,14 +150,12 @@ namespace Repository
             
         }
 
-        public OrderTable AddToExistingOrder(OrderTable o, ShoppingCart cart)//DateTime date, TimeSpan from, TimeSpan to)
+        public OrderTable AddToExistingOrder(OrderTable o, ShoppingCart cart)
         {
             OrderTable result = null;
-            //using (SqlConnection objConn = new SqlConnection(connection))
-            //{
-
-            //sql = objConn.BeginTransaction();
-            if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == cart.Service_ID).Any(t => t.NameOfDay == cart.Date.DayOfWeek.ToString()) && o.OrderStatus_ID != 2)
+           
+            if (_context.GetTable<WorkingDates>().Where(t => t.ServiceOffer_ID == cart.Service_ID)
+                    .Any(t => t.NameOfDay == cart.Date.DayOfWeek.ToString()) && o.OrderStatus_ID != 2)
             {
                 try
                 {
@@ -162,7 +163,8 @@ namespace Repository
                     var numberOfHours = span.Hours;
                     IList<BookedDate> list = new List<BookedDate>();
                     //bool isAvailable = HoursAvailable(cart.Service_ID, cart.Date, cart.HourFrom, cart.HourTo);
-                    var timeIsBooked = _context.GetTable<DbConnection.Salelines>().Where(x => x.ServiceOffer_ID == cart.Service_ID).Select(x => x).Where(x => x.BookedDate.BookedDate1 == cart.Date).Select(x => x.BookedDate);
+                    var timeIsBooked = _context.GetTable<DbConnection.Salelines>().Where(x => x.ServiceOffer_ID == cart.Service_ID)
+                        .Select(x => x).Where(x => x.BookedDate.BookedDate1 == cart.Date).Select(x => x.BookedDate);
                     foreach(var t in timeIsBooked)
                     {
                         if(new TimeRange(t.HourFrom, t.HourTo).Clashes(new TimeRange(cart.HourFrom, cart.HourTo)))
@@ -170,7 +172,8 @@ namespace Repository
                             list.Add(t);
                         }
                     }
-                    //select salelines for service and then select saleline  date(I mean day i.e '22.02'), selects the dates and checks if the hours aren't already booked
+                    //select salelines for service and then select saleline  date(I mean day i.e '22.02'),
+                    //selects the dates and checks if the hours aren't already booked
                     if (list.Count() > 0)
                     {
                         throw new BookedTimeException(cart.Service_ID, cart.User_ID, cart.HourFrom, cart.HourTo, cart.Date, cart.ServiceOffer.Title);
@@ -427,6 +430,10 @@ namespace Repository
         public IQueryable<Saleline> GetJobCalendar(DateTime date, string employeeId)
         {
          return _context.GetTable<Saleline>().Where(x => x.BookedDate.BookedDate1.Equals(date) && x.ServiceOffer.Employee_ID == employeeId);
+        }
+       public  IQueryable<Salelines> GetAllSalelines()
+        {
+            return _context.GetTable<Salelines>();
         }
 
 

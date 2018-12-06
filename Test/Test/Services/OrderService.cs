@@ -8,7 +8,7 @@ using System.ServiceModel;
 
 namespace ServiceLibrary
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Single, IncludeExceptionDetailInFaults =true)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Single, IncludeExceptionDetailInFaults = true)]
     public class OrderService : IOrderService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -118,7 +118,7 @@ namespace ServiceLibrary
 
         public bool CancelOrder(Order o)
         {
-            if(_unitOfWork.Orders.CancelOrder(o))
+            if (_unitOfWork.Orders.CancelOrder(o))
             {
                 return true;
             }
@@ -130,7 +130,7 @@ namespace ServiceLibrary
 
         public bool PayForOrder(Order o)
         {
-            if (_unitOfWork.Orders.PayForOrder(new OrderTable { ID = o.ID}) != null)
+            if (_unitOfWork.Orders.PayForOrder(new OrderTable { ID = o.ID }) != null)
             {
                 return true;
             }
@@ -141,7 +141,7 @@ namespace ServiceLibrary
         }
         public IEnumerable<TimeSpan> GetHoursFrom(int serviceId, DateTime date)
         {
-           return _unitOfWork.Orders.GetHoursFrom(serviceId, date);
+            return _unitOfWork.Orders.GetHoursFrom(serviceId, date);
         }
         public IEnumerable<TimeSpan> GetHoursTo(int serviceId, DateTime date, TimeSpan from)
         {
@@ -174,11 +174,11 @@ namespace ServiceLibrary
                     Title = saleline.ServiceOffer.Title,
                     WorkingTime = workingDetailsTime,
                 };
-                var joboffer= new JobOffer() { Customer_ID = customerId, Offer = o, TotalPrice = o.RatePerHour * workingtime };
+                var joboffer = new JobOffer() { Customer_ID = customerId, Offer = o, TotalPrice = o.RatePerHour * workingtime };
                 joboffers.Add(joboffer);
             }
 
-            return joboffers.AsEnumerable<JobOffer>().OrderBy(x=>x.Offer.WorkingTime.HoursFrom);
+            return joboffers.AsEnumerable<JobOffer>().OrderBy(x => x.Offer.WorkingTime.HoursFrom);
 
         }
 
@@ -197,5 +197,12 @@ namespace ServiceLibrary
             }
 
         }
+        public IQueryable<Saleline> GetAllSalelines()
+        {
+          return   _unitOfWork.Orders.GetAllSalelines().Select(x=> new Saleline { Id = x.ID, ServiceOfferId = x.ServiceOffer_ID });
+        }
+
+
+        }
     }
-}
+

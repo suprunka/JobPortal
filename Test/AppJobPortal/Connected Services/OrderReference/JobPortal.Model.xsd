@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salelines" nillable="true" type="tns:ArrayOfSaleline" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Order" nillable="true" type="tns:Order" />
+  <xs:complexType name="ArrayOfSaleline">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Saleline" nillable="true" type="tns:Saleline" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSaleline" nillable="true" type="tns:ArrayOfSaleline" />
+  <xs:complexType name="Saleline">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceOfferId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Saleline" nillable="true" type="tns:Saleline" />
+  <xs:complexType name="BookedTimeException">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookedTimeException" nillable="true" type="tns:BookedTimeException" />
+  <xs:complexType name="ShoppingCard">
+    <xs:sequence>
+      <xs:element name="author" nillable="true" type="tns:User" />
+      <xs:element name="listOfItems" nillable="true" type="tns:ArrayOfOffer" />
+      <xs:element name="payPallistOfItems" nillable="true" type="tns:ArrayOfPayPalOffer" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="random" nillable="true" type="q2:Random" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShoppingCard" nillable="true" type="tns:ShoppingCard" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressLine" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" type="tns:Gender" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PayPalMail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Region" type="tns:Region" />
+      <xs:element minOccurs="0" name="ShoppingCard" nillable="true" type="tns:ShoppingCard" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:simpleType name="Gender">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Gender" nillable="true" type="tns:Gender" />
+  <xs:simpleType name="Region">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Hovedstaden" />
+      <xs:enumeration value="Midtjylland" />
+      <xs:enumeration value="Nordjylland" />
+      <xs:enumeration value="Sjalland" />
+      <xs:enumeration value="Syddanmark" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Region" nillable="true" type="tns:Region" />
+  <xs:complexType name="ArrayOfOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Offer" nillable="true" type="tns:Offer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOffer" nillable="true" type="tns:ArrayOfOffer" />
+  <xs:complexType name="Offer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" type="tns:Category" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkingTime" nillable="true" type="tns:WorkingDetails" />
+      <xs:element minOccurs="0" name="WorkingTimes" nillable="true" type="tns:ArrayOfWorkingTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Offer" nillable="true" type="tns:Offer" />
+  <xs:simpleType name="Category">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home" />
+      <xs:enumeration value="Tutoring" />
+      <xs:enumeration value="IT" />
+      <xs:enumeration value="Repairs" />
+      <xs:enumeration value="Architecture" />
+      <xs:enumeration value="Media" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Category" nillable="true" type="tns:Category" />
+  <xs:simpleType name="SubCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Cleaning" />
+      <xs:enumeration value="Gardening" />
+      <xs:enumeration value="Babysitting" />
+      <xs:enumeration value="Languages" />
+      <xs:enumeration value="Science" />
+      <xs:enumeration value="WebPrgramming" />
+      <xs:enumeration value="AppPrgramming" />
+      <xs:enumeration value="Design" />
+      <xs:enumeration value="Cars" />
+      <xs:enumeration value="Bikes" />
+      <xs:enumeration value="HouseholdGoods" />
+      <xs:enumeration value="Electronics" />
+      <xs:enumeration value="Buildings" />
+      <xs:enumeration value="InteriorDesign" />
+      <xs:enumeration value="Landscape" />
+      <xs:enumeration value="Video" />
+      <xs:enumeration value="Audio" />
+      <xs:enumeration value="Marketing" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SubCategory" nillable="true" type="tns:SubCategory" />
+  <xs:complexType name="WorkingDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q3:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingDetails" nillable="true" type="tns:WorkingDetails" />
+  <xs:complexType name="ArrayOfWorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
+  <xs:complexType name="WorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="End" type="ser:duration" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="OfferId" type="xs:int" />
+      <xs:element minOccurs="0" name="Start" type="ser:duration" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q4:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+  <xs:complexType name="ArrayOfPayPalOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PayPalOffer" nillable="true" type="tns:PayPalOffer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPayPalOffer" nillable="true" type="tns:ArrayOfPayPalOffer" />
+  <xs:complexType name="PayPalOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RatePerHour" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PayPalOffer" nillable="true" type="tns:PayPalOffer" />
+  <xs:complexType name="ArrayOfJobOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JobOffer" nillable="true" type="tns:JobOffer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJobOffer" nillable="true" type="tns:ArrayOfJobOffer" />
+  <xs:complexType name="JobOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Customer_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Offer" nillable="true" type="tns:Offer" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JobOffer" nillable="true" type="tns:JobOffer" />
+</xs:schema>

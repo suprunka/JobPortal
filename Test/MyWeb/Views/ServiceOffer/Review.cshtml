@@ -20,24 +20,33 @@
     @Model.Customer.Username
 </div>
 <div class="col-lg-12">
+    
     <div class="starsR">
+        <form>
+            @if (@Model.Rate == 5)
+            {<input class="star star-5" checked value="5" id="5" type="radio" name="star" />}
             <input class="star star-5" value="5" id="5" type="radio" name="star" />
             <label class="star star-5" for="star-5"></label>
+            @if (@Model.Rate == 4)
+            {<input class="star star-4" checked value="4" id="4" type="radio" name="star" />}
             <input class="star star-4" value="4" id="4" type="radio" name="star" />
             <label class="star star-4" for="star-4"></label>
+            @if (@Model.Rate == 3)
+            {<input class="star star-3" checked value="3" id="3" type="radio" name="star" />}
             <input class="star star-3" value="3" id="3" type="radio" name="star" />
             <label class="star star-3" for="star-3"></label>
+            @if (@Model.Rate == 2)
+            {<input class="star star-2" checked value="2" id="2" type="radio" name="star" />}
             <input class="star star-2" value="2" id="2" type="radio" name="star" />
             <label class="star star-2" for="star-2"></label>
+            @if (@Model.Rate == 1)
+            {<input class="star star-1" checked value="1" id="1" type="radio" name="star" />}
             <input class="star star-1" value="1" id="1" type="radio" name="star" />
             <label class="star star-1" for="star-1"></label>
-    </div>
+            
+        </form></div>
 </div>
 
 <div class="col-lg-12">
-    @Html.TextAreaFor(model => model.Comment, new { disabled=false,style = "max-width: 900px; width:100%;" });
+    @Html.TextAreaFor(model => model.Comment, new { disabled = false, style = "max-width: 900px; width:100%;" });
 </div>
-<script>
-    document.getElementById(@Model.Rate).checked = true;
-
-</script>
