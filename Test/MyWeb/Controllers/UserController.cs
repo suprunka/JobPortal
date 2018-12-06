@@ -139,6 +139,12 @@ namespace MyWeb.Controllers
                 {
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
+                else
+                {
+                    TempData["msg"] = "<script>alert('User account information has been changed before your changes, check new data before you update ');</script>";
+
+                    return RedirectToAction("UserProfile", "Edit", new { id = User.Identity.GetUserId() });
+                }
             }
             return View(u);
         }

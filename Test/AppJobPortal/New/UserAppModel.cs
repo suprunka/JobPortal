@@ -1,7 +1,7 @@
 ﻿using AppJobPortal.New;
 using JobPortal.Model;
 using System;
-
+using System.Data.Linq;
 
 namespace AppJobPortal.Models
 {
@@ -12,6 +12,7 @@ namespace AppJobPortal.Models
         int Id;
         Region region;
         Gender gender;
+        Binary lastUpdate;
 
         
 
@@ -19,7 +20,7 @@ namespace AppJobPortal.Models
         {
         }
 
-        public UserAppModel(int iD, string paypalmail, string phoneNumber, string firstName, string lastName, string email,string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
+        public UserAppModel(int iD, string paypalmail, string phoneNumber, string firstName, string lastName, string email,string username, string addressLine, string cityName, string postcode, Region region, Gender gender, Binary lastUpdate)
         {
             ID = iD;
             this.phoneNumber = phoneNumber;
@@ -36,6 +37,7 @@ namespace AppJobPortal.Models
             this.postCode = postcode;
             this.region = region;
             this.gender = gender;
+            this.lastUpdate = lastUpdate;
         }
 
         public virtual int ID
@@ -153,36 +155,45 @@ namespace AppJobPortal.Models
                 gender = value;
             }
         }
-       /* #region implementing IDataErrorInfo
-        public string Error
+        public virtual Binary LastUpdate
         {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string this[string columnName]
-        {
-            get
+            get { return lastUpdate; }
+            set
             {
-                string result = null;
-                if (columnName == "FirstName")
-                {
-                    if (string.IsNullOrEmpty(FirstName))
-                        result = "Please enter a First Name";
-                }
-                if (columnName == "LastName")
-                {
-                    if (string.IsNullOrEmpty(LastName))
-                        result = "Please enter a Last Name";
-                }
-                if (columnName == "Email")
-                {
-                    if (!Email.Contains("@"))
-                        result = "Please enter a valid email";
-                }
-                return result;
+                OnPropertyChanged("LastUpdate");
+                lastUpdate = value;
             }
         }
-        #endregion*/
+        /* #region implementing IDataErrorInfo
+         public string Error
+         {
+             get { throw new NotImplementedException(); }
+         }
+
+         public string this[string columnName]
+         {
+             get
+             {
+                 string result = null;
+                 if (columnName == "FirstName")
+                 {
+                     if (string.IsNullOrEmpty(FirstName))
+                         result = "Please enter a First Name";
+                 }
+                 if (columnName == "LastName")
+                 {
+                     if (string.IsNullOrEmpty(LastName))
+                         result = "Please enter a Last Name";
+                 }
+                 if (columnName == "Email")
+                 {
+                     if (!Email.Contains("@"))
+                         result = "Please enter a valid email";
+                 }
+                 return result;
+             }
+         }
+         #endregion*/
     }
     public class UserListModel
     {
