@@ -28,7 +28,7 @@ namespace MyWeb.Controllers
         public OrderController()
         {
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
-            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint");
+            _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
         }
 

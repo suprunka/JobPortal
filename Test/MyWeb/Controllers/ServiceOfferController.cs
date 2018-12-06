@@ -46,11 +46,22 @@ namespace MyWeb.Controllers
             _mapper = config.CreateMapper();
             _offerProxy = proxy;
         }
-        public async Task<ActionResult> Index(string searchingString, int? page)
+        public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion)
         {
+            User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
+            if(User.Identity.GetUserId() != null)
+            {
+                profile = _userProxy.FindUser(User.Identity.GetUserId());
+            }
             var all = await _offerProxy.GetAllOffersAsync();
-            var list = all.OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
+            
+            var list = User.Identity.GetUserId() != null && show  ?
+                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12) :
+                all.OrderBy(x => x.RatePerHour).ThenByDescending(x=> _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
+            
+            //var list = all.OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {
                 return View(list);
@@ -59,10 +70,17 @@ namespace MyWeb.Controllers
             return View("Index", condition);
         }
 
-        public async Task<ActionResult> Home(string searchingString, int? page)
+        public async Task<ActionResult> Home(string searchingString, int? page, bool? showInRegion)
         {
+            User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
+            if (User.Identity.GetUserId() != null)
+            {
+                profile = _userProxy.FindUser(User.Identity.GetUserId());
+            }
             var all = await _offerProxy.GetAllOffersAsync();
+
             var list = all.Where(x => x.Category.ToString() == "Home").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
             if (searchingString == null)
             {

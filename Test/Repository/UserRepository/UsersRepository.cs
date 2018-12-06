@@ -241,7 +241,7 @@ namespace Repository
                     {
                         try
                         {
-                            
+
                             int oldCity_ID = found.City_ID;
                             var oldPostCode = found.AddressTable.Postcode;
                             found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
@@ -268,40 +268,45 @@ namespace Repository
                                     City = obj.AddressTable.City,
                                     Region = obj.AddressTable.Region,
                                 });
-                                string newPhoneNumber = obj.AspNetUsers.PhoneNumber;
+
                                 _context.SubmitChanges();
+
                                 found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == obj.AddressTable.Postcode);
-                                _context.SubmitChanges();
-                                int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
-                                if (numberOfAddressRecords < 2)
-                                {
-                                    var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
-                                    _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
-                                }
                                 _context.SubmitChanges();
                             }
                             else
                             {
-                                found.AddressTable.Postcode = obj.AddressTable.Postcode;
-                                found.AddressTable.City = obj.AddressTable.City;
-                                found.AddressTable.Region = obj.AddressTable.Region;
+                                found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == addressExists.Postcode);
+                            }
+
+                            int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
+                            if (numberOfAddressRecords < 2)
+                            {
+                                var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
+                                _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
                             }
                             _context.SubmitChanges();
+
+
+
+                            _context.SubmitChanges();
+
                             Users foundAtTheEnd = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                             if (found.AddressLine == foundAtTheEnd.AddressLine && found.AddressTable.City == foundAtTheEnd.AddressTable.City &&
-                                found.AddressTable.Postcode == foundAtTheEnd.AddressTable.Postcode && found.AddressTable.Region == foundAtTheEnd.AddressTable.Region&&
-                                found.AspNetUsers.Email == foundAtTheEnd.AspNetUsers.Email && found.AspNetUsers.PasswordHash == foundAtTheEnd.AspNetUsers.PasswordHash&&
+                                found.AddressTable.Postcode == foundAtTheEnd.AddressTable.Postcode && found.AddressTable.Region == foundAtTheEnd.AddressTable.Region &&
+                                found.AspNetUsers.Email == foundAtTheEnd.AspNetUsers.Email && found.AspNetUsers.PasswordHash == foundAtTheEnd.AspNetUsers.PasswordHash &&
                                 found.AspNetUsers.UserName == foundAtTheEnd.AspNetUsers.UserName && found.AspNetUsers.PhoneNumber == foundAtTheEnd.AspNetUsers.PhoneNumber &&
                                 found.Description == foundAtTheEnd.Description && found.FirstName == foundAtTheEnd.FirstName && found.Gender.Gender1 == foundAtTheEnd.Gender.Gender1 &&
                                 found.LastName == foundAtTheEnd.LastName && found.PayPalMail == foundAtTheEnd.PayPalMail)
                             {
                                 myTran.Complete();
                                 result = true;
-                            }else
+                            }
+                            else
                             {
                                 return false;
                             }
-                           
+
                         }
                         catch
                         {
