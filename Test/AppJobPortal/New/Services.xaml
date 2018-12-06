@@ -19,7 +19,7 @@
             
         </Grid.RowDefinitions>
       
-            <DataGrid Name="servicesTable" HorizontalAlignment="Stretch"   HorizontalContentAlignment="Stretch" Margin="10,0,10,10" CanUserSortColumns="True" CanUserDeleteRows="True" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Row="1">
+            <DataGrid Name="servicesTable"   Margin="10,0,10,10" CanUserSortColumns="True" CanUserDeleteRows="True" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Row="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Id}" Header="ServiceID" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Title}" Header="Title"></DataGridTextColumn>
