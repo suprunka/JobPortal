@@ -6,18 +6,8 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace AppJobPortal
 {
@@ -31,8 +21,8 @@ namespace AppJobPortal
         public EarnedMoney()
         {
             InitializeComponent();
-            _orderproxy = new OrderServiceClient();
-            _offerproxy = new OfferServiceClient();
+            _orderproxy = new OrderServiceClient("OrderServiceTcpEndpoint");
+            _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
             CultureInfo cul = CultureInfo.CurrentCulture;
 
 
@@ -43,10 +33,16 @@ namespace AppJobPortal
 
             var orderList = _orderproxy.GetAllOrders();
             var allSalelines = _orderproxy.GetAllSalelines();
-            IDictionary<int, decimal> weeksMoney =  new Dictionary<int, decimal>();
+            IDictionary<int, double?> weeksMoney =  new Dictionary<int, double?>();
+            weeksMoney.Add(weekNum - 4, 0);
+            weeksMoney.Add(weekNum - 3, 0);
+            weeksMoney.Add(weekNum - 2, 0);
+            weeksMoney.Add(weekNum - 1, 0);
+            weeksMoney.Add(weekNum , 0);
+
             foreach (Order item in orderList)
             {
-                if (item.OrderStatus != ""+2)
+                if (item.OrderStatus == ""+2)
                 {
                     foreach (var saleline in item.Salelines)
                     {
@@ -54,37 +50,30 @@ namespace AppJobPortal
                      saleline.Date,
                      CalendarWeekRule.FirstDay,
                      DayOfWeek.Monday);
-                        Order x = item;
-                        if (weekN >= weekNum - 4 && weekN <= weekNum)
+                        if (weekN >= (weekNum - 4 )&& weekN <= weekNum)
                         {
-                            weeksMoney.Add(weekN, item.TotalPrice);
+                                 weeksMoney[weekN] += (double) item.TotalPrice;
+                            
+                            break;
                         }
                     }
                 }
                     
             }
-
+            
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Title = "Series 1",
-                    Values = new ChartValues<double> { 4, 6, 5, 2 ,7 }
+                    Title = "Earned money",
+                    Values = new ChartValues<double> { weeksMoney[weekNum - 4] ?? 0, weeksMoney[weekNum-3] ?? 0, weeksMoney[weekNum-2] ?? 0, weeksMoney[weekNum - 1] ?? 0, weeksMoney[weekNum] ?? 0}
                 }
             };
-            CultureInfo cul = CultureInfo.CurrentCulture;
-
-
-            int weekNum = cul.Calendar.GetWeekOfYear(
-                    DateTime.Now,
-                    CalendarWeekRule.FirstDay,
-                    DayOfWeek.Monday);
+            
             Labels = new[] { "Week" + (weekNum - 4), "Week" + (weekNum - 3), "Week" + (weekNum - 2), "Week" +(weekNum-1),"Week" + weekNum  };
-            YFormatter = value => value.ToString("C");
+            YFormatter = value => value+"DKK";
 
-      
-
-            //modifying any series values will also animate and update the chart
+     
 
             DataContext = this;
         }

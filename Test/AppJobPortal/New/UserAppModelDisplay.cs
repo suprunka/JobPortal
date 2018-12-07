@@ -5,13 +5,13 @@ using System;
 
 namespace AppJobPortal.Models
 {
-    public class UserAppModelDisplay : NotifyBase//, IDataErrorInfo
+    public class UserAppModelDisplay 
     {
         string phoneNumber, firstName, lastName, email, userName, password,
              addressLine, cityName, postCode, paypalmail, description;
         int Id;
         Region region;
-        Gender gender;
+        UsersGender gender;
 
 
 
@@ -19,7 +19,7 @@ namespace AppJobPortal.Models
         {
         }
 
-        public UserAppModelDisplay(int iD, string paypalmail, string description, string phoneNumber, string firstName, string lastName, string email, string username, string addressLine, string cityName, string postcode, Region region, Gender gender)
+        public UserAppModelDisplay(int iD, string paypalmail, string description, string phoneNumber, string firstName, string lastName, string email, string username, string addressLine, string cityName, string postcode, Region region, UsersGender gender)
         {
             ID = iD;
             this.phoneNumber = phoneNumber;
@@ -45,7 +45,6 @@ namespace AppJobPortal.Models
             get { return phoneNumber; }
             set
             {
-                OnPropertyChanged("Phonenumber");
                 phoneNumber = value;
             }
         }
@@ -55,7 +54,6 @@ namespace AppJobPortal.Models
             get { return firstName; }
             set
             {
-                OnPropertyChanged("First name");
                 firstName = value;
             }
         }
@@ -65,7 +63,6 @@ namespace AppJobPortal.Models
             get { return lastName; }
             set
             {
-                OnPropertyChanged("Lastname");
                 lastName = value;
             }
         }
@@ -75,7 +72,6 @@ namespace AppJobPortal.Models
             get { return email; }
             set
             {
-                OnPropertyChanged("Email");
                 email = value;
             }
         }
@@ -85,7 +81,6 @@ namespace AppJobPortal.Models
             get { return userName; }
             set
             {
-                OnPropertyChanged("Username");
                 userName = value;
             }
         }
@@ -95,7 +90,6 @@ namespace AppJobPortal.Models
             get { return addressLine; }
             set
             {
-                OnPropertyChanged("Addressline");
                 addressLine = value;
             }
         }
@@ -105,7 +99,6 @@ namespace AppJobPortal.Models
             get { return cityName; }
             set
             {
-                OnPropertyChanged("City");
                 cityName = value;
             }
         }
@@ -115,7 +108,6 @@ namespace AppJobPortal.Models
             get { return paypalmail; }
             set
             {
-                OnPropertyChanged("PayPalMail");
                 paypalmail = value;
             }
         }
@@ -125,7 +117,6 @@ namespace AppJobPortal.Models
             get { return description; }
             set
             {
-                OnPropertyChanged("Description");
                 description = value;
             }
         }
@@ -135,7 +126,6 @@ namespace AppJobPortal.Models
             get { return postCode; }
             set
             {
-                OnPropertyChanged("Postcode");
                 postCode = value;
             }
         }
@@ -145,17 +135,15 @@ namespace AppJobPortal.Models
             get { return region; }
             set
             {
-                OnPropertyChanged("Region");
                 region = value;
             }
         }
 
-        public virtual Gender Gender
+        public virtual UsersGender Gender
         {
             get { return gender; }
             set
             {
-                OnPropertyChanged("Gender");
                 gender = value;
             }
         }

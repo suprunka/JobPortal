@@ -174,7 +174,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AllServices.xaml.cs">
+    <Compile Include="New\Class1.cs" />
+    <Compile Include="New\Statistics\AllServices.xaml.cs">
       <DependentUpon>AllServices.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\TcpOfferReference\Reference.cs">
@@ -192,14 +193,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="EarnedMoney.xaml.cs">
+    <Compile Include="New\Statistics\EarnedMoney.xaml.cs">
       <DependentUpon>EarnedMoney.xaml</DependentUpon>
     </Compile>
-    <Compile Include="New\EnumMatchToBooleanConverter.cs" />
+    <Compile Include="New\Statistics\UsersGender.xaml.cs">
+      <DependentUpon>UsersGender.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="New\NotifyBase.cs" />
+    <Compile Include="New\Statistics\UserBoughtServices.xaml.cs">
+      <DependentUpon>UserBoughtServices.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New\ServiceAppModel.cs" />
     <Compile Include="New\Services.xaml.cs">
       <DependentUpon>Services.xaml</DependentUpon>
@@ -212,15 +217,23 @@
     <Compile Include="Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
-    <Page Include="AllServices.xaml">
+    <Page Include="New\Statistics\AllServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EarnedMoney.xaml">
+    <Page Include="New\Statistics\EarnedMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New\Statistics\UsersGender.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="New\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New\Statistics\UserBoughtServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

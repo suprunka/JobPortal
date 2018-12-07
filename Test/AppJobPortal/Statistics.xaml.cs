@@ -9,6 +9,7 @@ using System.Linq;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JobPortal.Model;
+using AppJobPortal.New;
 
 namespace AppJobPortal
 
@@ -39,6 +40,16 @@ namespace AppJobPortal
         {
             DataContext = new EarnedMoney();
 
+        }
+
+        private void Button_Click_2(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = new UserBoughtServices();
+        }
+
+        private void Button_Click_3(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = new UsersGender();
         }
     }
 }

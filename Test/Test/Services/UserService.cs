@@ -242,6 +242,7 @@ namespace ServiceLibrary
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
+                    LoggingId = u.Logging_ID,
                     // Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
                     Description = u.Description,

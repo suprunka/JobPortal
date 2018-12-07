@@ -199,7 +199,7 @@ namespace ServiceLibrary
         }
         public IQueryable<Saleline> GetAllSalelines()
         {
-          return   _unitOfWork.Orders.GetAllSalelines().Select(x=> new Saleline { Id = x.ID, ServiceOfferId = x.ServiceOffer_ID });
+          return   _unitOfWork.Orders.GetAllSalelines().Select(x=> new Saleline { Id = x.ID, ServiceOfferId = x.ServiceOffer_ID , AuthorId = x.ServiceOffer.Employee_ID, Date = x.BookedDate.BookedDate1});
         }
         public IQueryable<Order> GetAllOrders()
 

@@ -62,7 +62,7 @@ namespace AppJobPortal.New
         }
         private void GetAll() {
             _source = _proxy.GetAll();
-            //_source.AsParallel().ForAll(user => new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender));
+            //_source.AsParallel().ForAll(user => new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email, user.AddressLine, user.CityName, user.Postcode, user.Region, user.UsersGender));
             IList<UserAppModel> userAppModels = new List<UserAppModel>();
             foreach(User user in _source)
             {

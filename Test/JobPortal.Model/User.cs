@@ -41,6 +41,8 @@ namespace JobPortal.Model
 
         [DataMember]
         public virtual int ID { get; set; }
+        [DataMember]
+        public virtual string LoggingId { get; set; }
 
         [DataMember]
         public virtual String PhoneNumber { get; set; }

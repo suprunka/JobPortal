@@ -21,6 +21,7 @@
   <xs:element name="ArrayOfSaleline" nillable="true" type="tns:ArrayOfSaleline" />
   <xs:complexType name="Saleline">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="ServiceOfferId" type="xs:int" />
@@ -53,6 +54,7 @@
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Data.Linq" minOccurs="0" name="LastUpdate" nillable="true" type="q3:Binary" />
+      <xs:element minOccurs="0" name="LoggingId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PayPalMail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />

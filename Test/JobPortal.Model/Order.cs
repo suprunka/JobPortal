@@ -47,6 +47,8 @@ namespace JobPortal.Model
         [DataMember]
         public virtual int ServiceOfferId { get; set; }
         [DataMember]
+        public virtual string AuthorId { get; set; }
+        [DataMember]
         public virtual DateTime Date { get; set; }
     }
 
