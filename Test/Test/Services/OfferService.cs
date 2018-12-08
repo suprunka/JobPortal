@@ -264,11 +264,11 @@ namespace ServiceLibrary
             }
         }
 
-        public int GetAvgOfServiceRates(int serviceId)
+        public double GetAvgOfServiceRates(int serviceId)
         {
             try
             {
-                return (int)Math.Ceiling(GetServiceReviews(serviceId).Select(x => x.Rate).Average());
+                return GetServiceReviews(serviceId).Select(x => x.Rate).Average();
             }
             catch
             {

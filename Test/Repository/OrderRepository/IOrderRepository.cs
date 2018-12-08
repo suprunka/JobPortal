@@ -20,6 +20,7 @@ namespace Repository
         bool CleanCart(string userID);
         IQueryable<Salelines> GetJobCalendar(DateTime date, string employeeId);
         IQueryable<Salelines> GetAllSalelines();
+        IQueryable<OrderTable> GetAllOrders();
 
     }
 }

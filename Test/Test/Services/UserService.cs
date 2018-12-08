@@ -241,11 +241,13 @@ namespace ServiceLibrary
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
+                    LoggingId = u.Logging_ID,
                     // Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
                     Description = u.Description,
                     PayPalMail = u.PayPalMail,
-                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region),
+                    LastUpdate = u.LastUpdate
                 });
             }
             return resultToReturn.ToArray();
