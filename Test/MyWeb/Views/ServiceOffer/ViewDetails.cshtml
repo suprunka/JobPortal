@@ -1,4 +1,4 @@
-﻿@model WebJobPortal.Models.ViewDetails
+﻿@model WebJobPortal.Models.ViewDetailsModel
 @using WebJobPortal.Models
 @using Microsoft.AspNet.Identity;
 @using DayPilot.Web.Mvc
@@ -89,7 +89,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Save" class="btn btn-primary" />
-                        @Html.ActionLink("Delete", "Delete", "ServiceOffer", new { idd = Model.Id }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Delete", "Delete", "ServiceOffer", new { id = Model .Id }, new { @class = "btn btn-danger" })
                     </div>
                 </div>
             }

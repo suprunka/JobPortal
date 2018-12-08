@@ -35,15 +35,15 @@ namespace MyWeb.Mapping
             };
         }
 
-        public static DescriptionViewModel Map_User_To_DescriptionViewModel(User model)
+        public static ChangeDescriptionViewModel Map_User_To_DescriptionViewModel(User model)
         {
-            return new DescriptionViewModel
+            return new ChangeDescriptionViewModel
             {
                 Description = model.Description,
             };
         }
 
-        public static User Map_DescriptionViewModel_To_User(DescriptionViewModel model)
+        public static User Map_DescriptionViewModel_To_User(ChangeDescriptionViewModel model)
         {
             return new User
             {
@@ -79,6 +79,7 @@ namespace MyWeb.Mapping
                 PayPalMail = user.PayPalMail,
                 UserName = user.UserName,
                 Description = user.Description,
+                Lastupdate = user.LastUpdate,
             };
         }
 
@@ -98,10 +99,11 @@ namespace MyWeb.Mapping
                 PayPalMail = userProfileViewModel.PayPalMail,
                 UserName = userProfileViewModel.UserName,
                 Description = userProfileViewModel.Description,
+                LastUpdate = userProfileViewModel.Lastupdate,
             };
         }
 
-        public static Offer Map_AddServiceOfferModel_To_Offer(AddServiceOfferModel model, string authorID)
+        public static Offer Map_AddServiceOfferModel_To_Offer(AddOfferModel model, string authorID)
         {
             return new Offer
             {
@@ -114,7 +116,7 @@ namespace MyWeb.Mapping
             };
         }
 
-        public static Offer Map_ViewDetails_To_Offer(ViewDetails edited)
+        public static Offer Map_ViewDetails_To_Offer(ViewDetailsModel edited)
         {
             return new Offer
             {
@@ -126,9 +128,9 @@ namespace MyWeb.Mapping
             };
         }
 
-        public static BoughtOffers Map_Offer_To_BoughtOffers(Offer x)
+        public static BoughtOfferModel Map_Offer_To_BoughtOffers(Offer x)
         {
-            return new BoughtOffers
+            return new BoughtOfferModel
             {
                 Id = x.Id,
                 Author = x.AuthorId,
@@ -143,9 +145,9 @@ namespace MyWeb.Mapping
             };
         }
 
-        public static ManageOffers Map_Offer_To_ManageOffers(Offer x)
+        public static ManageOfferModel Map_Offer_To_ManageOffers(Offer x)
         {
-            return new ManageOffers
+            return new ManageOfferModel
             {
                 Id = x.Id,
                 Author = x.AuthorId,
@@ -157,26 +159,48 @@ namespace MyWeb.Mapping
             };
         }
 
-        public static WebJobPortal.Models.JobOffer Map_JobOffer_JPModel_To_WebJobPortal_JobOffer(JobPortal.Model.JobOffer x, DateTime date, UserProfileViewModel user)
+        public static JobOfferViewModel Map_JobOffer_JPModel_To_WebJobPortal_JobOffer(JobOffer x, DateTime date, UserProfileViewModel user)
         {
-            return new WebJobPortal.Models.JobOffer
+            return new JobOfferViewModel
             {
-                CurrentDate = (DateTime)date,
+                CurrentDate = date,
                 TotalPrice = x.TotalPrice,
-                Customer = new CustomerViewModel { AddressLine = user.AddressLine, CityName = user.CityName, FirstName = user.FirstName, Gender = user.Gender, LastName = user.LastName, PayPalMail = user.PayPalMail, Email = user.Email, PhoneNumber = user.PhoneNumber, Postcode = user.Postcode, Region = user.Region },
-                Offer = new BoughtOffers
-                {
-                    Id = x.Offer.Id,
-                    Author = x.Offer.AuthorId,
-                    Description = x.Offer.Description,
-                    RatePerHour = x.Offer.RatePerHour,
-                    Title = x.Offer.Title,
-                    Subcategory = x.Offer.Subcategory,
-                    Category = x.Offer.Category,
-                    Date = x.Offer.WorkingTime.Date,
-                    HourFrom = x.Offer.WorkingTime.HoursFrom,
-                    HourTo = x.Offer.WorkingTime.HoursTo
-                }
+                Customer = Map_UserProfileViewModel_ToCustomerViewModel(user),
+                Offer = Map_JobOffer_To_BoughtOfferModel(x),
+            };
+        }
+
+        public static CustomerViewModel Map_UserProfileViewModel_ToCustomerViewModel(UserProfileViewModel user)
+        {
+            return new CustomerViewModel
+            {
+                AddressLine = user.AddressLine,
+                CityName = user.CityName,
+                FirstName = user.FirstName,
+                Gender = user.Gender,
+                LastName = user.LastName,
+                PayPalMail = user.PayPalMail,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Postcode = user.Postcode,
+                Region = user.Region
+            };
+        }
+
+        public static BoughtOfferModel Map_JobOffer_To_BoughtOfferModel(JobOffer x)
+        {
+            return new BoughtOfferModel
+            {
+                Id = x.Offer.Id,
+                Author = x.Offer.AuthorId,
+                Description = x.Offer.Description,
+                RatePerHour = x.Offer.RatePerHour,
+                Title = x.Offer.Title,
+                Subcategory = x.Offer.Subcategory,
+                Category = x.Offer.Category,
+                Date = x.Offer.WorkingTime.Date,
+                HourFrom = x.Offer.WorkingTime.HoursFrom,
+                HourTo = x.Offer.WorkingTime.HoursTo
             };
         }
     }

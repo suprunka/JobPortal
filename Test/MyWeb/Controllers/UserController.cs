@@ -80,15 +80,9 @@ namespace MyWeb.Controllers
 
             UserProfileViewModel user = Mapping.Mapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
             var userServices = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id);
-            if (userServices.Count() < 1)
-            {
-                user.Services = userServices.Select(x =>
-                Mapping.Mapping.Map_Offer_To_ManageOffers(x)).ToPagedList(1, 1);
-            }
-            else
-            {
-                user.Services= userServices.Select(y =>Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, userServices.Count());
-            }
+            
+            user.Services= userServices.Select(y =>Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, 100000);
+
             user.Bought = _offerProxy.GetAllBought(id).Select(x => Mapping.Mapping.Map_Offer_To_BoughtOffers(x)).ToArray();
 
             user.Date = (DateTime)date;
@@ -139,6 +133,12 @@ namespace MyWeb.Controllers
                 {
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
+                else
+                {
+                    TempData["msg"] = "<script>alert('User account information has been changed before your changes, check new data before you update ');</script>";
+
+                    return RedirectToAction("UserProfile", "Edit", new { id = User.Identity.GetUserId() });
+                }
             }
             return View(u);
         }
@@ -149,7 +149,7 @@ namespace MyWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddDescription(DescriptionViewModel u)
+        public async Task<ActionResult> AddDescription(ChangeDescriptionViewModel u)
         {
             string id = User.Identity.GetUserId();
             if (ModelState.IsValid)

@@ -4,6 +4,7 @@ using AutoMapper;
 using JobPortal.Model;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -61,11 +62,11 @@ namespace AppJobPortal.New
         }
         private void GetAll() {
             _source = _proxy.GetAll();
-            //_source.AsParallel().ForAll(user => new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender));
+            //_source.AsParallel().ForAll(user => new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email, user.AddressLine, user.CityName, user.Postcode, user.Region, user.UsersGender));
             IList<UserAppModel> userAppModels = new List<UserAppModel>();
             foreach(User user in _source)
             {
-                userAppModels.Add(new UserAppModel(user.ID, user.PayPalMail, user.PhoneNumber, user.FirstName, user.LastName, user.Email,user.UserName, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender));
+                userAppModels.Add(new UserAppModel(user.ID, user.PayPalMail, user.PhoneNumber, user.FirstName, user.LastName, user.Email,user.UserName, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender, user.LastUpdate));
              
             }
             usersTable.ItemsSource = userAppModels;
@@ -143,6 +144,7 @@ namespace AppJobPortal.New
             txtPostcode.Text = "";
             txtUsername.Text = "";
             txtPaypalMail.Text = "";
+            lastUpdate.Text = "";
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -197,6 +199,7 @@ namespace AppJobPortal.New
                 txtUsername.Text = _user.UserName;
                 regBox.SelectedValue = _user.Region;
                 txtPaypalMail.Text = _user.PayPalMail;
+                lastUpdate.DataContext = _user.LastUpdate;
                 if (_user.Gender.ToString() == "Male")
                 {
                     Male.IsChecked = true;
@@ -222,7 +225,7 @@ namespace AppJobPortal.New
                 _user.Postcode = txtPostcode.Text;
                 _user.UserName = txtUsername.Text;
                 _user.PayPalMail = txtPaypalMail.Text;
-
+                _user.LastUpdate =(System.Data.Linq.Binary) lastUpdate.DataContext;
 
                 if ((bool)Male.IsChecked)
                 {

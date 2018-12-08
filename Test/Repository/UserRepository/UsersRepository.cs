@@ -77,6 +77,7 @@ namespace Repository
                                 AddressLine = obj.AddressLine,
                                 City_ID = addressExists.ID,
                                 PayPalMail = obj.PayPalMail,
+                             
                             };
 
                             _context.GetTable<Users>().InsertOnSubmit(u);
@@ -231,97 +232,90 @@ namespace Repository
 
         public override bool Update(Users obj)
         {
-            {
+            
                 bool result = false;
                 Users found = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
                 using (SqlConnection objConn = new SqlConnection(connection))
                 {
                     objConn.Open();
-                    using (var myTran = new TransactionScope())
+                    if (found.LastUpdate == obj.LastUpdate)
                     {
-                        try
+                        using (var myTran = new TransactionScope())
                         {
-
-                            int oldCity_ID = found.City_ID;
-                            var oldPostCode = found.AddressTable.Postcode;
-                            found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
-                            found.FirstName = obj.FirstName;
-                            found.LastName = obj.LastName;
-                            found.AddressLine = obj.AddressLine;
-                            found.PayPalMail = obj.PayPalMail;
-                            if (obj.Gender.Gender1 == "Male")
-                            {
-                                found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Male");
-                            }
-                            else
-                            {
-                                found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Female");
-                            }
-
-                            var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
-                            if (addressExists == null)
+                            try
                             {
 
-                                _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
+                                int oldCity_ID = found.City_ID;
+                                var oldPostCode = found.AddressTable.Postcode;
+                                found.AspNetUsers.PhoneNumber = obj.AspNetUsers.PhoneNumber;
+                                found.FirstName = obj.FirstName;
+                                found.LastName = obj.LastName;
+                                found.AddressLine = obj.AddressLine;
+                                found.PayPalMail = obj.PayPalMail;
+                                if (obj.Gender.Gender1 == "Male")
                                 {
-                                    Postcode = obj.AddressTable.Postcode,
-                                    City = obj.AddressTable.City,
-                                    Region = obj.AddressTable.Region,
-                                });
+                                    found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Male");
+                                }
+                                else
+                                {
+                                    found.Gender = _context.GetTable<DbConnection.Gender>().Single(x => x.Gender1 == "Female");
+                                }
+
+                                var addressExists = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == obj.AddressTable.Postcode);
+                                if (addressExists == null)
+                                {
+
+                                    _context.GetTable<AddressTable>().InsertOnSubmit(new AddressTable
+                                    {
+                                        Postcode = obj.AddressTable.Postcode,
+                                        City = obj.AddressTable.City,
+                                        Region = obj.AddressTable.Region,
+                                    });
+
+                                    _context.SubmitChanges();
+
+                                    found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == obj.AddressTable.Postcode);
+                                    _context.SubmitChanges();
+                                }
+                                else
+                                {
+                                    found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == addressExists.Postcode);
+                                }
+
+                                int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
+                                if (numberOfAddressRecords < 2)
+                                {
+                                    var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
+                                    _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
+                                }
+                                _context.SubmitChanges();
+
+
 
                                 _context.SubmitChanges();
 
-                                found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == obj.AddressTable.Postcode);
-                                _context.SubmitChanges();
-                            }
-                            else
-                            {
-                                found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == addressExists.Postcode);
-                            }
 
-                            int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
-                            if (numberOfAddressRecords < 2)
-                            {
-                                var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == oldPostCode);
-                                _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
-                            }
-                            _context.SubmitChanges();
-
-
-
-                            _context.SubmitChanges();
-
-                            Users foundAtTheEnd = _context.GetTable<Users>().FirstOrDefault(u => u.ID == obj.ID);
-                            if (found.AddressLine == foundAtTheEnd.AddressLine && found.AddressTable.City == foundAtTheEnd.AddressTable.City &&
-                                found.AddressTable.Postcode == foundAtTheEnd.AddressTable.Postcode && found.AddressTable.Region == foundAtTheEnd.AddressTable.Region &&
-                                found.AspNetUsers.Email == foundAtTheEnd.AspNetUsers.Email && found.AspNetUsers.PasswordHash == foundAtTheEnd.AspNetUsers.PasswordHash &&
-                                found.AspNetUsers.UserName == foundAtTheEnd.AspNetUsers.UserName && found.AspNetUsers.PhoneNumber == foundAtTheEnd.AspNetUsers.PhoneNumber &&
-                                found.Description == foundAtTheEnd.Description && found.FirstName == foundAtTheEnd.FirstName && found.Gender.Gender1 == foundAtTheEnd.Gender.Gender1 &&
-                                found.LastName == foundAtTheEnd.LastName && found.PayPalMail == foundAtTheEnd.PayPalMail)
-                            {
                                 myTran.Complete();
                                 result = true;
                             }
-                            else
+
+
+                            catch
                             {
-                                return false;
+
+                                result = false;
+                                throw new InvalidOperationException();
                             }
-
-                        }
-                        catch
-                        {
-
-                            result = false;
-                            throw new InvalidOperationException();
-                        }
-                        finally
-                        {
-                            objConn.Close();
+                            finally
+                            {
+                                objConn.Close();
+                            }
                         }
                     }
+
                     return result;
                 }
-            }
+            
         }
 
         public Users UpdateUserMail(Users newInformation)

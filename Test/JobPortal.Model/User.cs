@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Linq;
 using System.Runtime.Serialization;
 
 namespace JobPortal.Model
@@ -35,9 +36,13 @@ namespace JobPortal.Model
 
         [DataMember]
         public virtual String Description { get; set; }
+        [DataMember]
+        public virtual Binary LastUpdate { get; set; }
 
         [DataMember]
         public virtual int ID { get; set; }
+        [DataMember]
+        public virtual string LoggingId { get; set; }
 
         [DataMember]
         public virtual String PhoneNumber { get; set; }

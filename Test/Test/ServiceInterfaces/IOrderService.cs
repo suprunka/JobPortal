@@ -53,6 +53,8 @@ namespace ServiceLibrary
 
         [OperationContract]
         IQueryable<Saleline> GetAllSalelines();
+        [OperationContract]
+        IQueryable<Order> GetAllOrders();
 
     }
 }

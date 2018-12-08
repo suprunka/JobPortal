@@ -13,8 +13,9 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="124*"/>
+            <ColumnDefinition Width="467*"/>
+            <ColumnDefinition Width="13*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -22,62 +23,62 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
-        <StackPanel Margin="10,10,10,10" Grid.Column="0" Grid.RowSpan="2">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Margin" Value="0,5,0,0"/>
-                </Style>
-                <Style TargetType="{x:Type TextBox}">
-                    <Setter Property="Margin" Value="0,5,0,0"/>
-                </Style>
-                
-            </StackPanel.Resources>
-            
-            <TextBlock x:Name="txbIdLabel" VerticalAlignment="Center" Text="Id" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
-            <TextBox x:Name="txtId" Height="20" VerticalAlignment="Center" IsEnabled="True"/>
+            <StackPanel Margin="10,10,10,10" Grid.Column="0" Grid.RowSpan="2">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0,5,0,0"/>
+                    </Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Margin" Value="0,5,0,0"/>
+                    </Style>
 
-            <TextBlock x:Name="txbNameLabel" VerticalAlignment="Center" Text="First name" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
-            <TextBox x:Name="txtFname"  Height="20" VerticalAlignment="Center"/>
+                </StackPanel.Resources>
 
-            <TextBlock x:Name="txbLastNameLabel" VerticalAlignment="Center"   Text="Last name" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
-            <TextBox x:Name="txtLname" Height="20" VerticalAlignment="Center"  />
+                <TextBlock x:Name="txbIdLabel" VerticalAlignment="Center" Text="Id" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+                <TextBox x:Name="txtId" Height="20" VerticalAlignment="Center" IsEnabled="True"/>
 
-            <TextBlock x:Name="txtAddressLabel" VerticalAlignment="Center" Text="Address" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
-            <TextBox x:Name="txtAddress" Height="20" VerticalAlignment="Center"  />
+                <TextBlock x:Name="txbNameLabel" VerticalAlignment="Center" Text="First name" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+                <TextBox x:Name="txtFname"  Height="20" VerticalAlignment="Center"/>
 
-            <TextBlock x:Name="txbCityLabel" VerticalAlignment="Center" Text="City" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
-            <TextBox x:Name="txtCity"  Height="20" VerticalAlignment="Center"  />
+                <TextBlock x:Name="txbLastNameLabel" VerticalAlignment="Center"   Text="Last name" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+                <TextBox x:Name="txtLname" Height="20" VerticalAlignment="Center"  />
 
-            <TextBlock x:Name="txtPostcodeLbl" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Postcode"/></TextBlock>
-            <TextBox x:Name="txtPostcode" Height="20"  VerticalAlignment="Center"  />
+                <TextBlock x:Name="txtAddressLabel" VerticalAlignment="Center" Text="Address" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+                <TextBox x:Name="txtAddress" Height="20" VerticalAlignment="Center"  />
 
-            <TextBlock x:Name="Region" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Region"/></TextBlock>
-            <ComboBox  Name="regBox" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+                <TextBlock x:Name="txbCityLabel" VerticalAlignment="Center" Text="City" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"/>
+                <TextBox x:Name="txtCity"  Height="20" VerticalAlignment="Center"  />
 
-            <TextBlock x:Name="txtPhonenumberLbl" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Phone number"/></TextBlock>
-            <TextBox x:Name="txtPhonenumber" Height="20"  VerticalAlignment="Center"  />
+                <TextBlock x:Name="txtPostcodeLbl" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Postcode"/></TextBlock>
+                <TextBox x:Name="txtPostcode" Height="20"  VerticalAlignment="Center"  />
 
-            <TextBlock x:Name="txtEmailLbl" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Email"/></TextBlock>
-            <TextBox x:Name="txtEmail" Height="20"  VerticalAlignment="Center"  />
+                <TextBlock x:Name="Region" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Region"/></TextBlock>
+                <ComboBox  Name="regBox" HorizontalAlignment="Left"  VerticalAlignment="Top" />
 
+                <TextBlock x:Name="txtPhonenumberLbl" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Phone number"/></TextBlock>
+                <TextBox x:Name="txtPhonenumber" Height="20"  VerticalAlignment="Center"  />
 
-            <TextBlock x:Name="txtGenderLbl" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Gender"/></TextBlock>
-
-            <RadioButton Name="Male" GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Male}" Width="85">Male</RadioButton>
-            <RadioButton Name="Female" GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Female}" Height="38" VerticalAlignment="Bottom">Female</RadioButton>
+                <TextBlock x:Name="txtEmailLbl" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Email"/></TextBlock>
+                <TextBox x:Name="txtEmail" Height="20"  VerticalAlignment="Center"  />
 
 
-            <TextBlock x:Name="txtUsernameLbl" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold" ><Run Text="Username"/></TextBlock>
-            <TextBox x:Name="txtUsername"  Height="20"  VerticalAlignment="Center"/>
-            <TextBlock x:Name="txtPaypalMailLbl" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Paypal Mail"/></TextBlock>
-            <TextBox x:Name="txtPaypalMail"   Height="20"  VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtGenderLbl" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Gender"/></TextBlock>
 
-        </StackPanel>
+                <RadioButton Name="Male" GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Male}" Width="85">Male</RadioButton>
+                <RadioButton Name="Female" GroupName="genderGroup" IsChecked="{Binding Path=Gender, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=Female}" Height="38" VerticalAlignment="Bottom">Female</RadioButton>
+
+
+                <TextBlock x:Name="txtUsernameLbl" VerticalAlignment="Center"  FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold" ><Run Text="Username"/></TextBlock>
+                <TextBox x:Name="txtUsername"  Height="20"  VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtPaypalMailLbl" VerticalAlignment="Center" FontSize="15" Height="20" Foreground="#FF1C285F" FontWeight="Bold"><Run Text="Paypal Mail"/></TextBlock>
+                <TextBox x:Name="txtPaypalMail"   Height="20"  VerticalAlignment="Center"/>
+
+            </StackPanel>
         </ScrollViewer>
 
-        <DataGrid x:Name="usersTable" Grid.Column="1" Margin="10,10,10,10" BorderThickness="5" Grid.Row="0" DisplayMemberPath="DisplayName"  RenderTransformOrigin="0.494,0.918" HorizontalGridLinesBrush="#FF333337" VerticalGridLinesBrush="#FF2D2D30" CanUserAddRows="True" CanUserResizeRows="False" IsEnabled="True" SelectionChanged="usersTable_SelectionChanged"  CurrentCellChanged="usersTable_CurrentCellChanged"/>
+        <DataGrid x:Name="usersTable" Grid.Column="1" Margin="10,10,10,9.5" BorderThickness="5" Grid.Row="0" DisplayMemberPath="DisplayName"  RenderTransformOrigin="0.494,0.918" HorizontalGridLinesBrush="#FF333337" VerticalGridLinesBrush="#FF2D2D30" CanUserAddRows="True" CanUserResizeRows="False" IsEnabled="True" SelectionChanged="usersTable_SelectionChanged"  CurrentCellChanged="usersTable_CurrentCellChanged" Grid.ColumnSpan="2"/>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="1">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,294,10,-2" Grid.RowSpan="2">
             <StackPanel Grid.Column="1" Grid.Row="2">
                 <StackPanel x:Name="btnPaneltwo"  HorizontalAlignment="Center"  Orientation="Horizontal"  VerticalAlignment="Bottom">
                     <StackPanel.Resources>
@@ -95,7 +96,8 @@
                     <TextBox  Name="searchMe" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="0,0,20,0" VerticalAlignment="Bottom" Width="115" UndoLimit="11"/>
                     <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" FontSize="11" Click="btnSearch_Click" />
                 </StackPanel>
-
+                <TextBlock Name="lastUpdate" Visibility="Collapsed">
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
 

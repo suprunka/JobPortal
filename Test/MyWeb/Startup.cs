@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(WebJobPortal.Startup))]
+[assembly: OwinStartup(typeof(WebJobPortal.Startup))]
 namespace WebJobPortal
 {
     public partial class Startup

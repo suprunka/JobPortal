@@ -138,6 +138,8 @@ namespace ServiceLibrary
                         LastName = u.LastName,
                         AddressLine = u.AddressLine,
                         PayPalMail = u.PayPalMail,
+                        LastUpdate = u.LastUpdate
+
                     });
                     return true;
                 }
@@ -163,7 +165,6 @@ namespace ServiceLibrary
                     LastName = result.LastName,
                     Email = result.AspNetUsers.Email,
                     UserName = result.AspNetUsers.UserName,
-                    // Password = result.AspNetUsers.PasswordHash,
                     AddressLine = result.AddressLine,
                     CityName = result.AddressTable.City,
                     Postcode = result.AddressTable.Postcode,
@@ -171,6 +172,7 @@ namespace ServiceLibrary
                     Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                     Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                     Description = result.Description,
+                    LastUpdate = result.LastUpdate,
                 };
             }
             catch
@@ -205,6 +207,8 @@ namespace ServiceLibrary
                             Region = (Region)Enum.Parse(typeof(Region), result.AddressTable.Region),
                             Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                             Description = result.Description,
+                            LastUpdate = result.LastUpdate,
+
                         };
                     }
                     else
@@ -237,11 +241,13 @@ namespace ServiceLibrary
                     Gender = (Gender)Enum.Parse(typeof(Gender), u.Gender.Gender1),
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
+                    LoggingId = u.Logging_ID,
                     // Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
                     Description = u.Description,
                     PayPalMail = u.PayPalMail,
-                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region)
+                    Region = (Region)Enum.Parse(typeof(Region), u.AddressTable.Region),
+                    LastUpdate = u.LastUpdate
                 });
             }
             return resultToReturn.ToArray();

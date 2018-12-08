@@ -1,4 +1,4 @@
-﻿@model WebJobPortal.Models.JobOffer[]
+﻿@model WebJobPortal.Models.JobOfferViewModel[]
 @using WebJobPortal.Models
 @using Microsoft.AspNet.Identity.Owin;
 
@@ -16,7 +16,7 @@
     }
 </style>
 <tr class="job">
-    @foreach (JobOffer offer in Model)
+    @foreach (JobOfferViewModel offer in Model)
     {
         if (counter != 0 && counter % 3 == 0)
         {

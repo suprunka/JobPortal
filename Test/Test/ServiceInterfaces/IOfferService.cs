@@ -35,6 +35,6 @@ namespace ServiceLibrary
         [OperationContract]
         IQueryable<OfferReview> GetServiceReviews(int serviceId);
         [OperationContract]
-        int GetAvgOfServiceRates(int serviceId);
+        double GetAvgOfServiceRates(int serviceId);
     }
 }

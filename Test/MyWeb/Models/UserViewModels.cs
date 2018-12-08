@@ -4,59 +4,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MyWeb.OfferReference;
 using PagedList;
+using System.Data.Linq;
 
 namespace WebJobPortal.Models
 {
-    public class ExternalLoginConfirmationViewModel
-    {
-        [Required]
-        [Display(Name = "Email:")]
-        public string Email { get; set; }
-    }
 
-    public class ExternalLoginListViewModel
-    {
-        public string ReturnUrl { get; set; }
-    }
-
-    public class DescriptionViewModel
+    public class ChangeDescriptionViewModel
     {
         public int ID { get; set; }
 
         public String Description { get; set; }
     }
-
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class VerifyCodeViewModel
-    {
-        [Required]
-        public string Provider { get; set; }
-
-        [Required]
-        [Display(Name = "Code:")]
-        public string Code { get; set; }
-        public string ReturnUrl { get; set; }
-
-        [Display(Name = "Remember this browser?")]
-        public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
-    }
-
-    public class ForgotViewModel
-    {
-        [Required]
-        [Display(Name = "Email:")]
-        public string Email { get; set; }
-    }
-
+ 
     public class LoginViewModel
     {
         [Required]
@@ -73,22 +32,12 @@ namespace WebJobPortal.Models
         public bool RememberMe { get; set; }
     }
 
-
-    public class JobOffer
-    {
-        public DateTime CurrentDate { get; set; }
-        public CustomerViewModel Customer { get; set; }
-        public decimal TotalPrice { get; set; }
-        public BoughtOffers Offer { get; set; }
-
-    }
-
     public class UserProfileViewModel
     {
-        public IPagedList<ManageOffers> Services { get; set; }
+        public IPagedList<ManageOfferModel> Services { get; set; }
 
-        public BoughtOffers[] Bought { get; set; }
-        public WebJobPortal.Models.JobOffer[] Jobs { get; set; }
+        public BoughtOfferModel[] Bought { get; set; }
+        public JobOfferViewModel[] Jobs { get; set; }
         public DateTime Date { get; set; }
 
         public String Description { get; set; }
@@ -98,7 +47,7 @@ namespace WebJobPortal.Models
 
 
         [Display(Name = "User name:")]
-        public String UserName { get; set;}
+        public String UserName { get; set; }
 
         [Display(Name = "Phone number:")]
         public String PhoneNumber { get; set; }
@@ -128,6 +77,7 @@ namespace WebJobPortal.Models
 
         [Display(Name = "Gender:")]
         public Gender Gender { get; set; }
+        public Binary Lastupdate { get; set; }
     }
 
     public class CustomerViewModel
@@ -195,6 +145,12 @@ namespace WebJobPortal.Models
         public Gender Gender { get; set; }
     }
 
+    public class ReviewAuthorViewModel
+    {
+        public Gender Gender { get; set; }
+        public string Username { get; set; }
+    }
+    
     public class RegisterViewModel
     {
         public int ID { get; set; }
@@ -209,8 +165,6 @@ namespace WebJobPortal.Models
         [Display(Name = "Password:")]
         public string Password { get; set; }
 
-     
-
         [Display(Name = "Phone Number:")]
         [Required(ErrorMessage = "Phone number required")]
         [RegularExpression("^[0-9]{8}$", ErrorMessage = "8 digits required.")]
@@ -221,34 +175,45 @@ namespace WebJobPortal.Models
         [Required(ErrorMessage = "User name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{3,}$", ErrorMessage = "At leat 3 characters required.")]
         public String UserName { get; set; }
-
     }
-    public class ResetPasswordViewModel
+    
+    public class ChangePasswordViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email:")]
-        public string Email { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Current password")]
+        public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password:")]
-        public string Password { get; set; }
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password:")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        public string Code { get; set; }
     }
 
-    public class ForgotPasswordViewModel
+    public class ChangeEmailViewModel
     {
+        public UserProfileViewModel UserProfileViewModel { get; set; }
+
+        public int Id { get; set; }
+
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email:")]
-        public string Email { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Current email")]
+        public string OldEmail { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "New email")]
+        public string NewEmail { get; set; }
+
+        
+
     }
+
 }
