@@ -165,7 +165,6 @@ namespace ServiceLibrary
                     LastName = result.LastName,
                     Email = result.AspNetUsers.Email,
                     UserName = result.AspNetUsers.UserName,
-                    // Password = result.AspNetUsers.PasswordHash,
                     AddressLine = result.AddressLine,
                     CityName = result.AddressTable.City,
                     Postcode = result.AddressTable.Postcode,

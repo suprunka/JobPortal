@@ -34,9 +34,11 @@ namespace MyWeb.Controllers
             TimeSpan starttime = startT.TimeOfDay;
             TimeSpan endtime = endT.TimeOfDay;
             int serId = serviceId;
-            if (_offerProxy.AddHoursToOffer(new WorkingTime { WeekDay = wd, Start = starttime, End = endtime, OfferId = serId }))
+            if (_offerProxy.AddHoursToOffer(new WorkingTime { WeekDay = wd,
+                Start = starttime, End = endtime, OfferId = serId }))
                 return JavaScript(SimpleJsonSerializer.Serialize("Hours are added"));
-            return JavaScript(SimpleJsonSerializer.Serialize("You can't add working hours " + starttime + "- " + endtime + "for " + wd));
+            return JavaScript(SimpleJsonSerializer.Serialize("You can't add working hours " 
+                + starttime + "- " + endtime + "for " + wd));
         }
 
     }

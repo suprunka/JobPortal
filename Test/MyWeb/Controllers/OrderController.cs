@@ -38,7 +38,7 @@ namespace MyWeb.Controllers
             {
                 _orderProxy.CancelOrder(_orderProxy.FindOrder(User.Identity.GetUserId()));
                 var shoppingcard = _orderProxy.GetShoppingCart(id);
-                ShoppingCardView scv = new ShoppingCardView { Card = shoppingcard, Error = error };
+                ShoppingCartView scv = new ShoppingCartView { Card = shoppingcard, Error = error };
                 return View(scv);
             }
             else
@@ -60,7 +60,8 @@ namespace MyWeb.Controllers
                 catch (FaultException e)
                 {
 
-                    return RedirectToAction("Index", "Order", new { id = userID.Trim(), error = e.Reason.ToString() });
+                    return RedirectToAction("Index", "Order", new
+                    { id = userID.Trim(), error = e.Reason.ToString() });
                 }
             }
             return null;
@@ -68,14 +69,16 @@ namespace MyWeb.Controllers
         }
 
 
-        public ActionResult AddToCart(string userID, int? serviceID, DateTime? date, TimeSpan? from, TimeSpan? to)
+        public ActionResult AddToCart(string userID, int? serviceID, DateTime? date,
+            TimeSpan? from, TimeSpan? to)
         {
 
             if (userID.Trim().Length > 0 && serviceID > 0)
             {
                 try
                 {
-                    var result = _orderProxy.AddToCart(userID, (int)serviceID, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
+                    var result = _orderProxy.AddToCart(userID, (int)serviceID,
+                        (DateTime)date, (TimeSpan)from, (TimeSpan)to);
                     if (result)
                     {
                         return RedirectToAction("Index", "Order", new { id = userID.Trim() });
@@ -95,7 +98,7 @@ namespace MyWeb.Controllers
             {
                 TempData["msg"] = "<script>alert('You are not logged in.');</script>";
             }
-            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = serviceID });
+            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = serviceID });
         }
 
         public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)

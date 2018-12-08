@@ -1,10 +1,10 @@
-﻿@model WebJobPortal.Models.BoughtOffers[]
+﻿@model WebJobPortal.Models.BoughtOfferModel[]
 @using WebJobPortal.Models
 @{
     var counter = 0;
 }
 <tr class="offers">
-    @foreach (BoughtOffers offer in Model)
+    @foreach (BoughtOfferModel offer in Model)
     {
         if (counter != 0 && counter % 3 == 0)
         {

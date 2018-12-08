@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebJobPortal.Models
 {
-    public class ShoppingCardView
+    public class ShoppingCartView
     {
         public ShoppingCard Card{ get; set; }
         public string Error{ get; set; }

@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using WebJobPortal.Models;
 using MyWeb.UserReference1;
 using JobPortal.Model;
+using MyWeb.Mapping;
+using static WebJobPortal.Controllers.AccountController.ChallengeResult;
 
 namespace WebJobPortal.Controllers
 {
@@ -19,17 +21,17 @@ namespace WebJobPortal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IUserService _proxy;
+        private IUserService _userProxy;
 
         public AccountController()
         {
-            _proxy = new UserServiceClient("UserServiceHttpEndpoint1");
+            _userProxy = new UserServiceClient("UserServiceHttpEndpoint1");
 
         }
 
         public AccountController(IUserService proxy)
         {
-            _proxy = proxy;
+            _userProxy = proxy;
 
         }
 
@@ -68,6 +70,59 @@ namespace WebJobPortal.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId(), Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            AddErrors(result);
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult SetUserProperties()
+        {
+            return View("SetUserProperties", new SetPropertiesViewModel());
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetUserProperties(SetPropertiesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = _userProxy.CreateUser(Mapping.Map_SetPropertiesViewModel_To_User(model), User.Identity.GetUserId());
+            if (result)
+            {
+                return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -131,7 +186,7 @@ namespace WebJobPortal.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(userapp, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("SetUserProperties", "Manage", routeValues: User.Identity.GetUserId());
+                    return RedirectToAction("SetUserProperties", "Account", routeValues: User.Identity.GetUserId());
                 }
             }
 
@@ -146,7 +201,7 @@ namespace WebJobPortal.Controllers
             return RedirectToAction("Index", "ServiceOffer");
         }
 
-       
+        #region Helpers
 
         protected override void Dispose(bool disposing)
         {
@@ -168,7 +223,6 @@ namespace WebJobPortal.Controllers
             base.Dispose(disposing);
         }
 
-        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -223,6 +277,17 @@ namespace WebJobPortal.Controllers
                     properties.Dictionary[XsrfKey] = UserId;
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+            }
+
+            public enum ManageMessageId
+            {
+                AddPhoneSuccess,
+                ChangePasswordSuccess,
+                SetTwoFactorSuccess,
+                SetPasswordSuccess,
+                RemoveLoginSuccess,
+                RemovePhoneSuccess,
+                Error
             }
         }
         #endregion

@@ -20,15 +20,16 @@ namespace MyWeb.Controllers
         private UserReference1.IUserService _userProxy;
         private OrderReference.IOrderService _orderProxy;
         private IMapper _mapper;
-        private IList<WorkingHours> workingdays = new List<WorkingHours>();
+        private IList<WorkingHoursOfOfferModel> workingdays = new List<WorkingHoursOfOfferModel>();
 
 
         // GET: Offer
 
         public ServiceOfferController()
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<JobPortal.Model.Offer, ManageOfferModel>();
             });
 
             _mapper = config.CreateMapper();
@@ -40,37 +41,14 @@ namespace MyWeb.Controllers
         }
         public ServiceOfferController(IOfferService proxy)
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<JobPortal.Model.Offer, ManageOffers>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<JobPortal.Model.Offer, ManageOfferModel>();
             });
             _mapper = config.CreateMapper();
             _offerProxy = proxy;
         }
         public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion)
-        {
-            User profile = null;
-            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
-            if(User.Identity.GetUserId() != null)
-            {
-                profile = _userProxy.FindUser(User.Identity.GetUserId());
-            }
-            var all = await _offerProxy.GetAllOffersAsync();
-            
-            var list = User.Identity.GetUserId() != null && show  ?
-                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12) :
-                all.OrderBy(x => x.RatePerHour).ThenByDescending(x=> _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            
-            //var list = all.OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            if (searchingString == null)
-            {
-                return View(list);
-            }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            return View("Index", condition);
-        }
-
-        public async Task<ActionResult> Home(string searchingString, int? page, bool? showInRegion)
         {
             User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
@@ -81,94 +59,110 @@ namespace MyWeb.Controllers
             }
             var all = await _offerProxy.GetAllOffersAsync();
 
-            var list = all.Where(x => x.Category.ToString() == "Home").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
+            var list = User.Identity.GetUserId() != null && show ?
+                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id)
+                as IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
+
+                all.OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).
+                Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+            
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
+
+            var condition = User.Identity.GetUserId() != null && show ?
+
+                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region && x.Title.ToUpper().Contains(searchingString.ToUpper())).
+                OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).
+                Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
+
+                all.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).OrderBy(x => x.RatePerHour).
+                ThenByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).Select(x => _mapper.
+                Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+
+            return View("Index", condition);
         }
 
-        public async Task<ActionResult> Tutoring(string searchingString, int? page)
+        public async Task<ActionResult> Home(string searchingString, int? page, bool? showInRegion)
         {
-            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var all = await _offerProxy.GetAllOffersAsync();
-            var list = all.Where(x => x.Category.ToString() == "Tutoring").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            if (searchingString == null)
-            {
-                return View("Index", list);
-            }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
+            return await OpenSubcategory(searchingString, page, showInRegion, "Home");
         }
 
-        public async Task<ActionResult> IT(string searchingString, int? page)
+        public async Task<ActionResult> Tutoring(string searchingString, int? page, bool? showInRegion)
         {
-            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var all = await _offerProxy.GetAllOffersAsync();
-            var list = all.Where(x => x.Category.ToString() == "IT").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            if (searchingString == null)
-            {
-                return View("Index", list);
-            }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
+            return await OpenSubcategory(searchingString, page, showInRegion, "Tutoring");
         }
 
-        public async Task<ActionResult> Repairs(string searchingString, int? page)
+        public async Task<ActionResult> IT(string searchingString, int? page, bool? showInRegion)
         {
-            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var all = await _offerProxy.GetAllOffersAsync();
-            var list = all.Where(x => x.Category.ToString() == "Repairs").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            if (searchingString == null)
-            {
-                return View("Index", list);
-            }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
+            return await OpenSubcategory(searchingString, page, showInRegion, "IT");
         }
 
-        public async Task<ActionResult> Architecture(string searchingString, int? page)
+        public async Task<ActionResult> Repairs(string searchingString, int? page, bool? showInRegion)
         {
-            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var all = await _offerProxy.GetAllOffersAsync();
-            var list = all.Where(x => x.Category.ToString() == "Architecture").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
-            if (searchingString == null)
-            {
-                return View("Index", list);
-            }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
+            return await OpenSubcategory(searchingString, page, showInRegion, "Repairs");
         }
 
-        public async Task<ActionResult> Media(string searchingString, int? page)
+        public async Task<ActionResult> Architecture(string searchingString, int? page, bool? showInRegion)
         {
+            return await OpenSubcategory(searchingString, page, showInRegion, "Architecture");
+        }
+
+        public async Task<ActionResult> Media(string searchingString, int? page, bool? showInRegion)
+        {
+            return await OpenSubcategory(searchingString, page, showInRegion, "Media");
+        }
+
+        private async Task<ActionResult> OpenSubcategory(string searchingString, int? page, bool? showInRegion, string subCategoryName)
+        {
+            User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
+            if (User.Identity.GetUserId() != null)
+            {
+                profile = _userProxy.FindUser(User.Identity.GetUserId());
+            }
             var all = await _offerProxy.GetAllOffersAsync();
-            var list = all.Where(x => x.Category.ToString() == "Media").OrderBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOffers())).ToPagedList(pageIndex, 12);
+
+            var list = User.Identity.GetUserId() != null && show ?
+                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region && x.Category.ToString() == subCategoryName).
+                OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).Select(x =>
+                _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
+
+                all.Where(x => x.Category.ToString() == subCategoryName).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id)
+                as IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+            
             if (searchingString == null)
             {
                 return View("Index", list);
             }
-            var condition = list.OrderBy(x => x.RatePerHour).Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOffers()));
-            return View("Index", condition.ToArray());
-        }
 
+            var condition = User.Identity.GetUserId() != null && show ?
+                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region && x.Title.ToUpper().Contains(searchingString.
+                ToUpper()) && x.Category.ToString() == subCategoryName).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as
+                IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
+
+                all.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper()) && x.Category.ToString() == subCategoryName).
+                OrderBy(x => x.RatePerHour).ThenByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).
+                Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+            return View("Index", condition);
+
+        }
 
         public ActionResult Add()
         {
 
-            return View("Add", new AddServiceOfferModel());
+            return View("Add", new AddOfferModel());
 
 
         }
         [HttpPost]
-        public async Task<ActionResult> Add(AddServiceOfferModel model)
+        public async Task<ActionResult> Add(AddOfferModel model)
         {
             bool result = await _offerProxy.CreateServiceOfferAsync(
                 Mapping.Mapping.Map_AddServiceOfferModel_To_Offer(model, User.Identity.GetUserId()));
-            if(result)
+            if (result)
                 return RedirectToAction("Index");
 
             return View("Add", model);
@@ -212,10 +206,10 @@ namespace MyWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetHoursTo(int serviceId, DateTime date,TimeSpan from)
+        public ActionResult GetHoursTo(int serviceId, DateTime date, TimeSpan from)
         {
 
-            var hoursto =  _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
+            var hoursto = _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
                 Value = x.ToString(),
@@ -226,38 +220,48 @@ namespace MyWeb.Controllers
 
         }
         [HttpGet]
-        public async Task<ActionResult> ViewDetails(int  id)
+        public async Task<ActionResult> ViewDetails(int id)
         {
             ReviewModel[] reviewstomodel = null;
             var found = await _offerProxy.FindServiceOfferAsync(id);
             var foundDates = _offerProxy.GetAllWorkingDays().Where(x => x.OfferId == id);
             var reviews = _offerProxy.GetServiceReviews(id);
             if (reviews != null)
-                
-            reviewstomodel= reviews.Select(x => new ReviewModel { Customer = new ReviewAuthor {Gender = _userProxy.FindUser(x.CustomerId).Gender, Username = _userProxy.FindUser(x.CustomerId).UserName }, Comment = x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
-            ViewDetails model = new ViewDetails { Id = found.Id, Title = found.Title, Author = found.AuthorId, Description = found.Description, RatePerHour = found.RatePerHour, Dates = foundDates, Category = found.Category, Subcategory= found.Subcategory, Reviews = reviewstomodel };
-            return View( model);
+            {
+                reviewstomodel = reviews.Select(x => new ReviewModel
+                { Customer = new ReviewAuthorViewModel { Gender = 
+                _userProxy.FindUser(x.CustomerId).Gender, Username = 
+                _userProxy.FindUser(x.CustomerId).UserName }, Comment =
+                x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
+            }
+
+            ViewDetailsModel model = new ViewDetailsModel { Id = found.Id, Title = found.Title,
+                Author = found.AuthorId, Description = found.Description,
+                RatePerHour = found.RatePerHour, Dates = foundDates,
+                Category = found.Category, Subcategory = found.Subcategory,
+                Reviews = reviewstomodel };
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> ViewDetails(ViewDetails edited)
+        public async Task<ActionResult> ViewDetails(ViewDetailsModel edited)
         {
             var isUpdated = await _offerProxy.UpdateServiceOfferAsync
                 (Mapping.Mapping.Map_ViewDetails_To_Offer(edited));
-                if (isUpdated)
-                {
-                    return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
-                }
+            if (isUpdated)
+            {
+                return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
+            }
 
-            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = edited.Id });
+            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = edited.Id });
         }
 
-        public async Task<ActionResult> Delete(int idd)
+        public async Task<ActionResult> Delete(int id)
         {
-            var isDeleted = await _offerProxy.DeleteServiceOfferAsync(idd);
+            var isDeleted = await _offerProxy.DeleteServiceOfferAsync(id);
             if (isDeleted)
                 return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
-            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = idd});
+            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = id });
 
 
 
@@ -273,8 +277,8 @@ namespace MyWeb.Controllers
             {
                 try
                 {
-                    var getAllBought  = await _offerProxy.GetAllBoughtAsync(customer);
-                    var wasOrdered= getAllBought.Where(x => x.Id == serviceId).Count() > 0;
+                    var getAllBought = await _offerProxy.GetAllBoughtAsync(customer);
+                    var wasOrdered = getAllBought.Where(x => x.Id == serviceId).Count() > 0;
                     if (wasOrdered)
                     {
                         double rateD = Double.Parse(rate);
@@ -290,7 +294,7 @@ namespace MyWeb.Controllers
                     return View("Error", null);
                 }
             }
-           return RedirectToAction("ViewDetails","ServiceOffer", new { id=serviceId });
+            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = serviceId });
         }
     }
 }
