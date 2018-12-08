@@ -160,6 +160,7 @@ namespace WebJobPortal.Controllers
             
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
         {
