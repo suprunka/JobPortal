@@ -23,8 +23,8 @@ namespace AppJobPortal
         {
             InitializeComponent();
 
-            _userproxy = new UserServiceClient();
-            _offerproxy = new OfferServiceClient();
+            _userproxy = new UserServiceClient("UserServiceTcpEndpoint");
+            _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
             _orderproxy = new OrderServiceClient("OrderServiceTcpEndpoint");
             int hovedstadenBought = 0;
             int midtyllandBought = 0;

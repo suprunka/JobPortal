@@ -30,11 +30,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Content="Show all services by category" Grid.Row="0" Grid.Column="0" Click="Button_Click" />
-            <Button Content="Money" Grid.Row="0" Grid.Column="1" Click="Button_Click_1"  />
+            <Button Content="Income" Grid.Row="0" Grid.Column="1" Click="Button_Click_1"  />
             <Button Content="Bought services" Grid.Row="1" Grid.Column="0" Click="Button_Click_2"  />
             <Button Content="Users- gender" Grid.Row="1" Grid.Column="1" Click="Button_Click_3" />
+            <Button Content="Services by region and rate" Grid.Row="2" Grid.Column="0" Click="Button_Click_5"  />
+            <Button Content="Top 10 services" Grid.Row="2" Grid.Column="1" Click="Button_Click_4" />
 
         </Grid>
       

@@ -196,6 +196,12 @@
     <Compile Include="New\Statistics\EarnedMoney.xaml.cs">
       <DependentUpon>EarnedMoney.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New\Statistics\ServicesByRegionandRate.xaml.cs">
+      <DependentUpon>ServicesByRegionandRate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="New\Statistics\Top10Services.xaml.cs">
+      <DependentUpon>Top10Services.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New\Statistics\UsersGender.xaml.cs">
       <DependentUpon>UsersGender.xaml</DependentUpon>
     </Compile>
@@ -222,6 +228,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="New\Statistics\EarnedMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New\Statistics\ServicesByRegionandRate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New\Statistics\Top10Services.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,6 +342,7 @@
     <None Include="Properties\DataSources\AppJobPortal.Model.Offer.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.JobOffer.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.Offer.datasource" />
+    <None Include="Properties\DataSources\JobPortal.Model.OfferReview.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.Order.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.Saleline.datasource" />
     <None Include="Properties\DataSources\JobPortal.Model.ShoppingCard.datasource" />

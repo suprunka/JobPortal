@@ -23,7 +23,7 @@ namespace AppJobPortal
         {
 
             InitializeComponent();
-            _offerproxy = new OfferServiceClient();
+            _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
             var offers = _offerproxy.GetAllOffers();
             int home = offers.Where(x => x.Category.ToString() == Category.Home.ToString() && x.RatePerHour < 200).Count();
             int home2 = offers.Where(x => x.Category.ToString() == Category.Home.ToString() && x.RatePerHour > 200).Count();

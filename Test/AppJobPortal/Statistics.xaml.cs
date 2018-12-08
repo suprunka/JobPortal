@@ -25,7 +25,7 @@ namespace AppJobPortal
         {
 
             InitializeComponent();
-            _offerproxy = new OfferServiceClient();
+            _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
            
             DataContext = new AllServices();
         }
@@ -50,6 +50,14 @@ namespace AppJobPortal
         private void Button_Click_3(object sender, System.Windows.RoutedEventArgs e)
         {
             DataContext = new UsersGender();
+        }
+        private void Button_Click_5(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = new ServicesByRegionandRate();
+        }
+        private void Button_Click_4(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = new Top10Services();
         }
     }
 }

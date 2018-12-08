@@ -28,7 +28,7 @@ namespace AppJobPortal
         public UsersGender()
         {
             InitializeComponent();
-            _userproxy = new UserServiceClient();
+            _userproxy = new UserServiceClient("UserServiceTcpEndpoint");
             var users = _userproxy.GetAll();
 
 
