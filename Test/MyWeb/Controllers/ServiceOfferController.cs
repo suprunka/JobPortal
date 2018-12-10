@@ -62,7 +62,7 @@ namespace MyWeb.Controllers
             _mapper = config.CreateMapper();
             _offerProxy = proxy;
         }
-        public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion)
+        public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion, int? sorting)
         {
             User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
@@ -72,30 +72,69 @@ namespace MyWeb.Controllers
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
             }
             var all = await _offerProxy.GetAllOffersAsync();
-
-            var list = User.Identity.GetUserId() != null && show ?
-                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id)
-                as IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
-
-                all.OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).
-                Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
-            
-            if (searchingString == null)
+            IEnumerable<Offer> list = null;
+            IPagedList<ManageOfferModel> ipagedList = null;
+            switch (sorting)
             {
-                return View("Index", list);
+                case 1://by highet price
+                    list = User.Identity.GetUserId() != null && show ?
+                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => x.RatePerHour) :
+                all.OrderByDescending(x => x.RatePerHour);
+                    break;
+                case 2:
+                    list = User.Identity.GetUserId() != null && show ?
+               all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderBy(x => x.RatePerHour) :
+
+               all.OrderBy(x => x.RatePerHour);
+
+                    break;
+                case 4://date
+                    list = User.Identity.GetUserId() != null && show  ?
+                        all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region):
+
+                    all.Select(x=>x);
+
+                    break;
+                case 3:
+                    list = User.Identity.GetUserId() != null && show  ?
+                        all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region ).OrderByDescending(x => x.Id):
+
+                    all.OrderByDescending(x => x.Id);
+
+                    break;
+                default:
+                    list = User.Identity.GetUserId() != null && show ?
+                 all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id)
+                 as IComparable).ThenBy(x => x.RatePerHour) :
+
+                 all.OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour);
+                    break;
             }
-
-            var condition = User.Identity.GetUserId() != null && show ?
-
-                all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region && x.Title.ToUpper().Contains(searchingString.ToUpper())).
-                OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).
-                Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
-
-                all.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).OrderBy(x => x.RatePerHour).
-                ThenByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).Select(x => _mapper.
-                Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
-
-            return View("Index", condition);
+            if (searchingString != null)
+            {
+                ipagedList = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+            }
+            else
+            {
+                ipagedList = list.Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+            }
+            // if (searchingString == null)
+            // {
+            //     return View("Index", list);
+            // }
+            //
+            // var condition = User.Identity.GetUserId() != null && show ?
+            //
+            //     all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region && x.Title.ToUpper().Contains(searchingString.ToUpper())).
+            //     OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).
+            //     Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
+            //
+            //     all.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).OrderBy(x => x.RatePerHour).
+            //     ThenByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).Select(x => _mapper.
+            //     Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+            //
+            // return View("Index", condition);
+            return View("Index", ipagedList);
         }
 
         public async Task<ActionResult> Home(string searchingString, int? page, bool? showInRegion)
@@ -146,7 +185,7 @@ namespace MyWeb.Controllers
 
                 all.Where(x => x.Category.ToString() == subCategoryName).OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id)
                 as IComparable).ThenBy(x => x.RatePerHour).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
-            
+
             if (searchingString == null)
             {
                 return View("Index", list);
@@ -251,17 +290,33 @@ namespace MyWeb.Controllers
             if (reviews != null)
             {
                 reviewstomodel = reviews.Select(x => new ReviewModel
-                { Customer = new ReviewAuthorViewModel { Gender = 
-                _userProxy.FindUser(x.CustomerId).Gender, Username = 
-                _userProxy.FindUser(x.CustomerId).UserName }, Comment =
-                x.Comment, Rate = x.Rate, ServiceOfferId = x.ServiceOfferId }).ToArray();
+                {
+                    Customer = new ReviewAuthorViewModel
+                    {
+                        Gender =
+                _userProxy.FindUser(x.CustomerId).Gender,
+                        Username =
+                _userProxy.FindUser(x.CustomerId).UserName
+                    },
+                    Comment =
+                x.Comment,
+                    Rate = x.Rate,
+                    ServiceOfferId = x.ServiceOfferId
+                }).ToArray();
             }
 
-            ViewDetailsModel model = new ViewDetailsModel { Id = found.Id, Title = found.Title,
-                Author = found.AuthorId, Description = found.Description,
-                RatePerHour = found.RatePerHour, Dates = foundDates,
-                Category = found.Category, Subcategory = found.Subcategory,
-                Reviews = reviewstomodel };
+            ViewDetailsModel model = new ViewDetailsModel
+            {
+                Id = found.Id,
+                Title = found.Title,
+                Author = found.AuthorId,
+                Description = found.Description,
+                RatePerHour = found.RatePerHour,
+                Dates = foundDates,
+                Category = found.Category,
+                Subcategory = found.Subcategory,
+                Reviews = reviewstomodel
+            };
             return View(model);
         }
 
