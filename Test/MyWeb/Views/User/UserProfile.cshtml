@@ -181,7 +181,7 @@ else
                     "<<",
                     "UserProfile",
                     "User",
-                    new {id= User.Identity.GetUserId(), date = Model.Date.AddDays(-1) },
+                    new {id= Model.ID, date = Model.Date.AddDays(-1) },
                     new { @class = " btn btn-default btn-sm pull-left" })
                 </th>
                 <th scope="col">@Model.Date.ToString(@"D")</th>
@@ -190,7 +190,7 @@ else
                     ">>",
                     "UserProfile",
                     "User",
-                    new {id= User.Identity.GetUserId(), date = Model.Date.AddDays(1) },
+                    new {id= Model.ID, date = Model.Date.AddDays(1) },
                     new { @class = " btn btn-default btn-sm pull-right" })
                 </th>
             </tr>

@@ -22,11 +22,14 @@ namespace ServiceLibrary
         public OfferService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            new NotificationService();
+
         }
 
         public OfferService()
         {
             _unitOfWork = new UnitOfWork(new JobPortalDatabaseDataContext());
+            new NotificationService().Init();
 
         }
 
