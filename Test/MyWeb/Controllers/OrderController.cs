@@ -15,12 +15,14 @@ using WebJobPortal.Models;
 using JobPortal.Model;
 using System.Configuration;
 using System.Threading.Tasks;
+using MyWeb.UserReference1;
+using MyWeb.OrderReference;
+using MyWeb.OfferReference;
 
 namespace MyWeb.Controllers
 {
     public class OrderController : Controller
     {
-        private OfferReference.IOfferService _offerProxy;
         private UserReference1.IUserService _userProxy;
         private OrderReference.IOrderService _orderProxy;
         private ShoppingCard shoppingCard;
@@ -28,9 +30,13 @@ namespace MyWeb.Controllers
 
         public OrderController()
         {
-            _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
             _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
+        }
+        public OrderController(IUserService userService, IOrderService orderService )
+        {
+            _userProxy = userService;
+            _orderProxy = orderService;
         }
 
         public async Task<ActionResult> Index(string id, string error)

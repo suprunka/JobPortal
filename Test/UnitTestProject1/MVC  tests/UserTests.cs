@@ -476,38 +476,38 @@ namespace UnitTestProject1.MVC__tests
 
         //Read
 
-        [TestMethod]
-        public void Search_Of_User_Returns_Redirect_To_Action()
-        {
-            try
-            {
-                var serviceMock = new Mock<IUserService>();
-                var serviceOfferMock = new Mock<IOfferService>();
-                var serviceOrderMock = new Mock<IOrderService>();
-                serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Returns(new User
-                {
-                    PhoneNumber = "12345678",
-                    FirstName = "Adam",
-                    LastName = "Adam",
-                    Email = "Adam@gmail.com",
-                    UserName = "AdamMana",
-                    Password = "Qwerty1",
-                    AddressLine = "Streetline",
-                    CityName = "Cityname",
-                    Postcode = "2154",
-                    Region = Region.Nordjylland,
-                    Gender = Gender.Male,
-                });
-
-                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object, serviceOrderMock.Object);
-                var result = controller.(12345678);
-                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-            }
-            catch
-            {
-                Assert.Fail();
-            }
-        }
+      //  [TestMethod]
+      //  public void Search_Of_User_Returns_Redirect_To_Action()
+      //  {
+      //      try
+      //      {
+      //          var serviceMock = new Mock<IUserService>();
+      //          var serviceOfferMock = new Mock<IOfferService>();
+      //          var serviceOrderMock = new Mock<IOrderService>();
+      //          serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Returns(new User
+      //          {
+      //              PhoneNumber = "12345678",
+      //              FirstName = "Adam",
+      //              LastName = "Adam",
+      //              Email = "Adam@gmail.com",
+      //              UserName = "AdamMana",
+      //              Password = "Qwerty1",
+      //              AddressLine = "Streetline",
+      //              CityName = "Cityname",
+      //              Postcode = "2154",
+      //              Region = Region.Nordjylland,
+      //              Gender = Gender.Male,
+      //          });
+      //
+      //          var controller = new UserController(serviceMock.Object, serviceOfferMock.Object, serviceOrderMock.Object);
+      //          var result = controller.
+      //          Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+      //      }
+      //      catch
+      //      {
+      //          Assert.Fail();
+      //      }
+      //  }
 
 
 
@@ -547,42 +547,42 @@ namespace UnitTestProject1.MVC__tests
         }
 
         //To do
-        [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (too many characters)
-        [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (not allowed characters)
-        [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid firstname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid lastname (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid email
-        [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid email without '@'
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid email without '.'
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamManaż", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid userName (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "he", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //too short userName
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid password no capital letter
-        [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid password without number
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid addressline (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid city name (not allwed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (too long)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (not allowed characters)
-        [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true)] //valid all data
-        [TestMethod]
-        public void Update_UserService_Update_Valid_Inputs(string phoneNumber, string firstName,
-        string lastName, string email, string userName, string password, string addressLine,
-        string cityName, string postCode, Region region, Gender gender, bool shouldValidate)
-        {
-            var serviceMock = new Mock<IUserService>();
-            var userStub = new Mock<SetPropertiesViewModel>().SetupAllProperties();
-            userStub.Setup(x => x.FirstName).Returns(firstName);
-            userStub.Setup(x => x.LastName).Returns(lastName);
-            userStub.Setup(x => x.AddressLine).Returns(addressLine);
-            userStub.Setup(x => x.CityName).Returns(cityName);
-            userStub.Setup(x => x.Postcode).Returns(postCode);
-            userStub.Setup(x => x.Region).Returns(region);
-            userStub.Setup(x => x.Gender).Returns(gender);
-            var subject = new UserController();
-            subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
-            ViewResult resultPage = subject.Edit(userStub.Object.) as ViewResult;
-            Assert.IsTrue("Edit" == resultPage.ViewName);
-        }
-
+       // [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (too many characters)
+       // [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (not allowed characters)
+       // [DataRow("12345678", "Adaś", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid firstname (not allowed characters)
+       // [DataRow("12345678", "Adam", "Adamżść", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid lastname (not allowed characters)
+       // [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid email
+       // [DataRow("12345678", "Adam", "Adam", "Adaśgmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid email without '@'
+       // [DataRow("12345678", "Adam", "Adam", "Adaś@gmailcom", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid email without '.'
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamManaż", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid userName (not allowed characters)
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "he", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //too short userName
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid password no capital letter
+       // [DataRow("12345678", "Adam", "Adam", "Adaś@gmail.com", "AdamMana", "Qwerty", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid password without number
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetlineżć", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid addressline (not allowed characters)
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Citynamę", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid city name (not allwed characters)
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (too long)
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (not allowed characters)
+       // [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, true)] //valid all data
+       // [TestMethod]
+       // public void Update_UserService_Update_Valid_Inputs(string phoneNumber, string firstName,
+       // string lastName, string email, string userName, string password, string addressLine,
+       // string cityName, string postCode, Region region, Gender gender, bool shouldValidate)
+       // {
+       //     var serviceMock = new Mock<IUserService>();
+       //     var userStub = new Mock<SetPropertiesViewModel>().SetupAllProperties();
+       //     userStub.Setup(x => x.FirstName).Returns(firstName);
+       //     userStub.Setup(x => x.LastName).Returns(lastName);
+       //     userStub.Setup(x => x.AddressLine).Returns(addressLine);
+       //     userStub.Setup(x => x.CityName).Returns(cityName);
+       //     userStub.Setup(x => x.Postcode).Returns(postCode);
+       //     userStub.Setup(x => x.Region).Returns(region);
+       //     userStub.Setup(x => x.Gender).Returns(gender);
+       //     var subject = new UserController();
+       //     subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
+       //     ViewResult resultPage = subject.Edit(userStub.Object.) as ViewResult;
+       //     Assert.IsTrue("Edit" == resultPage.ViewName);
+       // }
+       //
 
         //Delete
         #region
@@ -590,8 +590,10 @@ namespace UnitTestProject1.MVC__tests
         public void Test_Delete_Result_Passing_Invalid_Integer()
         {
             var serviceMock = new Mock<IUserService>();
-            var controller = new UserController(serviceMock.Object);
-            var result = controller.Delete(-1);
+            var serviceMockOffer = new Mock<IOfferService>();
+            var serviceMockOrder = new Mock<IOrderService>();
+            var controller = new UserController(serviceMock.Object, serviceMockOffer.Object, serviceMockOrder.Object);
+            var result = controller.DeleteAsync(-1);
             Assert.IsNull(result);
         }
 
@@ -601,8 +603,10 @@ namespace UnitTestProject1.MVC__tests
         {
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.DeleteUser(1)).Returns(false);
-            var controller = new UserController(userServiceStub.Object);
-            var result = controller.Delete(1);
+            var serviceMockOffer = new Mock<IOfferService>();
+            var serviceMockOrder = new Mock<IOrderService>();
+            var controller = new UserController(userServiceStub.Object, serviceMockOffer.Object, serviceMockOrder.Object);
+            var result = controller.DeleteAsync(1);
             Assert.IsNull(result);
         }
 
@@ -611,8 +615,10 @@ namespace UnitTestProject1.MVC__tests
         {
             var userServiceStub = new Mock<IUserService>();
             userServiceStub.Setup(x => x.DeleteUser(It.IsAny<int>())).Returns(true);
-            var controller = new UserController(userServiceStub.Object);
-            var result = controller.Delete(1);
+            var serviceMockOffer = new Mock<IOfferService>();
+            var serviceMockOrder = new Mock<IOrderService>();
+            var controller = new UserController(userServiceStub.Object, serviceMockOffer.Object, serviceMockOrder.Object);
+            var result = controller.DeleteAsync(1);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 

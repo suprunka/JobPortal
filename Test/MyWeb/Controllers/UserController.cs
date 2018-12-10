@@ -62,13 +62,7 @@ namespace MyWeb.Controllers
             this._offerProxy = offerService;
             this._orderProxy = orderProxy;
         }
-        public UserController()
-        {
-            this._proxy = new UserServiceClient("UserServiceHttpEndpoint1");
-            this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
-            this._orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
-        }
-
+       
 
         [HttpGet]
         public async Task<ActionResult> UserProfile(string id, DateTime? date = null)
