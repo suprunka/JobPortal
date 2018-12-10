@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using WebJobPortal.Models;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using PagedList;
 
 namespace UnitTestProject1.MVC__tests
 {
@@ -15,18 +16,30 @@ namespace UnitTestProject1.MVC__tests
     public class OfferTests
     {
         [TestMethod]
-        public async void Test_Index_Show_All_Offers()
+        public void Test_Index_Show_All_Offers()
         {
             Offer[] array = { new Offer(), new Offer(), new Offer() };
             var all = array.AsQueryable<Offer>();
 
             var serviceMock = new Mock<MyWeb.OfferReference.IOfferService>();
-            serviceMock.Setup(x => x.GetAllOffersAsync()).Returns(Task.FromResult(array));
+            serviceMock.Setup(x => x.GetAllOffersAsync()).ReturnsAsync(array);
+            var userProxyMock = new Mock<MyWeb.UserReference1.IUserService>();
+            var orderProxyMock = new Mock<MyWeb.OrderReference.IOrderService>();
+            userProxyMock.Setup(x => x.FindUser(It.IsAny<string>())).Returns(new User
+            {
+                ID = 12,
+            });
 
-            var ctr = new ServiceOfferController(serviceMock.Object);
-            var result = await ctr.Index(null, 0) as ViewResult;
-            ManageOffers[] model = (ManageOffers[])result.Model;
-            Assert.AreEqual(3, model.Length);
+            var controllerContext = new Mock<ControllerContext>();
+            var principal = new Moq.Mock<IPrincipal>();
+            principal.SetupGet(x => x.Identity.IsAuthenticated).Returns(true);
+            //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
+            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+            var ctr = new ServiceOfferController(serviceMock.Object, userProxyMock.Object, orderProxyMock.Object);
+            ctr.ControllerContext = controllerContext.Object;
+            var result = ctr.Index(null, 1,false).Result as ViewResult;
+            PagedList<ManageOfferModel> model = (PagedList<ManageOfferModel>)result.Model;
+            Assert.AreEqual(3, model.Count);
         }
 
         [DataRow("Cleaning", 2, DisplayName = "The same cases and word length, 2 maches")] 
@@ -35,7 +48,7 @@ namespace UnitTestProject1.MVC__tests
         [DataRow("", 5, DisplayName = "Emptystring")] 
 
         [TestMethod]
-        public async void  Test_Index_Show_All_Offers_Which_Contains_searching_string(string searchingString, int foundOffers)
+        public  void  Test_Index_Show_All_Offers_Which_Contains_searching_string(string searchingString, int foundOffers)
         {
             Offer[] array = { new Offer { Title= "Cleaning at your house"},
                               new Offer {Title = "Very good Cleaning" },
@@ -46,12 +59,24 @@ namespace UnitTestProject1.MVC__tests
         
 
             var serviceMock = new Mock<MyWeb.OfferReference.IOfferService>();
-            serviceMock.Setup(x => x.GetAllOffers()).Returns(array);
+            serviceMock.Setup(x => x.GetAllOffersAsync()).ReturnsAsync(array);
+            var userProxyMock = new Mock<MyWeb.UserReference1.IUserService>();
+            var orderProxyMock = new Mock<MyWeb.OrderReference.IOrderService>();
+            userProxyMock.Setup(x => x.FindUser(It.IsAny<string>())).Returns(new User
+            {
+                ID = 12,
+            });
 
-            var ctr = new ServiceOfferController(serviceMock.Object);
-            var result = await ctr.Index(searchingString, 0) as ViewResult;
-            ManageOffers[] model = (ManageOffers[])result.Model;
-            Assert.AreEqual(foundOffers, model.Length);
+            var controllerContext = new Mock<ControllerContext>();
+            var principal = new Moq.Mock<IPrincipal>();
+            principal.SetupGet(x => x.Identity.IsAuthenticated).Returns(true);
+            //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
+            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+            var ctr = new ServiceOfferController(serviceMock.Object, userProxyMock.Object, orderProxyMock.Object);
+            ctr.ControllerContext = controllerContext.Object;
+            var result = ctr.Index(searchingString, 1, false).Result as ViewResult;
+            PagedList<ManageOfferModel> model = (PagedList<ManageOfferModel>) result.Model;
+            Assert.AreEqual(foundOffers, model.Count);
         }
 
         [TestMethod]
@@ -85,7 +110,7 @@ namespace UnitTestProject1.MVC__tests
                 var ctr = new ServiceOfferController(serviceMock.Object);
                 var task = ctr.ViewDetails(1);
                 var result = task.Result as ViewResult;
-                var model = ((ViewDetails)result.Model);
+                var model = (ViewDetailsModel)result.Model;
                 Assert.AreEqual(1, model.Id);
             }
 
@@ -96,11 +121,11 @@ namespace UnitTestProject1.MVC__tests
         }
 
         [TestMethod]
-        public async void ViewDetails_UpdateOffer_View_Tests_If_Rederict_to_Action()
+        public void ViewDetails_UpdateOffer_View_Tests_If_Rederict_to_Action()
         {
             try
             {
-                ViewDetails detail = new ViewDetails();
+                ViewDetailsModel detail = new ViewDetailsModel();
                 detail.Id = 3;
                 detail.Title = "234567";
                 detail.RatePerHour = 122;
@@ -113,13 +138,14 @@ namespace UnitTestProject1.MVC__tests
                 controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
                
                 var serviceMock = new Mock<MyWeb.OfferReference.IOfferService>();
-                serviceMock.Setup(x => x.UpdateServiceOffer(It.IsAny<Offer>())).Returns(true);
+                serviceMock.Setup(x => x.UpdateServiceOfferAsync(It.IsAny<Offer>())).ReturnsAsync(true);
 
                 var ctr = new ServiceOfferController(serviceMock.Object);
                 ctr.ControllerContext = controllerContext.Object;
-                var result = ctr.ViewDetails(detail);//Task<actionRsult>>
+                var result = ctr.ViewDetails(detail).Result;//Task<actionRsult>>
+                RedirectToRouteResult routeResult = result as RedirectToRouteResult;
                 Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-                RedirectToRouteResult routeResult = await result as RedirectToRouteResult;
+                
                 Assert.AreEqual(routeResult.RouteValues["action"], "UserProfile");
             }
             catch
@@ -136,7 +162,7 @@ namespace UnitTestProject1.MVC__tests
                 serviceMock.Setup(x => x.CreateServiceOffer(It.IsAny<Offer>())).Returns(true);
 
                 var ctr = new ServiceOfferController(serviceMock.Object);
-                var result = (ViewResult)ctr.Add();
+                var result = (ViewResult)ctr.Add().Result;
 
                 Assert.AreEqual("Add", result.ViewName);
             }
@@ -157,9 +183,9 @@ namespace UnitTestProject1.MVC__tests
                 principal.SetupGet(x => x.Identity.Name).Returns("uname");
                 //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
                 controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-                WorkingHours[] array = { new WorkingHours() };
-                AddServiceOfferModel model = new AddServiceOfferModel();
-                ManageOffers manageOffers = new ManageOffers();
+                WorkingHoursOfOfferModel[] array = { new WorkingHoursOfOfferModel() };
+                AddOfferModel model = new AddOfferModel();
+                ManageOfferModel manageOffers = new ManageOfferModel();
                 manageOffers.Author = "2";
                 manageOffers.Category = Category.Architecture;
                 manageOffers.Description = "2222222222222222";
@@ -168,7 +194,7 @@ namespace UnitTestProject1.MVC__tests
                 manageOffers.Subcategory = SubCategory.InteriorDesign;
                 manageOffers.Title = "my titlee";
                 model.ManageOffers = manageOffers;
-                model.WorkingDays = array.AsEnumerable<WorkingHours>();
+                model.WorkingDays = array.AsEnumerable<WorkingHoursOfOfferModel>();
                 var serviceMock = new Mock<MyWeb.OfferReference.IOfferService>();
                 serviceMock.Setup(x => x.CreateServiceOfferAsync(It.IsAny<Offer>())).ReturnsAsync(true);
 

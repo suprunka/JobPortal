@@ -10,6 +10,8 @@ using MyWeb.OfferReference;
 using PagedList;
 using WebJobPortal.Models;
 using JobPortal.Model;
+using MyWeb.OrderReference;
+using MyWeb.UserReference1;
 
 namespace MyWeb.Controllers
 {
@@ -39,6 +41,18 @@ namespace MyWeb.Controllers
 
 
         }
+        public ServiceOfferController(IOfferService proxy, IUserService userProxy, IOrderService orderProxy)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<JobPortal.Model.Offer, ManageOfferModel>();
+            });
+            _mapper = config.CreateMapper();
+            _offerProxy = proxy;
+            _userProxy = userProxy;
+            _orderProxy = orderProxy;
+        }
+
         public ServiceOfferController(IOfferService proxy)
         {
             var config = new MapperConfiguration(cfg =>
@@ -53,7 +67,7 @@ namespace MyWeb.Controllers
             User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
-            if (User.Identity.GetUserId() != null)
+            if (User.Identity.IsAuthenticated)
             {
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
             }

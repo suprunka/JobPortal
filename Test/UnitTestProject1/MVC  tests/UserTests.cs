@@ -27,7 +27,7 @@ namespace UnitTestProject1.MVC__tests
     {
 
 
-    
+
         [TestMethod]
         public void Test_UserProfile_View()
         {
@@ -38,7 +38,7 @@ namespace UnitTestProject1.MVC__tests
                 var serviceOrderMock = new Mock<IOrderService>();
                 serviceMock.Setup(s => s.FindUser(It.IsAny<String>())).Returns(new User { ID = 2 });
                 var controller = new UserController(serviceMock.Object, serviceOfferMock.Object, serviceOrderMock.Object);
-                var result = controller.UserProfile("2") as ViewResult;
+                var result = controller.UserProfile("2").Result as ViewResult;
                 Assert.IsTrue("" == result.ViewName);
             }
             catch
@@ -135,7 +135,7 @@ namespace UnitTestProject1.MVC__tests
                 //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
                 controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
 
-                ManageOffers[] array = { new ManageOffers(), new ManageOffers() };
+                ManageOfferModel[] array = { new ManageOfferModel(), new ManageOfferModel() };
                 UserProfileViewModel user = new UserProfileViewModel();
                 user.Email = "ww@wp.pl";
                 user.FirstName = "firstname";
@@ -207,7 +207,7 @@ namespace UnitTestProject1.MVC__tests
                 principal.SetupGet(x => x.Identity.Name).Returns("uname");
                 //principal.SetupGet(x => x.Identity.GetUserId()).Returns("uname");
                 controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-                var dmock = new Mock<DescriptionViewModel>();
+                var dmock = new Mock<ChangeDescriptionViewModel>();
                 dmock.SetupAllProperties();
                 var serviceMock = new Mock<IUserService>();
                 var serviceOfferMock = new Mock<IOfferService>();
@@ -265,7 +265,7 @@ namespace UnitTestProject1.MVC__tests
                 ChangeEmailViewModel mail = new ChangeEmailViewModel();
                 mail.NewEmail = "new@mail.pl";
                 mail.OldEmail = "www@w.pl";
-                mail.userProfileViewModel = new UserProfileViewModel();
+                mail.UserProfileViewModel = new UserProfileViewModel();
                 mail.Id = 2;
                 var serviceMock = new Mock<IUserService>();
                 var serviceOfferMock = new Mock<IOfferService>();
@@ -299,7 +299,7 @@ namespace UnitTestProject1.MVC__tests
                 var serviceMock = new Mock<IUserService>();
                 var serviceOfferMock = new Mock<IOfferService>();
                 var serviceOrderMock = new Mock<IOrderService>();
-                var controller = new ManageController();
+                var controller = new AccountController();
                 var result = controller.SetUserProperties(new SetPropertiesViewModel
                 {
                     FirstName = "Adam",
@@ -326,7 +326,7 @@ namespace UnitTestProject1.MVC__tests
         {
             var serviceMock = new Mock<IUserService>();
             serviceMock.Setup(x => x.CreateUser(It.IsAny<User>(), It.IsAny<String>())).Throws(new Exception());
-            var controller = new ManageController(serviceMock.Object);
+            var controller = new AccountController(serviceMock.Object);
             var result = controller.SetUserProperties(new SetPropertiesViewModel
             {
                 FirstName = "Adam",
@@ -410,7 +410,7 @@ namespace UnitTestProject1.MVC__tests
 
                 serviceMock.Setup(x => x.CreateUser(It.IsAny<User>(), It.IsAny<String>())).Callback<User>(x => u = x);
 
-                var subject = new ManageController();
+                var subject = new AccountController();
 
                 subject.SetUserProperties(userStub.Object);
 
@@ -442,6 +442,7 @@ namespace UnitTestProject1.MVC__tests
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "215214", Region.Hovedstaden, Gender.Male)] //invalid postcode (too long)
         [DataRow("12345678", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "śćęż", Region.Hovedstaden, Gender.Male)] //invalid postcode (not allowed characters)
         #endregion
+
         //TODO
         [TestMethod]
         public void Test_MVCController_Will_Not_Create_A_Movie_With_Invalid_Model_State(string phoneNumber, string firstName,
@@ -462,7 +463,7 @@ namespace UnitTestProject1.MVC__tests
                 userStub.Setup(x => x.Region).Returns(region);
                 userStub.Setup(x => x.Gender).Returns(gender);
                 #endregion
-                var subject = new ManageController();
+                var subject = new AccountController();
                 subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
                 ViewResult resultPage = subject.SetUserProperties(userStub.Object) as ViewResult;
                 Assert.IsTrue("Create" == resultPage.ViewName);
@@ -474,40 +475,39 @@ namespace UnitTestProject1.MVC__tests
         }
 
         //Read
-        /*
-                [TestMethod]
-                public void Search_Of_User_Returns_Redirect_To_Action()
-                {
-                    try
-                    {
-                        var serviceMock = new Mock<IUserService>();
-                        var serviceOfferMock = new Mock<IOfferService>();
-                        var serviceOrderMock = new Mock<IOrderService>();
-                        serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Returns(new User
-                        {
-                            PhoneNumber = "12345678",
-                            FirstName = "Adam",
-                            LastName = "Adam",
-                            Email = "Adam@gmail.com",
-                            UserName = "AdamMana",
-                            Password = "Qwerty1",
-                            AddressLine = "Streetline",
-                            CityName = "Cityname",
-                            Postcode = "2154",
-                            Region = Region.Nordjylland,
-                            Gender = Gender.Male,
-                        });
 
-                        var controller = new UserController(serviceMock.Object, serviceOfferMock.Object, serviceOrderMock.Object);
-                        var result = controller.(12345678);
-                        Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-                    }
-                    catch
-                    {
-                        Assert.Fail();
-                    }
-                }
-                */
+        [TestMethod]
+        public void Search_Of_User_Returns_Redirect_To_Action()
+        {
+            try
+            {
+                var serviceMock = new Mock<IUserService>();
+                var serviceOfferMock = new Mock<IOfferService>();
+                var serviceOrderMock = new Mock<IOrderService>();
+                serviceMock.Setup(t => t.FindUser(It.IsAny<string>())).Returns(new User
+                {
+                    PhoneNumber = "12345678",
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    Email = "Adam@gmail.com",
+                    UserName = "AdamMana",
+                    Password = "Qwerty1",
+                    AddressLine = "Streetline",
+                    CityName = "Cityname",
+                    Postcode = "2154",
+                    Region = Region.Nordjylland,
+                    Gender = Gender.Male,
+                });
+
+                var controller = new UserController(serviceMock.Object, serviceOfferMock.Object, serviceOrderMock.Object);
+                var result = controller.(12345678);
+                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
 
 
 
@@ -515,7 +515,7 @@ namespace UnitTestProject1.MVC__tests
         //Update
 
 
-     
+
 
         [TestMethod]
         public async void Edit_With_Valid_inputs()
@@ -545,7 +545,7 @@ namespace UnitTestProject1.MVC__tests
             await controller.Object.Edit(1);
             userServiceStub.Verify(x => x.EditUser(It.IsAny<User>()), Times.Once());
         }
-        /*
+
         //To do
         [DataRow("123456789", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (too many characters)
         [DataRow("12345ść", "Adam", "Adam", "Adam@gmail.com", "AdamMana", "Qwerty1", "Streetline", "Cityname", "2154", Region.Hovedstaden, Gender.Male, false)] //invalid phonenumber (not allowed characters)
@@ -577,13 +577,12 @@ namespace UnitTestProject1.MVC__tests
             userStub.Setup(x => x.Postcode).Returns(postCode);
             userStub.Setup(x => x.Region).Returns(region);
             userStub.Setup(x => x.Gender).Returns(gender);
-            var subject = new ManageController();
+            var subject = new UserController();
             subject.ModelState.AddModelError("RegularExpression", "Doesn't match regex");
-            ViewResult resultPage = subject.Edit(userStub.Object.ID) as ViewResult;
+            ViewResult resultPage = subject.Edit(userStub.Object.) as ViewResult;
             Assert.IsTrue("Edit" == resultPage.ViewName);
         }
 
-        #endregion
 
         //Delete
         #region
@@ -618,7 +617,7 @@ namespace UnitTestProject1.MVC__tests
         }
 
         #endregion
-      */
+
 
     }
 }
