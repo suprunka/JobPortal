@@ -19,6 +19,7 @@ namespace WebJobPortal.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IUserService _userProxy;
@@ -160,6 +161,7 @@ namespace WebJobPortal.Controllers
             
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
         {

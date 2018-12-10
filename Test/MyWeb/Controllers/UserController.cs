@@ -71,7 +71,7 @@ namespace MyWeb.Controllers
 
 
         [HttpGet]
-        public ActionResult UserProfile(string id, DateTime? date = null)
+        public async Task<ActionResult> UserProfile(string id, DateTime? date = null)
         {
             if (date == null)
             {
@@ -79,15 +79,16 @@ namespace MyWeb.Controllers
             }
 
             UserProfileViewModel user = Mapping.Mapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
-            var userServices = _offerProxy.GetAllOffers().Where(x => x.AuthorId == id);
-            
-            user.Services= userServices.Select(y =>Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, 100000);
-
-            user.Bought = _offerProxy.GetAllBought(id).Select(x => Mapping.Mapping.Map_Offer_To_BoughtOffers(x)).ToArray();
+            var allOffers = await _offerProxy.GetAllOffersAsync();
+            var userServices = allOffers.Where(x => x.AuthorId == id);
+            user.Services= userServices.Select(y =>Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, userServices.Count()+1);
+            var allBought = await _offerProxy.GetAllBoughtAsync(id);
+            user.Bought = allBought.Select(x => Mapping.Mapping.Map_Offer_To_BoughtOffers(x)).ToArray();
 
             user.Date = (DateTime)date;
 
-            user.Jobs = _orderProxy.GetJobCallendar((DateTime)date, id).Select(x =>
+            var jobCalendar = await _orderProxy.GetJobCallendarAsync((DateTime)date, id);
+            user.Jobs = jobCalendar.Select(x =>
             Mapping.Mapping.Map_JobOffer_JPModel_To_WebJobPortal_JobOffer(x, (DateTime)date, user)).ToArray();
 
             return View(user);
@@ -188,7 +189,7 @@ namespace MyWeb.Controllers
             return View(model);
         }
 
-
+        #region Helpers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -215,5 +216,6 @@ namespace MyWeb.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
+        #endregion
     }
 }

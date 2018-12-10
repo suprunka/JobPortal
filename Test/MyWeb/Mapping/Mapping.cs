@@ -165,12 +165,12 @@ namespace MyWeb.Mapping
             {
                 CurrentDate = date,
                 TotalPrice = x.TotalPrice,
-                Customer = Map_UserProfileViewModel_ToCustomerViewModel(user),
+                Customer = Map_User_ToCustomerViewModel(x.Customer),
                 Offer = Map_JobOffer_To_BoughtOfferModel(x),
             };
         }
 
-        public static CustomerViewModel Map_UserProfileViewModel_ToCustomerViewModel(UserProfileViewModel user)
+        public static CustomerViewModel Map_User_ToCustomerViewModel(User user)
         {
             return new CustomerViewModel
             {
@@ -192,7 +192,7 @@ namespace MyWeb.Mapping
             return new BoughtOfferModel
             {
                 Id = x.Offer.Id,
-                Author = x.Offer.AuthorId,
+                Author = x.Customer_ID,
                 Description = x.Offer.Description,
                 RatePerHour = x.Offer.RatePerHour,
                 Title = x.Offer.Title,

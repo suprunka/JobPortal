@@ -14,6 +14,7 @@ using System.Net.Mail;
 using WebJobPortal.Models;
 using JobPortal.Model;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace MyWeb.Controllers
 {
@@ -23,7 +24,7 @@ namespace MyWeb.Controllers
         private UserReference1.IUserService _userProxy;
         private OrderReference.IOrderService _orderProxy;
         private ShoppingCard shoppingCard;
-        private JobPortal.Model.Order _order;
+
 
         public OrderController()
         {
@@ -32,10 +33,11 @@ namespace MyWeb.Controllers
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
         }
 
-        public ActionResult Index(string id, string error)
+        public async Task<ActionResult> Index(string id, string error)
         {
             if (shoppingCard == null)
             {
+
                 _orderProxy.CancelOrder(_orderProxy.FindOrder(User.Identity.GetUserId()));
                 var shoppingcard = _orderProxy.GetShoppingCart(id);
                 ShoppingCartView scv = new ShoppingCartView { Card = shoppingcard, Error = error };
@@ -47,13 +49,13 @@ namespace MyWeb.Controllers
             }
         }
 
-        public ActionResult CreateOrder(string userID)
+        public async Task<ActionResult> CreateOrder(string userID)
         {
             if (userID != null)
             {
                 try
                 {
-                    _orderProxy.CreateOrder(userID);
+                    await _orderProxy.CreateOrderAsync(userID);
                     return PaymentWithPaypal();
 
                 }
@@ -68,8 +70,7 @@ namespace MyWeb.Controllers
 
         }
 
-
-        public ActionResult AddToCart(string userID, int? serviceID, DateTime? date,
+        public async Task<ActionResult> AddToCart(string userID, int? serviceID, DateTime? date,
             TimeSpan? from, TimeSpan? to)
         {
 
@@ -77,7 +78,7 @@ namespace MyWeb.Controllers
             {
                 try
                 {
-                    var result = _orderProxy.AddToCart(userID, (int)serviceID,
+                    var result = await _orderProxy.AddToCartAsync(userID, (int)serviceID,
                         (DateTime)date, (TimeSpan)from, (TimeSpan)to);
                     if (result)
                     {
@@ -101,9 +102,9 @@ namespace MyWeb.Controllers
             return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = serviceID });
         }
 
-        public ActionResult DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
+        public async Task<ActionResult> DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
         {
-            var result = _orderProxy.DeleteFromCart(idU, (int)id, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
+            var result = await _orderProxy.DeleteFromCartAsync(idU, (int)id, (DateTime)date, (TimeSpan)from, (TimeSpan)to);
             if (result)
             {
                 return RedirectToAction("Index", "Order", new { id = idU.Trim() });
@@ -111,9 +112,9 @@ namespace MyWeb.Controllers
             return null;
         }
 
-        public ActionResult CleanCart(string id)
+        public async Task<ActionResult> CleanCart(string id)
         {
-            if (_orderProxy.CleanCart(id))
+            if (await _orderProxy.CleanCartAsync(id))
             {
                 return RedirectToAction("Index", "Order", new { id = id.Trim() });
             }
@@ -121,7 +122,6 @@ namespace MyWeb.Controllers
             {
                 return null;
             }
-
         }
 
         public ActionResult PaymentWithPaypal(string Cancel = null)

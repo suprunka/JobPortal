@@ -12,16 +12,19 @@ namespace ServiceLibrary
     public class OrderService : IOrderService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
 
         public OrderService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _userService = new UserService();
         }
 
         public OrderService()
         {
             _unitOfWork = new UnitOfWork(new JobPortalDatabaseDataContext());
+            _userService = new UserService();
         }
 
         public ShoppingCard GetShoppingCart(string id)
@@ -175,7 +178,7 @@ namespace ServiceLibrary
                     Title = saleline.ServiceOffer.Title,
                     WorkingTime = workingDetailsTime,
                 };
-                var joboffer = new JobOffer() { Customer_ID = customerId, Offer = o, TotalPrice = o.RatePerHour * workingtime };
+                var joboffer = new JobOffer() { Customer = _userService.FindUser(customerId), Customer_ID = customerId, Offer = o, TotalPrice = o.RatePerHour * workingtime };
                 joboffers.Add(joboffer);
             }
 

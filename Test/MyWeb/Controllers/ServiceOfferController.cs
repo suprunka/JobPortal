@@ -10,6 +10,8 @@ using MyWeb.OfferReference;
 using PagedList;
 using WebJobPortal.Models;
 using JobPortal.Model;
+using MyWeb.OrderReference;
+using MyWeb.UserReference1;
 
 namespace MyWeb.Controllers
 {
@@ -39,6 +41,18 @@ namespace MyWeb.Controllers
 
 
         }
+        public ServiceOfferController(IOfferService proxy, IUserService userProxy, IOrderService orderProxy)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<JobPortal.Model.Offer, ManageOfferModel>();
+            });
+            _mapper = config.CreateMapper();
+            _offerProxy = proxy;
+            _userProxy = userProxy;
+            _orderProxy = orderProxy;
+        }
+
         public ServiceOfferController(IOfferService proxy)
         {
             var config = new MapperConfiguration(cfg =>
@@ -53,7 +67,7 @@ namespace MyWeb.Controllers
             User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
-            if (User.Identity.GetUserId() != null)
+            if (User.Identity.IsAuthenticated)
             {
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
             }
@@ -150,14 +164,19 @@ namespace MyWeb.Controllers
 
         }
 
-        public ActionResult Add()
+        public async Task<ActionResult> Add()
         {
 
             return View("Add", new AddOfferModel());
 
 
         }
+
+
+
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(AddOfferModel model)
         {
             bool result = await _offerProxy.CreateServiceOfferAsync(
@@ -169,6 +188,7 @@ namespace MyWeb.Controllers
 
 
         }
+
         [HttpGet]
         public ActionResult GetSubCategories(string iso3)
         {
@@ -187,11 +207,12 @@ namespace MyWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetHoursFrom(int serviceId, DateTime date)
+        public async Task<ActionResult> GetHoursFrom(int serviceId, DateTime date)
         {
             try
             {
-                IEnumerable<SelectListItem> hoursFrom = _orderProxy.GetHoursFrom(serviceId, date).Select(x => new SelectListItem()
+                var hours = await _orderProxy.GetHoursFromAsync(serviceId, date);
+                var hoursFrom = hours.Select(x => new SelectListItem()
                 {
                     Text = x.ToString(),
                     Value = x.ToString()
@@ -206,10 +227,11 @@ namespace MyWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetHoursTo(int serviceId, DateTime date, TimeSpan from)
+        public async Task<ActionResult> GetHoursTo(int serviceId, DateTime date, TimeSpan from)
         {
 
-            var hoursto = _orderProxy.GetHoursTo(serviceId, date, from).Select(x => new SelectListItem()
+            var hours = await _orderProxy.GetHoursToAsync(serviceId, date, from);
+            var hoursto = hours.Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
                 Value = x.ToString(),
@@ -244,6 +266,7 @@ namespace MyWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ViewDetails(ViewDetailsModel edited)
         {
             var isUpdated = await _offerProxy.UpdateServiceOfferAsync

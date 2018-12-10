@@ -100,8 +100,7 @@ else
         <!--different tabs in menu-->
         <div class="tabColumn">
             <!--Personal info set like default frame-->
-            <button class="frameLinks" onclick="openFrame(event, 'Calendar')" id="defaultOpen">My calendar</button>
-            <button class="frameLinks" onclick="openFrame(event, 'Sell')">Sell</button>
+            <button class="frameLinks" onclick="openFrame(event, 'Offers')" id="defaultOpen">Offers</button>
         </div>
     </div>
 }
@@ -119,7 +118,6 @@ else
         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
     </div>
 
-    <!--Date of birth here-->
     <div class="form-group">
         @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
@@ -218,9 +216,13 @@ else
         </colgroup>
         @Html.Partial("Offers", Model.Services)
     </table>
-    <a href="@Url.Action("Add", "ServiceOffer")">
-        <img style="width:90px ;padding-top:10px;" src="@Url.Content("~/Pictures/addBtn.png")" />
-    </a>
+    @if (Model.UserName == User.Identity.GetUserName())
+    {
+        <a href="@Url.Action("Add", "ServiceOffer")">
+            <img style="width:90px ;padding-top:10px;" src="@Url.Content("~/Pictures/addBtn.png")" />
+        </a>
+    }
+
 </div>
 
 <!--delete account option, code in the beginning - button delete account-->
