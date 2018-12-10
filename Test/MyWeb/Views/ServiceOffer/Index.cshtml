@@ -1,18 +1,32 @@
 ﻿@model PagedList.IPagedList<ManageOfferModel>
-
+@using PagedList.Mvc;
+@using PagedList;
 @using WebJobPortal.Models
 @using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Services";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    IList<SelectListItem> selectListItems = new List<SelectListItem>();
+    string[] sortlist = { "Highest price", "Lowest price", "Latest", "Oldest", "Best match" };
+    int value = 1;
+    bool checkedtex = (Request.Url.ToString().Contains("showInRegion=true")) ? true : false;
+
+    foreach (string item in sortlist)
+    {
+        SelectListItem listItem = new SelectListItem();
+        listItem.Text = item;
+        listItem.Value = "" + value;
+        selectListItems.Add(listItem);
+        value++;
+    }
 }
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="padding:45px">
         <form>
             <center>
-                @Html.TextBox("SearchingString")
-                <input class="btn btn-light" type="submit" value="Search" />
+                @Html.TextBox("SearchingString", "", new { id = "searchingstring" })
+                <input class="btn btn-light" type="submit" value="Search" id="searchingBar" />
                 @if (User.Identity.GetUserId() != null)
                 {
                     <div class="form-check">
@@ -34,6 +48,13 @@
             <col class="col-md-4">
             <col class="col-md-4">
         </colgroup>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="text-align:right">
+                @Html.DropDownList("Sort by", selectListItems, "Sort by", new { id = "sortingList" })
+            </td>
+        </tr>
         @Html.Partial("Offers", Model)
     </table>
 </div>
@@ -51,6 +72,25 @@
                 window.location.href = path;
             }
     });
+    $("#sortingList").click(function () {
+        var sortingVal = $(this).val();
+        var checked = 'false';
+        var searchingString = $("#searchingstring").val();
+        console.log("xcvb"+searchingString);
+        if ($("#exampleCheck1").is(':checked')) {
+            checked = 'true';
+        }
+        if (searchingString == null) {
+            var url = '/ServiceOffer/Index?showInRegion=' + checked + '&sorting=' + sortingVal;
+        }
+        else
+        {
+            var url = '/ServiceOffer/Index?SearchingString=' + searchingString + '&showInRegion=' + checked + '&sorting=' + sortingVal;
+        }
+
+        location.href = url; // redirect
+    });
+
 </script>
 
 
