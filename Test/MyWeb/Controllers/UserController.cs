@@ -23,6 +23,7 @@ namespace MyWeb.Controllers
 {
     public class UserController : Controller
     {
+        private IAuthenticationManager _authnManager;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly IUserService _proxy;
@@ -62,7 +63,24 @@ namespace MyWeb.Controllers
             this._offerProxy = offerService;
             this._orderProxy = orderProxy;
         }
-       
+
+        public UserController(IUserService proxy, IOfferService offerService, IOrderService orderProxy, IAuthenticationManager authentication)
+        {
+            this._proxy = proxy;
+            this._offerProxy = offerService;
+            this._orderProxy = orderProxy;
+            this._authnManager = authentication;
+        }
+
+
+
+        public UserController()
+        {
+            this._proxy = new UserServiceClient("UserServiceHttpEndpoint1");
+            this._offerProxy = new OfferServiceClient("OfferServiceHttpEndpoint");
+            this._orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
+        }
+
 
         [HttpGet]
         public async Task<ActionResult> UserProfile(string id, DateTime? date = null)
@@ -75,7 +93,7 @@ namespace MyWeb.Controllers
             UserProfileViewModel user = Mapping.Mapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
             var allOffers = await _offerProxy.GetAllOffersAsync();
             var userServices = allOffers.Where(x => x.AuthorId == id);
-            user.Services= userServices.Select(y =>Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, userServices.Count()+1);
+            user.Services = userServices.Select(y => Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, userServices.Count() + 1);
             var allBought = await _offerProxy.GetAllBoughtAsync(id);
             user.Bought = allBought.Select(x => Mapping.Mapping.Map_Offer_To_BoughtOffers(x)).ToArray();
 
@@ -203,11 +221,15 @@ namespace MyWeb.Controllers
 
             base.Dispose(disposing);
         }
-        private IAuthenticationManager AuthenticationManager
+        public IAuthenticationManager AuthenticationManager
         {
             get
             {
-                return HttpContext.GetOwinContext().Authentication;
+                if (_authnManager == null)
+                {
+                    return HttpContext.GetOwinContext().Authentication;
+                }
+                return _authnManager;
             }
         }
         #endregion
