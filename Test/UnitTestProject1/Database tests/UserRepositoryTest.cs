@@ -513,6 +513,7 @@ namespace UnitTestProject1
                     Users u = unitOfWork.Users.Create(GetUser());
                     Users toUpdate = ToUpdate();
                     toUpdate.ID = u.ID;
+                    toUpdate.LastUpdate = u.LastUpdate;
 
                     bool edited = unitOfWork.Users.Update(toUpdate);
                     Assert.IsTrue(edited);

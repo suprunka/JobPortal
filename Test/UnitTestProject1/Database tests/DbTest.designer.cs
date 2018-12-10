@@ -3916,6 +3916,8 @@ namespace UnitTestProject1.Database_tests
 		
 		private int _Gender_ID;
 		
+		private System.Data.Linq.Binary _LastUpdate;
+		
 		private EntityRef<Gender> _Gender;
 		
 		private EntityRef<AspNetUsers> _AspNetUsers;
@@ -3944,6 +3946,8 @@ namespace UnitTestProject1.Database_tests
     partial void OnCity_IDChanged();
     partial void OnGender_IDChanging(int value);
     partial void OnGender_IDChanged();
+    partial void OnLastUpdateChanging(System.Data.Linq.Binary value);
+    partial void OnLastUpdateChanged();
     #endregion
 		
 		public Users()
@@ -3954,7 +3958,7 @@ namespace UnitTestProject1.Database_tests
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
 		public int ID
 		{
 			get
@@ -3974,7 +3978,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(30) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string FirstName
 		{
 			get
@@ -3994,7 +3998,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(30) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string LastName
 		{
 			get
@@ -4014,7 +4018,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logging_ID", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logging_ID", DbType="NVarChar(128) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Logging_ID
 		{
 			get
@@ -4038,7 +4042,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine", DbType="VarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string AddressLine
 		{
 			get
@@ -4058,7 +4062,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayPalMail", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayPalMail", DbType="VarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string PayPalMail
 		{
 			get
@@ -4078,7 +4082,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public string Description
 		{
 			get
@@ -4098,7 +4102,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_ID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int City_ID
 		{
 			get
@@ -4122,7 +4126,7 @@ namespace UnitTestProject1.Database_tests
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int Gender_ID
 		{
 			get
@@ -4142,6 +4146,26 @@ namespace UnitTestProject1.Database_tests
 					this._Gender_ID = value;
 					this.SendPropertyChanged("Gender_ID");
 					this.OnGender_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdate", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary LastUpdate
+		{
+			get
+			{
+				return this._LastUpdate;
+			}
+			set
+			{
+				if ((this._LastUpdate != value))
+				{
+					this.OnLastUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._LastUpdate = value;
+					this.SendPropertyChanged("LastUpdate");
+					this.OnLastUpdateChanged();
 				}
 			}
 		}
