@@ -46,7 +46,7 @@ namespace UnitTestProject1.MVC__tests
                 serviceMockOrder.Setup(x => x.CreateOrderAsync(It.IsAny<string>())).Throws(new FaultException());
 
                 var ctr = new OrderController(serviceMockUser.Object, serviceMockOrder.Object);
-                 task = ctr.CreateOrder("22");
+                task = ctr.CreateOrder("22");
                 Assert.Fail();
 
             }
@@ -83,7 +83,8 @@ namespace UnitTestProject1.MVC__tests
             {
                 Assert.Fail();
             }
-        } [TestMethod]
+        }
+        [TestMethod]
         public void AddToCart_error_view()
         {
             try
@@ -105,14 +106,15 @@ namespace UnitTestProject1.MVC__tests
             {
                 Assert.Fail();
             }
-        } [TestMethod]
+        }
+        [TestMethod]
         public void Clean_cartCorrect()
         {
             try
             {
                 var serviceMockOrder = new Mock<IOrderService>();
                 var serviceMockUser = new Mock<IUserService>();
-                serviceMockOrder.Setup(x => x.CleanCartAsync( It.IsAny<string>())).ReturnsAsync(true);
+                serviceMockOrder.Setup(x => x.CleanCartAsync(It.IsAny<string>())).ReturnsAsync(true);
 
                 var ctr = new OrderController(serviceMockUser.Object, serviceMockOrder.Object);
                 var task = ctr.CleanCart("2");
@@ -151,25 +153,26 @@ namespace UnitTestProject1.MVC__tests
             {
                 Assert.Fail();
             }
-        } [TestMethod]
+        }
+        [TestMethod]
         public void DeleteFromCart()
         {
             //DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
-            
-                try
+
+            try
             {
                 var serviceMockOrder = new Mock<IOrderService>();
                 var serviceMockUser = new Mock<IUserService>();
-                    serviceMockOrder.Setup(x => x.DeleteFromCartAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>())).ReturnsAsync(true);
+                serviceMockOrder.Setup(x => x.DeleteFromCartAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>())).ReturnsAsync(true);
 
-                    var ctr = new OrderController(serviceMockUser.Object, serviceMockOrder.Object);
+                var ctr = new OrderController(serviceMockUser.Object, serviceMockOrder.Object);
                 var task = ctr.DeleteFromCard("2", 2, DateTime.Now, new TimeSpan(11, 00, 00), new TimeSpan(12, 00, 00));
-                    var result = task.Result;
-                    RedirectToRouteResult routeResult = result as RedirectToRouteResult;
-                    Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+                var result = task.Result;
+                RedirectToRouteResult routeResult = result as RedirectToRouteResult;
+                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
 
-                    Assert.AreEqual(routeResult.RouteValues["action"], "Index");
-                
+                Assert.AreEqual(routeResult.RouteValues["action"], "Index");
+
             }
 
             catch

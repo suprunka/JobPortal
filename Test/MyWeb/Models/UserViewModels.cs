@@ -15,7 +15,7 @@ namespace WebJobPortal.Models
 
         public String Description { get; set; }
     }
- 
+
     public class LoginViewModel
     {
         [Required]
@@ -38,12 +38,12 @@ namespace WebJobPortal.Models
 
         public virtual BoughtOfferModel[] Bought { get; set; }
         public virtual JobOfferViewModel[] Jobs { get; set; }
-        public virtual  DateTime Date { get; set; }
+        public virtual DateTime Date { get; set; }
 
-        public virtual  String Description { get; set; }
+        public virtual String Description { get; set; }
 
         [Display(Name = "Email:")]
-        public virtual  String Email { get; set; }
+        public virtual String Email { get; set; }
 
 
         [Display(Name = "User name:")]
@@ -151,7 +151,7 @@ namespace WebJobPortal.Models
         public Gender Gender { get; set; }
         public string Username { get; set; }
     }
-    
+
     public class RegisterViewModel
     {
         public int ID { get; set; }
@@ -171,13 +171,13 @@ namespace WebJobPortal.Models
         [RegularExpression("^[0-9]{8}$", ErrorMessage = "8 digits required.")]
         public String PhoneNumber { get; set; }
 
-      
+
         [Display(Name = "User Name:")]
         [Required(ErrorMessage = "User name required")]
         [RegularExpression("^[a-zA-Z0-9ÆæØøÅå ]{3,}$", ErrorMessage = "At leat 3 characters required.")]
         public String UserName { get; set; }
     }
-    
+
     public class ChangePasswordViewModel
     {
         [Required]
@@ -213,7 +213,7 @@ namespace WebJobPortal.Models
         [Display(Name = "New email")]
         public string NewEmail { get; set; }
 
-        
+
 
     }
 

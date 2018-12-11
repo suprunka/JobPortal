@@ -41,7 +41,7 @@ namespace AppJobPortal.New
         public Users(UserAppModel user)
         {
             InitializeComponent();
-            _proxy = new TcpUserReference.UserServiceClient("UserServiceTcpEndpoint");
+            _proxy = new UserServiceClient("UserServiceTcpEndpoint");
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<UserAppModel, User>();
@@ -113,14 +113,9 @@ namespace AppJobPortal.New
                 SetUserFromBoxes();
                 _user.ID = int.Parse(txtId.Text);
 
-                if (_proxy.EditUser(_mapper.Map(_user, new User())))
+                if (!_proxy.EditUser(_mapper.Map(_user, new User())))
                 {
-                 
-                }
-                else
-                {
-                    MessageBox.Show("Cannot process the operation", "Data you read was modified.");
-                   
+                    MessageBox.Show("Data you read was modified", "Cannot process the operation");
                 }
             }
             else
