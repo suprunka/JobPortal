@@ -61,7 +61,7 @@ namespace AppJobPortal.New
             regBox.ItemsSource = Enum.GetValues(typeof(Region));
         }
         private void GetAll() {
-            _source = _proxy.GetAll();
+            _source = new UserServiceClient("UserServiceTcpEndpoint").GetAll();
             //_source.AsParallel().ForAll(user => new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email, user.AddressLine, user.CityName, user.Postcode, user.Region, user.UsersGender));
             IList<UserAppModel> userAppModels = new List<UserAppModel>();
             foreach(User user in _source)
@@ -115,7 +115,12 @@ namespace AppJobPortal.New
 
                 if (_proxy.EditUser(_mapper.Map(_user, new User())))
                 {
-                    GetAll();
+                 
+                }
+                else
+                {
+                    MessageBox.Show("Cannot process the operation", "Data you read was modified.");
+                   
                 }
             }
             else
@@ -123,6 +128,7 @@ namespace AppJobPortal.New
                 MessageBox.Show("Select user first" , "Cannot find user");
 
             }
+            GetAll();
         }
 
         private void btnServices_Click(object sender, RoutedEventArgs e)

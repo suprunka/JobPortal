@@ -242,7 +242,6 @@ namespace ServiceLibrary
                     CityName = u.AddressTable.City,
                     Postcode = u.AddressTable.Postcode,
                     LoggingId = u.Logging_ID,
-                    // Password = u.AspNetUsers.Password,
                     UserName = u.AspNetUsers.UserName,
                     Description = u.Description,
                     PayPalMail = u.PayPalMail,
