@@ -59,6 +59,13 @@
     </table>
 </div>
 
+<div id='Paging' style="text-align: center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
         $('#exampleCheck1').click(function () {
@@ -70,22 +77,45 @@
             else {
                 var path = '@Url.Content("~/ServiceOffer/"+ @HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() +"")' + "?showInRegion=false";
                 window.location.href = path;
+                }
+        });
+        $("#sortingList").click(function () {
+            var sortingVal = $(this).val();
+            var checked = 'false';
+            var searchingString = $("#searchingstring").val();
+            var pathArray = window.location.pathname;
+            var subCat = "";
+            if (pathArray.includes("/Home")) {
+                subCat = "Home";
             }
-    });
-    $("#sortingList").click(function () {
-        var sortingVal = $(this).val();
-        var checked = 'false';
-        var searchingString = $("#searchingstring").val();
-        console.log("xcvb"+searchingString);
+            else if (pathArray.includes("/IT")) {
+                subCat = "subCategory=IT";
+            }
+            else if (pathArray.includes("/Tutoring")) {
+                subCat = "Tutoring";
+            }
+            else if (pathArray.includes("/Repairs")) {
+                subCat = "Repairs";
+            }
+            else if (pathArray.includes("/Media")) {
+                subCat = "Media";
+            }
+            else if (pathArray.includes("/Architecture")) {
+                subCat = "Architecture";
+            }
+            else {
+                subCat = "Index";
+            }
         if ($("#exampleCheck1").is(':checked')) {
             checked = 'true';
-        }
-        if (searchingString == null) {
-            var url = '/ServiceOffer/Index?showInRegion=' + checked + '&sorting=' + sortingVal;
+            }
+           
+            if (searchingString == null) {
+                var url = '/ServiceOffer/' + subCat + '?showInRegion=' + checked + '&sorting=' + sortingVal;
         }
         else
-        {
-            var url = '/ServiceOffer/Index?SearchingString=' + searchingString + '&showInRegion=' + checked + '&sorting=' + sortingVal;
+            {
+                var url = '/ServiceOffer/' + subCat + '?SearchingString=' + searchingString + '&showInRegion=' + checked + '&sorting=' + sortingVal;
         }
 
         location.href = url; // redirect

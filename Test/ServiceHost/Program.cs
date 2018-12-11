@@ -18,6 +18,19 @@ namespace ServiceHost2
 
         static void Main(string[] args)
         {
+            using (ServiceHost host = new ServiceHost(typeof(NotificationService)))
+            {
+                host.Open();
+
+                Console.WriteLine("Service up and running at:");
+                foreach (var ea in host.Description.Endpoints)
+                {
+                    Console.WriteLine(ea.Address);
+                }
+
+                Console.ReadLine();
+                host.Close();
+            }
             using (ServiceHost host = new ServiceHost(typeof(NotificationService), notificationBaseAddress))
             {
                 // Enable metadata publishing.

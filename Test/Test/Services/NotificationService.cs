@@ -55,7 +55,7 @@ namespace ServiceLibrary
                 .Build();
             ITrigger trigger = TriggerBuilder
                 .Create()
-                .WithCronSchedule("0 0 22  1/1 * ? *")
+                .WithCronSchedule("0 12 18  1/1 * ? *")
                 .StartNow()
                 .Build();
 
@@ -93,10 +93,9 @@ namespace ServiceLibrary
         {
             return Task<bool>.Factory.StartNew(() =>
             {
-                var allSalelinesForNextDay = _unitOfWork.Orders.GetAllSalelines().Where(x => x.BookedDate.BookedDate1.Date == (DateTime.Now.Date.AddDays(1)));
-                foreach (var saleline in allSalelinesForNextDay)
+                var allEmailsforSalelinesForNextDay = _unitOfWork.Orders.GetAllSalelines().Where(x => x.BookedDate.BookedDate1.Date == (DateTime.Now.Date.AddDays(1))).Select(x=>x.ServiceOffer.AspNetUsers.Email);
+                foreach (var email in allEmailsforSalelinesForNextDay.Distinct())
                 {
-                    var email = saleline.ServiceOffer.AspNetUsers.Email;
                     MailMessage mail = new MailMessage();
                     mail.From = new MailAddress(ConfigurationManager.AppSettings["Glogin"], "JobPortal");
                     mail.To.Add(new MailAddress(email, "Receiver"));
