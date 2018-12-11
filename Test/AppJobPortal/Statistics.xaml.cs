@@ -10,7 +10,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JobPortal.Model;
 using AppJobPortal.New;
-
+using System.Threading.Tasks;
+using System.Threading;
 namespace AppJobPortal
 
 {
@@ -20,26 +21,61 @@ namespace AppJobPortal
     public partial class Statistics : UserControl
     {
         private IOfferService _offerproxy;
-
+        private AllServices services;
+        private EarnedMoney earned;
+        private UserBoughtServices boughtServices;
+        private UsersGender gender;
+        private ServicesByRegionandRate regionandRate;
+        private Top10Services top10;
         public Statistics()
         {
 
             InitializeComponent();
             _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
-           
+
             DataContext = new AllServices();
+            Init();
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Init()
         {
-            DataContext = new AllServices();
-
+            services = new AllServices();
+            earned = new EarnedMoney();
+            boughtServices = new UserBoughtServices();
+            gender = new UsersGender();
+            regionandRate = new ServicesByRegionandRate();
+            top10 = new Top10Services();
         }
 
-        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
-        {
-            DataContext = new EarnedMoney();
 
+        private  void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Thread thread = new Thread(new ThreadStart(() => {
+                Init();
+            }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.IsBackground = true;
+            Task t = new Task(() =>
+            {
+                thread.Start();
+                thread.Join();
+            });
+            t.Start();
+            DataContext = services;
+        }
+
+        private async void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        {
+            EarnedMoney all = null;
+            await Task.Run(() =>
+            {
+
+                Dispatcher.Invoke(() =>
+                {
+                    all = new EarnedMoney();
+                    DataContext = all;
+                });
+            });
         }
 
         private void Button_Click_2(object sender, System.Windows.RoutedEventArgs e)
