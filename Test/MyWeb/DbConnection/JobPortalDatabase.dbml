@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JobPortal" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=JAKUB\SQLEXPRESS;Initial Catalog=JobPortal;Integrated Security=True" SettingsObjectName="ServiceLibrary.Properties.Settings" SettingsPropertyName="JobPortalConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.WorkingArea" Member="WorkingArea">
+    <Type Name="WorkingArea">
+      <Column Name="Employee_Phone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="AddressTable_WorkingArea" Member="AddressTable" ThisKey="City" OtherKey="City" Type="AddressTable" IsForeignKey="true" />
+      <Association Name="UserTable_WorkingArea" Member="UserTable" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccountState" Member="AccountState">
+    <Type Name="AccountState">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Account_state" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="AccountState_Account" Member="Account" ThisKey="ID" OtherKey="AccountState_ID" Type="Account" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AddressTable" Member="AddressTable">
+    <Type Name="AddressTable">
+      <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="Region" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="AddressTable_WorkingArea" Member="WorkingArea" ThisKey="City" OtherKey="City" Type="WorkingArea" />
+      <Association Name="AddressTable_UserTable" Member="UserTable" ThisKey="City" OtherKey="City" Type="UserTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Advertisement" Member="Advertisement">
+    <Type Name="Advertisement">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Review_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Service_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Employee_Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="Advertisement_AvailableDates" Member="AvailableDates" ThisKey="ID" OtherKey="Advertisement_ID" Type="AvailableDates" />
+      <Association Name="Advertisement_Saleline" Member="Saleline" ThisKey="ID" OtherKey="Advertisement_ID" Type="Saleline" />
+      <Association Name="Review_Advertisement" Member="Review" ThisKey="Review_ID" OtherKey="ID" Type="Review" IsForeignKey="true" />
+      <Association Name="ServiceTable_Advertisement" Member="ServiceTable" ThisKey="Service_ID" OtherKey="ID" Type="ServiceTable" IsForeignKey="true" />
+      <Association Name="UserTable_Advertisement" Member="UserTable" ThisKey="Employee_Phone" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AvailableDates" Member="AvailableDates">
+    <Type Name="AvailableDates">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Saleline_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Advertisement_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Advertisement_AvailableDates" Member="Advertisement" ThisKey="Advertisement_ID" OtherKey="ID" Type="Advertisement" IsForeignKey="true" />
+      <Association Name="Saleline_AvailableDates" Member="Saleline" ThisKey="Saleline_ID" OtherKey="ID" Type="Saleline" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Category" Member="Category">
+    <Type Name="Category">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Category_ServiceTable" Member="ServiceTable" ThisKey="ID" OtherKey="Category_ID" Type="ServiceTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customer">
+    <Type Name="Customer">
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="UserTable_Customer" Member="UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dates" Member="Dates">
+    <Type Name="Dates">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="HourFrom" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HourTo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Employee" Member="Employee">
+    <Type Name="Employee">
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="UserTable_Employee" Member="UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gender" Member="Gender">
+    <Type Name="Gender">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Gender" Member="Gender1" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Gender_UserTable" Member="UserTable" ThisKey="ID" OtherKey="Gender_ID" Type="UserTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Logging" Member="Logging">
+    <Type Name="Logging">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Logging_UserTable" Member="UserTable" ThisKey="ID" OtherKey="Logging_ID" Type="UserTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderStatus" Member="OrderStatus">
+    <Type Name="OrderStatus">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Order_status" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="OrderStatus_OrderTable" Member="OrderTable" ThisKey="ID" OtherKey="OrderStatus_ID" Type="OrderTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderTable" Member="OrderTable">
+    <Type Name="OrderTable">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Account_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OrderStatus_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Payment_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Association Name="OrderTable_Saleline" Member="Saleline" ThisKey="ID" OtherKey="Order_ID" Type="Saleline" />
+      <Association Name="OrderStatus_OrderTable" Member="OrderStatus" ThisKey="OrderStatus_ID" OtherKey="ID" Type="OrderStatus" IsForeignKey="true" />
+      <Association Name="Payment_OrderTable" Member="Payment" ThisKey="Payment_ID" OtherKey="ID" Type="Payment" IsForeignKey="true" />
+      <Association Name="Account_OrderTable" Member="Account" ThisKey="Account_ID" OtherKey="ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payment" Member="Payment">
+    <Type Name="Payment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Payment_OrderTable" Member="OrderTable" ThisKey="ID" OtherKey="Payment_ID" Type="OrderTable" />
+      <Association Name="PaymentType_Payment" Member="PaymentType1" ThisKey="PaymentType" OtherKey="ID" Type="PaymentType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaymentType" Member="PaymentType">
+    <Type Name="PaymentType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PaymentType" Member="PaymentType1" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="PaymentType_Payment" Member="Payment" ThisKey="ID" OtherKey="PaymentType" Type="Payment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rate" Member="Rate">
+    <Type Name="Rate">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RateValue" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Rate_Review" Member="Review" ThisKey="RateValue" OtherKey="Rate_ID" Type="Review" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Review" Member="Review">
+    <Type Name="Review">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Customer_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Rate_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Review_Advertisement" Member="Advertisement" ThisKey="ID" OtherKey="Review_ID" Type="Advertisement" />
+      <Association Name="Rate_Review" Member="Rate" ThisKey="Rate_ID" OtherKey="RateValue" Type="Rate" IsForeignKey="true" />
+      <Association Name="UserTable_Review" Member="UserTable" ThisKey="Customer_ID" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Saleline" Member="Saleline">
+    <Type Name="Saleline">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Advertisement_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Saleline_AvailableDates" Member="AvailableDates" ThisKey="ID" OtherKey="Saleline_ID" Type="AvailableDates" />
+      <Association Name="Advertisement_Saleline" Member="Advertisement" ThisKey="Advertisement_ID" OtherKey="ID" Type="Advertisement" IsForeignKey="true" />
+      <Association Name="OrderTable_Saleline" Member="OrderTable" ThisKey="Order_ID" OtherKey="ID" Type="OrderTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServiceTable" Member="ServiceTable">
+    <Type Name="ServiceTable">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Category_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ServiceTable_Advertisement" Member="Advertisement" ThisKey="ID" OtherKey="Service_ID" Type="Advertisement" />
+      <Association Name="Category_ServiceTable" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserTable" Member="UserTable">
+    <Type Name="UserTable">
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Logging_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressTableLine" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="UserTable_WorkingArea" Member="WorkingArea" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="WorkingArea" />
+      <Association Name="UserTable_Advertisement" Member="Advertisement" ThisKey="PhoneNumber" OtherKey="Employee_Phone" Type="Advertisement" />
+      <Association Name="UserTable_Customer" Member="Customer" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Customer" />
+      <Association Name="UserTable_Employee" Member="Employee" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Employee" />
+      <Association Name="UserTable_Review" Member="Review" ThisKey="PhoneNumber" OtherKey="Customer_ID" Type="Review" />
+      <Association Name="UserTable_Account" Member="Account" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="Account" />
+      <Association Name="AddressTable_UserTable" Member="AddressTable" ThisKey="City" OtherKey="City" Type="AddressTable" IsForeignKey="true" />
+      <Association Name="Gender_UserTable" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" />
+      <Association Name="Logging_UserTable" Member="Logging" ThisKey="Logging_ID" OtherKey="ID" Type="Logging" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Account" Member="Account">
+    <Type Name="Account">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountState_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LatestActivity" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Account_OrderTable" Member="OrderTable" ThisKey="ID" OtherKey="Account_ID" Type="OrderTable" />
+      <Association Name="AccountState_Account" Member="AccountState" ThisKey="AccountState_ID" OtherKey="ID" Type="AccountState" IsForeignKey="true" />
+      <Association Name="UserTable_Account" Member="UserTable" ThisKey="PhoneNumber" OtherKey="PhoneNumber" Type="UserTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

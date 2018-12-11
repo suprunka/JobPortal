@@ -10,7 +10,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JobPortal.Model;
 using AppJobPortal.New;
-
+using System.Threading.Tasks;
+using System.Threading;
 namespace AppJobPortal
 
 {
@@ -26,20 +27,37 @@ namespace AppJobPortal
 
             InitializeComponent();
             _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
-           
+
             DataContext = new AllServices();
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            DataContext = new AllServices();
 
+        private async void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            AllServices all = null;
+            await Task.Run(() =>
+            {
+
+                Dispatcher.Invoke(() =>
+                {
+                    all = new AllServices();
+                    DataContext = all;
+                });
+            });
         }
 
-        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        private async void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
         {
-            DataContext = new EarnedMoney();
+            EarnedMoney all = null;
+            await Task.Run(() =>
+            {
 
+                Dispatcher.Invoke(() =>
+                {
+                    all = new EarnedMoney();
+                    DataContext = all;
+                });
+            });
         }
 
         private void Button_Click_2(object sender, System.Windows.RoutedEventArgs e)

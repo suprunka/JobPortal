@@ -9,8 +9,8 @@
 
     <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MaxWidth="600"/>
-            <ColumnDefinition Width="*" MaxWidth="400"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -18,40 +18,34 @@
             <RowDefinition Height="15*"/>
 
         </Grid.RowDefinitions>
+        <DataGrid x:Name="servicesTable" Grid.Column="0" Margin="10,0,0,10" BorderThickness="5" Grid.Row="1" DisplayMemberPath="DisplayName"  RenderTransformOrigin="0.494,0.918" HorizontalGridLinesBrush="#FF333337" VerticalGridLinesBrush="#FF2D2D30" CanUserAddRows="False" CanUserResizeRows="False" IsEnabled="True" Grid.ColumnSpan="2">
 
-        <DataGrid Name="servicesTable" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="10,0,10,10" CanUserSortColumns="True" CanUserDeleteRows="True" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="ServiceID" ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Title}" Header="Title"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Description}"  Header="Description" Width="2*"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Category}" Header="Category" ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Subcategory}" Header="Subcategory" ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=FullName}" Header="Author" ></DataGridTextColumn>
-                <!--
-                <DataGridTemplateColumn Header="Author">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="btnEmployee" Content="{Binding Path=FullName}" Click="GoToEmployee" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                -->
-                <DataGridTemplateColumn  Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="btnDelete" Content="Delete" Click="Delete" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
+        <!--
+            <DataGridTextColumn Binding="{Binding Id}" Header="ServiceID" ></DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding Title}" Header="Title"></DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding Description}"  Header="Description" Width="2*"></DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding Category}" Header="Category" ></DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding Subcategory}" Header="Subcategory" ></DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding Path=FullName}" Header="Author" ></DataGridTextColumn>
+            
+            
+            --><DataGrid.Columns>
+            
+            <DataGridTemplateColumn  Header="Delete">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Name="btnDelete" Content="Delete" Click="Delete" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
         </DataGrid>
 
+
         <DockPanel Grid.ColumnSpan="1" Grid.Row="0" >
-            <Button Name ="RefreshBtn" Content="Refresh" Width="80" Height="36" Click="RefreshBtn_Click"/>
-
+            <Button Name ="RefreshBtn" Content="Refresh" Width="90" Height="36" Click="RefreshBtn_Click"/>
             <Button Content="Search" Margin="0,0,0,0"  Width="90" Height="36" Click="Button_Click"/>
-            <TextBox Name="txtId"  Margin="0,0,0,0" Height="20" TextWrapping="Wrap" Text=""  Width="90"/>
-
+            <TextBox Name="txtId"  Margin="0,0,0,0" Height="20" TextWrapping="Wrap" Width="90"/>
         </DockPanel>
 
 

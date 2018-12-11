@@ -21,7 +21,6 @@ namespace AppJobPortal
 
         public AllServices()
         {
-
             InitializeComponent();
             _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
             var offers = _offerproxy.GetAllOffers();
