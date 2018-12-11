@@ -21,7 +21,12 @@ namespace AppJobPortal
     public partial class Statistics : UserControl
     {
         private IOfferService _offerproxy;
-
+        private AllServices services;
+        private EarnedMoney earned;
+        private UserBoughtServices boughtServices;
+        private UsersGender gender;
+        private ServicesByRegionandRate regionandRate;
+        private Top10Services top10;
         public Statistics()
         {
 
@@ -29,21 +34,34 @@ namespace AppJobPortal
             _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
 
             DataContext = new AllServices();
+            Init();
+        }
+
+        private void Init()
+        {
+            services = new AllServices();
+            earned = new EarnedMoney();
+            boughtServices = new UserBoughtServices();
+            gender = new UsersGender();
+            regionandRate = new ServicesByRegionandRate();
+            top10 = new Top10Services();
         }
 
 
-        private async void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private  void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            AllServices all = null;
-            await Task.Run(() =>
+            Thread thread = new Thread(new ThreadStart(() => {
+                Init();
+            }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.IsBackground = true;
+            Task t = new Task(() =>
             {
-
-                Dispatcher.Invoke(() =>
-                {
-                    all = new AllServices();
-                    DataContext = all;
-                });
+                thread.Start();
+                thread.Join();
             });
+            t.Start();
+            DataContext = services;
         }
 
         private async void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)

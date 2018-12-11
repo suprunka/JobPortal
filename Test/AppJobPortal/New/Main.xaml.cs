@@ -6,17 +6,13 @@ using System;
 
 namespace AppJobPortal.New
 {
-    /// <summary>
-    /// Interaction logic for Main.xaml
-    /// </summary>
+
     public partial class Main : Window
     {
-        private Services _services;
-        private Statistics _statistics;
-        private Users _users;
+
         public Main()
         {
-           
+
         }
 
 
@@ -33,7 +29,7 @@ namespace AppJobPortal.New
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                DataContext = new Services(); 
+                DataContext = new Services();
             }));
         }
 
