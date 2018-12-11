@@ -300,7 +300,7 @@ namespace Repository
                             }
 
 
-                            catch
+                            catch(Exception e)
                             {
 
                                 result = false;

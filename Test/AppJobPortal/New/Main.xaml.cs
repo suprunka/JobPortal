@@ -16,35 +16,33 @@ namespace AppJobPortal.New
         private Users _users;
         public Main()
         {
-            _services = new AppJobPortal.New.Services();
-            _users = new AppJobPortal.New.Users();
-            _statistics = new AppJobPortal.Statistics();
+           
         }
 
 
         private void Users_Clicked(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.Invoke(() =>
+            this.Dispatcher.BeginInvoke(new Action(() =>
                        {
-                           DataContext = _users;
-                       });
+                           DataContext = new Users();
+                       }));
 
         }
 
         private  void Services_Clicked(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.Invoke(() =>
+            this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                DataContext = _services;
-            });
+                DataContext = new Services(); 
+            }));
         }
 
         private  void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.Invoke(() =>
+            this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                DataContext = _statistics;
-            });
+                DataContext = new Statistics();
+            }));
         }
     }
 }
