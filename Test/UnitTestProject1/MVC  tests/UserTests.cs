@@ -8,11 +8,6 @@ using System;
 using MyWeb.Controllers;
 using MyWeb.UserReference1;
 using MyWeb.OfferReference;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
 using System.Security.Principal;
 using MyWeb.OrderReference;
 using PagedList;
@@ -47,7 +42,7 @@ namespace UnitTestProject1.MVC__tests
                 Assert.Fail();
             }
         }
-        
+
 
         [TestMethod]
         public void Test_Edit_Get_Proper_User()
@@ -207,7 +202,8 @@ namespace UnitTestProject1.MVC__tests
                 var serviceMock = new Mock<IUserService>();
                 var serviceOfferMock = new Mock<IOfferService>();
                 var serviceOrderMock = new Mock<IOrderService>();
-                serviceMock.Setup(s => s.FindUserByIDAsync(It.IsAny<int>())).ReturnsAsync(new User {
+                serviceMock.Setup(s => s.FindUserByIDAsync(It.IsAny<int>())).ReturnsAsync(new User
+                {
                 });
                 var controller = new UserController(serviceMock.Object, serviceOfferMock.Object, serviceOrderMock.Object);
                 var task = controller.ChangeEmail(2);//Task<actionRsult>>
@@ -260,7 +256,7 @@ namespace UnitTestProject1.MVC__tests
             }
         }
 
-       
+
 
         [TestMethod]
         public void Test_Create_View__With_No_Cookie_Exception_Expected()
@@ -287,7 +283,7 @@ namespace UnitTestProject1.MVC__tests
         [DataRow("Adam", "Adamżść", "Streetline", "Cityname", "2154", "paypal@wp.pl", Region.Hovedstaden, Gender.Male, false)] //invalid lastname (not allowed characters)
         [DataRow("Adam", "Adam", "Streetlineżć", "Cityname", "2154", "paypal@wp.pl", Region.Hovedstaden, Gender.Male, false)] //invalid addressline (not allowed characters)
         [DataRow("Adam", "Adam", "Streetline", "Citynamę", "2154", "paypal@wp.pl", Region.Hovedstaden, Gender.Male, false)] //invalid city name (not allwed characters)
-        [DataRow("Adam", "Adam", "Streetline", "Cityname", "215214", "paypal@wp.pl",Region.Hovedstaden, Gender.Male, false)] //invalid postcode (too long)
+        [DataRow("Adam", "Adam", "Streetline", "Cityname", "215214", "paypal@wp.pl", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (too long)
         [DataRow("Adam", "Adam", "Streetline", "Cityname", "śćęż", "paypal@wp.pl", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (not allowed characters)
         [DataRow("Adam", "Adam", "Streetline", "Cityname", "2164", "pąypął@wp.pl", Region.Hovedstaden, Gender.Male, false)] //invalid postcode (not allowed characters)
         [DataRow("Adam", "Adam", "Streetline", "Cityname", "2154", "paypal@wp.pl", Region.Hovedstaden, Gender.Male, true)] //valid all data

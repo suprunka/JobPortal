@@ -15,6 +15,8 @@ using WebJobPortal.Models;
 using JobPortal.Model;
 using System.Configuration;
 using System.Threading.Tasks;
+using MyWeb.UserReference1;
+using MyWeb.OrderReference;
 
 namespace MyWeb.Controllers
 {
@@ -31,6 +33,12 @@ namespace MyWeb.Controllers
             _offerProxy = new OfferReference.OfferServiceClient("OfferServiceHttpEndpoint");
             _userProxy = new UserReference1.UserServiceClient("UserServiceHttpEndpoint1");
             _orderProxy = new OrderReference.OrderServiceClient("OrderServiceHttpEndpoint");
+        }
+
+        public OrderController(IUserService userService, IOrderService orderService)
+        {
+            _userProxy = userService;
+            _orderProxy = orderService;
         }
 
         public async Task<ActionResult> Index(string id, string error)

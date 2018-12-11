@@ -41,7 +41,7 @@ namespace AppJobPortal.New
         public Users(UserAppModel user)
         {
             InitializeComponent();
-            _proxy = new TcpUserReference.UserServiceClient("UserServiceTcpEndpoint");
+            _proxy = new UserServiceClient("UserServiceTcpEndpoint");
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<UserAppModel, User>();
@@ -61,7 +61,7 @@ namespace AppJobPortal.New
             regBox.ItemsSource = Enum.GetValues(typeof(Region));
         }
         private void GetAll() {
-            _source = _proxy.GetAll();
+            _source = new UserServiceClient("UserServiceTcpEndpoint").GetAll();
             //_source.AsParallel().ForAll(user => new UserAppModel(user.ID, user.PhoneNumber, user.FirstName, user.LastName, user.Email, user.AddressLine, user.CityName, user.Postcode, user.Region, user.UsersGender));
             IList<UserAppModel> userAppModels = new List<UserAppModel>();
             foreach(User user in _source)
@@ -113,9 +113,9 @@ namespace AppJobPortal.New
                 SetUserFromBoxes();
                 _user.ID = int.Parse(txtId.Text);
 
-                if (_proxy.EditUser(_mapper.Map(_user, new User())))
+                if (!_proxy.EditUser(_mapper.Map(_user, new User())))
                 {
-                    GetAll();
+                    MessageBox.Show("Data you read was modified", "Cannot process the operation");
                 }
             }
             else
@@ -123,6 +123,7 @@ namespace AppJobPortal.New
                 MessageBox.Show("Select user first" , "Cannot find user");
 
             }
+            GetAll();
         }
 
         private void btnServices_Click(object sender, RoutedEventArgs e)
