@@ -63,7 +63,7 @@ namespace MyWeb.Controllers
             _offerProxy = proxy;
         }
         public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion, int? sorting)
-        { 
+        {
             User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
@@ -71,6 +71,7 @@ namespace MyWeb.Controllers
             {
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
             }
+
           
             var all = await _offerProxy.GetAllOffersAsync();
             IEnumerable<Offer> list = null;
@@ -113,14 +114,13 @@ namespace MyWeb.Controllers
             }
             if (searchingString != null)
             {
-                ipagedList = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper()))
-                    .Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+                ipagedList = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
             }
             else
             {
                 ipagedList = list.Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
             }
-           
+            
             return View("Index", ipagedList);
         }
 

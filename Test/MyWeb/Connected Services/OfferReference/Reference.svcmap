@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ba458f74-f790-423b-a629-ced0d0974bb3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6df9c113-f79c-401d-95a0-9850ffb4c667" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/Offer/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://jobportalik.cloudapp.net/OfferService.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="e30ab2bd-bb9d-42bd-af8c-0885c7db8b12" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7fbe3afe-a66e-421f-b013-a487605ce0ef" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4ac88435-4352-482c-959b-a008fb747f0b" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="265f40d7-e1a0-4df9-a9c1-e60f1cc7525d" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="7ce9ba79-3503-49d5-97ea-9d1e4ddb8cad" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="OfferService.wsdl" MetadataType="Wsdl" ID="42721259-d28a-4818-9846-84525aa0a3ad" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/OfferService.svc?wsdl" />
+    <MetadataFile FileName="OfferService.xsd" MetadataType="Schema" ID="50f84344-6eb4-4763-80a6-4abd4f8a9d27" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd3" />
+    <MetadataFile FileName="OfferService1.xsd" MetadataType="Schema" ID="24c5a910-aeea-4056-ab72-60cd00cbfe86" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd2" />
+    <MetadataFile FileName="OfferService2.xsd" MetadataType="Schema" ID="6382cfc4-2e6f-4c1d-ab3d-aa819193f8a9" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd1" />
+    <MetadataFile FileName="OfferService3.xsd" MetadataType="Schema" ID="38b32801-b72c-4f34-b756-f37a44d8ae0f" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

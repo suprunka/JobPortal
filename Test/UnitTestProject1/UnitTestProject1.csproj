@@ -274,10 +274,6 @@
       <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
       <Name>Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceHost\ServiceHost.csproj">
-      <Project>{d6747a31-10f4-46ed-8e7d-78481f93e3d1}</Project>
-      <Name>ServiceHost</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Test\ServiceLibrary.csproj">
       <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
       <Name>ServiceLibrary</Name>
