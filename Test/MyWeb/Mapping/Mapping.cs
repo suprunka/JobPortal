@@ -80,6 +80,7 @@ namespace MyWeb.Mapping
                 UserName = user.UserName,
                 Description = user.Description,
                 Lastupdate = user.LastUpdate,
+                LoggingId = user.LoggingId,
             };
         }
 

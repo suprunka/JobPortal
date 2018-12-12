@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Persist Security Info=True;User ID=dmai0917_1067677" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dmai0917_1067677" Class="JobPortalDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067677;User ID=dmai0917_1067677" SettingsObjectName="Repository.Properties.Settings" SettingsPropertyName="dmai0917_1067677ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AddressTable" Member="AddressTables">
     <Type Name="AddressTable">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -32,7 +32,7 @@
       <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="AspNetUsers_AspNetUserClaim" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
@@ -40,7 +40,7 @@
       <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="AspNetUsers_AspNetUserLogin" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
@@ -48,31 +48,7 @@
       <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AspNetUsers_AspNetUserRole" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
-    <Type Name="AspNetUsers">
-      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUsers_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
-      <Association Name="AspNetUsers_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
-      <Association Name="AspNetUsers_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
-      <Association Name="AspNetUsers_OrderTable" Member="OrderTables" ThisKey="Id" OtherKey="Users_ID" Type="OrderTable" />
-      <Association Name="AspNetUsers_ShoppingCart" Member="ShoppingCart" ThisKey="Id" OtherKey="User_ID" Type="ShoppingCart" />
-      <Association Name="AspNetUsers_Review" Member="Reviews" ThisKey="Id" OtherKey="Customer_ID" Type="Review" />
-      <Association Name="AspNetUsers_Users" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
-      <Association Name="AspNetUsers_ServiceOffer" Member="ServiceOffer" ThisKey="Id" OtherKey="Employee_ID" Type="ServiceOffer" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.BookedDates" Member="BookedDates">
@@ -114,8 +90,8 @@
       <Column Name="TotalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Association Name="OrderTable_Salelines" Member="Salelines" ThisKey="ID" OtherKey="Order_ID" Type="Salelines" />
-      <Association Name="AspNetUsers_OrderTable" Member="AspNetUsers" ThisKey="Users_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
       <Association Name="OrderStatus_OrderTable" Member="OrderStatus" ThisKey="OrderStatus_ID" OtherKey="ID" Type="OrderStatus" IsForeignKey="true" />
+      <Association Name="AspNetUser_OrderTable" Member="AspNetUsers" ThisKey="Users_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Saleline" Member="Salelines">
@@ -134,7 +110,7 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Category_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SubCategory_ServiceOffer" Member="ServiceOffer" ThisKey="ID" OtherKey="Subcategory_ID" Type="ServiceOffer" />
+      <Association Name="SubCategory_ServiceOffer" Member="ServiceOffers" ThisKey="ID" OtherKey="Subcategory_ID" Type="ServiceOffer" />
       <Association Name="Category_SubCategory" Member="Category" ThisKey="Category_ID" OtherKey="ID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
@@ -146,8 +122,8 @@
       <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="HourFrom" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="HourTo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUsers_ShoppingCart" Member="AspNetUsers" ThisKey="User_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="ServiceOffer_ShoppingCart" Member="ServiceOffer" ThisKey="Service_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_ShoppingCart" Member="AspNetUsers" ThisKey="User_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Review" Member="Reviews">
@@ -157,8 +133,8 @@
       <Column Name="Customer_ID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="ServiceOffer_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="AspNetUsers_Review" Member="AspNetUsers" ThisKey="Customer_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
       <Association Name="ServiceOffer_Review" Member="ServiceOffer" ThisKey="ServiceOffer_ID" OtherKey="ID" Type="ServiceOffer" IsForeignKey="true" />
+      <Association Name="AspNetUser_Review" Member="AspNetUsers" ThisKey="Customer_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Users" Member="Users">
@@ -174,18 +150,11 @@
       <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LastUpdate" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Gender_Users" Member="Gender" ThisKey="Gender_ID" OtherKey="ID" Type="Gender" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="AspNetUsers_Users" Member="AspNetUsers" ThisKey="Logging_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="AddressTable_Users" Member="AddressTable" ThisKey="City_ID" OtherKey="ID" Type="AddressTable" IsForeignKey="true" />
+      <Association Name="AspNetUser_Users" Member="AspNetUsers" ThisKey="Logging_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.AvailabilityState" Member="AvailabilityState">
-    <Type Name="AvailabilityState">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="State" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="AvailabilityState_ServiceOffer" Member="ServiceOffer" ThisKey="ID" OtherKey="ServiceAvailability" Type="ServiceOffer" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ServiceOffer" Member="ServiceOffer">
+  <Table Name="dbo.ServiceOffer" Member="ServiceOffers">
     <Type Name="ServiceOffer">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RatePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
@@ -196,11 +165,45 @@
       <Column Name="ServiceAvailability" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="ServiceOffer_WorkingDates" Member="WorkingDates" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="WorkingDates" />
       <Association Name="ServiceOffer_Salelines" Member="Salelines" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Salelines" />
-      <Association Name="ServiceOffer_ShoppingCart" Member="ShoppingCart" ThisKey="ID" OtherKey="Service_ID" Type="ShoppingCart" />
-      <Association Name="ServiceOffer_Review" Member="Review" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Review" />
-      <Association Name="AspNetUsers_ServiceOffer" Member="AspNetUsers" ThisKey="Employee_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
+      <Association Name="ServiceOffer_ShoppingCart" Member="ShoppingCarts" ThisKey="ID" OtherKey="Service_ID" Type="ShoppingCart" />
+      <Association Name="ServiceOffer_Review" Member="Reviews" ThisKey="ID" OtherKey="ServiceOffer_ID" Type="Review" />
       <Association Name="SubCategory_ServiceOffer" Member="SubCategory" ThisKey="Subcategory_ID" OtherKey="ID" Type="SubCategory" IsForeignKey="true" />
+      <Association Name="AspNetUser_ServiceOffer" Member="AspNetUsers" ThisKey="Employee_ID" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
       <Association Name="AvailabilityState_ServiceOffer" Member="AvailabilityState" ThisKey="ServiceAvailability" OtherKey="ID" Type="AvailabilityState" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUsers">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="AvailabilityState" Member="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_OrderTable" Member="OrderTables" ThisKey="Id" OtherKey="Users_ID" Type="OrderTable" />
+      <Association Name="AspNetUser_ShoppingCart" Member="ShoppingCarts" ThisKey="Id" OtherKey="User_ID" Type="ShoppingCart" />
+      <Association Name="AspNetUser_Review" Member="Reviews" ThisKey="Id" OtherKey="Customer_ID" Type="Review" />
+      <Association Name="AspNetUser_Users" Member="Users" ThisKey="Id" OtherKey="Logging_ID" Type="Users" />
+      <Association Name="AspNetUser_ServiceOffer" Member="ServiceOffers" ThisKey="Id" OtherKey="Employee_ID" Type="ServiceOffer" />
+      <Association Name="AvailabilityState_AspNetUsers" Member="AvailabilityState" ThisKey="State" OtherKey="ID" Type="AvailabilityState" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AvailabilityState" Member="AvailabilityStates">
+    <Type Name="AvailabilityState">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="AvailabilityState_ServiceOffer" Member="ServiceOffers" ThisKey="ID" OtherKey="ServiceAvailability" Type="ServiceOffer" />
+      <Association Name="AvailabilityState_AspNetUsers" Member="AspNetUsers" ThisKey="ID" OtherKey="State" Type="AspNetUsers" />
     </Type>
   </Table>
 </Database>

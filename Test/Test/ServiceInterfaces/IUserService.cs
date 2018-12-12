@@ -34,6 +34,8 @@ namespace ServiceLibrary
         bool EditUserEmail(User u);
 
         [OperationContract]
-        bool AddDescription(User u);      
+        bool AddDescription(User u);
+        [OperationContract]
+        bool IsActive(string email);
     }
 }

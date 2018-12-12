@@ -47,6 +47,7 @@ namespace Repository
                                 PasswordHash = obj.AspNetUsers.PasswordHash,
                                 Email = obj.AspNetUsers.Email,
                                 PhoneNumber = obj.AspNetUsers.PhoneNumber,
+                                AvailabilityState = _context.GetTable<AvailabilityState>().First(x => x.ID == 1),
 
                             };
                             _context.GetTable<AspNetUsers>().InsertOnSubmit(logging);
@@ -167,30 +168,30 @@ namespace Repository
                 {
 
                     Users found = _context.GetTable<Users>().FirstOrDefault(predicate);
-                    _context.GetTable<Users>().DeleteOnSubmit(found);
 
                     AspNetUsers foundLogging = _context.GetTable<AspNetUsers>().FirstOrDefault(t => t.Id.ToString() == found.Logging_ID.ToString());
-                    _context.GetTable<AspNetUsers>().DeleteOnSubmit(foundLogging);
-
+                    foundLogging.AvailabilityState = _context.GetTable<AvailabilityState>().First(x => x.ID == 2);
+                    _context.SubmitChanges();
 
 
                     var services = _context.GetTable<ServiceOffer>().Where(t => t.Employee_ID == foundLogging.Id);
                     foreach (var t in services)
                     {
-                        _context.GetTable<ServiceOffer>().DeleteOnSubmit(t);
+                        t.AvailabilityState =  _context.GetTable<AvailabilityState>().First(x => x.ID == 2);
                     }
+                    _context.SubmitChanges();
 
 
 
                     //delete however check if there is more people with the same city if not leave the city
-                    int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == found.City_ID).Count();
-                    if (numberOfAddressRecords < 2)
-                    {
-
-                        var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == found.AddressTable.Postcode);
-                        _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
-                    }
-
+                 //  int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == found.City_ID).Count();
+                 //  if (numberOfAddressRecords < 2)
+                 //  {
+                 //
+                 //      var addressToDelete = _context.GetTable<AddressTable>().FirstOrDefault(t => t.Postcode == found.AddressTable.Postcode);
+                 //      _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
+                 //  }
+                 //
                     _context.SubmitChanges();
 
                     sql.Commit();
@@ -276,11 +277,6 @@ namespace Repository
 
                                     found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == obj.AddressTable.Postcode);
                                     _context.SubmitChanges();
-                                }
-                                else
-                                {
-                                    found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == addressExists.Postcode);
-                                }
 
                                 int numberOfAddressRecords = _context.GetTable<Users>().Where(t => t.City_ID == oldCity_ID).Count();
                                 if (numberOfAddressRecords < 2)
@@ -289,7 +285,13 @@ namespace Repository
                                     _context.GetTable<AddressTable>().DeleteOnSubmit(addressToDelete);
                                 }
                                 _context.SubmitChanges();
-
+                            }
+                                else
+                                {
+                                    found.AddressTable = _context.GetTable<AddressTable>().Single(x => x.Postcode == addressExists.Postcode);
+                                }
+                            
+                            
 
 
                                 _context.SubmitChanges();
@@ -300,7 +302,7 @@ namespace Repository
                             }
 
 
-                            catch
+                            catch(Exception e)
                             {
 
                                 result = false;

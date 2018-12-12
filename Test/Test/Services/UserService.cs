@@ -173,6 +173,7 @@ namespace ServiceLibrary
                     Gender = (Gender)Enum.Parse(typeof(Gender), result.Gender.Gender1),
                     Description = result.Description,
                     LastUpdate = result.LastUpdate,
+                    LoggingId = phoneNumber,
                 };
             }
             catch
@@ -228,7 +229,7 @@ namespace ServiceLibrary
         public User[] GetAll()
         {
             IList<User> resultToReturn = new List<User>();
-            foreach (var u in _unitOfWork.Users.GetAll())
+            foreach (var u in _unitOfWork.Users.GetAll().Where(x=>x.AspNetUsers.State==1))
             {
                 resultToReturn.Add(new User
                 {
@@ -251,6 +252,13 @@ namespace ServiceLibrary
                 });
             }
             return resultToReturn.ToArray();
+        }
+        public bool IsActive(string email)
+        {
+
+            var result = _unitOfWork.Users.Get(t => t.AspNetUsers.Email == email);
+
+            return result.AspNetUsers.State  !=2 ? true : false;
         }
 
         public User[] ListByGender(Gender gender)

@@ -18,18 +18,20 @@ namespace Repository.DbConnection.Entity
     public partial class dmai0917_1067677Entities2 : IdentityDbContext<ApplicationUser>
     {
         public dmai0917_1067677Entities2()
-            : base("data source = kraka.ucn.dk; initial catalog = dmai0917_1067677; user id = dmai0917_1067677; password=Password1!;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("data source=kraka.ucn.dk;initial catalog=dmai0917_1067677;user id=dmai0917_1067677;password=Password1!;MultipleActiveResultSets=True;App=EntityFramework")                       
         {
         }
-    
+        public static dmai0917_1067677Entities2 Create()
+        {
+            return new dmai0917_1067677Entities2();
+        }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
         }
     
-        public static dmai0917_1067677Entities2 Create()
-        {
-            return new dmai0917_1067677Entities2 { };
-        }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

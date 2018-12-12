@@ -66,7 +66,7 @@ namespace AppJobPortal.New
             IList<UserAppModel> userAppModels = new List<UserAppModel>();
             foreach(User user in _source)
             {
-                userAppModels.Add(new UserAppModel(user.ID, user.PayPalMail, user.PhoneNumber, user.FirstName, user.LastName, user.Email,user.UserName, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender, user.LastUpdate));
+                userAppModels.Add(new UserAppModel ( user.ID, user.PayPalMail, user.PhoneNumber, user.FirstName, user.LastName, user.Email,user.UserName, user.AddressLine, user.CityName, user.Postcode, user.Region, user.Gender, user.LastUpdate));
              
             }
             usersTable.ItemsSource = userAppModels;
