@@ -92,7 +92,7 @@ namespace MyWeb.Controllers
 
             UserProfileViewModel user = Mapping.Mapping.Map_User_To_UserProfileViewModel(_proxy.FindUser(id));
             var allOffers = await _offerProxy.GetAllOffersAsync();
-            var userServices = allOffers.Where(x => x.AuthorId == id);
+            var userServices = allOffers.Where(x => x.AuthorId == id && x.IsAvailable == true);
             user.Services = userServices.Select(y => Mapping.Mapping.Map_Offer_To_ManageOffers(y)).ToPagedList(1, userServices.Count() + 1);
             var allBought = await _offerProxy.GetAllBoughtAsync(id);
             user.Bought = allBought.Select(x => Mapping.Mapping.Map_Offer_To_BoughtOffers(x)).ToArray();

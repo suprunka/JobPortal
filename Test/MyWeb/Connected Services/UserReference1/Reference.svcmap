@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7cd3fa22-9f78-43af-9517-665d005904f9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="333710b4-6ee6-4e01-8ac9-956b59131b9a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,16 +19,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://jobportalik.cloudapp.net/UserService.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/User/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="ff62bde5-60da-4298-a773-f7a5a6f04ab1" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="0128ed2b-9a96-4799-b90f-ea190e3c0172" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?xsd=xsd4" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="d415da0c-f50c-4080-9d69-cc9afb36055f" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?xsd=xsd5" />
-    <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="dfe3702d-f40f-422a-b30f-3b0a45107e0e" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="8309a9e2-62ef-4305-abe9-4d632d9be0e0" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService4.xsd" MetadataType="Schema" ID="6e5651fd-7488-46c9-bd18-c958b14d9f5e" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService5.xsd" MetadataType="Schema" ID="58b26547-37ab-4b3e-aa7b-92f6847f6104" SourceId="1" SourceUrl="http://jobportalik.cloudapp.net/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f333b28a-71c9-48ea-a6d2-ae0cd2cca88d" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a87a181f-7143-4d3d-bae2-15258f3e6892" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2e3f696b-7066-4d93-8b5f-b2343531af6d" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="ee5d97f9-9ecc-4a3a-9794-12cb69969ff6" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="System.Data.Linq.xsd" MetadataType="Schema" ID="d4640e74-7ba9-470c-9537-14872ca1e7f2" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="897064e4-b400-483a-805e-9ff580737574" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="9a931614-a241-4d60-9c1d-9141ecc2898f" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

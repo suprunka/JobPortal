@@ -15,64 +15,64 @@ namespace MyWeb.UserReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserReference1.IUserService")]
     public interface IUserService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
         bool CreateUser(JobPortal.Model.User u, string loggingId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/CreateUser", ReplyAction="http://tempuri.org/IUserService/CreateUserResponse")]
         System.Threading.Tasks.Task<bool> CreateUserAsync(JobPortal.Model.User u, string loggingId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
         JobPortal.Model.User FindUser(string phoneNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/FindUser", ReplyAction="http://tempuri.org/IUserService/FindUserResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User> FindUserAsync(string phoneNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
         JobPortal.Model.User FindUserByID(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/FindUserByID", ReplyAction="http://tempuri.org/IUserService/FindUserByIDResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User> FindUserByIDAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         bool DeleteUser(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         System.Threading.Tasks.Task<bool> DeleteUserAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
         bool EditUser(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/EditUser", ReplyAction="http://tempuri.org/IUserService/EditUserResponse")]
         System.Threading.Tasks.Task<bool> EditUserAsync(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
         JobPortal.Model.User[] GetAll();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/GetAll", ReplyAction="http://tempuri.org/IUserService/GetAllResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User[]> GetAllAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByGender", ReplyAction="http://tempuri.org/IUserService/ListByGenderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/ListByGender", ReplyAction="http://tempuri.org/IUserService/ListByGenderResponse")]
         JobPortal.Model.User[] ListByGender(JobPortal.Model.Gender gender);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByGender", ReplyAction="http://tempuri.org/IUserService/ListByGenderResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/ListByGender", ReplyAction="http://tempuri.org/IUserService/ListByGenderResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByGenderAsync(JobPortal.Model.Gender gender);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
         JobPortal.Model.User[] ListByRegion(JobPortal.Model.Region region);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/ListByRegion", ReplyAction="http://tempuri.org/IUserService/ListByRegionResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.User[]> ListByRegionAsync(JobPortal.Model.Region region);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
         bool EditUserEmail(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/EditUserEmail", ReplyAction="http://tempuri.org/IUserService/EditUserEmailResponse")]
         System.Threading.Tasks.Task<bool> EditUserEmailAsync(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
         bool AddDescription(JobPortal.Model.User u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IUserService/AddDescription", ReplyAction="http://tempuri.org/IUserService/AddDescriptionResponse")]
         System.Threading.Tasks.Task<bool> AddDescriptionAsync(JobPortal.Model.User u);
     }
     

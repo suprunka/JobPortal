@@ -42,11 +42,12 @@ namespace Repository
                 {
                     ServiceOffer s = new ServiceOffer
                     {
+                        ServiceAvailability = _context.GetTable<AvailabilityState>().Single(x => x.State == "Active").ID, 
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
                         Title = offer.Title,
                         Employee_ID = offer.Employee_ID,
-                        Subcategory_ID = _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.Name == offer.SubCategory.Name).ID
+                        Subcategory_ID = _context.GetTable<DbConnection.SubCategory>().FirstOrDefault(x => x.Name == offer.SubCategory.Name).ID 
                     };
 
                     _context.GetTable<ServiceOffer>().InsertOnSubmit(s);
@@ -97,7 +98,7 @@ namespace Repository
                 try
                 {
                     var toDelete = _context.GetTable<ServiceOffer>().SingleOrDefault(predicate);
-                    _context.GetTable<ServiceOffer>().DeleteOnSubmit(toDelete);
+                    toDelete.ServiceAvailability = _context.GetTable<AvailabilityState>().Single(x => x.State == "Not active").ID;
                     _context.SubmitChanges();
                     result = true;
 

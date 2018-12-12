@@ -46,6 +46,7 @@ namespace ServiceLibrary
 
         public bool CreateServiceOffer(Offer offer)
         {
+
             try
             {
                 if (RegexMatch.DoesOfferMatch(offer) && (offer.RatePerHour > 0))
@@ -63,13 +64,15 @@ namespace ServiceLibrary
                         },
 
 
+                        AvailabilityState = new AvailabilityState
+                        {
+                            State = "Active"
+                        },
                         Title = offer.Title,
                         Description = offer.Description,
                         RatePerHour = offer.RatePerHour,
                         Employee_ID = offer.AuthorId,
-
                     });
-                    //      AddtoOffer(serviceOffer, offer);
 
                     return true;
                 }
@@ -89,6 +92,11 @@ namespace ServiceLibrary
         {
             Offer offer = null;
             var dbResult = _unitOfWork.Offers.Get(x => x.ID == ID);
+            bool isActive = true;
+            if(dbResult.AvailabilityState.State.ToString() != "Active")
+            {
+                isActive = false;
+            }
             if (dbResult != null)
             {
 
@@ -100,7 +108,8 @@ namespace ServiceLibrary
                     Title = dbResult.Title,
                     RatePerHour = dbResult.RatePerHour,
                     Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), dbResult.SubCategory.Name),
-                    Category = (Category)Enum.Parse(typeof(Category), dbResult.SubCategory.Category.Name)
+                    Category = (Category)Enum.Parse(typeof(Category), dbResult.SubCategory.Category.Name),
+                    IsAvailable = isActive,
                 };
 
             }
@@ -171,7 +180,11 @@ namespace ServiceLibrary
             IList<Offer> resultToReturn = new List<Offer>();
             foreach (var item in _unitOfWork.Offers.GetAll())
             {
-
+                bool isActive = true;
+                if (item.ServiceAvailability == 2)
+                {
+                    isActive = false;
+                }
                 resultToReturn.Add(new Offer
                 {
                     Id = item.ID,
@@ -181,6 +194,7 @@ namespace ServiceLibrary
                     RatePerHour = item.RatePerHour,
                     Subcategory = (SubCategory)Enum.Parse(typeof(SubCategory), item.SubCategory.Name),
                     Category = (Category)Enum.Parse(typeof(Category), item.SubCategory.Category.Name),
+                    IsAvailable = isActive,
                 });
             }
             return resultToReturn.AsQueryable<Offer>();
@@ -277,7 +291,7 @@ namespace ServiceLibrary
             {
                 return 0;
             }
-            
+
         }
     }
 }

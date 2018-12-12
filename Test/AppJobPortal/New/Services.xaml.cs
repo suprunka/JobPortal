@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Linq;
 using AppJobPortal.Models;
 using AppJobPortal.TcpUserReference;
 using AutoMapper;
@@ -43,7 +44,8 @@ namespace AppJobPortal.New
         }
         private void GetAll()
         {
-            _source = _proxyOffer.GetAllOffers();
+            var all = _proxyOffer.GetAllOffers();
+            _source = all.Where(x => x.IsAvailable == true).ToArray();
             ObservableCollection<ServiceAppModel> offers = new ObservableCollection<ServiceAppModel>();
             foreach (Offer offer in _source)
             {

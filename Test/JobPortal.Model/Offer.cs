@@ -14,6 +14,8 @@ namespace JobPortal.Model
         [DataMember]
         public virtual int Id { get; set; }
         [DataMember]
+        public virtual bool IsAvailable { get; set; }
+        [DataMember]
         public virtual decimal RatePerHour { get; set; }
         [DataMember]
         public virtual string Title { get; set; }

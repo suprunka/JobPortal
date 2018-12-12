@@ -278,6 +278,8 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css" />
@@ -318,61 +320,61 @@
     <Content Include="Fakes\DayPilot.Web.Mvc.fakes" />
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.fakesconfig" />
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.messages" />
-    <None Include="Connected Services\OfferReference\OfferService.wsdl" />
-    <None Include="Connected Services\OfferReference\OfferService.xsd">
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <None Include="Connected Services\OfferReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferReference\OfferService1.xsd">
+    <None Include="Connected Services\OfferReference\service.wsdl" />
+    <None Include="Connected Services\OfferReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferReference\OfferService2.xsd">
+    <None Include="Connected Services\OfferReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferReference\OfferService3.xsd">
+    <None Include="Connected Services\OfferReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\OrderService.wsdl" />
-    <None Include="Connected Services\OrderReference\OrderService.xsd">
+    <None Include="Connected Services\OrderReference\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\OrderService1.xsd">
+    <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\OrderService2.xsd">
+    <None Include="Connected Services\OrderReference\service.wsdl" />
+    <None Include="Connected Services\OrderReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\OrderService3.xsd">
+    <None Include="Connected Services\OrderReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\OrderService4.xsd">
+    <None Include="Connected Services\OrderReference\System.Data.Linq.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\OrderService5.xsd">
+    <None Include="Connected Services\OrderReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\UserService.wsdl" />
-    <None Include="Connected Services\UserReference1\UserService.xsd">
+    <None Include="Connected Services\UserReference1\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\UserService1.xsd">
+    <None Include="Connected Services\UserReference1\JobPortal.Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\UserService2.xsd">
+    <None Include="Connected Services\UserReference1\service.wsdl" />
+    <None Include="Connected Services\UserReference1\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\UserService3.xsd">
+    <None Include="Connected Services\UserReference1\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\UserService4.xsd">
+    <None Include="Connected Services\UserReference1\System.Data.Linq.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\UserService5.xsd">
+    <None Include="Connected Services\UserReference1\System.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\ApplicationJobPortal - Web Deploy1.pubxml" />
-    <None Include="Properties\PublishProfiles\JobPortall - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\JobPortall - Web Deploy2.pubxml" />
-    <None Include="Properties\PublishProfiles\VirtualMJP - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\JobPortalUCN - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy1.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -496,15 +498,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\OfferReference\" />
-    <WCFMetadataStorage Include="Connected Services\OrderReference\" />
-    <WCFMetadataStorage Include="Connected Services\UserReference1\" />
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\OfferReference\" />
+    <WCFMetadataStorage Include="Connected Services\OrderReference\" />
+    <WCFMetadataStorage Include="Connected Services\UserReference1\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

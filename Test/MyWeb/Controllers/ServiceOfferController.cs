@@ -72,8 +72,9 @@ namespace MyWeb.Controllers
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
             }
 
-          
-            var all = await _offerProxy.GetAllOffersAsync();
+
+            var allOffers =  await _offerProxy.GetAllOffersAsync();
+            var all = allOffers.Where(x => x.IsAvailable == true).ToArray();
             IEnumerable<Offer> list = null;
             IPagedList<ManageOfferModel> ipagedList = null;
             switch (sorting)
@@ -163,8 +164,9 @@ namespace MyWeb.Controllers
             {
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
             }
-          
-            var all = await _offerProxy.GetAllOffersAsync();
+
+            var allOffers = await _offerProxy.GetAllOffersAsync();
+            var all = allOffers.Where(x => x.IsAvailable == true);
             IEnumerable<Offer> list = null;
             IPagedList<ManageOfferModel> ipagedList = null;
             switch (sorting)
