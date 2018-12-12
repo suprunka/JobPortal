@@ -52,7 +52,8 @@ namespace WebJobPortal.Models
         [Display(Name = "Phone number:")]
         public virtual String PhoneNumber { get; set; }
 
-        public virtual String ID { get; set; }
+        public virtual string ID { get; set; }
+        public virtual string LoggingId { get; set; }
 
         [Display(Name = "First Name:")]
         public virtual String FirstName { get; set; }

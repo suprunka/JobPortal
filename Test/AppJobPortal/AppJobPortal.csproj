@@ -188,6 +188,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\TcpUserReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="New\Class1.cs" />
     <Compile Include="New\Statistics\AllServices.xaml.cs">
       <DependentUpon>AllServices.xaml</DependentUpon>
@@ -198,11 +203,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\TcpOrderReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\TcpUserReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -347,6 +347,9 @@
     <None Include="Connected Services\TcpUserReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\TcpUserReference\System.Data.Linq.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\TcpUserReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -399,18 +402,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TcpUserReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\TcpUserReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\TcpUserReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\TcpOrderReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +409,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\TcpOrderReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TcpUserReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

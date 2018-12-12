@@ -340,6 +340,9 @@
     <None Include="Connected Services\UserReference1\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UserReference1\System.Data.Linq3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UserReference1\System.xsd">
       <SubType>Designer</SubType>
     </None>

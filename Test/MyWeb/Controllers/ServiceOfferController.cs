@@ -62,36 +62,14 @@ namespace MyWeb.Controllers
             _mapper = config.CreateMapper();
             _offerProxy = proxy;
         }
-        public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion, int? sorting, string subCategory)
-        {
+        public async Task<ActionResult> Index(string searchingString, int? page, bool? showInRegion, int? sorting)
+        { 
             User profile = null;
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var show = showInRegion.HasValue ? Convert.ToBoolean(showInRegion) : false;
             if (User.Identity.IsAuthenticated)
             {
                 profile = _userProxy.FindUser(User.Identity.GetUserId());
-            }
-            switch (subCategory)
-            {
-                case "Home":
-                    RedirectToAction("Home", "ServiceOffer", new { searchingString = searchingString, page = 1, showInRegion = show, sorting = sorting });
-                    break;
-                case "Tutoring":
-                    RedirectToAction("Home", "ServiceOffer", new { searchingString = searchingString, page = 1, showInRegion = show, sorting = sorting });
-                    break;
-                case "IT":
-                    RedirectToAction("IT", "ServiceOffer", new { searchingString = searchingString, page = 1, showInRegion = show, sorting = sorting });
-                    break;
-                case "Repairs":
-                    RedirectToAction("Repairs", "ServiceOffer", new { searchingString = searchingString, page = 1, showInRegion = show, sorting = sorting });
-                    break;
-                case "Architecture":
-                    RedirectToAction("Architecture", "ServiceOffer", new { searchingString = searchingString, page = 1, showInRegion = show, sorting = sorting });
-                    break;
-                case "Media":
-                    RedirectToAction("Media", "ServiceOffer", new { searchingString = searchingString, page = 1, showInRegion = show, sorting = sorting });
-                    break;
-
             }
           
             var all = await _offerProxy.GetAllOffersAsync();
@@ -135,28 +113,14 @@ namespace MyWeb.Controllers
             }
             if (searchingString != null)
             {
-                ipagedList = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
+                ipagedList = list.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper()))
+                    .Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
             }
             else
             {
                 ipagedList = list.Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
             }
-            // if (searchingString == null)
-            // {
-            //     return View("Index", list);
-            // }
-            //
-            // var condition = User.Identity.GetUserId() != null && show ?
-            //
-            //     all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region && x.Title.ToUpper().Contains(searchingString.ToUpper())).
-            //     OrderByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).ThenBy(x => x.RatePerHour).
-            //     Select(x => _mapper.Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12) :
-            //
-            //     all.Where(x => x.Title.ToUpper().Contains(searchingString.ToUpper())).OrderBy(x => x.RatePerHour).
-            //     ThenByDescending(x => _offerProxy.GetAvgOfServiceRates(x.Id) as IComparable).Select(x => _mapper.
-            //     Map(x, new ManageOfferModel())).ToPagedList(pageIndex, 12);
-            //
-            // return View("Index", condition);
+           
             return View("Index", ipagedList);
         }
 

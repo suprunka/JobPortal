@@ -7,42 +7,41 @@
     <title>@ViewBag.Title - Layout</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <div class="topnav" id="myTopnav">
 
-                    <li><a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:40px;border:0;"></a></li>
-                    <li>
-                        <a href="~/ServiceOffer/Home">Home</a>
-                    </li>
-                    <li>
-                        <a href="~/ServiceOffer/Tutoring">Tutoring</a>
-                    </li>
-                    <li>
-                        <a href="~/ServiceOffer/IT">IT</a>
-                    </li>
-                    <li>
-                        <a href="~/ServiceOffer/Repairs">Repairs</a>
-                    </li>
-                    <li>
-                        <a href="~/ServiceOffer/Architecture">Architecture</a>
-                    </li>
-                    <li>
-                        <a href="~/ServiceOffer/Media">Media</a>
-                    </li>
-                    <li>
-                        @Html.ActionLink("Shopping card", "Index", "Order", new { id = User.Identity.GetUserId() }, null)
-                    </li>
-                </ul>
 
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
+                    <a href="~/ServiceOffer/Index"><img src="~/Pictures/logo.png" alt="logo" id="logo" style="width:auto;height:40px;border:0;"></a></li>
+
+                    <a href="~/ServiceOffer/Home">Home</a>
+
+
+                    <a href="~/ServiceOffer/Tutoring">Tutoring</a>
+
+
+                    <a href="~/ServiceOffer/IT">IT</a>
+
+
+                    <a href="~/ServiceOffer/Repairs">Repairs</a>
+
+
+                    <a href="~/ServiceOffer/Architecture">Architecture</a>
+
+
+                    <a href="~/ServiceOffer/Media">Media</a>
+
+
+                    @Html.ActionLink("Shopping card", "Index", "Order", new { id = User.Identity.GetUserId() }, null)
+
+
+                    @Html.Partial("_LoginPartial")
+                    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+    
     <div class="container body-content">
         @RenderBody()
     </div>
@@ -56,4 +55,14 @@
     </footer>
 </body>
 
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
 </html>

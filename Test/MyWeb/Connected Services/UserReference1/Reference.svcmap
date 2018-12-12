@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="2475e7dc-9ec5-47e1-a0d8-ff5400c7c80d" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="1c089270-8a7c-4cb1-b746-24b0af7774e3" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
     <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="a238f211-70fd-40a4-9a8e-e21d68643c2c" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
+    <MetadataFile FileName="System.Data.Linq3.xsd" MetadataType="Schema" ID="9e9aebfb-0250-4051-b6b8-fae0475e0f41" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
     <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="bfe24ab0-38c4-4721-b40a-593a4444f6a4" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="36e0f3f0-85de-428c-a352-e3f9949712fe" SourceId="1" SourceUrl="http://localhost:8080/User/mex" />
   </Metadata>

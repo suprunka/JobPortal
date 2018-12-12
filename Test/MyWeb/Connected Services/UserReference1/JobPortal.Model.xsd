@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/JobPortal.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="User">
@@ -12,6 +13,8 @@
       <xs:element minOccurs="0" name="Gender" type="tns:Gender" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Linq" minOccurs="0" name="LastUpdate" nillable="true" type="q1:Binary" />
+      <xs:element minOccurs="0" name="LoggingId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PayPalMail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
@@ -44,7 +47,7 @@
       <xs:element name="author" nillable="true" type="tns:User" />
       <xs:element name="listOfItems" nillable="true" type="tns:ArrayOfOffer" />
       <xs:element name="payPallistOfItems" nillable="true" type="tns:ArrayOfPayPalOffer" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="random" nillable="true" type="q1:Random" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="random" nillable="true" type="q2:Random" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ShoppingCard" nillable="true" type="tns:ShoppingCard" />
@@ -64,6 +67,7 @@
       <xs:element minOccurs="0" name="Subcategory" type="tns:SubCategory" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WorkingTime" nillable="true" type="tns:WorkingDetails" />
+      <xs:element minOccurs="0" name="WorkingTimes" nillable="true" type="tns:ArrayOfWorkingTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Offer" nillable="true" type="tns:Offer" />
@@ -106,10 +110,27 @@
       <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="HoursFrom" type="ser:duration" />
       <xs:element minOccurs="0" name="HoursTo" type="ser:duration" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q2:DayOfWeek" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q3:DayOfWeek" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkingDetails" nillable="true" type="tns:WorkingDetails" />
+  <xs:complexType name="ArrayOfWorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkingTime" nillable="true" type="tns:WorkingTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkingTime" nillable="true" type="tns:ArrayOfWorkingTime" />
+  <xs:complexType name="WorkingTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="End" type="ser:duration" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="OfferId" type="xs:int" />
+      <xs:element minOccurs="0" name="Start" type="ser:duration" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="WeekDay" type="q4:DayOfWeek" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkingTime" nillable="true" type="tns:WorkingTime" />
   <xs:complexType name="ArrayOfPayPalOffer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PayPalOffer" nillable="true" type="tns:PayPalOffer" />
