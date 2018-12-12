@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OfferService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/JobPortal.Model" />
+      <xsd:import schemaLocation="http://jobportalik.cloudapp.net/OfferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IOfferService_CreateServiceOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateServiceOffer" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_CreateServiceOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateServiceOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_FindServiceOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindServiceOffer" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_FindServiceOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindServiceOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_DeleteServiceOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteServiceOffer" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_DeleteServiceOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteServiceOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_UpdateServiceOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateServiceOffer" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_UpdateServiceOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateServiceOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllOffers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOffers" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllOffers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOffersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_AddHoursToOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddHoursToOffer" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_AddHoursToOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddHoursToOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllWorkingDays_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWorkingDays" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllWorkingDays_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWorkingDaysResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllBought_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBought" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAllBought_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBoughtResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_AddReview_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddReview" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_AddReview_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddReviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetServiceReviews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceReviews" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetServiceReviews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceReviewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAvgOfServiceRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvgOfServiceRates" />
+  </wsdl:message>
+  <wsdl:message name="IOfferService_GetAvgOfServiceRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvgOfServiceRatesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IOfferService">
+    <wsdl:operation name="CreateServiceOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/CreateServiceOffer" message="tns:IOfferService_CreateServiceOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/CreateServiceOfferResponse" message="tns:IOfferService_CreateServiceOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindServiceOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/FindServiceOffer" message="tns:IOfferService_FindServiceOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/FindServiceOfferResponse" message="tns:IOfferService_FindServiceOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteServiceOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/DeleteServiceOffer" message="tns:IOfferService_DeleteServiceOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/DeleteServiceOfferResponse" message="tns:IOfferService_DeleteServiceOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServiceOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/UpdateServiceOffer" message="tns:IOfferService_UpdateServiceOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/UpdateServiceOfferResponse" message="tns:IOfferService_UpdateServiceOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOffers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAllOffers" message="tns:IOfferService_GetAllOffers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAllOffersResponse" message="tns:IOfferService_GetAllOffers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddHoursToOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/AddHoursToOffer" message="tns:IOfferService_AddHoursToOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/AddHoursToOfferResponse" message="tns:IOfferService_AddHoursToOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWorkingDays">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAllWorkingDays" message="tns:IOfferService_GetAllWorkingDays_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse" message="tns:IOfferService_GetAllWorkingDays_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBought">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAllBought" message="tns:IOfferService_GetAllBought_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAllBoughtResponse" message="tns:IOfferService_GetAllBought_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddReview">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/AddReview" message="tns:IOfferService_AddReview_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/AddReviewResponse" message="tns:IOfferService_AddReview_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceReviews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetServiceReviews" message="tns:IOfferService_GetServiceReviews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetServiceReviewsResponse" message="tns:IOfferService_GetServiceReviews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvgOfServiceRates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates" message="tns:IOfferService_GetAvgOfServiceRates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse" message="tns:IOfferService_GetAvgOfServiceRates_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OfferServiceHttpEndpoint" type="tns:IOfferService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateServiceOffer">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/CreateServiceOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindServiceOffer">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/FindServiceOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteServiceOffer">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/DeleteServiceOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateServiceOffer">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/UpdateServiceOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOffers">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/GetAllOffers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddHoursToOffer">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/AddHoursToOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWorkingDays">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/GetAllWorkingDays" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBought">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/GetAllBought" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReview">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/AddReview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceReviews">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/GetServiceReviews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvgOfServiceRates">
+      <soap:operation soapAction="http://tempuri.org/IOfferService/GetAvgOfServiceRates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OfferService">
+    <wsdl:port name="OfferServiceHttpEndpoint" binding="tns:OfferServiceHttpEndpoint">
+      <soap:address location="http://jobportalik.cloudapp.net/OfferService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

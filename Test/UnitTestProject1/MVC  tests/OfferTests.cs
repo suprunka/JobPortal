@@ -37,7 +37,7 @@ namespace UnitTestProject1.MVC__tests
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
             var ctr = new ServiceOfferController(serviceMock.Object, userProxyMock.Object, orderProxyMock.Object);
             ctr.ControllerContext = controllerContext.Object;
-            var result = ctr.Index(null, 1,false, null).Result as ViewResult;
+            var result = ctr.Index(null, 1,false, null, null).Result as ViewResult;
             PagedList<ManageOfferModel> model = (PagedList<ManageOfferModel>)result.Model;
             Assert.AreEqual(3, model.Count);
         }
@@ -74,7 +74,7 @@ namespace UnitTestProject1.MVC__tests
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
             var ctr = new ServiceOfferController(serviceMock.Object, userProxyMock.Object, orderProxyMock.Object);
             ctr.ControllerContext = controllerContext.Object;
-            var result = ctr.Index(searchingString, 1, false, null).Result as ViewResult;
+            var result = ctr.Index(searchingString, 1, false, null, null).Result as ViewResult;
             PagedList<ManageOfferModel> model = (PagedList<ManageOfferModel>) result.Model;
             Assert.AreEqual(foundOffers, model.Count);
         }

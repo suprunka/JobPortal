@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -26,6 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -258,38 +260,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\OfferReference\JobPortal.Model.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OfferReference\service.wsdl" />
-    <None Include="Connected Services\OfferReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OfferReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OfferReference\System.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\Repository.DbConnection.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\service1.wsdl" />
-    <None Include="Connected Services\OrderReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\System.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\OfferReference\configuration91.svcinfo" />
     <None Include="Connected Services\OfferReference\configuration.svcinfo" />
     <None Include="Connected Services\OfferReference\Reference.svcmap">
@@ -302,9 +272,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\UserReference1\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\UserReference1\configuration91.svcinfo" />
     <None Include="Connected Services\UserReference1\configuration.svcinfo" />
     <None Include="Connected Services\UserReference1\Reference.svcmap">
@@ -312,16 +279,30 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\calendar_g.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Rating.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.dll" />
+    <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Pictures\addBtn.png" />
+    <Content Include="Pictures\architecture.png" />
+    <Content Include="Pictures\female.png" />
+    <Content Include="Pictures\home.png" />
+    <Content Include="Pictures\it.png" />
+    <Content Include="Pictures\logo.png" />
+    <Content Include="Pictures\male.png" />
+    <Content Include="Pictures\media.png" />
+    <Content Include="Pictures\repairs.png" />
+    <Content Include="Pictures\stars.png" />
+    <Content Include="Pictures\tutoring.png" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -330,23 +311,88 @@
     <Content Include="Properties\DataSources\Repository.DbConnection.Entity.dmai0917_1067677Entities1.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.Order.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.ShoppingCard.datasource" />
-    <None Include="Connected Services\UserReference1\JobPortal.Model.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\service.wsdl" />
-    <None Include="Connected Services\UserReference1\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\System.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Properties\DataSources\JobPortal.Model.WorkingTime.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.JobOffer.datasource" />
     <Content Include="Properties\DataSources\JobPortal.Model.OfferReview.datasource" />
+    <Content Include="Properties\DataSources\JobPortal.Model.Saleline4.datasource" />
+    <Content Include="Fakes\DayPilot.Web.Mvc.fakes" />
+    <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.fakesconfig" />
+    <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.messages" />
+    <None Include="Connected Services\OfferReference\OfferService.wsdl" />
+    <None Include="Connected Services\OfferReference\OfferService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\OfferService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\OfferService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\OfferService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService.wsdl" />
+    <None Include="Connected Services\OrderReference\OrderService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService.wsdl" />
+    <None Include="Connected Services\UserReference1\UserService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\ApplicationJobPortal - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\JobPortall - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\JobPortall - Web Deploy2.pubxml" />
+    <None Include="Properties\PublishProfiles\VirtualMJP - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy1.pubxml" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\daypilot-all.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -357,6 +403,38 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="themes\calendar_bronze\delete.gif" />
+    <Content Include="themes\calendar_bronze\down.png" />
+    <Content Include="themes\calendar_bronze\left30.gif" />
+    <Content Include="themes\calendar_bronze\top21.gif" />
+    <Content Include="themes\calendar_bronze\up.png" />
+    <Content Include="themes\calendar_silver\corner20.gif" />
+    <Content Include="themes\calendar_silver\delete.gif" />
+    <Content Include="themes\calendar_silver\down.png" />
+    <Content Include="themes\calendar_silver\left45.gif" />
+    <Content Include="themes\calendar_silver\right17.gif" />
+    <Content Include="themes\calendar_silver\top21.gif" />
+    <Content Include="themes\calendar_silver\up.png" />
+    <Content Include="themes\menu_default\bg3white.png" />
+    <Content Include="themes\menu_default\left.png" />
+    <Content Include="themes\menu_default\right.png" />
+    <Content Include="themes\month_silver\event20.gif" />
+    <Content Include="themes\month_silver\top20.gif" />
+    <Content Include="themes\navigator_silver\top21.gif" />
+    <Content Include="themes\scheduler_silver\left45.gif" />
+    <Content Include="themes\scheduler_silver\top20.gif" />
+    <Content Include="themes\scheduler_silver\tree_collapse.png" />
+    <Content Include="themes\scheduler_silver\tree_expand.png" />
+    <Content Include="themes\scheduler_silver\tree_nochildren.png" />
+    <Content Include="themes\themes.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -386,29 +464,26 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_ViewStart.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\OfferReference\" />
-    <WCFMetadataStorage Include="Connected Services\OrderReference\" />
-    <WCFMetadataStorage Include="Connected Services\UserReference1\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
@@ -420,11 +495,23 @@
       <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\OfferReference\" />
+    <WCFMetadataStorage Include="Connected Services\OrderReference\" />
+    <WCFMetadataStorage Include="Connected Services\UserReference1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

@@ -55,7 +55,7 @@ namespace ServiceLibrary
                 .Build();
             ITrigger trigger = TriggerBuilder
                 .Create()
-                .WithCronSchedule("0 0 22  1/1 * ? *")
+                .WithCronSchedule("0 30 11  1/1 * ? *")
                 .StartNow()
                 .Build();
 

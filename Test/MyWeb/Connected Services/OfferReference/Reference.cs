@@ -15,71 +15,71 @@ namespace MyWeb.OfferReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OfferReference.IOfferService")]
     public interface IOfferService {
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
         bool CreateServiceOffer(JobPortal.Model.Offer offer);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/CreateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/CreateServiceOfferResponse")]
         System.Threading.Tasks.Task<bool> CreateServiceOfferAsync(JobPortal.Model.Offer offer);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/FindServiceOffer", ReplyAction="http://tempuri.org/IOfferService/FindServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/FindServiceOffer", ReplyAction="http://tempuri.org/IOfferService/FindServiceOfferResponse")]
         JobPortal.Model.Offer FindServiceOffer(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/FindServiceOffer", ReplyAction="http://tempuri.org/IOfferService/FindServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/FindServiceOffer", ReplyAction="http://tempuri.org/IOfferService/FindServiceOfferResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Offer> FindServiceOfferAsync(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/DeleteServiceOffer", ReplyAction="http://tempuri.org/IOfferService/DeleteServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/DeleteServiceOffer", ReplyAction="http://tempuri.org/IOfferService/DeleteServiceOfferResponse")]
         bool DeleteServiceOffer(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/DeleteServiceOffer", ReplyAction="http://tempuri.org/IOfferService/DeleteServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/DeleteServiceOffer", ReplyAction="http://tempuri.org/IOfferService/DeleteServiceOfferResponse")]
         System.Threading.Tasks.Task<bool> DeleteServiceOfferAsync(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/UpdateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/UpdateServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/UpdateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/UpdateServiceOfferResponse")]
         bool UpdateServiceOffer(JobPortal.Model.Offer serviceOffer);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/UpdateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/UpdateServiceOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/UpdateServiceOffer", ReplyAction="http://tempuri.org/IOfferService/UpdateServiceOfferResponse")]
         System.Threading.Tasks.Task<bool> UpdateServiceOfferAsync(JobPortal.Model.Offer serviceOffer);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
         JobPortal.Model.Offer[] GetAllOffers();
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllOffers", ReplyAction="http://tempuri.org/IOfferService/GetAllOffersResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllOffersAsync();
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
         bool AddHoursToOffer(JobPortal.Model.WorkingTime time);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddHoursToOffer", ReplyAction="http://tempuri.org/IOfferService/AddHoursToOfferResponse")]
         System.Threading.Tasks.Task<bool> AddHoursToOfferAsync(JobPortal.Model.WorkingTime time);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
         JobPortal.Model.WorkingTime[] GetAllWorkingDays();
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllWorkingDays", ReplyAction="http://tempuri.org/IOfferService/GetAllWorkingDaysResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.WorkingTime[]> GetAllWorkingDaysAsync();
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
         JobPortal.Model.Offer[] GetAllBought(string ID);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAllBought", ReplyAction="http://tempuri.org/IOfferService/GetAllBoughtResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.Offer[]> GetAllBoughtAsync(string ID);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/AddReview", ReplyAction="http://tempuri.org/IOfferService/AddReviewResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddReview", ReplyAction="http://tempuri.org/IOfferService/AddReviewResponse")]
         bool AddReview(JobPortal.Model.OfferReview review);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/AddReview", ReplyAction="http://tempuri.org/IOfferService/AddReviewResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/AddReview", ReplyAction="http://tempuri.org/IOfferService/AddReviewResponse")]
         System.Threading.Tasks.Task<bool> AddReviewAsync(JobPortal.Model.OfferReview review);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
         JobPortal.Model.OfferReview[] GetServiceReviews(int serviceId);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetServiceReviews", ReplyAction="http://tempuri.org/IOfferService/GetServiceReviewsResponse")]
         System.Threading.Tasks.Task<JobPortal.Model.OfferReview[]> GetServiceReviewsAsync(int serviceId);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates", ReplyAction="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse")]
-        int GetAvgOfServiceRates(int serviceId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates", ReplyAction="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse")]
+        double GetAvgOfServiceRates(int serviceId);
         
-        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates", ReplyAction="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse")]
-        System.Threading.Tasks.Task<int> GetAvgOfServiceRatesAsync(int serviceId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOfferService/GetAvgOfServiceRates", ReplyAction="http://tempuri.org/IOfferService/GetAvgOfServiceRatesResponse")]
+        System.Threading.Tasks.Task<double> GetAvgOfServiceRatesAsync(int serviceId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -189,11 +189,11 @@ namespace MyWeb.OfferReference {
             return base.Channel.GetServiceReviewsAsync(serviceId);
         }
         
-        public int GetAvgOfServiceRates(int serviceId) {
+        public double GetAvgOfServiceRates(int serviceId) {
             return base.Channel.GetAvgOfServiceRates(serviceId);
         }
         
-        public System.Threading.Tasks.Task<int> GetAvgOfServiceRatesAsync(int serviceId) {
+        public System.Threading.Tasks.Task<double> GetAvgOfServiceRatesAsync(int serviceId) {
             return base.Channel.GetAvgOfServiceRatesAsync(serviceId);
         }
     }

@@ -41,7 +41,7 @@ namespace MyWeb.Controllers
             _orderProxy = orderService;
         }
 
-        public async Task<ActionResult> Index(string id, string error)
+        public ActionResult Index(string id, string error)
         {
             if (shoppingCard == null)
             {
