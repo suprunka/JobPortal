@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1fc1ff2d-2c9e-4d04-a84a-d1d59c309e11" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b73c9b9c-3c4c-490d-8c12-05e8218827d5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/Offer/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost/JobPortal/Services/OfferService.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="304d4cb3-2ad6-4614-a7b3-a6ca0d950454" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="5e5eef2d-36db-4188-8a8c-1af6b298f2e0" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c9960663-7425-498c-bc10-d205345a3768" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="JobPortal.Model.xsd" MetadataType="Schema" ID="c7314415-83cf-4c65-a4b7-cf3b59e5b2c1" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
-    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="d6aba01b-9f21-4ad8-999f-15f5e96da571" SourceId="1" SourceUrl="http://localhost:8080/Offer/mex" />
+    <MetadataFile FileName="OfferService.xsd" MetadataType="Schema" ID="e6f369e6-b9af-43fe-808b-fc31b142fd24" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd1" />
+    <MetadataFile FileName="OfferService1.xsd" MetadataType="Schema" ID="23880fdf-1f02-4304-bf88-d111f794b1ea" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd0" />
+    <MetadataFile FileName="OfferService.wsdl" MetadataType="Wsdl" ID="343e68b5-3cd4-4320-9ba9-85fa7f140ba0" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?wsdl" />
+    <MetadataFile FileName="OfferService2.xsd" MetadataType="Schema" ID="c2e3ef13-62e1-4154-a7b9-42bd94b203d9" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd3" />
+    <MetadataFile FileName="OfferService3.xsd" MetadataType="Schema" ID="07c33a2c-49e4-4d4a-a29c-530d9c118dee" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

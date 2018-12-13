@@ -322,55 +322,55 @@
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.messages" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
-    <None Include="Connected Services\OfferReference\JobPortal.Model.xsd">
+    <None Include="Connected Services\OfferReference\OfferService.wsdl" />
+    <None Include="Connected Services\OfferReference\OfferService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferReference\service.wsdl" />
-    <None Include="Connected Services\OfferReference\service.xsd">
+    <None Include="Connected Services\OfferReference\OfferService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferReference\service1.xsd">
+    <None Include="Connected Services\OfferReference\OfferService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OfferReference\System.xsd">
+    <None Include="Connected Services\OfferReference\OfferService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\Arrays.xsd">
+    <None Include="Connected Services\OrderReference\OrderService.wsdl" />
+    <None Include="Connected Services\OrderReference\OrderService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\JobPortal.Model.xsd">
+    <None Include="Connected Services\OrderReference\OrderService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\service.wsdl" />
-    <None Include="Connected Services\OrderReference\service.xsd">
+    <None Include="Connected Services\OrderReference\OrderService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\service1.xsd">
+    <None Include="Connected Services\OrderReference\OrderService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\System.Data.Linq.xsd">
+    <None Include="Connected Services\OrderReference\OrderService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderReference\System.xsd">
+    <None Include="Connected Services\OrderReference\OrderService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\Arrays.xsd">
+    <None Include="Connected Services\UserReference1\UserService.wsdl" />
+    <None Include="Connected Services\UserReference1\UserService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\JobPortal.Model.xsd">
+    <None Include="Connected Services\UserReference1\UserService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\service.wsdl" />
-    <None Include="Connected Services\UserReference1\service.xsd">
+    <None Include="Connected Services\UserReference1\UserService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\service1.xsd">
+    <None Include="Connected Services\UserReference1\UserService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\System.Data.Linq.xsd">
+    <None Include="Connected Services\UserReference1\UserService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserReference1\System.xsd">
+    <None Include="Connected Services\UserReference1\UserService5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\ApplicationJobPortal - Web Deploy1.pubxml" />
