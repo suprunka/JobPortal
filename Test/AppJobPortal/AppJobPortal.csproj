@@ -310,12 +310,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
-      <Project>{54C02908-1940-4080-9B75-A3879245C02B}</Project>
-      <Name>JobPortal.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\TcpOfferReference\" />
     <WCFMetadataStorage Include="Connected Services\TcpOrderReference\" />
     <WCFMetadataStorage Include="Connected Services\TcpUserReference\" />
@@ -355,6 +349,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Name>JobPortal.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
