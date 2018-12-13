@@ -90,15 +90,21 @@ namespace ServiceLibrary
         {
             if (RegexMatch.DoesUserEmailMatch(u))
             {
-                _unitOfWork.Users.UpdateUserMail(new Users
+                try
                 {
-                    ID = u.ID,
-                    AspNetUsers = new AspNetUsers
+                    _unitOfWork.Users.UpdateUserMail(new Users
                     {
-                        Email = u.Email,
-                    }
+                        ID = u.ID,
+                        AspNetUsers = new AspNetUsers
+                        {
+                            Email = u.Email,
+                        }
 
-                });
+                    });
+                }
+                catch {
+                    return false;
+                }
                 return true;
             }
             else

@@ -236,7 +236,6 @@
       <Name>JobPortal.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="DbConnection\Entity\Lo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
