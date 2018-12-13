@@ -18,7 +18,7 @@ namespace UnitTestProject1.MVC__tests
         [TestMethod]
         public void Test_Index_Show_All_Offers()
         {
-            Offer[] array = { new Offer(), new Offer(), new Offer() };
+            Offer[] array = { new Offer { IsAvailable = true }, new Offer { IsAvailable = true }, new Offer { IsAvailable = true } };
             var all = array.AsQueryable<Offer>();
 
             var serviceMock = new Mock<MyWeb.OfferReference.IOfferService>();
@@ -50,11 +50,11 @@ namespace UnitTestProject1.MVC__tests
         [TestMethod]
         public  void  Test_Index_Show_All_Offers_Which_Contains_searching_string(string searchingString, int foundOffers)
         {
-            Offer[] array = { new Offer { Title= "Cleaning at your house"},
-                              new Offer {Title = "Very good Cleaning" },
-                              new Offer {Title = "GaRDening" },
-                              new Offer {Title = "gardening" },
-                              new Offer {Title = "garden" }
+            Offer[] array = { new Offer { Title= "Cleaning at your house", IsAvailable= true},
+                              new Offer {Title = "Very good Cleaning", IsAvailable= true },
+                              new Offer {Title = "GaRDening", IsAvailable= true },
+                              new Offer {Title = "gardening", IsAvailable= true },
+                              new Offer {Title = "garden", IsAvailable= true }
             };
         
 
