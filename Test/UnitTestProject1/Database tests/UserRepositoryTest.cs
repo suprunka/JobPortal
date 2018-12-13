@@ -10,7 +10,7 @@ using Gender = Repository.DbConnection.Gender;
 
 namespace UnitTestProject1
 {
-    //Works
+
     [TestClass]
     public class RepositoryTest
     {
@@ -46,6 +46,7 @@ namespace UnitTestProject1
                 FirstName = "Adam",
                 LastName = "Adam",
                 AddressLine = "mickiewicza",
+                
 
             };
             return userStub;
@@ -378,34 +379,7 @@ namespace UnitTestProject1
             }
         }
 
-        //Testing deleting an object and deleting address table if there in no one referencing it
-        [TestMethod]
-        public void Deleting_User_And_Address_Table_If_No_One_Uses_It()
-        {
-            var context = new DbTestDataContext();
-            using (var unitOfWork = new UnitOfWork(context))
-            {
-                try
-                {
-                    var user = unitOfWork.Users.Create(GetUser());
-                    unitOfWork.Users.Delete(t => t.ID == user.ID);
-                    Assert.AreEqual(0, context.AddressTable.Count());
-                }
-                catch
-                {
-                    Assert.Fail();
-                }
-            }
-
-            var secondContext = new DbTestDataContext();
-            using (var unitOfWork = new UnitOfWork(secondContext))
-            {
-                secondContext.Users.DeleteAllOnSubmit(secondContext.Users);
-                secondContext.AspNetUsers.DeleteAllOnSubmit(secondContext.AspNetUsers);
-                secondContext.AddressTable.DeleteAllOnSubmit(secondContext.AddressTable);
-                secondContext.SubmitChanges();
-            }
-        }
+        
 
         //Testing returning all users in a database. 
         [TestMethod]
@@ -577,7 +551,7 @@ namespace UnitTestProject1
                     Users u = unitOfWork.Users.Create(GetUser());
                     Users toUpdate = ToUpdate();
                     toUpdate.ID = u.ID;
-
+                    toUpdate.LastUpdate = u.LastUpdate;
                     var result = unitOfWork.Users.AddDescription(toUpdate);
                     Assert.IsNotNull(result);
                     Assert.AreEqual("Description", result.Description);

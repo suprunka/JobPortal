@@ -345,7 +345,7 @@ namespace MyWeb.Controllers
                 return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
             }
 
-            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = edited.Id });
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = edited.Id });
         }
 
         public async Task<ActionResult> Delete(int id)
@@ -353,7 +353,7 @@ namespace MyWeb.Controllers
             var isDeleted = await _offerProxy.DeleteServiceOfferAsync(id);
             if (isDeleted)
                 return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
-            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = id });
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = id });
 
 
 
@@ -383,10 +383,11 @@ namespace MyWeb.Controllers
                 }
                 catch
                 {
-                    return View("Error", null);
+                    TempData["msg"] = "<script>alert('You can not add a review to the offer, first you need to buy it.');</script>";
+
                 }
             }
-            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = serviceId });
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = serviceId });
         }
     }
 }

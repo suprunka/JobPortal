@@ -193,7 +193,7 @@ namespace UnitTestProject1.Service_tests
             {
                 var databaseMock = new Mock<IUnitOfWork>();
 
-               databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
+                databaseMock.Setup(x => x.Users.Get(It.IsAny<Expression<Func<Users, bool>>>())).Returns(new Users
                 {
                     AddressTable = new AddressTable
                     {
@@ -477,9 +477,9 @@ namespace UnitTestProject1.Service_tests
                 var databaseMock = new Mock<IUnitOfWork>();
                 databaseMock.Setup(x => x.Users.GetAll()).Throws(new Exception());
                 new UserService(databaseMock.Object).GetAll();
-                
+
             }
-            catch(Exception)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
@@ -491,34 +491,32 @@ namespace UnitTestProject1.Service_tests
             {
                 var databaseMock = new Mock<IUnitOfWork>();
                 databaseMock.Setup(x => x.Users.GetAll()).Returns(new Users[] { new Users {
-                 AddressTable = new AddressTable
-                 {
+                    AddressTable = new AddressTable
+                    {
                      Postcode = "9000",
                      City = "Aalborg",
                      Region = "Nordjylland"
-                 },
-                AspNetUsers = new AspNetUsers
-                 {
+                    },
+                    AspNetUsers = new AspNetUsers
+                    {
                      PasswordHash = "adamapA1",
                      UserName = "Username5",
-                    PhoneNumber = "87654321",
+                     PhoneNumber = "87654321",
                      Email = "adam@gmail.com",
-
-
-                 },
-                 Gender = new Repository.DbConnection.Gender
-                 {
+                     AvailabilityState = 1,
+                    },
+                    Gender = new Repository.DbConnection.Gender
+                    {
                      Gender1 = "Male",
-                 },
-                 ID = 5,
-                 FirstName = "Adam",
-                 LastName = "Adam",
-                 AddressLine = "mickiewicza",
-                   Description = "description",
-                        PayPalMail = "paypal@wp.pl",
-
-                     }, new Users {
-                         AddressTable = new AddressTable
+                    },
+                    ID = 5,
+                    FirstName = "Adam",
+                    LastName = "Adam",
+                    AddressLine = "mickiewicza",
+                    Description = "description",
+                    PayPalMail = "paypal@wp.pl",
+                    }, new Users {
+                        AddressTable = new AddressTable
                          {
                              Postcode = "9000",
                              City = "Aalborg",
@@ -530,7 +528,7 @@ namespace UnitTestProject1.Service_tests
                              UserName = "Username5",
                             PhoneNumber = "87654321",
                              Email = "adam@gmail.com",
-
+                             AvailabilityState = 1,
 
                          },
                          Gender = new Repository.DbConnection.Gender
@@ -763,7 +761,7 @@ namespace UnitTestProject1.Service_tests
             var sut = new UserService(dbMock.Object);
             bool result = sut.DeleteUser(userMock.Object.ID);
             Assert.IsTrue(result);
-        }   
+        }
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Invalid_ID_Returns_False()
         {
@@ -774,7 +772,7 @@ namespace UnitTestProject1.Service_tests
             var sut = new UserService(dbMock.Object);
             bool result = sut.DeleteUser(userMock.Object.ID);
             Assert.IsFalse(result);
-        }       
+        }
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Valid_ID_Hits_Database_Once()
         {
@@ -785,7 +783,7 @@ namespace UnitTestProject1.Service_tests
             var sut = new UserService(dbMock.Object);
             sut.DeleteUser(userMock.Object.ID);
             dbMock.Verify(x => x.Users.Delete(It.IsAny<Expression<Func<Users, bool>>>()), Times.Once);
-        }        
+        }
         [TestMethod]
         public void Delete_UserService_Delete_User_With_Invalid_ID_Never_Hits_Database()
         {

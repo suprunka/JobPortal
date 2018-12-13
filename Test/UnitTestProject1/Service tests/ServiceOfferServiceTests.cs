@@ -161,6 +161,11 @@ namespace UnitTestProject1.Service_tests
                     Description = "Descriptionlong",
                     Title = "Title",
                     RatePerHour = 20,
+                    AvailabilityState = new AvailabilityState
+                    {
+                        ID = 1,
+                        State = "Active",
+                    },
                     SubCategory = new Repository.DbConnection.SubCategory
                     {
                         Category = new Repository.DbConnection.Category
@@ -253,6 +258,11 @@ namespace UnitTestProject1.Service_tests
                     Description = "Descriptonlong",
                     Title = "Title",
                     RatePerHour = 20,
+                    AvailabilityState = new AvailabilityState
+                    {
+                        ID = 1,
+                        State = "Active",
+                    },
                     SubCategory = new Repository.DbConnection.SubCategory
                     {
                         Category = new Repository.DbConnection.Category
@@ -288,6 +298,11 @@ namespace UnitTestProject1.Service_tests
                     Description = "Descriptonlong",
                     Title = "Title",
                     RatePerHour = 20,
+                    AvailabilityState = new AvailabilityState
+                    {
+                        ID = 1,
+                        State = "Active",
+                    },
                     SubCategory = new Repository.DbConnection.SubCategory
                     {
                         Category = new Repository.DbConnection.Category
@@ -324,6 +339,11 @@ namespace UnitTestProject1.Service_tests
                     Description = "Descriptionlong",
                     Title = "Title",
                     RatePerHour = 20,
+                    AvailabilityState = new AvailabilityState
+                    {
+                        ID = 1,
+                        State = "Active",
+                    },
                     SubCategory = new Repository.DbConnection.SubCategory
                     {
                         Category = new Repository.DbConnection.Category
