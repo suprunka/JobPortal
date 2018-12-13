@@ -290,6 +290,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Rating.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Endpoints addresses.txt" />
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.dll" />
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.xml" />
     <Content Include="favicon.ico" />

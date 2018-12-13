@@ -1,0 +1,16 @@
+TO Local IIS:
+OfferService: http://localhost/JobPortal/Services/OfferService.svc?wsdl
+OrderService: http://localhost/JobPortal/Services/OrderService.svc?wsdl
+UserService: http://localhost/JobPortal/Services/UserService.svc?wsdl
+
+To azure:
+OfferService:  http://jobportalik.cloudapp.net/OfferService.svc?wsdl
+OrderService: http://jobportalik.cloudapp.net/OrderService.svc?wsdl
+UserService: http://jobportalik.cloudapp.net/UserService.svc?wsdl
+
+To ServiceLibrary in WCF:
+OfferService: http://localhost:8080/Offer/mex
+OrderService: http://localhost:8080/Order/mex
+UserService: http://localhost:8080/User/mex
+
+
