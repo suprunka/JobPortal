@@ -14,6 +14,7 @@ namespace WebJobPortal.Models
         public int ID { get; set; }
 
         public String Description { get; set; }
+
     }
 
     public class LoginViewModel

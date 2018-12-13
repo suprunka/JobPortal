@@ -113,25 +113,33 @@
 }
 @if (Model.Author != User.Identity.GetUserId())
 {<div class="row">
-        <div class="col-md-10">
-            Available days when you can order the service:
-            <div>
-                @foreach (var t in Model.Dates.GroupBy(x=>x.WeekDay).Where(x => x.Count() >= 1).Select(y => y.Key))
-                {
+     <div class="col-md-10">
+         @if (Model.Dates.Count() > 0)
+         {
+             <p>Available days when you can order the service:</p>
+             <div>
+                 @foreach (var t in Model.Dates.GroupBy(x => x.WeekDay).Where(x => x.Count() >= 1).Select(y => y.Key))
+                 {
 
-                    <div>
-                        @t.ToString()
-                    </div>
-                }
-            </div>
-            <p><span class="glyphicon glyphicon-calendar" style="padding-right:20px;"></span><input type="date" name="days" id="selecteddate"></p>
-            <br />
-            <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span>@Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "selectlistReview" }) </p>
-            <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span> @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "selectlistReview" }) </p>
-            <br />
+                     <div>
+                         @t.ToString()
+                     </div>
+                 }
+             </div>
+             <p><span class="glyphicon glyphicon-calendar" style="padding-right:20px;"></span><input type="date" name="days" id="selecteddate"></p>
+             <br />
+             <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span>@Html.DropDownList("Hours from", new SelectList(""), new { @id = "hoursfrom", @class = "selectlistReview" }) </p>
+             <p> <span class="glyphicon glyphicon-time" style="padding-right:20px;"></span> @Html.DropDownList("Hours To", new SelectList(""), new { @id = "hoursto", @class = "selectlistReview" }) </p>
+             <br />
+             @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-info", @id = "addToCart" })
 
-            @Html.ActionLink("Add to cart", "AddToCart", "Order", new { serviceID = Model.Id, userID = User.Identity.GetUserId() }, new { @class = "btn btn-info", @id = "addToCart" })
-        </div>
+         }
+         else
+         {
+
+             <h4>The owner of the  service haven't set working dates yet.</h4>
+
+         }</div>
     </div>
 }
 

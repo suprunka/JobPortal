@@ -200,7 +200,6 @@ namespace ServiceLibrary
                             LastName = result.LastName,
                             Email = result.AspNetUsers.Email,
                             UserName = result.AspNetUsers.UserName,
-                            //Password = result.AspNetUsers.Password,
                             AddressLine = result.AddressLine,
                             CityName = result.AddressTable.City,
                             Postcode = result.AddressTable.Postcode,
@@ -229,7 +228,7 @@ namespace ServiceLibrary
         public User[] GetAll()
         {
             IList<User> resultToReturn = new List<User>();
-            foreach (var u in _unitOfWork.Users.GetAll().Where(x=>x.AspNetUsers.State==1))
+            foreach (var u in _unitOfWork.Users.GetAll().Where(x=>x.AspNetUsers.AvailabilityState==1))
             {
                 resultToReturn.Add(new User
                 {
@@ -258,7 +257,7 @@ namespace ServiceLibrary
 
             var result = _unitOfWork.Users.Get(t => t.AspNetUsers.Email == email);
 
-            return result.AspNetUsers.State  !=2 ? true : false;
+            return result.AspNetUsers.AvailabilityState !=2 ? true : false;
         }
 
         public User[] ListByGender(Gender gender)

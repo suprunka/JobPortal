@@ -80,7 +80,7 @@
         <elementListCompartment Id="152f60ac-f5fa-48f4-95e7-bee04465fef1" absoluteBounds="5.1400000000000006, 8.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.625 : 10.2844962565104); (7.19791666666667 : 10.2844962565104 : JumpStart); (7.36458333333333 : 10.2844962565104 : JumpEnd); (7.38541666666667 : 10.2844962565104 : JumpStart); (7.55208333333333 : 10.2844962565104 : JumpEnd); (7.625 : 10.2844962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.625 : 10.2844962565104); (7.29166666666667 : 10.2844962565104 : JumpStart); (7.58333583333333 : 10.2844962565104 : JumpEnd); (7.625 : 10.2844962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetRole/AspNetRole_AspNetUserRole" />
       <nodes>
         <classShapeMoniker Id="68a771ab-9588-4477-a5a1-239d28f7e002" />
@@ -108,7 +108,7 @@
         <classShapeMoniker Id="9b3cf6f0-42bc-4444-99a1-da4869fcd288" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.375 : 10.03125); (12.4196666666667 : 10.03125 : JumpStart); (12.5863333333333 : 10.03125 : JumpEnd); (14.4479166666667 : 10.03125 : JumpStart); (14.6145833333333 : 10.03125 : JumpEnd); (14.9062495 : 10.03125); (14.9062495 : 12.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(12.375 : 10.03125); (12.6354166666667 : 10.03125 : JumpStart); (12.8020833333333 : 10.03125 : JumpEnd); (14.9062495 : 10.03125); (14.9062495 : 12.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/OrderTable/OrderTable_Salelines" />
       <nodes>
         <classShapeMoniker Id="fe00cc2d-5232-4106-813c-c551cc1348f4" />
@@ -133,141 +133,141 @@
         <elementListCompartment Id="1c31bc31-86c0-4e6c-8886-222150dd2519" absoluteBounds="8.765, 13.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.625 : 11.5969962565104); (5.54166666666667 : 11.5969962565104 : JumpStart); (5.70833333333333 : 11.5969962565104 : JumpEnd); (5.875 : 11.5969962565104); (5.875 : 11.25); (7.19791666666667 : 11.25 : JumpStart); (7.36458333333333 : 11.25 : JumpEnd); (7.375 : 11.25); (7.375 : 11.4439925130208); (8.29166666666667 : 11.4439925130208 : JumpStart); (8.45833333333333 : 11.4439925130208 : JumpEnd); (9.5624995 : 11.4439925130208); (9.5624995 : 13.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.625 : 11.5969962565104); (4.875 : 11.5969962565104); (4.875 : 14.375); (5.125 : 14.375); (5.125 : 14.5593082682292); (5.625 : 14.5593082682292); (5.625 : 14.375); (8.5 : 14.375); (8.5 : 12.875); (9.6874995 : 12.875); (9.6874995 : 13.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/Gender/Gender_Users" />
       <nodes>
         <classShapeMoniker Id="377967c7-bf25-4665-9b45-28acb9934738" />
         <classShapeMoniker Id="a39fc10c-042b-40b9-9ba9-9863490e6ded" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.75 : 13.2892976888021); (4.76041666666667 : 13.2892976888021 : JumpStart); (4.92708333333333 : 13.2892976888021 : JumpEnd); (5.625 : 13.2892976888021); (5.625 : 11); (7.19791666666667 : 11 : JumpStart); (7.36458333333333 : 11 : JumpEnd); (7.375 : 11); (7.375 : 11.4127425130208); (7.38541666666667 : 11.4127425130208 : JumpStart); (7.55208333333333 : 11.4127425130208 : JumpEnd); (7.79166666666667 : 11.4127425130208 : JumpStart); (7.95833333333333 : 11.4127425130208 : JumpEnd); (8.29166666666667 : 11.4127425130208 : JumpStart); (8.45833333333333 : 11.4127425130208 : JumpEnd); (9.12499775 : 11.4127425130208); (9.12499775 : 13.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.78125 : 14.0785953776042); (2.78125 : 14.4671541341146); (4.91666666666667 : 14.4671541341146 : JumpStart); (5.08333333333333 : 14.4671541341146 : JumpEnd); (6.41666666666667 : 14.4671541341146 : JumpStart); (6.58333333333333 : 14.4671541341146 : JumpEnd); (8.75 : 14.4671541341146)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/AddressTable/AddressTable_Users" />
       <nodes>
         <classShapeMoniker Id="2f8c06f5-57eb-4455-9c40-9686e4ca259e" />
         <classShapeMoniker Id="a39fc10c-042b-40b9-9ba9-9863490e6ded" />
       </nodes>
     </associationConnector>
-    <classShape Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" absoluteBounds="8.625, 8, 2, 2.1554996744791666">
+    <classShape Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" absoluteBounds="7.125, 3.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/JobPortalDatabaseDataContext/ServiceOffer" />
       <nestedChildShapes>
-        <elementListCompartment Id="0569d3a7-a44e-498f-9e79-bc1ae48c1dc3" absoluteBounds="8.64, 8.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0569d3a7-a44e-498f-9e79-bc1ae48c1dc3" absoluteBounds="7.1400000000000006, 4.2100000000000009, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(9.625 : 8); (9.625 : 7.808); (12.122 : 7.808); (12.122 : 9.27389680989583); (12.503 : 9.27389680989583); (12.503 : 11.933); (11.625 : 11.933); (11.625 : 12.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.375 : 5.90549967447917); (7.375 : 12.544943130008); (10.625 : 12.544943130008)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/ServiceOffer/ServiceOffer_WorkingDates" />
       <nodes>
         <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
         <classShapeMoniker Id="56f963a8-ed6c-4854-82f1-027b96534597" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.625 : 9.72199625651042); (11.2604166666667 : 9.72199625651042 : JumpStart); (11.4270833333333 : 9.72199625651042 : JumpEnd); (12.4196666666667 : 9.72199625651042 : JumpStart); (12.5863333333333 : 9.72199625651042 : JumpEnd); (14.874997 : 9.72199625651042); (14.874997 : 12.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(9.125 : 4.82774983723958); (14.874997 : 4.82774983723958); (14.874997 : 12.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/ServiceOffer/ServiceOffer_Salelines" />
       <nodes>
         <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
         <classShapeMoniker Id="9b3cf6f0-42bc-4444-99a1-da4869fcd288" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.625 : 9.86100062825521); (11.2604166666667 : 9.86100062825521 : JumpStart); (11.4270833333333 : 9.86100062825521 : JumpEnd); (14.53125 : 9.86100062825521); (14.53125 : 10.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.5000025 : 5.90549967447917); (7.5000025 : 11.9479484049479); (12.75 : 11.9479484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/ServiceOffer/ServiceOffer_ShoppingCart" />
       <nodes>
         <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
         <classShapeMoniker Id="53ae49ea-2f2e-4de6-84f1-8c2e392525ec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.625 : 8.09375); (12.25 : 8.09375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.34375375 : 5.90549967447917); (8.34375375 : 7.78125); (12.25 : 7.78125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/ServiceOffer/ServiceOffer_Review" />
       <nodes>
         <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
         <classShapeMoniker Id="ca831f1d-8c26-4368-b66a-8c369459de38" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.125 : 8.50564697265625); (7.38541666666667 : 8.50564697265625 : JumpStart); (7.55208333333333 : 8.50564697265625 : JumpEnd); (8.625 : 8.50564697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.09375 : 7.625); (6.09375 : 4.82774983723958); (7.125 : 4.82774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/SubCategory/SubCategory_ServiceOffer" />
       <nodes>
         <classShapeMoniker Id="861d54fc-2ae6-4335-adf2-0d4c3d4a6d86" />
         <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
       </nodes>
     </associationConnector>
-    <classShape Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" absoluteBounds="6.125, 11.5, 2, 3.3093082682291666">
-      <DataClassMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0a56d76a-6a46-4a1e-ae4f-d06e1a141c14" absoluteBounds="6.14, 11.96, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(6.125 : 12.3469962565104); (5.70833333333333 : 12.3469962565104 : JumpStart); (5.54166666666667 : 12.3469962565104 : JumpEnd); (4.84375 : 12.3469962565104); (4.84375 : 14.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_AspNetUserClaim" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="9b73007e-9597-4c51-bf3d-d2d2575be663" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(8.125 : 13.1546541341146); (8.425 : 13.1546541341146); (8.425 : 15.4415506067708); (7.875 : 15.4415506067708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_AspNetUserLogin" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="c9d93d43-7bfb-4afa-8ba2-0511cdd74fbf" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(7.875 : 11.5); (7.875 : 11.1939925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_AspNetUserRole" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="5e8e0d13-2e5a-4eab-b99a-f3183d36f900" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(6.7500005 : 11.5); (6.7500005 : 11.28125); (7.19791666666667 : 11.28125 : JumpStart); (7.55208333333333 : 11.28125 : JumpEnd); (7.79166666666667 : 11.28125 : JumpStart); (7.95833333333333 : 11.28125 : JumpEnd); (8.375 : 11.28125); (8.375 : 11.6939925130208); (9.04166441666667 : 11.6939925130208 : JumpStart); (9.20833108333333 : 11.6939925130208 : JumpEnd); (9.47916616666667 : 11.6939925130208 : JumpStart); (9.64583283333334 : 11.6939925130208 : JumpEnd); (10 : 11.6939925130208); (10 : 10.8854484049479); (10.375 : 10.8854484049479)]" fixedFrom="Algorithm" fixedTo="NotFixed">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_OrderTable" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="fe00cc2d-5232-4106-813c-c551cc1348f4" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(8.125 : 14.0132332011719); (8.34166666666667 : 14.0132332011719 : JumpStart); (8.50833333333333 : 14.0132332011719 : JumpEnd); (8.6875 : 14.0132332011719); (8.6875 : 12.0625); (9.04166441666667 : 12.0625 : JumpStart); (9.20833108333333 : 12.0625 : JumpEnd); (9.47916616666667 : 12.0625 : JumpStart); (9.64583283333334 : 12.0625 : JumpEnd); (12.6875 : 12.0625); (12.6875 : 12.1506982421875); (13.75 : 12.1506982421875); (13.75 : 12.0881982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_ShoppingCart" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="53ae49ea-2f2e-4de6-84f1-8c2e392525ec" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(7.46875 : 11.5); (7.46875 : 7.46875); (12.25 : 7.46875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_Review" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="ca831f1d-8c26-4368-b66a-8c369459de38" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(8.125 : 14.4737707347005); (8.34166666666667 : 14.4737707347005 : JumpStart); (8.50833333333333 : 14.4737707347005 : JumpEnd); (8.75 : 14.4737707347005)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_Users" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="a39fc10c-042b-40b9-9ba9-9863490e6ded" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(7.28125 : 11.5); (7.28125 : 9.64225062825521); (7.38541666666667 : 9.64225062825521 : JumpStart); (7.55208333333333 : 9.64225062825521 : JumpEnd); (8.625 : 9.64225062825521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUser_ServiceOffer" />
-      <nodes>
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
-        <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="a466d981-ea31-40bb-adc1-8296b223aa49" absoluteBounds="1.375, 12.375, 2, 1.1939925130208333">
+    <classShape Id="a466d981-ea31-40bb-adc1-8296b223aa49" absoluteBounds="0.5, 9, 2, 1.1939925130208333">
       <DataClassMoniker Name="/JobPortalDatabaseDataContext/AvailabilityState" />
       <nestedChildShapes>
-        <elementListCompartment Id="2ae8bdd6-ff66-49ea-b0b5-fd670d92a94c" absoluteBounds="1.3900000000000001, 12.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2ae8bdd6-ff66-49ea-b0b5-fd670d92a94c" absoluteBounds="0.51500000000000012, 9.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.96875 : 12.375); (1.96875 : 9.28449625651042); (7.38541666666667 : 9.28449625651042 : JumpStart); (7.55208333333333 : 9.28449625651042 : JumpEnd); (8.625 : 9.28449625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.5 : 9); (1.5 : 5.39787725585937); (6.01041666666667 : 5.39787725585937 : JumpStart); (6.17708333333333 : 5.39787725585937 : JumpEnd); (7.125 : 5.39787725585937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/AvailabilityState/AvailabilityState_ServiceOffer" />
       <nodes>
         <classShapeMoniker Id="a466d981-ea31-40bb-adc1-8296b223aa49" />
         <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.375 : 12.40625); (5.54166666666667 : 12.40625 : JumpStart); (5.70833333333333 : 12.40625 : JumpEnd); (6.125 : 12.40625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="88fe2cce-0d4e-460d-8b40-71660731b07b" absoluteBounds="5.125, 11, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers" />
+      <nestedChildShapes>
+        <elementListCompartment Id="467b057e-ea87-49af-aeca-be615a670d40" absoluteBounds="5.14, 11.46, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 14.3093082682292); (4.875 : 14.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_AspNetUserClaim" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="9b73007e-9597-4c51-bf3d-d2d2575be663" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.5 : 14.3093082682292); (6.5 : 14.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_AspNetUserLogin" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="c9d93d43-7bfb-4afa-8ba2-0511cdd74fbf" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.125 : 11); (6.125 : 10.6734996282552); (7.29166666666667 : 10.6734996282552 : JumpStart); (7.58333583333333 : 10.6734996282552 : JumpEnd); (7.625 : 10.6734996282552)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_AspNetUserRole" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="5e8e0d13-2e5a-4eab-b99a-f3183d36f900" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 11.5136946614583); (7.29166666666667 : 11.5136946614583 : JumpStart); (7.58333583333333 : 11.5136946614583 : JumpEnd); (10.375 : 11.5136946614583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_OrderTable" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="fe00cc2d-5232-4106-813c-c551cc1348f4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 12.152381260016); (7.29166666666667 : 12.152381260016 : JumpStart); (7.45833333333333 : 12.152381260016 : JumpEnd); (10.5625 : 12.152381260016); (10.5625 : 12.0625); (12.6875 : 12.0625); (12.6875 : 12.1506982421875); (13.75 : 12.1506982421875); (13.75 : 12.0881982421875)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_ShoppingCart" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="53ae49ea-2f2e-4de6-84f1-8c2e392525ec" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 13.1808447641226); (8.41666666666667 : 13.1808447641226 : JumpStart); (8.58333333333333 : 13.1808447641226 : JumpEnd); (10.5625 : 13.1808447641226); (10.5625 : 12.0625); (12.71875 : 12.0625); (12.71875 : 9.9375); (13.3764995 : 9.9375); (13.3764995 : 9.14589680989583)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_Review" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="ca831f1d-8c26-4368-b66a-8c369459de38" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 13.8075765161759); (8.41666666666667 : 13.8075765161759 : JumpStart); (8.58333333333333 : 13.8075765161759 : JumpEnd); (8.75 : 13.8075765161759)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_Users" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="a39fc10c-042b-40b9-9ba9-9863490e6ded" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 11.7620740332031); (7.40624875 : 11.7620740332031); (7.40624875 : 5.90549967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JobPortalDatabaseDataContext/AspNetUsers/AspNetUsers_ServiceOffer" />
+      <nodes>
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
+        <classShapeMoniker Id="9948b478-bb2f-4d06-8f62-416a8f2a42c7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.5 : 10.1939925130208); (1.5 : 12.3469962565104); (4.79166666666667 : 12.3469962565104 : JumpStart); (4.95833333333333 : 12.3469962565104 : JumpEnd); (5.125 : 12.3469962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JobPortalDatabaseDataContext/AvailabilityState/AvailabilityState_AspNetUsers" />
       <nodes>
         <classShapeMoniker Id="a466d981-ea31-40bb-adc1-8296b223aa49" />
-        <classShapeMoniker Id="cd1ef0ae-8be5-466f-91de-3f81065a258a" />
+        <classShapeMoniker Id="88fe2cce-0d4e-460d-8b40-71660731b07b" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

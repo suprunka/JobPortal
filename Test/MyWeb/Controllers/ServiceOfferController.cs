@@ -79,7 +79,7 @@ namespace MyWeb.Controllers
             IPagedList<ManageOfferModel> ipagedList = null;
             switch (sorting)
             {
-                case 1://by highet price
+                case 1://by highest price
                     list = User.Identity.GetUserId() != null && show ?
                 all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region).OrderByDescending(x => x.RatePerHour) :
                 all.OrderByDescending(x => x.RatePerHour);
@@ -91,7 +91,7 @@ namespace MyWeb.Controllers
                all.OrderBy(x => x.RatePerHour);
 
                     break;
-                case 4://date
+                case 4://by date
                     list = User.Identity.GetUserId() != null && show  ?
                         all.Where(x => _userProxy.FindUser(x.AuthorId).Region == profile.Region):
 

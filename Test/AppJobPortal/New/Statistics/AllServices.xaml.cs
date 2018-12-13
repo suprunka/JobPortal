@@ -24,24 +24,24 @@ namespace AppJobPortal
 
             InitializeComponent();
             _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
-            var offers = _offerproxy.GetAllOffers();
-            int home = offers.Where(x => x.Category.ToString() == Category.Home.ToString() && x.RatePerHour < 200).Count();
+            var offers = _offerproxy.GetAllOffers().Where(x => x.IsAvailable == true);
+            int home = offers.Where(x => x.Category.ToString() == Category.Home.ToString() && x.RatePerHour <= 200).Count();
             int home2 = offers.Where(x => x.Category.ToString() == Category.Home.ToString() && x.RatePerHour > 200).Count();
-            int it = offers.Where(x => x.Category.ToString() == Category.IT.ToString() && x.RatePerHour < 200).Count();
+            int it = offers.Where(x => x.Category.ToString() == Category.IT.ToString() && x.RatePerHour <= 200).Count();
             int it2 = offers.Where(x => x.Category.ToString() == Category.IT.ToString() && x.RatePerHour > 200).Count();
-            int tutoring = offers.Where(x => x.Category.ToString() == Category.Tutoring.ToString() && x.RatePerHour < 200).Count();
+            int tutoring = offers.Where(x => x.Category.ToString() == Category.Tutoring.ToString() && x.RatePerHour <= 200).Count();
             int tutoring2 = offers.Where(x => x.Category.ToString() == Category.Tutoring.ToString() && x.RatePerHour > 200).Count();
-            int media = offers.Where(x => x.Category.ToString() == Category.Media.ToString() && x.RatePerHour < 200).Count();
+            int media = offers.Where(x => x.Category.ToString() == Category.Media.ToString() && x.RatePerHour <= 200).Count();
             int media2 = offers.Where(x => x.Category.ToString() == Category.Media.ToString() && x.RatePerHour > 200).Count();
-            int arch = offers.Where(x => x.Category.ToString() == Category.Architecture.ToString() && x.RatePerHour < 200).Count();
+            int arch = offers.Where(x => x.Category.ToString() == Category.Architecture.ToString() && x.RatePerHour <= 200).Count();
             int arch2 = offers.Where(x => x.Category.ToString() == Category.Architecture.ToString() && x.RatePerHour > 200).Count();
-            int repairs = offers.Where(x => x.Category.ToString() == Category.Repairs.ToString() && x.RatePerHour < 200).Count();
+            int repairs = offers.Where(x => x.Category.ToString() == Category.Repairs.ToString() && x.RatePerHour <= 200).Count();
             int repairs2 = offers.Where(x => x.Category.ToString() == Category.Repairs.ToString() && x.RatePerHour > 200).Count();
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
-                    Title = "Less than 200kr/h",
+                    Title = "Less or 200kr/h",
                     Values = new ChartValues<int> { home, it, tutoring,media,arch,repairs }
                 }
             };
