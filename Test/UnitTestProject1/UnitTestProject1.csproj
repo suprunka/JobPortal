@@ -258,28 +258,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
-      <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
-      <Name>AppJobPortal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
-      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
-      <Name>JobPortal.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyWeb\WebJobPortal.csproj">
-      <Project>{210d4b66-bef0-48ed-a289-b76ba2dc7a6a}</Project>
-      <Name>WebJobPortal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test\ServiceLibrary.csproj">
-      <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
-      <Name>ServiceLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +283,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppJobPortal\AppJobPortal.csproj">
+      <Project>{e63f4324-3fab-4f0d-8126-6b4b123a2742}</Project>
+      <Name>AppJobPortal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JobPortal.Model\JobPortal.Model.csproj">
+      <Project>{54c02908-1940-4080-9b75-a3879245c02b}</Project>
+      <Name>JobPortal.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyWeb\WebJobPortal.csproj">
+      <Project>{210d4b66-bef0-48ed-a289-b76ba2dc7a6a}</Project>
+      <Name>WebJobPortal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{b6b74896-6884-4bee-b43f-6405664079f8}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test\ServiceLibrary.csproj">
+      <Project>{33304a02-e154-4c1b-9f09-d2a024c77434}</Project>
+      <Name>ServiceLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

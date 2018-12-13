@@ -197,8 +197,15 @@ namespace MyWeb.Controllers
                 {
                     return RedirectToAction("UserProfile", "User", new { id = User.Identity.GetUserId() });
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Entered mail is already used, try to enter another one.");
+                    return View(model);
+
+                }
             }
             return View(model);
+
         }
 
         #region Helpers
