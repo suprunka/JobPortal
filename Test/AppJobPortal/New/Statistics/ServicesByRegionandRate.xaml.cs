@@ -32,7 +32,7 @@ namespace AppJobPortal
             InitializeComponent();
             _offerproxy = new OfferServiceClient("OfferServiceTcpEndpoint");
             _userproxy = new UserServiceClient("UserServiceTcpEndpoint");
-            var offers = _offerproxy.GetAllOffers();
+            var offers = _offerproxy.GetAllOffers().Where(x=>x.IsAvailable);
             var users = _userproxy.GetAll();
 
 
@@ -40,15 +40,15 @@ namespace AppJobPortal
             int midtyllandAvg = 0;
             int nordjyllandAvg = 0;
             int sjallandAvg = 0;
-            int syddanmarkAvg = 0;
+            int syddanmarkAvg = 0; 
             int hovedstadenAvgLower = 0;
-            int midtyllandAvgLower = 0;
+            int midtyllandAvgLower = 0;//d
             int nordjyllandAvgLower = 0;
             int sjallandAvgLower = 0;
             int syddanmarkAvgLower = 0;
             foreach (var offer in offers)
-            {
-                var userRegion = users.Where(x => x.LoggingId == offer.AuthorId).First().Region;
+            { var u = users.Where(x => x.LoggingId == offer.AuthorId).FirstOrDefault(); 
+                var userRegion = users.Where(x => x.LoggingId == offer.AuthorId).FirstOrDefault().Region;
                 double avg = _offerproxy.GetAvgOfServiceRates(offer.Id);
                 switch (userRegion)
                 {
