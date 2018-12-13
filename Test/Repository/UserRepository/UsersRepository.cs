@@ -156,7 +156,6 @@ namespace Repository
             return result;
         }
 
-
         public override bool Delete(Expression<Func<Users, bool>> predicate)
         {
             bool result = false;
@@ -226,6 +225,7 @@ namespace Repository
         {
             return base.List(predicate);
         }
+
         public AspNetUsers Login(AspNetUsers account)
         {
             return base.Login(account);
