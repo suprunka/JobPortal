@@ -107,7 +107,7 @@ namespace MyWeb.Controllers
             {
                 TempData["msg"] = "<script>alert('You are not logged in.');</script>";
             }
-            return RedirectToAction("ViewDetailsModel", "ServiceOffer", new { id = serviceID });
+            return RedirectToAction("ViewDetails", "ServiceOffer", new { id = serviceID });
         }
 
         public async Task<ActionResult> DeleteFromCard(string idU, int? id, DateTime? date, TimeSpan? from, TimeSpan? to)
