@@ -55,7 +55,7 @@ namespace WcfServiceJobPortal
                 .Build();
             ITrigger trigger = TriggerBuilder
                 .Create()
-                .WithCronSchedule("0 30 11  1/1 * ? *")
+                .WithCronSchedule("0 35 13  1/1 * ? *")
                 .StartNow()
                 .Build();
 

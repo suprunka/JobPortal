@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3d3beb5a-874d-4276-bd78-67d5458a04e6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a7bd7730-4ade-40f9-a549-75a3ce9fb309" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,16 +19,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/JobPortal/Services/OrderService.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/Order/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OrderService.xsd" MetadataType="Schema" ID="075fc010-ca57-492b-914f-c502fde8064e" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?xsd=xsd2" />
-    <MetadataFile FileName="OrderService1.xsd" MetadataType="Schema" ID="9b3a8283-da5c-40b3-b2c2-54c7a90a8792" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?xsd=xsd3" />
-    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="3258811d-fe0d-46e8-aada-27ab7b1e067c" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?wsdl" />
-    <MetadataFile FileName="OrderService2.xsd" MetadataType="Schema" ID="795ec5b7-cc75-4409-8423-bb8ad08bc68b" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?xsd=xsd4" />
-    <MetadataFile FileName="OrderService3.xsd" MetadataType="Schema" ID="adca2aef-8a8d-4ca4-870f-a7e5f3b5fd54" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?xsd=xsd5" />
-    <MetadataFile FileName="OrderService4.xsd" MetadataType="Schema" ID="422ace6d-61c0-4465-9af9-a732fd015978" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?xsd=xsd0" />
-    <MetadataFile FileName="OrderService5.xsd" MetadataType="Schema" ID="98c733f3-cd32-4278-a53a-2dc532b7e1e8" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OrderService.svc?xsd=xsd1" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="64e55cfe-d99d-40d5-9718-10f364387029" SourceId="1" SourceUrl="http://localhost:8080/Order/?xsd=xsd2" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="3c1b1e82-f29c-4861-9580-3e7ed7640133" SourceId="1" SourceUrl="http://localhost:8080/Order/?xsd=xsd3" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="9f3b9401-7743-4b39-91e8-96811b097e76" SourceId="1" SourceUrl="http://localhost:8080/Order/?xsd=xsd0" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="82408fb9-c4bb-4498-b430-f5f8f060eed8" SourceId="1" SourceUrl="http://localhost:8080/Order/?xsd=xsd1" />
+    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="b904545d-8ec3-42b3-a562-78a7f2c319d2" SourceId="1" SourceUrl="http://localhost:8080/Order/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="9d0a6f8b-8293-4186-b550-ddd736b4b98b" SourceId="1" SourceUrl="http://localhost:8080/Order/?disco" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="e8521572-e7b2-45f5-911e-aa17c96c4e5e" SourceId="1" SourceUrl="http://localhost:8080/Order/?xsd=xsd4" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="6a7f41dc-bca4-4b80-ad4e-e43cbc83ca32" SourceId="1" SourceUrl="http://localhost:8080/Order/?xsd=xsd5" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

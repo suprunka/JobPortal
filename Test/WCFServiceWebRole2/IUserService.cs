@@ -36,5 +36,8 @@ namespace WCFServiceWebRole2
 
         [OperationContract]
         bool AddDescription(User u);
+
+        [OperationContract]
+        bool IsActive(string email);
     }
 }

@@ -19,6 +19,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebJobPortal", "MyWeb\WebJobPortal.csproj", "{210D4B66-BEF0-48ED-A289-B76BA2DC7A6A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{33304A02-E154-4C1B-9F09-D2A024C77434} = {33304A02-E154-4C1B-9F09-D2A024C77434}
+		{921E25AD-27C9-4CB8-9011-C09D4A892FBF} = {921E25AD-27C9-4CB8-9011-C09D4A892FBF}
 	EndProjectSection
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "WcfCloudService", "WcfCloudService\WcfCloudService.ccproj", "{2C22CE6F-A05F-405D-B5C6-05439B450267}"
@@ -74,7 +75,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.Integration.WCF.6.0.1304.0\lib\NET45
 		SolutionGuid = {9E3A0AA7-733B-497E-8D8A-432DEF2E26D9}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.Integration.WCF.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal

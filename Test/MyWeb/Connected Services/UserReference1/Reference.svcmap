@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c948f1c6-1c2d-4857-af88-4fde6f627884" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a3284d63-003c-4dff-b451-a95bb4240f47" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,16 +19,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/JobPortal/Services/UserService.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/User/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="6e525c97-08dd-4b12-bb16-e23ec65c367b" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="d5844414-8a43-4346-8617-75420d7bd636" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="a1e7184a-ae3f-4b0b-8b6e-53b734b9771a" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?xsd=xsd4" />
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="d88e645c-9fb3-4a0c-b220-602f02d8e08f" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="021b8169-9115-4c1d-a352-007cca0a37eb" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UserService4.xsd" MetadataType="Schema" ID="ff3ea528-7088-4df3-be79-861f01b5b608" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?xsd=xsd5" />
-    <MetadataFile FileName="UserService5.xsd" MetadataType="Schema" ID="47906a8c-d92d-44ca-a4e2-4fc902c05338" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="fbf5b6c7-9cbb-4043-bcc1-292ccd4f410d" SourceId="1" SourceUrl="http://localhost:8080/User/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="1895795c-be5c-4490-a21a-e7ce49821a62" SourceId="1" SourceUrl="http://localhost:8080/User/?disco" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="cabcc8bb-4847-401f-a611-677dc43c4686" SourceId="1" SourceUrl="http://localhost:8080/User/?xsd=xsd2" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="46848b55-d501-42c3-8852-1add97c8e3d8" SourceId="1" SourceUrl="http://localhost:8080/User/?wsdl" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="5a9d2743-fc1d-45b3-80b6-c03379788c24" SourceId="1" SourceUrl="http://localhost:8080/User/?xsd=xsd4" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="cea863eb-20a5-455e-8c3d-2d8bdeb5eb32" SourceId="1" SourceUrl="http://localhost:8080/User/?xsd=xsd0" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="04aad895-8f56-4008-a2b7-40f2862f5f0b" SourceId="1" SourceUrl="http://localhost:8080/User/?xsd=xsd3" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="e8f2f5a0-044b-4bb4-8074-115a36161887" SourceId="1" SourceUrl="http://localhost:8080/User/?xsd=xsd5" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

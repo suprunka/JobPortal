@@ -223,6 +223,14 @@ namespace WCFServiceWebRole2
 
         }
 
+        public bool IsActive(string email)
+        {
+
+            var result = _unitOfWork.Users.Get(t => t.AspNetUsers.Email == email);
+
+            return result.AspNetUsers.AvailabilityState != 2 ? true : false;
+        }
+
         public User[] GetAll()
         {
             IList<User> resultToReturn = new List<User>();

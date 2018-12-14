@@ -260,21 +260,43 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\OfferReference\item.disco" />
     <None Include="Connected Services\OfferReference\configuration91.svcinfo" />
     <None Include="Connected Services\OfferReference\configuration.svcinfo" />
     <None Include="Connected Services\OfferReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\OrderReference\configuration91.svcinfo" />
-    <None Include="Connected Services\OrderReference\configuration.svcinfo" />
-    <None Include="Connected Services\OrderReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
+    <None Include="Connected Services\OrderReference\item.xsd">
+      <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OrderReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderReference\OrderService.wsdl" />
+    <None Include="Connected Services\UserReference1\item.disco" />
     <None Include="Connected Services\UserReference1\configuration91.svcinfo" />
     <None Include="Connected Services\UserReference1\configuration.svcinfo" />
     <None Include="Connected Services\UserReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\OrderReference\item.disco" />
+    <None Include="Connected Services\OrderReference\configuration91.svcinfo" />
+    <None Include="Connected Services\OrderReference\configuration.svcinfo" />
+    <None Include="Connected Services\OrderReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -290,7 +312,6 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Rating.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Endpoints addresses.txt" />
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.dll" />
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.xml" />
     <Content Include="favicon.ico" />
@@ -323,61 +344,6 @@
     <Content Include="FakesAssemblies\DayPilot.Web.Mvc.Fakes.messages" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
-    <None Include="Connected Services\OfferReference\OfferService.wsdl" />
-    <None Include="Connected Services\OfferReference\OfferService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OfferReference\OfferService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OfferReference\OfferService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OfferReference\OfferService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\OrderService.wsdl" />
-    <None Include="Connected Services\OrderReference\OrderService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\OrderService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\OrderService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\OrderService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\OrderService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderReference\OrderService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\UserService.wsdl" />
-    <None Include="Connected Services\UserReference1\UserService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\UserService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\UserService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\UserService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\UserService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UserReference1\UserService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\PublishProfiles\ApplicationJobPortal - Web Deploy1.pubxml" />
-    <None Include="Properties\PublishProfiles\JobPortalUCN - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy1.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -394,6 +360,40 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Connected Services\OfferReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OfferReference\OfferService.wsdl" />
+    <None Include="Connected Services\UserReference1\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserReference1\UserService.wsdl" />
+    <None Include="Properties\PublishProfiles\JobPortalik - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\WebJobPortal20181212095345 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\daypilot-all.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -438,7 +438,9 @@
     <Content Include="themes\scheduler_silver\tree_expand.png" />
     <Content Include="themes\scheduler_silver\tree_nochildren.png" />
     <Content Include="themes\themes.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

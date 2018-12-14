@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b73c9b9c-3c4c-490d-8c12-05e8218827d5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e30a68e2-9709-4482-8762-77810cd35cb2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/JobPortal/Services/OfferService.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/Offer/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OfferService.xsd" MetadataType="Schema" ID="e6f369e6-b9af-43fe-808b-fc31b142fd24" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd1" />
-    <MetadataFile FileName="OfferService1.xsd" MetadataType="Schema" ID="23880fdf-1f02-4304-bf88-d111f794b1ea" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd0" />
-    <MetadataFile FileName="OfferService.wsdl" MetadataType="Wsdl" ID="343e68b5-3cd4-4320-9ba9-85fa7f140ba0" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?wsdl" />
-    <MetadataFile FileName="OfferService2.xsd" MetadataType="Schema" ID="c2e3ef13-62e1-4154-a7b9-42bd94b203d9" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd3" />
-    <MetadataFile FileName="OfferService3.xsd" MetadataType="Schema" ID="07c33a2c-49e4-4d4a-a29c-530d9c118dee" SourceId="1" SourceUrl="http://localhost/JobPortal/Services/OfferService.svc?xsd=xsd2" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="4621a55c-71c4-4e7e-adf9-b5e955ef96f2" SourceId="1" SourceUrl="http://localhost:8080/Offer/?disco" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="d9cea0df-08ad-4c06-a60b-73201bd541f4" SourceId="1" SourceUrl="http://localhost:8080/Offer/?xsd=xsd0" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="10891180-e2e7-4d59-b4ee-503ce019cd47" SourceId="1" SourceUrl="http://localhost:8080/Offer/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="b85b1875-70a4-4621-9fe4-d573a5a56c9b" SourceId="1" SourceUrl="http://localhost:8080/Offer/?xsd=xsd2" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="a3edb204-49a3-454c-847a-c10958a4d6b2" SourceId="1" SourceUrl="http://localhost:8080/Offer/?xsd=xsd3" />
+    <MetadataFile FileName="OfferService.wsdl" MetadataType="Wsdl" ID="41143f79-a730-460f-87aa-4e1d6e34ade7" SourceId="1" SourceUrl="http://localhost:8080/Offer/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
